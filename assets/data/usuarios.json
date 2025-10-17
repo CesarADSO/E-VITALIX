@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nombres": "Valeria Ramírez",
+    "email": "valeria.ramirez@evitalix.com",
+    "contrasena": "valeria123",
+    "rol": "Administrador",
+    "fecha_registro": "2025-01-12"
+  },
+  {
+    "id": 2,
+    "nombres": "Felipe Ruiz",
+    "email": "felipe.ruiz@evitalix.com",
+    "contrasena": "felipe456",
+    "rol": "Especialista",
+    "fecha_registro": "2025-02-05"
+  },
+  {
+    "id": 3,
+    "nombres": "Laura Torres",
+    "email": "laura.torres@evitalix.com",
+    "contrasena": "laura789",
+    "rol": "Paciente",
+    "fecha_registro": "2025-03-10"
+  },
+  {
+    "id": 4,
+    "nombres": "Carlos Gómez",
+    "email": "carlos.gomez@evitalix.com",
+    "contrasena": "carlos2025",
+    "rol": "Paciente",
+    "fecha_registro": "2025-04-22"
+  },
+  {
+    "id": 5,
+    "nombres": "Daniela Morales",
+    "email": "daniela.morales@evitalix.com",
+    "contrasena": "daniAdmin",
+    "rol": "Administrador",
+    "fecha_registro": "2025-05-30"
+  }
+]
