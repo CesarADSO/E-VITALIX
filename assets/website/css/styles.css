@@ -194,3 +194,31 @@ header .barra-navegacion {
     font-weight: 500;
     color: #0c498a;
 }
+
+.cont-tarjetas {
+    display: flex;
+    justify-content: center;
+    gap: 46px;
+    width: 100%;
+}
+
+main {
+    width: 100%;
+    position: relative;
+}
+
+.cont-tarjetas .cont-cita {
+    background: var(--tercer-azul);
+    display: flex;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    justify-content: space-between;
+    position: relative;
+    top: -50px;
+}
+
+.cont-cita p {
+    margin-top: 20px;
+    color: var(--blanco-color);
+}
