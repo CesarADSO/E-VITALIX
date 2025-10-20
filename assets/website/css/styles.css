@@ -16,7 +16,7 @@
     --gris-proyecto: #969696;
     --tercer-azul: #1a73d3;
     --titulo-principal: 48px;
-    --subtitulo-seccion: 30px;
+    --subtitulo-seccion: 32px;
     --titulo-bloque: 24px;
     --subtitulo-menor: 18px;
     --parrafos: 16px;
@@ -173,6 +173,7 @@ header .barra-navegacion {
     color: #007bff;
     font-weight: 700;
     font-size: var(--subtitulo-menor);
+    letter-spacing: 4px;
 }
 
 .fila .cont-info h1 {
@@ -205,6 +206,10 @@ header .barra-navegacion {
 main {
     width: 100%;
     position: relative;
+}
+
+#bienvenidos {
+    width: 100%;
 }
 
 .cont-tarjetas .cont-cita {
@@ -240,4 +245,37 @@ main {
     color: var(--color-secundario);
     margin-top: 10px;
     padding-right: 90px;
+}
+
+#bienvenidos .cont-info {
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 60px;
+}
+
+#bienvenidos .cont-info h3 {
+    font-size: var(--subtitulo-menor);
+    font-weight: 700;
+    color: var(--color-primario);
+    letter-spacing: 4px;
+}
+
+#bienvenidos .cont-info h2 {
+    color: var(--color-secundario);
+}
+
+#bienvenidos .cont-info p {
+    color: var(--color-secundario);
+    padding-left: 301px;
+    padding-right: 301px;
+    margin-bottom: 42px;
+}
+
+#bienvenidos .cont-info a {
+    text-decoration: none;
+    color: var(--color-primario);
+}
+
+.cont-info a img {
+    margin-left: 5px;
 }
