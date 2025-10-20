@@ -73,3 +73,42 @@ header .col-info img {
     color: var(--color-primario);
     font-weight: 500;
 }
+
+header .barra-navegacion {
+    background: var(--color-primario);
+    width: 100%;
+    height: 83px;
+}
+
+.barra-navegacion .ingresar {
+    gap: 59px;
+}
+
+.items-menu .lista-items {
+    gap: 20px;
+}
+
+.items-menu .item-menu a {
+    color: var(--blanco-color);
+}
+
+.item-menu a.active {
+    color: var(--gris-proyecto) !important;
+    font-weight: 700;
+}
+
+.ingresar .item-ingresar a {
+    color: var(--blanco-color);
+    font-weight: 700;
+}
+
+.ingresar .item-registrar a {
+    width: 140px;
+    background: var(--blanco-color);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-secundario);
+    font-weight: 500;
+}
