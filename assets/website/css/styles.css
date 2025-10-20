@@ -153,10 +153,6 @@ header .barra-navegacion {
     z-index: 1;
 }
 
-.fila .cont-foto img {
-    width: 100%;
-}
-
 #hero .fondo-hero {
     position: absolute;
     top: 0;
@@ -210,6 +206,7 @@ main {
 
 #bienvenidos {
     width: 100%;
+    padding-bottom: 50px;
 }
 
 .cont-tarjetas .cont-cita {
@@ -278,4 +275,48 @@ main {
 
 .cont-info a img {
     margin-left: 5px;
+}
+
+#bienvenidos .cont-foto {
+    position: relative;
+}
+
+#bienvenidos .cont-foto .foto-doctores {
+    width: 100%;
+}
+
+#bienvenidos .cont-foto .elipse {
+    position: absolute;
+}
+
+.cont-foto .elipse.elipse-izquierdo {
+    width: 155px;
+}
+
+.cont-foto .elipse.elipse-derecho {
+    right: 12px;
+    bottom: 0;
+    width: 155px;
+}
+
+#bienvenidos .cont-foto .rectangulo {
+    position: absolute;
+}
+
+.cont-foto .rectangulo.rectangulo1 {
+    bottom: -9px;
+    left: 12px;
+    width: 270px;
+}
+
+.cont-foto .rectangulo.rectangulo2 {
+    left: 282px;
+    bottom: -10px;
+    width: 810px;
+}
+
+.cont-foto .rectangulo.rectangulo3 {
+    bottom: -10px;
+    right: 12px;
+    width: 217px;
 }
