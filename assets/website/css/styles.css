@@ -216,9 +216,28 @@ main {
     justify-content: space-between;
     position: relative;
     top: -50px;
+    height: 100px;
 }
 
 .cont-cita p {
     margin-top: 20px;
     color: var(--blanco-color);
+}
+
+.cont-tarjetas .cont-especialista {
+    background: var(--gris-proyecto);
+    border-radius: 5px;
+    display: flex;
+    width: 390px;
+    padding: 20px;
+    height: 100px;
+    justify-content: space-between;
+    top: -50px;
+    position: relative;
+}
+
+.cont-especialista p {
+    color: var(--color-secundario);
+    margin-top: 10px;
+    padding-right: 90px;
 }
