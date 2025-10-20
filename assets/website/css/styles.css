@@ -20,7 +20,7 @@
     --titulo-bloque: 24px;
     --subtitulo-menor: 18px;
     --parrafos: 16px;
-    --texto-auxiliar: 14px; 
+    --texto-auxiliar: 14px;
 }
 
 .btn-azul {
@@ -111,4 +111,86 @@ header .barra-navegacion {
     align-items: center;
     color: var(--color-secundario);
     font-weight: 500;
+}
+
+#hero {
+    width: 100%;
+    position: relative;
+    background: linear-gradient(180deg,
+            /* Dirección: de arriba hacia abajo */
+            #E5E4E8 9%,
+            /* Primer color en el 9% */
+            #EBEAEF 100%
+            /* Segundo color en el 100% */
+        );
+    padding: 120px;
+}
+
+#hero .elipse {
+    position: absolute;
+    z-index: 0;
+    /* Detrás del contenido */
+}
+
+.elipse-izquierda {
+    top: 0;
+    left: 0;
+    width: 250px;
+    /* ajusta según el diseño */
+    height: auto;
+}
+
+.elipse-derecha {
+    bottom: 0;
+    right: 0;
+    width: 250px;
+    height: auto;
+}
+
+#hero .contenido {
+    position: relative;
+    /* Por encima de las elipses */
+    z-index: 1;
+}
+
+.fila .cont-foto img {
+    width: 100%;
+}
+
+#hero .fondo-hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(3px);
+    /* Ajusta el nivel de desenfoque */
+    z-index: 0;
+}
+
+.fila .cont-info h3 {
+    color: #007bff;
+    font-weight: 700;
+    font-size: var(--subtitulo-menor);
+}
+
+.fila .cont-info h1 {
+    color: var(--color-secundario);
+    font-size: var(--titulo-principal);
+    margin-bottom: 14px;
+    padding-right: 88px;
+}
+
+.fila .cont-info a {
+    text-decoration: none;
+    width: 215px;
+    background: var(--blanco-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    height: 40px;
+    font-weight: 500;
+    color: #0c498a;
 }
