@@ -1,4 +1,9 @@
+/* CONFIGURACIÓN BÁSICA DE UN ARCHIVO CSS */
+
+/* 1. TIPOGRAFÍAS */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* 2. ICONOS */
 
 * {
     font-family: 'Nunito', sans-serif;
@@ -37,4 +42,34 @@
 .campos-formulario {
     border-radius: 17%;
     background: #BFD2F8;
+}
+
+header {
+    width: 100%;
+    position: relative;
+}
+
+header .contenedor {
+    background: #fcfefe;
+}
+
+header .col-info {
+    display: flex;
+    padding-top: 20px;
+}
+
+header .col-info img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.col-info p {
+    color: var(--color-secundario);
+}
+
+.col-info span {
+    color: var(--color-primario);
+    font-weight: 500;
 }
