@@ -620,7 +620,8 @@ h2 {
     padding-bottom: 120px;
 }
 
-#contacto h3,h2 {
+#contacto h3,
+h2 {
     text-align: center;
 }
 
@@ -664,7 +665,7 @@ h2 {
     border-radius: 5px;
 }
 
-.cont-contacto .tarjeta:hover i{
+.cont-contacto .tarjeta:hover i {
     color: var(--blanco-color);
     transition: .5s;
 }
@@ -672,4 +673,88 @@ h2 {
 .cont-contacto .tarjeta:hover p {
     color: var(--blanco-color);
     transition: .5s;
+}
+
+footer {
+    width: 100%;
+    background: var(--color-primario);
+    padding-top: 44px;
+    padding-bottom: 44px;
+}
+
+footer p {
+    color: var(--blanco-color);
+}
+
+.cont-info .descriptivo {
+    padding: 0 90px 0 25px;
+    font-size: var(--subtitulo-menor);
+}
+
+footer h5 {
+    color: var(--blanco-color);
+    font-size: var(--subtitulo-menor);
+}
+
+.cont-enlaces h5 {
+    margin-bottom: 35px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+footer .cont-enlaces a {
+    display: block;
+    text-decoration: none;
+    color: var(--blanco-color);
+    margin-bottom: 1rem;
+}
+
+.cont-info .titulo-contacto {
+    margin-bottom: 35px;
+    margin-top: 20px;
+}
+
+.cont-info .hoja-informativa {
+    margin-bottom: 35px;
+    margin-top: 20px;
+}
+
+.cont-info form {
+    position: relative;
+}
+
+.cont-info form input {
+    width: 100%;
+    padding: 12px 50px 12px 15px;
+    /* espacio derecho para el icono */
+    background-color: #BFD2F8;
+    border: 1px solid #BFD2F8;
+    border-radius: 5px;
+    color: var(--color-secundario);
+}
+
+.cont-info form input::placeholder {
+    color: var(--color-secundario);
+}
+
+form i {
+    font-size: var(--titulo-bloque);
+    position: absolute;
+    bottom: 4px;
+    right: 15px;
+    color: var(--color-secundario);
+}
+
+footer hr {
+    border: 1px solid #BFD2F8;
+}
+
+footer .fila {
+    padding-top: 20px;
+}
+
+.cont-redes a i{
+    font-size: 24px;
+    color: var(--blanco-color);
+    line-height: 1;
 }
