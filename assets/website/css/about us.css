@@ -234,3 +234,30 @@ main {
 .dots button.active{
     background: var(--color-primario);
 }
+
+#doctores {
+    width: 100%;
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+#doctores h3,h2 {
+    text-align: center;
+}
+
+#doctores h3 {
+    font-size: var(--subtitulo-menor);
+    color: var(--color-primario);
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+#doctores h2 {
+    color: var(--color-secundario);
+    margin-bottom: 57px;
+}
+
+#doctores .col-md-4 {
+    display: flex;
+    justify-content: center;
+}
