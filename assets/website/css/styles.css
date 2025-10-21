@@ -59,11 +59,10 @@ header .col-info {
     padding-top: 20px;
 }
 
-header .col-info img {
-    width: 40px;
-    height: 40px;
+header .col-info i {
+    font-size: 35px;
     margin-right: 10px;
-    margin-top: 5px;
+    color: var(--color-primario);
 }
 
 .col-info p {
@@ -222,6 +221,11 @@ main {
     height: 100px;
 }
 
+.cont-tarjetas .cont-cita i {
+    font-size: 50px;
+    color: #BFD2F8;
+}
+
 .cont-cita p {
     margin-top: 20px;
     color: var(--blanco-color);
@@ -238,6 +242,12 @@ main {
     top: -50px;
     position: relative;
 }
+
+.cont-tarjetas .cont-especialista i {
+    font-size: 50px;
+    color: var(--color-secundario)
+}
+
 
 .cont-especialista p {
     color: var(--color-secundario);
@@ -351,18 +361,36 @@ h2 {
     padding-top: 20px;
 }
 
-.lista-servicios .cont-servicio:first-child {
+.lista-servicios .cont-servicio {
     border-radius: 5px 5px 0 0;
     border-top: 1px solid #969696;
     border-left: 1px solid #969696;
     border-right: 1px solid #969696;
 }
 
-.lista-servicios .cont-servicio.azul {
+.lista-servicios .cont-servicio:hover {
     background: var(--color-primario);
+    transition: .5s;
+}
+
+.lista-servicios .cont-servicio:hover i {
+    color: var(--blanco-color);
+    transition: .5s;
+}
+
+.lista-servicios .cont-servicio:hover p {
+    color: var(--blanco-color);
+    transition: .5s;
+}
+
+.lista-servicios .cont-servicio.cardiograma {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .cont-servicio.adn {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     border-left: 1px solid #969696;
     border-right: 1px solid #969696;
 }
@@ -373,6 +401,11 @@ h2 {
 
 .cont-servicio.azul p {
     color: var(--blanco-color);
+}
+
+.cont-servicio i {
+    font-size: 26px;
+    color: var(--color-primario);
 }
 
 .lista-servicios a {
@@ -386,6 +419,8 @@ h2 {
     align-items: center;
     color: var(--blanco-color);
 }
+
+
 
 #nuestrosServicios .lista-textos h3 {
     text-align: left;
@@ -508,6 +543,12 @@ h2 {
     text-align: center;
     border: 1px solid #96969645;
     padding: 40px;
+}
+
+#especialidades .cont-info i {
+    font-size: 60px;
+    margin-bottom: 10px;
+    color: var(--color-primario);
 }
 
 #especialidades .cont-info:hover {
