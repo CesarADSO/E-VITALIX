@@ -527,3 +527,89 @@ h2 {
     color: var(--blanco-color);
     transition: .5s;
 }
+
+#equipo {
+    width: 100%;
+    padding-bottom: 100px;
+}
+
+#equipo h3,
+h2 {
+    text-align: center;
+}
+
+#equipo h3 {
+    font-size: var(--subtitulo-menor);
+    color: var(--color-primario);
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+#equipo h2 {
+    color: var(--color-secundario);
+    margin-bottom: 57px;
+}
+
+#equipo .col-md-4 {
+    display: flex;
+    justify-content: center;
+}
+
+#equipo .tarjeta {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.tarjeta img {
+    border-radius: 0;
+}
+
+.card .cuerpo-tarjeta {
+    background: #BFD2F8;
+    text-align: center;
+}
+
+.cuerpo-tarjeta h5 {
+    font-size: var(--subtitulo-menor);
+    color: var(--color-primario);
+}
+
+.cuerpo-tarjeta p {
+    font-size: var(--subtitulo-menor);
+    letter-spacing: 3px;
+    font-weight: 700;
+    color: var(--color-primario);
+}
+
+.redes .social {
+    padding-right: 10px;
+}
+
+.tarjeta .perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    text-decoration: none;
+    background: var(--color-primario);
+    color: var(--blanco-color);
+    border-radius: 0 0 5px 5px;
+}
+
+#equipo .cont-botones {
+    text-align: center;
+    padding-top: 6px;
+}
+
+.cont-botones .boton {
+    width: 18px;
+    height: 18px;
+    background: #BFD2F8;
+    border: none;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.cont-botones .boton.active {
+    background: var(--color-primario);
+}
