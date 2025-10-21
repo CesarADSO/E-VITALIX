@@ -43,7 +43,7 @@
 .campos-formulario {
     border-radius: 17%;
     background: #BFD2F8;
-} 
+}
 
 #hero .fondo-hero {
     filter: blur(0);
@@ -78,3 +78,89 @@
     font-weight: 400;
 }
 
+#hero .rectangulo {
+    position: absolute;
+}
+
+#hero .rectangulo.rectangulo-1 {
+    bottom: -8px;
+    left: 350px;
+}
+
+#hero .rectangulo.rectangulo-2 {
+    right: 0;
+    bottom: -12px;
+    width: 349px;
+}
+
+main {
+    width: 100%;
+    position: relative;
+}
+
+#bienvenido {
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+#bienvenido .cont-img img {
+    width: 100%;
+}
+
+#bienvenido .cont-info h3 {
+    color: var(--color-primario);
+    letter-spacing: 4px;
+    font-weight: 700;
+    font-size: var(--subtitulo-menor);
+    margin-bottom: 20px;
+}
+
+.cont-info h2 {
+    text-align: left;
+    font-size: var(--titulo-principal);
+    color: var(--color-secundario);
+    padding-right: 40px;
+}
+
+.fila .lista {
+    margin-bottom: 32px;
+}
+
+.fila .lista ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista ul li {
+    position: relative;
+    padding-left: 25px;
+    /* Espacio para el puntico */
+    color: var(--color-secundario);
+    /* Azul del texto */
+    font-size: var(--subtitulo-menor);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    /* Espacio entre líneas */
+    padding-right: 39px;
+}
+
+.lista ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    /* Alinea verticalmente el punto */
+    width: 16px;
+    height: 16px;
+    background-color: #159EEC;
+    /* Color del puntico */
+    border-radius: 50%;
+    /* Lo hace circular */
+}
+
+.cont-info p {
+    color: var(--color-secundario);
+    padding-right: 40px;
+
+}
