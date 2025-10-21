@@ -325,7 +325,8 @@ main {
     width: 100%;
 }
 
-#nuestrosServicios h3,h2 {
+#nuestrosServicios h3,
+h2 {
     text-align: center;
 }
 
@@ -372,7 +373,7 @@ main {
     color: var(--blanco-color);
 }
 
-.lista-servicios a{
+.lista-servicios a {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -382,4 +383,99 @@ main {
     text-decoration: none;
     align-items: center;
     color: var(--blanco-color);
+}
+
+#nuestrosServicios .lista-textos h3 {
+    text-align: left;
+    margin-bottom: 19px;
+    margin-top: 27px;
+    color: var(--color-secundario);
+    font-weight: 500;
+}
+
+.lista-textos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-textos ul li {
+    position: relative;
+    padding-left: 25px;
+    /* Espacio para el puntico */
+    color: var(--color-secundario);
+    /* Azul del texto */
+    font-size: var(--subtitulo-menor);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    /* Espacio entre líneas */
+    padding-right: 39px;
+}
+
+.lista-textos ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    /* Alinea verticalmente el punto */
+    width: 16px;
+    height: 16px;
+    background-color: #159EEC;
+    /* Color del puntico */
+    border-radius: 50%;
+    /* Lo hace circular */
+}
+
+.lista-textos p {
+    margin-top: 15px;
+    padding-right: 45px;
+    color: var(--color-secundario);
+}
+
+#nuestrosServicios .cont-fotos {
+    position: relative;
+}
+
+#nuestrosServicios .cont-fotos img {
+    width: 100%;
+    padding-bottom: 21px;
+}
+
+.cont-fotos .rectangulo {
+    position: absolute;
+}
+
+.cont-fotos .rectangulo.rectangulo-1 {
+    top: 218px;
+    width: 78px !important;
+}
+
+.cont-fotos .rectangulo.rectangulo-2 {
+    top: 218px;
+    left: 89px;
+    width: 180px !important;
+}
+
+.cont-fotos .rectangulo.rectangulo-3 {
+    top: 218px;
+    left: 268px;
+    width: 50px !important;
+}
+
+.cont-fotos .rectangulo.rectangulo-4 {
+    bottom: -9px;
+    left: 12px;
+    width: 78px !important;
+}
+
+.cont-fotos .rectangulo.rectangulo-5 {
+    bottom: -7px;
+    left: 90px;
+    width: 180px !important;
+}
+
+.cont-fotos .rectangulo.rectangulo-6 {
+    bottom: -8px;
+    width: 50px !important;
+    right: 11px;
 }
