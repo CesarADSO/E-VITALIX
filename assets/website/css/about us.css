@@ -372,3 +372,11 @@ h2 {
     text-align: center;
     margin-top: 20px;
 }
+
+footer .cont-info .descriptivo {
+    color: var(--blanco-color);
+}
+
+footer .cont-info .contacto {
+    color: var(--blanco-color);
+}
