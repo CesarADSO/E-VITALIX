@@ -330,7 +330,6 @@ h2 {
 }
 
 .text-body-secondary {
-    color: #5f6368 !important;
     font-size: 14px;
 }
 
@@ -343,4 +342,33 @@ h2 {
 .text-body-secondary span{
     display: inline-flex;
     align-items: center;
+}
+
+.cuerpo .title {
+    font-size: var(--texto-auxiliar);
+}
+
+.cuerpo .text {
+    font-size: var(--subtitulo-menor);
+}
+
+.ojo {
+    color: #000000 !important;
+}
+
+.corazon {
+    color: #000000 !important;
+}
+
+.ojo i {
+    color: #6c5ce7 !important; /* Morado */
+}
+
+.corazon i {
+    color: #e74c3c !important; /* Rojo */
+}
+
+#noticias .cont-botones {
+    text-align: center;
+    margin-top: 20px;
 }
