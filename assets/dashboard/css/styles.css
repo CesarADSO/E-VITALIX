@@ -10,6 +10,12 @@
     --blanco-color: #ffffff;
     --gris-proyecto: #969696;
     --tercer-azul: #1a73d3;
+    --titulo-principal: 48px;
+    --subtitulo-seccion: 30px;
+    --titulo-bloque: 24px;
+    --subtitulo-menor: 18px;
+    --parrafos: 16px;
+    --texto-auxiliar: 14px;
 }
 
 .btn-azul {
@@ -30,6 +36,5 @@
 
 .campos-formulario {
     border-radius: 17%;
-
-
+    background: #BFD2F8;
 }
