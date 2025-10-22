@@ -90,11 +90,31 @@ header .barra-navegacion {
 
 .items-menu .item-menu a {
     color: var(--blanco-color);
+    color: var(--blanco-color);
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.items-menu .item-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s ease;
+}
+
+.items-menu .item-menu a:hover::after {
+    width: 100%;
 }
 
 .item-menu a.active {
-    color: var(--gris-proyecto) !important;
-    font-weight: 700;
+    color: #ffffff !important;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 5px;
 }
 
 .ingresar .item-ingresar a {
@@ -219,6 +239,15 @@ main {
     position: relative;
     top: -50px;
     height: 100px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cont-tarjetas .cont-cita:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
+    background: var(--color-primario);
 }
 
 .cont-tarjetas .cont-cita i {
@@ -241,6 +270,15 @@ main {
     justify-content: space-between;
     top: -50px;
     position: relative;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cont-tarjetas .cont-especialista:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(148, 163, 184, 0.3);
+    background: #BFD2F8;
 }
 
 .cont-tarjetas .cont-especialista i {
@@ -359,6 +397,7 @@ h2 {
     text-align: center;
     height: 100px;
     padding-top: 20px;
+    cursor: pointer;
 }
 
 .lista-servicios .cont-servicio {
@@ -543,6 +582,8 @@ h2 {
     text-align: center;
     border: 1px solid #96969645;
     padding: 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 #especialidades .cont-info i {
@@ -553,8 +594,9 @@ h2 {
 
 #especialidades .cont-info:hover {
     background: var(--color-secundario);
-    transition: .5s;
     border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 #especialidades .cont-info img {
@@ -778,12 +820,25 @@ footer .cont-enlaces a {
     color: var(--color-secundario);
 }
 
-form i {
-    font-size: var(--titulo-bloque);
+form button {
     position: absolute;
     bottom: 4px;
     right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+form button i {
+    font-size: var(--titulo-bloque);
     color: var(--color-secundario);
+    transition: all 0.3s ease;
+}
+
+form button:hover i {
+    color: var(--color-primario);
 }
 
 footer hr {
@@ -794,8 +849,85 @@ footer .fila {
     padding-top: 20px;
 }
 
-.cont-redes a i{
+.cont-redes a i {
     font-size: 24px;
     color: var(--blanco-color);
     line-height: 1;
+}
+
+/* Estilos para el carrusel */
+.equipoSwiper {
+    width: 100%;
+    padding: 40px 0 80px;
+    position: relative;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Mantén tus estilos de .tarjeta, .cuerpo-tarjeta, etc. */
+
+/* Flechas de navegación */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #1976d2;
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: #1976d2;
+    color: white;
+}
+
+/* Paginación - Personalizar tus botones existentes */
+.swiper-pagination {
+    bottom: 15px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.swiper-pagination-bullet {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #BFD2F8;
+    opacity: 1;
+    margin: 0 !important;
+    transition: background 0.3s ease;
+    border: none;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--color-primario);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 35px;
+        height: 35px;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 14px;
+    }
 }
