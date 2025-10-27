@@ -820,6 +820,10 @@ footer .cont-enlaces a {
     color: var(--color-secundario);
 }
 
+.cont-redes {
+    justify-content: center;
+}
+
 form button {
     position: absolute;
     bottom: 4px;
@@ -929,5 +933,103 @@ footer .fila {
     .swiper-button-next:after,
     .swiper-button-prev:after {
         font-size: 14px;
+    }
+}
+
+/* ESTILOS RESPONSIVE */
+/* 📱 Tablets verticales (iPad Mini, Galaxy Tab en vertical) */
+@media screen and (min-width: 768px) and (max-width: 899px) {
+    img {
+        width: 100%;
+    }
+
+    .cont-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #bienvenidos .cont-info p {
+        padding: 0;
+    }
+
+    .cont-info a .flecha {
+        width: 15px;
+    }
+
+    #bienvenidos .cont-foto .rectangulo {
+        display: none;
+    }
+
+    .cont-foto .elipse.elipse-izquierdo {
+        width: 87px;
+    }
+
+    .cont-foto .elipse.elipse-derecho {
+        width: 87px;
+    }
+
+    .lista-textos ul li {
+        padding-right: 0;
+    }
+
+    .lista-textos p {
+        padding-right: 0;
+    }
+
+    .cont-fotos .rectangulo {
+        display: none;
+    }
+
+    #nuestrosServicios .lista-textos h3 {
+        margin-top: 0;
+    }
+
+    #especialidades .cont-info img {
+        width: 50px;
+    }
+
+    #especialidades .cont-info i {
+        font-size: 45px;
+    }
+
+    .redes .social {
+        width: 40px;
+    }
+
+    .cont-contacto {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        width: 100% !important;
+    }
+
+    .tarjeta .titulo {
+        font-size: var(--parrafos);
+    }
+
+    .cont-info a img {
+        width: 100%;
+    }
+
+    .cont-info .descriptivo {
+        padding: 0;
+        text-align: center;
+    }
+
+    .cont-enlaces {
+        text-align: center;
+    }
+
+    .cont-info {
+        text-align: center;
+    }
+
+    .cont-redes {
+        justify-content: center;
     }
 }

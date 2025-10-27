@@ -8,11 +8,7 @@ const equipoSwiper = new Swiper('.equipoSwiper', {
     loop: true,
 
     // Autoplay (opcional - quítalo si no lo quieres)
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-    },
+    
 
     // Navegación con flechas
     navigation: {
