@@ -192,3 +192,22 @@ main {
 .accordion-button.button:not(.collapsed) i {
     color: var(--blanco-color);
 }
+
+.cont-info img {
+    width: 100%;
+}
+
+.cont-info h2 {
+    text-align: start;
+    margin-top: 24px;
+    color: var(--color-secundario);
+    margin-bottom: 16px;
+}
+
+.lista-textos ul li {
+    padding-right: 0;
+}
+
+.cont-info p {
+    color: var(--color-secundario);
+}
