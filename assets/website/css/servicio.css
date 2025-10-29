@@ -193,7 +193,7 @@ main {
     color: var(--blanco-color);
 }
 
-.cont-info img {
+.cont-info .img-servicio {
     width: 100%;
 }
 
@@ -208,6 +208,18 @@ main {
     padding-right: 0;
 }
 
+.lista-textos ul li::before {
+    background: var(--color-primario);
+}
+
 .cont-info p {
     color: var(--color-secundario);
+}
+
+.cont-info .descriptivo {
+    color: var(--blanco-color);
+}
+
+footer p {
+    color: var(--blanco-color) !important;
 }
