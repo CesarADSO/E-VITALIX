@@ -1,3 +1,5 @@
+const contEspecialidades = document.getElementById('cont-especialidades');
+let especialidades = []
 AOS.init();
 
 const equipoSwiper = new Swiper('.equipoSwiper', {
@@ -39,8 +41,6 @@ const equipoSwiper = new Swiper('.equipoSwiper', {
     },
 });
 
-const contEspecialidades = document.getElementById('cont-especialidades');
-let especialidades = []
 document.addEventListener('DOMContentLoaded', () => {
     fetch("../assets/data/especialidades.json")
 
