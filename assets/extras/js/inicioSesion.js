@@ -44,3 +44,10 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
                 this.style.transform = 'scale(1)';
             });
         });
+
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            mirror: true
+        });

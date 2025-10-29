@@ -18,3 +18,9 @@ function toggleMenu() {
                 document.getElementById('navLinks').classList.remove('active');
             }
 });
+AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            mirror: true
+        });

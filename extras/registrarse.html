@@ -8,28 +8,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/extras/css/registrarse.css">
-
-    </head>
+</head>
 <body>
     <div class="registro-container">
         <div class="registro-content">
             <div class="registro-row">
                 <div class="form-section">
-                    <div class="logo-header">
+                    <div class="logo-header" data-aos="fade-down" data-aos-duration="800">
                         <!-- Reemplaza con tu logo -->
                         <img src="../assets/extras/img/image-removebg-preview 1.png" alt="E-Vitalix" class="logo-registro">
-                        <!-- Placeholder temporal -->
-                        <!-- <div class="logo-placeholder">
-                            <span class="logo-icon">❤️</span>
-                            E-VITALIX
-                        </div> -->
                     </div>
 
-                    <p class="subtitle-registro">Regístrate para poder crear tu cuenta</p>
+                    <p class="subtitle-registro" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        Regístrate para poder crear tu cuenta
+                    </p>
 
                     <!-- Wizard Progress Bar -->
-                    <div class="wizard-progress">
+                    <div class="wizard-progress" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                         <div class="progress-line" id="progressLine"></div>
                         <div class="wizard-step active" data-step="1">
                             <div class="step-circle">1</div>
@@ -52,7 +50,7 @@
                     <form id="registroForm">
                         <!-- Step 1: Datos Personales -->
                         <div class="wizard-form-step active" data-step="1">
-                            <div class="form-row-custom">
+                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Nombre:</label>
                                     <input 
@@ -75,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-row-custom">
+                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="500">
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Email:</label>
                                     <input 
@@ -101,7 +99,7 @@
 
                         <!-- Step 2: Documentación -->
                         <div class="wizard-form-step" data-step="2">
-                            <div class="form-row-custom">
+                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Tipo de documento:</label>
                                     <select class="campos-formulario" id="tipoDocumento" required>
@@ -127,7 +125,7 @@
 
                         <!-- Step 3: Seguridad -->
                         <div class="wizard-form-step" data-step="3">
-                            <div class="form-row-custom">
+                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Contraseña:</label>
                                     <input 
@@ -153,7 +151,7 @@
 
                         <!-- Step 4: Información Adicional -->
                         <div class="wizard-form-step" data-step="4">
-                            <div class="form-row-custom">
+                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Género:</label>
                                     <select class="campos-formulario" id="genero" required>
@@ -178,7 +176,7 @@
                         </div>
 
                         <!-- Wizard Navigation Buttons -->
-                        <div class="wizard-buttons">
+                        <div class="wizard-buttons" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
                             <button type="button" class="btn-wizard btn-secondary" id="btnAnterior" style="display: none;">
                                 Anterior
                             </button>
@@ -192,7 +190,7 @@
                     </form>
                 </div>
 
-                <div class="image-section">
+                <div class="image-section" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
                     <!-- Agrega tu imagen aquí -->
                     <img src="../assets/extras/img/doctor 3.jpg" alt="Doctor" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
@@ -201,6 +199,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="../assets/extras/js/registrarse.js"></script>
-    </body>
+</body>
 </html>

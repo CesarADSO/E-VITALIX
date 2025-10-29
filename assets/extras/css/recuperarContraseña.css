@@ -40,7 +40,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"%3E%3Crect fill="%23f8f9fa" width="1920" height="1080"/%3E%3Ctext x="50%25" y="50%25" font-size="40" text-anchor="middle" fill="%23969696" font-family="Nunito, sans-serif"%3EImagen de fondo del doctor%3C/text%3E%3C/svg%3E');
+            background: url('../img/image\ 2.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
