@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Control Administrador</title>
+    <title>Panel de Control especialista</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../dashboard/styles.css">
@@ -24,8 +24,8 @@
                 <div class="user-profile">
                     <div class="user-avatar"></div>
                     <div class="user-info">
-                        <h6>Geronimo</h6>
-                        <div class="user-role">Administrador</div>
+                        <h6>Diego</h6>
+                        <div class="user-role">Especialista</div>
                     </div>
                 </div>
 
@@ -40,11 +40,7 @@
                     </a>
                     <a class="nav-item" onclick="showSection('consultorios')">
                         <i class="bi bi-building"></i>
-                        <span>Consultorios</span>
-                    </a>
-                    <a class="nav-item" onclick="showSection('profesionales')">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Profesionales</span>
+                        <span>Consultorio</span>
                     </a>
                 </nav>
 
@@ -251,58 +247,6 @@
                         </table>
                     </div>
                 </div>
-                <div id="consultoriosSection" style="display: none;">
-                    <!-- Top Bar -->
-                    <div class="top-bar">
-                        <div class="search-bar">
-                            <input type="text" class="form-control" placeholder="Buscar">
-                        </div>
-                        <div class="notification-icon">
-                            <i class="bi bi-bell-fill text-primary"></i>
-                        </div>
-                    </div>
-
-                    <!-- consultorios Header -->
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (56)
-                            </button>
-                        </div>
-                        <button class="btn btn-primary btn-sm" style="border-radius: 20px;">
-                            <i class="bi bi-plus-lg"></i> AÑADIR
-                        </button>
-                    </div>
-
-                    <!-- consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-consultorios">
-                            <thead>
-                                <tr>
-                                    <th style="width: 40px;">
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
-                                    <th style="width: 60px;">Foto</th>
-                                    <th>
-                                        Nombres
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th>Edad</th>
-                                    <th>
-                                        Email
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th style="width: 80px;">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Los consultorios se cargan dinámicamente con JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
                 <!-- Perfil Section -->
                 <div id="perfilSection" style="display: none;">
                     <!-- Top Bar -->
@@ -439,10 +383,117 @@
                         </div>
                     </div>
                 </div>
+                <!-- Consultorios Section -->
+                <div id="consultoriosSection" style="display: none;">
+                    <!-- Top Bar -->
+                    <div class="top-bar">
+                        <div class="search-bar">
+                            <input type="text" class="form-control" placeholder="Buscar">
+                        </div>
+                        <div class="notification-icon">
+                            <i class="bi bi-bell-fill text-primary"></i>
+                        </div>
+                    </div>
+
+                    <!-- Consultorios Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <button class="btn btn-link text-primary p-0"
+                                style="text-decoration: none; font-size: 14px;">
+                                ← Todos (0)
+                            </button>
+                        </div>
+                        <button class="btn btn-primary btn-sm" style="border-radius: 20px;">
+                            <i class="bi bi-plus-lg"></i> AÑADIR
+                        </button>
+                    </div>
+
+                    <!-- Consultorios Table -->
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <table class="table-pacientes">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40px;">
+                                        <input type="checkbox" class="form-check-input">
+                                    </th>
+                                    <th>
+                                        Nombre
+                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                    </th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
+                                    <th>
+                                        Ciudad
+                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                    </th>
+                                    <th style="width: 80px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Los consultorios se cargan dinámicamente con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- End Consultorios Section -->
+
+                <!-- Profesionales Section -->
+                <div id="profesionalesSection" style="display: none;">
+                    <!-- Top Bar -->
+                    <div class="top-bar">
+                        <div class="search-bar">
+                            <input type="text" class="form-control" placeholder="Buscar">
+                        </div>
+                        <div class="notification-icon">
+                            <i class="bi bi-bell-fill text-primary"></i>
+                        </div>
+                    </div>
+
+                    <!-- Profesionales Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <button class="btn btn-link text-primary p-0"
+                                style="text-decoration: none; font-size: 14px;">
+                                ← Todos (0)
+                            </button>
+                        </div>
+                        <button class="btn btn-primary btn-sm" style="border-radius: 20px;">
+                            <i class="bi bi-plus-lg"></i> AÑADIR
+                        </button>
+                    </div>
+
+                    <!-- Profesionales Table -->
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <table class="table-pacientes">
+                            <thead>
+                                <tr>
+                                    <th style="width: 40px;">
+                                        <input type="checkbox" class="form-check-input">
+                                    </th>
+                                    <th style="width: 60px;">Foto</th>
+                                    <th>
+                                        Nombre
+                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                    </th>
+                                    <th>Edad</th>
+                                    <th>Email</th>
+                                    <th>Especialidad</th>
+                                    <th>Consultorio</th>
+                                    <th style="width: 80px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Los profesionales se cargan dinámicamente con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- End Profesionales Section -->
 
             </div>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
