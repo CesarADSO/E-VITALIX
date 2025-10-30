@@ -823,7 +823,7 @@ function eliminarConsultorio(id) {
 // Array para almacenar profesionales
 let profesionales = [
     { id: 1, nombre: "Dr. Juan Pérez", edad: 45, email: "juan.perez@mail.com", especialidad: "Cardiólogo", consultorio: "Consultorio Central" },
-    { id: 2, nombre: "Dra. María González", edad: 38, email: "maria.gonzalez@mail.com", especialidad: "Dermatóloga", consultorio: "Clínica San José" },
+    { id: 2, nombre: "Dr. Nicolas Pinzon", edad: 38, email: "nicolas.pinzon@mail.com", especialidad: "Dermatólogo", consultorio: "Clínica San José" },
     { id: 3, nombre: "Dr. Carlos Rodríguez", edad: 52, email: "carlos.rodriguez@mail.com", especialidad: "Médico General", consultorio: "Centro Médico Norte" }
 ];
 
