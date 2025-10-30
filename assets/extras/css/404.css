@@ -1,0 +1,258 @@
+* {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primario: #007bff;
+            --color-secundario: #0c498a;
+            --blanco-color: #ffffff;
+            --gris-proyecto: #969696;
+            --tercer-azul: #1a73d3;
+            --titulo-principal: 48px;
+            --subtitulo-seccion: 30px;
+            --titulo-bloque: 24px;
+            --subtitulo-menor: 18px;
+            --parrafos: 16px;
+            --texto-auxiliar: 14px;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        /* Header superior con información de contacto */
+        .top-header {
+            background-color: var(--blanco-color);
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: var(--texto-auxiliar);
+            color: #333;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primario);
+        }
+
+        /* Barra de navegación principal */
+        .main-navbar {
+            background-color: var(--color-primario);
+            padding: 0;
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+
+        .logo-nav {
+            background-color: var(--blanco-color);
+            padding: 8px 20px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .logo-nav img {
+            max-height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--blanco-color);
+            text-decoration: none;
+            font-size: var(--parrafos);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #BFD2F8;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-entrar {
+            background-color: transparent;
+            color: var(--blanco-color);
+            border: 2px solid var(--blanco-color);
+            padding: 8px 25px;
+            border-radius: 8px;
+            font-size: var(--texto-auxiliar);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-entrar:hover {
+            background-color: var(--blanco-color);
+            color: var(--color-primario);
+        }
+
+        .btn-registrarse {
+            background-color: var(--blanco-color);
+            color: var(--color-primario);
+            border: 2px solid var(--blanco-color);
+            padding: 8px 25px;
+            border-radius: 8px;
+            font-size: var(--texto-auxiliar);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-registrarse:hover {
+            background-color: var(--tercer-azul);
+            color: var(--blanco-color);
+            border-color: var(--tercer-azul);
+        }
+
+        /* Contenido 404 */
+        .error-container {
+            min-height: calc(100vh - 150px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            color: var(--color-primario);
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+
+        .error-message {
+            font-size: var(--subtitulo-menor);
+            color: var(--color-primario);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .error-submessage {
+            font-size: var(--subtitulo-menor);
+            color: var(--color-primario);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .btn-volver {
+            background-color: var(--color-primario);
+            color: var(--blanco-color);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 8px;
+            font-size: var(--parrafos);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-volver:hover {
+            background-color: var(--tercer-azul);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            color: var(--blanco-color);
+        }
+
+        /* Mobile menu toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--blanco-color);
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--color-primario);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .error-code {
+                font-size: 80px;
+            }
+
+            .contact-info {
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-item {
+                font-size: 12px;
+            }
+
+            .error-code {
+                font-size: 60px;
+            }
+
+            .error-message,
+            .error-submessage {
+                font-size: 16px;
+            }
+        }
