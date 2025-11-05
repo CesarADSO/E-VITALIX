@@ -1,0 +1,280 @@
+/* CONFIGURACIÓN BÁSICA DE UN ARCHIVO CSS */
+
+/* 1. TIPOGRAFÍAS */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* 2. ICONOS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #0c498a;
+    --blanco-color: #ffffff;
+    --gris-proyecto: #969696;
+    --tercer-azul: #1a73d3;
+    --titulo-principal: 48px;
+    --subtitulo-seccion: 32px;
+    --titulo-bloque: 24px;
+    --subtitulo-menor: 18px;
+    --parrafos: 16px;
+    --texto-auxiliar: 14px;
+}
+
+.btn-azul {
+    border-radius: 25%;
+    width: auto;
+    background-color: var(--color-primario);
+    height: auto;
+    padding: 10px;
+}
+
+.btn-rojo {
+    border-radius: 25%;
+    width: auto;
+    background-color: red;
+    height: auto;
+    padding: 10px;
+}
+
+.campos-formulario {
+    border-radius: 17%;
+    background: #BFD2F8;
+}
+
+#hero .fondo-hero {
+    filter: blur(0);
+}
+
+#hero::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #bfd2f86e;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#hero::after {
+    content: "";
+    width: 350px;
+    height: 10px;
+    background: #bfd2f8;
+    z-index: 1;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+#hero h3 {
+    color: var(--color-secundario);
+    letter-spacing: 0;
+    font-size: var(--subtitulo-menor);
+    font-weight: 400;
+}
+
+#hero .rectangulo {
+    position: absolute;
+}
+
+#hero .rectangulo.rectangulo-1 {
+    bottom: -8px;
+    left: 350px;
+}
+
+#hero .rectangulo.rectangulo-2 {
+    right: 0;
+    bottom: -12px;
+    width: 349px;
+}
+
+main {
+    width: 100%;
+    position: relative;
+}
+
+#servicio {
+    width: 100%;
+    padding: 120px 0 120px 0;
+}
+
+/* Estilos para el acordeón */
+.acordion {
+    background: var(--blanco-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.accordion-item.item {
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+    background: transparent;
+}
+
+.accordion-item.item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header.title {
+    margin-bottom: 0;
+}
+
+.accordion-button.button {
+    background-color: var(--blanco-color);
+    color: var(--color-secundario);
+    border: none;
+    padding: 16px 20px;
+    font-size: var(--parrafos);
+    font-weight: 400;
+    box-shadow: none;
+    position: relative;
+    padding-left: 56px;
+}
+
+
+
+/* Quitar el icono de flecha de Bootstrap */
+.accordion-button.button::after {
+    display: none;
+}
+
+.accordion-button.button:not(.collapsed) {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: none;
+}
+
+.accordion-button.button:not(.collapsed)::before {
+    background-color: var(--blanco-color);
+}
+
+.accordion-button.button:hover {
+    background-color: #f5f5f5;
+}
+
+.accordion-button.button:not(.collapsed):hover {
+    background-color: var(--tercer-azul);
+}
+
+.accordion-button.button:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.accordion-collapse.mostrar {
+    border: none;
+}
+
+.accordion-body.cuerpo {
+    padding: 16px 20px 16px 56px;
+    font-size: var(--texto-auxiliar);
+    color: #5a5a5a;
+    background-color: #f9f9f9;
+}
+
+/* Estilo para el icono de Bootstrap Icons */
+.accordion-button.button i {
+    color: var(--color-primario);
+    font-size: 24px;
+    min-width: 24px;
+    position: absolute;
+    left: 20px;
+}
+
+/* Icono en blanco cuando el acordeón está abierto */
+.accordion-button.button:not(.collapsed) i {
+    color: var(--blanco-color);
+}
+
+.cont-info .img-servicio {
+    width: 100%;
+}
+
+.cont-info h2 {
+    text-align: start;
+    margin-top: 24px;
+    color: var(--color-secundario);
+    margin-bottom: 16px;
+}
+
+.lista-textos ul li {
+    padding-right: 0;
+}
+
+.lista-textos ul li::before {
+    background: var(--color-primario);
+}
+
+.cont-info p {
+    color: var(--color-secundario);
+}
+
+.cont-info .descriptivo {
+    color: var(--blanco-color);
+}
+
+footer p {
+    color: var(--blanco-color) !important;
+}
+
+/* ESTILOS RESPONSIVE */
+/* 📱 Tablets verticales (iPad Mini, Galaxy Tab en vertical) */
+@media screen and (min-width: 768px) and (max-width: 899px) {
+    #hero .rectangulo.rectangulo-1 {
+        display: none;
+    }
+
+    #hero .rectangulo.rectangulo-2 {
+        display: none;
+    }
+
+    #hero::after {
+        width: 100%;
+    }
+
+    .lista-textos ul li {
+        text-align: start;
+    }
+
+    .cont-info p {
+        text-align: start;
+    }
+}
+
+/* ESTILOS RESPONSIVE MOVIL */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #hero .rectangulo.rectangulo-1 {
+        display: none;
+    }
+
+    #hero .rectangulo.rectangulo-2 {
+        display: none;
+    }
+
+    #hero::after {
+        width: 100%;
+    }
+
+    .cont-info .img-servicio {
+        margin-top: 50px;
+    }
+
+    .cont-info h2 {
+        text-align: center;
+    }
+    
+    .cont-info p {
+        margin-top: 20px;
+    }
+
+    .lista-textos ul {
+        padding-left: 2rem;
+    }
+}

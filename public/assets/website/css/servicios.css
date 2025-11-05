@@ -1,0 +1,275 @@
+/* CONFIGURACIÓN BÁSICA DE UN ARCHIVO CSS */
+
+/* 1. TIPOGRAFÍAS */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* 2. ICONOS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #0c498a;
+    --blanco-color: #ffffff;
+    --gris-proyecto: #969696;
+    --tercer-azul: #1a73d3;
+    --titulo-principal: 48px;
+    --subtitulo-seccion: 32px;
+    --titulo-bloque: 24px;
+    --subtitulo-menor: 18px;
+    --parrafos: 16px;
+    --texto-auxiliar: 14px;
+}
+
+.btn-azul {
+    border-radius: 25%;
+    width: auto;
+    background-color: var(--color-primario);
+    height: auto;
+    padding: 10px;
+}
+
+.btn-rojo {
+    border-radius: 25%;
+    width: auto;
+    background-color: red;
+    height: auto;
+    padding: 10px;
+}
+
+.campos-formulario {
+    border-radius: 17%;
+    background: #BFD2F8;
+}
+
+#hero .fondo-hero {
+    filter: blur(0);
+}
+
+#hero::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #bfd2f86e;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#hero::after {
+    content: "";
+    width: 350px;
+    height: 10px;
+    background: #bfd2f8;
+    z-index: 1;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+#hero h3 {
+    color: var(--color-secundario);
+    letter-spacing: 0;
+    font-size: var(--subtitulo-menor);
+    font-weight: 400;
+}
+
+#hero .rectangulo {
+    position: absolute;
+}
+
+#hero .rectangulo.rectangulo-1 {
+    bottom: -8px;
+    left: 350px;
+}
+
+#hero .rectangulo.rectangulo-2 {
+    right: 0;
+    bottom: -12px;
+    width: 349px;
+}
+
+main {
+    width: 100%;
+    position: relative;
+}
+
+#servicios {
+    width: 100%;
+    padding: 120px 0 120px 0;
+}
+
+#servicios .fila {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#servicios .cont-card {
+    margin-bottom: 50px;
+}
+
+
+#servicios .car {
+    width: 100% !important;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#servicios .car:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+#servicios .card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    position: relative;
+}
+
+
+#servicios .car::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+#servicios .car:hover::before {
+    background: #0c498a9e;
+}
+
+
+#servicios .cuerpo::before {
+    content: '\F681';
+    font-family: "bootstrap-icons";
+    font-weight: 900;
+    position: absolute;
+    top: -35px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: var(--tercer-azul);
+    border-radius: 50%;
+    z-index: 3; /* Cambiar de 2 a 3 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blanco-color);
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0, 102, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+#servicios .car:hover .cuerpo::before {
+    transform: scale(1.1);
+}
+
+
+#servicios .cuerpo {
+    padding: 30px 25px;
+    background: white;
+    position: relative;
+}
+
+
+#servicios .title {
+    font-size: var(--titulo-bloque);
+    font-weight: 600;
+    color: var(--color-secundario);
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+
+#servicios .text {
+    color: var(--color-secundario);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+
+#servicios .boton {
+    background: transparent !important;
+    border: none !important;
+    color: var(--color-primario) !important;
+    padding: 0 !important;
+    font-weight: 600;
+    font-size: var(--parrafos);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+}
+
+#servicios .boton:hover {
+    color: var(--tercer-azul) !important;
+    gap: 12px;
+    background: transparent !important;
+}
+
+#servicios .boton::after {
+    content: '→';
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+#servicios .boton:hover::after {
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    #servicios .cuerpo::before {
+        width: 60px;
+        height: 60px;
+        top: -30px;
+        right: 20px;
+        font-size: 25px;
+    }
+}
+
+/* ESTILOS RESPONSIVE */
+/* 📱 Tablets verticales (iPad Mini, Galaxy Tab en vertical) */
+@media screen and (min-width: 768px) and (max-width: 899px) {
+    #hero .rectangulo.rectangulo-1 {
+        display: none;
+    }
+
+    #hero .rectangulo.rectangulo-2 {
+        display: none;
+    }
+
+    #hero::after {
+        width: 100%;
+    }
+}
+
+/* ESTILOS RESPONSIVE MOVIL */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #hero .rectangulo.rectangulo-1 {
+        display: none;
+    }
+
+    #hero .rectangulo.rectangulo-2 {
+        display: none;
+    }
+
+    #hero::after {
+        width: 100%;
+    }
+}

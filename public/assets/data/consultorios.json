@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "Consultorio Santa María",
+    "direccion": "Carrera 10 #23-45, Bogotá",
+    "telefono": "601-4587321"
+  },
+  {
+    "id": 2,
+    "nombre": "Centro Médico La Esperanza",
+    "direccion": "Calle 52 #14-09, Medellín",
+    "telefono": "604-3221789"
+  },
+  {
+    "id": 3,
+    "nombre": "Clínica Los Pinos",
+    "direccion": "Avenida 30 de Agosto #15-60, Pereira",
+    "telefono": "606-3372194"
+  },
+  {
+    "id": 4,
+    "nombre": "Consultorio Vida y Salud",
+    "direccion": "Calle 7 #18-20, Cali",
+    "telefono": "602-4456723"
+  },
+  {
+    "id": 5,
+    "nombre": "Consultorio Bienestar Total",
+    "direccion": "Carrera 12 #45-67, Bucaramanga",
+    "telefono": "607-6358210"
+  }
+]

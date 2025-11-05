@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias</title>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Boostrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- MI CSS -->
+    <link rel="stylesheet" href="../assets/website/css/styles.css">
+    <link rel="stylesheet" href="../assets/website/css/noticias.css">
+</head>
+
+<body>
+    <header>
+        <div class="container contenedor">
+            <div class="row fila">
+                <div class="col-md-3 cont-img">
+                    <a href="index.html"><img src="../assets/website/img/LOGO-PRINCIPAL 2.svg" alt="Logo E-VITALIX"></a>
+                </div>
+                <div class="col-md-3 col-info">
+                    <i class="bi bi-telephone-outbound"></i>
+                    <p>EMERGENCIA <br><span>(237) 681-812-255</span></p>
+                </div>
+                <div class="col-md-3 col-info">
+                    <i class="bi bi-clock"></i>
+                    <p>HORARIO DE TRABAJO <br><span>09:00-20:00 Todos los días</span></p>
+                </div>
+                <div class="col-md-3 col-info">
+                    <i class="bi bi-geo-alt"></i>
+                    <p>UBICACIÓN <br><span>SENA VILLETA</span></p>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg barra-navegacion">
+            <div class="container">
+                <a class="navbar-brand" href="index.html"><img src="../assets/website/img/LOGO NEGATIVO 1.svg" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse items-menu" id="navbarNav">
+                    <ul class="navbar-nav lista-items">
+                        <li class="nav-item item-menu">
+                            <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item item-menu">
+                            <a class="nav-link" href="about us.html">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item item-menu">
+                            <a class="nav-link" href="servicios.html">Servicios</a>
+                        </li>
+                        <li class="nav-item item-menu">
+                            <a class="nav-link" href="doctores.html">Doctores</a>
+                        </li>
+                        <li class="nav-item item-menu">
+                            <a class="nav-link" href="noticias.html">Noticias</a>
+                        </li>
+                        <li class="nav-item item-menu">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ingresar">
+                    <li class="nav-item item-ingresar">
+                        <a class="nav-link" aria-current="page" href="../extras/inicioSesion.html">Entrar</a>
+                    </li>
+                    <li class="nav-item item-registrar">
+                        <a class="nav-link" href="../extras/registrarse.html">Registrarse</a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="hero" data-aos="fade-down" data-aos-duration="1000">
+            <img src="../assets/website/img/foto del hero de noticias.svg" alt="imagen de fondo" class="fondo-hero">
+            <img src="../assets/website/img/rectangulo del hero del about us.svg" alt=""
+                class="rectangulo rectangulo-1">
+            <img src="../assets/website/img/rectangulo about us azul clarito.svg" alt=""
+                class="rectangulo rectangulo-2">
+            <img src="../assets/website/img/Ellipse 2.svg" alt="elipse 2" class="elipse elipse-izquierda">
+            <img src="../assets/website/img/Ellipse 1.svg" alt="elipse 1" class="elipse elipse-derecha">
+            <div class="container contenido">
+                <div class="row fila">
+                    <div class="col-md-6 cont-info">
+                        <h3>Inicio / Noticias</h3>
+                        <h1>Publicaciones de blog</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="news">
+            <div class="container">
+                <div class="row">
+                    <!-- Columna izquierda - Artículos principales -->
+                    <div class="col-lg-8">
+                        <!-- Artículo destacado 1 -->
+                        <article class="news-card" data-aos="fade-up" data-aos-duration="800">
+                            <img src="../assets/website/img/foto para la noticia.svg" class="news-img" alt="Noticia">
+                            <div class="news-content">
+                                <div class="news-meta">
+                                    <span><i class="bi bi-calendar3"></i> Lunes 05, Septiembre 21 de 2025</span>
+                                    <span><i class="bi bi-person"></i> El Tiempo</span>
+                                    <span><i class="ojo bi bi-eye"></i> 68</span>
+                                    <span><i class="corazon bi bi-heart"></i> 86</span>
+                                </div>
+                                <h2 class="news-title">Una pasión por poner a los pacientes primero</h2>
+                                <p class="news-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+                                    placerat scelerisque tortor ornare ornare. Quisque placerat scelerisque tortor
+                                    ornare ornare Convallis felis vitae tortor augue. Velit nascetur proin massa in.
+                                    Consequat faucibus porttitor enim et...</p>
+                                <a href="noticia.html" class="btn-read-more">Leer más <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Artículo destacado 2 -->
+                        <article class="news-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                            <img src="../assets/website/img/imagen de la primera seccion del main del about us.svg"
+                                class="news-img" alt="Noticia">
+                            <div class="news-content">
+                                <div class="news-meta">
+                                    <span><i class="bi bi-calendar3"></i> Lunes 05, Septiembre 21 de 2025</span>
+                                    <span><i class="bi bi-person"></i> El Tiempo</span>
+                                    <span><i class="ojo bi bi-eye"></i> 68</span>
+                                    <span><i class="corazon bi bi-heart"></i> 86</span>
+                                </div>
+                                <h2 class="news-title">Una pasión por poner a los pacientes primero</h2>
+                                <p class="news-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+                                    placerat scelerisque tortor ornare ornare. Quisque placerat scelerisque tortor
+                                    ornare ornare Convallis felis vitae tortor augue. Velit nascetur proin massa in.
+                                    Consequat faucibus porttitor enim et...</p>
+                                <a href="#" class="btn-read-more">Leer más <i class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <nav class="news-pagination" aria-label="Paginación de noticias" data-aos="fade-up"
+                            data-aos-duration="800">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link page-prev" href="#" aria-label="Anterior">
+                                        <i class="bi bi-arrow-left"></i> Página Anterior
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1 -</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2 -</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3 -</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">4 -</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">5</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link page-next" href="#" aria-label="Siguiente">
+                                        Página Siguiente <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Columna derecha - Sidebar -->
+                    <div class="col-lg-4">
+                        <!-- Buscador -->
+                        <div class="cont-buscador" data-aos="fade-up" data-aos-duration="800">
+                            <div class="search-box">
+                                <input type="text" class="form-control" placeholder="Buscar">
+                                <button class="btn-search"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Publicaciones Recientes -->
+                        <div class="sidebar-widget" data-aos="fade-down" data-aos-duration="800" data-aos-delay="100">
+                            <h3 class="widget-title">Publicaciones Recientes</h3>
+                            <div class="recent-posts">
+                                <!-- Post 1 -->
+                                <div class="recent-post-item">
+                                    <img src="../assets/website/img/señora con tapabocas.svg" alt="Noticia">
+                                    <div class="recent-post-content">
+                                        <span class="post-date">Lunes 05, Septiembre 21 de 2025</span>
+                                        <a href="#" class="post-link">El título de este artículo es aquí, pero no es
+                                            demasiado larga</a>
+                                    </div>
+                                </div>
+
+                                <!-- Post 2 -->
+                                <div class="recent-post-item">
+                                    <img src="../assets/website/img/señora con tapabocas.svg" alt="Noticia">
+                                    <div class="recent-post-content">
+                                        <span class="post-date">Lunes 05, Septiembre 21 de 2025</span>
+                                        <a href="#" class="post-link">El título de este artículo es aquí, pero no es
+                                            demasiado larga</a>
+                                    </div>
+                                </div>
+
+                                <!-- Post 3 -->
+                                <div class="recent-post-item">
+                                    <img src="../assets/website/img/señora con tapabocas.svg" alt="Noticia">
+                                    <div class="recent-post-content">
+                                        <span class="post-date">Lunes 05, Septiembre 21 de 2025</span>
+                                        <a href="#" class="post-link">El título de este artículo es aquí, pero no es
+                                            demasiado larga</a>
+                                    </div>
+                                </div>
+
+                                <!-- Post 4 -->
+                                <div class="recent-post-item">
+                                    <img src="../assets/website/img/señora con tapabocas.svg" alt="Noticia">
+                                    <div class="recent-post-content">
+                                        <span class="post-date">Lunes 05, Septiembre 21 de 2025</span>
+                                        <a href="#" class="post-link">El título de este artículo es aquí, pero no es
+                                            demasiado larga</a>
+                                    </div>
+                                </div>
+
+                                <!-- Post 5 -->
+                                <div class="recent-post-item">
+                                    <img src="../assets/website/img/señora con tapabocas.svg" alt="Noticia">
+                                    <div class="recent-post-content">
+                                        <span class="post-date">Lunes 05, Septiembre 21 de 2025</span>
+                                        <a href="#" class="post-link">El título de este artículo es aquí, pero no es
+                                            demasiado larga</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Categorías -->
+                        <div class="sidebar-widget" data-aos="fade-down" data-aos-duration="800" data-aos-delay="200">
+                            <h3 class="widget-title">Categorías</h3>
+                            <ul class="categories-list">
+                                <li>
+                                    <a href="#">Cirugía <span class="badge">3</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Cuidado de la salud <span class="badge">4</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Médico <span class="badge">8</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Profesional <span class="badge">10</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contacto">
+            <div class="container">
+                <h3 data-aos="fade-down" data-aos-duration="800">HABLEMOS</h3>
+                <h2 data-aos="fade-down" data-aos-duration="800" data-aos-delay="100">Contacto</h2>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 cont-contacto" data-aos="flip-up" data-aos-duration="800" data-aos-delay="100">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body tarjeta">
+                                <i class="bi bi-telephone-outbound"></i>
+                                <p class="card-text titulo">EMERGENCIA</p>
+                                <p class="texto">(237) 681-812-255</p>
+                                <p class="texto">(237) 666-331-894</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 cont-contacto" data-aos="flip-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body tarjeta">
+                                <i class="bi bi-geo-alt"></i>
+                                <p class="card-text titulo">UBICACIÓN</p>
+                                <p class="texto">SENA VILLETA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 cont-contacto" data-aos="flip-up" data-aos-duration="800" data-aos-delay="300">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body tarjeta">
+                                <i class="bi bi-envelope"></i>
+                                <p class="card-text titulo">EMAIL</p>
+                                <p class="texto">evitalix@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 cont-contacto" data-aos="flip-up" data-aos-duration="800" data-aos-delay="400">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body tarjeta">
+                                <i class="bi bi-clock"></i>
+                                <p class="card-text titulo">ATENCIÓN</p>
+                                <p class="texto">Lunes-Domingo</p>
+                                <p class="texto">09:00-20:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+    <footer data-aos="fade-up" data-aos-duration="1000">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 cont-info">
+                    <a href="index.html"><img src="../assets/website/img/LOGO NEGATIVO 1.svg" alt="Logo negativo"></a>
+                    <p class="descriptivo">Liderando el camino en
+                        excelencia médica
+                        y atención confiable</p>
+                </div>
+                <div class="col-md-3 cont-enlaces">
+                    <h5>Otros Links</h5>
+                    <a href="index.html">Inicio</a>
+                    <a href="doctores.html">Doctores</a>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="about us.html">Sobre Nosotros</a>
+                </div>
+                <div class="col-md-3 cont-info">
+                    <h5 class="titulo-contacto">Contactanos</h5>
+                    <p class="contacto">Llama: 3219219323</p>
+                    <p class="contacto">Email: evitalix@gmail.com</p>
+                    <p class="contacto">Dirección: SENA VILLETA</p>
+                    <p class="contacto">Villeta - Cundinamarca</p>
+                </div>
+                <div class="col-md-3 cont-info">
+                    <h5 class="hoja-informativa">Hoja informativa</h5>
+                    <form action="" method="post">
+                        <input type="email" name="email" placeholder="Introduce tu correo">
+                        <button type="submit" class="btn-enviar">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="row fila">
+                <div class="col-md-10">
+                    <p class="derechos">© 2025 E-VITALIX Todos los Derechos Reservados by PNTEC-LTD</p>
+                </div>
+                <div class="col-md-2 cont-redes d-flex gap-3">
+                    <a href="#"><img src="../assets/website/img/linkedin blanco.svg" alt="Linkedin"></a>
+                    <a href="#"><img src="../assets/website/img/facebook circulo.svg" alt=""></a>
+                    <a href="#"><img src="../assets/website/img/instagram blanco.svg" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Boostrap Js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../assets/website/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,358 @@
+/* CONFIGURACIÓN BÁSICA DE UN ARCHIVO CSS */
+
+/* 1. TIPOGRAFÍAS */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* 2. ICONOS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #0c498a;
+    --blanco-color: #ffffff;
+    --gris-proyecto: #969696;
+    --tercer-azul: #1a73d3;
+    --titulo-principal: 48px;
+    --subtitulo-seccion: 32px;
+    --titulo-bloque: 24px;
+    --subtitulo-menor: 18px;
+    --parrafos: 16px;
+    --texto-auxiliar: 14px;
+}
+
+.btn-azul {
+    border-radius: 25%;
+    width: auto;
+    background-color: var(--color-primario);
+    height: auto;
+    padding: 10px;
+}
+
+.btn-rojo {
+    border-radius: 25%;
+    width: auto;
+    background-color: red;
+    height: auto;
+    padding: 10px;
+}
+
+.campos-formulario {
+    border-radius: 17%;
+    background: #BFD2F8;
+}
+
+#hero .fondo-hero {
+    filter: blur(0);
+}
+
+#hero::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #bfd2f86e;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#hero::after {
+    content: "";
+    width: 350px;
+    height: 10px;
+    background: #bfd2f8;
+    z-index: 1;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+#hero h3 {
+    color: var(--color-secundario);
+    letter-spacing: 0;
+    font-size: var(--subtitulo-menor);
+    font-weight: 400;
+}
+
+#hero .rectangulo {
+    position: absolute;
+}
+
+#hero .rectangulo.rectangulo-1 {
+    bottom: -8px;
+    left: 350px;
+}
+
+#hero .rectangulo.rectangulo-2 {
+    right: 0;
+    bottom: -12px;
+    width: 349px;
+}
+
+main {
+    width: 100%;
+    position: relative;
+}
+
+#equipo {
+    padding: 120px 0 120px 0;
+}
+
+#equipo .fila {
+    row-gap: 30px;
+}
+
+#equipo .tarjeta {
+    transition: all 0.3s ease;
+}
+
+#equipo .tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.15);
+}
+
+#motivacion {
+    width: 100%;
+    position: relative;
+    height: 400px;
+    background-image: url('../img/imagen\ de\ doctor\ con\ cardiologia.svg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#motivacion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0c498a89;
+    z-index: 1;
+}
+
+.cont-carrusel .item i {
+    font-size: var(--titulo-principal);
+    color: var(--color-primario);
+}
+
+.cont-carrusel .item {
+    text-align: center;
+    z-index: 1;
+}
+
+.cont-carrusel .item p {
+    color: var(--blanco-color);
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+.cont-carrusel .item hr {
+    width: 200px;
+    /* Ancho corto */
+    margin: 20px auto;
+    /* Centrado y espaciado */
+    border: 1px solid var(--gris-proyecto);
+    /* Quitar borde por defecto */
+}
+
+.cont-carrusel .item h5 {
+    color: var(--blanco-color);
+    font-size: var(--titulo-bloque);
+}
+
+.dots {
+    bottom: -50px;
+    margin-bottom: 0;
+}
+
+.dots [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: #BFD2F8;
+    border: none;
+}
+
+.dots button.active {
+    background: var(--color-primario);
+}
+
+#noticias {
+    width: 100%;
+    padding-bottom: 120px;
+    padding-top: 120px;
+}
+
+#noticias h3,
+h2 {
+    text-align: center;
+}
+
+#noticias h3 {
+    color: var(--color-primario);
+    letter-spacing: 4px;
+    font-weight: 700;
+    font-size: var(--subtitulo-menor);
+    margin-bottom: 20px;
+}
+
+#noticias h2 {
+    color: var(--color-secundario);
+    margin-bottom: 57px;
+}
+
+#noticias .cont-card {
+    display: flex;
+    justify-content: center;
+}
+
+.cont-card {
+    padding: 10px;
+}
+
+.cont-card .car {
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
+    overflow: hidden;
+    background: white;
+}
+
+.cont-card .car:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cont-img {
+    padding: 0;
+    overflow: hidden;
+}
+
+#noticias .cont-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info .cuerpo {
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.info .title {
+    font-size: 12px;
+    color: var(--color-primario);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.info .text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-secundario);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.info .texto {
+    margin-bottom: 0;
+    margin-top: auto;
+}
+
+.text-body-secondary {
+    font-size: 14px;
+}
+
+.text-body-secondary i {
+    color: #5f6368;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.text-body-secondary span{
+    display: inline-flex;
+    align-items: center;
+}
+
+.cuerpo .title {
+    font-size: var(--texto-auxiliar);
+}
+
+.cuerpo .text {
+    font-size: var(--subtitulo-menor);
+}
+
+.ojo {
+    color: #000000 !important;
+}
+
+.corazon {
+    color: #000000 !important;
+}
+
+.ojo i {
+    color: #6c5ce7 !important; /* Morado */
+}
+
+.corazon i {
+    color: #e74c3c !important; /* Rojo */
+}
+
+#noticias .cont-botones {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ESTILOS RESPONSIVE */
+/* 📱 Tablets verticales (iPad Mini, Galaxy Tab en vertical) */
+@media screen and (min-width: 768px) and (max-width: 899px) {
+    #hero .rectangulo.rectangulo-1 {
+        display: none;
+    }
+
+    #hero .rectangulo.rectangulo-2 {
+        display: none;
+    }
+
+    #hero::after {
+        width: 100%;
+    }
+
+    .cont-carrusel .item p {
+        padding: 0;
+    }
+}
+
+
+/* ESTILOS RESPONSIVE MOVIL */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #hero .rectangulo.rectangulo-1 {
+        display: none;
+    }
+
+    #hero .rectangulo.rectangulo-2 {
+        display: none;
+    }
+
+    #hero::after {
+        width: 100%;
+    }
+
+    .cont-carrusel .item p {
+        padding: 0;
+    }
+}

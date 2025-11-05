@@ -1,0 +1,56 @@
+[
+    {
+      "nombre": "Neurología",
+      "icono": "fa-solid fa-brain"
+    },
+    {
+      "nombre": "Oncología",
+      "icono": "fas fa-ribbon"
+    },
+    {
+      "nombre": "Otorrinolaringología",
+      "icono": "bi bi-ear-fill"
+    },
+    {
+      "nombre": "Oftalmología",
+      "icono": "bi bi-eye"
+    },
+    {
+      "nombre": "Cardiología",
+      "icono": "bi bi-heart-pulse-fill"
+    },
+    {
+      "nombre": "Neumología",
+      "icono": "fas fa-lungs"
+    },
+    {
+      "nombre": "Nefrología",
+      "imagen": "../assets/website/img/riñones.svg",
+      "alt": "Riñones"
+    },
+    {
+      "nombre": "Gastroenterología",
+      "imagen": "../assets/website/img/gastro.svg",
+      "alt": "Gastro"
+    },
+    {
+      "nombre": "Urología",
+      "imagen": "../assets/website/img/riñones.svg",
+      "alt": "urología"
+    },
+    {
+      "nombre": "Dermatología",
+      "imagen": "../assets/website/img/urologia 2.svg",
+      "alt": "Dermatología"
+    },
+    {
+      "nombre": "Ginecología",
+      "imagen": "../assets/website/img/ginecologia.svg",
+      "alt": "Ginecología"
+    },
+    {
+      "nombre": "Ortopedia",
+      "imagen": "../assets/website/img/ortopedia.svg",
+      "alt": "Ortopedia"
+    }
+  ]
