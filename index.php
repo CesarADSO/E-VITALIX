@@ -56,6 +56,12 @@ switch ($request) {
     case '/admin': 
         require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.html';
         break;
+    case '/doctor': 
+        require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.html';
+        break;
+    case '/paciente': 
+        require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.html';
+        break;
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.html';
