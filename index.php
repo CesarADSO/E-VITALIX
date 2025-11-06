@@ -23,6 +23,27 @@ switch ($request) {
     case '/':
         require BASE_PATH . '/app/views/website/index.html';
         break;
+    case '/sobreNosotros':
+        require BASE_PATH . '/app/views/website/about us.html';
+        break;
+    case '/servicios':
+        require BASE_PATH . '/app/views/website/servicios.html';
+        break;
+    case '/servicio':
+        require BASE_PATH . '/app/views/website/servicio.html';
+        break;
+    case '/doctores':
+        require BASE_PATH . '/app/views/website/doctores.html';
+        break;
+    case '/noticias':
+        require BASE_PATH . '/app/views/website/noticias.html';
+        break;
+    case '/noticia':
+        require BASE_PATH . '/app/views/website/noticia.html';
+        break;
+    case '/contacto':
+        require BASE_PATH . '/app/views/website/contacto.html';
+        break;
     case '/login':
         require BASE_PATH . '/app/views/auth/inicioSesion.html';
         break;
