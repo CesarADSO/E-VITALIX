@@ -50,6 +50,12 @@ switch ($request) {
     case '/registro':
         require BASE_PATH . '/app/views/auth/registrarse.html';
         break;
+    case '/recuperacion': 
+        require BASE_PATH . '/app/views/auth/recuperar-contraseña.html';
+        break;
+    case '/admin': 
+        require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.html';
+        break;
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.html';
