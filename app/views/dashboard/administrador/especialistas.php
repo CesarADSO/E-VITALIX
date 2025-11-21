@@ -79,7 +79,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <div class="dropdown">
                                             <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/E-VITALIX/admin/actualizar-consultorio"><i class="bi bi-pencil"></i>Editar</a></li>
+                                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="bi bi-pencil"></i>Editar</a></li>
                                                 <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
                                             </ul>
                                         </div>

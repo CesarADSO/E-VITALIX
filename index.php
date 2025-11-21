@@ -101,6 +101,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
 
+    case '/admin/actualizar-especialista':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-especialista.php';
+        break;
+
     case '/admin/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;

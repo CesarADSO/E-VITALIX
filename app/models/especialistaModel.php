@@ -132,7 +132,8 @@ class Especialista
     }
 
     // CREAMOS LA FUNCIÓN PARA MOSTRAR LOS ESPECIALISTAS
-    public function mostrar() {
+    public function mostrar()
+    {
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
@@ -146,10 +147,72 @@ class Especialista
 
             // RETORNAMOS EN UN FETCHALL LA CADENA DE DATOS QUE NOS DA LA VARIABLE RESULTADO PARA ENVIARLO COMO UN ARREGLO
             return $resultado->fetchAll();
-
-
         } catch (PDOException $e) {
             error_log("Error en Especialista::mostrar->" . $e->getMessage());
+            // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
+            return [];
+        }
+    }
+
+    // CREAMOS LA FUNCIÓN PARA LISTAR UN ESPECIALISTA
+    public function listarEspecialistaPorId($id)
+    {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $consultar = "SELECT 
+                            especialistas.id AS id_especialista,
+                            especialistas.nombres,
+                            especialistas.apellidos,
+                            especialistas.id_tipo_documento,
+                            especialistas.numero_documento,
+                            especialistas.fecha_nacimiento,
+                            especialistas.genero,
+                            especialistas.telefono,
+                            especialistas.direccion,
+                            especialistas.especialidad,
+                            especialistas.registro_profesional,
+    
+                            usuarios.email,
+                            usuarios.estado AS estado_especialista,
+    
+                            disponibilidad_medico.dia_semana,
+                            disponibilidad_medico.hora_inicio,
+                            disponibilidad_medico.hora_fin,
+                            disponibilidad_medico.pausa_inicio,
+                            disponibilidad_medico.pausa_fin,
+                            disponibilidad_medico.capacidad_maxima,
+                            disponibilidad_medico.estado_disponibilidad,
+                            consultorios.id AS id_consultorio,
+                            consultorios.nombre AS consultorio_nombre,
+                            tipo_documento.nombre AS documento
+
+                            FROM disponibilidad_medico
+                            INNER JOIN consultorios 
+                                ON disponibilidad_medico.id_consultorio = consultorios.id
+                            INNER JOIN especialistas 
+                                ON disponibilidad_medico.id_especialista = especialistas.id
+                            INNER JOIN tipo_documento 
+                                ON especialistas.id_tipo_documento = tipo_documento.id
+                            INNER JOIN usuarios 
+                                ON especialistas.id_usuario = usuarios.id
+
+                            WHERE especialistas.id = :id
+                            LIMIT 1;";
+
+            // PREPARAMOS LA ACCIÓN A EJECUTAR
+            $resultado = $this->conexion->prepare($consultar);
+
+            // HACEMOS EL BINDPARAM
+            $resultado->bindParam(':id', $id);
+
+            // EJECUTAMOS LA ACCIÓN
+            $resultado->execute();
+
+            // RETORNAMOS LA CADENA DE DATOS CON UN FETCH
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::listarEspecialistaPorId->" . $e->getMessage());
             // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
             return [];
         }

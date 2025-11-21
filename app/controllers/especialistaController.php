@@ -15,7 +15,14 @@ switch ($method) {
         break;
 
     case 'GET':
-        mostrarEspecialistas();
+        // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
+        if (isset($_GET['id'])) {
+            listarEspecialista($_GET['id']);
+        }
+        else {
+            mostrarEspecialistas();
+        }
+        
         break;
     default:
         # code...
@@ -152,6 +159,19 @@ function mostrarEspecialistas() {
 
     // EN UNA VARIABLE ACCEDEMOS AL METODO DE DICHA CLASE QUE NECESITAMOS
     $resultado = $objEspecialista->mostrar();
+
+    // RETORNAMOS LOS DATOS A LA VISTA
+    return $resultado;
+
+}
+
+function listarEspecialista($id) {
+
+    // INSTANCIAMOS LA CLASE DE NUESTRO MODELO AL CUAL ESTAMOS RELACIONADOS
+    $objEspecialista = new Especialista();
+
+    // ACCEDEMOS AL MÉTODO QUE VAMOS A USAR
+    $resultado = $objEspecialista->listarEspecialistaPorId($id);
 
     // RETORNAMOS LOS DATOS A LA VISTA
     return $resultado;
