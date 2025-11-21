@@ -20,8 +20,8 @@
         <div class="login-content">
 
 
-            <div class="login-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                <div class="logo-container" data-aos="fade-down" data-aos-duration="800">
+            <div class="login-card">
+                <div class="logo-container">
                     <!-- Aquí va tu logo - Reemplaza el src con la ruta de tu imagen -->
                     <div class="logo">
                         <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo"
@@ -30,40 +30,38 @@
                         <!-- <div class="logo-placeholder">E-VITALIX</div> -->
                     </div>
                 </div>
-                <h2 class="login-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                <h2 class="login-title">
                     Iniciar sesión
                 </h2>
-                <p class="login-pharagraf" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">Ingrese sus
+                <p class="login-pharagraf">Ingrese sus
                     credenciales para Iniciar sesión</p>
-                <form id="loginForm">
-                    <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-                        <input type="email" class="campos-formulario" placeholder="Email" id="email" required>
+                <form id="loginForm" action="iniciar-sesion" method="POST">
+                    <div>
+                        <input type="email" name="email" class="campos-formulario" placeholder="Email" id="email" required>
                     </div>
 
-                    <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
-                        <input type="password" class="campos-formulario" placeholder="Contraseña" id="password"
+                    <div>
+                        <input type="password" name="clave" class="campos-formulario" placeholder="Contraseña" id="password"
                             required>
                     </div>
 
-                    <div class="form-options" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
+                    <div class="form-options">
                         <div class="checkbox-container">
-                            <input type="checkbox" id="recordarme">
+                            <input type="checkbox" id="recordarme" name="recordarme" value="1">
                             <label for="recordarme">Recordarme</label>
                         </div>
 
-                        <a href="recuperacion" target="_blank" class="forgot-password">
+                        <a href="recuperacion" class="forgot-password">
                             ¿Olvidó su contraseña?
                         </a>
                     </div>
 
-                    <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
-                        <a href="admin" class="btn-azul">
-                            Ingresar
-                        </a>
+                    <div>
+                        <button class="btn-azul" type="submit">Ingresar</button>
                     </div>
 
-                    <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
-                        <a href="registro" target="_blank" class="btn-azul-2">
+                    <div>
+                        <a href="registro" class="btn-azul-2">
                             Registrarse
                         </a>
                     </div>
@@ -73,9 +71,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AOS Animation Library -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="public/assets/auth/js/inicioSesion.js"></script>
 </body>
 
 </html>

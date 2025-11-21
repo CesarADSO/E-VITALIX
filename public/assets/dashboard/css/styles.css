@@ -51,11 +51,35 @@ body {
     border-bottom: 1px solid #e9ecef;
 }
 
+.cont-form-foto {
+    position: relative;
+}
+
 .user-avatar {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     background-color: #e9ecef;
+}
+
+.user-avatar .adminImg {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.form-foto .enviarFoto {
+    border-radius: 20px;
+    padding: 8px 30px;
+    background: var(--color-primario);
+    border: none;
+    color: var(--blanco-color);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 10px;
 }
 
 .user-info h6 {
@@ -390,4 +414,173 @@ body {
     .bottom-section {
         grid-template-columns: 1fr;
     }
+}
+
+/* ... tu CSS actual ... */
+
+/* WIZARD STYLES */
+.wizard-progress {
+    margin-bottom: 2rem;
+}
+
+.mb-4 {
+    color: var(--color-secundario);
+}
+
+.texto {
+    color: var(--color-secundario) !important;
+}
+
+.form-label {
+    color: var(--color-secundario);
+}
+
+.form-control {
+    color: var(--color-primario);
+}
+
+.form-control::placeholder {
+    color: var(--color-primario);
+}
+
+.form-text {
+    color: var(--gris-proyecto);
+}
+
+.steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.steps:before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--gris-proyecto);
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--gris-proyecto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--blanco-color);
+    font-size: var(--texto-auxiliar);
+}
+
+.step.active .step-number {
+    background-color: var(--color-primario);
+}
+
+.step-label {
+    font-size: var(--texto-auxiliar);
+    color: var(--gris-proyecto);
+    text-align: center;
+}
+
+.step.active .step-label {
+    color: var(--color-primario);
+    font-weight: bold;
+}
+
+.wizard-step {
+    display: none;
+}
+
+.wizard-step h5 {
+    color: var(--color-secundario);
+}
+
+.card-body strong {
+    color: var(--color-primario);
+}
+
+.card-body span {
+    color: var(--gris-proyecto);
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+/* Estilos específicos para el formulario de consultorios */
+.table-pacientes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-pacientes th,
+.table-pacientes td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-pacientes th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: var(--color-secundario);
+    font-size: var(--texto-auxiliar);
+}
+
+.table-pacientes tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.btn-primary {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-secundario);
+    border-color: var(--color-secundario);
+}
+
+.btn-outline-secondary {
+    color: var(--gris-proyecto);
+    border-color: var(--gris-proyecto);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--gris-proyecto);
+    border-color: var(--gris-proyecto);
+    color: var(--blanco-color);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.cont-botones .boton {
+    background: var(--color-primario);
+    color: var(--blanco-color);
+}
+
+.imgconsultorio {
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    object-fit: cover;
 }

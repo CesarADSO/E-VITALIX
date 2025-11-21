@@ -210,150 +210,150 @@ function eliminarPaciente(id) {
 
 // ==================== GESTIÓN DE CONSULTORIOS ====================
 
-let consultorios = [
-    { id: 1, nombre: "Consultorio Central", direccion: "Av. Principal 123", telefono: "+51 987 654 321", ciudad: "Lima" },
-    { id: 2, nombre: "Clínica San José", direccion: "Calle Los Pinos 456", telefono: "+51 912 345 678", ciudad: "Arequipa" },
-    { id: 3, nombre: "Centro Médico Norte", direccion: "Jr. Las Flores 789", telefono: "+51 998 765 432", ciudad: "Trujillo" }
-];
+// let consultorios = [
+//     { id: 1, nombre: "Consultorio Central", direccion: "Av. Principal 123", telefono: "+51 987 654 321", ciudad: "Lima" },
+//     { id: 2, nombre: "Clínica San José", direccion: "Calle Los Pinos 456", telefono: "+51 912 345 678", ciudad: "Arequipa" },
+//     { id: 3, nombre: "Centro Médico Norte", direccion: "Jr. Las Flores 789", telefono: "+51 998 765 432", ciudad: "Trujillo" }
+// ];
 
-let nextConsultorioId = 4;
-let editingConsultorioId = null;
+// let nextConsultorioId = 4;
+// let editingConsultorioId = null;
 
-function renderConsultoriosTable() {
-    const tbody = document.querySelector('#consultoriosSection .table-pacientes tbody');
-    if (!tbody) {
-        console.warn('No se encontró el tbody de la tabla de consultorios');
-        return;
-    }
+// function renderConsultoriosTable() {
+//     const tbody = document.querySelector('#consultoriosSection .table-pacientes tbody');
+//     if (!tbody) {
+//         console.warn('No se encontró el tbody de la tabla de consultorios');
+//         return;
+//     }
 
-    tbody.innerHTML = '';
+//     tbody.innerHTML = '';
 
-    consultorios.forEach(consultorio => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td><input type="checkbox" class="form-check-input"></td>
-            <td>${consultorio.nombre}</td>
-            <td>${consultorio.direccion}</td>
-            <td>${consultorio.telefono}</td>
-            <td>${consultorio.ciudad}</td>
-            <td>
-                <div class="dropdown">
-                    <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="editarConsultorio(${consultorio.id}); return false;"><i class="bi bi-pencil"></i> Editar</a></li>
-                        <li><a class="dropdown-item text-danger" href="#" onclick="eliminarConsultorio(${consultorio.id}); return false;"><i class="bi bi-trash"></i> Eliminar</a></li>
-                    </ul>
-                </div>
-            </td>
-        `;
-        tbody.appendChild(tr);
-    });
+//     consultorios.forEach(consultorio => {
+//         const tr = document.createElement('tr');
+//         tr.innerHTML = `
+//             <td><input type="checkbox" class="form-check-input"></td>
+//             <td>${consultorio.nombre}</td>
+//             <td>${consultorio.direccion}</td>
+//             <td>${consultorio.telefono}</td>
+//             <td>${consultorio.ciudad}</td>
+//             <td>
+//                 <div class="dropdown">
+//                     <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
+//                     <ul class="dropdown-menu">
+//                         <li><a class="dropdown-item" href="#" onclick="editarConsultorio(${consultorio.id}); return false;"><i class="bi bi-pencil"></i> Editar</a></li>
+//                         <li><a class="dropdown-item text-danger" href="#" onclick="eliminarConsultorio(${consultorio.id}); return false;"><i class="bi bi-trash"></i> Eliminar</a></li>
+//                     </ul>
+//                 </div>
+//             </td>
+//         `;
+//         tbody.appendChild(tr);
+//     });
 
-    const btnLink = document.querySelector('#consultoriosSection .btn-link');
-    if (btnLink) {
-        btnLink.textContent = `← Todos (${consultorios.length})`;
-    }
-}
+//     const btnLink = document.querySelector('#consultoriosSection .btn-link');
+//     if (btnLink) {
+//         btnLink.textContent = `← Todos (${consultorios.length})`;
+//     }
+// }
 
-function mostrarModalConsultorio(id = null) {
-    editingConsultorioId = id;
-    const consultorio = id ? consultorios.find(c => c.id === id) : null;
+// // function mostrarModalConsultorio(id = null) {
+// //     editingConsultorioId = id;
+// //     const consultorio = id ? consultorios.find(c => c.id === id) : null;
 
-    const modalHTML = `
-        <div class="modal fade" id="consultorioModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content" style="border-radius: 15px;">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title" style="font-weight: 600;">${id ? 'Editar' : 'Agregar'} Consultorio</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body p-4">
-                        <form id="consultorioForm">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Nombre del Consultorio</label>
-                                <input type="text" class="form-control campos-formulario" id="nombreConsultorio" value="${consultorio ? consultorio.nombre : ''}" placeholder="Nombre del consultorio" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Dirección</label>
-                                <input type="text" class="form-control campos-formulario" id="direccionConsultorio" value="${consultorio ? consultorio.direccion : ''}" placeholder="Dirección completa" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Teléfono</label>
-                                <input type="text" class="form-control campos-formulario" id="telefonoConsultorio" value="${consultorio ? consultorio.telefono : ''}" placeholder="+51 999 999 999" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Ciudad</label>
-                                <input type="text" class="form-control campos-formulario" id="ciudadConsultorio" value="${consultorio ? consultorio.ciudad : ''}" placeholder="Ciudad" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 20px;">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="guardarConsultorio()" style="border-radius: 20px;">${id ? 'Actualizar' : 'Agregar'}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
+// //     const modalHTML = `
+// //         <div class="modal fade" id="consultorioModal" tabindex="-1">
+// //             <div class="modal-dialog modal-dialog-centered">
+// //                 <div class="modal-content" style="border-radius: 15px;">
+// //                     <div class="modal-header border-0">
+// //                         <h5 class="modal-title" style="font-weight: 600;">${id ? 'Editar' : 'Agregar'} Consultorio</h5>
+// //                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+// //                     </div>
+// //                     <div class="modal-body p-4">
+// //                         <form id="consultorioForm">
+// //                             <div class="mb-3">
+// //                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Nombre del Consultorio</label>
+// //                                 <input type="text" class="form-control campos-formulario" id="nombreConsultorio" value="${consultorio ? consultorio.nombre : ''}" placeholder="Nombre del consultorio" required>
+// //                             </div>
+// //                             <div class="mb-3">
+// //                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Dirección</label>
+// //                                 <input type="text" class="form-control campos-formulario" id="direccionConsultorio" value="${consultorio ? consultorio.direccion : ''}" placeholder="Dirección completa" required>
+// //                             </div>
+// //                             <div class="mb-3">
+// //                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Teléfono</label>
+// //                                 <input type="text" class="form-control campos-formulario" id="telefonoConsultorio" value="${consultorio ? consultorio.telefono : ''}" placeholder="+51 999 999 999" required>
+// //                             </div>
+// //                             <div class="mb-3">
+// //                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Ciudad</label>
+// //                                 <input type="text" class="form-control campos-formulario" id="ciudadConsultorio" value="${consultorio ? consultorio.ciudad : ''}" placeholder="Ciudad" required>
+// //                             </div>
+// //                         </form>
+// //                     </div>
+// //                     <div class="modal-footer border-0">
+// //                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 20px;">Cancelar</button>
+// //                         <button type="button" class="btn btn-primary" onclick="guardarConsultorio()" style="border-radius: 20px;">${id ? 'Actualizar' : 'Agregar'}</button>
+// //                     </div>
+// //                 </div>
+// //             </div>
+// //         </div>
+// //     `;
 
-    const oldModal = document.getElementById('consultorioModal');
-    if (oldModal) oldModal.remove();
+// //     const oldModal = document.getElementById('consultorioModal');
+// //     if (oldModal) oldModal.remove();
 
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
+// //     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    const modal = new bootstrap.Modal(document.getElementById('consultorioModal'));
-    modal.show();
-}
+// //     const modal = new bootstrap.Modal(document.getElementById('consultorioModal'));
+// //     modal.show();
+// // }
 
-function guardarConsultorio() {
-    const nombreInput = document.getElementById('nombreConsultorio');
-    const direccionInput = document.getElementById('direccionConsultorio');
-    const telefonoInput = document.getElementById('telefonoConsultorio');
-    const ciudadInput = document.getElementById('ciudadConsultorio');
+// function guardarConsultorio() {
+//     const nombreInput = document.getElementById('nombreConsultorio');
+//     const direccionInput = document.getElementById('direccionConsultorio');
+//     const telefonoInput = document.getElementById('telefonoConsultorio');
+//     const ciudadInput = document.getElementById('ciudadConsultorio');
 
-    if (!nombreInput || !direccionInput || !telefonoInput || !ciudadInput) {
-        alert('Error al acceder a los campos del formulario');
-        return;
-    }
+//     if (!nombreInput || !direccionInput || !telefonoInput || !ciudadInput) {
+//         alert('Error al acceder a los campos del formulario');
+//         return;
+//     }
 
-    const nombre = nombreInput.value.trim();
-    const direccion = direccionInput.value.trim();
-    const telefono = telefonoInput.value.trim();
-    const ciudad = ciudadInput.value.trim();
+//     const nombre = nombreInput.value.trim();
+//     const direccion = direccionInput.value.trim();
+//     const telefono = telefonoInput.value.trim();
+//     const ciudad = ciudadInput.value.trim();
 
-    if (!nombre || !direccion || !telefono || !ciudad) {
-        alert('Por favor complete todos los campos');
-        return;
-    }
+//     if (!nombre || !direccion || !telefono || !ciudad) {
+//         alert('Por favor complete todos los campos');
+//         return;
+//     }
 
-    if (editingConsultorioId) {
-        const index = consultorios.findIndex(c => c.id === editingConsultorioId);
-        consultorios[index] = { id: editingConsultorioId, nombre, direccion, telefono, ciudad };
-    } else {
-        consultorios.push({ id: nextConsultorioId++, nombre, direccion, telefono, ciudad });
-    }
+//     if (editingConsultorioId) {
+//         const index = consultorios.findIndex(c => c.id === editingConsultorioId);
+//         consultorios[index] = { id: editingConsultorioId, nombre, direccion, telefono, ciudad };
+//     } else {
+//         consultorios.push({ id: nextConsultorioId++, nombre, direccion, telefono, ciudad });
+//     }
 
-    renderConsultoriosTable();
+//     renderConsultoriosTable();
 
-    const modalElement = document.getElementById('consultorioModal');
-    if (modalElement) {
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) modal.hide();
-    }
+//     const modalElement = document.getElementById('consultorioModal');
+//     if (modalElement) {
+//         const modal = bootstrap.Modal.getInstance(modalElement);
+//         if (modal) modal.hide();
+//     }
 
-    editingConsultorioId = null;
-}
+//     editingConsultorioId = null;
+// }
 
-function editarConsultorio(id) {
-    mostrarModalConsultorio(id);
-}
+// function editarConsultorio(id) {
+//     mostrarModalConsultorio(id);
+// }
 
-function eliminarConsultorio(id) {
-    if (confirm('¿Está seguro de que desea eliminar este consultorio?')) {
-        consultorios = consultorios.filter(c => c.id !== id);
-        renderConsultoriosTable();
-    }
-}
+// function eliminarConsultorio(id) {
+//     if (confirm('¿Está seguro de que desea eliminar este consultorio?')) {
+//         consultorios = consultorios.filter(c => c.id !== id);
+//         renderConsultoriosTable();
+//     }
+// }
 
 // ==================== GESTIÓN DE PROFESIONALES ====================
 
@@ -676,147 +676,147 @@ function initCharts() {
 }
 // ==================== GESTIÓN DE CONSULTORIOS ====================
 
-// Función para renderizar la tabla de consultorios
-function renderConsultoriosTable() {
-    const tbody = document.querySelector('#consultoriosSection .table-pacientes tbody');
-    if (!tbody) {
-        console.warn('No se encontró el tbody de la tabla de consultorios');
-        return;
-    }
+// // Función para renderizar la tabla de consultorios
+// function renderConsultoriosTable() {
+//     const tbody = document.querySelector('#consultoriosSection .table-pacientes tbody');
+//     if (!tbody) {
+//         console.warn('No se encontró el tbody de la tabla de consultorios');
+//         return;
+//     }
 
-    tbody.innerHTML = '';
+//     tbody.innerHTML = '';
 
-    consultorios.forEach(consultorio => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td><input type="checkbox" class="form-check-input"></td>
-            <td>${consultorio.nombre}</td>
-            <td>${consultorio.direccion}</td>
-            <td>${consultorio.telefono}</td>
-            <td>${consultorio.ciudad}</td>
-            <td>
-                <div class="dropdown">
-                    <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="editarConsultorio(${consultorio.id}); return false;"><i class="bi bi-pencil"></i> Editar</a></li>
-                        <li><a class="dropdown-item text-danger" href="#" onclick="eliminarConsultorio(${consultorio.id}); return false;"><i class="bi bi-trash"></i> Eliminar</a></li>
-                    </ul>
-                </div>
-            </td>
-        `;
-        tbody.appendChild(tr);
-    });
+//     consultorios.forEach(consultorio => {
+//         const tr = document.createElement('tr');
+//         tr.innerHTML = `
+//             <td><input type="checkbox" class="form-check-input"></td>
+//             <td>${consultorio.nombre}</td>
+//             <td>${consultorio.direccion}</td>
+//             <td>${consultorio.telefono}</td>
+//             <td>${consultorio.ciudad}</td>
+//             <td>
+//                 <div class="dropdown">
+//                     <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
+//                     <ul class="dropdown-menu">
+//                         <li><a class="dropdown-item" href="#" onclick="editarConsultorio(${consultorio.id}); return false;"><i class="bi bi-pencil"></i> Editar</a></li>
+//                         <li><a class="dropdown-item text-danger" href="#" onclick="eliminarConsultorio(${consultorio.id}); return false;"><i class="bi bi-trash"></i> Eliminar</a></li>
+//                     </ul>
+//                 </div>
+//             </td>
+//         `;
+//         tbody.appendChild(tr);
+//     });
 
-    // Actualizar contador
-    const btnLink = document.querySelector('#consultoriosSection .btn-link');
-    if (btnLink) {
-        btnLink.textContent = `← Todos (${consultorios.length})`;
-    }
-}
+//     // Actualizar contador
+//     const btnLink = document.querySelector('#consultoriosSection .btn-link');
+//     if (btnLink) {
+//         btnLink.textContent = `← Todos (${consultorios.length})`;
+//     }
+// }
 
-// Función para mostrar modal de agregar/editar consultorio
-function mostrarModalConsultorio(id = null) {
-    editingConsultorioId = id;
-    const consultorio = id ? consultorios.find(c => c.id === id) : null;
+// // Función para mostrar modal de agregar/editar consultorio
+// function mostrarModalConsultorio(id = null) {
+//     editingConsultorioId = id;
+//     const consultorio = id ? consultorios.find(c => c.id === id) : null;
 
-    const modalHTML = `
-        <div class="modal fade" id="consultorioModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content" style="border-radius: 15px;">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title" style="font-weight: 600;">${id ? 'Editar' : 'Agregar'} Consultorio</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body p-4">
-                        <form id="consultorioForm">
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Nombre del Consultorio</label>
-                                <input type="text" class="form-control campos-formulario" id="nombreConsultorio" value="${consultorio ? consultorio.nombre : ''}" placeholder="Nombre del consultorio" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Dirección</label>
-                                <input type="text" class="form-control campos-formulario" id="direccionConsultorio" value="${consultorio ? consultorio.direccion : ''}" placeholder="Dirección completa" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Teléfono</label>
-                                <input type="text" class="form-control campos-formulario" id="telefonoConsultorio" value="${consultorio ? consultorio.telefono : ''}" placeholder="+51 999 999 999" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Ciudad</label>
-                                <input type="text" class="form-control campos-formulario" id="ciudadConsultorio" value="${consultorio ? consultorio.ciudad : ''}" placeholder="Ciudad" required>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 20px;">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="guardarConsultorio()" style="border-radius: 20px;">${id ? 'Actualizar' : 'Agregar'}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
+//     const modalHTML = `
+//         <div class="modal fade" id="consultorioModal" tabindex="-1">
+//             <div class="modal-dialog modal-dialog-centered">
+//                 <div class="modal-content" style="border-radius: 15px;">
+//                     <div class="modal-header border-0">
+//                         <h5 class="modal-title" style="font-weight: 600;">${id ? 'Editar' : 'Agregar'} Consultorio</h5>
+//                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+//                     </div>
+//                     <div class="modal-body p-4">
+//                         <form id="consultorioForm">
+//                             <div class="mb-3">
+//                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Nombre del Consultorio</label>
+//                                 <input type="text" class="form-control campos-formulario" id="nombreConsultorio" value="${consultorio ? consultorio.nombre : ''}" placeholder="Nombre del consultorio" required>
+//                             </div>
+//                             <div class="mb-3">
+//                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Dirección</label>
+//                                 <input type="text" class="form-control campos-formulario" id="direccionConsultorio" value="${consultorio ? consultorio.direccion : ''}" placeholder="Dirección completa" required>
+//                             </div>
+//                             <div class="mb-3">
+//                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Teléfono</label>
+//                                 <input type="text" class="form-control campos-formulario" id="telefonoConsultorio" value="${consultorio ? consultorio.telefono : ''}" placeholder="+51 999 999 999" required>
+//                             </div>
+//                             <div class="mb-3">
+//                                 <label class="form-label" style="font-size: 13px; color: var(--gris-proyecto);">Ciudad</label>
+//                                 <input type="text" class="form-control campos-formulario" id="ciudadConsultorio" value="${consultorio ? consultorio.ciudad : ''}" placeholder="Ciudad" required>
+//                             </div>
+//                         </form>
+//                     </div>
+//                     <div class="modal-footer border-0">
+//                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="border-radius: 20px;">Cancelar</button>
+//                         <button type="button" class="btn btn-primary" onclick="guardarConsultorio()" style="border-radius: 20px;">${id ? 'Actualizar' : 'Agregar'}</button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     `;
 
-    const oldModal = document.getElementById('consultorioModal');
-    if (oldModal) oldModal.remove();
+//     const oldModal = document.getElementById('consultorioModal');
+//     if (oldModal) oldModal.remove();
 
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
+//     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    const modal = new bootstrap.Modal(document.getElementById('consultorioModal'));
-    modal.show();
-}
+//     const modal = new bootstrap.Modal(document.getElementById('consultorioModal'));
+//     modal.show();
+// }
 
-// Función para guardar consultorio
-function guardarConsultorio() {
-    const nombreInput = document.getElementById('nombreConsultorio');
-    const direccionInput = document.getElementById('direccionConsultorio');
-    const telefonoInput = document.getElementById('telefonoConsultorio');
-    const ciudadInput = document.getElementById('ciudadConsultorio');
+// // Función para guardar consultorio
+// function guardarConsultorio() {
+//     const nombreInput = document.getElementById('nombreConsultorio');
+//     const direccionInput = document.getElementById('direccionConsultorio');
+//     const telefonoInput = document.getElementById('telefonoConsultorio');
+//     const ciudadInput = document.getElementById('ciudadConsultorio');
 
-    if (!nombreInput || !direccionInput || !telefonoInput || !ciudadInput) {
-        alert('Error al acceder a los campos del formulario');
-        return;
-    }
+//     if (!nombreInput || !direccionInput || !telefonoInput || !ciudadInput) {
+//         alert('Error al acceder a los campos del formulario');
+//         return;
+//     }
 
-    const nombre = nombreInput.value.trim();
-    const direccion = direccionInput.value.trim();
-    const telefono = telefonoInput.value.trim();
-    const ciudad = ciudadInput.value.trim();
+//     const nombre = nombreInput.value.trim();
+//     const direccion = direccionInput.value.trim();
+//     const telefono = telefonoInput.value.trim();
+//     const ciudad = ciudadInput.value.trim();
 
-    if (!nombre || !direccion || !telefono || !ciudad) {
-        alert('Por favor complete todos los campos');
-        return;
-    }
+//     if (!nombre || !direccion || !telefono || !ciudad) {
+//         alert('Por favor complete todos los campos');
+//         return;
+//     }
 
-    if (editingConsultorioId) {
-        const index = consultorios.findIndex(c => c.id === editingConsultorioId);
-        consultorios[index] = { id: editingConsultorioId, nombre, direccion, telefono, ciudad };
-    } else {
-        consultorios.push({ id: nextConsultorioId++, nombre, direccion, telefono, ciudad });
-    }
+//     if (editingConsultorioId) {
+//         const index = consultorios.findIndex(c => c.id === editingConsultorioId);
+//         consultorios[index] = { id: editingConsultorioId, nombre, direccion, telefono, ciudad };
+//     } else {
+//         consultorios.push({ id: nextConsultorioId++, nombre, direccion, telefono, ciudad });
+//     }
 
-    renderConsultoriosTable();
+//     renderConsultoriosTable();
 
-    const modalElement = document.getElementById('consultorioModal');
-    if (modalElement) {
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) modal.hide();
-    }
+//     const modalElement = document.getElementById('consultorioModal');
+//     if (modalElement) {
+//         const modal = bootstrap.Modal.getInstance(modalElement);
+//         if (modal) modal.hide();
+//     }
 
-    editingConsultorioId = null;
-}
+//     editingConsultorioId = null;
+// }
 
-// Función para editar consultorio
-function editarConsultorio(id) {
-    mostrarModalConsultorio(id);
-}
+// // Función para editar consultorio
+// function editarConsultorio(id) {
+//     mostrarModalConsultorio(id);
+// }
 
-// Función para eliminar consultorio
-function eliminarConsultorio(id) {
-    if (confirm('¿Está seguro de que desea eliminar este consultorio?')) {
-        consultorios = consultorios.filter(c => c.id !== id);
-        renderConsultoriosTable();
-    }
-}
+// // Función para eliminar consultorio
+// function eliminarConsultorio(id) {
+//     if (confirm('¿Está seguro de que desea eliminar este consultorio?')) {
+//         consultorios = consultorios.filter(c => c.id !== id);
+//         renderConsultoriosTable();
+//     }
+// }
 
 // ==================== GESTIÓN DE PROFESIONALES ====================
 

@@ -1,7 +1,7 @@
 <?php
 // index.php - Router principal (EN LARAVEL SE TIENE UN ARCHIVO POR CADA CARPETA DE VIEWS)
 
-define('BASE_PATH', __DIR__);
+require_once __DIR__ . '/config/config.php';
 
 // Obtener la URL actual (por ejemplo: /E-VITALIX/login)
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -16,7 +16,7 @@ $request = strtok($request, '?');
 $request = rtrim($request, '/');
 
 // Si la ruta vacia queda como un "/"
-if($request === '') $request = '/';
+if ($request === '') $request = '/';
 
 // Enrutamiento básico
 switch ($request) {
@@ -24,7 +24,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/index.html';
         break;
     case '/sobreNosotros':
-        require BASE_PATH . '/app/views/website/about us.html';
+        require BASE_PATH . '/app/views/website/about_us.html';
         break;
     case '/servicios':
         require BASE_PATH . '/app/views/website/servicios.html';
@@ -44,27 +44,86 @@ switch ($request) {
     case '/contacto':
         require BASE_PATH . '/app/views/website/contacto.html';
         break;
+    // Inicio rutas login
     case '/login':
-        require BASE_PATH . '/app/views/auth/inicioSesion.html';
+        require BASE_PATH . '/app/views/auth/inicioSesion.php';
+        break;
+    case '/iniciar-sesion':
+        require BASE_PATH . '/app/controllers/LoginController.php';
         break;
     case '/registro':
         require BASE_PATH . '/app/views/auth/registrarse.html';
         break;
-    case '/recuperacion': 
-        require BASE_PATH . '/app/views/auth/recuperar-contraseña.html';
+    case '/recuperacion':
+        require BASE_PATH . '/app/views/auth/recuperar-contraseña.php';
         break;
-    case '/admin': 
-        require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.html';
+    
+    case '/generar-clave':
+        require BASE_PATH . '/app/controllers/passwordController.php';
         break;
-    case '/doctor': 
+    
+    // ADMIN INTERFACES
+    case '/admin/dashboard':
+        require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.php';
+        break;
+
+    case '/admin/consultorios':
+        require BASE_PATH . '/app/views/dashboard/administrador/consultorios.php';
+        break;
+
+    case '/admin/registrar-consultorio':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-consultorio.php';
+        break;
+    case '/admin/guardar-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+    case '/admin/actualizar-consultorio':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-consultorio.php';
+        break;
+
+    case '/admin/guardar-cambios-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
+    case '/admin/eliminar-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
+    case '/admin/especialistas':
+        require BASE_PATH . '/app/views/dashboard/administrador/especialistas.php';
+        break;
+
+    case '/admin/registrar-especialista':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-especialista.php';
+        break;
+
+    case '/admin/guardar-especialista':
+        require BASE_PATH . '/app/controllers/especialistaController.php';
+        break;
+
+    case '/admin/perfil':
+        require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
+        break;
+
+    case '/admin/guardar-foto-perfil':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/admin/guardar-configuracion-usuario':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/admin/cambiar-contrasena':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+    case '/doctor':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.html';
         break;
-    case '/paciente': 
+    case '/paciente':
         require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.html';
         break;
     default:
         http_response_code(404);
-        require BASE_PATH . '/app/views/auth/404.html';
+        require BASE_PATH . '/app/views/auth/404.php';
         break;
 }
-?>

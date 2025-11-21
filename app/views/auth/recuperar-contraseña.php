@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +12,11 @@
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="public/assets/auth/css/recuperarContraseña.css">
-  </head>
+</head>
+
 <body>
     <div class="recuperar-container">
-        <div class="logo-container" data-aos="fade-down" data-aos-duration="800">
+        <div class="logo-container">
             <div class="logo">
                 <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo" class="img-fluid" style="max-width: 100%;"></a>
                 <!-- Placeholder temporal -->
@@ -23,35 +25,34 @@
         </div>
 
         <div class="recuperar-content">
-            <div class="recuperar-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+            <div class="recuperar-card">
                 <!-- Formulario de recuperación -->
                 <div id="recuperarForm">
-                    <h2 class="recuperar-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <h2 class="recuperar-title">
                         Recuperar contraseña
                     </h2>
-                    <p class="recuperar-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <p class="recuperar-subtitle">
                         Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
                     </p>
-                    
-                    <form id="formRecuperar">
-                        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
-                            <input 
-                                type="email" 
-                                class="campos-formulario" 
-                                placeholder="Ingresa tu email" 
+
+                    <form id="formRecuperar" action="<?= BASE_URL ?>/generar-clave" method="POST">
+                        <div>
+                            <label for="correo">Correo</label>
+                            <input
+                                type="email"
+                                class="campos-formulario"
+                                name="email"
+                                placeholder="Ingresa tu email"
                                 id="email"
-                                required
-                            >
+                                required>
                         </div>
-                        
-                        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
-                            <a href="login" target="_blank" class="btn-azul" id="btnEnviar" style="display: block; text-decoration: none; text-align: center;">
-                                Enviar enlace de recuperación
-                            </a>
+                        <div>
+
+                            <button type="submit" class="btn-azul" id="btnEnviar" style="display: block; text-decoration: none; text-align: center;">Restablecer</button>
                         </div>
                     </form>
 
-                    <div class="volver-login" data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
+                    <div class="volver-login">
                         <a href="login">
                             ← Volver al inicio de sesión
                         </a>
@@ -60,21 +61,21 @@
 
                 <!-- Mensaje de éxito (oculto por defecto) -->
                 <div class="success-message" id="successMessage">
-                    <div class="success-icon" data-aos="zoom-in" data-aos-duration="600">✓</div>
-                    <h3 class="success-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="success-icon">✓</div>
+                    <h3 class="success-title">
                         ¡Correo enviado!
                     </h3>
-                    <p class="success-text" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                        Hemos enviado un enlace de recuperación a tu correo electrónico. 
+                    <p class="success-text">
+                        Hemos enviado un enlace de recuperación a tu correo electrónico.
                         Por favor, revisa tu bandeja de entrada y sigue las instrucciones.
                     </p>
-                    <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div data-aos="fade-up">
                         <a href="recuperacion" target="_blank" class="btn-azul" style="display: block; text-decoration: none; text-align: center;">
                             Enviar otro correo
                         </a>
                     </div>
-                    <div class="volver-login"  data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
-                        <a  target="_blank" href="login">
+                    <div class="volver-login">
+                        <a target="_blank" href="login">
                             ← Volver al inicio de sesión
                         </a>
                     </div>
@@ -86,6 +87,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation Library -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="public/assets/auth/js/recuperarContraseña.js"></script>
-    </body>
+</body>
+
 </html>

@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/auth/css/404.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/auth/css/404.css">
 </head>
 <body>
     <!-- Header superior con información de contacto -->
@@ -41,7 +41,7 @@
             <div class="navbar-content">
                 <div class="logo-nav" data-aos="zoom-in" data-aos-duration="600" data-aos-delay="400">
                     <!-- Reemplaza con tu logo -->
-                    <img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo">
+                    <img src="<?= BASE_URL ?>/public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo">
                 </div>
 
                 <button class="mobile-menu-toggle" onclick="toggleMenu()">
@@ -100,6 +100,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation Library -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="public/assets/auth/js/404.js"></script>
+    <script src="<?= BASE_URL ?>/public/assets/auth/js/404.js"></script>
 </body>
 </html>
