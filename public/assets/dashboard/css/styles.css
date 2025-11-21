@@ -55,6 +55,10 @@ body {
     position: relative;
 }
 
+.cont-form-foto {
+    position: relative;
+}
+
 .user-avatar {
     width: 45px;
     height: 45px;
@@ -68,6 +72,30 @@ body {
     background-repeat: no-repeat;
     border-radius: 50%;
     object-fit: cover;
+}
+
+/* Ícono de lápiz SOLO en el avatar editable */
+.user-avatar.avatar-editable {
+    position: relative;
+    cursor: pointer;
+}
+
+.user-avatar.avatar-editable::after {
+    content: "\F4CA";
+    font-family: "bootstrap-icons";
+    position: absolute;
+    bottom: -5px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    background: var(--color-primario);
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid white;
 }
 
 .form-foto .enviarFoto {

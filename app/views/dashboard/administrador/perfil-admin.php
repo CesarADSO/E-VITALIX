@@ -48,7 +48,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
                                     <input type="hidden" name="accion" value="actualizarFotoAdmin">
                                     <!-- FOTO CON INPUT OCULTO -->
-                                    <label for="foto" class="user-avatar"
+                                    <label for="foto" class="user-avatar avatar-editable"
                                         style="width: 150px; height: 150px; border-radius: 50%; 
                                         background-color: #e9ecef; margin: 0 auto 20px; 
                                         cursor: pointer; display: flex; align-items: center; justify-content: center;">
