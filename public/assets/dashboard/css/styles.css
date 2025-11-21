@@ -584,3 +584,8 @@ body {
     height: 50px;
     object-fit: cover;
 }
+
+.boton {
+    background: var(--color-primario);
+    color: var(--blanco-color);
+}
