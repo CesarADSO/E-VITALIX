@@ -86,7 +86,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <!-- Formulario -->
                         <form id="especialistaForm" action="<?= BASE_URL ?>/admin/guardar-cambios-especialista" method="POST" enctype="multipart/form-data">
                             <!-- INPUTS OCULTOS QUE NOS VAN A SERVIR PARA LA LÓGICA DEL ACTUALIZAR -->
-                             <input type="hidden" name="id" value="<?= $especialista['id_especialista'] ?>">
+                             <input type="hidden" name="idUsuario" value="<?= $especialista['id_usuario'] ?>">
+                             <input type="hidden" name="idEspecialista" value="<?= $especialista['id_especialista'] ?>">
                              <input type="hidden" name="accion" value="actualizar">
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
@@ -153,14 +154,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="mb-3">
                                     <label for="foto" class="form-label">Foto</label>
                                     <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico" value="<?= $especialista['email'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña</label>
-                                    <input type="password" name="clave" class="form-control" id="password" placeholder="Ingresa la contraseña">
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>

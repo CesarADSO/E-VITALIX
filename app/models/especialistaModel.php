@@ -172,10 +172,9 @@ class Especialista
                             especialistas.direccion,
                             especialistas.especialidad,
                             especialistas.registro_profesional,
-    
-                            usuarios.email,
-                            usuarios.estado AS estado_especialista,
-    
+                            usuarios.id AS id_usuario,
+                            usuarios.estado,
+
                             disponibilidad_medico.dia_semana,
                             disponibilidad_medico.hora_inicio,
                             disponibilidad_medico.hora_fin,
@@ -215,6 +214,23 @@ class Especialista
             error_log("Error en Especialista::listarEspecialistaPorId->" . $e->getMessage());
             // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
             return [];
+        }
+    }
+
+    public function actualizar($data) {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $actualizar = "UPDATE usuarios SET estado = :estadoEspecialista WHERE id = :idUsuario";
+
+             // PREPARAMOS LA ACCIÓN A EJECUTAR
+             $resultado = $this->conexion->prepare($actualizar);
+
+             $resultado->bindParam(':idUsuario', $data['idUsuario']);
+             $resultado->bindParam(':estadoEspecialista', $data['estadoEspecialista']);
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::actualizar->" . $e->getMessage());
+            return false;
         }
     }
 }
