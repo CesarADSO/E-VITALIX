@@ -15,7 +15,7 @@ switch ($method) {
         break;
 
     case 'GET':
-        # code...
+        mostrarEspecialistas();
         break;
     default:
         # code...
@@ -142,6 +142,20 @@ function registrarEspecialista()
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el especialista. Intenta nuevamente');
     }
     exit();
+}
+
+// CREAMOS LA FUNCIÓN QUE DECLARAMOS ANTERIOMENTE EN EL SWITCH METHOD mostrarEspecialistas();
+function mostrarEspecialistas() {
+
+    // INSTANCIAMOS NUESTRA CLASE DEL MODELO
+    $objEspecialista = new Especialista();
+
+    // EN UNA VARIABLE ACCEDEMOS AL METODO DE DICHA CLASE QUE NECESITAMOS
+    $resultado = $objEspecialista->mostrar();
+
+    // RETORNAMOS LOS DATOS A LA VISTA
+    return $resultado;
+
 }
 
 

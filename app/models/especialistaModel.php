@@ -130,4 +130,28 @@ class Especialista
             return false;
         }
     }
+
+    // CREAMOS LA FUNCIÓN PARA MOSTRAR LOS ESPECIALISTAS
+    public function mostrar() {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $mostrar = "SELECT especialistas.*, usuarios.email, usuarios.estado, disponibilidad_medico.id_consultorio FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE usuarios.estado = 'Activo' ORDER BY especialistas.nombres ASC";
+
+            // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
+            $resultado = $this->conexion->prepare($mostrar);
+
+            // EJECUTAMOS LA ACCIÓN
+            $resultado->execute();
+
+            // RETORNAMOS EN UN FETCHALL LA CADENA DE DATOS QUE NOS DA LA VARIABLE RESULTADO PARA ENVIARLO COMO UN ARREGLO
+            return $resultado->fetchAll();
+
+
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::mostrar->" . $e->getMessage());
+            // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
+            return [];
+        }
+    }
 }

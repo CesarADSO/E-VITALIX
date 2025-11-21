@@ -1,4 +1,15 @@
 <?php
+// IMPORTAMOS LAS DEPENDENCIAS NECESARIAS EN ESTE CASO EL SESSION ADMIN Y EL CONTROLADOR
+require_once BASE_PATH . '/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/controllers/especialistaController.php';
+
+// DECLARAMOS UNA VARIABLE PARA GUARDAR LA FUNCIÓN DEL MODELO Y ASÍ PODER USAR ESA VARIABLE PARA PINTAR LOS DATOS EN LA TABLA
+$especialistas = mostrarEspecialistas();
+
+?>
+
+
+<?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
 
@@ -44,22 +55,28 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         Nombres y apellidos
                                         <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                     </th>
-                                    <th>Edad</th>
+                                    <th>Telefono</th>
                                     <th>Email</th>
                                     <th>Especialidad</th>
                                     <th>Consultorio</th>
+                                    <th>Estado</th>
                                     <th style="width: 80px;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody
+                             <?php if(!empty($especialistas)) :?>
+                                <?php foreach($especialistas as $especialista):?>
                                 <tr>
                                     <td><input type="checkbox" class="form-check-input"></td>
-                                    <td><img src="<?= BASE_URL ?>/public/assets/dashboard/img/admin_foto.png" alt=""></td>
-                                    <td>Miguel Casas</td>
-                                    <td>25</td>
-                                    <td>miguelcasas@gmail.com</td>
-                                    <td>Dermatólogo</td>
-                                    <td>IPS Hospital Salazar</td>
+                                    <td><div class="user-avatar">
+                                        <img class="especialistaImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" alt="<?= $especialista['nombres'] ?>">
+                                    </div></td>
+                                    <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
+                                    <td><?= $especialista['telefono'] ?></td>
+                                    <td><?= $especialista['email'] ?></td>
+                                    <td><?= $especialista['especialidad'] ?></td>
+                                    <td><?= $especialista['id_consultorio'] ?></td>
+                                    <td><?= $especialista['estado'] ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
@@ -70,6 +87,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         </div>
                                     </td>
                                 </tr>
+                                <?php endforeach;?>
+                            <?php else: ?>
+                                <td>No hay especialistas registrados</td>
+                            <?php endif;?>
                             </tbody>
                         </table>
                     </div>
