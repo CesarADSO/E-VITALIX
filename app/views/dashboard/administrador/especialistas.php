@@ -56,7 +56,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                     </th>
                                     <th>Telefono</th>
-                                    <th>Email</th>
                                     <th>Especialidad</th>
                                     <th>Consultorio</th>
                                     <th>Estado</th>
@@ -73,9 +72,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div></td>
                                     <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
                                     <td><?= $especialista['telefono'] ?></td>
-                                    <td><?= $especialista['email'] ?></td>
                                     <td><?= $especialista['especialidad'] ?></td>
-                                    <td><?= $especialista['id_consultorio'] ?></td>
+                                    <td><?= $especialista['consultorio'] ?></td>
                                     <td><?= $especialista['estado'] ?></td>
                                     <td>
                                         <div class="dropdown">
