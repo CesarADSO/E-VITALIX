@@ -187,6 +187,7 @@ function actualizarEspecialista()
     // CAPTURAMOS EN VARIABLES LO QUE VENGA A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $idUsuario = $_POST['idUsuario'] ?? '';
     $idEspecialista = $_POST['idEspecialista'] ?? '';
+    $idDisponibilidad = $_POST['idDisponibilidad'] ?? '';
     $tipoDocumento = $_POST['tipoDocumento'] ?? '';
     $numeroDocumento = $_POST['numeroDocumento'] ?? '';
     $nombres = $_POST['nombres'] ?? '';
@@ -195,8 +196,6 @@ function actualizarEspecialista()
     $genero = $_POST['genero'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
-    $email = $_POST['correo'] ?? '';
-    $clave = $_POST['clave'] ?? '';
     $especialidad = $_POST['especialidad'] ?? '';
     $registroProfesional = $_POST['registro'] ?? '';
     $consultorio = $_POST['consultorio'] ?? '';
@@ -210,7 +209,7 @@ function actualizarEspecialista()
     $estadoDisponibilidad = $_POST['estadoDisponibilidad'] ?? '';
 
     // VALIDAMOS LOS CAMPOS QUE SON OBLIGATORIOS
-    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($clave) || empty($especialidad) || empty($registroProfesional) || empty($consultorio) || empty($diaSemana) || empty($horaInicio) || empty($horaFin) || empty($descansoInicio) || empty($descansoFinal) || empty($capacidad) || empty($estadoEspecialista) || empty($estadoDisponibilidad)) {
+    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) ||  empty($especialidad) || empty($registroProfesional) || empty($consultorio) || empty($diaSemana) || empty($horaInicio) || empty($horaFin) || empty($descansoInicio) || empty($descansoFinal) || empty($capacidad) || empty($estadoEspecialista) || empty($estadoDisponibilidad)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -265,6 +264,7 @@ function actualizarEspecialista()
     $data = [
         'idUsuario' => $idUsuario,
         'idEspecialista' => $idEspecialista,
+        'idDisponibilidad' => $idDisponibilidad,
         'tipoDocumento' => $tipoDocumento,
         'numeroDocumento' => $numeroDocumento,
         'nombres' => $nombres,
@@ -274,8 +274,6 @@ function actualizarEspecialista()
         'telefono' => $telefono,
         'direccion' => $direccion,
         'foto' => $ruta_foto,
-        'email' => $email,
-        'clave' => $clave,
         'especialidad' => $especialidad,
         'registroProfesional' => $registroProfesional,
         'consultorio' => $consultorio,

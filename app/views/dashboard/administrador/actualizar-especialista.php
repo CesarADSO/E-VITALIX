@@ -88,6 +88,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- INPUTS OCULTOS QUE NOS VAN A SERVIR PARA LA LÓGICA DEL ACTUALIZAR -->
                              <input type="hidden" name="idUsuario" value="<?= $especialista['id_usuario'] ?>">
                              <input type="hidden" name="idEspecialista" value="<?= $especialista['id_especialista'] ?>">
+                             <input type="hidden" name="idDisponibilidad" value="<?= $especialista['id_disponibilidad'] ?>">
                              <input type="hidden" name="accion" value="actualizar">
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
@@ -266,7 +267,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="mb-3">
                                     <label for="estado" class="form-label">Estado del especialista</label>
                                     <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
-                                        <option value="<?= $especialista['estado_especialista'] ?>"><?= $especialista['estado_especialista'] ?></option>
+                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
                                         <option value="Activo">Activo</option>
                                         <option value="Inactivo">Inactivo</option>
                                     </select>
@@ -281,7 +282,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
-                                    <button type="submit" class="btn boton">Registrar Especialista</button>
+                                    <button type="submit" class="btn boton">Actualizar Especialista</button>
                                 </div>
                             </div>
                         </form>

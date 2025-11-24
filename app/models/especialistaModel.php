@@ -175,6 +175,7 @@ class Especialista
                             usuarios.id AS id_usuario,
                             usuarios.estado,
 
+                            disponibilidad_medico.id AS id_disponibilidad,
                             disponibilidad_medico.dia_semana,
                             disponibilidad_medico.hora_inicio,
                             disponibilidad_medico.hora_fin,
@@ -228,7 +229,44 @@ class Especialista
 
              $resultado->bindParam(':idUsuario', $data['idUsuario']);
              $resultado->bindParam(':estadoEspecialista', $data['estadoEspecialista']);
+
+             $resultado->execute();
+
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+
+            $resultado2 = $this->conexion->prepare($actualizar2);
+            $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
+            $resultado2->bindParam(':nombres', $data['nombres']);
+            $resultado2->bindParam(':apellidos', $data['apellidos']);
+            $resultado2->bindParam(':idTipoDocumento', $data['tipoDocumento']);
+            $resultado2->bindParam(':numeroDocumento', $data['numeroDocumento']);
+            $resultado2->bindParam(':fechaNacimiento', $data['fechaNacimiento']);
+            $resultado2->bindParam(':genero', $data['genero']);
+            $resultado2->bindParam(':telefono', $data['telefono']);
+            $resultado2->bindParam(':direccion', $data['direccion']);
+            $resultado2->bindParam(':especialidad', $data['especialidad']);
+            $resultado2->bindParam(':registroProfesional', $data['registroProfesional']);
+
+            $resultado2->execute();
+
+            $actualizar3 = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estadoDisponibilidad WHERE id = :idDisponibilidad";
+
+            $resultado3 = $this->conexion->prepare($actualizar3);
+
+            $resultado3->bindParam(':idDisponibilidad', $data['idDisponibilidad']);
+            $resultado3->bindParam(':diaSemana', $data['diaSemana']);
+            $resultado3->bindParam(':horaInicio', $data['horaInicio']);
+            $resultado3->bindParam(':horaFin', $data['horaFin']);
+            $resultado3->bindParam(':pausaInicio', $data['descansoInicio']);
+            $resultado3->bindParam(':pausaFin', $data['descansoFinal']);
+            $resultado3->bindParam(':capacidadMaxima', $data['capacidad']);
+            $resultado3->bindParam(':estadoDisponibilidad', $data['estadoDisponibilidad']);
+
+            $resultado3->execute();
+
+            return true;
         } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
             error_log("Error en Especialista::actualizar->" . $e->getMessage());
             return false;
         }
