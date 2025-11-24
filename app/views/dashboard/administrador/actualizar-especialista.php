@@ -1,16 +1,19 @@
 <?php
-// ENLAZAMOS EL ARCHIVO DE SEGURIDAD
-require_once BASE_PATH . '/app/helpers/session_admin.php';
-
-// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE TRAER()
+// IMPORTAMOS LAS DEPENDENCIAS NECESARIAS
+require_once BASE_PATH . '/app/controllers/especialistaController.php';
 require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
-
-// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR DE LOS ROLES QUE TIENE LA FUNCIÓN DE mostrarConsultorios()
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
-// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
-    $datos = traertipoDocumento();
-// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
-    $consultorios = mostrarConsultorios();
+
+// ASIGNAMOS EL VALOR ID DEL REGISTRO SEGÚN LA TABLA
+$id = $_GET['id'];
+
+// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR Y LE PASAMOS LOS DATOS A UNA VARIABLE
+// QUE PODAMOS MANIPULAR EN ESTE ARCHIVO
+$especialista = listarEspecialista($id);
+
+$datos = traerTipoDocumento();
+
+$consultorios = mostrarConsultorios();
 ?>
 
 
@@ -18,6 +21,7 @@ require_once BASE_PATH . '/app/controllers/consultorioController.php';
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
+
 
 <body>
     <div class="container-fluid">
@@ -50,8 +54,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Formulario con Wizard -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <h4 class="mb-4">Registrar Especialista</h4>
-                        <p class="text-muted mb-4">Por favor diligencia este formulario para registrar un especialista</p>
+                        <h4 class="mb-4">Actualizar Especialista</h4>
+                        <p class="text-muted mb-4">Por favor diligencia este formulario para actualizar el especialista seleccionado</p>
 
                         <!-- Indicador de Pasos -->
                         <div class="wizard-progress mb-4">
@@ -80,7 +84,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </div>
 
                         <!-- Formulario -->
-                        <form id="especialistaForm" action="<?= BASE_URL ?>/admin/guardar-especialista" method="POST" enctype="multipart/form-data">
+                        <form id="especialistaForm" action="<?= BASE_URL ?>/admin/guardar-cambios-especialista" method="POST" enctype="multipart/form-data">
+                            <!-- INPUTS OCULTOS QUE NOS VAN A SERVIR PARA LA LÓGICA DEL ACTUALIZAR -->
+                             <input type="hidden" name="idUsuario" value="<?= $especialista['id_usuario'] ?>">
+                             <input type="hidden" name="idEspecialista" value="<?= $especialista['id_especialista'] ?>">
+                             <input type="hidden" name="idDisponibilidad" value="<?= $especialista['id_disponibilidad'] ?>">
+                             <input type="hidden" name="accion" value="actualizar">
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
@@ -88,40 +97,40 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                         <select name="tipoDocumento" class="form-select" id="tipo_documento">
                                             <!-- Los tipos de documento se cargarán desde la base de datos -->
-                                            <option value="">Seleccionar tipo</option>
+                                            <option value="<?= $especialista['id_tipo_documento'] ?>"><?= $especialista['documento'] ?></option>
                                             <?php if (!empty($datos)) : ?>
-                                            <?php foreach($datos as $tipoDocumento) :?>
-                                            <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
-                                            <?php endforeach;?>
+                                                <?php foreach ($datos as $tipoDocumento) : ?>
+                                                    <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
+                                                <?php endforeach; ?>
                                             <?php else : ?>
                                                 <option value="">No hay tipos de documento registrados</option>
-                                            <?php endif;?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento" class="form-label">Número de Documento</label>
-                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento">
+                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" value="<?= $especialista['numero_documento'] ?>">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="nombres" class="form-label">Nombres</label>
-                                        <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresa los nombres">
+                                        <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresa los nombres" value="<?= $especialista['nombres'] ?>">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="apellidos" class="form-label">Apellidos</label>
-                                        <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Ingresa los apellidos">
+                                        <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Ingresa los apellidos" value="<?= $especialista['apellidos'] ?>">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
-                                        <input type="date" name="nacimiento" class="form-control" id="fecha_nacimiento">
+                                        <input type="date" name="nacimiento" class="form-control" id="fecha_nacimiento" value="<?= $especialista['fecha_nacimiento'] ?>">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="genero" class="form-label">Género</label>
                                         <select name="genero" class="form-select" id="genero">
-                                            <option value="">Seleccionar género</option>
+                                            <option value="<?= $especialista['genero'] ?>"><?= $especialista['genero'] ?></option>
                                             <option value="Masculino">Masculino</option>
                                             <option value="Femenino">Femenino</option>
                                             <option value="Otro">Otro</option>
@@ -137,23 +146,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="wizard-step" id="step2">
                                 <div class="mb-3">
                                     <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico">
+                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
+                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $especialista['direccion'] ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="foto" class="form-label">Foto</label>
                                     <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña</label>
-                                    <input type="password" name="clave" class="form-control" id="password" placeholder="Ingresa la contraseña">
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
@@ -165,11 +166,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <label for="especialidad" class="form-label">Especialidad</label>
-                                    <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ingresa la especialidad">
+                                    <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ingresa la especialidad" value="<?= $especialista['especialidad'] ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="registro_profesional" class="form-label">Registro Profesional</label>
-                                    <input type="text" name="registro" class="form-control" id="registro_profesional" placeholder="Ingresa el registro profesional">
+                                    <input type="text" name="registro" class="form-control" id="registro_profesional" placeholder="Ingresa el registro profesional" value="<?= $especialista['registro_profesional'] ?>">
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
@@ -182,21 +183,21 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="mb-3">
                                     <label for="consultorio" class="form-label">Consultorio</label>
                                     <select name="consultorio" class="form-select" id="consultorio">
-                                        <option value="">Seleccionar consultorio</option>
-                                        <?php if(!empty($consultorios)) :?>
-                                        <?php foreach($consultorios as $consultorio) :?>
-                                        <option value="<?= $consultorio['id'] ?>"><?= $consultorio['nombre'] ?></option>
-                                        <?php endforeach;?>
-                                        <?php else :?>
+                                        <option value="<?= $especialista['id_consultorio'] ?>"><?= $especialista['consultorio_nombre'] ?></option>
+                                        <?php if (!empty($consultorios)) : ?>
+                                            <?php foreach ($consultorios as $consultorio) : ?>
+                                                <option value="<?= $consultorio['id'] ?>"><?= $consultorio['nombre'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php else : ?>
                                             <option value="">No hay consultorios registrados</option>
-                                        <?php endif;?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="dia_semana" class="form-label">Día de la Semana</label>
                                     <select name="dia" class="form-select" id="dia_semana">
-                                        <option value="">Seleccionar día</option>
+                                        <option value="<?= $especialista['dia_semana'] ?>"><?= $especialista['dia_semana'] ?></option>
                                         <option value="lunes">Lunes</option>
                                         <option value="martes">Martes</option>
                                         <option value="miercoles">Miércoles</option>
@@ -209,26 +210,26 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="hora_inicio" class="form-label">Hora Inicio</label>
-                                        <input type="time" name="horaInicio" class="form-control" id="hora_inicio">
+                                        <input type="time" name="horaInicio" class="form-control" id="hora_inicio" value="<?= $especialista['hora_inicio'] ?>">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="hora_fin" class="form-label">Hora Fin</label>
-                                        <input type="time" name="horaFin" class="form-control" id="hora_fin">
+                                        <input type="time" name="horaFin" class="form-control" id="hora_fin" value="<?= $especialista['hora_fin'] ?>">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="hora_descanso_inicio" class="form-label">Inicio Descanso</label>
-                                        <input type="time" name="inicioDescanso" class="form-control" id="hora_descanso_inicio">
+                                        <input type="time" name="inicioDescanso" class="form-control" id="hora_descanso_inicio" value="<?= $especialista['pausa_inicio'] ?>">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="hora_descanso_fin" class="form-label">Fin Descanso</label>
-                                        <input type="time" name="finDescanso" class="form-control" id="hora_descanso_fin">
+                                        <input type="time" name="finDescanso" class="form-control" id="hora_descanso_fin" value="<?= $especialista['pausa_fin'] ?>">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="capacidad_citas" class="form-label">Capacidad Máxima de Citas</label>
-                                    <input type="number" name="capacidad" class="form-control" id="capacidad_citas" placeholder="Ej: 20" min="1">
+                                    <input type="number" name="capacidad" class="form-control" id="capacidad_citas" placeholder="Ej: 20" min="1" value="<?= $especialista['capacidad_maxima'] ?>">
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
@@ -262,9 +263,26 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         </div>
                                     </div>
                                 </div>
+                                <!-- NUEVO CAMPO ESTADO PARA ACTUALIZAR -->
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado del especialista</label>
+                                    <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
+                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado de la disponibilidad del especialista</label>
+                                    <select class="form-select" id="estadoDisponibilidad" name="estadoDisponibilidad">
+                                        <option value="<?= $especialista['estado_disponibilidad'] ?>"><?= $especialista['estado_disponibilidad'] ?></option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
-                                    <button type="submit" class="btn boton">Registrar Especialista</button>
+                                    <button type="submit" class="btn boton">Actualizar Especialista</button>
                                 </div>
                             </div>
                         </form>
