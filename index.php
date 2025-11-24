@@ -89,6 +89,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/consultorioController.php';
         break;
 
+    case '/admin/generar-reporte-consultorios':
+        require BASE_PATH . '/app/controllers/reportesPdfController.php';
+        break;
+
     case '/admin/especialistas':
         require BASE_PATH . '/app/views/dashboard/administrador/especialistas.php';
         break;

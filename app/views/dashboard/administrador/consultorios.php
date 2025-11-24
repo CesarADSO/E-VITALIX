@@ -96,7 +96,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </tbody>
                         </table>
                     </div>
-
+                    
+                    <a href="<?= BASE_URL ?>/admin/generar-reporte-consultorios">generar pdf</a>
 
                 </div>
             </div>
