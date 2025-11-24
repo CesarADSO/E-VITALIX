@@ -47,6 +47,10 @@
                         <i class="bi bi-person-badge"></i>
                         <span>Profesionales</span>
                     </a>
+                    <a class="nav-item" href="/E-VITALIX/admin/especialistas">
+                        <i class="bi bi-alarm"></i>
+                        <span>Horarios</span>
+                    </a>
                 </nav>
 
                 <div style="margin-top: auto; padding: 20px;">
