@@ -130,4 +130,145 @@ class Especialista
             return false;
         }
     }
+
+    // CREAMOS LA FUNCIÓN PARA MOSTRAR LOS ESPECIALISTAS
+    public function mostrar()
+    {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $mostrar = "SELECT especialistas.*, usuarios.email, usuarios.estado, consultorios.nombre AS consultorio FROM disponibilidad_medico INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE usuarios.estado = 'Activo' ORDER BY especialistas.nombres ASC";
+
+            // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
+            $resultado = $this->conexion->prepare($mostrar);
+
+            // EJECUTAMOS LA ACCIÓN
+            $resultado->execute();
+
+            // RETORNAMOS EN UN FETCHALL LA CADENA DE DATOS QUE NOS DA LA VARIABLE RESULTADO PARA ENVIARLO COMO UN ARREGLO
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::mostrar->" . $e->getMessage());
+            // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
+            return [];
+        }
+    }
+
+    // CREAMOS LA FUNCIÓN PARA LISTAR UN ESPECIALISTA
+    public function listarEspecialistaPorId($id)
+    {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $consultar = "SELECT 
+                            especialistas.id AS id_especialista,
+                            especialistas.nombres,
+                            especialistas.apellidos,
+                            especialistas.id_tipo_documento,
+                            especialistas.numero_documento,
+                            especialistas.fecha_nacimiento,
+                            especialistas.genero,
+                            especialistas.telefono,
+                            especialistas.direccion,
+                            especialistas.especialidad,
+                            especialistas.registro_profesional,
+                            usuarios.id AS id_usuario,
+                            usuarios.estado,
+
+                            disponibilidad_medico.id AS id_disponibilidad,
+                            disponibilidad_medico.dia_semana,
+                            disponibilidad_medico.hora_inicio,
+                            disponibilidad_medico.hora_fin,
+                            disponibilidad_medico.pausa_inicio,
+                            disponibilidad_medico.pausa_fin,
+                            disponibilidad_medico.capacidad_maxima,
+                            disponibilidad_medico.estado_disponibilidad,
+                            consultorios.id AS id_consultorio,
+                            consultorios.nombre AS consultorio_nombre,
+                            tipo_documento.nombre AS documento
+
+                            FROM disponibilidad_medico
+                            INNER JOIN consultorios 
+                                ON disponibilidad_medico.id_consultorio = consultorios.id
+                            INNER JOIN especialistas 
+                                ON disponibilidad_medico.id_especialista = especialistas.id
+                            INNER JOIN tipo_documento 
+                                ON especialistas.id_tipo_documento = tipo_documento.id
+                            INNER JOIN usuarios 
+                                ON especialistas.id_usuario = usuarios.id
+
+                            WHERE especialistas.id = :id
+                            LIMIT 1;";
+
+            // PREPARAMOS LA ACCIÓN A EJECUTAR
+            $resultado = $this->conexion->prepare($consultar);
+
+            // HACEMOS EL BINDPARAM
+            $resultado->bindParam(':id', $id);
+
+            // EJECUTAMOS LA ACCIÓN
+            $resultado->execute();
+
+            // RETORNAMOS LA CADENA DE DATOS CON UN FETCH
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::listarEspecialistaPorId->" . $e->getMessage());
+            // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
+            return [];
+        }
+    }
+
+    public function actualizar($data) {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $actualizar = "UPDATE usuarios SET estado = :estadoEspecialista WHERE id = :idUsuario";
+
+             // PREPARAMOS LA ACCIÓN A EJECUTAR
+             $resultado = $this->conexion->prepare($actualizar);
+
+             $resultado->bindParam(':idUsuario', $data['idUsuario']);
+             $resultado->bindParam(':estadoEspecialista', $data['estadoEspecialista']);
+
+             $resultado->execute();
+
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+
+            $resultado2 = $this->conexion->prepare($actualizar2);
+            $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
+            $resultado2->bindParam(':nombres', $data['nombres']);
+            $resultado2->bindParam(':apellidos', $data['apellidos']);
+            $resultado2->bindParam(':idTipoDocumento', $data['tipoDocumento']);
+            $resultado2->bindParam(':numeroDocumento', $data['numeroDocumento']);
+            $resultado2->bindParam(':fechaNacimiento', $data['fechaNacimiento']);
+            $resultado2->bindParam(':genero', $data['genero']);
+            $resultado2->bindParam(':telefono', $data['telefono']);
+            $resultado2->bindParam(':direccion', $data['direccion']);
+            $resultado2->bindParam(':especialidad', $data['especialidad']);
+            $resultado2->bindParam(':registroProfesional', $data['registroProfesional']);
+
+            $resultado2->execute();
+
+            $actualizar3 = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estadoDisponibilidad WHERE id = :idDisponibilidad";
+
+            $resultado3 = $this->conexion->prepare($actualizar3);
+
+            $resultado3->bindParam(':idDisponibilidad', $data['idDisponibilidad']);
+            $resultado3->bindParam(':diaSemana', $data['diaSemana']);
+            $resultado3->bindParam(':horaInicio', $data['horaInicio']);
+            $resultado3->bindParam(':horaFin', $data['horaFin']);
+            $resultado3->bindParam(':pausaInicio', $data['descansoInicio']);
+            $resultado3->bindParam(':pausaFin', $data['descansoFinal']);
+            $resultado3->bindParam(':capacidadMaxima', $data['capacidad']);
+            $resultado3->bindParam(':estadoDisponibilidad', $data['estadoDisponibilidad']);
+
+            $resultado3->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+            error_log("Error en Especialista::actualizar->" . $e->getMessage());
+            return false;
+        }
+    }
 }
