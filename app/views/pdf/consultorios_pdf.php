@@ -13,7 +13,6 @@ $hoy = date("Y");
     }
 
     body {
-        font-family: DejaVu Sans, sans-serif;
         font-size: 12px;
         color: #333;
     }
@@ -110,7 +109,7 @@ $hoy = date("Y");
 <table>
     <thead>
         <tr>
-            <th style="width: 20px;"><input type="checkbox"></th>
+           
             <th>Foto</th>
             <th>Nombre</th>
             <th>Dirección</th>
@@ -120,10 +119,10 @@ $hoy = date("Y");
         </tr>
     </thead>
     <tbody>
-        <?php if (!empty($datos)): ?>
-            <?php foreach ($datos as $consultorio): ?>
+        <?php if (!empty($consultorios)): ?>
+            <?php foreach ($consultorios as $consultorio): ?>
                 <tr>
-                    <td><input type="checkbox"></td>
+                
                     <td>
                         <img class="imgconsultorio" 
                              src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" 

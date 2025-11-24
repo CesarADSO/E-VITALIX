@@ -45,6 +45,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
                         <table class="table-pacientes">
+                            <a href="<?= BASE_URL ?>/admin/generar-reporte-consultorios" target="_blank">generar reporte pdf</a>
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -97,7 +98,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </table>
                     </div>
                     
-                    <a href="<?= BASE_URL ?>/admin/generar-reporte-consultorios">generar pdf</a>
+                    
 
                 </div>
             </div>
