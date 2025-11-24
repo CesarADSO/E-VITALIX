@@ -1,13 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-
-require_once __DIR__ . '/../../vendor/PHPMailer/Exception.php';
-require_once __DIR__ . '/../../vendor/PHPMailer/PHPMailer.php';
-require_once __DIR__ . '/../../vendor/PHPMailer/SMTP.php';
+require_once __DIR__ . '/../helpers/mailer_helper.php';
 
 class RecoveryPass
 {
@@ -60,19 +53,10 @@ class RecoveryPass
 
                 // DESPUES DE ACTUALIZAR SE ENVÍA EL EMAIL
 
-                $mail = new PHPMailer(true);
-
-                try {
+                
                     //Server settings
-                    $mail->SMTPDebug = 0;                      //Enable verbose debug output
-                    $mail->isSMTP();                                            //Send using SMTP
-                    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                    $mail->Username   = 'evitalix558@gmail.com';                     //SMTP username
-                    $mail->Password   = 'eerxgardjexasalb';                               //SMTP password
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+                                                        //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                    $mail = mailer_init();
                     //Recipients
                     // EMISOR Y NOMBRE DE LA PERSONA O ROL
                     $mail->setFrom('evitalix558@gmail.com', 'Soporte E-VITALIX');
@@ -88,8 +72,7 @@ class RecoveryPass
                     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
                     //Content
-                    $mail->isHTML(true); //Set email format to HTML
-                    $mail->CharSet = "UTF-8";
+                    
                     $mail->Subject = "E-VITALIX - NUEVA CLAVE GENERADA";
                     $mail->Body    = '
             
@@ -248,9 +231,6 @@ class RecoveryPass
 
                     $mail->send();
                     return true;
-                } catch (Exception $e) {
-                    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
             } else {
                 return ['error' => 'Usuario no encontrado o inactivo'];
             }

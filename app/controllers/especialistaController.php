@@ -21,6 +21,14 @@ switch ($method) {
         break;
 
     case 'GET':
+
+        $accion = $_GET['accion'] ?? '';
+
+        if ($accion === 'eliminar') {
+            // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (ESPECIALISTA)
+            eliminarEspecialista($id);
+        }
+
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
         if (isset($_GET['id'])) {
             listarEspecialista($_GET['id']);
@@ -300,4 +308,8 @@ function actualizarEspecialista()
         mostrarSweetAlert('error', 'Error al modificar', 'No se pudo modificar el especialista. Intenta nuevamente');
     }
     exit();
+}
+
+function eliminarEspecialista($id) {
+    
 }

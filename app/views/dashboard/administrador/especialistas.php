@@ -80,7 +80,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="bi bi-pencil"></i>Editar</a></li>
-                                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                                <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/admin/eliminar-especialista?accion=eliminar&id=<?= $especialista['id'] ?>"><i class="bi bi-trash"></i> Eliminar</a></li>
                                             </ul>
                                         </div>
                                     </td>
