@@ -130,6 +130,9 @@ switch ($request) {
     case '/paciente':
         require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.html';
         break;
+    case '/cerrarSesion':
+        require BASE_PATH . '/app/controllers/cerrarSesionController.php';
+        break;
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';

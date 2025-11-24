@@ -54,13 +54,13 @@
                         <i class="bi bi-person-circle"></i>
                         <span>Perfil</span>
                     </a>
-                    <a class="nav-item" href="#">
+                    <a class="nav-item" href="<?= BASE_URL?>/cerrarSesion">
                         <i class="bi-box-arrow-right"></i>
                         <span>Cerrar Sesión</span>
                     </a>
-                    <a class="nav-item">
+                    <!-- <a class="nav-item">
                         <i class="bi bi-gear-fill"></i>
                         <span>Configuración</span>
-                    </a>
+                    </a> -->
                 </div>
             </div>
