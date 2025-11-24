@@ -12,12 +12,15 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
         // CREAMOS LA VARIABLE ACCIÓN QUE LO QUE TRAE ES LO QUE VIENE EN EL NAME DEL INPUT ACCION
-        $accion = $_POST['accion'];
+        $accion = $_POST['accion'] ?? '';
         // ACÁ VALIDAMOS EL VALUE DE DICHO INPUT
         if ($accion === 'actualizar') {
             actualizarEspecialista();
         }
-        registrarEspecialista();
+        else {
+            registrarEspecialista();
+        }
+        
         break;
 
     case 'GET':
@@ -26,7 +29,7 @@ switch ($method) {
 
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (ESPECIALISTA)
-            eliminarEspecialista($id);
+            eliminarEspecialista($_GET['idUsuario'], $_GET['id'], $_GET['idDisponibilidad']);
         }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
@@ -310,6 +313,20 @@ function actualizarEspecialista()
     exit();
 }
 
-function eliminarEspecialista($id) {
+function eliminarEspecialista($idUsuario, $id , $idDisponibilidad) {
     
+    // INSTANCIAMOS NUESTRA CLASE ESPECIALISTA 
+    $objEspecialista = new Especialista();
+
+    // EN UNA VARIABLE ACCEDEMOS A NUESTRO MÉTODO DE LA CLASE INSTANCIADA
+    $resultado = $objEspecialista->eliminar($idUsuario, $id , $idDisponibilidad);
+
+    // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el consultorio', '/E-VITALIX/admin/consultorios');
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el consultorio. Intenta nuevamente');
+    }
+    exit();
 }

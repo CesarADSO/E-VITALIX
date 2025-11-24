@@ -137,7 +137,7 @@ class Especialista
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
-            $mostrar = "SELECT especialistas.*, usuarios.email, usuarios.estado, consultorios.nombre AS consultorio FROM disponibilidad_medico INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE usuarios.estado = 'Activo' ORDER BY especialistas.nombres ASC";
+            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.email, usuarios.estado, consultorios.nombre AS consultorio, disponibilidad_medico.id AS id_disponibilidad FROM disponibilidad_medico INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id ORDER BY especialistas.nombres ASC";
 
             // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
             $resultado = $this->conexion->prepare($mostrar);
@@ -265,6 +265,45 @@ class Especialista
             $resultado3->execute();
 
             return true;
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+            error_log("Error en Especialista::actualizar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function eliminar($idUsuario, $id , $idDisponibilidad) {
+        // CREAMOS EL TRY - CATCH PARA MANEJAR ERRORES
+        try {
+            
+            // EN UNA VARIABLE DEFINIMOS NUESTRA CONSULTA SQL
+
+            $eliminarDisponibilidad = "DELETE FROM disponibilidad_medico WHERE id = :idDisponibilidad";
+
+            $resultado3 = $this->conexion->prepare($eliminarDisponibilidad);
+
+            $resultado3->bindParam(':idDisponibilidad', $idDisponibilidad);
+
+            $resultado3->execute();
+
+            $eliminarEspecialista = "DELETE FROM especialistas WHERE id = :idEspecialista";
+
+            $resultado2 = $this->conexion->prepare($eliminarEspecialista);
+
+            $resultado2->bindParam(':idEspecialista', $id);
+
+            $resultado2->execute();
+
+            $eliminarUsuario = "DELETE FROM usuarios WHERE id = :idUsuario";
+
+            $resultado = $this->conexion->prepare($eliminarUsuario);
+
+            $resultado->bindParam(':idUsuario', $idUsuario);
+
+            $resultado->execute();
+
+            return true;
+
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();
             error_log("Error en Especialista::actualizar->" . $e->getMessage());
