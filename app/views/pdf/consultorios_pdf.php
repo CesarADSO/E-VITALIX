@@ -109,7 +109,6 @@ $hoy = date("Y");
 <table>
     <thead>
         <tr>
-           
             <th>Foto</th>
             <th>Nombre</th>
             <th>Dirección</th>
@@ -122,7 +121,6 @@ $hoy = date("Y");
         <?php if (!empty($consultorios)): ?>
             <?php foreach ($consultorios as $consultorio): ?>
                 <tr>
-                
                     <td>
                         <img class="imgconsultorio" 
                              src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" 
