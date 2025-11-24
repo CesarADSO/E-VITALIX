@@ -624,3 +624,7 @@ body {
     background: var(--color-primario);
     color: var(--blanco-color);
 }
+
+.cont-tabla-consultorios .btn-reporte {
+    margin-bottom: 20px;
+}

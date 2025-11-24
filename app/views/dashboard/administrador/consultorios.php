@@ -43,14 +43,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     </div>
 
                     <!-- Consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4">
-                        <a href="<?= BASE_URL ?>/admin/generar-reporte-consultorios" target="_blank">generar reporte pdf</a>
+                    <div class="bg-white rounded shadow-sm p-4 cont-tabla-consultorios">
+                        <a class="btn btn-primary next-step btn-reporte" href="<?= BASE_URL ?>/admin/generar-reporte-consultorios" target="_blank">generar reporte pdf</a>
                         <table class="table-pacientes">
                             <thead>
                                 <tr>
-                                    <th style="width: 40px;">
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
                                     <th>Foto</th>
                                     <th>
                                         Nombre
@@ -70,7 +67,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <?php if (!empty($datos)) :  ?>
                                 <?php foreach ($datos as $consultorio) : ?>
                                 <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
                                     <td><?=  $consultorio['nombre'] ?></td>
                                     <td><?=  $consultorio['direccion'] ?></td>
