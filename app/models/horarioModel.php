@@ -80,6 +80,33 @@
                 return [];
             }
         }
+
+        public function actualizar($data) {
+            // CREAMOS EL TRY CATCH PARA MANEJAR ERRORES
+            try {
+                
+                // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A UTILIZAR
+                $actualizar = "UPDATE diponibilidad_medico SET id_especialista = :idEspecialista, id_consultorio = :idConsultorio, dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado";
+
+                $resultado = $this->conexion->prepare($actualizar);
+                $resultado->bindParam(':idEspecialista', $data['idEspecialista']);
+                $resultado->bindParam(':idConsultorio', $data['idConsultorio']);
+                $resultado->bindParam(':diaSemana', $data['diaSemana']);
+                $resultado->bindParam(':horaInicio', $data['horaInicio']);
+                $resultado->bindParam(':horaFin', $data['horaFin']);
+                $resultado->bindParam(':pausaInicio', $data['inicioDescanso']);
+                $resultado->bindParam(':pausaFin', $data['finDescanso']);
+                $resultado->bindParam(':capacidadMaxima', $data['capacidadCitas']);
+                $resultado->bindParam(':estado', $data['estado']);
+
+                $resultado->execute();
+
+                return true;
+            } catch (PDOException $e) {
+                error_log('Error en Horario::actualizar->' . $e->getMessage());
+                return false;
+            }
+        }
     }
 
 ?>

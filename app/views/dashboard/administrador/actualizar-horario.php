@@ -52,6 +52,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <p class="text-muted mb-4 texto">Actualiza el horario médico del especialista seleccionado</p>
 
                         <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-cambios-horario" method="POST">
+                            <input type="hidden" name="id" value="<?= $horario['id'] ?>">
+                            <input type="hidden" name="accion" value="actualizar">
                             <div class="row">
                                 <!-- Especialista -->
                                 <div class="col-md-6 mb-3">
