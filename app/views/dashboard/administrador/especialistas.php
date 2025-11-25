@@ -47,9 +47,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <table class="table-pacientes">
                             <thead>
                                 <tr>
-                                    <th style="width: 40px;">
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
                                     <th>Foto</th>
                                     <th>
                                         Nombres y apellidos
@@ -57,30 +54,27 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </th>
                                     <th>Telefono</th>
                                     <th>Especialidad</th>
-                                    <th>Consultorio</th>
                                     <th>Estado</th>
                                     <th style="width: 80px;">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody
+                            <tbody>
                              <?php if(!empty($especialistas)) :?>
                                 <?php foreach($especialistas as $especialista):?>
                                 <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
                                     <td><div class="user-avatar">
                                         <img class="especialistaImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" alt="<?= $especialista['nombres'] ?>">
                                     </div></td>
                                     <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
                                     <td><?= $especialista['telefono'] ?></td>
                                     <td><?= $especialista['especialidad'] ?></td>
-                                    <td><?= $especialista['consultorio'] ?></td>
                                     <td><?= $especialista['estado'] ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="bi bi-pencil"></i>Editar</a></li>
-                                                <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/admin/eliminar-especialista?accion=eliminar&id=<?= $especialista['id'] ?>"><i class="bi bi-trash"></i> Eliminar</a></li>
+                                                <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/admin/eliminar-especialista?accion=eliminar&id=<?= $especialista['id'] ?>&idUsuario=<?= $especialista['id_usuario'] ?>"><i class="bi bi-trash"></i> Eliminar</a></li>
                                             </ul>
                                         </div>
                                     </td>
