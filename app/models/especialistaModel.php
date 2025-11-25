@@ -87,46 +87,157 @@ class Especialista
 
             $resultado2->execute();
 
-            // OBTENEMOS EL ID DEL ESPECIALISTA PARA LA DISPONIBILIDAD
-            $idEspecialista = $this->conexion->lastInsertId();
-
-            $registrarDisponibilidad = "INSERT INTO disponibilidad_medico(id_especialista,
-            id_consultorio,
-            dia_semana,
-            hora_inicio,
-            hora_fin,
-            pausa_inicio,
-            pausa_fin,
-            capacidad_maxima,
-            estado_disponibilidad)
-            VALUES 
-            (:id_especialista,
-            :consultorio,
-            :dia_semana,
-            :hora_inicio,
-            :hora_fin,
-            :pausa_inicio,
-            :pausa_fin,
-            :capacidad_maxima,
-            'Activo')";
-
-            $resultado3 = $this->conexion->prepare($registrarDisponibilidad);
-
-            $resultado3->bindParam(':id_especialista', $idEspecialista);
-            $resultado3->bindParam(':consultorio', $data['consultorio']);
-            $resultado3->bindParam(':dia_semana', $data['diaSemana']);
-            $resultado3->bindParam(':hora_inicio', $data['horaInicio']);
-            $resultado3->bindParam(':hora_fin', $data['horaFin']);
-            $resultado3->bindParam(':pausa_inicio', $data['descansoInicio']);
-            $resultado3->bindParam(':pausa_fin', $data['descansoFinal']);
-            $resultado3->bindParam(':capacidad_maxima', $data['capacidad']);
-
-            $resultado3->execute();
-
-
             return true;
         } catch (PDOException $e) {
             error_log("Error en Especialista::registrar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    // CREAMOS LA FUNCIÓN PARA MOSTRAR LOS ESPECIALISTAS
+    public function mostrar()
+    {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id ORDER BY especialistas.nombres ASC";
+
+            // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
+            $resultado = $this->conexion->prepare($mostrar);
+
+            // EJECUTAMOS LA ACCIÓN
+            $resultado->execute();
+
+            // RETORNAMOS EN UN FETCHALL LA CADENA DE DATOS QUE NOS DA LA VARIABLE RESULTADO PARA ENVIARLO COMO UN ARREGLO
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::mostrar->" . $e->getMessage());
+            // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
+            return [];
+        }
+    }
+
+    // CREAMOS LA FUNCIÓN PARA LISTAR UN ESPECIALISTA
+    public function listarEspecialistaPorId($id)
+    {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $consultar = "SELECT 
+                            especialistas.id AS id_especialista,
+                            especialistas.nombres,
+                            especialistas.apellidos,
+                            especialistas.id_tipo_documento,
+                            especialistas.numero_documento,
+                            especialistas.fecha_nacimiento,
+                            especialistas.genero,
+                            especialistas.telefono,
+                            especialistas.direccion,
+                            especialistas.foto,
+                            especialistas.especialidad,
+                            especialistas.registro_profesional,
+                            usuarios.id AS id_usuario,
+                            usuarios.estado,
+                            tipo_documento.nombre AS documento
+                            FROM especialistas INNER JOIN tipo_documento
+                            ON especialistas.id_tipo_documento = tipo_documento.id
+                            INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id
+                            WHERE especialistas.id = :id
+                            LIMIT 1;";
+
+            // PREPARAMOS LA ACCIÓN A EJECUTAR
+            $resultado = $this->conexion->prepare($consultar);
+
+            // HACEMOS EL BINDPARAM
+            $resultado->bindParam(':id', $id);
+
+            // EJECUTAMOS LA ACCIÓN
+            $resultado->execute();
+
+            // RETORNAMOS LA CADENA DE DATOS CON UN FETCH
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Especialista::listarEspecialistaPorId->" . $e->getMessage());
+            // RETORNAMOS UN ARREGLO VACIO SI NO LLEGAS NADA
+            return [];
+        }
+    }
+
+    public function actualizar($data) {
+        // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+        try {
+            // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
+            $actualizar = "UPDATE usuarios SET estado = :estadoEspecialista WHERE id = :idUsuario";
+
+             // PREPARAMOS LA ACCIÓN A EJECUTAR
+             $resultado = $this->conexion->prepare($actualizar);
+
+             $resultado->bindParam(':idUsuario', $data['idUsuario']);
+             $resultado->bindParam(':estadoEspecialista', $data['estadoEspecialista']);
+
+             $resultado->execute();
+
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, foto = :foto, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+
+            $resultado2 = $this->conexion->prepare($actualizar2);
+            $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
+            $resultado2->bindParam(':nombres', $data['nombres']);
+            $resultado2->bindParam(':apellidos', $data['apellidos']);
+            $resultado2->bindParam(':idTipoDocumento', $data['tipoDocumento']);
+            $resultado2->bindParam(':numeroDocumento', $data['numeroDocumento']);
+            $resultado2->bindParam(':fechaNacimiento', $data['fechaNacimiento']);
+            $resultado2->bindParam(':genero', $data['genero']);
+            $resultado2->bindParam(':telefono', $data['telefono']);
+            $resultado2->bindParam(':direccion', $data['direccion']);
+            $resultado2->bindParam(':foto', $data['foto']);
+            $resultado2->bindParam(':especialidad', $data['especialidad']);
+            $resultado2->bindParam(':registroProfesional', $data['registroProfesional']);
+
+            $resultado2->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+            error_log("Error en Especialista::actualizar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function eliminar($idUsuario, $id , $idDisponibilidad) {
+        // CREAMOS EL TRY - CATCH PARA MANEJAR ERRORES
+        try {
+            
+            // EN UNA VARIABLE DEFINIMOS NUESTRA CONSULTA SQL
+
+            $eliminarDisponibilidad = "DELETE FROM disponibilidad_medico WHERE id = :idDisponibilidad";
+
+            $resultado3 = $this->conexion->prepare($eliminarDisponibilidad);
+
+            $resultado3->bindParam(':idDisponibilidad', $idDisponibilidad);
+
+            $resultado3->execute();
+
+            $eliminarEspecialista = "DELETE FROM especialistas WHERE id = :idEspecialista";
+
+            $resultado2 = $this->conexion->prepare($eliminarEspecialista);
+
+            $resultado2->bindParam(':idEspecialista', $id);
+
+            $resultado2->execute();
+
+            $eliminarUsuario = "DELETE FROM usuarios WHERE id = :idUsuario";
+
+            $resultado = $this->conexion->prepare($eliminarUsuario);
+
+            $resultado->bindParam(':idUsuario', $idUsuario);
+
+            $resultado->execute();
+
+            return true;
+
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+            error_log("Error en Especialista::actualizar->" . $e->getMessage());
             return false;
         }
     }

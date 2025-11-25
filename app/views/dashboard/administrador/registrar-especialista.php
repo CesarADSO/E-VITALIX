@@ -45,7 +45,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (0)
                             </button>
                         </div>
-                        <a href="/E-VITALIX/admin/especialistas" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                        <a href="<?= BASE_URL ?>/admin/especialistas" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
                     <!-- Formulario con Wizard -->
@@ -80,7 +80,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </div>
 
                         <!-- Formulario -->
-                        <form id="especialistaForm" action="/E-VITALIX/admin/guardar-especialista" method="POST" enctype="multipart/form-data">
+                        <form id="especialistaForm" action="<?= BASE_URL ?>/admin/guardar-especialista" method="POST" enctype="multipart/form-data">
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
@@ -264,7 +264,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
-                                    <button type="submit" class="btn btn-success">Registrar Especialista</button>
+                                    <button type="submit" class="btn boton">Registrar Especialista</button>
                                 </div>
                             </div>
                         </form>
