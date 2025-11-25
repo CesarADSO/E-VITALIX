@@ -12,7 +12,7 @@ switch ($method) {
         registrarHorario();
         break;
     case 'GET':
-
+        mostrarHorarios();
         break;
 }
 
@@ -61,4 +61,14 @@ function registrarHorario()
         mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar una nueva disponibilidad');
     }
     exit();
+}
+
+function mostrarHorarios() {
+    // INSTANCIAMOS NUESTRA CLASE HORARIO
+    $objhorario = new Horario();
+
+    // ACCEDEMOS AL MÉTODO ESPECÍFICO
+    $resultado = $objhorario->mostrar();
+
+    return $resultado;
 }

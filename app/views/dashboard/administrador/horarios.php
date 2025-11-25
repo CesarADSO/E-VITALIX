@@ -1,4 +1,12 @@
 <?php
+    require_once BASE_PATH . '/app/helpers/session_admin.php';
+    require_once BASE_PATH . '/app/controllers/horarioController.php';
+
+    $horarios = mostrarHorarios();
+?>
+
+
+<?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
 
@@ -37,6 +45,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <thead>
                                 <tr>
                                     <th>
+                                        Especialista
+                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                    </th>
+                                    <th>
                                         Día de atención
                                         <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                     </th>
@@ -51,12 +63,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php if(!empty($horarios)) :?>
+                                <?php foreach($horarios as $horario):?>
                                 <tr>
-                                    <td>Lunes</td>
-                                    <td>8:00 am</td>
-                                    <td>4:00 pm</td>
-                                    <td>20</td>
-                                    <td>Activo</td>
+                                    <td><?= $horario['nombres'] ?> <?= $horario['apellidos'] ?></td>
+                                    <td><?= $horario['dia_semana'] ?></td>
+                                    <td><?= $horario['hora_inicio'] ?></td>
+                                    <td><?= $horario['hora_fin'] ?></td>
+                                    <td><?= $horario['capacidad_maxima'] ?></td>
+                                    <td><?= $horario['estado_disponibilidad'] ?></td>
                                     <td>
                                         <div class="dropdown">
                                             <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
@@ -68,6 +83,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         </div>
                                     </td>
                                 </tr>
+                                <?php endforeach;?>
+                                <?php else: ?>
+                                <td>No hay disponibilidades registradas</td>
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>

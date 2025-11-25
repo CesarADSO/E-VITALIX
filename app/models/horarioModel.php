@@ -38,6 +38,26 @@
                 return false;
             }
         }
+
+        public function mostrar() {
+            try {
+                
+                // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR
+                $mostrar = "SELECT disponibilidad_medico.*, especialistas.nombres, especialistas.apellidos FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id";
+
+                $resultado = $this->conexion->prepare($mostrar);
+
+                $resultado->execute();
+
+
+
+                return $resultado->fetchAll();
+
+            } catch (PDOException $e) {
+                error_log('Error en Horario::registrar->' . $e->getMessage());
+                return [];
+            }
+        }
     }
 
 ?>
