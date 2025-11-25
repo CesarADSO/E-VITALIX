@@ -33,6 +33,8 @@ switch ($method) {
         } else {
             // Esta función llena toda la tabla de usuarios
            $datos = mostrarUsuario();
+
+            require_once __DIR__ . '/../views/dashboard/administrador/usuarios.php';
         }
         break;
     // ESTO ES POR SI AGREGAMOS UNA API RESTFUL

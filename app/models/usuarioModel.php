@@ -37,18 +37,17 @@ class Usuario
     public function consultar()
     {
         try {
-            // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT * FROM  usuarios ORDER BY id ASC";
-            // Preparar lo necesario para ejecutar la función
+            $sql = "SELECT u.id, u.email, u.contrasena, r.nombre AS rol, u.estado
+                    FROM usuarios u
+                    LEFT JOIN roles r ON u.id_rol = r.id
+                    ORDER BY u.id ASC";
 
-            $resultado = $this->conexion->prepare($consultar);
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->execute();
 
-            $resultado->execute();
-            
-
-            return $resultado->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            error_log("Error en usuario::consultar->" . $e->getMessage());
+            error_log("Error en Usuario::consultar->" . $e->getMessage());
             return [];
         }
     }
