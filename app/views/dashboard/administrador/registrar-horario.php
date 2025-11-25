@@ -47,19 +47,19 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <h4 class="mb-4">Registrar Horario Médico</h4>
                         <p class="text-muted mb-4 texto">Configura el horario de atención del médico</p>
 
-                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-horario" method="POST" enctype="multipart/form-data">
+                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/registrar-horario" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <!-- Especialista -->
                                 <div class="col-md-6 mb-3">
                                     <label for="especialista" class="form-label">Especialista</label>
-                                    <select class="form-select" name="especialista" id="especialista" name="especialista" required>
+                                    <select class="form-select" name="idEspecialista" id="especialista" required>
                                         <option value="">Seleccionar especialista</option>
                                         <?php if (!empty($especialistas)) :  ?>
                                         <?php foreach($especialistas as $especialista) :?>
                                         <option value="<?= $especialista['id'] ?>"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></option>
                                         <?php endforeach;?>
                                         <?php else :?>
-                                            <option> value="">No hay especialistas registrados</option>
+                                            <option value="">No hay especialistas registrados</option>
                                         <?php endif;?>
                                     </select>
                                 </div>
@@ -67,7 +67,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <!-- Consultorio -->
                                 <div class="col-md-6 mb-3">
                                     <label for="consultorio" class="form-label">Consultorio</label>
-                                    <select class="form-select" name="consultorio" id="consultorio" name="consultorio" required>
+                                    <select class="form-select" name="idConsultorio" id="consultorio" required>
                                         <option value="">Seleccionar consultorio</option>
                                         <?php if(!empty($consultorios)):?>
                                             <?php foreach($consultorios as $consultorio):?>
@@ -84,15 +84,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <!-- Día de la Semana -->
                                 <div class="col-md-6 mb-3">
                                     <label for="dia_semana" class="form-label">Día de la Semana</label>
-                                    <select class="form-select" name="dia" id="dia_semana" name="dia_semana" required>
+                                    <select class="form-select" id="dia_semana" name="dia_semana" required>
                                         <option value="">Seleccionar día</option>
-                                        <option value="1">Lunes</option>
-                                        <option value="2">Martes</option>
-                                        <option value="3">Miércoles</option>
-                                        <option value="4">Jueves</option>
-                                        <option value="5">Viernes</option>
-                                        <option value="6">Sábado</option>
-                                        <option value="7">Domingo</option>
+                                        <option value="lunes">Lunes</option>
+                                        <option value="martes">Martes</option>
+                                        <option value="miercoles">Miércoles</option>
+                                        <option value="jueves">Jueves</option>
+                                        <option value="viernes">Viernes</option>
+                                        <option value="sabado">Sábado</option>
+                                        <option value="domingo">Domingo</option>
                                     </select>
                                 </div>
 
