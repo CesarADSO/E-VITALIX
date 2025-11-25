@@ -89,6 +89,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/consultorioController.php';
         break;
 
+    case '/admin/generar-reporte-consultorios':
+        require BASE_PATH . '/app/controllers/reportesPdfController.php';
+        break;
+
     case '/admin/especialistas':
         require BASE_PATH . '/app/views/dashboard/administrador/especialistas.php';
         break;
@@ -99,6 +103,34 @@ switch ($request) {
 
     case '/admin/guardar-especialista':
         require BASE_PATH . '/app/controllers/especialistaController.php';
+        break;
+
+    case '/admin/actualizar-especialista':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-especialista.php';
+        break;
+
+    case '/admin/guardar-cambios-especialista':
+        require BASE_PATH . '/app/controllers/especialistaController.php';
+        break;
+
+    case '/admin/eliminar-especialista':
+        require BASE_PATH . '/app/controllers/especialistaController.php';
+        break;
+
+    case '/admin/horarios':
+        require BASE_PATH . '/app/views/dashboard/administrador/horarios.php';
+        break;
+
+    case '/admin/registrar-horario':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-horario.php';
+        break;
+
+    case '/admin/guardar-horario':
+        require BASE_PATH . '/app/controllers/horarioController.php';
+        break;
+
+    case '/admin/actualizar-horario':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-horario.php';
         break;
 
     case '/admin/perfil':
@@ -146,7 +178,9 @@ switch ($request) {
     case '/paciente':
         require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.html';
         break;
-
+    case '/cerrarSesion':
+        require BASE_PATH . '/app/controllers/cerrarSesionController.php';
+        break;
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';

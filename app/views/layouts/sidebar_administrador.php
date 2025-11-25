@@ -35,7 +35,7 @@ $perfil = mostrarPerfilAdmin($id);
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
         </a>
-        <a class="nav-item" href="/E-VITALIX/admin/pacientes">
+        <a class="nav-item" onclick="showSection('pacientes')">
             <i class="bi bi-people-fill"></i>
             <span>Pacientes</span>
         </a>

@@ -25,6 +25,7 @@ switch ($method) {
             eliminarConsultorio($_GET['id']);
         }
 
+        // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
         if (isset($_GET['id'])) {
             // Esta función llena el formulario de editar con un solo consultorio
             listarConsultorio($_GET['id']);
