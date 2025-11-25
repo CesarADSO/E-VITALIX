@@ -87,43 +87,6 @@ class Especialista
 
             $resultado2->execute();
 
-            // OBTENEMOS EL ID DEL ESPECIALISTA PARA LA DISPONIBILIDAD
-            $idEspecialista = $this->conexion->lastInsertId();
-
-            $registrarDisponibilidad = "INSERT INTO disponibilidad_medico(id_especialista,
-            id_consultorio,
-            dia_semana,
-            hora_inicio,
-            hora_fin,
-            pausa_inicio,
-            pausa_fin,
-            capacidad_maxima,
-            estado_disponibilidad)
-            VALUES 
-            (:id_especialista,
-            :consultorio,
-            :dia_semana,
-            :hora_inicio,
-            :hora_fin,
-            :pausa_inicio,
-            :pausa_fin,
-            :capacidad_maxima,
-            'Activo')";
-
-            $resultado3 = $this->conexion->prepare($registrarDisponibilidad);
-
-            $resultado3->bindParam(':id_especialista', $idEspecialista);
-            $resultado3->bindParam(':consultorio', $data['consultorio']);
-            $resultado3->bindParam(':dia_semana', $data['diaSemana']);
-            $resultado3->bindParam(':hora_inicio', $data['horaInicio']);
-            $resultado3->bindParam(':hora_fin', $data['horaFin']);
-            $resultado3->bindParam(':pausa_inicio', $data['descansoInicio']);
-            $resultado3->bindParam(':pausa_fin', $data['descansoFinal']);
-            $resultado3->bindParam(':capacidad_maxima', $data['capacidad']);
-
-            $resultado3->execute();
-
-
             return true;
         } catch (PDOException $e) {
             error_log("Error en Especialista::registrar->" . $e->getMessage());
@@ -137,7 +100,7 @@ class Especialista
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
-            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.email, usuarios.estado, consultorios.nombre AS consultorio, disponibilidad_medico.id AS id_disponibilidad FROM disponibilidad_medico INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id ORDER BY especialistas.nombres ASC";
+            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id ORDER BY especialistas.nombres ASC";
 
             // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
             $resultado = $this->conexion->prepare($mostrar);
@@ -170,33 +133,15 @@ class Especialista
                             especialistas.genero,
                             especialistas.telefono,
                             especialistas.direccion,
+                            especialistas.foto,
                             especialistas.especialidad,
                             especialistas.registro_profesional,
                             usuarios.id AS id_usuario,
                             usuarios.estado,
-
-                            disponibilidad_medico.id AS id_disponibilidad,
-                            disponibilidad_medico.dia_semana,
-                            disponibilidad_medico.hora_inicio,
-                            disponibilidad_medico.hora_fin,
-                            disponibilidad_medico.pausa_inicio,
-                            disponibilidad_medico.pausa_fin,
-                            disponibilidad_medico.capacidad_maxima,
-                            disponibilidad_medico.estado_disponibilidad,
-                            consultorios.id AS id_consultorio,
-                            consultorios.nombre AS consultorio_nombre,
                             tipo_documento.nombre AS documento
-
-                            FROM disponibilidad_medico
-                            INNER JOIN consultorios 
-                                ON disponibilidad_medico.id_consultorio = consultorios.id
-                            INNER JOIN especialistas 
-                                ON disponibilidad_medico.id_especialista = especialistas.id
-                            INNER JOIN tipo_documento 
-                                ON especialistas.id_tipo_documento = tipo_documento.id
-                            INNER JOIN usuarios 
-                                ON especialistas.id_usuario = usuarios.id
-
+                            FROM especialistas INNER JOIN tipo_documento
+                            ON especialistas.id_tipo_documento = tipo_documento.id
+                            INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id
                             WHERE especialistas.id = :id
                             LIMIT 1;";
 
@@ -232,7 +177,7 @@ class Especialista
 
              $resultado->execute();
 
-            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, foto = :foto, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
 
             $resultado2 = $this->conexion->prepare($actualizar2);
             $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
@@ -244,25 +189,11 @@ class Especialista
             $resultado2->bindParam(':genero', $data['genero']);
             $resultado2->bindParam(':telefono', $data['telefono']);
             $resultado2->bindParam(':direccion', $data['direccion']);
+            $resultado2->bindParam(':foto', $data['foto']);
             $resultado2->bindParam(':especialidad', $data['especialidad']);
             $resultado2->bindParam(':registroProfesional', $data['registroProfesional']);
 
             $resultado2->execute();
-
-            $actualizar3 = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estadoDisponibilidad WHERE id = :idDisponibilidad";
-
-            $resultado3 = $this->conexion->prepare($actualizar3);
-
-            $resultado3->bindParam(':idDisponibilidad', $data['idDisponibilidad']);
-            $resultado3->bindParam(':diaSemana', $data['diaSemana']);
-            $resultado3->bindParam(':horaInicio', $data['horaInicio']);
-            $resultado3->bindParam(':horaFin', $data['horaFin']);
-            $resultado3->bindParam(':pausaInicio', $data['descansoInicio']);
-            $resultado3->bindParam(':pausaFin', $data['descansoFinal']);
-            $resultado3->bindParam(':capacidadMaxima', $data['capacidad']);
-            $resultado3->bindParam(':estadoDisponibilidad', $data['estadoDisponibilidad']);
-
-            $resultado3->execute();
 
             return true;
         } catch (PDOException $e) {

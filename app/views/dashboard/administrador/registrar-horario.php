@@ -51,7 +51,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <!-- Consultorio -->
                                 <div class="col-md-6 mb-3">
                                     <label for="consultorio" class="form-label">Consultorio</label>
-                                    <select class="form-select" name="consultorio id="consultorio" name="consultorio" required>
+                                    <select class="form-select" name="consultorio" id="consultorio" name="consultorio" required>
                                         <option value="">Seleccionar consultorio</option>
                                         <!-- Los consultorios se cargarán desde la base de datos -->
                                     </select>
@@ -120,6 +120,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </div>
                         </form>
                     </div>
-                    <?php
+
+<?php
     include_once __DIR__ . '/../../layouts/footer_administrador.php';
-    ?>
+?>
