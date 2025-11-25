@@ -1,3 +1,13 @@
+<?php 
+    require_once BASE_PATH . '/app/helpers/session_admin.php';
+    require_once BASE_PATH . '/app/controllers/especialistaController.php';
+    require_once BASE_PATH . '/app/controllers/consultorioController.php';
+
+    $especialistas = mostrarEspecialistas();
+    $consultorios = mostrarConsultorios();
+?>
+
+
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
@@ -44,7 +54,13 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="especialista" class="form-label">Especialista</label>
                                     <select class="form-select" name="especialista" id="especialista" name="especialista" required>
                                         <option value="">Seleccionar especialista</option>
-                                        <!-- Los especialistas se cargarán desde la base de datos -->
+                                        <?php if (!empty($especialistas)) :  ?>
+                                        <?php foreach($especialistas as $especialista) :?>
+                                        <option value="<?= $especialista['id'] ?>"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></option>
+                                        <?php endforeach;?>
+                                        <?php else :?>
+                                            <option> value="">No hay especialistas registrados</option>
+                                        <?php endif;?>
                                     </select>
                                 </div>
 
@@ -53,7 +69,13 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="consultorio" class="form-label">Consultorio</label>
                                     <select class="form-select" name="consultorio" id="consultorio" name="consultorio" required>
                                         <option value="">Seleccionar consultorio</option>
-                                        <!-- Los consultorios se cargarán desde la base de datos -->
+                                        <?php if(!empty($consultorios)):?>
+                                            <?php foreach($consultorios as $consultorio):?>
+                                                <option value="<?= $consultorio['id'] ?>"><?= $consultorio['nombre'] ?></option>
+                                            <?php endforeach;?>
+                                        <?php else:?>
+                                            <option value="">No hay consultorios registrados</option>
+                                        <?php endif;?>
                                     </select>
                                 </div>
                             </div>
