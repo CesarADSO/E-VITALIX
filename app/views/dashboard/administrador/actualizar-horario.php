@@ -1,3 +1,17 @@
+<?php 
+    require_once BASE_PATH . '/app/helpers/session_admin.php';
+    require_once BASE_PATH . '/app/controllers/horarioController.php';
+    require_once BASE_PATH . '/app/controllers/especialistaController.php';
+    require_once BASE_PATH . '/app/controllers/consultorioController.php';
+
+    $id = $_GET['id'];
+
+    $horario = listarHorarioPorId($id);
+    $especialistas = mostrarEspecialistas();
+    $consultorios = mostrarConsultorios();
+?>
+
+
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
@@ -37,23 +51,38 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <h4 class="mb-4">Actualizar Horario Médico</h4>
                         <p class="text-muted mb-4 texto">Actualiza el horario médico del especialista seleccionado</p>
 
-                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-horario" method="POST" enctype="multipart/form-data">
+                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-cambios-horario" method="POST">
+                            <input type="hidden" name="id" value="<?= $horario['id'] ?>">
+                            <input type="hidden" name="accion" value="actualizar">
                             <div class="row">
                                 <!-- Especialista -->
                                 <div class="col-md-6 mb-3">
                                     <label for="especialista" class="form-label">Especialista</label>
-                                    <select class="form-select" name="especialista" id="especialista" name="especialista" required>
-                                        <option value="">Seleccionar especialista</option>
-                                        <!-- Los especialistas se cargarán desde la base de datos -->
+                                    <select class="form-select" name="idEspecialista" id="especialista" required>
+                                        <option value="<?= $horario['id_especialista'] ?>"><?= $horario['nombres'] ?> <?= $horario['apellidos'] ?></option>
+                                        <?php if (!empty($especialistas)) :?>
+                                            <?php foreach($especialistas as $especialista) :?>
+                                            <option value="<?= $especialista['id'] ?>"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></option>
+                                            <?php endforeach;?>
+                                        <?php else:?>
+                                            <option value="">No hay especialistas registrados</option>
+                                        <?php endif;?>
                                     </select>
                                 </div>
 
                                 <!-- Consultorio -->
                                 <div class="col-md-6 mb-3">
                                     <label for="consultorio" class="form-label">Consultorio</label>
-                                    <select class="form-select" name="consultorio id=" consultorio" name="consultorio" required>
-                                        <option value="">Seleccionar consultorio</option>
+                                    <select class="form-select" name="idConsultorio" id="consultorio" required>
+                                        <option value="<?= $horario['id_consultorio'] ?>"><?= $horario['nombre'] ?></option>
                                         <!-- Los consultorios se cargarán desde la base de datos -->
+                                         <?php if (!empty($consultorios)) :?>
+                                            <?php foreach($consultorios as $consultorio) :?>
+                                            <option value="<?= $consultorio['id'] ?>"><?= $consultorio['nombre'] ?></option>
+                                            <?php endforeach;?>
+                                        <?php else: ?>
+                                            <option value="">No hay consultorios registrados</option>
+                                        <?php endif;?>
                                     </select>
                                 </div>
                             </div>
@@ -62,15 +91,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <!-- Día de la Semana -->
                                 <div class="col-md-6 mb-3">
                                     <label for="dia_semana" class="form-label">Día de la Semana</label>
-                                    <select class="form-select" name="dia" id="dia_semana" name="dia_semana" required>
-                                        <option value="">Seleccionar día</option>
-                                        <option value="1">Lunes</option>
-                                        <option value="2">Martes</option>
-                                        <option value="3">Miércoles</option>
-                                        <option value="4">Jueves</option>
-                                        <option value="5">Viernes</option>
-                                        <option value="6">Sábado</option>
-                                        <option value="7">Domingo</option>
+                                    <select class="form-select" id="dia_semana" name="dia_semana" required>
+                                        <option value="<?= $horario['dia_semana'] ?>"><?= $horario['dia_semana'] ?></option>
+                                        <option value="lunes">Lunes</option>
+                                        <option value="martes">Martes</option>
+                                        <option value="miercoles">Miércoles</option>
+                                        <option value="jueves">Jueves</option>
+                                        <option value="viernes">Viernes</option>
+                                        <option value="sabado">Sábado</option>
+                                        <option value="domingo">Domingo</option>
                                     </select>
                                 </div>
 
@@ -79,7 +108,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="capacidad_citas" class="form-label">Capacidad Máxima de Citas por
                                         Día</label>
                                     <input type="number" class="form-control" id="capacidad_citas"
-                                        name="capacidad_citas" min="1" max="50" placeholder="Ej: 20" required>
+                                        name="capacidad_citas" min="1" max="50" placeholder="Ej: 20" value="<?= $horario['capacidad_maxima'] ?>" required>
                                     <div class="form-text">Número máximo de citas que puede atender en este día</div>
                                 </div>
                             </div>
@@ -88,14 +117,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <!-- Hora Inicio -->
                                 <div class="col-md-6 mb-3">
                                     <label for="hora_inicio" class="form-label">Hora Inicio de Trabajo</label>
-                                    <input type="time" class="form-control" id="hora_inicio" name="hora_inicio"
+                                    <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" value="<?= $horario['hora_inicio'] ?>"
                                         required>
                                 </div>
 
                                 <!-- Hora Fin -->
                                 <div class="col-md-6 mb-3">
                                     <label for="hora_fin" class="form-label">Hora Fin de Trabajo</label>
-                                    <input type="time" class="form-control" id="hora_fin" name="hora_fin" required>
+                                    <input type="time" class="form-control" id="hora_fin" name="hora_fin" value="<?= $horario['hora_fin'] ?>" required>
                                 </div>
                             </div>
 
@@ -103,25 +132,25 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <!-- Inicio Descanso -->
                                 <div class="col-md-6 mb-3">
                                     <label for="inicio_descanso" class="form-label">Inicio de Descanso</label>
-                                    <input type="time" class="form-control" id="inicio_descanso" name="inicio_descanso">
+                                    <input type="time" class="form-control" id="inicio_descanso" name="inicio_descanso" value="<?= $horario['pausa_inicio'] ?>">
                                 </div>
 
                                 <!-- Fin Descanso -->
                                 <div class="col-md-6 mb-3">
                                     <label for="fin_descanso" class="form-label">Fin de Descanso</label>
-                                    <input type="time" class="form-control" id="fin_descanso" name="fin_descanso">
+                                    <input type="time" class="form-control" id="fin_descanso" name="fin_descanso" value="<?= $horario['pausa_fin'] ?>">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 mb-3">
-                                <label for="dia_semana" class="form-label">Estado</label>
-                                <select class="form-select" id="estado" name="estado" required>
-                                    <option value="">Activo</option>
-                                    <option value="Activo">Activo</option>
-                                    <option value="Inactivo">Inactivo</option>
-                                </select>
-                            </div>
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <select class="form-select" id="estado" name="estado" required>
+                                        <option value="<?= $horario['estado_disponibilidad'] ?>"><?= $horario['estado_disponibilidad'] ?></option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">

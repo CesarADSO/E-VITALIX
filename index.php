@@ -132,7 +132,11 @@ switch ($request) {
 
     case '/admin/actualizar-horario':
         require BASE_PATH . '/app/views/dashboard/administrador/actualizar-horario.php';
-        break;
+        break; 
+        
+    case '/admin/guardar-cambios-horario':
+        require BASE_PATH . '/app/controllers/horarioController.php';
+        break; 
 
     case '/admin/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
