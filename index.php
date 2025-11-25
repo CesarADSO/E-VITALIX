@@ -114,6 +114,26 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
 
+    case '/admin/eliminar-especialista':
+        require BASE_PATH . '/app/controllers/especialistaController.php';
+        break;
+        
+    case '/admin/horarios':
+        require BASE_PATH . '/app/views/dashboard/administrador/horarios.php';
+        break;
+        
+    case '/admin/registrar-horario':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-horario.php';
+        break;
+
+    case '/admin/guardar-horario':
+        require BASE_PATH . '/app/controllers/horarioController.php';
+        break;
+    
+    case '/admin/actualizar-horario':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-horario.php';
+        break;   
+
     case '/admin/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;

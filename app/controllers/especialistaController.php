@@ -12,12 +12,15 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
         // CREAMOS LA VARIABLE ACCIÓN QUE LO QUE TRAE ES LO QUE VIENE EN EL NAME DEL INPUT ACCION
-        $accion = $_POST['accion'];
+        $accion = $_POST['accion'] ?? '';
         // ACÁ VALIDAMOS EL VALUE DE DICHO INPUT
         if ($accion === 'actualizar') {
             actualizarEspecialista();
         }
-        registrarEspecialista();
+        else {
+            registrarEspecialista();
+        }
+        
         break;
 
     case 'GET':
@@ -26,7 +29,7 @@ switch ($method) {
 
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (ESPECIALISTA)
-            eliminarEspecialista($id);
+            eliminarEspecialista($_GET['idUsuario'], $_GET['id'], $_GET['idDisponibilidad']);
         }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
@@ -58,17 +61,10 @@ function registrarEspecialista()
     $clave = $_POST['clave'] ?? '';
     $especialidad = $_POST['especialidad'] ?? '';
     $registroProfesional = $_POST['registro'] ?? '';
-    $consultorio = $_POST['consultorio'] ?? '';
-    $diaSemana = $_POST['dia'] ?? '';
-    $horaInicio = $_POST['horaInicio'] ?? '';
-    $horaFin = $_POST['horaFin'] ?? '';
-    $descansoInicio = $_POST['inicioDescanso'] ?? '';
-    $descansoFinal = $_POST['finDescanso'] ?? '';
-    $capacidad =  $_POST['capacidad'] ?? '';
 
 
     // VALIDAMOS LOS DATOS QUE SON OBLIGATORIOS
-    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($clave) || empty($especialidad) || empty($registroProfesional) || empty($consultorio) || empty($diaSemana) || empty($horaInicio) || empty($horaFin) || empty($descansoInicio) || empty($descansoFinal) || empty($capacidad)) {
+    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($clave) || empty($especialidad) || empty($registroProfesional)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -137,14 +133,7 @@ function registrarEspecialista()
         'email' => $email,
         'clave' => $clave,
         'especialidad' => $especialidad,
-        'registroProfesional' => $registroProfesional,
-        'consultorio' => $consultorio,
-        'diaSemana' => $diaSemana,
-        'horaInicio' => $horaInicio,
-        'horaFin' => $horaFin,
-        'descansoInicio' => $descansoInicio,
-        'descansoFinal' => $descansoFinal,
-        'capacidad' => $capacidad
+        'registroProfesional' => $registroProfesional
     ];
 
     // CREAMOS UNA VARIABLE DONDE SE VA A GUARDAR EL OBJETO DONDE INSTANCIAMOS LA CLASE ACCEDIENDO AL MÉTODO DEL MODELO
@@ -195,7 +184,6 @@ function actualizarEspecialista()
     // CAPTURAMOS EN VARIABLES LO QUE VENGA A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $idUsuario = $_POST['idUsuario'] ?? '';
     $idEspecialista = $_POST['idEspecialista'] ?? '';
-    $idDisponibilidad = $_POST['idDisponibilidad'] ?? '';
     $tipoDocumento = $_POST['tipoDocumento'] ?? '';
     $numeroDocumento = $_POST['numeroDocumento'] ?? '';
     $nombres = $_POST['nombres'] ?? '';
@@ -206,18 +194,10 @@ function actualizarEspecialista()
     $direccion = $_POST['direccion'] ?? '';
     $especialidad = $_POST['especialidad'] ?? '';
     $registroProfesional = $_POST['registro'] ?? '';
-    $consultorio = $_POST['consultorio'] ?? '';
-    $diaSemana = $_POST['dia'] ?? '';
-    $horaInicio = $_POST['horaInicio'] ?? '';
-    $horaFin = $_POST['horaFin'] ?? '';
-    $descansoInicio = $_POST['inicioDescanso'] ?? '';
-    $descansoFinal = $_POST['finDescanso'] ?? '';
-    $capacidad =  $_POST['capacidad'] ?? '';
     $estadoEspecialista = $_POST['estadoEspecialista'] ?? '';
-    $estadoDisponibilidad = $_POST['estadoDisponibilidad'] ?? '';
 
     // VALIDAMOS LOS CAMPOS QUE SON OBLIGATORIOS
-    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) ||  empty($especialidad) || empty($registroProfesional) || empty($consultorio) || empty($diaSemana) || empty($horaInicio) || empty($horaFin) || empty($descansoInicio) || empty($descansoFinal) || empty($capacidad) || empty($estadoEspecialista) || empty($estadoDisponibilidad)) {
+    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) ||  empty($especialidad) || empty($registroProfesional)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -272,7 +252,6 @@ function actualizarEspecialista()
     $data = [
         'idUsuario' => $idUsuario,
         'idEspecialista' => $idEspecialista,
-        'idDisponibilidad' => $idDisponibilidad,
         'tipoDocumento' => $tipoDocumento,
         'numeroDocumento' => $numeroDocumento,
         'nombres' => $nombres,
@@ -284,15 +263,7 @@ function actualizarEspecialista()
         'foto' => $ruta_foto,
         'especialidad' => $especialidad,
         'registroProfesional' => $registroProfesional,
-        'consultorio' => $consultorio,
-        'diaSemana' => $diaSemana,
-        'horaInicio' => $horaInicio,
-        'horaFin' => $horaFin,
-        'descansoInicio' => $descansoInicio,
-        'descansoFinal' => $descansoFinal,
-        'capacidad' => $capacidad,
-        'estadoEspecialista' => $estadoEspecialista,
-        'estadoDisponibilidad' => $estadoDisponibilidad
+        'estadoEspecialista' => $estadoEspecialista
     ];
 
     // CREAMOS UNA VARIABLE DONDE SE VA A GUARDAR EL OBJETO DONDE INSTANCIAMOS LA CLASE ACCEDIENDO AL MÉTODO DEL MODELO
@@ -310,6 +281,20 @@ function actualizarEspecialista()
     exit();
 }
 
-function eliminarEspecialista($id) {
+function eliminarEspecialista($idUsuario, $id , $idDisponibilidad) {
     
+    // INSTANCIAMOS NUESTRA CLASE ESPECIALISTA 
+    $objEspecialista = new Especialista();
+
+    // EN UNA VARIABLE ACCEDEMOS A NUESTRO MÉTODO DE LA CLASE INSTANCIADA
+    $resultado = $objEspecialista->eliminar($idUsuario, $id , $idDisponibilidad);
+
+    // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el consultorio', '/E-VITALIX/admin/consultorios');
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el consultorio. Intenta nuevamente');
+    }
+    exit();
 }
