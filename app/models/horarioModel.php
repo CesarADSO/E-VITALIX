@@ -54,7 +54,29 @@
                 return $resultado->fetchAll();
 
             } catch (PDOException $e) {
-                error_log('Error en Horario::registrar->' . $e->getMessage());
+                error_log('Error en Horario::mostrar->' . $e->getMessage());
+                return [];
+            }
+        }
+
+        public function listarHorarioPorId($id) {
+            // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+            try {
+                
+                // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL QUE VAMOS A UTILIZAR
+                $consultar = "SELECT disponibilidad_medico.*, especialistas.id AS id_especialista, especialistas.nombres, especialistas.apellidos, consultorios.id AS id_consultorio, consultorios.nombre FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id WHERE disponibilidad_medico.id = :id";
+
+                $resultado = $this->conexion->prepare($consultar);
+
+                $resultado->bindParam(':id', $id);
+
+                $resultado->execute();
+
+                return $resultado->fetch();
+
+
+            } catch (PDOException $e) {
+                error_log('Error en Horario::listarHorariosPorId->' . $e->getMessage());
                 return [];
             }
         }

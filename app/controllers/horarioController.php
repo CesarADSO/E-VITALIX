@@ -12,7 +12,12 @@ switch ($method) {
         registrarHorario();
         break;
     case 'GET':
-        mostrarHorarios();
+        if (isset($_GET['id'])) {
+            listarHorarioPorId($_GET['id']);
+        }
+        else {
+            mostrarHorarios();
+        }
         break;
 }
 
@@ -69,6 +74,17 @@ function mostrarHorarios() {
 
     // ACCEDEMOS AL MÉTODO ESPECÍFICO
     $resultado = $objhorario->mostrar();
+
+    return $resultado;
+}
+
+function listarHorarioPorId($id) {
+    // INSTANCIAMOS NUESTRA CLASE HORARIO
+
+    $objhorario = new Horario();
+
+    // ACCEDEMOS AL MÉTODO ESPECÍFICO
+    $resultado = $objhorario->listarHorarioPorId($id);
 
     return $resultado;
 }
