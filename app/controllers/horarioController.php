@@ -30,7 +30,7 @@ function registrarHorario()
 
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($idEspecialista) || empty($idConsultorio) || empty($diaSemana) || empty($capacidadMaxima) || empty($horaInicio) || empty($horaFin) || empty($inicioDescanso) || empty($finDescanso)) {
+    if (empty($idEspecialista) || empty($idConsultorio) || empty($diaSemana) || empty($capacidadMaxima) || empty($horaInicio) || empty($horaFin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }

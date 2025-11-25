@@ -47,7 +47,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <h4 class="mb-4">Registrar Horario Médico</h4>
                         <p class="text-muted mb-4 texto">Configura el horario de atención del médico</p>
 
-                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/registrar-horario" method="POST" enctype="multipart/form-data">
+                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-horario" method="POST">
                             <div class="row">
                                 <!-- Especialista -->
                                 <div class="col-md-6 mb-3">
