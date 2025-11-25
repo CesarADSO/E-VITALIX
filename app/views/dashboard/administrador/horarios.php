@@ -1,0 +1,84 @@
+<?php
+include_once __DIR__ . '/../../layouts/header_administrador.php';
+?>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <?php
+            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            ?>
+
+            <!-- Main Content -->
+            <div class="col-lg-10 col-md-9 main-content">
+
+                <!-- Horarios Section -->
+                <div id="HorariosSection" style="display: block;">
+                    <!-- Top Bar -->
+                    <?php
+                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    ?>
+
+                    <!-- Horarios Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <button class="btn btn-link text-primary p-0"
+                                style="text-decoration: none; font-size: 14px;">
+                                ← Todos (0)
+                            </button>
+                        </div>
+                        <a href="<?= BASE_URL ?>/admin/registrar-horario" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
+                    </div>
+
+                    <!-- Horarios Table -->
+                    <div class="bg-white rounded shadow-sm p-4 cont-tabla-consultorios">
+                        <table class="table-pacientes">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Día de atención
+                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                    </th>
+                                    <th>Hora de inicio</th>
+                                    <th>Hora de fin</th>
+                                    <th>
+                                        Capacidad máxima de citas diarias
+                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                    </th>
+                                    <th>Estado</th>
+                                    <th style="width: 80px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Lunes</td>
+                                    <td>8:00 am</td>
+                                    <td>4:00 pm</td>
+                                    <td>20</td>
+                                    <td>Activo</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/E-VITALIX/admin/consultar-consultorio"><i class="bi bi-search"></i>Ver</a></li>
+                                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-horario"><i class="bi bi-pencil"></i>Editar</a></li>
+                                                <li><a class="dropdown-item text-danger" href=""><i class="bi bi-trash"></i> Eliminar</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    ?>

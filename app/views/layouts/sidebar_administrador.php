@@ -39,7 +39,7 @@
                         <i class="bi bi-people-fill"></i>
                         <span>Pacientes</span>
                     </a>
-                    <a class="nav-item active" href="/E-VITALIX/admin/consultorios">
+                    <a class="nav-item" href="/E-VITALIX/admin/consultorios">
                         <i class="bi bi-building"></i>
                         <span>Consultorios</span>
                     </a>
@@ -47,7 +47,7 @@
                         <i class="bi bi-person-badge"></i>
                         <span>Profesionales</span>
                     </a>
-                    <a class="nav-item" href="/E-VITALIX/admin/especialistas">
+                    <a class="nav-item active" href="<?= BASE_URL ?>/admin/horarios">
                         <i class="bi bi-alarm"></i>
                         <span>Horarios</span>
                     </a>
