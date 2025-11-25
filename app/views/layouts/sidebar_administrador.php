@@ -47,6 +47,10 @@
                         <i class="bi bi-person-badge"></i>
                         <span>Profesionales</span>
                     </a>
+                     <a class="nav-item" href="/E-VITALIX/admin/usuarios">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Usuarios</span>
+                    </a>
                 </nav>
 
                 <div style="margin-top: auto; padding: 20px;">
