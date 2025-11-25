@@ -2,6 +2,23 @@
     require_once BASE_PATH . '/app/helpers/pdf_helper.php';
     require_once BASE_PATH . '/app/controllers/consultorioController.php';
 
+    // ESTA FUNCIÓN SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCIÓN CORRESPONDIENTE
+    function reportesPdfController() {
+        // CAPTURAMOS EL TIPO EDE REPORTE ENVIADO DESDE LA VISTA
+        $tipo = $_GET['tipo'];
+
+        // SEGÚN EL TIPO DE REPORTE EJECUTAMOS X FUNCIÓN
+        switch ($tipo) {
+            case 'consultorios':
+                reporteConsultoriosPDF();
+                break;
+            
+            default:
+                exit();
+                break;
+        }
+    }
+
     function reporteConsultoriosPDF() {
         // CARGAR LA VISTA Y OBTENERLA COMO HTML
         ob_start();
@@ -14,6 +31,4 @@
 
         generarPDF($html, 'reporte_consultorios.pdf', false);
     }
-
-    reporteConsultoriosPDF();
 ?>

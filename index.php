@@ -57,11 +57,11 @@ switch ($request) {
     case '/recuperacion':
         require BASE_PATH . '/app/views/auth/recuperar-contraseña.php';
         break;
-    
+
     case '/generar-clave':
         require BASE_PATH . '/app/controllers/passwordController.php';
         break;
-    
+
     // ADMIN INTERFACES
     case '/admin/dashboard':
         require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.php';
@@ -89,8 +89,9 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/consultorioController.php';
         break;
 
-    case '/admin/generar-reporte-consultorios':
+    case '/admin/generar-reporte':
         require BASE_PATH . '/app/controllers/reportesPdfController.php';
+        reportesPdfController();
         break;
 
     case '/admin/especialistas':
@@ -116,11 +117,11 @@ switch ($request) {
     case '/admin/eliminar-especialista':
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
-        
+
     case '/admin/horarios':
         require BASE_PATH . '/app/views/dashboard/administrador/horarios.php';
         break;
-        
+
     case '/admin/registrar-horario':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar-horario.php';
         break;
@@ -128,7 +129,7 @@ switch ($request) {
     case '/admin/guardar-horario':
         require BASE_PATH . '/app/controllers/horarioController.php';
         break;
-    
+
     case '/admin/actualizar-horario':
         require BASE_PATH . '/app/views/dashboard/administrador/actualizar-horario.php';
         break; 
@@ -151,6 +152,30 @@ switch ($request) {
 
     case '/admin/cambiar-contrasena':
         require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+    // En tu index.php, agrega estas rutas:
+    case '/admin/pacientes':
+        require BASE_PATH . '/app/views/dashboard/administrador/pacientes.php';
+        break;
+
+    case '/admin/registrar-paciente':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-paciente.php';
+        break;
+
+    case '/admin/guardar-paciente':
+        require BASE_PATH . '/app/controllers/pacienteController.php';
+        break;
+
+    case '/admin/actualizar-paciente':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-paciente.php';
+        break;
+
+    case '/admin/guardar-cambios-paciente':
+        require BASE_PATH . '/app/controllers/pacienteController.php';
+        break;
+
+    case '/admin/eliminar-paciente':
+        require BASE_PATH . '/app/controllers/pacienteController.php';
         break;
     case '/doctor':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.html';
