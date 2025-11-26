@@ -29,7 +29,7 @@ switch ($method) {
 
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (ESPECIALISTA)
-            eliminarEspecialista($_GET['idUsuario'], $_GET['id'], $_GET['idDisponibilidad']);
+            eliminarEspecialista($_GET['idUsuario'], $_GET['id']);
         }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
@@ -281,13 +281,13 @@ function actualizarEspecialista()
     exit();
 }
 
-function eliminarEspecialista($idUsuario, $id , $idDisponibilidad) {
+function eliminarEspecialista($idUsuario, $id) {
     
     // INSTANCIAMOS NUESTRA CLASE ESPECIALISTA 
     $objEspecialista = new Especialista();
 
     // EN UNA VARIABLE ACCEDEMOS A NUESTRO MÉTODO DE LA CLASE INSTANCIADA
-    $resultado = $objEspecialista->eliminar($idUsuario, $id , $idDisponibilidad);
+    $resultado = $objEspecialista->eliminar($idUsuario, $id);
 
     // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
     // Si es falsa notificamos y redirecciomamos
