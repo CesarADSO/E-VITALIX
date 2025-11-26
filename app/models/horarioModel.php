@@ -86,11 +86,10 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A UTILIZAR
-                $actualizar = "UPDATE diponibilidad_medico SET id_especialista = :idEspecialista, id_consultorio = :idConsultorio, dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado";
+                $actualizar = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado WHERE id = :id";
 
                 $resultado = $this->conexion->prepare($actualizar);
-                $resultado->bindParam(':idEspecialista', $data['idEspecialista']);
-                $resultado->bindParam(':idConsultorio', $data['idConsultorio']);
+                $resultado->bindParam(':id', $data['id']);
                 $resultado->bindParam(':diaSemana', $data['diaSemana']);
                 $resultado->bindParam(':horaInicio', $data['horaInicio']);
                 $resultado->bindParam(':horaFin', $data['horaFin']);
@@ -104,6 +103,25 @@
                 return true;
             } catch (PDOException $e) {
                 error_log('Error en Horario::actualizar->' . $e->getMessage());
+                return false;
+            }
+        }
+
+        public function eliminar($id) {
+            try {
+                
+                $eliminar = "DELETE FROM disponibilidad_medico WHERE id = :id";
+
+                $resultado = $this->conexion->prepare($eliminar);
+
+                $resultado->bindParam(':id', $id);
+
+                $resultado->execute();
+
+                return true;
+
+            } catch (PDOException $e) {
+                error_log('Error en Horario::eliminar->' . $e->getMessage());
                 return false;
             }
         }

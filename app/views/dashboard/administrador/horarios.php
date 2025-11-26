@@ -78,7 +78,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="/E-VITALIX/admin/consultar-consultorio"><i class="bi bi-search"></i>Ver</a></li>
                                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-horario?id=<?= $horario['id'] ?>"><i class="bi bi-pencil"></i>Editar</a></li>
-                                                <li><a class="dropdown-item text-danger" href=""><i class="bi bi-trash"></i> Eliminar</a></li>
+                                                <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/admin/eliminar-horario?id=<?= $horario['id'] ?>&accion=eliminar"><i class="bi bi-trash"></i> Eliminar</a></li>
                                             </ul>
                                         </div>
                                     </td>

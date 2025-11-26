@@ -196,7 +196,7 @@ function actualizarPaciente()
     $resultado = $objPaciente->actualizar($data);
 
     if ($resultado ===  true) {
-        mostrarSweetAlert('sucess', 'Modificacion exitosa', 'Se ha actualizado el paciente', '/E-VITALIX/admin/pacientes');
+        mostrarSweetAlert('success', 'Modificacion exitosa', 'Se ha actualizado el paciente', '/E-VITALIX/admin/pacientes');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el paciente');
     }
