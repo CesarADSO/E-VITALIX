@@ -199,12 +199,13 @@ switch ($request) {
     case '/admin/guardar-usuario':
         require BASE_PATH . '/app/controllers/usuarioController.php';
         break;
-    case '/admin/guardar-usuario':
-        require BASE_PATH . '/app/controllers/usuarioController.php';
-        break;
     case '/admin/actualizar-usuario':
         require BASE_PATH . '/app/views/dashboard/administrador/actualizar-usuario.php';
         break;
+    case '/admin/eliminar-usuario':
+        require BASE_PATH . '/app/controllers/usuarioController.php';
+        break;
+        
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';

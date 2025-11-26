@@ -97,5 +97,19 @@ class Usuario
         }
     }
 
+      public function eliminar($id) {
+        try {
+            $eliminar = "DELETE FROM usuarios WHERE id = :id";
+            $resultado = $this->conexion->prepare($eliminar);
+            $resultado->bindParam(':id', $id);
 
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en usuario::eliminar->" . $e->getMessage());
+            return false;
+        }
+    }
 }
+

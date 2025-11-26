@@ -23,7 +23,8 @@ switch ($method) {
 
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINA EL USUARIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (usuario)
-            // eliminarUsuario($_GET['id']);
+            eliminarUsuario($_GET['id']);
+            exit();
         }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
@@ -162,3 +163,22 @@ function actualizarUsuario()
     }
     exit();
 }
+
+
+function eliminarUsuario($id)
+{
+    $objUsuario = new Usuario();
+
+    $resultado = $objUsuario->eliminar($id);
+
+    // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el usuario', '/E-VITALIX/admin/usuarios');
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el usuario. Intenta nuevamente');
+    }
+    exit();
+}
+
+
