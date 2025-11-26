@@ -203,19 +203,9 @@ class Especialista
         }
     }
 
-    public function eliminar($idUsuario, $id , $idDisponibilidad) {
+    public function eliminar($idUsuario, $id) {
         // CREAMOS EL TRY - CATCH PARA MANEJAR ERRORES
         try {
-            
-            // EN UNA VARIABLE DEFINIMOS NUESTRA CONSULTA SQL
-
-            $eliminarDisponibilidad = "DELETE FROM disponibilidad_medico WHERE id = :idDisponibilidad";
-
-            $resultado3 = $this->conexion->prepare($eliminarDisponibilidad);
-
-            $resultado3->bindParam(':idDisponibilidad', $idDisponibilidad);
-
-            $resultado3->execute();
 
             $eliminarEspecialista = "DELETE FROM especialistas WHERE id = :idEspecialista";
 
