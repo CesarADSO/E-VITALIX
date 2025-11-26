@@ -30,28 +30,32 @@ $perfil = mostrarPerfilAdmin($id);
         </div>
     </div>
 
-    <nav class="nav-menu">
-        <a class="nav-item" href="/E-VITALIX/admin/dashboard">
-            <i class="bi bi-grid-fill"></i>
-            <span>Dashboard</span>
-        </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
-            <i class="bi bi-people-fill"></i>
-            <span>Pacientes</span>
-        </a>
-        <a class="nav-item" href="/E-VITALIX/admin/consultorios">
-            <i class="bi bi-building"></i>
-            <span>Consultorios</span>
-        </a>
-        <a class="nav-item" href="/E-VITALIX/admin/especialistas">
-            <i class="bi bi-person-badge"></i>
-            <span>Profesionales</span>
-        </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/admin/horarios">
-            <i class="bi bi-alarm"></i>
-            <span>Horarios</span>
-        </a>
-    </nav>
+                <nav class="nav-menu">
+                    <a class="nav-item" href="<?= BASE_URL ?>/admin/dashboard">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Pacientes</span>
+                    </a>
+                    <a class="nav-item" href="<?= BASE_URL ?>/admin/consultorios">
+                        <i class="bi bi-building"></i>
+                        <span>Consultorios</span>
+                    </a>
+                    <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Profesionales</span>
+                    </a>
+                    <a class="nav-item" href="<?= BASE_URL ?>/admin/horarios">
+                        <i class="bi bi-alarm"></i>
+                        <span>Horarios</span>
+                    </a>
+                     <a class="nav-item" href="<?= BASE_URL ?>/admin/usuarios">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </nav>
 
     <div style="margin-top: auto; padding: 20px;">
         <a class="nav-item" href="<?= BASE_URL ?>/admin/perfil">
