@@ -66,9 +66,5 @@ $perfil = mostrarPerfilAdmin($id);
             <i class="bi-box-arrow-right"></i>
             <span>Cerrar Sesión</span>
         </a>
-        <!-- <a class="nav-item">
-                        <i class="bi bi-gear-fill"></i>
-                        <span>Configuración</span>
-                    </a> -->
     </div>
 </div>

@@ -1,3 +1,11 @@
+<?php
+require_once BASE_PATH . '/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/controllers/especialistaController.php';
+
+$especialitas = mostrarEspecialistas();
+
+?>
+
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
@@ -39,8 +47,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Especialistas</div>
-                            <div class="stat-value">77</div>
-                            <div class="stat-subtitle">Asistentes</div>
+                            <div class="stat-value"><?= count($especialitas) ?></div>
+                            <div class="stat-subtitle">Registrados</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Nuevo pacientes registrados<br>este mes</div>

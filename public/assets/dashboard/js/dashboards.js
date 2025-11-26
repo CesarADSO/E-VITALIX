@@ -1,51 +1,3 @@
-function showSection(section) {
-    const dashboardSection = document.getElementById('dashboardSection');
-    const pacientesSection = document.getElementById('pacientesSection');
-    const consultoriosSection = document.getElementById('consultoriosSection');
-    const profesionalesSection = document.getElementById('profesionalesSection');
-    const perfilSection = document.getElementById('perfilSection');
-    const navItems = document.querySelectorAll('.nav-item');
-
-    // Verificar que los elementos existen
-    if (!dashboardSection || !pacientesSection || !perfilSection) {
-        console.error('Una o más secciones no se encontraron en el DOM');
-        return;
-    }
-
-    // Ocultar todas las secciones
-    dashboardSection.style.display = 'none';
-    pacientesSection.style.display = 'none';
-    if (consultoriosSection) consultoriosSection.style.display = 'none';
-    if (profesionalesSection) profesionalesSection.style.display = 'none';
-    perfilSection.style.display = 'none';
-
-    // Remover clase active de todos los nav-items
-    navItems.forEach(item => {
-        item.classList.remove('active');
-    });
-
-    // Mostrar la sección seleccionada
-    if (section === 'dashboard') {
-        dashboardSection.style.display = 'block';
-        if (navItems[0]) navItems[0].classList.add('active');
-    } else if (section === 'pacientes') {
-        pacientesSection.style.display = 'block';
-        if (navItems[1]) navItems[1].classList.add('active');
-    } else if (section === 'consultorios') {
-        if (consultoriosSection) {
-            consultoriosSection.style.display = 'block';
-            if (navItems[2]) navItems[2].classList.add('active');
-        }
-    } else if (section === 'profesionales') {
-        if (profesionalesSection) {
-            profesionalesSection.style.display = 'block';
-            if (navItems[3]) navItems[3].classList.add('active');
-        }
-    } else if (section === 'perfil') {
-        perfilSection.style.display = 'block';
-        if (navItems[4]) navItems[4].classList.add('active');
-    }
-}
 
 
 
@@ -132,3 +84,4 @@ function initCharts() {
         });
     }
 }
+

@@ -1,6 +1,7 @@
 <?php
     require_once BASE_PATH . '/app/helpers/pdf_helper.php';
     require_once BASE_PATH . '/app/controllers/consultorioController.php';
+    require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
     // ESTA FUNCIÓN SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCIÓN CORRESPONDIENTE
     function reportesPdfController() {
@@ -11,6 +12,9 @@
         switch ($tipo) {
             case 'consultorios':
                 reporteConsultoriosPDF();
+                break;
+            case 'especialistas':
+                reporteEspecialistasPDF();
                 break;
             
             default:
@@ -30,5 +34,18 @@
         $html = ob_get_clean();
 
         generarPDF($html, 'reporte_consultorios.pdf', false);
+    }
+
+    function reporteEspecialistasPDF() {
+        // CARGAR LA VISTA Y OBTENERLA COMO HTML
+        ob_start();
+        // ASIGNAMOS LOS DATOS DE LA FUNCIÓN EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
+        $especialistas = mostrarEspecialistas();
+
+        // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
+        require BASE_PATH . '/app/views/pdf/especialistas_pdf.php';
+        $html = ob_get_clean();
+
+        generarPDF($html. 'reporte_especialistas.pdf', false);
     }
 ?>
