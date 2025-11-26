@@ -19,6 +19,12 @@ switch ($method) {
         
         break;
     case 'GET':
+
+        $accion = $_GET['accion'] ?? '';
+        if ($accion === 'eliminar') {
+            eliminarHorario($_GET['id']);
+        }
+
         if (isset($_GET['id'])) {
             listarHorarioPorId($_GET['id']);
         } else {
@@ -135,9 +141,28 @@ function actualizarHorario()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha Modificado la disponibilidad', '/E-VITALIX/admin/horarios');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha modificado la disponibilidad', '/E-VITALIX/admin/horarios');
     } else {
-        mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar la disponibilidad');
+        mostrarSweetAlert('error', 'Error al modificar', 'No se pudo modificar la disponibilidad');
     }
     exit();
+}
+
+function eliminarHorario($id) {
+
+    // INSTANCIAMOS NUESTRA CLASE HORARIO
+    $objhorario = new Horario();
+
+    // ACCEDEMOS AL MÉTODO ESPECÍFICO
+    $resultado = $objhorario->eliminar($id);
+    
+    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado la disponibilidad', '/E-VITALIX/admin/horarios');
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la disponibilidad');
+    }
+    exit();
+
 }
