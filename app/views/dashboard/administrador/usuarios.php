@@ -46,19 +46,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             
                             <thead>
                                 <tr>
-                                    <th style="width: 40px;">
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
+                                    
                                     
                                     <th>
                                         Correo
                                         <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                     </th>
                                     <th>rol</th>
-                                    <th>
-                                        
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
+                                   
                                     <th>Estado</th>
                                     <th style="width: 80px;">Acciones</th>
                                 </tr>
@@ -67,7 +62,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <?php if (!empty($datos)) :  ?>
                                 <?php foreach ($datos as $usuario) : ?>
                                 <tr>
-                                    <td><input type="checkbox" class="form-check-input"></td>
+                                    
                                     
                                     <td><?=  $usuario['email'] ?></td>
                                     <td><?=  $usuario['rol'] ?></td>

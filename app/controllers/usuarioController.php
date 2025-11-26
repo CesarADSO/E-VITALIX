@@ -11,7 +11,7 @@ switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
-            // actualizarUsuario();
+            actualizarUsuario();
         } else {
             registrarUsuario();
         }
@@ -29,7 +29,7 @@ switch ($method) {
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
         if (isset($_GET['id'])) {
             // Esta función llena el formulario de editar con un solo usuario
-            // listarUsuario($_GET['id']);
+            listarUsuario($_GET['id']);
         } else {
             // Esta función llena toda la tabla de usuarios
            $datos = mostrarUsuario();
@@ -115,4 +115,50 @@ function mostrarUsuario()
     $usuario = $resultado->consultar();
 
     return $usuario;
+}
+
+function listarUsuario($id)
+{
+    $objUsuario = new Usuario();
+
+    $usuario = $objUsuario->listarUsuarioPorId($id);
+
+    return $usuario;
+}
+
+function actualizarUsuario()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'] ?? '';
+    $email = $_POST['correo'] ?? '';
+    $contrasena = $_POST['contrasena'] ?? '';
+    $estado = $_POST['estado'] ?? '';
+   
+    // Validamos los campos que son obligatorios
+       if  (empty($email) || empty($contrasena) || empty($estado)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $ObjUsuario = new Usuario();
+    $data = [
+        'id'=> $id,
+        'email' => $email,
+        'contrasena' => $contrasena,
+        'estado' => $estado
+       
+        // 'id_admin' => $id_admin
+    ];
+    // Enviamos la data al método "actualizar()" de la clase instanciada anteriormente "Consultorio()"
+    // Y esperamos una respuesta booleana del modelo
+    $resultado = $ObjUsuario->actualizar($data);
+
+    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado el Usuario', '/E-VITALIX/admin/usuarios');
+    } else {
+        mostrarSweetAlert('error', 'Error al actualizar', 'No se puedo actualizar el cUsuario. Intenta nuevamente');
+    }
+    exit();
 }

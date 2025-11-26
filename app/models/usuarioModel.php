@@ -51,4 +51,51 @@ class Usuario
             return [];
         }
     }
+
+
+    
+
+     public function listarUsuarioPorId($id)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $consulta = "SELECT * FROM usuarios WHERE id = :id LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en usuario::consultar->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function actualizar($data)
+    {
+        try {
+
+            $claveEncriptada = password_hash($data ['contrasena'], PASSWORD_DEFAULT);
+
+            $insertar = "UPDATE usuarios SET email=:email, contrasena=:contrasena, estado=:estado WHERE id=:id";
+
+            $resultado = $this->conexion->prepare($insertar);
+            $resultado->bindParam(':id', $data['id']);
+            $resultado->bindParam(':email', $data['email']);
+            $resultado->bindParam(':contrasena', $claveEncriptada);
+            $resultado->bindParam(':estado', $data['estado']);
+       
+
+            $resultado->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en actualizar::registrar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+
 }
