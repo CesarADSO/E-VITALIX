@@ -45,9 +45,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <table class="table-pacientes">
                             <thead>
                                 <tr>
-                                    <th style="width: 40px;">
-                                        <input type="checkbox" class="form-check-input">
-                                    </th>
                                     <th>Foto</th>
                                     <th>
                                         Nombres y Apellidos
@@ -66,7 +63,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <?php if (!empty($datos)) :  ?>
                                     <?php foreach ($datos as $paciente) : ?>
                                         <tr>
-                                            <td><input type="checkbox" class="form-check-input"></td>
                                             <td>
                                                 <img class="imgconsultorio"
                                                     src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>"
