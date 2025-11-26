@@ -54,38 +54,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-cambios-horario" method="POST">
                             <input type="hidden" name="id" value="<?= $horario['id'] ?>">
                             <input type="hidden" name="accion" value="actualizar">
-                            <div class="row">
-                                <!-- Especialista -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="especialista" class="form-label">Especialista</label>
-                                    <select class="form-select" name="idEspecialista" id="especialista" required>
-                                        <option value="<?= $horario['id_especialista'] ?>"><?= $horario['nombres'] ?> <?= $horario['apellidos'] ?></option>
-                                        <?php if (!empty($especialistas)) :?>
-                                            <?php foreach($especialistas as $especialista) :?>
-                                            <option value="<?= $especialista['id'] ?>"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></option>
-                                            <?php endforeach;?>
-                                        <?php else:?>
-                                            <option value="">No hay especialistas registrados</option>
-                                        <?php endif;?>
-                                    </select>
-                                </div>
-
-                                <!-- Consultorio -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="consultorio" class="form-label">Consultorio</label>
-                                    <select class="form-select" name="idConsultorio" id="consultorio" required>
-                                        <option value="<?= $horario['id_consultorio'] ?>"><?= $horario['nombre'] ?></option>
-                                        <!-- Los consultorios se cargarán desde la base de datos -->
-                                         <?php if (!empty($consultorios)) :?>
-                                            <?php foreach($consultorios as $consultorio) :?>
-                                            <option value="<?= $consultorio['id'] ?>"><?= $consultorio['nombre'] ?></option>
-                                            <?php endforeach;?>
-                                        <?php else: ?>
-                                            <option value="">No hay consultorios registrados</option>
-                                        <?php endif;?>
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="row">
                                 <!-- Día de la Semana -->

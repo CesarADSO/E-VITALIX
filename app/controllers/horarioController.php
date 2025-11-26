@@ -13,7 +13,10 @@ switch ($method) {
         if ($accion === 'actualizar') {
             actualizarHorario();
         }
-        registrarHorario();
+        else {
+            registrarHorario();
+        }
+        
         break;
     case 'GET':
         if (isset($_GET['id'])) {
@@ -97,8 +100,6 @@ function actualizarHorario()
 {
     // GUARDAMOS EN VARIABLES LO QUE VIENE DE LOS NAME DE LOS CAMPOS A TRAVÉS DEL METHOD POST
     $id = $_POST['id'] ?? '';
-    $idEspecialista = $_POST['idEspecialista'] ?? '';
-    $idConsultorio = $_POST['idConsultorio'] ?? '';
     $diaSemana = $_POST['dia_semana'] ?? '';
     $capacidadCitas = $_POST['capacidad_citas'] ?? '';
     $horaInicio = $_POST['hora_inicio'] ?? '';
@@ -108,7 +109,7 @@ function actualizarHorario()
     $estado = $_POST['estado'] ?? '';
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($idEspecialista) || empty($idConsultorio) || empty($diaSemana) || empty($capacidadCitas) || empty($horaInicio) || empty($horaFin)) {
+    if (empty($diaSemana) || empty($capacidadCitas) || empty($horaInicio) || empty($horaFin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -119,8 +120,6 @@ function actualizarHorario()
     // CREAMOS LA VARIABLE DATA PARA INGRESAR TODOS LOS DATOS QUE VIENEN A TRAVÉS DE METHOD POST
     $data = [
         'id' => $id,
-        'idEspecialista' => $idEspecialista,
-        'idConsultorio' => $idConsultorio,
         'diaSemana' => $diaSemana,
         'capacidadCitas' => $capacidadCitas,
         'horaInicio' => $horaInicio,
@@ -136,9 +135,9 @@ function actualizarHorario()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Se ha registrado una nueva disponibilidad', '/E-VITALIX/admin/horarios');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha Modificado la disponibilidad', '/E-VITALIX/admin/horarios');
     } else {
-        mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar una nueva disponibilidad');
+        mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar la disponibilidad');
     }
     exit();
 }
