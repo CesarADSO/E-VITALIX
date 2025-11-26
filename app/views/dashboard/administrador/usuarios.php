@@ -1,4 +1,10 @@
+<?php
+require_once BASE_PATH .'/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/controllers/usuarioController.php';
 
+$datos = mostrarUsuario();
+
+?>
 
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
