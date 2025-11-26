@@ -70,10 +70,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="step" data-step="4">
                                     <span class="step-number">4</span>
-                                    <span class="step-label">Horario</span>
-                                </div>
-                                <div class="step" data-step="5">
-                                    <span class="step-number">5</span>
                                     <span class="step-label">Confirmación</span>
                                 </div>
                             </div>
@@ -177,67 +173,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                             </div>
 
-                            <!-- Paso 4: Horario de Trabajo -->
+
+                            <!-- Paso 4: Confirmación -->
                             <div class="wizard-step" id="step4">
-                                <div class="mb-3">
-                                    <label for="consultorio" class="form-label">Consultorio</label>
-                                    <select name="consultorio" class="form-select" id="consultorio">
-                                        <option value="">Seleccionar consultorio</option>
-                                        <?php if(!empty($consultorios)) :?>
-                                        <?php foreach($consultorios as $consultorio) :?>
-                                        <option value="<?= $consultorio['id'] ?>"><?= $consultorio['nombre'] ?></option>
-                                        <?php endforeach;?>
-                                        <?php else :?>
-                                            <option value="">No hay consultorios registrados</option>
-                                        <?php endif;?>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="dia_semana" class="form-label">Día de la Semana</label>
-                                    <select name="dia" class="form-select" id="dia_semana">
-                                        <option value="">Seleccionar día</option>
-                                        <option value="lunes">Lunes</option>
-                                        <option value="martes">Martes</option>
-                                        <option value="miercoles">Miércoles</option>
-                                        <option value="jueves">Jueves</option>
-                                        <option value="viernes">Viernes</option>
-                                        <option value="sabado">Sábado</option>
-                                        <option value="domingo">Domingo</option>
-                                    </select>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="hora_inicio" class="form-label">Hora Inicio</label>
-                                        <input type="time" name="horaInicio" class="form-control" id="hora_inicio">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="hora_fin" class="form-label">Hora Fin</label>
-                                        <input type="time" name="horaFin" class="form-control" id="hora_fin">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="hora_descanso_inicio" class="form-label">Inicio Descanso</label>
-                                        <input type="time" name="inicioDescanso" class="form-control" id="hora_descanso_inicio">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="hora_descanso_fin" class="form-label">Fin Descanso</label>
-                                        <input type="time" name="finDescanso" class="form-control" id="hora_descanso_fin">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="capacidad_citas" class="form-label">Capacidad Máxima de Citas</label>
-                                    <input type="number" name="capacidad" class="form-control" id="capacidad_citas" placeholder="Ej: 20" min="1">
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="5">Siguiente</button>
-                                </div>
-                            </div>
-
-                            <!-- Paso 5: Confirmación -->
-                            <div class="wizard-step" id="step5">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -254,16 +192,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <p><strong>Email:</strong> <span id="resumen-email"></span></p>
                                             <p><strong>Especialidad:</strong> <span id="resumen-especialidad"></span></p>
                                             <p><strong>Registro Profesional:</strong> <span id="resumen-registro-profesional"></span></p>
-                                            <p><strong>Consultorio:</strong> <span id="resumen-consultorio"></span></p>
-                                            <p><strong>Día Trabajo:</strong> <span id="resumen-dia-semana"></span></p>
-                                            <p><strong>Horario:</strong> <span id="resumen-horario"></span></p>
-                                            <p><strong>Descanso:</strong> <span id="resumen-descanso"></span></p>
-                                            <p><strong>Capacidad Citas:</strong> <span id="resumen-capacidad-citas"></span></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
                                     <button type="submit" class="btn boton">Registrar Especialista</button>
                                 </div>
                             </div>
@@ -297,7 +230,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     nextStep.classList.add('active');
 
                     // Si es el último paso, actualizar resumen
-                    if (nextStepId === '5') {
+                    if (nextStepId === '4') {
                         updateSummary();
                     }
                 });
@@ -345,13 +278,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 // Profesional
                 document.getElementById('resumen-especialidad').textContent = document.getElementById('especialidad').value || 'No ingresado';
                 document.getElementById('resumen-registro-profesional').textContent = document.getElementById('registro_profesional').value || 'No ingresado';
-
-                // Horario
-                document.getElementById('resumen-consultorio').textContent = document.getElementById('consultorio').value || 'No ingresado';
-                document.getElementById('resumen-dia-semana').textContent = document.getElementById('dia_semana').options[document.getElementById('dia_semana').selectedIndex].text || 'No seleccionado';
-                document.getElementById('resumen-horario').textContent = (document.getElementById('hora_inicio').value || '--') + ' a ' + (document.getElementById('hora_fin').value || '--');
-                document.getElementById('resumen-descanso').textContent = (document.getElementById('hora_descanso_inicio').value || '--') + ' a ' + (document.getElementById('hora_descanso_fin').value || '--');
-                document.getElementById('resumen-capacidad-citas').textContent = document.getElementById('capacidad_citas').value || 'No ingresado';
             }
         });
     </script>

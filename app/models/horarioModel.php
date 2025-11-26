@@ -54,8 +54,75 @@
                 return $resultado->fetchAll();
 
             } catch (PDOException $e) {
-                error_log('Error en Horario::registrar->' . $e->getMessage());
+                error_log('Error en Horario::mostrar->' . $e->getMessage());
                 return [];
+            }
+        }
+
+        public function listarHorarioPorId($id) {
+            // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
+            try {
+                
+                // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL QUE VAMOS A UTILIZAR
+                $consultar = "SELECT disponibilidad_medico.*, especialistas.id AS id_especialista, especialistas.nombres, especialistas.apellidos, consultorios.id AS id_consultorio, consultorios.nombre FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id WHERE disponibilidad_medico.id = :id";
+
+                $resultado = $this->conexion->prepare($consultar);
+
+                $resultado->bindParam(':id', $id);
+
+                $resultado->execute();
+
+                return $resultado->fetch();
+
+
+            } catch (PDOException $e) {
+                error_log('Error en Horario::listarHorariosPorId->' . $e->getMessage());
+                return [];
+            }
+        }
+
+        public function actualizar($data) {
+            // CREAMOS EL TRY CATCH PARA MANEJAR ERRORES
+            try {
+                
+                // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A UTILIZAR
+                $actualizar = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado WHERE id = :id";
+
+                $resultado = $this->conexion->prepare($actualizar);
+                $resultado->bindParam(':id', $data['id']);
+                $resultado->bindParam(':diaSemana', $data['diaSemana']);
+                $resultado->bindParam(':horaInicio', $data['horaInicio']);
+                $resultado->bindParam(':horaFin', $data['horaFin']);
+                $resultado->bindParam(':pausaInicio', $data['inicioDescanso']);
+                $resultado->bindParam(':pausaFin', $data['finDescanso']);
+                $resultado->bindParam(':capacidadMaxima', $data['capacidadCitas']);
+                $resultado->bindParam(':estado', $data['estado']);
+
+                $resultado->execute();
+
+                return true;
+            } catch (PDOException $e) {
+                error_log('Error en Horario::actualizar->' . $e->getMessage());
+                return false;
+            }
+        }
+
+        public function eliminar($id) {
+            try {
+                
+                $eliminar = "DELETE FROM disponibilidad_medico WHERE id = :id";
+
+                $resultado = $this->conexion->prepare($eliminar);
+
+                $resultado->bindParam(':id', $id);
+
+                $resultado->execute();
+
+                return true;
+
+            } catch (PDOException $e) {
+                error_log('Error en Horario::eliminar->' . $e->getMessage());
+                return false;
             }
         }
     }

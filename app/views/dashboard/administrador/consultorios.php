@@ -43,8 +43,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     </div>
 
                     <!-- Consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4 cont-tabla-consultorios">
-                        <a class="btn btn-primary next-step btn-reporte" href="<?= BASE_URL ?>/admin/generar-reporte-consultorios" target="_blank">generar reporte pdf</a>
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <a href="<?= BASE_URL ?>/admin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
                         <table class="table-pacientes">
                             
                             <thead>
