@@ -36,7 +36,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <div>
                             <button class="btn btn-link text-primary p-0"
                                 style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
+                                ← Todos (<?= count($datos) ?>)
                             </button>
                         </div>
                         <a href="<?= BASE_URL ?>/admin/registrar-consultorio" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
@@ -44,7 +44,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <a href="<?= BASE_URL ?>/admin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
+                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
                         <table class="table-pacientes">
                             <thead>
                                 <tr>
