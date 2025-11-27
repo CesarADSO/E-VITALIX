@@ -12,8 +12,6 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarUsuario();
-        } else {
-            registrarUsuario();
         }
         break;
 
@@ -51,59 +49,6 @@ switch ($method) {
         http_response_code(405);
         echo "Método no permitido";
         break;
-}
-
-function registrarUsuario()
-{
-    // Capturamos en variables los datos desde el formulario a través del method posh y los name de los campos
- 
-   
-    $email = $_POST['correo'] ?? '';
-    $contrasena = $_POST['contrasena'] ?? '';
-    $rol = $_POST['rol'] ?? '';
-   
-    // Validamos los campos que son obligatorios
-    if  (empty($email) || empty($contrasena) || empty($rol)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
-        exit();
-    }
-
-    // CAPTURAMOS EL ID DEL USUARIO QUE INICIA SESIÓN PARA GUARDARLO SOLO SI ES NECESARIO
-    // session_start();
-    // $id_admin = $_SESSION['user']['id'];
-
-    //POO - INSTANCIAMOS LA CLASE
-    // LÓGICA PARA CARGAR IMÁGENES
-
-    // $ruta_foto = null;
-
-    // VALIDAMOS SI SE ENVIÓ O NO LA FOTO DESDE EL FORMULARIO
-    // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
-
-  
-
-
-    $ObjUsuario = new Usuario();
-    $data = [
-        
-        'email' => $email,
-        'contrasena' => $contrasena,
-        'id_rol' => $rol
-       
-        // 'id_admin' => $id_admin
-    ];
-    // Enviamos la data al método "registrar()" de la clase instanciada anteriormente "Consultorio()"
-    // Y esperamos una respuesta booleana del modelo
-    $resultado = $ObjUsuario->registrar($data);
-
-    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
-    // Si es falsa notificamos y redirecciomamos
-    if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio',  '/E-VITALIX/admin/usuarios');
-    } else {
-        mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el consultorio. Intenta nuevamente');
-    }
-    exit();
 }
 
 function mostrarUsuario()
