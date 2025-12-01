@@ -126,6 +126,7 @@ class Paciente
                             p.fecha_nacimiento,
                             p.genero,
                             p.telefono,
+                            p.ciudad,
                             p.direccion,
                             p.foto,
                             p.eps,
