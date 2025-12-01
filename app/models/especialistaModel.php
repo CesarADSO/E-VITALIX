@@ -22,7 +22,7 @@ class Especialista
         try {
 
             // ENCRIPTAMOS LA CLAVE 
-            $claveEncriptada = password_hash($data['clave'], PASSWORD_DEFAULT);
+            $claveEncriptada = password_hash($data['numeroDocumento'], PASSWORD_DEFAULT);
 
             // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL
             $registrarUsuario = "INSERT INTO usuarios(email, contrasena, id_rol, estado) VALUES (:email, :clave, 3, 'Activo')";

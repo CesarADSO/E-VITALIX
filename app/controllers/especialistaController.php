@@ -58,13 +58,12 @@ function registrarEspecialista()
     $telefono = $_POST['telefono'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $email = $_POST['correo'] ?? '';
-    $clave = $_POST['clave'] ?? '';
     $especialidad = $_POST['especialidad'] ?? '';
     $registroProfesional = $_POST['registro'] ?? '';
 
 
     // VALIDAMOS LOS DATOS QUE SON OBLIGATORIOS
-    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($clave) || empty($especialidad) || empty($registroProfesional)) {
+    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($especialidad) || empty($registroProfesional)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -131,7 +130,6 @@ function registrarEspecialista()
         'direccion' => $direccion,
         'foto' => $ruta_foto,
         'email' => $email,
-        'clave' => $clave,
         'especialidad' => $especialidad,
         'registroProfesional' => $registroProfesional
     ];
