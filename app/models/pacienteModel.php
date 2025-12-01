@@ -17,13 +17,16 @@ class Paciente
             // Iniciar transacción
             $this->conexion->beginTransaction();
 
+            // HASEAR LA CONTRASEÑA
+            $claveEncriptada = password_hash($data['numero_documento'], PASSWORD_DEFAULT);
+
             // 1. Insertar usuario
             $insertarUsuario = "INSERT INTO usuarios(email, contrasena, id_rol, estado) 
                                VALUES(:email, :contrasena, :id_rol, 'Activo')";
 
             $resultadoUsuario = $this->conexion->prepare($insertarUsuario);
             $resultadoUsuario->bindParam(':email', $data['email']);
-            $resultadoUsuario->bindParam(':contrasena', $data['contrasena']);
+            $resultadoUsuario->bindParam(':contrasena', $claveEncriptada);
             $resultadoUsuario->bindParam(':id_rol', $data['id_rol']);
 
             $resultadoUsuario->execute();
