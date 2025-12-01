@@ -33,7 +33,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <div>
                             <button class="btn btn-link text-primary p-0"
                                 style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
+                                ← Todos (<?= count($datos) ?>)
                             </button>
                         </div>
                     </div>
