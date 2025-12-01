@@ -109,34 +109,28 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label for="numero_documento" class="form-label">Número de Documento <span class="text-danger">*</span></label>
-                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" value="<?= $paciente['numero_documento'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
                                         <label for="nombres" class="form-label">Nombres <span class="text-danger">*</span></label>
                                         <input type="text" name="nombres" class="form-control" id="nombres" value="<?= $paciente['nombres'] ?>" required>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="apellidos" class="form-label">Apellidos <span class="text-danger">*</span></label>
                                         <input type="text" name="apellidos" class="form-control" id="apellidos" value="<?= $paciente['apellidos'] ?>" required>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento <span class="text-danger">*</span></label>
                                         <input type="date" name="nacimiento" class="form-control" id="fecha_nacimiento" value="<?= $paciente['fecha_nacimiento'] ?>" required>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="genero" class="form-label">Género <span class="text-danger">*</span></label>
-                                        <select name="genero" class="form-select" id="genero" required>
-                                            <option value="">Seleccionar género</option>
-                                            <option value="Masculino" <?= $paciente['genero'] == 'Masculino' ? 'selected' : '' ?>>Masculino</option>
-                                            <option value="Femenino" <?= $paciente['genero'] == 'Femenino' ? 'selected' : '' ?>>Femenino</option>
-                                            <option value="Otro" <?= $paciente['genero'] == 'Otro' ? 'selected' : '' ?>>Otro</option>
-                                        </select>
-                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="genero" class="form-label">Género <span class="text-danger">*</span></label>
+                                    <select name="genero" class="form-select" id="genero" required>
+                                        <option value="">Seleccionar género</option>
+                                        <option value="Masculino" <?= $paciente['genero'] == 'Masculino' ? 'selected' : '' ?>>Masculino</option>
+                                        <option value="Femenino" <?= $paciente['genero'] == 'Femenino' ? 'selected' : '' ?>>Femenino</option>
+                                        <option value="Otro" <?= $paciente['genero'] == 'Otro' ? 'selected' : '' ?>>Otro</option>
+                                    </select>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -145,9 +139,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Paso 2: Contacto -->
                             <div class="wizard-step" id="step2">
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $paciente['telefono'] ?>" required>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $paciente['telefono'] ?>" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="ciudad" class="form-label">Ciudad <span class="text-danger">*</span></label>
+                                        <input type="text" name="ciudad" class="form-control" id="ciudad" value="<?= $paciente['ciudad'] ?>" required>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label">Dirección <span class="text-danger">*</span></label>
@@ -213,13 +213,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Paso 4: Contacto de Emergencia -->
                             <div class="wizard-step" id="step4">
-                                <div class="mb-3">
-                                    <label for="nombre_contacto" class="form-label">Nombre Completo del Contacto</label>
-                                    <input type="text" name="nombreContacto" class="form-control" id="nombre_contacto" value="<?= $paciente['nombre_contacto_emergencia'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
-                                    <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" value="<?= $paciente['telefono_contacto_emergencia'] ?>">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="nombre_contacto" class="form-label">Nombre Completo del Contacto</label>
+                                        <input type="text" name="nombreContacto" class="form-control" id="nombre_contacto" value="<?= $paciente['nombre_contacto_emergencia'] ?>">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
+                                        <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" value="<?= $paciente['telefono_contacto_emergencia'] ?>">
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="direccion_contacto" class="form-label">Dirección del Contacto</label>
@@ -239,7 +241,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <div class="card-body">
                                             <h6 class="card-subtitle mb-3 text-primary">Información Personal</h6>
                                             <p><strong>Tipo Documento:</strong> <span id="resumen-tipo-documento"></span></p>
-                                            <p><strong>Número Documento:</strong> <span id="resumen-numero-documento"></span></p>
                                             <p><strong>Nombres:</strong> <span id="resumen-nombres"></span></p>
                                             <p><strong>Apellidos:</strong> <span id="resumen-apellidos"></span></p>
                                             <p><strong>Fecha Nacimiento:</strong> <span id="resumen-fecha-nacimiento"></span></p>
@@ -248,6 +249,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <hr>
                                             <h6 class="card-subtitle mb-3 text-primary">Contacto</h6>
                                             <p><strong>Teléfono:</strong> <span id="resumen-telefono"></span></p>
+                                            <p><strong>Ciudad:</strong> <span id="resumen-ciudad"></span></p>
                                             <p><strong>Dirección:</strong> <span id="resumen-direccion"></span></p>
                                             <p><strong>Email:</strong> <span id="resumen-email"></span></p>
 
@@ -334,7 +336,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             function updateSummary() {
                 const tipoDocSelect = document.getElementById('tipo_documento');
                 document.getElementById('resumen-tipo-documento').textContent = tipoDocSelect.options[tipoDocSelect.selectedIndex]?.text || 'No seleccionado';
-                document.getElementById('resumen-numero-documento').textContent = document.getElementById('numero_documento').value || 'No ingresado';
                 document.getElementById('resumen-nombres').textContent = document.getElementById('nombres').value || 'No ingresado';
                 document.getElementById('resumen-apellidos').textContent = document.getElementById('apellidos').value || 'No ingresado';
                 document.getElementById('resumen-fecha-nacimiento').textContent = document.getElementById('fecha_nacimiento').value || 'No ingresado';
@@ -343,6 +344,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 document.getElementById('resumen-genero').textContent = generoSelect.options[generoSelect.selectedIndex]?.text || 'No seleccionado';
 
                 document.getElementById('resumen-telefono').textContent = document.getElementById('telefono').value || 'No ingresado';
+                document.getElementById('resumen-ciudad').textContent = document.getElementById('ciudad').value || 'No ingresado';
                 document.getElementById('resumen-direccion').textContent = document.getElementById('direccion').value || 'No ingresado';
                 document.getElementById('resumen-email').textContent = document.getElementById('email').value || 'No ingresado';
 
