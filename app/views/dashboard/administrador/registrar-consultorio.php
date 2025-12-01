@@ -63,20 +63,20 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 1: Información Básica -->
                             <div class="wizard-step active" id="step1">
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingresa el nombre del consultorio">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
-                                </div>
-                                <div class="mb-3">
                                     <label for="foto" class="form-label">Foto</label>
                                     <input type="file" name="foto" class="form-control" id="foto" accept=".jpg .png .svg">
                                 </div>
                                 <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingresa el nombre del consultorio">
+                                </div>
+                                <div class="mb-3">
                                     <label for="ciudad" class="form-label">Ciudad</label>
                                     <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -110,10 +110,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="horario_atencion" class="form-label">Horario de Atención</label>
                                     <textarea class="form-control" name="horario" id="horario_atencion" rows="3" placeholder="Ej: Lunes a Viernes: 8:00 AM - 6:00 PM, Sábados: 8:00 AM - 12:00 PM"></textarea>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="servicios_adicionales" class="form-label">Servicios Adicionales</label>
-                                    <textarea class="form-control" name="adicionales" id="servicios_adicionales" rows="3" placeholder=" (Opcional) Ej: Laboratorio clínico, Rayos X, Ecografías"></textarea>
-                                </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="4">Siguiente</button>
@@ -134,7 +130,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <p><strong>Correo:</strong> <span id="resumen-correo"></span></p>
                                             <p><strong>Especialidades:</strong> <span id="resumen-especialidades"></span></p>
                                             <p><strong>Horario:</strong> <span id="resumen-horario"></span></p>
-                                            <p><strong>Servicios adicionales:</strong> <span id="resumen-servicios"></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +210,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 document.getElementById('resumen-especialidades').textContent = document.getElementById('especialidades').value || 'No ingresado';
 
                 document.getElementById('resumen-horario').textContent = document.getElementById('horario_atencion').value || 'No ingresado';
-                document.getElementById('resumen-servicios').textContent = document.getElementById('servicios_adicionales').value || 'No ingresado';
             }
 
             
