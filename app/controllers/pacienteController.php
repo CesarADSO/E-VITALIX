@@ -44,6 +44,7 @@ function registrarPaciente()
     $fecha_nacimiento = $_POST['nacimiento'] ?? '';
     $genero = $_POST['genero'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
+    $ciudad = $_POST['ciudad'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $email = $_POST['correo'] ?? '';
     $eps = $_POST['eps'] ?? '';
@@ -57,7 +58,7 @@ function registrarPaciente()
     // Validamos los campos obligatorios
     if (
         empty($nombres) || empty($apellidos) || empty($id_tipo_documento) ||
-        empty($numero_documento) || empty($fecha_nacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email)
+        empty($numero_documento) || empty($fecha_nacimiento) || empty($genero) || empty($telefono) || empty($ciudad) || empty($direccion) || empty($email)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
@@ -103,6 +104,7 @@ function registrarPaciente()
         'fecha_nacimiento' => $fecha_nacimiento,
         'genero' => $genero,
         'telefono' => $telefono,
+        'ciudad' => $ciudad,
         'direccion' => $direccion,
         'foto' => $ruta_foto,
         'email' => $email,

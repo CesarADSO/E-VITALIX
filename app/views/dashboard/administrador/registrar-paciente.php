@@ -140,20 +140,24 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" required>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="direccion" class="form-label">Dirección <span class="text-danger">*</span></label>
-                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" required>
+                                        <label for="ciudad" class="form-label">Ciudad <span class="text-danger">*</span></label>
+                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad" required>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="direccion" class="form-label">Dirección <span class="text-danger">*</span></label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" required>
+                                    </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="foto" class="form-label">Foto</label>
                                         <input type="file" name="foto" class="form-control" id="foto" accept=".jpg,.png,.jpeg">
                                         <div class="form-text">Formatos permitidos: jpg, png, jpeg. Tamaño máximo: 2MB</div>
                                     </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico" required>
-                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico" required>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>

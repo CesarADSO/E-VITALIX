@@ -43,7 +43,8 @@ class Paciente
                 numero_documento, 
                 fecha_nacimiento, 
                 genero, 
-                telefono, 
+                telefono,
+                ciudad,
                 direccion, 
                 foto, 
                 eps, 
@@ -61,7 +62,8 @@ class Paciente
                 :numero_documento, 
                 :fecha_nacimiento, 
                 :genero, 
-                :telefono, 
+                :telefono,
+                :ciudad,
                 :direccion, 
                 :foto, 
                 :eps, 
@@ -82,6 +84,7 @@ class Paciente
             $resultadoPaciente->bindParam(':fecha_nacimiento', $data['fecha_nacimiento']);
             $resultadoPaciente->bindParam(':genero', $data['genero']);
             $resultadoPaciente->bindParam(':telefono', $data['telefono']);
+            $resultadoPaciente->bindParam(':ciudad', $data['ciudad']);
             $resultadoPaciente->bindParam(':direccion', $data['direccion']);
             $resultadoPaciente->bindParam(':foto', $data['foto']);
             $resultadoPaciente->bindParam(':eps', $data['eps']);
