@@ -113,24 +113,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <input type="text" name="nombres" class="form-control" id="nombres" value="<?= $paciente['nombres'] ?>" required>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="apellidos" class="form-label">Apellidos <span class="text-danger">*</span></label>
-                                        <input type="text" name="apellidos" class="form-control" id="apellidos" value="<?= $paciente['apellidos'] ?>" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento <span class="text-danger">*</span></label>
-                                        <input type="date" name="nacimiento" class="form-control" id="fecha_nacimiento" value="<?= $paciente['fecha_nacimiento'] ?>" required>
-                                    </div>
-                                </div>
                                 <div class="mb-3">
-                                    <label for="genero" class="form-label">Género <span class="text-danger">*</span></label>
-                                    <select name="genero" class="form-select" id="genero" required>
-                                        <option value="">Seleccionar género</option>
-                                        <option value="Masculino" <?= $paciente['genero'] == 'Masculino' ? 'selected' : '' ?>>Masculino</option>
-                                        <option value="Femenino" <?= $paciente['genero'] == 'Femenino' ? 'selected' : '' ?>>Femenino</option>
-                                        <option value="Otro" <?= $paciente['genero'] == 'Otro' ? 'selected' : '' ?>>Otro</option>
-                                    </select>
+                                    <label for="apellidos" class="form-label">Apellidos <span class="text-danger">*</span></label>
+                                    <input type="text" name="apellidos" class="form-control" id="apellidos" value="<?= $paciente['apellidos'] ?>" required>
+                                </div>
+                                <div class="alert alert-info" role="alert">
+                                    <i class="bi bi-info-circle"></i> El número de documento, la fecha de nacimiento y el género no se pueden actualizar.
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -158,7 +146,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <input type="email" name="correo" class="form-control" id="email" value="<?= $paciente['email'] ?>" required>
                                 </div>
                                 <div class="alert alert-info" role="alert">
-                                    <i class="bi bi-info-circle"></i> La foto y contraseña no se pueden actualizar desde aquí.
+                                    <i class="bi bi-info-circle"></i> La foto y contraseña no se pueden actualizar.
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
@@ -338,10 +326,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 document.getElementById('resumen-tipo-documento').textContent = tipoDocSelect.options[tipoDocSelect.selectedIndex]?.text || 'No seleccionado';
                 document.getElementById('resumen-nombres').textContent = document.getElementById('nombres').value || 'No ingresado';
                 document.getElementById('resumen-apellidos').textContent = document.getElementById('apellidos').value || 'No ingresado';
-                document.getElementById('resumen-fecha-nacimiento').textContent = document.getElementById('fecha_nacimiento').value || 'No ingresado';
-
-                const generoSelect = document.getElementById('genero');
-                document.getElementById('resumen-genero').textContent = generoSelect.options[generoSelect.selectedIndex]?.text || 'No seleccionado';
 
                 document.getElementById('resumen-telefono').textContent = document.getElementById('telefono').value || 'No ingresado';
                 document.getElementById('resumen-ciudad').textContent = document.getElementById('ciudad').value || 'No ingresado';
