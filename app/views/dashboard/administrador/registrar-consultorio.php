@@ -103,21 +103,21 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <label class="form-label" for="especialidades">Especialidades (Selecciona una o varias)</label>
-                                    <div class="form-check">
+                                    <div class="form-check check-especialidad">
                                         <input class="form-check-input" type="checkbox" id="dermatologia" name="especialidades[]" value="Dermatologia">
-                                        <label for="dermatologia" class="form-check-label">Dermatología</label>
+                                        <label for="dermatologia" class="form-check-label mi-label">Dermatología</label>
                                     </div>
-                                    <div class="form-check">
+                                    <div class="form-check check-especialidad">
                                         <input class="form-check-input" type="checkbox" id="urologia" name="especialidades[]" value="urologia">
-                                        <label for="urologia" class="form-check-label">Urología</label>
+                                        <label for="urologia" class="form-check-label mi-label">Urología</label>
                                     </div>
-                                    <div class="form-check">
+                                    <div class="form-check check-especialidad">
                                         <input class="form-check-input" type="checkbox" id="cardiologia" name="especialidades[]" value="Cardiologia">
-                                        <label for="cardiologia" class="form-check-label">Cardiología</label>
+                                        <label for="cardiologia" class="form-check-label mi-label">Cardiología</label>
                                     </div>
-                                    <div class="form-check">
+                                    <div class="form-check check-especialidad">
                                         <input class="form-check-input" type="checkbox" id="medicina-general" name="especialidades[]" value="Medicina_general">
-                                        <label for="medicinaGeneral" class="form-check-label">Medicina General</label>
+                                        <label for="medicinaGeneral" class="form-check-label mi-label">Medicina General</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">

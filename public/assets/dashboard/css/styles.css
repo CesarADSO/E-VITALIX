@@ -632,3 +632,7 @@ body {
 .boton-reporte {
     margin-bottom: 20px;
 }
+
+.check-especialidad .mi-label {
+    color: var(--color-primario);
+}
