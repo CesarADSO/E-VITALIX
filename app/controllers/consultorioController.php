@@ -59,11 +59,13 @@ function registrarConsultorio()
     $telefono = $_POST['telefono'] ?? '';
     $correo_contacto = $_POST['correo'] ?? '';
     $especialidades = $_POST['especialidades'] ?? [];
-    $horario_atencion = $_POST['horario'] ?? '';
+    $dias = $_POST['dias'] ?? [];
+    $hora_apertura = $_POST['hora_apertura'] ?? '';
+    $hora_cierre = $_POST['hora_cierre'] ?? '';
     $servicios_adicionales = $_POST['adicionales'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($horario_atencion)) {
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -101,7 +103,7 @@ function registrarConsultorio()
             mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
             exit();
         }
-        
+
         // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
         $ruta_foto = uniqid('consultorio_') . '.' . $ext;
 
@@ -110,11 +112,19 @@ function registrarConsultorio()
 
         // MOVEMOS EL ARCHIVO AL DESTINO
         move_uploaded_file($file['tmp_name'], $destino);
-
     } else {
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
     }
 
+    $horario_atencion = [
+        'dias' => $dias,
+        'hora_apertura' => $hora_apertura,
+        'hora_cierre' => $hora_cierre
+    ];
+
+    // Convertimos el arreglo de horario a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
+    // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).
+    $horario_atencion_json = json_encode($horario_atencion, JSON_UNESCAPED_UNICODE);
 
     $ObjConsultorio = new Consultorio();
     $data = [
@@ -125,7 +135,7 @@ function registrarConsultorio()
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
         'especialidades' => $especialidades,
-        'horario_atencion' => $horario_atencion,
+        'horario_atencion' => $horario_atencion_json,
         'servicios_adicionales' => $servicios_adicionales
         // 'id_admin' => $id_admin
     ];

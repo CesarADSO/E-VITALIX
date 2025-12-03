@@ -13,7 +13,7 @@ class Consultorio
     public function registrar($data)
     {
         try {
-            $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, especialidades, horario_atencion, servicios_adicionales, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :especialidades, :horario_atencion, :servicios_adicionales, 'Activo')";
+            $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, especialidades, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :especialidades, :horario_atencion, 'Activo')";
 
             // Convertimos el arreglo de especialidades en un texto JSON
             // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
@@ -30,7 +30,6 @@ class Consultorio
             // Esto permite guardarlo correctamente en la base de datos como un string
             $resultado->bindParam(':especialidades', $especialidades_json);
             $resultado->bindParam(':horario_atencion', $data['horario_atencion']);
-            $resultado->bindParam(':servicios_adicionales', $data['servicios_adicionales']);
 
             return $resultado->execute();
         } catch (PDOException $e) {
