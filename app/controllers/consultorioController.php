@@ -58,7 +58,7 @@ function registrarConsultorio()
     $ciudad = $_POST['ciudad'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $correo_contacto = $_POST['correo'] ?? '';
-    $especialidades = $_POST['especialidades'] ?? '';
+    $especialidades = $_POST['especialidades'] ?? [];
     $horario_atencion = $_POST['horario'] ?? '';
     $servicios_adicionales = $_POST['adicionales'] ?? '';
 

@@ -15,6 +15,10 @@ class Consultorio
         try {
             $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, especialidades, horario_atencion, servicios_adicionales, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :especialidades, :horario_atencion, :servicios_adicionales, 'Activo')";
 
+            // Convertimos el arreglo de especialidades en un texto JSON
+            // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
+            $especialidades_json = json_encode($data['especialidades']);
+
             $resultado = $this->conexion->prepare($insertar);
             $resultado->bindParam(':nombre', $data['nombre']);
             $resultado->bindParam(':direccion', $data['direccion']);
@@ -22,7 +26,9 @@ class Consultorio
             $resultado->bindParam(':ciudad', $data['ciudad']);
             $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':correo_contacto', $data['correo_contacto']);
-            $resultado->bindParam(':especialidades', $data['especialidades']);
+            // Enlazamos ese texto JSON al parámetro :especialidades de la consulta SQL
+            // Esto permite guardarlo correctamente en la base de datos como un string
+            $resultado->bindParam(':especialidades', $especialidades_json);
             $resultado->bindParam(':horario_atencion', $data['horario_atencion']);
             $resultado->bindParam(':servicios_adicionales', $data['servicios_adicionales']);
 
@@ -96,7 +102,8 @@ class Consultorio
         }
     }
 
-    public function eliminar($id) {
+    public function eliminar($id)
+    {
         try {
             $eliminar = "DELETE FROM consultorios WHERE id = :id";
             $resultado = $this->conexion->prepare($eliminar);
