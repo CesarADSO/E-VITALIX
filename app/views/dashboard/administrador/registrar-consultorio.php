@@ -102,9 +102,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 3: Servicios -->
                             <div class="wizard-step" id="step3">
                                 <div class="mb-3">
-                                    <label for="especialidades" class="form-label">Especialidades</label>
-                                    <textarea class="form-control" name="especialidades" id="especialidades" rows="3" placeholder="Ej: Medicina General, Pediatría, Cardiología, Dermatología"></textarea>
-                                    <div class="form-text">Separa las especialidades con comas</div>
+                                    <label class="form-label" for="especialidades">Especialidades</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="dermatologia" name="dermatologia">
+                                        <label for="dermatologia" class="form-check-label">Dermatología</label>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="horario_atencion" class="form-label">Horario de Atención</label>
@@ -212,7 +214,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 document.getElementById('resumen-horario').textContent = document.getElementById('horario_atencion').value || 'No ingresado';
             }
 
-            
+
         });
     </script>
 
