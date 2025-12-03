@@ -36,15 +36,15 @@ $perfil = mostrarPerfilAdmin($id);
                         <span>Dashboard</span>
                     </a>
                     <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
-                        <i class="bi bi-people-fill"></i>
+                        <i class="fa-solid fa-hospital-user"></i>
                         <span>Pacientes</span>
                     </a>
                     <a class="nav-item" href="<?= BASE_URL ?>/admin/consultorios">
-                        <i class="bi bi-building"></i>
+                        <i class="bi bi-hospital"></i>
                         <span>Consultorios</span>
                     </a>
                     <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
-                        <i class="bi bi-person-badge"></i>
+                        <i class="fa-solid fa-user-doctor"></i>
                         <span>Profesionales</span>
                     </a>
                     <a class="nav-item" href="<?= BASE_URL ?>/admin/horarios">
