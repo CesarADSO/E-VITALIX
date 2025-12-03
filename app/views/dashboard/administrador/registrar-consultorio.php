@@ -125,42 +125,42 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="horario_atencion" class="form-label">Días de Atención</label>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Lunes">
-                                        <label class="form-check-label">Lunes</label>
+                                        <label class="form-check-label mi-label">Lunes</label>
                                     </div>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Martes">
-                                        <label class="form-check-label">Martes</label>
+                                        <label class="form-check-label mi-label">Martes</label>
                                     </div>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Miercoles">
-                                        <label class="form-check-label">Miercoles</label>
+                                        <label class="form-check-label mi-label">Miercoles</label>
                                     </div>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Jueves">
-                                        <label class="form-check-label">Jueves</label>
+                                        <label class="form-check-label mi-label">Jueves</label>
                                     </div>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Viernes">
-                                        <label class="form-check-label">Viernes</label>
+                                        <label class="form-check-label mi-label">Viernes</label>
                                     </div>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Sabado">
-                                        <label class="form-check-label">Sabado</label>
+                                        <label class="form-check-label mi-label">Sabado</label>
                                     </div>
                                     <div class="form-check check-dia">
                                         <input class="form-check-input" type="checkbox" name="dias[]" value="Domingo">
-                                        <label class="form-check-label">Domingo</label>
+                                        <label class="form-check-label mi-label">Domingo</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Horario de atención</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label for="hora_apertura">Hora apertura</label>
+                                            <label for="hora_apertura" class="form-label">Hora apertura</label>
                                             <input type="time" id="hora_apertura" name="hora_apertura" class="form-control">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="hora_cierre">Hora cierre</label>
+                                            <label for="hora_cierre" class="form-label">Hora cierre</label>
                                             <input type="time" id="hora_cierre" name="hora_cierre" class="form-control">
                                         </div>
                                     </div>

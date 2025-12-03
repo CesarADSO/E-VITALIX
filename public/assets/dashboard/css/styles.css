@@ -636,3 +636,7 @@ body {
 .check-especialidad .mi-label {
     color: var(--color-primario);
 }
+
+.check-dia .mi-label {
+    color: var(--color-primario);
+}
