@@ -309,10 +309,44 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     :
                     'No ingresado';
 
+                // --- Horario de atención ---
+                /* 1. Seleccionamos todos los checkboxes de días que estén marcados
+                   querySelectorAll devuelve una NodeList → Array.from lo convierte en arreglo
+                   map extrae solo el valor de cada checkbox */
+                const diasSeleccionados = Array.from(
+                    document.querySelectorAll('input[name="dias[]"]:checked')
+                ).map(dia => dia.value);
 
-                // --- Horario (lo dejamos exactamente igual que lo tienes ahora) ---
-                document.getElementById('resumen-horario').textContent =
-                    document.getElementById('horario_atencion').value || 'No ingresado';
+                /* 2. Obtenemos los valores de hora de apertura y hora de cierre desde los inputs correspondientes */
+                const horaApertura = document.getElementById('hora_apertura').value;
+                const horaCierre = document.getElementById('hora_cierre').value;
+
+                /* 3. Inicializamos la variable que contendrá el texto final del horario */
+                let textoHorario = '';
+
+                /* 4. Validamos si no se seleccionó ningún día */
+                if (diasSeleccionados.length === 0) {
+                    // Si no hay días seleccionados, mostramos "No ingresado"
+                    textoHorario = 'No ingresado';
+                } else {
+                    /* 5. Convertimos el arreglo de días seleccionados en un texto separado por comas
+                       Ejemplo: ["Lunes", "Miércoles"] → "Lunes, Miércoles" */
+                    const diasTexto = diasSeleccionados.join(', ');
+
+                    /* 6. Validamos si falta la hora de apertura o cierre */
+                    if (!horaApertura || !horaCierre) {
+                        // Si alguna de las horas no está completa, mostramos los días y un aviso
+                        textoHorario = `${diasTexto} (horas no completadas)`;
+                    } else {
+                        /* 7. Si todo está completo, armamos el texto final del horario
+                           Ejemplo: "Lunes, Miércoles • 08:00 - 17:00" */
+                        textoHorario = `${diasTexto} • ${horaApertura} - ${horaCierre}`;
+                    }
+                }
+
+                /* 8. Finalmente colocamos el texto generado en el span del resumen
+                       Esto actualiza dinámicamente lo que ve el usuario */
+                document.getElementById('resumen-horario').textContent = textoHorario;
             }
 
 
