@@ -213,18 +213,65 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             }
 
             function updateSummary() {
-                document.getElementById('resumen-nombre').textContent = document.getElementById('nombre').value || 'No ingresado';
-                document.getElementById('resumen-direccion').textContent = document.getElementById('direccion').value || 'No ingresado';
-                document.getElementById('resumen-foto').textContent = document.getElementById('foto').value || 'No ingresado';
-                document.getElementById('resumen-ciudad').textContent = document.getElementById('ciudad').value || 'No ingresado';
-                document.getElementById('resumen-telefono').textContent = document.getElementById('telefono').value || 'No ingresado';
-                document.getElementById('resumen-correo').textContent = document.getElementById('correo_contacto').value || 'No ingresado';
 
-                // Especialidades como texto
-                document.getElementById('resumen-especialidades').textContent = document.getElementById('especialidades').value || 'No ingresado';
+                // --- Campos normales tipo texto ---
+                // Cada línea toma el valor del input y si está vacío muestra "No ingresado".
 
-                document.getElementById('resumen-horario').textContent = document.getElementById('horario_atencion').value || 'No ingresado';
+                document.getElementById('resumen-nombre').textContent =
+                    document.getElementById('nombre').value || 'No ingresado';
+
+                document.getElementById('resumen-direccion').textContent =
+                    document.getElementById('direccion').value || 'No ingresado';
+
+                document.getElementById('resumen-foto').textContent =
+                    document.getElementById('foto').value || 'No ingresado';
+
+                document.getElementById('resumen-ciudad').textContent =
+                    document.getElementById('ciudad').value || 'No ingresado';
+
+                document.getElementById('resumen-telefono').textContent =
+                    document.getElementById('telefono').value || 'No ingresado';
+
+                document.getElementById('resumen-correo').textContent =
+                    document.getElementById('correo_contacto').value || 'No ingresado';
+
+
+                // ----------------------------------------------------------------------
+                // --- Especialidades seleccionadas (nueva lógica para los checkboxes) ---
+                // ----------------------------------------------------------------------
+
+                // PASO 1:
+                // Seleccionamos TODOS los checkboxes cuyo name sea "especialidades[]"
+                // y que estén marcados (checked).
+                //
+                // querySelectorAll devuelve un NodeList (no es array), por eso usamos "..."
+                // para convertirlo en un arreglo real.
+                const especialidadesSeleccionadas = [
+                        ...document.querySelectorAll('input[name="especialidades[]"]:checked')
+                    ]
+
+                    // PASO 2:
+                    // Con .map(cb => cb.value) obtenemos el valor "value" de cada checkbox marcado.
+                    // Esto convierte una lista de inputs en un arreglo de strings.
+                    // Ejemplo:
+                    // [inputCheckbox1, inputCheckbox2] → ["dermatologia", "urologia"]
+                    .map(cb => cb.value);
+
+                // PASO 3:
+                // Si hay al menos una especialidad marcada, las mostramos separadas por comas.
+                // Si no hay ninguna, mostramos "No ingresado".
+                document.getElementById('resumen-especialidades').textContent =
+                    especialidadesSeleccionadas.length > 0 ?
+                    especialidadesSeleccionadas.join(', ') // Ejemplo: "dermatologia, urologia"
+                    :
+                    'No ingresado';
+
+
+                // --- Horario (lo dejamos exactamente igual que lo tienes ahora) ---
+                document.getElementById('resumen-horario').textContent =
+                    document.getElementById('horario_atencion').value || 'No ingresado';
             }
+
 
 
         });
