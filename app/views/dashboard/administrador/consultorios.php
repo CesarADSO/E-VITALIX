@@ -75,14 +75,17 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <td><?=  $consultorio['ciudad'] ?></td>
                                     <td><?=  $consultorio['estado'] ?></td>
                                     <td>
-                                        <div class="dropdown">
+                                        <a href="<?= BASE_URL ?>/admin/consultar-consultorio"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                        <a href="<?= BASE_URL ?>/admin/actualizar-consultorio"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="<?= BASE_URL ?>/admin/eliminar-consultorio"><i class="fa-solid fa-trash-can"></i></a>
+                                        <!-- <div class="dropdown">
                                             <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="/E-VITALIX/admin/consultar-consultorio"><i class="bi bi-search"></i>Ver</a></li>
                                                 <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="bi bi-pencil"></i>Editar</a></li>
                                                 <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/admin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="bi bi-trash"></i> Eliminar</a></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </td>
                                 </tr>
                                 <?php endforeach;?>
