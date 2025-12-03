@@ -102,10 +102,22 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 3: Servicios -->
                             <div class="wizard-step" id="step3">
                                 <div class="mb-3">
-                                    <label class="form-label" for="especialidades">Especialidades</label>
+                                    <label class="form-label" for="especialidades">Especialidades (Selecciona una o varias)</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="dermatologia" name="dermatologia">
+                                        <input class="form-check-input" type="checkbox" id="dermatologia" name="especialidades[]" value="Dermatologia">
                                         <label for="dermatologia" class="form-check-label">Dermatología</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="urologia" name="especialidades[]" value="urologia">
+                                        <label for="urologia" class="form-check-label">Urología</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="cardiologia" name="especialidades[]" value="Cardiologia">
+                                        <label for="cardiologia" class="form-check-label">Cardiología</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="medicina-general" name="especialidades[]" value="Medicina_general">
+                                        <label for="medicinaGeneral" class="form-check-label">Medicina General</label>
                                     </div>
                                 </div>
                                 <div class="mb-3">
