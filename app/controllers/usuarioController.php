@@ -12,7 +12,7 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarUsuario();
-        }
+        } 
         break;
 
     case 'GET':
