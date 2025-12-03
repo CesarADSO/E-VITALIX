@@ -122,6 +122,10 @@ function registrarConsultorio()
         'hora_cierre' => $hora_cierre
     ];
 
+    // Convertimos el arreglo de especialidades en un texto JSON
+    // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
+    $especialidades_json = json_encode($especialidades);
+
     // Convertimos el arreglo de horario a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
     // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).
     $horario_atencion_json = json_encode($horario_atencion, JSON_UNESCAPED_UNICODE);
@@ -134,7 +138,7 @@ function registrarConsultorio()
         'ciudad' => $ciudad,
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
-        'especialidades' => $especialidades,
+        'especialidades' => $especialidades_json,
         'horario_atencion' => $horario_atencion_json,
         'servicios_adicionales' => $servicios_adicionales
         // 'id_admin' => $id_admin

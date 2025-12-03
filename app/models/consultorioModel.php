@@ -15,9 +15,7 @@ class Consultorio
         try {
             $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, especialidades, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :especialidades, :horario_atencion, 'Activo')";
 
-            // Convertimos el arreglo de especialidades en un texto JSON
-            // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
-            $especialidades_json = json_encode($data['especialidades']);
+            
 
             $resultado = $this->conexion->prepare($insertar);
             $resultado->bindParam(':nombre', $data['nombre']);
@@ -26,9 +24,7 @@ class Consultorio
             $resultado->bindParam(':ciudad', $data['ciudad']);
             $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':correo_contacto', $data['correo_contacto']);
-            // Enlazamos ese texto JSON al parámetro :especialidades de la consulta SQL
-            // Esto permite guardarlo correctamente en la base de datos como un string
-            $resultado->bindParam(':especialidades', $especialidades_json);
+            $resultado->bindParam(':especialidades', $data['especialidades']);
             $resultado->bindParam(':horario_atencion', $data['horario_atencion']);
 
             return $resultado->execute();
