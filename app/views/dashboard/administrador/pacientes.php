@@ -92,23 +92,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <div class="dropdown">
-                                                    <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye"></i> Ver</a></li>
-                                                        <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-paciente?id=<?= $paciente['id'] ?>"><i class="bi bi-pencil"></i> Editar</a></li>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li>
-                                                            <a class="dropdown-item text-danger"
-                                                                href="<?= BASE_URL ?>/admin/eliminar-paciente?accion=eliminar&id=<?= $paciente['id'] ?>"
-                                                                onclick="return confirm('¿Estás seguro de eliminar este paciente? Esta acción no se puede deshacer.')">
-                                                                <i class="bi bi-trash"></i> Eliminar
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <a href="<?= BASE_URL ?>/admin/consultar-paciente"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/actualizar-paciente?id=<?= $paciente['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/eliminar-paciente?accion=eliminar&id=<?= $paciente['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
