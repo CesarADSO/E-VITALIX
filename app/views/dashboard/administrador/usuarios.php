@@ -29,6 +29,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
+                    <h4 class="mb-4">Gestión de usuarios</h4>
+                    <p class="mb-4">Aquí puede ver la lista de usuarios registrados con su correo, rol y estado. A la derecha encontrará los botones para gestionar cada usuario.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"

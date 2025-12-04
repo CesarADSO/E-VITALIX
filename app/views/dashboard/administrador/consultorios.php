@@ -1,11 +1,11 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_admin.php';
-    // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
-    require_once BASE_PATH . '/app/controllers/consultorioController.php';
+require_once BASE_PATH . '/app/helpers/session_admin.php';
+// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
+require_once BASE_PATH . '/app/controllers/consultorioController.php';
 
-    // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
+// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
 
-    $datos = mostrarConsultorios();
+$datos = mostrarConsultorios();
 ?>
 
 
@@ -32,6 +32,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
+                    <h2>GESTIÓN DE CONSULTORIOS</h2>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -46,7 +47,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <div class="bg-white rounded shadow-sm p-4">
                         <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
                         <table class="table-pacientes">
-                            
+
                             <thead>
                                 <tr>
                                     <th>Foto</th>
@@ -66,31 +67,31 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </thead>
                             <tbody>
                                 <?php if (!empty($datos)) :  ?>
-                                <?php foreach ($datos as $consultorio) : ?>
-                                <tr>
-                                    <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
-                                    <td><?=  $consultorio['nombre'] ?></td>
-                                    <td><?=  $consultorio['direccion'] ?></td>
-                                    <td><?=  $consultorio['telefono'] ?></td>
-                                    <td><?=  $consultorio['ciudad'] ?></td>
-                                    <td><?=  $consultorio['estado'] ?></td>
-                                    <td>
-                                        <a href="<?= BASE_URL ?>/admin/consultar-consultorio"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        <a href="<?= BASE_URL ?>/admin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="<?= BASE_URL ?>/admin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
-                                    </td>
-                                </tr>
-                                <?php endforeach;?>
+                                    <?php foreach ($datos as $consultorio) : ?>
+                                        <tr>
+                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
+                                            <td><?= $consultorio['nombre'] ?></td>
+                                            <td><?= $consultorio['direccion'] ?></td>
+                                            <td><?= $consultorio['telefono'] ?></td>
+                                            <td><?= $consultorio['ciudad'] ?></td>
+                                            <td><?= $consultorio['estado'] ?></td>
+                                            <td>
+                                                <a href="<?= BASE_URL ?>/admin/consultar-consultorio"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
                                         <td>No hay consultorios registrados!</td>
                                     </tr>
-                                <?php endif;?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
-                    
-                    
+
+
 
                 </div>
             </div>

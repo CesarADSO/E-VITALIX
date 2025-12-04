@@ -48,7 +48,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- Formulario de Registro de Usuarios -->
                     <div class="bg-white rounded shadow-sm p-4">
                         <h4 class="mb-4">Actualizar Usuario</h4>
-                        <p class="text-muted mb-4 texto">edita tu cuenta de usuario en el sistema</p>
+                        <p class="text-muted mb-4 texto">Edite la información del usuario seleccionado.</p>
 
                         <form id="usuarioForm"  action="<?= BASE_URL ?>/admin/actualizar-usuario" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?= $usuarios['id'] ?>"> 
