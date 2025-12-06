@@ -62,36 +62,61 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/passwordController.php';
         break;
 
+    // SUPER ADMIN INTERFACES
+    case '/superadmin/dashboard':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/dashboard_superadmin.php';
+        break;
+
+    case '/superadmin/consultorios':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/consultorios.php';
+        break;
+
+    case '/superadmin/registrar-consultorio':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-consultorio.php';
+        break;
+    case '/superadmin/guardar-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+    case '/superadmin/actualizar-consultorio':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/actualizar-consultorio.php';
+        break;
+
+    case '/superadmin/guardar-cambios-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
+    case '/superadmin/consultar-consultorio':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/consultar-consultorio.php';
+        break;
+
+    case '/superadmin/eliminar-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
+    case '/superadmin/generar-reporte':
+        require BASE_PATH . '/app/controllers/reportesPdfController.php';
+        reportesPdfController();
+        break;
+
+    case '/superadmin/usuarios':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/usuarios.php';
+        break;
+    // case '/superadmin/registrarUsuario':
+    //     require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-Usuarios.php';
+    //     break;
+    case '/superadmin/guardar-usuario':
+        require BASE_PATH . '/app/controllers/usuarioController.php';
+        break;
+    case '/superadmin/actualizar-usuario':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/actualizar-usuario.php';
+        break;
+    case '/superadmin/eliminar-usuario':
+        require BASE_PATH . '/app/controllers/usuarioController.php';
+        break;
+
     // ADMIN INTERFACES
     case '/admin/dashboard':
         require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.php';
-        break;
-
-    case '/admin/consultorios':
-        require BASE_PATH . '/app/views/dashboard/administrador/consultorios.php';
-        break;
-
-    case '/admin/registrar-consultorio':
-        require BASE_PATH . '/app/views/dashboard/administrador/registrar-consultorio.php';
-        break;
-    case '/admin/guardar-consultorio':
-        require BASE_PATH . '/app/controllers/consultorioController.php';
-        break;
-    case '/admin/actualizar-consultorio':
-        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-consultorio.php';
-        break;
-
-    case '/admin/guardar-cambios-consultorio':
-        require BASE_PATH . '/app/controllers/consultorioController.php';
-        break;
-
-    case '/admin/eliminar-consultorio':
-        require BASE_PATH . '/app/controllers/consultorioController.php';
-        break;
-
-    case '/admin/generar-reporte':
-        require BASE_PATH . '/app/controllers/reportesPdfController.php';
-        reportesPdfController();
         break;
 
     case '/admin/especialistas':
@@ -118,28 +143,28 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
 
-    case '/admin/horarios':
-        require BASE_PATH . '/app/views/dashboard/administrador/horarios.php';
+    case '/admin/disponibilidades':
+        require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
         break;
 
-    case '/admin/registrar-horario':
-        require BASE_PATH . '/app/views/dashboard/administrador/registrar-horario.php';
+    case '/admin/registrar-disponibilidad':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-disponibilidad.php';
         break;
 
-    case '/admin/guardar-horario':
-        require BASE_PATH . '/app/controllers/horarioController.php';
+    case '/admin/guardar-disponibilidad':
+        require BASE_PATH . '/app/controllers/disponibilidadController.php';
         break;
 
-    case '/admin/actualizar-horario':
-        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-horario.php';
+    case '/admin/actualizar-disponibilidad':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-disponibilidad.php';
         break; 
         
-    case '/admin/guardar-cambios-horario':
-        require BASE_PATH . '/app/controllers/horarioController.php';
+    case '/admin/guardar-cambios-disponibilidad':
+        require BASE_PATH . '/app/controllers/disponibilidadController.php';
         break; 
     
-    case '/admin/eliminar-horario':
-        require BASE_PATH . '/app/controllers/horarioController.php';
+    case '/admin/eliminar-disponibilidad':
+        require BASE_PATH . '/app/controllers/disponibilidadController.php';
         break; 
 
     case '/admin/perfil':
@@ -178,6 +203,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/pacienteController.php';
         break;
 
+    case '/admin/consultar-paciente':
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar-paciente.php';
+        break;
+
     case '/admin/eliminar-paciente':
         require BASE_PATH . '/app/controllers/pacienteController.php';
         break;
@@ -189,21 +218,6 @@ switch ($request) {
         break;
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
-        break;
-    case '/admin/usuarios':
-        require BASE_PATH . '/app/views/dashboard/administrador/usuarios.php';
-        break;
-    case '/admin/registrarUsuario':
-        require BASE_PATH . '/app/views/dashboard/administrador/registrar-Usuarios.php';
-        break;
-    case '/admin/guardar-usuario':
-        require BASE_PATH . '/app/controllers/usuarioController.php';
-        break;
-    case '/admin/actualizar-usuario':
-        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-usuario.php';
-        break;
-    case '/admin/eliminar-usuario':
-        require BASE_PATH . '/app/controllers/usuarioController.php';
         break;
         
     default:

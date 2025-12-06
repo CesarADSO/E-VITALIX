@@ -22,36 +22,36 @@ $perfil = mostrarPerfilAdmin($id);
 
     <div class="user-profile">
         <div class="user-avatar">
-            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['admin_nombre'] ?>">
+            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['superadmin_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['admin_nombre'] ?></h6>
+            <h6><?= $perfil['superadmin_nombre'] ?></h6>
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>
 
                 <nav class="nav-menu">
-                    <a class="nav-item" href="<?= BASE_URL ?>/admin/dashboard">
+                    <a class="nav-item" href="<?= BASE_URL ?>/superadmin/dashboard">
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
-                    <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
+                    <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
                         <i class="fa-solid fa-hospital-user"></i>
                         <span>Pacientes</span>
-                    </a>
-                    <a class="nav-item" href="<?= BASE_URL ?>/admin/consultorios">
+                    </a> -->
+                    <a class="nav-item" href="<?= BASE_URL ?>/superadmin/consultorios">
                         <i class="bi bi-hospital"></i>
                         <span>Consultorios</span>
                     </a>
-                    <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
+                    <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>Profesionales</span>
-                    </a>
-                    <a class="nav-item" href="<?= BASE_URL ?>/admin/horarios">
+                    </a> -->
+                    <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/disponibilidades">
                         <i class="bi bi-alarm"></i>
                         <span>Horarios</span>
-                    </a>
-                     <a class="nav-item" href="<?= BASE_URL ?>/admin/usuarios">
+                    </a> -->
+                     <a class="nav-item" href="<?= BASE_URL ?>/superadmin/usuarios">
                         <i class="bi bi-people-fill"></i>
                         <span>Usuarios</span>
                     </a>

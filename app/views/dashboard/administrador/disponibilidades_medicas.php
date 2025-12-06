@@ -29,7 +29,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     ?>
 
                     <!-- Horarios Header -->
-                    <h2>GESTIÓN DE HORARIOS</h2>
+                    <h4 class="mb-4">Gestión de disponibilidades médicas</h4>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -74,9 +74,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <td><?= $horario['capacidad_maxima'] ?></td>
                                             <td><?= $horario['estado_disponibilidad'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/admin/consultar-horario"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/actualizar-horario?id=<?= $horario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/eliminar-horario?id=<?= $horario['id'] ?>&accion=eliminar"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/consultar-disponibilidad"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/actualizar-disponibilidad?id=<?= $horario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/eliminar-disponibilidad?id=<?= $horario['id'] ?>&accion=eliminar"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

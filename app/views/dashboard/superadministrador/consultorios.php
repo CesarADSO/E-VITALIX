@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
 
@@ -10,7 +10,7 @@ $datos = mostrarConsultorios();
 
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 <body>
@@ -18,7 +18,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <!-- Main Content -->
@@ -28,11 +28,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="consultoriosSection" style="display: block;">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
-                    <h2>GESTIÓN DE CONSULTORIOS</h2>
+                    <h4 class="mb-4">Gestión de consultorios</h4>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -40,12 +40,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (<?= count($datos) ?>)
                             </button>
                         </div>
-                        <a href="<?= BASE_URL ?>/admin/registrar-consultorio" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
+                        <a href="<?= BASE_URL ?>/superadmin/registrar-consultorio" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
                     </div>
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
+                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
                         <table class="table-pacientes">
 
                             <thead>
@@ -76,9 +76,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <td><?= $consultorio['ciudad'] ?></td>
                                             <td><?= $consultorio['estado'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/admin/consultar-consultorio"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -100,5 +100,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>

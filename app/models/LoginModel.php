@@ -50,6 +50,15 @@ class Login
                     $consulta = $this->conexion->prepare("SELECT * FROM especialistas WHERE id_usuario = :id LIMIT 1");
                     break;
 
+                case 4: // asistente del especialista
+                    $consulta = $this->conexion->prepare("SELECT * FROM asistentes WHERE id_usuario = :id LIMIT 1");
+                    break;
+
+                case 5: // superadministrador
+                    $consulta = $this->conexion->prepare("SELECT * FROM superadministradores WHERE id_usuario = :id LIMIT 1");
+                    break;
+
+
                 default:
                     return ['error' => 'Rol inválido'];
             }

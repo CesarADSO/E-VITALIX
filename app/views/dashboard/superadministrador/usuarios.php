@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 require_once BASE_PATH . '/app/controllers/usuarioController.php';
 
 $datos = mostrarUsuario();
@@ -7,7 +7,7 @@ $datos = mostrarUsuario();
 ?>
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 <body>
@@ -15,7 +15,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <!-- Main Content -->
@@ -25,7 +25,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="consultoriosSection" style="display: block;">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
@@ -69,8 +69,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <td><?= $usuario['rol'] ?></td>
                                             <td><?= $usuario['estado'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/admin/actualizar-usuario?id=<?= $usuario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/eliminar-usuario?accion=eliminar&id=<?= $usuario['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-usuario?id=<?= $usuario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/eliminar-usuario?accion=eliminar&id=<?= $usuario['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -92,5 +92,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>

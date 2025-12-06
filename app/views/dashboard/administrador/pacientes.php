@@ -30,7 +30,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     ?>
 
                     <!-- Pacientes Header -->
-                    <h2>GESTIÓN DE PACIENTES</h2>
+                    <h4 class="mb-4">Gestión de pacientes</h4>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"

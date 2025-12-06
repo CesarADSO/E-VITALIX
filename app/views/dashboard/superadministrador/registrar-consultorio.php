@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 <body>
@@ -7,7 +7,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <!-- Main Content -->
@@ -17,7 +17,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="consultoriosSection">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
@@ -28,7 +28,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (0)
                             </button>
                         </div>
-                        <a href="/E-VITALIX/admin/consultorios" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                        <a href="<?= BASE_URL ?>/superadmin/consultorios" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
                     <!-- Formulario con Wizard -->
@@ -59,7 +59,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </div>
 
                         <!-- Formulario -->
-                        <form id="consultorioForm" action="<?= BASE_URL ?>/admin/guardar-consultorio" method="POST" enctype="multipart/form-data">
+                        <form id="consultorioForm" action="<?= BASE_URL ?>/superadmin/guardar-consultorio" method="POST" enctype="multipart/form-data">
                             <!-- Paso 1: Información Básica -->
                             <div class="wizard-step active" id="step1">
                                 <div class="mb-3">
@@ -355,5 +355,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
     </script>
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>
