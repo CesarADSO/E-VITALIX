@@ -55,6 +55,10 @@ $perfil = mostrarPerfilAdmin($id);
                         <i class="bi bi-people-fill"></i>
                         <span>Usuarios</span>
                     </a>
+                    <a class="nav-item" href="<?= BASE_URL ?>/superadmin/administradores-consultorio">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <span>Administradores - Consultorios</span>
+                    </a>
                 </nav>
 
     <div style="margin-top: auto; padding: 20px;">

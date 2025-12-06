@@ -113,6 +113,26 @@ switch ($request) {
     case '/superadmin/eliminar-usuario':
         require BASE_PATH . '/app/controllers/usuarioController.php';
         break;
+
+    case '/superadmin/administradores-consultorio':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/gestion-administradores.php';
+        break;
+
+    case '/superadmin/registrar-administrador':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-administrador.php';
+        break;
+
+    case '/superadmin/guardar-admin-consultorio':
+        require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+        break;
+
+    case '/superadmin/actualizar-administrador':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/actualizar-administrador.php';
+        break;
+
+    case '/superadmin/guardar-cambios-admin-consultorio':
+        require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+        break;
     
     case '/superadmin/perfil':
         require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-admin.php';
