@@ -104,15 +104,20 @@ switch ($request) {
     // case '/superadmin/registrarUsuario':
     //     require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-Usuarios.php';
     //     break;
-    case '/superadmin/guardar-usuario':
-        require BASE_PATH . '/app/controllers/usuarioController.php';
-        break;
+    // case '/superadmin/guardar-usuario':
+    //     require BASE_PATH . '/app/controllers/usuarioController.php';
+    //     break;
     case '/superadmin/actualizar-usuario':
         require BASE_PATH . '/app/views/dashboard/superadministrador/actualizar-usuario.php';
         break;
     case '/superadmin/eliminar-usuario':
         require BASE_PATH . '/app/controllers/usuarioController.php';
         break;
+    
+    case '/superadmin/perfil':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-admin.php';
+        break;
+
 
     // ADMIN INTERFACES
     case '/admin/dashboard':
@@ -167,10 +172,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/disponibilidadController.php';
         break; 
 
-    case '/admin/perfil':
-        require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
-        break;
-
+    
     case '/admin/guardar-foto-perfil':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;

@@ -58,7 +58,7 @@ $perfil = mostrarPerfilAdmin($id);
                 </nav>
 
     <div style="margin-top: auto; padding: 20px;">
-        <a class="nav-item" href="<?= BASE_URL ?>/admin/perfil">
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/perfil">
             <i class="bi bi-person-circle"></i>
             <span>Perfil</span>
         </a>

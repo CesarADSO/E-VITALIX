@@ -1,4 +1,24 @@
 <?php
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
+// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
+require_once BASE_PATH . '/app/controllers/consultorioController.php';
+
+// ASIGNAMOS EL VALOR ID DEL REGISTRO SEGÚN LA TABLA
+$id = $_GET['id'];
+// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR Y LE PASAMOS LOS DATOS A UNA VARIABLE
+// QUE PODAMOS MANIPULAR EN ESTE ARCHIVO
+$consultorio = listarConsultorio($id);
+// Decodificamos el campo "horario_atencion" que viene almacenado en la base de datos.
+// Este campo es un JSON con estructura similar a:
+// {"dias":["Martes","Miercoles"],"hora_apertura":"23:13","hora_cierre":"23:13"}
+//
+// json_decode convierte ese texto JSON en un arreglo de PHP.
+// El parámetro "true" indica que queremos un array asociativo, no un objeto.
+$horario = json_decode($consultorio['horario_atencion'], true);
+?>
+
+
+<?php
 include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
@@ -25,23 +45,23 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <div class="row align-items-center">
                                 <div class="col-md-2 text-center">
                                     <div class="consultorio-logo">
-                                        <i class="bi bi-building display-1 text-primary"></i>
+                                        <img class="logo-consultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-7">
-                                    <h2 class="mb-2" id="consultorio-nombre">Consultorio Médico Central</h2>
+                                    <h2 class="mb-2" id="consultorio-nombre"><?= $consultorio['nombre'] ?></h2>
                                     <p class="text-muted mb-3">
                                         <i class="bi bi-geo-alt-fill me-2"></i>
-                                        <span id="consultorio-direccion">Calle 123 #45-67, Bogotá</span>
+                                        <span id="consultorio-direccion"><?= $consultorio['direccion'] ?>, <?= $consultorio['ciudad'] ?></span>
                                     </p>
                                     <div class="d-flex gap-3 align-items-center">
                                         <span class="badge-estado activo" id="consultorio-estado">
                                             <i class="bi bi-check-circle-fill me-1"></i>
-                                            Activo
+                                            <?= $consultorio['estado'] ?>
                                         </span>
                                         <span class="text-muted">
                                             <i class="bi bi-calendar-check me-1"></i>
-                                            Registrado: <span id="consultorio-fecha">15/11/2024</span>
+                                            Registrado: <span id="consultorio-fecha"><?= $consultorio['fecha_registro'] ?></span>
                                         </span>
                                     </div>
                                 </div>
@@ -70,31 +90,31 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         <span class="info-label">
                                             <i class="bi bi-building me-2"></i>Nombre:
                                         </span>
-                                        <span class="info-value" id="info-nombre">Consultorio Médico Central</span>
+                                        <span class="info-value" id="info-nombre"><?= $consultorio['nombre'] ?></span>
                                     </div>
                                     <div class="info-row">
                                         <span class="info-label">
                                             <i class="bi bi-pin-map me-2"></i>Ciudad:
                                         </span>
-                                        <span class="info-value" id="info-ciudad">Bogotá D.C.</span>
+                                        <span class="info-value" id="info-ciudad"><?= $consultorio['ciudad'] ?></span>
                                     </div>
                                     <div class="info-row">
                                         <span class="info-label">
                                             <i class="bi bi-geo-alt me-2"></i>Dirección:
                                         </span>
-                                        <span class="info-value" id="info-direccion">Calle 123 #45-67</span>
+                                        <span class="info-value" id="info-direccion"><?= $consultorio['direccion'] ?></span>
                                     </div>
                                     <div class="info-row">
                                         <span class="info-label">
                                             <i class="bi bi-telephone me-2"></i>Teléfono:
                                         </span>
-                                        <span class="info-value" id="info-telefono">601 234 5678</span>
+                                        <span class="info-value" id="info-telefono"><?= $consultorio['telefono'] ?></span>
                                     </div>
                                     <div class="info-row">
                                         <span class="info-label">
                                             <i class="bi bi-envelope me-2"></i>Correo:
                                         </span>
-                                        <span class="info-value" id="info-correo">contacto@consultorio.com</span>
+                                        <span class="info-value" id="info-correo"><?= $consultorio['correo_contacto'] ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -148,15 +168,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     <div class="horario-container">
                                         <div class="horario-item">
                                             <i class="bi bi-calendar-week text-primary me-2"></i>
-                                            <span id="info-horario">Lunes a Viernes: 8:00 AM - 6:00 PM</span>
-                                        </div>
-                                        <div class="horario-item mt-2">
-                                            <i class="bi bi-calendar-day text-primary me-2"></i>
-                                            <span>Sábados: 8:00 AM - 12:00 PM</span>
-                                        </div>
-                                        <div class="horario-item mt-2">
-                                            <i class="bi bi-x-circle text-danger me-2"></i>
-                                            <span>Domingos: Cerrado</span>
+                                            <span id="info-horario"><?= implode(", ", $horario['dias']) ?>: <?= $horario['hora_apertura'] ?> - <?= $horario['hora_cierre'] ?></span>
                                         </div>
                                     </div>
                                 </div>
