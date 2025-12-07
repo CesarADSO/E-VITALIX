@@ -30,36 +30,36 @@ $perfil = mostrarPerfilAdmin($id);
         </div>
     </div>
 
-                <nav class="nav-menu">
-                    <a class="nav-item" href="<?= BASE_URL ?>/superadmin/dashboard">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
+    <nav class="nav-menu">
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/dashboard">
+            <i class="bi bi-grid-fill"></i>
+            <span>Dashboard</span>
+        </a>
+        <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
                         <i class="fa-solid fa-hospital-user"></i>
                         <span>Pacientes</span>
                     </a> -->
-                    <a class="nav-item" href="<?= BASE_URL ?>/superadmin/consultorios">
-                        <i class="bi bi-hospital"></i>
-                        <span>Consultorios</span>
-                    </a>
-                    <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/consultorios">
+            <i class="bi bi-hospital"></i>
+            <span>Consultorios</span>
+        </a>
+        <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>Profesionales</span>
                     </a> -->
-                    <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/disponibilidades">
+        <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/disponibilidades">
                         <i class="bi bi-alarm"></i>
                         <span>Horarios</span>
                     </a> -->
-                     <a class="nav-item" href="<?= BASE_URL ?>/superadmin/usuarios">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Usuarios</span>
-                    </a>
-                    <a class="nav-item" href="<?= BASE_URL ?>/superadmin/administradores-consultorio">
-                        <i class="fa-solid fa-user-tie"></i>
-                        <span>Administradores - Consultorios</span>
-                    </a>
-                </nav>
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/usuarios">
+            <i class="bi bi-people-fill"></i>
+            <span>Usuarios</span>
+        </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/administradores-consultorio">
+            <i class="fa-solid fa-user-tie"></i>
+            <span>Administradores - Consultorios</span>
+        </a>
+    </nav>
 
     <div style="margin-top: auto; padding: 20px;">
         <a class="nav-item" href="<?= BASE_URL ?>/superadmin/perfil">
