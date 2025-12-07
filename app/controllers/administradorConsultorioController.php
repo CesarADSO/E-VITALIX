@@ -11,7 +11,7 @@ switch ($method) {
         registrarAdministradorConsultorio();
         break;
     case 'GET':
-        # code...
+        mostrarAdministradoresConsultorios();
         break;
     default:
         # code...
@@ -96,4 +96,11 @@ function registrarAdministradorConsultorio()
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el administrador de consultorio. Intenta nuevamente');
     }
     exit();
+}
+
+function mostrarAdministradoresConsultorios() {
+    $resultado = new Administrador();
+    $Administrador = $resultado->consultar();
+
+    return $Administrador;
 }

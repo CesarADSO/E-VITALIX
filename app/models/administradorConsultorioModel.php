@@ -48,6 +48,23 @@ class Administrador {
             return false;
         }
     }
+
+    public function consultar() {
+         try {
+            // Variable que almacena la sentencia de sql a ejecutar
+            $consultar = "SELECT administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
+            // Preparar lo necesario para ejecutar la función
+
+            $resultado = $this->conexion->prepare($consultar);
+
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            return [];
+        }
+    }
 }
 
 

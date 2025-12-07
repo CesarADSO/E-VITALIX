@@ -1,4 +1,15 @@
 <?php
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
+// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
+require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+
+// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
+
+$datos = mostrarAdministradoresConsultorios();
+
+?>
+
+<?php
 include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
@@ -52,19 +63,27 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                        <tr>
-                                            <td><img class="imgconsultorio" src="#" alt=""></td>
-                                            <td>Julio César Morales Valencia</td>
-                                            <td>3112417663</td>
-                                            <td>CC</td>
-                                            <td>19318781</td>
-                                            <td>Activo</td>
-                                            <td>
-                                                <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                                            </td>
-                                        </tr>
+                                <?php if (!empty($datos)) :?>
+                                    <?php foreach($datos as $dato) :?>
+                                <tr>
+                                    <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $dato['foto'] ?>" alt="<?= $dato['nombres'] ?>"></td>
+                                    <td><?= $dato['nombres'] ?> <?= $dato['apellidos'] ?></td>
+                                    <td><?= $dato['telefono'] ?></td>
+                                    <td><?= $dato['tipo_documento'] ?></td>
+                                    <td><?= $dato['numero_documento'] ?></td>
+                                    <td><?= $dato['estado'] ?></td>
+                                    <td>
+                                        <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
+                                        <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else:?>
+                                    <td>
+                                        No hay administradores de consultorios registrados
+                                    </td>
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>
