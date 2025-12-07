@@ -52,7 +52,7 @@ class Administrador {
     public function consultar() {
          try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
+            $consultar = "SELECT administradores.id, administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);
@@ -60,6 +60,25 @@ class Administrador {
             $resultado->execute();
 
             return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function listarAdministradorPorId($id)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $consulta = "SELECT administradores.id, administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.id AS id_tipo_documento, tipo_documento.nombre AS tipo_documento, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id WHERE administradores.id = :id ORDER BY administradores.nombres ASC LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();
         } catch (PDOException $e) {
             error_log("Error en consultorio::consultar->" . $e->getMessage());
             return [];

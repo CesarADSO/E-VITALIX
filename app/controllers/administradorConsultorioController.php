@@ -11,6 +11,9 @@ switch ($method) {
         registrarAdministradorConsultorio();
         break;
     case 'GET':
+        if (isset($_GET['id'])) {
+            listarAdministradorConsultorioId($_GET['id']);
+        }
         mostrarAdministradoresConsultorios();
         break;
     default:
@@ -98,9 +101,18 @@ function registrarAdministradorConsultorio()
     exit();
 }
 
-function mostrarAdministradoresConsultorios() {
+function mostrarAdministradoresConsultorios()
+{
     $resultado = new Administrador();
     $Administrador = $resultado->consultar();
 
     return $Administrador;
+}
+
+function listarAdministradorConsultorioId($id) {
+    $objAdministrador = new Administrador();
+
+    $administrador = $objAdministrador->listarAdministradorPorId($id);
+
+    return $administrador;
 }
