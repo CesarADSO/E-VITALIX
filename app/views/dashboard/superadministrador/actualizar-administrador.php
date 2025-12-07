@@ -86,7 +86,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         </div>
 
                         <div class="alert alert-info" role="alert">
-                            <i class="bi bi-info-circle"></i> La foto y el número de documento no se pueden actualizar y el correo no se puede en este módulo para hacer este cambio vaya al módulo gestión de usuarios.
+                            <i class="bi bi-info-circle"></i> La foto solo la puede modificar el usuario, el número de documento no se puede modificar y el correo no se puede modificar en este módulo. Para modificar el correo por favor vaya al módulo gestión de usuarios.
                         </div>
 
                         <!-- Botones -->
