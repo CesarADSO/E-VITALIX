@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../../config/database.php';
 
-class Administrador {
+class Administrador
+{
 
     private $conexion;
     public function __construct()
@@ -30,7 +31,7 @@ class Administrador {
 
             $insertar2 = "INSERT INTO administradores(id_usuario, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES(LAST_INSERT_ID(), :nombres, :apellidos, :foto, :telefono, :tipoDocumento, :numeroDocumento)";
 
-            
+
 
             $resultado2 = $this->conexion->prepare($insertar2);
             $resultado2->bindParam(':nombres', $data['nombres']);
@@ -49,8 +50,9 @@ class Administrador {
         }
     }
 
-    public function consultar() {
-         try {
+    public function consultar()
+    {
+        try {
             // Variable que almacena la sentencia de sql a ejecutar
             $consultar = "SELECT administradores.id, administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
             // Preparar lo necesario para ejecutar la función
@@ -61,7 +63,7 @@ class Administrador {
 
             return $resultado->fetchAll();
         } catch (PDOException $e) {
-            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            error_log("Error en Administrador::consultar->" . $e->getMessage());
             return [];
         }
     }
@@ -80,11 +82,31 @@ class Administrador {
 
             return $resultado->fetch();
         } catch (PDOException $e) {
-            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            error_log("Error en Administrador::listarAdministradorPorId->" . $e->getMessage());
             return [];
         }
     }
+
+    public function actualizar($data)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $actualizar = "UPDATE administradores SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono, id_tipo_documento = :tipoDocumento WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($actualizar);
+
+            $resultado->bindParam(':id', $data['id']);
+            $resultado->bindParam(':nombres', $data['nombres']);
+            $resultado->bindParam(':apellidos', $data['apellidos']);
+            $resultado->bindParam(':telefono', $data['telefono']);
+            $resultado->bindParam(':tipoDocumento', $data['tipoDocumento']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Administrador::actualizar->" . $e->getMessage());
+            return false;
+        }
+    }
 }
-
-
-?>

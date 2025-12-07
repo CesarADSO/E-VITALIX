@@ -8,6 +8,10 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
+        $accion = $_POST['accion'];
+        if ($accion === 'actualizar') {
+            actualizarAdministradorConsultorio();
+        }
         registrarAdministradorConsultorio();
         break;
     case 'GET':
@@ -94,7 +98,7 @@ function registrarAdministradorConsultorio()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro de administrador de consultorio exitoso', 'Se ha creado un nuevo administrador de consultorio', '/E-VITALIX/admin/consultorios');
+        mostrarSweetAlert('success', 'Registro de administrador de consultorio exitoso', 'Se ha creado un nuevo administrador de consultorio', '/E-VITALIX/superadmin/administradores-consultorio');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el administrador de consultorio. Intenta nuevamente');
     }
@@ -109,10 +113,48 @@ function mostrarAdministradoresConsultorios()
     return $Administrador;
 }
 
-function listarAdministradorConsultorioId($id) {
+function listarAdministradorConsultorioId($id)
+{
     $objAdministrador = new Administrador();
 
     $administrador = $objAdministrador->listarAdministradorPorId($id);
 
     return $administrador;
+}
+
+function actualizarAdministradorConsultorio()
+{
+    // Capturamos en variables los datos desde el formulario a través del method posh y los name de los campos
+    $id = $_POST['id'] ?? '';
+    $nombres = $_POST['nombres'] ?? '';
+    $apellidos = $_POST['apellidos'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+    $tipoDocumento = $_POST['tipo_documento'] ?? '';
+
+    // Validamos los campos que son obligatorios
+    if (empty($nombres) || empty($apellidos) || empty($telefono) || empty($tipoDocumento)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    //POO - INSTANCIAMOS LA CLASE
+    $objAdministrador = new Administrador();
+    $data = [
+        'id' => $id,
+        'nombres' => $nombres,
+        'apellidos' => $apellidos,
+        'telefono' => $telefono,
+        'tipoDocumento' => $tipoDocumento
+    ];
+
+    $resultado = $objAdministrador->actualizar($data);
+
+    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Modificación de administrador de consultorio exitoso', 'Se ha modificado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
+    } else {
+        mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el administrador de consultorio. Intenta nuevamente');
+    }
+    exit();
 }

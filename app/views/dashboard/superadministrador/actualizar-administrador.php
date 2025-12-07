@@ -43,6 +43,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <p class="text-muted mb-4 texto">En este formulario podrá modificar los datos del administrador de consultorio seleccionado</p>
 
                     <form id="adminConsultorioForm" action="<?= BASE_URL ?>/superadmin/guardar-cambios-admin-consultorio" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $administrador['id'] ?>">
+                        <input type="hidden" name="accion" value="actualizar">
                         <div class="row">
 
                             <!-- Tipo de Documento -->
