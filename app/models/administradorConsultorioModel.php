@@ -54,7 +54,7 @@ class Administrador
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT administradores.id, administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
+            $consultar = "SELECT administradores.id, administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento,usuarios.id AS id_usuario, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);
@@ -106,6 +106,33 @@ class Administrador
             return true;
         } catch (PDOException $e) {
             error_log("Error en Administrador::actualizar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function eliminar($id, $id_usuario)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $eliminar = "DELETE FROM administradores WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($eliminar);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            $eliminar2 = "DELETE FROM usuarios WHERE id = :id_usuario";
+
+            $resultado2 = $this->conexion->prepare($eliminar2);
+
+            $resultado2->bindParam(':id_usuario', $id_usuario);
+
+            $resultado2->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Administrador::eliminar->" . $e->getMessage());
             return false;
         }
     }

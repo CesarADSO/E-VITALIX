@@ -8,20 +8,27 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
-        $accion = $_POST['accion'];
+        $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarAdministradorConsultorio();
         }
-        registrarAdministradorConsultorio();
+        else {
+            registrarAdministradorConsultorio();
+        }
+        
         break;
     case 'GET':
+        $accion = $_GET['accion'] ?? '';
+        if ($accion === 'eliminar') {
+            eliminarAdministradorConsultorio($_GET['id'], $_GET['id_usuario']);
+        }
         if (isset($_GET['id'])) {
             listarAdministradorConsultorioId($_GET['id']);
         }
-        mostrarAdministradoresConsultorios();
-        break;
-    default:
-        # code...
+        else {
+            mostrarAdministradoresConsultorios();
+        }
+        
         break;
 }
 
@@ -88,6 +95,7 @@ function registrarAdministradorConsultorio()
         'nombres' => $nombres,
         'apellidos' => $apellidos,
         'email' => $email,
+        'telefono' => $telefono,
         'foto' => $ruta_foto,
         'tipoDocumento' => $tipoDocumento,
         'numeroDocumento' => $numeroDocumento
@@ -155,6 +163,21 @@ function actualizarAdministradorConsultorio()
         mostrarSweetAlert('success', 'Modificación de administrador de consultorio exitoso', 'Se ha modificado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el administrador de consultorio. Intenta nuevamente');
+    }
+    exit();
+}
+
+function eliminarAdministradorConsultorio($id, $id_usuario) {
+    $objAdministrador = new Administrador();
+
+    $resultado = $objAdministrador->eliminar($id, $id_usuario);
+
+     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se puedo eliminar el administrador de consultorio. Intenta nuevamente');
     }
     exit();
 }

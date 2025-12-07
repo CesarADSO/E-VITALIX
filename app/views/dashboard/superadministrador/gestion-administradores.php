@@ -37,7 +37,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <div>
                             <button class="btn btn-link text-primary p-0"
                                 style="text-decoration: none; font-size: 14px;">
-                                ← Todos ()
+                                ← Todos (<?= count($datos) ?>)
                             </button>
                         </div>
                         <a href="<?= BASE_URL ?>/superadmin/registrar-administrador" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
@@ -53,7 +53,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     <th>Foto</th>
                                     <th>
                                         Nombres y apellidos
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                     </th>
                                     <th>Teléfono</th>
                                     <th>Tipo de documento</th>
@@ -63,27 +62,27 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($datos)) :?>
-                                    <?php foreach($datos as $dato) :?>
-                                <tr>
-                                    <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $dato['foto'] ?>" alt="<?= $dato['nombres'] ?>"></td>
-                                    <td><?= $dato['nombres'] ?> <?= $dato['apellidos'] ?></td>
-                                    <td><?= $dato['telefono'] ?></td>
-                                    <td><?= $dato['tipo_documento'] ?></td>
-                                    <td><?= $dato['numero_documento'] ?></td>
-                                    <td><?= $dato['estado'] ?></td>
+                                <?php if (!empty($datos)) : ?>
+                                    <?php foreach ($datos as $dato) : ?>
+                                        <tr>
+                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $dato['foto'] ?>" alt="<?= $dato['nombres'] ?>"></td>
+                                            <td><?= $dato['nombres'] ?> <?= $dato['apellidos'] ?></td>
+                                            <td><?= $dato['telefono'] ?></td>
+                                            <td><?= $dato['tipo_documento'] ?></td>
+                                            <td><?= $dato['numero_documento'] ?></td>
+                                            <td><?= $dato['estado'] ?></td>
+                                            <td>
+                                                <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $dato['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/eliminar-administrador?id=<?= $dato['id'] ?>&accion=eliminar&id_usuario=<?= $dato['id_usuario'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
                                     <td>
-                                        <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                        <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $dato['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                                        no hay administradores de consultorio registrados
                                     </td>
-                                </tr>
-                                <?php endforeach;?>
-                                <?php else:?>
-                                    <td>
-                                        No hay administradores de consultorios registrados
-                                    </td>
-                                <?php endif;?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
