@@ -80,7 +80,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <td>
-                                        no hay administradores de consultorio registrados
+                                        no hay administradores de consultorio registradosg
                                     </td>
                                 <?php endif; ?>
                             </tbody>
