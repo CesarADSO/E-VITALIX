@@ -43,7 +43,7 @@ class Login
                     break;
 
                 case 2: // Administrador
-                    $consulta = $this->conexion->prepare("SELECT * FROM perfiles WHERE id_usuario = :id LIMIT 1");
+                    $consulta = $this->conexion->prepare("SELECT * FROM administradores WHERE id_usuario = :id LIMIT 1");
                     break;
 
                 case 3: // Especialista
