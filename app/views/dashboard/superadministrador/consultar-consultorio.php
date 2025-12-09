@@ -111,7 +111,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <div class="card-body">
                                     <div class="info-row">
                                         <span class="info-label">
-                                            <i class="bi bi-building me-2"></i>Nombre:
+                                            <i class="bi bi-hospital me-2"></i>Nombre:
                                         </span>
                                         <span class="info-value" id="info-nombre"><?= $consultorio['nombre'] ?></span>
                                     </div>

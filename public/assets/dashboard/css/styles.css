@@ -838,7 +838,7 @@ body {
 
 .bg-info-custom {
     background-color: var(--tercer-azul) !important;
-    color: var(--blanco-color);
+    color: var(--blanco-color) !important;
     font-size: var(--texto-auxiliar);
 }
 
@@ -866,7 +866,7 @@ body {
 
 .badge-especialidad {
     background: linear-gradient(135deg, var(--color-primario) 0%, var(--tercer-azul) 100%);
-    color: var(--blanco-color);
+    color: var(--blanco-color) !important;
     padding: 10px 18px;
     border-radius: 25px;
     font-size: var(--texto-auxiliar);
