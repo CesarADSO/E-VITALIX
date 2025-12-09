@@ -195,6 +195,10 @@
      margin-top: 15px;
  }
 
+ .login-pharagraf {
+    color: var(--blanco-color);
+ }
+
  @media (max-width: 576px) {
      .login-card {
          padding: 40px 25px;
