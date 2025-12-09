@@ -1,74 +1,35 @@
+
+<?php
+require_once BASE_PATH . '/app/helpers/session_paciente.php';
+require_once BASE_PATH . '/app/controllers/pacienteController.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Control Paciente</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="public/assets/dashboard/css/styles.css">
-</head>
+
+<?php
+    include_once __DIR__. '/../../layouts/header_paciente.php';
+?>
 
 <body>
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-lg-2 col-md-3 sidebar p-0">
-                <div class="sidebar-header">
-                    <div class="logo">
-                        <img src="public/assets/dashboard/img/LOGO-PRINCIPAL.png" alt="Logo E-VITALIX3e" width="80%">
-                    </div>
-                </div>
-
-                <div class="user-profile">
-                    <div class="user-avatar"></div>
-                    <div class="user-info">
-                        <h6>Nicolas</h6>
-                        <div class="user-role">Paciente</div>
-                    </div>
-                </div>
-
-                <nav class="nav-menu">
-                    <a class="nav-item active" onclick="showSection('dashboard')">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a class="nav-item" onclick="showSection('consultorios')">
-                        <i class="bi bi-building"></i>
-                        <span>Consultorios</span>
-                    </a>
-                    <a class="nav-item" onclick="showSection('profesionales')">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Profesionales</span>
-                    </a>
-                </nav>
-
-                <div style="margin-top: auto; padding: 20px;">
-                    <a class="nav-item" onclick="showSection('perfil')">
-                        <i class="bi bi-person-circle"></i>
-                        <span>Perfil</span>
-                    </a>
-                    <a class="nav-item">
-                        <i class="bi bi-gear-fill"></i>
-                        <span>Configuración</span>
-                    </a>
-                </div>
-            </div>
+            <?php
+                include_once __DIR__ . '/../../layouts/sidebar_paciente.php';
+            ?>
 
             <!-- Main Content -->
             <div class="col-lg-10 col-md-9 main-content">
                 <!-- Dashboard Section -->
                 <div id="dashboardSection">
                     <!-- Top Bar -->
-                    <div class="top-bar">
-                        <div class="search-bar">
-                            <input type="text" class="form-control" placeholder="Buscar">
-                        </div>
-                        <div class="notification-icon">
-                            <i class="bi bi-bell-fill text-primary"></i>
-                        </div>
-                    </div>
+                    <?php 
+                        include_once __DIR__ . '/../../layouts/topbar_paciente.php';
+                    ?>
 
                     <!-- Stats Cards -->
                     <div class="stats-cards">
@@ -494,10 +455,6 @@
         </div>
     </div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="public/assets/dashboard/js/dashboards.js"></script>
-</body>
-
-</html>
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    ?>
