@@ -32,7 +32,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
-                    <h4 class="mb-4">Gestión de consultorios</h4>
+                    <h4 class="mb-4">Asignación de administradores a consultorios</h4>
+                    <p class="mb-4">Asigne o modifique el administrador responsable de cada consultorio desde este módulo.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -40,28 +41,21 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 ← Todos (<?= count($datos) ?>)
                             </button>
                         </div>
-                        <a href="<?= BASE_URL ?>/superadmin/registrar-consultorio" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
+                        <!-- <a href="<?= BASE_URL ?>/superadmin/registrar-consultorio" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a> -->
                     </div>
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
+                        <!-- <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a> -->
                         <table class="table-pacientes">
 
                             <thead>
                                 <tr>
                                     <th>Foto</th>
                                     <th>
-                                        Nombre
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                        Consultorio
                                     </th>
-                                    <th>Dirección</th>
-                                    <th>Teléfono</th>
-                                    <th>
-                                        Ciudad
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th>Estado</th>
+                                    <th>Administrador</th>
                                     <th style="width: 80px;">Acciones</th>
                                 </tr>
                             </thead>
@@ -71,14 +65,11 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         <tr>
                                             <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
                                             <td><?= $consultorio['nombre'] ?></td>
-                                            <td><?= $consultorio['direccion'] ?></td>
-                                            <td><?= $consultorio['telefono'] ?></td>
-                                            <td><?= $consultorio['ciudad'] ?></td>
-                                            <td><?= $consultorio['estado'] ?></td>
+                                            <td>Julio Morales</td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/superadmin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/asignar-administrador?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-plus"></i></a>
+                                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -142,6 +142,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/superadministrador/consultorios-administradores.php';
         break;
     
+    case '/superadmin/asignar-administrador':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/asignar-administrador.php';
+        break;
+
+    case '/superadmin/asignar-admin-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+    
     case '/superadmin/perfil':
         require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-admin.php';
         break;
