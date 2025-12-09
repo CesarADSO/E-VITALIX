@@ -117,6 +117,7 @@ $hoy = date("Y");
             <tr>
                 <th>Logo</th>
                 <th>Nombre</th>
+                <th>Administrador</th>
                 <th>Dirección</th>
                 <th>Teléfono</th>
                 <th>Ciudad</th>
@@ -133,6 +134,7 @@ $hoy = date("Y");
                                 alt="<?= $consultorio['nombre'] ?>">
                         </td>
                         <td><?= $consultorio['nombre'] ?></td>
+                        <td><?= $consultorio['nombres'] ?> <?= $consultorio['apellidos'] ?></td>
                         <td><?= $consultorio['direccion'] ?></td>
                         <td><?= $consultorio['telefono'] ?></td>
                         <td><?= $consultorio['ciudad'] ?></td>
