@@ -57,16 +57,11 @@ $datos = mostrarCitas();
                                 <label>Especialista</label>
                                 <select name="id_especialista" id="id_especialista" class="form-control" required>
                                     <option value="">Seleccione...</option>
+                                    <option value="cardiologo">Cardiologo</option>
+                                    <option value="odontologo">odontologo</option>
 
-                                    <?php foreach ($especialistas as $e): ?>
-                                        <option 
-                                            value="<?= $e['id']; ?>" 
-                                            data-especialidad="<?= $e['especialidad']; ?>"
-                                        >
-                                            <?= $e['nombres'] . ' ' . $e['apellidos']; ?>
-                                        </option>
-                                    <?php endforeach; ?>
 
+                                    
                                 </select>
                             </div>
 
@@ -136,5 +131,8 @@ $datos = mostrarCitas();
                          <div class="d-flex justify-content-between cont-botones">
                              <button type="submit" class="btn boton">Agendar cita</button>
                         </div>
-                         
-                            
+                </form>
+            </div>
+        </div>
+    </div>   
+</div>                   
