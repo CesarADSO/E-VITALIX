@@ -46,7 +46,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <!-- <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a> -->
+                        <!-- <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=asignaciones" target="_blank">generar reporte pdf</a> -->
                         <table class="table-pacientes">
 
                             <thead>
