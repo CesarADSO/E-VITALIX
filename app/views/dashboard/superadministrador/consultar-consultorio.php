@@ -17,6 +17,18 @@ $consultorio = listarConsultorio($id);
 $horario = json_decode($consultorio['horario_atencion'], true);
 ?>
 
+<?php
+// Convertimos el estado que viene en MAYÚSCULAS desde la base de datos
+// Ejemplo: "ACTIVO" → "activo", "INACTIVO" → "inactivo"
+$estado = strtolower($consultorio['estado']);
+
+// Según el estado, asignamos la clase correct
+// Si el estado es "activo", la clase será "activo"
+// De lo contrario, será "inactivo"
+$claseEstado = ($estado === 'activo') ? 'activo' : 'inactivo';
+
+?>
+
 
 <?php
 include_once __DIR__ . '/../../layouts/header_superadministrador.php';
@@ -55,8 +67,19 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         <span id="consultorio-direccion"><?= $consultorio['direccion'] ?>, <?= $consultorio['ciudad'] ?></span>
                                     </p>
                                     <div class="d-flex gap-3 align-items-center">
-                                        <span class="badge-estado activo" id="consultorio-estado">
-                                            <i class="bi bi-check-circle-fill me-1"></i>
+                                        <span class="badge-estado <?= $claseEstado ?>" id="consultorio-estado">
+                                            <?php
+                                            // Mostramos un ícono distinto según el estado
+                                            if ($estado === 'activo'):
+                                            ?>
+                                                <!-- Ícono verde de "activo" -->
+                                                <i class="bi bi-check-circle-fill me-1"></i>
+                                            <?php else: ?>
+                                                <!-- Ícono rojo de "inactivo" -->
+                                                <i class="bi bi-x-circle-fill me-1"></i>
+                                            <?php endif; ?>
+
+                                            <!-- Mostramos el estado tal como viene desde la base de datos (ej: ACTIVO, INACTIVO) -->
                                             <?= $consultorio['estado'] ?>
                                         </span>
                                         <span class="text-muted">

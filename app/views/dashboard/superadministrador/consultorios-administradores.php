@@ -65,11 +65,9 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         <tr>
                                             <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
                                             <td><?= $consultorio['nombre'] ?></td>
-                                            <td>Julio Morales</td>
+                                            <td><?= $consultorio['nombres'] ?> <?= $consultorio['apellidos'] ?></td>
                                             <td>
                                                 <a href="<?= BASE_URL ?>/superadmin/asignar-administrador?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-plus"></i></a>
-                                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -41,15 +41,17 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <h4 class="mb-4">Asignar Administrador a Consultorio</h4>
 
                     <form id="asignarAdminForm" action="<?= BASE_URL ?>/superadmin/asignar-admin-consultorio" method="POST">
+                        <input type="hidden" name="id" value="<?= $consultorio['id'] ?>">
+                        <input type="hidden" name="accion" value="asignar">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Consultorio</label>
-                                <input type="text" class="form-control" value="<?= $consultorio['nombre'] ?>" disabled>
+                                <input type="text" class="form-control" value="<?= $consultorio['nombre'] ?>" disabled selected>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="administrador" class="form-label">Administrador</label>
-                                <select class="form-select" id="administrador" name="administrador" required>
+                                <select class="form-select" id="administrador" name="administrador">
                                     <option value="">Seleccionar administrador</option>
                                     <?php if (!empty($datos)) : ?>
                                         <?php foreach ($datos as $admin) : ?>

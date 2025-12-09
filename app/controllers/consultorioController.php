@@ -9,7 +9,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';
-        if ($accion === 'actualizar') {
+        if ($accion === 'asignar') {
+            asignarAdminConsultorio();
+        } elseif ($accion === 'actualizar') {
             actualizarConsultorio();
         } else {
             registrarConsultorio();
@@ -65,7 +67,7 @@ function registrarConsultorio()
 
     // Validamos los campos que son obligatorios
     if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatoriossssss');
         exit();
     }
 
@@ -148,7 +150,7 @@ function registrarConsultorio()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio', '/E-VITALIX/admin/consultorios');
+        mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio', '/E-VITALIX/superadmin/consultorios');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el consultorio. Intenta nuevamente');
     }
@@ -193,7 +195,7 @@ function actualizarConsultorio()
 
     // Validamos los campos que son obligatorios
     if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($estado)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatoriosaaaaa');
         exit();
     }
 
@@ -253,4 +255,32 @@ function eliminarConsultorio($id)
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el consultorio. Intenta nuevamente');
     }
     exit();
+}
+
+function asignarAdminConsultorio()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'] ?? '';
+    $administrador = $_POST['administrador'] ?? '';
+
+
+    //POO - INSTANCIAMOS LA CLASE
+    $ObjConsultorio = new Consultorio();
+    $data = [
+        'id' => $id,
+        'administrador' => $administrador
+    ];
+
+    // Enviamos la data al método "asignarAdministrador()" de la clase instanciada anteriormente "Consultorio()"
+    // Y esperamos una respuesta booleana del modelo
+    $resultado = $ObjConsultorio->asignarAdministrador($data);
+
+    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Asignación exitosa', 'Se ha asignado el administrador al consultorio', '/E-VITALIX/superadmin/consultorios-administradores');
+    } else {
+        mostrarSweetAlert('error', 'Error al asignar', 'No se pudo asignar el administrador al consultorio. Intenta nuevamente');
+    }
 }
