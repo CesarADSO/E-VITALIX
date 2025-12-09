@@ -26,6 +26,9 @@ switch ($method) {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (CONSULTORIO)
             eliminarConsultorio($_GET['id']);
         }
+        elseif ($accion === 'desasignar') {
+            desasignarAdminConsultorio($_GET['id']);
+        }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
         if (isset($_GET['id'])) {
@@ -283,4 +286,8 @@ function asignarAdminConsultorio()
     } else {
         mostrarSweetAlert('error', 'Error al asignar', 'No se pudo asignar el administrador al consultorio. Intenta nuevamente');
     }
+}
+
+function desasignarAdminConsultorio($id) {
+    
 }
