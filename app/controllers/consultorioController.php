@@ -9,7 +9,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';
-        if ($accion === 'actualizar') {
+        if ($accion === 'asignar') {
+            asignarAdminConsultorio();
+        } elseif ($accion === 'actualizar') {
             actualizarConsultorio();
         } else {
             registrarConsultorio();
@@ -23,6 +25,8 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (CONSULTORIO)
             eliminarConsultorio($_GET['id']);
+        } elseif ($accion === 'desasignar') {
+            desasignarAdminConsultorio($_GET['id']);
         }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN
@@ -58,13 +62,14 @@ function registrarConsultorio()
     $ciudad = $_POST['ciudad'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $correo_contacto = $_POST['correo'] ?? '';
-    $especialidades = $_POST['especialidades'] ?? '';
-    $horario_atencion = $_POST['horario'] ?? '';
-    $servicios_adicionales = $_POST['adicionales'] ?? '';
+    $especialidades = $_POST['especialidades'] ?? [];
+    $dias = $_POST['dias'] ?? [];
+    $hora_apertura = $_POST['hora_apertura'] ?? '';
+    $hora_cierre = $_POST['hora_cierre'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($horario_atencion)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatoriossssss');
         exit();
     }
 
@@ -101,7 +106,7 @@ function registrarConsultorio()
             mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
             exit();
         }
-        
+
         // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
         $ruta_foto = uniqid('consultorio_') . '.' . $ext;
 
@@ -110,11 +115,23 @@ function registrarConsultorio()
 
         // MOVEMOS EL ARCHIVO AL DESTINO
         move_uploaded_file($file['tmp_name'], $destino);
-
     } else {
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
     }
 
+    $horario_atencion = [
+        'dias' => $dias,
+        'hora_apertura' => $hora_apertura,
+        'hora_cierre' => $hora_cierre
+    ];
+
+    // Convertimos el arreglo de especialidades en un texto JSON
+    // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
+    $especialidades_json = json_encode($especialidades);
+
+    // Convertimos el arreglo de horario a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
+    // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).
+    $horario_atencion_json = json_encode($horario_atencion, JSON_UNESCAPED_UNICODE);
 
     $ObjConsultorio = new Consultorio();
     $data = [
@@ -124,9 +141,8 @@ function registrarConsultorio()
         'ciudad' => $ciudad,
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
-        'especialidades' => $especialidades,
-        'horario_atencion' => $horario_atencion,
-        'servicios_adicionales' => $servicios_adicionales
+        'especialidades' => $especialidades_json,
+        'horario_atencion' => $horario_atencion_json
         // 'id_admin' => $id_admin
     ];
     // Enviamos la data al método "registrar()" de la clase instanciada anteriormente "Consultorio()"
@@ -136,7 +152,7 @@ function registrarConsultorio()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio', '/E-VITALIX/admin/consultorios');
+        mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio', '/E-VITALIX/superadmin/consultorios');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el consultorio. Intenta nuevamente');
     }
@@ -173,16 +189,31 @@ function actualizarConsultorio()
     $ciudad = $_POST['ciudad'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $correo_contacto = $_POST['correo'] ?? '';
-    $especialidades = $_POST['especialidades'] ?? '';
-    $horario_atencion = $_POST['horario'] ?? '';
-    $servicios_adicionales = $_POST['adicionales'] ?? '';
+    $especialidades = $_POST['especialidades'] ?? [];
+    $dias = $_POST['dias'] ?? [];
+    $hora_apertura = $_POST['hora_apertura'] ?? '';
+    $hora_cierre = $_POST['hora_cierre'] ?? '';
     $estado = $_POST['estado'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($horario_atencion)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($estado)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatoriosaaaaa');
         exit();
     }
+
+    $horario_atencion = [
+        'dias' => $dias,
+        'hora_apertura' => $hora_apertura,
+        'hora_cierre' => $hora_cierre
+    ];
+
+    // Convertimos el arreglo de especialidades en un texto JSON
+    // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
+    $especialidades_json = json_encode($especialidades);
+
+    // Convertimos el arreglo de horario a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
+    // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).
+    $horario_atencion_json = json_encode($horario_atencion, JSON_UNESCAPED_UNICODE);
 
     //POO - INSTANCIAMOS LA CLASE
     $ObjConsultorio = new Consultorio();
@@ -193,9 +224,8 @@ function actualizarConsultorio()
         'ciudad' => $ciudad,
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
-        'especialidades' => $especialidades,
-        'horario_atencion' => $horario_atencion,
-        'servicios_adicionales' => $servicios_adicionales,
+        'especialidades' => $especialidades_json,
+        'horario_atencion' => $horario_atencion_json,
         'estado' => $estado
         // 'id_admin' => $id_admin
     ];
@@ -206,7 +236,7 @@ function actualizarConsultorio()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado el consultorio', '/E-VITALIX/admin/consultorios');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado el consultorio', '/E-VITALIX/superadmin/consultorios');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se puedo actualizar el consultorio. Intenta nuevamente');
     }
@@ -222,9 +252,50 @@ function eliminarConsultorio($id)
     // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el consultorio', '/E-VITALIX/admin/consultorios');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el consultorio', '/E-VITALIX/superadmin/consultorios');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el consultorio. Intenta nuevamente');
     }
     exit();
+}
+
+function asignarAdminConsultorio()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'] ?? '';
+    $administrador = $_POST['administrador'] ?? '';
+
+
+    //POO - INSTANCIAMOS LA CLASE
+    $ObjConsultorio = new Consultorio();
+    $data = [
+        'id' => $id,
+        'administrador' => $administrador
+    ];
+
+    // Enviamos la data al método "asignarAdministrador()" de la clase instanciada anteriormente "Consultorio()"
+    // Y esperamos una respuesta booleana del modelo
+    $resultado = $ObjConsultorio->asignarAdministrador($data);
+
+    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Asignación exitosa', 'Se ha asignado el administrador al consultorio', '/E-VITALIX/superadmin/consultorios-administradores');
+    } else {
+        mostrarSweetAlert('error', 'Error al asignar', 'No se pudo asignar el administrador al consultorio. Intenta nuevamente');
+    }
+}
+
+function desasignarAdminConsultorio($id)
+{
+    $objConsultorio = new Consultorio();
+
+    $resultado = $objConsultorio->desasignarAdminConsultorio($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'desasignación exitosa', 'El consultorio ha quedado sin administrador', '/E-VITALIX/superadmin/consultorios-administradores');
+    } else {
+        mostrarSweetAlert('error', 'Error al desasignar', 'No se pudo desasignar el administrador al consultorio. Intenta nuevamente');
+    }
 }

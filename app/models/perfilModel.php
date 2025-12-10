@@ -16,7 +16,7 @@ class Perfil
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT usuarios.*, roles.nombre AS roles_nombre, perfiles.nombres AS admin_nombre, perfiles.apellidos, perfiles.telefono, perfiles.foto FROM perfiles INNER JOIN usuarios ON perfiles.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE usuarios.id = :id LIMIT 1";
+            $consulta = "SELECT usuarios.*, roles.nombre AS roles_nombre, superadministradores.nombres AS superadmin_nombre, superadministradores.apellidos, superadministradores.telefono, superadministradores.foto FROM superadministradores INNER JOIN usuarios ON superadministradores.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE usuarios.id = :id LIMIT 1";
 
             $resultado = $this->conexion->prepare($consulta);
 
@@ -26,7 +26,7 @@ class Perfil
 
             return $resultado->fetch();
         } catch (PDOException $e) {
-            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            error_log("Error en Perfil::mostrarPerfilAdmin->" . $e->getMessage());
             return [];
         }
     }
@@ -38,7 +38,7 @@ class Perfil
 
 
             // UPDATE EN PERFILES
-            $actualizarInfo = "UPDATE perfiles SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono WHERE id_usuario = :id";
+            $actualizarInfo = "UPDATE superadministradores SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono WHERE id_usuario = :id";
 
             $resultado = $this->conexion->prepare($actualizarInfo);
 
@@ -130,7 +130,7 @@ class Perfil
         try {
             
             // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $actualizar = "UPDATE perfiles SET foto = :foto WHERE id_usuario = :id";
+            $actualizar = "UPDATE superadministradores SET foto = :foto WHERE id_usuario = :id";
 
             $resultado = $this->conexion->prepare($actualizar);
 

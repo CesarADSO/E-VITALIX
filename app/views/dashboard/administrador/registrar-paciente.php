@@ -134,27 +134,30 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Paso 2: Contacto -->
                             <div class="wizard-step" id="step2">
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" required>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="ciudad" class="form-label">Ciudad <span class="text-danger">*</span></label>
+                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad" required>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección <span class="text-danger">*</span></label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="foto" class="form-label">Foto</label>
-                                    <input type="file" name="foto" class="form-control" id="foto" accept=".jpg,.png,.jpeg">
-                                    <div class="form-text">Formatos permitidos: jpg, png, jpeg. Tamaño máximo: 2MB</div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="direccion" class="form-label">Dirección <span class="text-danger">*</span></label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" required>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="foto" class="form-label">Foto</label>
+                                        <input type="file" name="foto" class="form-control" id="foto" accept=".jpg,.png,.jpeg">
+                                        <div class="form-text">Formatos permitidos: jpg, png, jpeg. Tamaño máximo: 2MB</div>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                     <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
-                                    <input type="password" name="clave" class="form-control" id="password" placeholder="Ingresa la contraseña" required>
-                                    <div class="form-text">Mínimo 8 caracteres</div>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
@@ -209,13 +212,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Paso 4: Contacto de Emergencia -->
                             <div class="wizard-step" id="step4">
-                                <div class="mb-3">
-                                    <label for="nombre_contacto" class="form-label">Nombre Completo del Contacto</label>
-                                    <input type="text" name="nombreContacto" class="form-control" id="nombre_contacto" placeholder="Nombre del contacto de emergencia">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
-                                    <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" placeholder="Teléfono de emergencia">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="nombre_contacto" class="form-label">Nombre Completo del Contacto</label>
+                                        <input type="text" name="nombreContacto" class="form-control" id="nombre_contacto" placeholder="Nombre del contacto de emergencia">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
+                                        <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" placeholder="Teléfono de emergencia">
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="direccion_contacto" class="form-label">Dirección del Contacto</label>
@@ -268,7 +273,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
-                                    <button type="submit" class="btn btn-success">Registrar Paciente</button>
+                                    <button type="submit" class="btn btn-primary">Registrar Paciente</button>
                                 </div>
                             </div>
                         </form>

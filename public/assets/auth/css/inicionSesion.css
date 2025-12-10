@@ -162,8 +162,7 @@
      text-decoration: underline;
  }
 
- .btn-azul,
- .btn-azul-2 {
+ .btn-azul {
      display: inline-block;
      /* Permite que los <a> se comporten como botones */
      text-align: center;
@@ -181,38 +180,60 @@
      transition: all 0.3s ease;
  }
 
- /* Estilo hover para ambos */
- .btn-azul:hover,
- .btn-azul-2:hover {
-     background-color: var(--tercer-azul);
-     transform: translateY(-2px);
-     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
- }
-
-
- /* Separación del botón inferior */
  .btn-azul-2 {
-     margin-top: 15px;
- }
-
- @media (max-width: 576px) {
-     .login-card {
-         padding: 40px 25px;
+ 
+         display: inline-block;
+         /* Permite que los <a> se comporten como botones */
+         text-align: center;
+         text-decoration: none;
+         /* Quita el subrayado de los enlaces */
+         border-radius: 10px;
+         width: 100%;
+         color: var(--color-primario);
+         background: var(--gris-proyecto);
+         border: none;
+         padding: 15px;
+         font-size: var(--parrafos);
+         font-weight: 600;
+         cursor: pointer;
+         transition: all 0.3s ease;
      }
 
-     .login-title {
-         font-size: 20px;
+     /* Estilo hover para ambos */
+     .btn-azul:hover,
+     .btn-azul-2:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
      }
 
-     .form-options {
-         flex-direction: column;
-         align-items: flex-start;
-         gap: 15px;
+
+     /* Separación del botón inferior */
+     .btn-azul-2 {
+         margin-top: 15px;
      }
 
-     .logo-placeholder {
-         width: 150px;
-         height: 50px;
-         font-size: 18px;
+     .login-pharagraf {
+         color: var(--blanco-color);
      }
- }
+
+     @media (max-width: 576px) {
+         .login-card {
+             padding: 40px 25px;
+         }
+
+         .login-title {
+             font-size: 20px;
+         }
+
+         .form-options {
+             flex-direction: column;
+             align-items: flex-start;
+             gap: 15px;
+         }
+
+         .logo-placeholder {
+             width: 150px;
+             height: 50px;
+             font-size: 18px;
+         }
+     }

@@ -37,7 +37,7 @@
 
                     <form id="formRecuperar" action="<?= BASE_URL ?>/generar-clave" method="POST">
                         <div>
-                            <label for="correo">Correo</label>
+                            <label class="correo" for="correo">Correo</label>
                             <input
                                 type="email"
                                 class="campos-formulario"

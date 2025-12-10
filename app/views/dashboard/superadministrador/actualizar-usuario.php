@@ -1,5 +1,5 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_admin.php';
+    require_once BASE_PATH . '/app/helpers/session_superadmin.php';
     // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
     require_once BASE_PATH . '/app/controllers/usuarioController.php';
 
@@ -11,7 +11,7 @@
 ?>
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 
@@ -20,7 +20,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <!-- Main Content -->
@@ -30,7 +30,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="EspecialistaSection">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
@@ -48,9 +48,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- Formulario de Registro de Usuarios -->
                     <div class="bg-white rounded shadow-sm p-4">
                         <h4 class="mb-4">Actualizar Usuario</h4>
-                        <p class="text-muted mb-4 texto">edita tu cuenta de usuario en el sistema</p>
+                        <p class="text-muted mb-4 texto">Edite la información del usuario seleccionado.</p>
 
-                        <form id="usuarioForm"  action="<?= BASE_URL ?>/admin/actualizar-usuario" method="POST" enctype="multipart/form-data">
+                        <form id="usuarioForm"  action="<?= BASE_URL ?>/superadmin/actualizar-usuario" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?= $usuarios['id'] ?>"> 
                             <input type="hidden" name="accion" value="actualizar"> 
                             <div class="row">
@@ -66,7 +66,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="col-md-6 mb-3">
                                     <label for="password" class="form-label">Contraseña</label>
                                     <input type="password" class="form-control" id="password" name="contrasena" 
-                                        placeholder="Ingresa una contraseña segura" required>
+                                        placeholder="Ingresa una contraseña segura">
                                     <div class="form-text">Mínimo 8 caracteres</div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
-                                <a href="<?= BASE_URL ?>/admin/usuarios" class="btn btn-outline-secondary">Cancelar</a>
+                                <a href="<?= BASE_URL ?>/superadmin/usuarios" class="btn btn-outline-secondary">Cancelar</a>
                                 <button type="submit" class="btn boton" >Actualizar Usuario</button>
                             </div>
                         </form>
@@ -103,5 +103,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
     
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>

@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE mostrarPerfilAdmin($id)
 
@@ -16,7 +16,7 @@ $perfil = mostrarPerfilAdmin($id);
 
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 <body>
@@ -24,7 +24,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <!-- Main Content -->
@@ -34,7 +34,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="perfilSection" style="display: block;">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <h4 class="mb-4">Perfil</h4>
@@ -55,14 +55,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                         <img class="adminImg"
                                             src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>"
-                                            alt="<?= $perfil['admin_nombre'] ?>">
+                                            alt="<?= $perfil['superadmin_nombre'] ?>">
                                     </label>
 
                                     <!-- Input file oculto -->  
                                     <input type="file" id="foto" name="foto" accept=".jpg, .png, .jpeg" style="display: none;">
                                     <button class="enviarFoto" type="submit"><i class="bi bi-check-lg"></i></button>
                                 </form>
-                                <h6 style="font-weight: 600;">@<?= $perfil['admin_nombre'] ?></h6>
+                                <h6 style="font-weight: 600;">@<?= $perfil['superadmin_nombre'] ?></h6>
                                 <p style="font-size: 13px; color: var(--gris-proyecto);"><?= $perfil['email'] ?></p>
                             </div>
 
@@ -70,7 +70,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <h6 style="font-weight: 600; margin-bottom: 15px;">Información</h6>
                                 <div style="font-size: 14px; margin-bottom: 10px;">
                                     <span style="color: var(--gris-proyecto);">Nombres:</span> <span
-                                        style="color: var(--color-primario);"><?= $perfil['admin_nombre'] ?>, <?= $perfil['apellidos'] ?></span>
+                                        style="color: var(--color-primario);"><?= $perfil['superadmin_nombre'] ?>, <?= $perfil['apellidos'] ?></span>
                                 </div>
                                 <div style="font-size: 14px; margin-bottom: 10px;">
                                     <span style="color: var(--gris-proyecto);">Email:</span> <?= $perfil['email'] ?>
@@ -113,7 +113,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <label
                                                 style="font-size: 13px; color: var(--gris-proyecto); margin-bottom: 5px;">Nombres</label>
                                             <input type="text" name="nombres" class="form-control campos-formulario" id="nombresInput"
-                                                placeholder="Pepito Rodrick ..." value="<?= $perfil['admin_nombre'] ?>">
+                                                placeholder="Pepito Rodrick ..." value="<?= $perfil['superadmin_nombre'] ?>">
                                         </div>
                                         <div class="col-md-6">
                                             <label
@@ -190,5 +190,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
     </div>
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>

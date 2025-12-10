@@ -32,6 +32,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     ?>
 
                     <!-- Especialista Header -->
+                    <h2>GESTIÓN DE ESPECIALISTAS</h2>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -60,30 +61,28 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </tr>
                             </thead>
                             <tbody>
-                             <?php if(!empty($especialistas)) :?>
-                                <?php foreach($especialistas as $especialista):?>
-                                <tr>
-                                    <td><div class="user-avatar">
-                                        <img class="especialistaImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" alt="<?= $especialista['nombres'] ?>">
-                                    </div></td>
-                                    <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
-                                    <td><?= $especialista['telefono'] ?></td>
-                                    <td><?= $especialista['especialidad'] ?></td>
-                                    <td><?= $especialista['estado'] ?></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <i class="bi bi-three-dots text-muted" style="cursor: pointer;" data-bs-toggle="dropdown"></i>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="bi bi-pencil"></i>Editar</a></li>
-                                                <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>/admin/eliminar-especialista?accion=eliminar&id=<?= $especialista['id'] ?>&idUsuario=<?= $especialista['id_usuario'] ?>"><i class="bi bi-trash"></i> Eliminar</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php endforeach;?>
-                            <?php else: ?>
-                                <td>No hay especialistas registrados</td>
-                            <?php endif;?>
+                                <?php if (!empty($especialistas)) : ?>
+                                    <?php foreach ($especialistas as $especialista): ?>
+                                        <tr>
+                                            <td>
+                                                <div class="user-avatar">
+                                                    <img class="especialistaImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" alt="<?= $especialista['nombres'] ?>">
+                                                </div>
+                                            </td>
+                                            <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
+                                            <td><?= $especialista['telefono'] ?></td>
+                                            <td><?= $especialista['especialidad'] ?></td>
+                                            <td><?= $especialista['estado'] ?></td>
+                                            <td>
+                                                <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/eliminar-especialista?accion=eliminar&id=<?= $especialista['id'] ?>&idUsuario=<?= $especialista['id_usuario'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <td>No hay especialistas registrados</td>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>
@@ -94,6 +93,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         </div>
     </div>
 
-<?php
+    <?php
     include_once __DIR__ . '/../../layouts/footer_administrador.php';
-?>
+    ?>

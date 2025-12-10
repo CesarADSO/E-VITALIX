@@ -59,6 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $redirecUrl = '/E-VITALIX/especialista/dashboard';
             $mensaje = 'Bienvenido Especialista';
             break;
+        
+        case 4:
+            $redirecUrl = '/E-VITALIX/asistente/dashboard';
+            $mensaje = 'Bienvenido asistente';
+            break;
+        case 5:
+            $redirecUrl = '/E-VITALIX/superadmin/dashboard';
+            $mensaje = 'Bienvenido Superadministrador';
+            break;
     }
 
     mostrarSweetAlert('success', 'Ingreso Exitoso', $mensaje, $redirecUrl);

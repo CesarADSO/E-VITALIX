@@ -17,13 +17,16 @@ class Paciente
             // Iniciar transacción
             $this->conexion->beginTransaction();
 
+            // HASEAR LA CONTRASEÑA
+            $claveEncriptada = password_hash($data['numero_documento'], PASSWORD_DEFAULT);
+
             // 1. Insertar usuario
             $insertarUsuario = "INSERT INTO usuarios(email, contrasena, id_rol, estado) 
                                VALUES(:email, :contrasena, :id_rol, 'Activo')";
 
             $resultadoUsuario = $this->conexion->prepare($insertarUsuario);
             $resultadoUsuario->bindParam(':email', $data['email']);
-            $resultadoUsuario->bindParam(':contrasena', $data['contrasena']);
+            $resultadoUsuario->bindParam(':contrasena', $claveEncriptada);
             $resultadoUsuario->bindParam(':id_rol', $data['id_rol']);
 
             $resultadoUsuario->execute();
@@ -40,7 +43,8 @@ class Paciente
                 numero_documento, 
                 fecha_nacimiento, 
                 genero, 
-                telefono, 
+                telefono,
+                ciudad,
                 direccion, 
                 foto, 
                 eps, 
@@ -58,7 +62,8 @@ class Paciente
                 :numero_documento, 
                 :fecha_nacimiento, 
                 :genero, 
-                :telefono, 
+                :telefono,
+                :ciudad,
                 :direccion, 
                 :foto, 
                 :eps, 
@@ -79,6 +84,7 @@ class Paciente
             $resultadoPaciente->bindParam(':fecha_nacimiento', $data['fecha_nacimiento']);
             $resultadoPaciente->bindParam(':genero', $data['genero']);
             $resultadoPaciente->bindParam(':telefono', $data['telefono']);
+            $resultadoPaciente->bindParam(':ciudad', $data['ciudad']);
             $resultadoPaciente->bindParam(':direccion', $data['direccion']);
             $resultadoPaciente->bindParam(':foto', $data['foto']);
             $resultadoPaciente->bindParam(':eps', $data['eps']);
@@ -120,6 +126,7 @@ class Paciente
                             p.fecha_nacimiento,
                             p.genero,
                             p.telefono,
+                            p.ciudad,
                             p.direccion,
                             p.foto,
                             p.eps,
