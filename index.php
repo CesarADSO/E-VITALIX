@@ -267,6 +267,10 @@ switch ($request) {
     case '/paciente/agendarCita':
         require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
         break;
+     case '/administrador/dashboard':
+        require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
+        break;
+
 
     default:
         http_response_code(404);

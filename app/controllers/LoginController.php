@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
         
         case 2:
-            $redirecUrl = '/E-VITALIX/admin/dashboard';
+            $redirecUrl = '/E-VITALIX/administrador/dashboard';
             $mensaje = 'Bienvenido Administrador';
             break;
         
