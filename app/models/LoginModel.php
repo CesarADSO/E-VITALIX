@@ -80,10 +80,23 @@ class Login
                 'nombres' => $nombres,
                 'apellidos' => $apellidos
             ];
-
         } catch (PDOException $e) {
             error_log("Error de autenticacion: " . $e->getMessage());
             return ['error' => 'Error interno del servidor'];
+        }
+    }
+
+    public function obtenerConsultorioPorAdmin($id_admin)
+    {
+        try {
+            $sql = "SELECT id FROM consultorios WHERE id_administrador = :id_admin LIMIT 1";
+            $resultado = $this->conexion->prepare($sql);
+            $resultado->bindParam(':id_admin', $id_admin);
+            $resultado->execute();
+            return $resultado->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en obtenerConsultorioPorAdmin: " . $e->getMessage());
+            return null;
         }
     }
 }

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Validamos que los campos/variables no estén vacias
-    
+
     if (empty($correo) || empty($clave)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar');
         exit();
@@ -33,12 +33,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Si pasa esta línea, el usuario es válido
     session_start();
+
+    // Guardamos los datos principales del usuario en la sesión
     $_SESSION['user'] = [
         'id' => $resultado['id_usuario'],
         'nombres' => $resultado['nombres'],
         'apellidos' => $resultado['apellidos'],
         'rol' => $resultado['id_rol']
     ];
+    // Si el usuario es administrador de consultorio (rol 2)
+    if ($resultado['id_rol'] == 2) { // 2 = Administrador de consultorio
+        // Obtenemos el consultorio asociado a este administrador
+        $consultorio = $login->obtenerConsultorioPorAdmin($resultado['id_usuario']);
+        // Si se encontró el consultorio y tiene un id válido
+        if ($consultorio && isset($consultorio['id'])) {
+            // Guardamos el id del consultorio en la sesión
+            $_SESSION['user']['id_consultorio'] = $consultorio['id'];
+        }
+    }
 
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';
@@ -49,17 +61,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $redirecUrl = '/E-VITALIX/paciente/dashboard';
             $mensaje = 'Bienvenido Paciente';
             break;
-        
+
         case 2:
             $redirecUrl = '/E-VITALIX/admin/dashboard';
             $mensaje = 'Bienvenido Administrador';
             break;
-        
+
         case 3:
             $redirecUrl = '/E-VITALIX/especialista/dashboard';
             $mensaje = 'Bienvenido Especialista';
             break;
-        
+
         case 4:
             $redirecUrl = '/E-VITALIX/asistente/dashboard';
             $mensaje = 'Bienvenido asistente';
