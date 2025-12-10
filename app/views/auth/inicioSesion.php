@@ -52,10 +52,7 @@ header("Expires: 0");
                     </div>
 
                     <div class="form-options">
-                        <div class="checkbox-container">
-                            <input type="checkbox" id="recordarme" name="recordarme" value="1">
-                            <label for="recordarme">Recordarme</label>
-                        </div>
+                        
 
                         <a href="recuperacion" class="forgot-password">
                             ¿Olvidó su contraseña?

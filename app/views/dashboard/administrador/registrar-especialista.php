@@ -8,9 +8,9 @@ require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR DE LOS ROLES QUE TIENE LA FUNCIÓN DE mostrarConsultorios()
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
-    $datos = traertipoDocumento();
+$datos = traertipoDocumento();
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
-    $consultorios = mostrarConsultorios();
+$consultorios = mostrarConsultorios();
 ?>
 
 
@@ -86,12 +86,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <!-- Los tipos de documento se cargarán desde la base de datos -->
                                             <option value="">Seleccionar tipo</option>
                                             <?php if (!empty($datos)) : ?>
-                                            <?php foreach($datos as $tipoDocumento) :?>
-                                            <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
-                                            <?php endforeach;?>
+                                                <?php foreach ($datos as $tipoDocumento) : ?>
+                                                    <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
+                                                <?php endforeach; ?>
                                             <?php else : ?>
                                                 <option value="">No hay tipos de documento registrados</option>
-                                            <?php endif;?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -131,25 +131,25 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Paso 2: Contacto -->
                             <div class="wizard-step" id="step2">
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="direccion" class="form-label">Dirección</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="foto" class="form-label">Foto</label>
-                                    <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Contraseña</label>
-                                    <input type="password" name="clave" class="form-control" id="password" placeholder="Ingresa la contraseña">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="foto" class="form-label">Foto</label>
+                                        <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>

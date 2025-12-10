@@ -33,7 +33,7 @@ switch ($method) {
             // Esta función llena toda la tabla de usuarios
            $datos = mostrarUsuario();
 
-            require_once __DIR__ . '/../views/dashboard/administrador/usuarios.php';
+            require_once __DIR__ . '/../views/dashboard/superadministrador/usuarios.php';
         }
         break;
     // ESTO ES POR SI AGREGAMOS UNA API RESTFUL
@@ -50,7 +50,6 @@ switch ($method) {
         echo "Método no permitido";
         break;
 }
-
 
 function mostrarUsuario()
 {
@@ -82,7 +81,7 @@ function actualizarUsuario()
     $estado = $_POST['estado'] ?? '';
    
     // Validamos los campos que son obligatorios
-       if  (empty($email) || empty($contrasena) || empty($estado)) {
+       if  (empty($email) || empty($estado)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -103,9 +102,9 @@ function actualizarUsuario()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado el Usuario', '/E-VITALIX/admin/usuarios');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado el Usuario', '/E-VITALIX/superadmin/usuarios');
     } else {
-        mostrarSweetAlert('error', 'Error al actualizar', 'No se puedo actualizar el cUsuario. Intenta nuevamente');
+        mostrarSweetAlert('error', 'Error al actualizar', 'No se puedo actualizar el Usuario. Intenta nuevamente');
     }
     exit();
 }

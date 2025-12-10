@@ -44,9 +44,9 @@ function registrarPaciente()
     $fecha_nacimiento = $_POST['nacimiento'] ?? '';
     $genero = $_POST['genero'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
+    $ciudad = $_POST['ciudad'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $email = $_POST['correo'] ?? '';
-    $contrasena = $_POST['clave'] ?? '';
     $eps = $_POST['eps'] ?? '';
     $rh = $_POST['rh'] ?? '';
     $historial_medico = $_POST['historial'] ?? null;
@@ -58,7 +58,7 @@ function registrarPaciente()
     // Validamos los campos obligatorios
     if (
         empty($nombres) || empty($apellidos) || empty($id_tipo_documento) ||
-        empty($numero_documento) || empty($fecha_nacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($contrasena)
+        empty($numero_documento) || empty($fecha_nacimiento) || empty($genero) || empty($telefono) || empty($ciudad) || empty($direccion) || empty($email)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
@@ -69,8 +69,8 @@ function registrarPaciente()
         mostrarSweetAlert('error', 'Email inválido', 'Por favor ingresa un email válido');
         exit();
     }
-    // hashear la contraseña
-    $contrasena_hash = password_hash($contrasena, PASSWORD_BCRYPT);
+    // // hashear la contraseña
+    // $contrasena_hash = password_hash($, PASSWORD_BCRYPT);
     // Logica para cargar imagenes
     $ruta_foto = null;
     if (!empty($_FILES['foto']['name'])) {
@@ -104,10 +104,10 @@ function registrarPaciente()
         'fecha_nacimiento' => $fecha_nacimiento,
         'genero' => $genero,
         'telefono' => $telefono,
+        'ciudad' => $ciudad,
         'direccion' => $direccion,
         'foto' => $ruta_foto,
         'email' => $email,
-        'contrasena' => $contrasena_hash,
         'id_rol' => $id_rol,
         'eps' => $eps,
         'rh' => $rh,

@@ -7,7 +7,7 @@ if (!isset($_SESSION['user'])) {
 }
 
 // Validamos que el rol sea el correspondiente
-if ($_SESSION['user']['rol'] != 2) {
+if ($_SESSION['user']['rol'] != 5) {
     header ('Location: /E-VITALIX/login');
     exit();
 }
