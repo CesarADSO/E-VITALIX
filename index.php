@@ -258,6 +258,15 @@ switch ($request) {
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
         break;
+     case '/paciente/dashboard':
+        require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
+        break;
+    case '/paciente/ListaDeCitas':
+        require BASE_PATH . '/app/views/dashboard/paciente/ListaDeCitas.php';
+        break;
+    case '/paciente/agendarCita':
+        require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
+        break;
 
     default:
         http_response_code(404);

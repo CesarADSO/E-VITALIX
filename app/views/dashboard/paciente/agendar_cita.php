@@ -57,7 +57,7 @@ $datos = mostrarCitas();
                                 <label>Especialista</label>
                                 <select name="id_especialista" id="id_especialista" class="form-control" required>
                                     <option value="">Seleccione...</option>
-                                    <option value="cardiologo">Cardiologo</option>
+                                    <option value="cardiologo">Luis</option>
                                     <option value="odontologo">odontologo</option>
 
 
