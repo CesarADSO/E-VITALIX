@@ -141,7 +141,7 @@ switch ($request) {
     case '/superadmin/consultorios-administradores':
         require BASE_PATH . '/app/views/dashboard/superadministrador/consultorios-administradores.php';
         break;
-    
+
     case '/superadmin/asignar-administrador':
         require BASE_PATH . '/app/views/dashboard/superadministrador/asignar-administrador.php';
         break;
@@ -149,7 +149,11 @@ switch ($request) {
     case '/superadmin/asignar-admin-consultorio':
         require BASE_PATH . '/app/controllers/consultorioController.php';
         break;
-    
+
+    case '/superadmin/desasignar-administrador':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
     case '/superadmin/perfil':
         require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-admin.php';
         break;
@@ -198,17 +202,17 @@ switch ($request) {
 
     case '/admin/actualizar-disponibilidad':
         require BASE_PATH . '/app/views/dashboard/administrador/actualizar-disponibilidad.php';
-        break; 
-        
+        break;
+
     case '/admin/guardar-cambios-disponibilidad':
         require BASE_PATH . '/app/controllers/disponibilidadController.php';
-        break; 
-    
+        break;
+
     case '/admin/eliminar-disponibilidad':
         require BASE_PATH . '/app/controllers/disponibilidadController.php';
-        break; 
+        break;
 
-    
+
     case '/admin/guardar-foto-perfil':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
@@ -257,7 +261,7 @@ switch ($request) {
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
         break;
-        
+
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';

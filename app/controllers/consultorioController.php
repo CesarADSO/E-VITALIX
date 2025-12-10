@@ -25,8 +25,7 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (CONSULTORIO)
             eliminarConsultorio($_GET['id']);
-        }
-        elseif ($accion === 'desasignar') {
+        } elseif ($accion === 'desasignar') {
             desasignarAdminConsultorio($_GET['id']);
         }
 
@@ -288,6 +287,15 @@ function asignarAdminConsultorio()
     }
 }
 
-function desasignarAdminConsultorio($id) {
-    
+function desasignarAdminConsultorio($id)
+{
+    $objConsultorio = new Consultorio();
+
+    $resultado = $objConsultorio->desasignarAdminConsultorio($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'desasignación exitosa', 'El consultorio ha quedado sin administrador', '/E-VITALIX/superadmin/consultorios-administradores');
+    } else {
+        mostrarSweetAlert('error', 'Error al desasignar', 'No se pudo desasignar el administrador al consultorio. Intenta nuevamente');
+    }
 }

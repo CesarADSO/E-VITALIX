@@ -130,4 +130,21 @@ class Consultorio
             return false;
         }
     }
+
+    public function desasignarAdminConsultorio($id) {
+        try {
+            $desasignar = "UPDATE consultorios SET id_administrador = null WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($desasignar);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en consultorio::desasignarAdminConsultorio->" . $e->getMessage());
+            return false;
+        }
+    }
 }

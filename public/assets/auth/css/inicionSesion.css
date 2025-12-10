@@ -202,7 +202,6 @@
      /* Estilo hover para ambos */
      .btn-azul:hover,
      .btn-azul-2:hover {
-         background-color: var(--tercer-azul);
          transform: translateY(-2px);
          box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
      }
