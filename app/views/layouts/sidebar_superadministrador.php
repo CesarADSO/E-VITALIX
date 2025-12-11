@@ -7,7 +7,7 @@ require_once BASE_PATH . '/app/controllers/perfilController.php';
 $id = $_SESSION['user']['id'];
 
 // EN LA VARIABLE PERFIL LLAMAMOS LA FUNCIÓN DEL CONTROLADOR mostrarPerfilAdmin(id)
-$perfil = mostrarPerfilAdmin($id);
+$perfil = mostrarPerfilSuperAdmin($id);
 
 ?>
 

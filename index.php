@@ -155,7 +155,7 @@ switch ($request) {
         break;
 
     case '/superadmin/perfil':
-        require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-admin.php';
+        require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-superAdmin.php';
         break;
 
 

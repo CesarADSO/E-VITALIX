@@ -12,7 +12,7 @@ class Perfil
 
     // ESTA FUNCIÓN SE DUPLICA POR CADA ROL
 
-    public function mostrarPerfilAdmin($id)
+    public function mostrarPerfilSuperAdmin($id)
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
@@ -31,7 +31,7 @@ class Perfil
         }
     }
 
-    public function actualizarInfoPersonalAdmin($data)
+    public function actualizarInfoPersonalSuperAdmin($data)
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
@@ -71,7 +71,7 @@ class Perfil
         }
     }
 
-    public function actualizarContrasenaAdmin($data)
+    public function actualizarContrasenaSuperAdmin($data)
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
@@ -126,7 +126,7 @@ class Perfil
         }
     }
 
-    public function actualizarFotoAdmin($data) {
+    public function actualizarFotoSuperAdmin($data) {
         try {
             
             // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO

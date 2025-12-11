@@ -11,7 +11,7 @@ $id = $_SESSION['user']['id'];
 
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
 
-$perfil = mostrarPerfilAdmin($id);
+$perfil = mostrarPerfilSuperAdmin($id);
 ?>
 
 
@@ -46,7 +46,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                                 <form class="form-foto" action="<?= BASE_URL ?>/admin/guardar-foto-perfil" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
-                                    <input type="hidden" name="accion" value="actualizarFotoAdmin">
+                                    <input type="hidden" name="accion" value="actualizarFotoSuperAdmin">
                                     <!-- FOTO CON INPUT OCULTO -->
                                     <label for="foto" class="user-avatar avatar-editable"
                                         style="width: 150px; height: 150px; border-radius: 50%; 
@@ -107,7 +107,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <h6 style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">Detalles</h6>
                                 <form action="<?= BASE_URL ?>/admin/guardar-configuracion-usuario" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
-                                    <input type="hidden" name="accion" value="actualizarInfoPersonalAdmin">
+                                    <input type="hidden" name="accion" value="actualizarInfoPersonalSuperAdmin">
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label
@@ -151,7 +151,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                                 <form action="<?= BASE_URL ?>/admin/cambiar-contrasena" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
-                                    <input type="hidden" name="accion" value="actualizarContrasenaAdmin">
+                                    <input type="hidden" name="accion" value="actualizarContrasenaSuperAdmin">
                                     <h6 style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">Contraseña actual
                                     </h6>
                                     <div class="row mb-3">
