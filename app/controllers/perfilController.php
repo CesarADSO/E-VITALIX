@@ -14,7 +14,7 @@ function mostrarPerfilSuperAdmin($id) {
 function mostrarPerfilAdmin($id) {
     $objPerfil = new Perfil();
 
-    $usuario = $objPerfil->mostrarPerfiAdmin($id);
+    $usuario = $objPerfil->mostrarPerfilAdmin($id);
 
     return $usuario;
 }
@@ -166,7 +166,7 @@ function actContrasenaSuperAdmin() {
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/admin/perfil');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/superadmin/perfil');
     }
     else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su contraseña. Intenta nuevamente');
