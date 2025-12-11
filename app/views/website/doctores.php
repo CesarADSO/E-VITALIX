@@ -135,7 +135,7 @@
                     <?php else: ?>
                         <p>No hay especialistas registrados.</p>
                     <?php endif; ?>
-                    <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="200">
+                    <!-- <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="200">
                         <div class="card tarjeta" style="width: 18rem;">
                             <img src="public/assets/website/img/doctor 2.svg" class="card-img-top" alt="César">
                             <div class="card-body cuerpo-tarjeta">
@@ -224,7 +224,7 @@
                             </div>
                             <a class="perfil" href="#">Ver perfil</a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
