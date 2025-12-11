@@ -111,40 +111,4 @@ class Consultorio
             return false;
         }
     }
-
-    public function asignarAdministrador($data)
-    {
-        try {
-            $asignar = "UPDATE consultorios SET id_administrador = :id_administrador WHERE id = :id";
-
-            $resultado = $this->conexion->prepare($asignar);
-            $resultado->bindParam(':id', $data['id']);
-            $resultado->bindParam(':id_administrador', $data['administrador']);
-
-            $resultado->execute();
-
-            return true;
-
-        } catch (PDOException $e) {
-            error_log("Error en consultorio::asignarAdministrador->" . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function desasignarAdminConsultorio($id) {
-        try {
-            $desasignar = "UPDATE consultorios SET id_administrador = null WHERE id = :id";
-
-            $resultado = $this->conexion->prepare($desasignar);
-
-            $resultado->bindParam(':id', $id);
-
-            $resultado->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            error_log("Error en consultorio::desasignarAdminConsultorio->" . $e->getMessage());
-            return false;
-        }
-    }
 }

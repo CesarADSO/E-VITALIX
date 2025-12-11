@@ -32,8 +32,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
-                    <h4 class="mb-4">Asignación de administradores a consultorios</h4>
-                    <p class="mb-4">Asigne o modifique el administrador responsable de cada consultorio desde este módulo.</p>
+                    <h4 class="mb-4">Asignación de consultorios a administradores</h4>
+                    <p class="mb-4">Asigne o modifique un consultorio a cada administrador desde este módulo.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -63,27 +63,27 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <?php if (!empty($datos)) :  ?>
                                     <?php foreach ($datos as $administrador) : ?>
                                         <tr>
-                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
-                                            <td><?= $administrador['nombres'] ?></td>
+                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
+                                            <td><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></td>
                                             <td>
                                                 <?php
                                                     if (empty($administrador['id_consultorio']) || $administrador['id_consultorio'] === 0) {
                                                         echo '<span>Sin consultorio asignado</span>';
                                                     }
                                                     else {
-                                                        echo $administrador['nombres'] . ' ' . $administrador['apellidos'];
+                                                        echo $administrador['nombre_consultorio'];
                                                     }
                                                 ?>
                                             </td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/superadmin/asignar-administrador?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-plus"></i></a>
-                                                <a href="<?= BASE_URL ?>/superadmin/desasignar-administrador?accion=desasignar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/asignar-consultorio?id=<?= $administrador['id'] ?>"><i class="fa-solid fa-plus"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/desasignar-consultorio?accion=desasignar&id=<?= $administrador['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>
-                                        <td>No hay consultorios registrados!</td>
+                                        <td>No hay administradores registrados</td>
                                     </tr>
                                 <?php endif; ?>
                             </tbody>

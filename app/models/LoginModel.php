@@ -85,31 +85,4 @@ class Login
             return ['error' => 'Error interno del servidor'];
         }
     }
-
-    // Busca el consultorio asociado a un usuario administrador
-    public function obtenerConsultorioPorAdmin($id_usuario)
-    {
-        try {
-            // Primero, obtener el id del administrador en la tabla administradores
-            $sqlAdmin = "SELECT id FROM administradores WHERE id_usuario = :id_usuario LIMIT 1";
-            $stmtAdmin = $this->conexion->prepare($sqlAdmin);
-            $stmtAdmin->bindParam(':id_usuario', $id_usuario);
-            $stmtAdmin->execute();
-            $admin = $stmtAdmin->fetch(PDO::FETCH_ASSOC);
-
-            if (!$admin || !isset($admin['id'])) {
-                return null; // No se encontró el administrador
-            }
-
-            // Ahora, buscar el consultorio con ese id_administrador
-            $sqlConsultorio = "SELECT id FROM consultorios WHERE id_administrador = :id_admin LIMIT 1";
-            $stmtConsultorio = $this->conexion->prepare($sqlConsultorio);
-            $stmtConsultorio->bindParam(':id_admin', $admin['id']);
-            $stmtConsultorio->execute();
-            return $stmtConsultorio->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("Error en obtenerConsultorioPorAdmin: " . $e->getMessage());
-            return null;
-        }
-    }
 }

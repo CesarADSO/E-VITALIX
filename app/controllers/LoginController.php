@@ -41,16 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'apellidos' => $resultado['apellidos'],
         'rol' => $resultado['id_rol']
     ];
-    // Si el usuario es administrador de consultorio (rol 2)
-    if ($resultado['id_rol'] == 2) { // 2 = Administrador de consultorio
-        // Obtenemos el consultorio asociado a este administrador
-        $consultorio = $login->obtenerConsultorioPorAdmin($resultado['id_usuario']);
-        // Si se encontró el consultorio y tiene un id válido
-        if ($consultorio && isset($consultorio['id'])) {
-            // Guardamos el id del consultorio en la sesión
-            $_SESSION['user']['id_consultorio'] = $consultorio['id'];
-        }
-    }
 
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';

@@ -14,7 +14,7 @@ function mostrarPerfilSuperAdmin($id) {
 function mostrarPerfilAdmin($id) {
     $objPerfil = new Perfil();
 
-    $usuario = $objPerfil->mostrarPerfilAdmin($id);
+    $usuario = $objPerfil->mostrarPerfiAdmin($id);
 
     return $usuario;
 }
@@ -37,11 +37,11 @@ switch ($method) {
         elseif ($accion === 'actualizarInfoPersonalAdmin') {
             actInfoPersonalAdmin();
         }
-        elseif ($accion === 'actualizarContrasenaAdmin') {
-            actContrasenaAdmin();
-        }
         elseif ($accion === 'actualizarFotoAdmin') {
             actFotoAdmin();
+        }
+        elseif ($accion === 'actualizarContrasenaAdmin') {
+            actContrasenaAdmin();
         }
         break;
     
@@ -121,7 +121,7 @@ function actInfoPersonalAdmin() {
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/admin/perfil');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/superadmin/perfil');
     }
     else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo modificar su información personal. Intenta nuevamente');
@@ -186,28 +186,21 @@ function actContrasenaAdmin() {
         mostrarSweetAlert('error', 'Campos vacíos', 'Todos los campos son obligatorios');
         exit();
     }
-
-
     // VALIDAMOS QUE LA NUEVA CONTRASEÑA Y SU CONFIRMACIÓN COINCIDAN
     if ($claveNueva !== $confirmarClave) {
         mostrarSweetAlert('error', 'Contraseñas no coinciden', 'La nueva contraseña y su confirmación deben ser iguales');
         exit();
     }
-
     // POO - INSTANCIAMOS LA CLASE
     $objPerfil = new Perfil();
-
     $data = [
         'id' => $id,
         'claveActual' => $claveActual,
         'claveNueva' => $claveNueva, 
     ];
-
     // ENVIAMOS LA DATA AL METODO actualizarContrasenaAdmin() de la clase instanciada anteriormente Perfil()
     // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
-
     $resultado = $objPerfil->actualizarContrasenaAdmin($data);
-
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {

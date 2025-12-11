@@ -31,6 +31,25 @@ class Perfil
         }
     }
 
+    public function mostrarPerfilAdmin($id)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $consulta = "SELECT usuarios.*, roles.nombre AS roles_nombre, administradores.nombres AS admin_nombre, administradores.apellidos, administradores.telefono, administradores.foto FROM administradores INNER JOIN usuarios ON administradores.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE usuarios.id = :id LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();}
+        catch (PDOException $e) {
+            error_log("Error en Perfil::mostrarPerfilAdmin->" . $e->getMessage());
+            return [];
+        }
+    }
+
     public function actualizarInfoPersonalSuperAdmin($data)
     {
         try {
@@ -149,24 +168,6 @@ class Perfil
         }
     }
 
-    public function mostrarPerfilAdmin($id)
-    {
-        try {
-            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT usuarios.*, roles.nombre AS roles_nombre, administradores.nombres AS admin_nombre, administradores.apellidos, administradores.telefono, administradores.foto FROM administradores INNER JOIN usuarios ON administradores.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE usuarios.id = :id LIMIT 1";
-
-            $resultado = $this->conexion->prepare($consulta);
-
-            $resultado->bindParam(':id', $id);
-
-            $resultado->execute();
-
-            return $resultado->fetch();
-        } catch (PDOException $e) {
-            error_log("Error en Perfil::mostrarPerfilAdmin->" . $e->getMessage());
-            return [];
-        }
-    }
 
     public function actualizarInfoPersonalAdmin($data)
     {
@@ -285,4 +286,6 @@ class Perfil
             return false;
         }
     }
+
+    
 }
