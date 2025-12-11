@@ -1,3 +1,11 @@
+<?php
+    require_once BASE_PATH . '/app/controllers/especialistaController.php';
+
+
+    $datos = mostrarEspecialistas();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -103,12 +111,14 @@
         <section id="equipo">
             <div class="container">
                 <div class="row fila">
+                    <?php if(!empty($datos)):?>
+                        <?php foreach ($datos as $especialista):?>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="100">
                         <div class="card tarjeta" style="width: 18rem;">
-                            <img src="public/assets/website/img/doctor 1.svg" class="card-img-top" alt="Nicolas">
+                            <img src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" class="card-img-top" alt="Nicolas">
                             <div class="card-body cuerpo-tarjeta">
-                                <h5 class="card-title">Felipe Ramirez</h5>
-                                <p class="card-text">NEURÓLOGO</p>
+                                <h5 class="card-title"><?= $especialista['nombres'] ?> <?= $especialista['apellido'] ?></h5>
+                                <p class="card-text"><?= $especialista['especialidad'] ?></p>
                                 <div class="redes">
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/Linkedin.svg"
                                             alt="Linkedin"></a>
@@ -121,6 +131,10 @@
                             <a class="perfil" href="#">Ver perfil</a>
                         </div>
                     </div>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No hay especialistas registrados.</p>
+                    <?php endif; ?>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="200">
                         <div class="card tarjeta" style="width: 18rem;">
                             <img src="public/assets/website/img/doctor 2.svg" class="card-img-top" alt="César">
