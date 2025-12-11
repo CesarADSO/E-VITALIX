@@ -34,12 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si pasa esta línea, el usuario es válido
     session_start();
 
+
     // Guardamos los datos principales del usuario en la sesión
     $_SESSION['user'] = [
         'id' => $resultado['id_usuario'],
         'nombres' => $resultado['nombres'],
         'apellidos' => $resultado['apellidos'],
-        'rol' => $resultado['id_rol']
+        'rol' => $resultado['id_rol'],
+        'id_consultorio' => $resultado['id_consultorio'] ?? null
     ];
 
     // Redirección según el rol
@@ -53,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 2:
-            $redirecUrl = '/E-VITALIX/admin/dashboard';
+            $redirecUrl = '/E-VITALIX/administrador/dashboard';
             $mensaje = 'Bienvenido Administrador';
             break;
 

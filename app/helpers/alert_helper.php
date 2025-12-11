@@ -10,7 +10,8 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
         <head>
             <meta charset='UTF-8'>
             <style>
-                @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap&#39;);
+                @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+
 
                 body {
                     margin: 0;
@@ -18,31 +19,31 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: linear-gradient(135deg, #00304D, #007832);
+                    background: linear-gradient(135deg, #0c498a, #007bff);
                     font-family: 'Montserrat', sans-serif;
                     color: #fff;
                 }
 
                 .swal2-popup {
-                    font-family: 'Montserrat', sans-serif !important;
+                    font-family: 'Nunito', sans-serif !important;
                 }
 
                 .swal2-title {
-                    color: #00304D !important;
+                    color: #0c498a !important;
                     font-weight: 600 !important;
                 }
 
                 .swal2-styled.swal2-confirm {
-                    background-color: #007832 !important;
+                    background-color: #007bff !important;
                     border: none !important;
                 }
 
                 .swal2-styled.swal2-confirm:hover {
-                    background-color: #005d28 !important;
+                    background-color: #1a73d3 !important;
                 }
 
                 .swal2-styled.swal2-cancel {
-                    background-color: #00304D !important;
+                    background-color: #969696 !important;
                 }
             </style>
             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
@@ -54,9 +55,9 @@ function mostrarSweetAlert($tipo, $titulo, $mensaje, $redirect = null)
                     title: '$titulo',
                     text: '$mensaje',
                     confirmButtonText: 'Aceptar',
-                    confirmButtonColor: '#007832',
+                    confirmButtonColor: '#007bff',
                     background: '#fff',
-                    color: '#00304D'
+                    color: '#0c498a'
                 }).then((result) => {
                     " . ($redirect ? "window.location.href = '$redirect';" : "window.history.back();") . "
                 });

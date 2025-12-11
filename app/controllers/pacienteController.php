@@ -1,7 +1,7 @@
 <?php
 // Importamos las dependencias 
 require_once __DIR__ . '/../helpers/alert_helper.php';
-require_once __DIR__ . '/../helpers/session_admin.php';
+    
 require_once __DIR__ . '/../models/pacienteModel.php';
 
 // Capturamos en una variable el metodo o solicitud hecha al servidor 

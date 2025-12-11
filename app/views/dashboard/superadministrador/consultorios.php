@@ -1,3 +1,5 @@
+
+
 <?php
 require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
@@ -33,6 +35,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Consultorios Header -->
                     <h4 class="mb-4">Gestión de consultorios</h4>
+                    <p class="mb-4">Este módulo le permite gestionar todos los consultorios del sistema. Desde aquí puede crear, editar, consultar y eliminar consultorios, así como generar reportes y visualizar la información general de cada uno para mantener un control completo y actualizado.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
