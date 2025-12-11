@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si pasa esta línea, el usuario es válido
     session_start();
 
-    $id_consultorio = $resultado['id_consultorio'] ?? null;
 
     // Guardamos los datos principales del usuario en la sesión
     $_SESSION['user'] = [
@@ -42,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'nombres' => $resultado['nombres'],
         'apellidos' => $resultado['apellidos'],
         'rol' => $resultado['id_rol'],
-        'id_consultorio' => $id_consultorio
+        'id_consultorio' => $resultado['id_consultorio'] ?? null
     ];
 
     // Redirección según el rol

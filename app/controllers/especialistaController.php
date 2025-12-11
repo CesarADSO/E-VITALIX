@@ -68,9 +68,13 @@ function registrarEspecialista()
         exit();
     }
 
-    // CAPTURAMOS EL ID DEL USUARIO QUE INICIA SESIÓN PARA GUARDARLO SOLO SI ES NECESARIO
-    // session_start();
-    // $id_admin = $_SESSION['user']['id'];
+    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // ID del consultorio asignado al administrador (puede ser null si no aplica)
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
 
     // LÓGICA PARA CARGAR IMÁGENES
 
@@ -115,8 +119,6 @@ function registrarEspecialista()
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFECTO
     }
 
-    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
-
     // POO - INSTANCIAMOS LA CLASE
     $objEspecialista = new Especialista();
 
@@ -155,12 +157,14 @@ function registrarEspecialista()
 // CREAMOS LA FUNCIÓN QUE DECLARAMOS ANTERIOMENTE EN EL SWITCH METHOD mostrarEspecialistas();
 function mostrarEspecialistas()
 {
+    // ID del consultorio asignado al administrador (puede ser null si no aplica)
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
 
     // INSTANCIAMOS NUESTRA CLASE DEL MODELO
     $objEspecialista = new Especialista();
 
     // EN UNA VARIABLE ACCEDEMOS AL METODO DE DICHA CLASE QUE NECESITAMOS
-    $resultado = $objEspecialista->mostrar();
+    $resultado = $objEspecialista->mostrar($id_consultorio);
 
     // RETORNAMOS LOS DATOS A LA VISTA
     return $resultado;
@@ -203,49 +207,6 @@ function actualizarEspecialista()
         exit();
     }
 
-    // LÓGICA PARA CARGAR IMÁGENES
-
-    $ruta_foto = null;
-
-    // VALIDAMOS SI SE ENVIÓ O NO LA FOTO DESDE EL FORMULARIO
-    // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
-
-
-    if (!empty($_FILES['foto']['name'])) {
-
-        // EN LA VARIABLE $file guardamos todos los atributos que tiene $_FILES
-        $file = $_FILES['foto'];
-
-        // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
-        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // DEFINIMOS LAS EXTENSIONES PERMITIDAS
-        $permitidas = ['jpg', 'png', 'jpeg'];
-
-        // VALIDAMOS QUE LA EXTENSIÓN DE LA IMAGEN CARGADA ESTÉ DENTRO DE LAS PERMITIDAS    
-        if (!in_array($ext, $permitidas)) {
-            mostrarSweetAlert('error', 'Extensión no permitida', 'Señor usuario cargue una extensión que sea permitida');
-            exit();
-        }
-
-        // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MÁXIMO 2MB
-        if ($file['size'] > 2 * 1024 * 1024) {
-            mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
-            exit();
-        }
-
-        // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
-        $ruta_foto = uniqid('especialistas_') . '.' . $ext;
-
-        // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
-        $destino = BASE_PATH . "/public/uploads/usuarios/" . $ruta_foto;
-
-        // MOVEMOS EL ARCHIVO AL DESTINO
-        move_uploaded_file($file['tmp_name'], $destino);
-    } else {
-        // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFECTO
-    }
-
     // POO - INSTANCIAMOS LA CLASE
     $objEspecialista = new Especialista();
 
@@ -261,7 +222,6 @@ function actualizarEspecialista()
         'genero' => $genero,
         'telefono' => $telefono,
         'direccion' => $direccion,
-        'foto' => $ruta_foto,
         'especialidad' => $especialidad,
         'registroProfesional' => $registroProfesional,
         'estadoEspecialista' => $estadoEspecialista

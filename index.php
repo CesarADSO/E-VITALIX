@@ -33,7 +33,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/servicio.html';
         break;
     case '/doctores':
-        require BASE_PATH . '/app/views/website/doctores.html';
+        require BASE_PATH . '/app/views/website/doctores.php';
         break;
     case '/noticias':
         require BASE_PATH . '/app/views/website/noticias.html';

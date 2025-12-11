@@ -42,7 +42,7 @@ class Especialista
 
 
             // DEFINIMOS EN OTRA VARIABLE LA SIGUIENTE CONSULTA DE SQL
-            $registrarEspecialista = "INSERT INTO especialistas(id_usuario, id_consultorio 
+            $registrarEspecialista = "INSERT INTO especialistas(id_usuario, id_consultorio, 
             nombres,
             apellidos,
             id_tipo_documento,
@@ -53,8 +53,7 @@ class Especialista
             direccion,
             foto,
             especialidad,
-            registro_profesional,
-            id_consultorio)
+            registro_profesional)
             VALUES 
             (:id_usuario,
             :id_consultorio,
@@ -73,7 +72,9 @@ class Especialista
             // PREPARAMOS LA ACCIÓN A EJECUTAR
             $resultado2 = $this->conexion->prepare($registrarEspecialista);
 
+            
             $resultado2->bindParam(':id_usuario', $idUsuario);
+            $resultado2->bindParam(':id_consultorio', $data['id_consultorio']);
             $resultado2->bindParam(':nombres', $data['nombres']);
             $resultado2->bindParam(':apellidos', $data['apellidos']);
             $resultado2->bindParam(':id_tipo_documento', $data['tipoDocumento']);
@@ -85,7 +86,6 @@ class Especialista
             $resultado2->bindParam(':foto', $data['foto']);
             $resultado2->bindParam(':especialidad', $data['especialidad']);
             $resultado2->bindParam(':registro_profesional', $data['registroProfesional']);
-            $resultado2->bindParam(':id_consultorio', $data['id_consultorio']);
 
 
             $resultado2->execute();
@@ -98,15 +98,16 @@ class Especialista
     }
 
     // CREAMOS LA FUNCIÓN PARA MOSTRAR LOS ESPECIALISTAS
-    public function mostrar()
+    public function mostrar($id_consultorio)
     {
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
-            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id ORDER BY especialistas.nombres ASC";
+            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_consultorio = :id_consultorio ORDER BY especialistas.nombres ASC";
 
             // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
             $resultado = $this->conexion->prepare($mostrar);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
 
             // EJECUTAMOS LA ACCIÓN
             $resultado->execute();
@@ -180,7 +181,7 @@ class Especialista
 
              $resultado->execute();
 
-            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, foto = :foto, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
 
             $resultado2 = $this->conexion->prepare($actualizar2);
             $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
@@ -192,7 +193,6 @@ class Especialista
             $resultado2->bindParam(':genero', $data['genero']);
             $resultado2->bindParam(':telefono', $data['telefono']);
             $resultado2->bindParam(':direccion', $data['direccion']);
-            $resultado2->bindParam(':foto', $data['foto']);
             $resultado2->bindParam(':especialidad', $data['especialidad']);
             $resultado2->bindParam(':registroProfesional', $data['registroProfesional']);
 

@@ -36,6 +36,7 @@ class Login
             // 2. Obtener datos adicionales según el rol
             $nombres = '';
             $apellidos = '';
+            $id_consultorio = null;
 
             switch ($user['id_rol']) {
                 case 1: // Paciente
@@ -70,6 +71,9 @@ class Login
             if ($perfil) {
                 $nombres = $perfil['nombres'];
                 $apellidos = $perfil['apellidos'];
+                if (isset($perfil['id_consultorio'])) {
+                $id_consultorio = $perfil['id_consultorio'];  // <-- LO GUARDA SOLO SI EXISTE
+            }
             }
 
             // 3. Retornar todos los datos que necesitas
@@ -78,7 +82,8 @@ class Login
                 'id_rol' => $user['id_rol'],
                 'email' => $user['email'],
                 'nombres' => $nombres,
-                'apellidos' => $apellidos
+                'apellidos' => $apellidos,
+                'id_consultorio' => $id_consultorio
             ];
         } catch (PDOException $e) {
             error_log("Error de autenticacion: " . $e->getMessage());
