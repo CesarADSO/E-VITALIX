@@ -265,13 +265,21 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <p><strong>Ciudad:</strong> <span id="resumen-ciudad"></span></p>
                                             <p><strong>Teléfono del consultorio:</strong> <span id="resumen-telefono"></span></p>
                                             <p><strong>Correo del consultorio:</strong> <span id="resumen-correo"></span></p>
+                                            <p><strong>Correo del administrador:</strong> <span id="resumen-correo-administrador"></span></p>
+                                            <p><strong>Nombres del administrador:</strong> <span id="resumen-nombre-administrador"></span></p>
+                                            <p><strong>Apellidos del administrador:</strong> <span id="resumen-apellidos-administrador"></span></p>
+                                            <p><strong>Foto del administrador:</strong> <span id="resumen-foto-administrador"></span></p>
+                                            <p><strong>Teléfono del administrador:</strong> <span id="resumen-telefono-administrador"></span></p>
+                                            <p><strong>Tipo de documento del administrador:</strong> <span id="resumen-tipo-documento"></span></p>
+                                            <p><strong>Número de documento del administrador:</strong> <span id="resumen-numero-documento"></span></p>
+                                            <p><strong>Correo del consultorio:</strong> <span id="resumen-correo"></span></p>
                                             <p><strong>Especialidades:</strong> <span id="resumen-especialidades"></span></p>
                                             <p><strong>Horario del consultorio:</strong> <span id="resumen-horario"></span></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between cont-botones">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
                                     <button type="submit" class="btn boton">Registrar Consultorio</button>
                                 </div>
                             </div>
@@ -357,6 +365,34 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                 document.getElementById('resumen-correo').textContent =
                     document.getElementById('correo_contacto').value || 'No ingresado';
+
+                document.getElementById('resumen-correo-administrador').textContent =
+                    document.getElementById('correo_admin').value || 'No ingresado';
+
+                document.getElementById('resumen-nombre-administrador').textContent =
+                    document.getElementById('nombre_admin').value || 'No ingresado';
+
+                document.getElementById('resumen-apellidos-administrador').textContent =
+                    document.getElementById('apellido_admin').value || 'No ingresado';
+
+                document.getElementById('resumen-foto-administrador').textContent =
+                    document.getElementById('foto_admin').value || 'No ingresado';
+
+                document.getElementById('resumen-telefono-administrador').textContent =
+                    document.getElementById('telefono_admin').value || 'No ingresado';
+
+                // Actualiza el resumen del tipo de documento del administrador.
+                // Busca el elemento <span> donde se mostrará el resumen.
+                // Obtiene el texto de la opción seleccionada en el <select> de tipo de documento.
+                // Si no hay ninguna opción seleccionada, muestra "No ingresado".
+                // Esto permite que el usuario vea en el resumen el nombre legible del tipo de documento elegido.
+                document.getElementById('resumen-tipo-documento').textContent =
+                    document.getElementById('tipo_documento').options[
+                        document.getElementById('tipo_documento').selectedIndex
+                    ].text || 'No ingresado';
+
+                document.getElementById('resumen-numero-documento').textContent =
+                    document.getElementById('numero_documento_admin').value || 'No ingresado';
 
 
                 // ----------------------------------------------------------------------
