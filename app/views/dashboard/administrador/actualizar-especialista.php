@@ -181,7 +181,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <p><strong>Género:</strong> <span id="resumen-genero"></span></p>
                                             <p><strong>Teléfono:</strong> <span id="resumen-telefono"></span></p>
                                             <p><strong>Dirección:</strong> <span id="resumen-direccion"></span></p>
-                                            <p><strong>Foto:</strong> <span id="resumen-foto"></span></p>
                                             <p><strong>Especialidad:</strong> <span id="resumen-especialidad"></span></p>
                                             <p><strong>Registro Profesional:</strong> <span id="resumen-registro-profesional"></span></p>
                                         </div>
@@ -273,7 +272,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 // Contacto
                 document.getElementById('resumen-telefono').textContent = document.getElementById('telefono').value || 'No ingresado';
                 document.getElementById('resumen-direccion').textContent = document.getElementById('direccion').value || 'No ingresado';
-                document.getElementById('resumen-foto').textContent = document.getElementById('foto').value || 'No ingresado';
 
                 // Profesional
                 document.getElementById('resumen-especialidad').textContent = document.getElementById('especialidad').value || 'No ingresado';

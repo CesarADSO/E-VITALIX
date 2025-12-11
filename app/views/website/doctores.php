@@ -117,7 +117,7 @@
                         <div class="card tarjeta" style="width: 18rem;">
                             <img src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" class="card-img-top" alt="Nicolas">
                             <div class="card-body cuerpo-tarjeta">
-                                <h5 class="card-title"><?= $especialista['nombres'] ?> <?= $especialista['apellido'] ?></h5>
+                                <h5 class="card-title"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></h5>
                                 <p class="card-text"><?= $especialista['especialidad'] ?></p>
                                 <div class="redes">
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/Linkedin.svg"

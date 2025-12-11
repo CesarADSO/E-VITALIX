@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si pasa esta línea, el usuario es válido
     session_start();
 
+
     // Guardamos los datos principales del usuario en la sesión
     $_SESSION['user'] = [
         'id' => $resultado['id_usuario'],
@@ -42,13 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'rol' => $resultado['id_rol'],
         'id_consultorio' => $resultado['id_consultorio'] ?? null
     ];
-
-    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
-
-    if ($resultado['id_rol'] === 2) {
-        // Si es administrador, guardar id_consultorio en la sesión
-        $id_consultorio = $resultado['id_consultorio'];
-    }
 
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';
