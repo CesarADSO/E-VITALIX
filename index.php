@@ -138,20 +138,20 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
         break;
 
-    case '/superadmin/consultorios-administradores':
-        require BASE_PATH . '/app/views/dashboard/superadministrador/consultorios-administradores.php';
+    case '/superadmin/administradores-consultorios':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/administradores-consultorios.php';
         break;
 
-    case '/superadmin/asignar-administrador':
-        require BASE_PATH . '/app/views/dashboard/superadministrador/asignar-administrador.php';
+    case '/superadmin/asignar-consultorio':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/asignar-consultorio.php';
         break;
 
-    case '/superadmin/asignar-admin-consultorio':
-        require BASE_PATH . '/app/controllers/consultorioController.php';
+    case '/superadmin/asignar-consultorio-admin':
+        require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
         break;
 
-    case '/superadmin/desasignar-administrador':
-        require BASE_PATH . '/app/controllers/consultorioController.php';
+    case '/superadmin/desasignar-consultorio':
+        require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
         break;
 
     case '/superadmin/perfil':

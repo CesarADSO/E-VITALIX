@@ -38,7 +38,7 @@ class Consultorio
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT consultorios.*, administradores.nombres, administradores.apellidos FROM consultorios LEFT JOIN administradores ON consultorios.id_administrador = administradores.id ORDER BY consultorios.nombre ASC";
+            $consultar = "SELECT * FROM consultorios ORDER BY consultorios.nombre ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);
@@ -108,42 +108,6 @@ class Consultorio
             return true;
         } catch (PDOException $e) {
             error_log("Error en consultorio::eliminar->" . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function asignarAdministrador($data)
-    {
-        try {
-            $asignar = "UPDATE consultorios SET id_administrador = :id_administrador WHERE id = :id";
-
-            $resultado = $this->conexion->prepare($asignar);
-            $resultado->bindParam(':id', $data['id']);
-            $resultado->bindParam(':id_administrador', $data['administrador']);
-
-            $resultado->execute();
-
-            return true;
-
-        } catch (PDOException $e) {
-            error_log("Error en consultorio::asignarAdministrador->" . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function desasignarAdminConsultorio($id) {
-        try {
-            $desasignar = "UPDATE consultorios SET id_administrador = null WHERE id = :id";
-
-            $resultado = $this->conexion->prepare($desasignar);
-
-            $resultado->bindParam(':id', $id);
-
-            $resultado->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            error_log("Error en consultorio::desasignarAdminConsultorio->" . $e->getMessage());
             return false;
         }
     }
