@@ -290,7 +290,7 @@ function eliminarEspecialista($idUsuario, $id) {
     // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el consultorio', '/E-VITALIX/admin/consultorios');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el consultorio', '/E-VITALIX/admin/especialistas');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el consultorio. Intenta nuevamente');
     }

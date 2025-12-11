@@ -144,10 +144,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="direccion" class="form-label">Dirección</label>
                                     <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $especialista['direccion'] ?>">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="foto" class="form-label">Foto</label>
-                                    <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección" value="<?= $especialista['foto'] ?>">
-                                </div>
+                                
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>

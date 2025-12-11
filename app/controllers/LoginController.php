@@ -39,8 +39,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'id' => $resultado['id_usuario'],
         'nombres' => $resultado['nombres'],
         'apellidos' => $resultado['apellidos'],
-        'rol' => $resultado['id_rol']
+        'rol' => $resultado['id_rol'],
+        'id_consultorio' => $resultado['id_consultorio'] ?? null
     ];
+
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    if ($resultado['id_rol'] === 2) {
+        // Si es administrador, guardar id_consultorio en la sesión
+        $id_consultorio = $resultado['id_consultorio'];
+    }
 
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';
@@ -53,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             break;
 
         case 2:
-            $redirecUrl = '/E-VITALIX/admin/dashboard';
+            $redirecUrl = '/E-VITALIX/administrador/dashboard';
             $mensaje = 'Bienvenido Administrador';
             break;
 

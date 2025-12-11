@@ -959,3 +959,144 @@ body {
     background-repeat: no-repeat;
     object-fit: cover;
 }
+
+/* ================================
+   ESTILOS PARA EL WIZARD DE AGENDAR CITA
+   ================================ */
+
+#wizardCita h4 {
+    font-size: var(--subtitulo-seccion);
+    font-weight: 700;
+    color: var(--color-secundario);
+    margin-bottom: 15px;
+}
+
+#wizardCita section {
+    padding: 20px 10px;
+}
+
+#wizardCita label {
+    font-weight: 600;
+    color: var(--color-secundario);
+}
+
+#wizardCita input,
+#wizardCita select,
+#wizardCita textarea {
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    color: var(--color-secundario);
+}
+
+#wizardCita textarea {
+    resize: none;
+}
+
+/* Inputs focus */
+#wizardCita input:focus,
+#wizardCita select:focus,
+#wizardCita textarea:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.35);
+}
+
+/* Wizard steps (plugin jQuery Steps) */
+.wizard > .steps ul {
+    display: flex !important;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.wizard > .steps li a {
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #eeeeee;
+    color: var(--gris-proyecto);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.wizard > .steps li.current a {
+    background: var(--color-primario);
+    color: white !important;
+}
+
+.wizard > .steps li.done a {
+    background: var(--color-secundario);
+    color: white;
+}
+
+/* Botones del wizard */
+.wizard > .actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.wizard > .actions a {
+    background: var(--color-primario);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.wizard > .actions a:hover {
+    background: var(--color-secundario);
+}
+
+/* Botón deshabilitado */
+.wizard > .actions a[disabled] {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* ================================
+   ESTILOS PARA EL DATATABLE DE DISPONIBILIDAD
+   ================================ */
+
+#tablaDisponibilidad {
+    font-size: var(--texto-auxiliar);
+}
+
+#tablaDisponibilidad thead {
+    background: var(--color-secundario);
+    color: white;
+}
+
+#tablaDisponibilidad thead th {
+    padding: 12px;
+}
+
+#tablaDisponibilidad tbody tr:hover {
+    background: #eef6ff;
+}
+
+#tablaDisponibilidad td {
+    padding: 10px;
+}
+
+
+/* ================================
+   ESTILOS PARA LA CARD DE AGENDAR CITA
+   ================================ */
+
+.card.shadow-sm.p-4 {
+    border-radius: 12px;
+    border: none;
+}
+
+.card h5 {
+    color: var(--color-secundario);
+    font-weight: 700;
+}
+
+/* Título principal de la vista */
+.main-content h3 {
+    font-size: var(--titulo-bloque);
+    font-weight: 800;
+    color: var(--color-secundario);
+}
+
+
+
+

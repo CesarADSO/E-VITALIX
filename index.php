@@ -160,8 +160,8 @@ switch ($request) {
 
 
     // ADMIN INTERFACES
-    case '/admin/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.php';
+    case '/administrador/dashboard':
+        require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
         break;
 
     case '/admin/especialistas':
@@ -252,15 +252,28 @@ switch ($request) {
     case '/admin/eliminar-paciente':
         require BASE_PATH . '/app/controllers/pacienteController.php';
         break;
+        
+    case '/admin/perfil':
+        require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
+        break;
+        
     case '/doctor':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.html';
-        break;
-    case '/paciente':
-        require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.html';
         break;
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
         break;
+     case '/paciente/dashboard':
+        require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
+        break;
+    case '/paciente/ListaDeCitas':
+        require BASE_PATH . '/app/views/dashboard/paciente/ListaDeCitas.php';
+        break;
+    case '/paciente/agendarCita':
+        require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
+        break;
+     
+
 
     default:
         http_response_code(404);
