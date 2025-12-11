@@ -22,10 +22,10 @@ $perfil = mostrarPerfilAdmin($id);
 
     <div class="user-profile">
         <div class="user-avatar">
-            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['superadmin_nombre'] ?>">
+            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['admin_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['superadmin_nombre'] ?></h6>
+            <h6><?= $perfil['admin_nombre'] ?></h6>
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>
@@ -48,7 +48,7 @@ $perfil = mostrarPerfilAdmin($id);
                         <i class="bi bi-alarm"></i>
                         <span>Horarios</span>
                     </a> -->
-        <a class="nav-item" href="<?= BASE_URL ?>/administrador/especialistas">
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
             <i class="bi bi-people-fill"></i>
             <span>Especialistas</span>
         </a>
@@ -56,7 +56,7 @@ $perfil = mostrarPerfilAdmin($id);
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">
-        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/perfil">
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/perfil">
             <i class="bi bi-person-circle"></i>
             <span>Perfil</span>
         </a>

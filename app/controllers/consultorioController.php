@@ -9,9 +9,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';
-        if ($accion === 'asignar') {
-            asignarAdminConsultorio();
-        } elseif ($accion === 'actualizar') {
+         if ($accion === 'actualizar') {
             actualizarConsultorio();
         } else {
             registrarConsultorio();
@@ -25,8 +23,6 @@ switch ($method) {
         if ($accion === 'eliminar') {
             // ESTA FUNCIÓN ELIMINAR EL CONSULTORIO A PARTIR DE UN ID ESPECÍFICO DEL REGISTRO SELECCIONADO (CONSULTORIO)
             eliminarConsultorio($_GET['id']);
-        } elseif ($accion === 'desasignar') {
-            desasignarAdminConsultorio($_GET['id']);
         }
 
         // SI EXISTE EL ID QUE TRAEMOS POR METODO GET ENTONCES SE EJECUTA ESTA FUNCIÓN

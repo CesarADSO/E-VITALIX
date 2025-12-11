@@ -1,11 +1,11 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
-require_once BASE_PATH . '/app/controllers/consultorioController.php';
+require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
 
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
 
-$datos = mostrarConsultorios();
+$datos = mostrarAdministradoresConsultorios();
 ?>
 
 
@@ -53,25 +53,25 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <tr>
                                     <th>Foto</th>
                                     <th>
-                                        Consultorio
+                                        Administrador
                                     </th>
-                                    <th>Administrador</th>
+                                    <th>Consultorio</th>
                                     <th style="width: 80px;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php if (!empty($datos)) :  ?>
-                                    <?php foreach ($datos as $consultorio) : ?>
+                                    <?php foreach ($datos as $administrador) : ?>
                                         <tr>
-                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
-                                            <td><?= $consultorio['nombre'] ?></td>
+                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
+                                            <td><?= $administrador['nombres'] ?></td>
                                             <td>
                                                 <?php
-                                                    if (empty($consultorio['id_administrador']) || $consultorio['id_administrador'] === 0) {
-                                                        echo '<span>Sin administrador asignado</span>';
+                                                    if (empty($administrador['id_consultorio']) || $administrador['id_consultorio'] === 0) {
+                                                        echo '<span>Sin consultorio asignado</span>';
                                                     }
                                                     else {
-                                                        echo $consultorio['nombres'] . ' ' . $consultorio['apellidos'];
+                                                        echo $administrador['nombres'] . ' ' . $administrador['apellidos'];
                                                     }
                                                 ?>
                                             </td>

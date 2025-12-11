@@ -155,13 +155,13 @@ switch ($request) {
         break;
 
     case '/superadmin/perfil':
-        require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-admin.php';
+        require BASE_PATH . '/app/views/dashboard/superadministrador/perfil-superAdmin.php';
         break;
 
 
     // ADMIN INTERFACES
-    case '/admin/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/dashboard_admin.php';
+    case '/administrador/dashboard':
+        require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
         break;
 
     case '/admin/especialistas':
@@ -252,6 +252,11 @@ switch ($request) {
     case '/admin/eliminar-paciente':
         require BASE_PATH . '/app/controllers/pacienteController.php';
         break;
+        
+    case '/admin/perfil':
+        require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
+        break;
+        
     case '/doctor':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.html';
         break;
@@ -267,9 +272,7 @@ switch ($request) {
     case '/paciente/agendarCita':
         require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
         break;
-     case '/administrador/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
-        break;
+     
 
 
     default:

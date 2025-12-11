@@ -1,6 +1,6 @@
 <?php
 // IMPORTAMOS LAS DEPENDENCIAS NECESARIAS EN ESTE CASO EL SESSION ADMIN Y EL CONTROLADOR
-require_once BASE_PATH . '/app/helpers/session_admin.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
 // DECLARAMOS UNA VARIABLE PARA GUARDAR LA FUNCIÓN DEL MODELO Y ASÍ PODER USAR ESA VARIABLE PARA PINTAR LOS DATOS EN LA TABLA
@@ -32,7 +32,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     ?>
 
                     <!-- Especialista Header -->
-                    <h2>GESTIÓN DE ESPECIALISTAS</h2>
+                     <h4 class="mb-4">Gestión De Especialistas</h4>
+                    <p class="mb-4">Gestione a los especialistas de su consultorio: registre nuevos profesionales, actualice su información, consulte sus datos y administre su estado dentro del sistema.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -76,7 +77,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <td>
                                                 <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a>
                                                 <a href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/eliminar-especialista?accion=eliminar&id=<?= $especialista['id'] ?>&idUsuario=<?= $especialista['id_usuario'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                               
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

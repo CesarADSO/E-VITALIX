@@ -38,7 +38,7 @@ class Consultorio
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT consultorios.*, administradores.nombres, administradores.apellidos FROM consultorios LEFT JOIN administradores ON consultorios.id_administrador = administradores.id ORDER BY consultorios.nombre ASC";
+            $consultar = "SELECT * FROM consultorios ORDER BY consultorios.nombre ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);

@@ -30,7 +30,7 @@ class Administrador
 
 
 
-            $insertar2 = "INSERT INTO administradores(id_usuario, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES(LAST_INSERT_ID(), :nombres, :apellidos, :foto, :telefono, :tipoDocumento, :numeroDocumento)";
+            $insertar2 = "INSERT INTO administradores(id_usuario, id_consultorio, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES(LAST_INSERT_ID(), NULL, :nombres, :apellidos, :foto, :telefono, :tipoDocumento, :numeroDocumento)";
 
 
 
