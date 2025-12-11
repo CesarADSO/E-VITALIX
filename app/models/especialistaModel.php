@@ -42,7 +42,7 @@ class Especialista
 
 
             // DEFINIMOS EN OTRA VARIABLE LA SIGUIENTE CONSULTA DE SQL
-            $registrarEspecialista = "INSERT INTO especialistas(id_usuario, 
+            $registrarEspecialista = "INSERT INTO especialistas(id_usuario, id_consultorio 
             nombres,
             apellidos,
             id_tipo_documento,
@@ -53,9 +53,11 @@ class Especialista
             direccion,
             foto,
             especialidad,
-            registro_profesional)
+            registro_profesional,
+            id_consultorio)
             VALUES 
             (:id_usuario,
+            :id_consultorio,
             :nombres,
             :apellidos,
             :id_tipo_documento,
@@ -83,6 +85,7 @@ class Especialista
             $resultado2->bindParam(':foto', $data['foto']);
             $resultado2->bindParam(':especialidad', $data['especialidad']);
             $resultado2->bindParam(':registro_profesional', $data['registroProfesional']);
+            $resultado2->bindParam(':id_consultorio', $data['id_consultorio']);
 
 
             $resultado2->execute();
@@ -95,27 +98,15 @@ class Especialista
     }
 
     // CREAMOS LA FUNCIÓN PARA MOSTRAR LOS ESPECIALISTAS
-    public function mostrar($id_consultorio = null)
+    public function mostrar()
     {
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
-            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id";
-            
-            // Si se proporciona id_consultorio, filtrar por ese consultorio
-            if ($id_consultorio !== null) {
-                $mostrar .= " WHERE especialistas.id_consultorio = :id_consultorio";
-            }
-            
-            $mostrar .= " ORDER BY especialistas.nombres ASC";
+            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id ORDER BY especialistas.nombres ASC";
 
             // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
             $resultado = $this->conexion->prepare($mostrar);
-
-            // Si se proporciona id_consultorio, hacer el binding
-            if ($id_consultorio !== null) {
-                $resultado->bindParam(':id_consultorio', $id_consultorio);
-            }
 
             // EJECUTAMOS LA ACCIÓN
             $resultado->execute();

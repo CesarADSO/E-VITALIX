@@ -115,6 +115,8 @@ function registrarEspecialista()
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFECTO
     }
 
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
     // POO - INSTANCIAMOS LA CLASE
     $objEspecialista = new Especialista();
 
@@ -131,7 +133,8 @@ function registrarEspecialista()
         'foto' => $ruta_foto,
         'email' => $email,
         'especialidad' => $especialidad,
-        'registroProfesional' => $registroProfesional
+        'registroProfesional' => $registroProfesional,
+        'id_consultorio' => $id_consultorio
     ];
 
     // CREAMOS UNA VARIABLE DONDE SE VA A GUARDAR EL OBJETO DONDE INSTANCIAMOS LA CLASE ACCEDIENDO AL MÉTODO DEL MODELO

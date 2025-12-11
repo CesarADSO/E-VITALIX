@@ -1,3 +1,4 @@
+
 <?php
 // IMPORTAMOS LAS DEPENDENCIAS NECESARIAS EN ESTE CASO EL SESSION ADMIN Y EL CONTROLADOR
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
