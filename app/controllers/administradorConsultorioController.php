@@ -12,6 +12,9 @@ switch ($method) {
         if ($accion === 'actualizar') {
             actualizarAdministradorConsultorio();
         }
+        elseif ($accion === 'asignar') {
+            asignarConsultorioAdministrador();
+        }
         else {
             registrarAdministradorConsultorio();
         }
@@ -21,6 +24,9 @@ switch ($method) {
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'eliminar') {
             eliminarAdministradorConsultorio($_GET['id'], $_GET['id_usuario']);
+        }
+        elseif ($accion === 'desasignar') {
+            desasignarConsultorioAdministrador($_GET['id']);
         }
         if (isset($_GET['id'])) {
             listarAdministradorConsultorioId($_GET['id']);
@@ -178,6 +184,51 @@ function eliminarAdministradorConsultorio($id, $id_usuario) {
         mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se puedo eliminar el administrador de consultorio. Intenta nuevamente');
+    }
+    exit();
+}
+
+function asignarConsultorioAdministrador() {
+    // Capturamos en variables los datos desde el formulario a través del method posh y los name de los campos
+    $id = $_POST['id'] ?? '';
+    $id_consultorio = $_POST['consultorio'] ?? '';
+
+    // Validamos los campos que son obligatorios
+    if (empty($id_consultorio)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    //POO - INSTANCIAMOS LA CLASE
+    $objAdministrador = new Administrador();
+    $data = [
+        'id' => $id,
+        'id_consultorio' => $id_consultorio
+    ];
+
+    $resultado = $objAdministrador->asignarConsultorio($data);
+
+    // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+    // Si es falsa notificamos y redirecciomamos
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Asignación exitosa', 'Se ha asignado el consultorio al administrador seleccionado', '/E-VITALIX/superadmin/administradores-consultorios');
+    } else {
+        mostrarSweetAlert('error', 'Error al asignar', 'No se puedo asignar el consultorio al administrador. Intenta nuevamente');
+    }
+    exit();
+}
+
+function desasignarConsultorioAdministrador($id) {
+    $objAdministrador = new Administrador();
+
+    $resultado = $objAdministrador->desasignarConsultorio($id);
+
+     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Desasignación exitosa', 'Se ha desasignado el consultorio al administrador seleccionado', '/E-VITALIX/superadmin/administradores-consultorios');
+    } else {
+        mostrarSweetAlert('error', 'Error al desasignar', 'No se puedo desasignar el consultorio al administrador. Intenta nuevamente');
     }
     exit();
 }

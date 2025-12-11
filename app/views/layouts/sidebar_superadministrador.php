@@ -7,7 +7,7 @@ require_once BASE_PATH . '/app/controllers/perfilController.php';
 $id = $_SESSION['user']['id'];
 
 // EN LA VARIABLE PERFIL LLAMAMOS LA FUNCIÓN DEL CONTROLADOR mostrarPerfilAdmin(id)
-$perfil = mostrarPerfilAdmin($id);
+$perfil = mostrarPerfilSuperAdmin($id);
 
 ?>
 
@@ -59,7 +59,7 @@ $perfil = mostrarPerfilAdmin($id);
             <i class="fa-solid fa-user-tie"></i>
             <span>Administradores - Consultorios</span>
         </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/consultorios-administradores">
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/administradores-consultorios">
             <i class="fa-solid fa-building-user"></i>
             <span>Asignación de administradores</span>
         </a>

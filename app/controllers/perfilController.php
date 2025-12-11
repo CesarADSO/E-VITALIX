@@ -3,10 +3,10 @@
 require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/perfilModel.php';
 
-function mostrarPerfilAdmin($id) {
+function mostrarPerfilSuperAdmin($id) {
     $objPerfil = new Perfil();
 
-    $usuario = $objPerfil->mostrarPerfilAdmin($id);
+    $usuario = $objPerfil->mostrarPerfilSuperAdmin($id);
 
     return $usuario;
 }
@@ -17,14 +17,14 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';
-        if ($accion === 'actualizarInfoPersonalAdmin') {
-            actInfoPersonalAdmin();
+        if ($accion === 'actualizarInfoPersonalSuperAdmin') {
+            actInfoPersonalSuperAdmin();
         }
-        elseif ($accion === 'actualizarContrasenaAdmin') {
-            actContrasenaAdmin();
+        elseif ($accion === 'actualizarContrasenaSuperAdmin') {
+            actContrasenaSuperAdmin();
         }
-        elseif ($accion === 'actualizarFotoAdmin') {
-            actFotoAdmin();
+        elseif ($accion === 'actualizarFotoSuperAdmin') {
+            actFotoSuperAdmin();
         }
         break;
     
@@ -32,7 +32,7 @@ switch ($method) {
         break;
 }
 
-function actInfoPersonalAdmin() {
+function actInfoPersonalSuperAdmin() {
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
     $nombres = $_POST['nombres'];
@@ -59,12 +59,12 @@ function actInfoPersonalAdmin() {
 
     // ENVIAMOS LA DATA AL METODO actualizarInfoPersonalAdmin() de la clase instanciada anteriormente Perfil()
     // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
-    $resultado = $objPerfil->actualizarInfoPersonalAdmin($data);
+    $resultado = $objPerfil->actualizarInfoPersonalSuperAdmin($data);
 
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/admin/perfil');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/superadmin/perfil');
     }
     else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo modificar su información personal. Intenta nuevamente');
@@ -72,7 +72,7 @@ function actInfoPersonalAdmin() {
     exit();
 }
 
-function actContrasenaAdmin() {
+function actContrasenaSuperAdmin() {
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
     $claveActual = $_POST['claveActual'];
@@ -104,12 +104,12 @@ function actContrasenaAdmin() {
     // ENVIAMOS LA DATA AL METODO actualizarContrasenaAdmin() de la clase instanciada anteriormente Perfil()
     // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
 
-    $resultado = $objPerfil->actualizarContrasenaAdmin($data);
+    $resultado = $objPerfil->actualizarContrasenaSuperAdmin($data);
 
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/admin/perfil');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/superadmin/perfil');
     }
     else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su contraseña. Intenta nuevamente');
@@ -117,7 +117,7 @@ function actContrasenaAdmin() {
     exit();
 }
 
-function actFotoAdmin() {
+function actFotoSuperAdmin() {
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
 
@@ -181,12 +181,12 @@ function actFotoAdmin() {
     // ENVIAMOS LA DATA AL METODO actualizarFotoAdmin() de la clase instanciada anteriormente Perfil()
     // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
 
-    $resultado = $objPerfil->actualizarFotoAdmin($data);
+    $resultado = $objPerfil->actualizarFotoSuperAdmin($data);
 
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/admin/perfil');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/superadmin/perfil');
     }
     else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su foto. Intenta nuevamente');

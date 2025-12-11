@@ -30,7 +30,7 @@ class Administrador
 
 
 
-            $insertar2 = "INSERT INTO administradores(id_usuario, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES(LAST_INSERT_ID(), :nombres, :apellidos, :foto, :telefono, :tipoDocumento, :numeroDocumento)";
+            $insertar2 = "INSERT INTO administradores(id_usuario, id_consultorio, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES(LAST_INSERT_ID(), NULL, :nombres, :apellidos, :foto, :telefono, :tipoDocumento, :numeroDocumento)";
 
 
 
@@ -655,7 +655,7 @@ class Administrador
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT administradores.id, administradores.foto, administradores.nombres, administradores.apellidos, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento,usuarios.id AS id_usuario, usuarios.estado FROM administradores INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
+            $consultar = "SELECT administradores.id, administradores.id_consultorio, administradores.foto, administradores.nombres, administradores.apellidos, consultorios.nombre AS nombre_consultorio, administradores.telefono, tipo_documento.nombre AS tipo_documento, administradores.numero_documento,usuarios.id AS id_usuario, usuarios.estado FROM administradores LEFT JOIN consultorios ON administradores.id_consultorio = consultorios.id INNER JOIN tipo_documento ON administradores.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON administradores.id_usuario = usuarios.id ORDER BY administradores.nombres ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);
@@ -734,6 +734,41 @@ class Administrador
             return true;
         } catch (PDOException $e) {
             error_log("Error en Administrador::eliminar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function asignarConsultorio($data) {
+        try {
+            $asignar = "UPDATE administradores SET id_consultorio = :id_consultorio WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($asignar);
+
+            $resultado->bindParam(':id_consultorio', $data['id_consultorio']);
+            $resultado->bindParam(':id', $data['id']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Administrador::asignarConsultorio->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function desasignarConsultorio($id) {
+        try {
+            $desasignar = "UPDATE administradores SET id_consultorio = NULL WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($desasignar);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Administrador::desasignarConsultorio->" . $e->getMessage());
             return false;
         }
     }
