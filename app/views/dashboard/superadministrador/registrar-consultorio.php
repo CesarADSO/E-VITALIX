@@ -133,11 +133,11 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="nombres_admin" class="form-label">Nombres</label>
-                                        <input type="text" name="nombre_admin" class="form-control" id="nombre_admin" placeholder="Ingresa los nombres">
+                                        <input type="text" name="nombres_admin" class="form-control" id="nombre_admin" placeholder="Ingresa los nombres">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="apellidos_admin" class="form-label">Apellidos</label>
-                                        <input type="text" name="apellido_admin" class="form-control" id="apellido_admin" placeholder="Ingresa los apellidos">
+                                        <input type="text" name="apellidos_admin" class="form-control" id="apellido_admin" placeholder="Ingresa los apellidos">
                                     </div>
                                 </div>
 

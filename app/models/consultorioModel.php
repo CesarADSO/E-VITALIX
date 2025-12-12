@@ -13,6 +13,42 @@ class Consultorio
     public function registrar($data)
     {
         try {
+
+            // ENCRIPTAMOS LA CONTRASEÑA POR DEFECTO DEL NUEVO ADMINISTRADOR QUE VA A SER SU NÚMERO DE DOCUMENTO
+            $clave_encriptada = password_hash($data['numero_documento_admin'], PASSWORD_DEFAULT);
+
+            // HACEMOS EL INSERT EN USUARIOS
+            $insertarUsuario = "INSERT INTO usuarios(email, contrasena, id_rol, estado) VALUES(:email, :contrasena, 2, 'Activo')";
+
+            $resultadoUsuario = $this->conexion->prepare($insertarUsuario);
+            $resultadoUsuario->bindParam(':email', $data['email_admin']);
+            $resultadoUsuario->bindParam(':contrasena', $clave_encriptada);
+
+            $resultadoUsuario->execute();
+
+            // OBTENEMOS EL ID DEL USUARIO REGISTRADO
+            $id_usuario_admin = $this->conexion->lastInsertId();
+
+            // HACEMOS EL INSERT EN ADMINISTRADORES SIN EL ID DEL CONSULTORIO, LO MANTENEMOS EN NULL
+            $insertarAdmin = "INSERT INTO administradores(id_usuario, id_consultorio, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES (:id_usuario, NULL, :nombres, :apellidos, :foto, :telefono, :id_tipo_documento, :numero_documento)";
+
+        
+            $resultadoAdmin = $this->conexion->prepare($insertarAdmin);
+            // AQUÍ LE ASIGNAMOS AL CAMPO ID_USUARIO EL ID DEL ÚLTIMO USUARIO REGISTRADO
+            $resultadoAdmin->bindParam(':id_usuario', $id_usuario_admin);
+            $resultadoAdmin->bindParam(':nombres', $data['nombres_admin']);
+            $resultadoAdmin->bindParam(':apellidos', $data['apellidos_admin']);
+            $resultadoAdmin->bindParam(':foto', $data['foto_admin']);
+            $resultadoAdmin->bindParam(':telefono', $data['telefono_admin']);
+            $resultadoAdmin->bindParam(':id_tipo_documento', $data['tipo_documento_admin']);
+            $resultadoAdmin->bindParam(':numero_documento', $data['numero_documento_admin']);
+
+            $resultadoAdmin->execute();
+
+            // OBTENEMOS EL ID DEL ÚLTIMO ADMINISTRADOR REGISTRADO PARA LUEGO PODER HACER EL UPDATE EN EL CAMPO ID_CONSULTORIO
+            $id_admin = $this->conexion->lastInsertId();
+
+            // HACEMOS EL INSERT EN CONSULTORIOS
             $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, especialidades, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :especialidades, :horario_atencion, 'Activo')";
 
 
@@ -27,7 +63,22 @@ class Consultorio
             $resultado->bindParam(':especialidades', $data['especialidades']);
             $resultado->bindParam(':horario_atencion', $data['horario_atencion']);
 
-            return $resultado->execute();
+            $resultado->execute();
+
+            // OBTENEMOS EL ID DEL ÚLTIMO CONSULTORIO REGISTRADO
+            $id_consultorio = $this->conexion->lastInsertId();
+
+            // HACEMOS EL UPDATE EN ADMINISTRADORES PARA ASIGNARLE EL ID DEL ÚLTIMO CONSULTORIO REGISTRADO AL CAMPO ID_CONSULTORIO Y HACEMOS EL WHERE CON EL ID DEL ADMIN OBTENIDO ANTERIORMENTE
+            $asignarConusultorioAdmin = "UPDATE administradores SET id_consultorio = :id_consultorio WHERE id = :id LIMIT 1";
+
+            $resultadoAsignar = $this->conexion->prepare($asignarConusultorioAdmin);
+            $resultadoAsignar->bindParam(':id_consultorio', $id_consultorio);
+            $resultadoAsignar->bindParam(':id', $id_admin);
+
+            $resultadoAsignar->execute();
+
+            return true;
+
         } catch (PDOException $e) {
             error_log("Error en consultorio::registrar->" . $e->getMessage());
             return false;

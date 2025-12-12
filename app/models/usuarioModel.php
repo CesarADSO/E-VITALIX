@@ -10,6 +10,41 @@ class Usuario
         $this->conexion = $db->getConexion();
     }
 
+    public function registrarSuperAdministrador($data) {
+        try {
+
+            $claveEncriptada = password_hash('123', PASSWORD_DEFAULT);
+
+            $insertarUsuario = "INSERT INTO usuarios(email, contrasena, id_rol, estado) VALUES (:email, :contrasena, 5, 'Activo')";
+
+            $resultadoUsuario = $this->conexion->prepare($insertarUsuario);
+            $resultadoUsuario->bindParam(':email', $data['email']);
+            $resultadoUsuario->bindParam(':contrasena', $claveEncriptada);
+
+            $resultadoUsuario->execute();
+
+            // OBTENEMOS EL ID DEL ÚLTIMO USUARIO REGISTRADO
+            $id_usuario = $this->conexion->lastInsertId();
+
+            // HACEMOS EL INSERT EN SUPERADMINISTRADORES
+            $insertarSuperAdministrador = "INSERT INTO superadministradores(id_usuario, nombres, apellidos, foto, telefono) VALUES(:id_usuario, :nombres, :apellidos, :foto, :telefono)";
+
+            $resultadoSuperAdministrador = $this->conexion->prepare($insertarSuperAdministrador);
+            $resultadoSuperAdministrador->bindParam(':id_usuario', $id_usuario);
+            $resultadoSuperAdministrador->bindParam(':nombres', $data['nombres']);
+            $resultadoSuperAdministrador->bindParam(':apellidos', $data['apellidos']);
+            $resultadoSuperAdministrador->bindParam(':foto', $data['foto']);
+            $resultadoSuperAdministrador->bindParam(':telefono', $data['telefono']);
+
+            $resultadoSuperAdministrador->execute();
+
+            return true;
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     public function consultar()
     {
         try {

@@ -101,12 +101,12 @@ switch ($request) {
     case '/superadmin/usuarios':
         require BASE_PATH . '/app/views/dashboard/superadministrador/usuarios.php';
         break;
-    // case '/superadmin/registrarUsuario':
-    //     require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-Usuarios.php';
-    //     break;
-    // case '/superadmin/guardar-usuario':
-    //     require BASE_PATH . '/app/controllers/usuarioController.php';
-    //     break;
+    case '/superadmin/registrar-usuario':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-usuario.php';
+        break;
+    case '/superadmin/guardar-usuario':
+        require BASE_PATH . '/app/controllers/usuarioController.php';
+        break;
     case '/superadmin/actualizar-usuario':
         require BASE_PATH . '/app/views/dashboard/superadministrador/actualizar-usuario.php';
         break;

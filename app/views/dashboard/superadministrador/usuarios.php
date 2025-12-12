@@ -38,6 +38,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 ← Todos (<?= count($datos) ?>)
                             </button>
                         </div>
+                        <a href="<?= BASE_URL ?>/superadmin/registrar-usuario" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
                     </div>
 
                     <!-- Consultorios Table -->
