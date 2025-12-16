@@ -52,7 +52,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/LoginController.php';
         break;
     case '/registro':
-        require BASE_PATH . '/app/views/auth/registrarse.html';
+        require BASE_PATH . '/app/views/auth/registrarse.php';
         break;
     case '/recuperacion':
         require BASE_PATH . '/app/views/auth/recuperar-contraseña.php';

@@ -356,3 +356,27 @@ h2 {
         padding: 0;
     }
 }
+
+/* La tarjeta debe ser referencia */
+.tarjeta {
+    position: relative;
+}
+
+/* Contenedor de los logos */
+.tarjeta .redes {
+    position: absolute;
+    top: 12px;
+    left: 8px;          /* ⬅️ más hacia la izquierda */
+    transform: none;    /* quitamos el centrado */
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+ 
+
+/* Tamaño y visibilidad de los logos */
+.tarjeta .redes img {
+    width: 36px;
+    height: 36px;
+    opacity: 1;         /* totalmente visibles */
+}

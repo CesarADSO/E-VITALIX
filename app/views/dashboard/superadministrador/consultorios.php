@@ -1,5 +1,4 @@
 
-
 <?php
 require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
