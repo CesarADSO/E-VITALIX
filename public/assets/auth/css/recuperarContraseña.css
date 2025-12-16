@@ -1,246 +1,195 @@
 * {
-            font-family: 'Nunito', sans-serif;
-        }
+    font-family: 'Nunito', sans-serif;
+}
 
-        :root {
-            --color-primario: #007bff;
-            --color-secundario: #0c498a;
-            --blanco-color: #ffffff;
-            --gris-proyecto: #969696;
-            --tercer-azul: #1a73d3;
-            --titulo-principal: 48px;
-            --subtitulo-seccion: 30px;
-            --titulo-bloque: 24px;
-            --subtitulo-menor: 18px;
-            --parrafos: 16px;
-            --texto-auxiliar: 14px;
-        }
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #0c498a;
+    --blanco-color: #ffffff;
+    --gris-proyecto: #969696;
+    --tercer-azul: #1a73d3;
+    --titulo-principal: 48px;
+    --subtitulo-seccion: 30px;
+    --titulo-bloque: 24px;
+    --subtitulo-menor: 18px;
+    --parrafos: 16px;
+    --texto-auxiliar: 14px;
+}
 
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
 
-        .recuperar-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(191,210,248,0.7) 100%);
-            padding: 40px 20px;
-        }
+/* ================= CONTENEDOR PRINCIPAL ================= */
+.recuperar-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(191,210,248,0.7) 100%);
+    padding: 40px 20px;
+}
 
-        /* Imagen de fondo del doctor que cubre toda la pantalla */
-        .recuperar-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('../img/image\ 2.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.3;
-            z-index: 1;
-        }
+/* Fondo doctor */
+.recuperar-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../img/image.png') center / cover no-repeat;
+    opacity: 0.3;
+    z-index: 1;
+}
 
-        .recuperar-content {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+/* ================= CONTENIDO ================= */
+.recuperar-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-        .logo-container {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            z-index: 10;
-        }
+/* ================= LOGO (AHORA SOBRE EL FORM) ================= */
+.logo-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 25px;
+    z-index: 2;
+}
 
-        .logo {
-            background-color: var(--blanco-color);
-            padding: 15px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            display: inline-block;
-        }
 
-        .logo-placeholder {
-            width: 200px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--color-primario) 0%, var(--tercer-azul) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-            border-radius: 8px;
-        }
+.logo {
+    max-width: 200px;
+    height: auto;
+    background-color: var(--blanco-color);
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    display: inline-block;
+}
 
-        .recuperar-card {
-            background: var(--color-secundario);
-            border-radius: 20px;
-            padding: 50px 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            width: 100%;
-        }
 
-        .recuperar-title {
-            color: var(--blanco-color);
-            font-size: var(--titulo-bloque);
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-align: center;
-        }
+/* ================= CARD ================= */
+.recuperar-card {
+    background: var(--color-secundario);
+    border-radius: 20px;
+    padding: 45px 40px 50px; /* NORMAL, sin espacio extra */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
 
-        .recuperar-subtitle {
-            color: #BFD2F8;
-            font-size: var(--texto-auxiliar);
-            text-align: center;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
+/* ================= TEXTOS ================= */
+.recuperar-title {
+    color: var(--blanco-color);
+    font-size: var(--titulo-bloque);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
 
-        .campos-formulario {
-            border-radius: 10px;
-            background: #BFD2F8;
-            border: none;
-            padding: 15px 20px;
-            font-size: var(--parrafos);
-            margin-bottom: 25px;
-            width: 100%;
-            color: #333;
-        }
-
-        .campos-formulario::placeholder {
-            color: #6c757d;
-            opacity: 0.8;
-        }
-
-        .campos-formulario:focus {
-            outline: none;
-            background: #d4e3f9;
-            box-shadow: 0 0 0 3px rgba(191, 210, 248, 0.3);
-        }
-
-        .btn-azul {
-            border-radius: 10px;
-            width: 100%;
-            background-color: var(--color-primario);
-            color: var(--blanco-color);
-            border: none;
-            padding: 15px;
-            font-size: var(--parrafos);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .btn-azul:hover {
-            background-color: var(--tercer-azul);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .volver-login {
-            text-align: center;
-        }
-
-        .volver-login a {
-            color: var(--blanco-color);
-            font-size: var(--texto-auxiliar);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .volver-login a:hover {
-            color: #BFD2F8;
-            text-decoration: underline;
-        }
-
-        /* Mensaje de éxito */
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .success-message.active {
-            display: block;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--color-primario);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 40px;
-            color: white;
-            animation: scaleIn 0.5s ease;
-        }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        .success-title {
-            color: var(--blanco-color);
-            font-size: var(--titulo-bloque);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .success-text {
-            color: #BFD2F8;
-            font-size: var(--parrafos);
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        @media (max-width: 576px) {
-            .recuperar-card {
-                padding: 40px 25px;
-            }
-
-            .recuperar-title {
-                font-size: 20px;
-            }
-
-            .logo-container {
-                position: relative;
-                top: 0;
-                right: 0;
-                text-align: center;
-                margin-bottom: 30px;
-            }
-
-            .logo-placeholder {
-                width: 150px;
-                height: 50px;
-                font-size: 18px;
-            }
-        }
+.recuperar-subtitle {
+    color: #BFD2F8;
+    font-size: var(--texto-auxiliar);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
 
 .correo {
     color: var(--blanco-color);
+}
+
+/* ================= INPUTS ================= */
+.campos-formulario {
+    border-radius: 10px;
+    background: #BFD2F8;
+    border: none;
+    padding: 15px 20px;
+    font-size: var(--parrafos);
+    margin-bottom: 25px;
+    width: 100%;
+    color: #333;
+}
+
+.campos-formulario::placeholder {
+    color: #6c757d;
+}
+
+.campos-formulario:focus {
+    outline: none;
+    background: #d4e3f9;
+    box-shadow: 0 0 0 3px rgba(191, 210, 248, 0.3);
+}
+
+/* ================= BOTÓN ================= */
+.btn-azul {
+    border-radius: 10px;
+    width: 100%;
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    border: none;
+    padding: 15px;
+    font-size: var(--parrafos);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.btn-azul:hover {
+    background-color: var(--tercer-azul);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* ================= VOLVER LOGIN ================= */
+.volver-login a {
+    color: var(--blanco-color);
+    font-size: var(--texto-auxiliar);
+    text-decoration: none;
+}
+
+.volver-login a:hover {
+    color: #BFD2F8;
+    text-decoration: underline;
+}
+
+/* ================= SUCCESS ================= */
+.success-message {
+    display: none;
+    text-align: center;
+}
+
+.success-message.active {
+    display: block;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--color-primario);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 40px;
+    color: white;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 576px) {
+    .logo-container {
+        margin-bottom: -30px;
+    }
+
+    .logo img {
+        max-width: 160px;
+    }
+
+    .recuperar-card {
+        padding: 60px 25px 40px;
+    }
 }

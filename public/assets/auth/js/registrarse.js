@@ -128,7 +128,7 @@
             
             console.log('Datos de registro:', formData);
             alert('Registro exitoso. Redirigiendo...');
-            window.open('inicioSesion.html', '_blank');
+            window.open('login', '_blank');
         });
 
         // Animación en inputs

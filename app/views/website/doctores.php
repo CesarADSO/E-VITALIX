@@ -115,25 +115,30 @@
                         <?php foreach ($datos as $especialista):?>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="100">
                         <div class="card tarjeta" style="width: 18rem;">
-                            <img src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" class="card-img-top" alt="Nicolas">
+
+                            <!-- IMAGEN -->
+                            <img src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>"
+                                class="card-img-top img-doctor" alt="Nicolas">
+
+                            <!-- LOGOS SUBIDOS (AQUÍ ES DONDE DEBEN IR) -->
+                            <div class="redes redes-top">
+                                <a href="#"><img src="public/assets/website/img/Linkedin.svg" alt="Linkedin"></a>
+                                <a href="#"><img src="public/assets/website/img/face.svg" alt="Facebook"></a>
+                                
+                            </div>
+
+                            <!-- BODY (SE QUEDA IGUAL) -->
                             <div class="card-body cuerpo-tarjeta">
                                 <h5 class="card-title"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></h5>
                                 <p class="card-text"><?= $especialista['especialidad'] ?></p>
-                                <div class="redes">
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/Linkedin.svg"
-                                            alt="Linkedin"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/face.svg"
-                                            alt="Facebook"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/insta.svg"
-                                            alt="Instagram"></a>
-                                </div>
                             </div>
-                            <a class="perfil" href="#">Ver perfil</a>
+
                         </div>
                     </div>
+
                     <?php endforeach; ?>
                     <?php else: ?>
-                        <p>No hay especialistas registrados.</p>
+                        <p></p>
                     <?php endif; ?>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="200">
                         <div class="card tarjeta" style="width: 18rem;">
@@ -146,11 +151,10 @@
                                             alt="Linkedin"></a>
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/face.svg"
                                             alt="Facebook"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/insta.svg"
-                                            alt="Instagram"></a>
+                                    
                                 </div>
                             </div>
-                            <a class="perfil" href="#">Ver perfil</a>
+                        
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="300">
@@ -164,11 +168,10 @@
                                             alt="Linkedin"></a>
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/face.svg"
                                             alt="Facebook"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/insta.svg"
-                                            alt="Instagram"></a>
+                                   
                                 </div>
                             </div>
-                            <a class="perfil" href="#">Ver perfil</a>
+                        
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="400">
@@ -182,11 +185,10 @@
                                             alt="Linkedin"></a>
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/face.svg"
                                             alt="Facebook"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/insta.svg"
-                                            alt="Instagram"></a>
+                                    
                                 </div>
                             </div>
-                            <a class="perfil" href="#">Ver perfil</a>
+                        
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="500">
@@ -200,11 +202,10 @@
                                             alt="Linkedin"></a>
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/face.svg"
                                             alt="Facebook"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/insta.svg"
-                                            alt="Instagram"></a>
+                                    
                                 </div>
                             </div>
-                            <a class="perfil" href="#">Ver perfil</a>
+                        
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="flip-left" data-aos-duration="800" data-aos-delay="600">
@@ -218,11 +219,10 @@
                                             alt="Linkedin"></a>
                                     <a class="social" href="#"><img class="social" src="public/assets/website/img/face.svg"
                                             alt="Facebook"></a>
-                                    <a class="social" href="#"><img class="social" src="public/assets/website/img/insta.svg"
-                                            alt="Instagram"></a>
+                                   
                                 </div>
                             </div>
-                            <a class="perfil" href="#">Ver perfil</a>
+                        
                         </div>
                     </div>
                 </div>
