@@ -5,7 +5,9 @@ require_once BASE_PATH . '/app/helpers/pdf_helper.php';
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 require_once BASE_PATH . '/app/controllers/usuarioController.php';
-require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+ require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+
+
 
 // ESTA FUNCIÓN SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCIÓN CORRESPONDIENTE
 function reportesPdfController()

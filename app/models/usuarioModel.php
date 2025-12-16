@@ -10,7 +10,8 @@ class Usuario
         $this->conexion = $db->getConexion();
     }
 
-    public function registrarSuperAdministrador($data) {
+    public function registrarSuperAdministrador($data)
+    {
         try {
 
             $claveEncriptada = password_hash('123', PASSWORD_DEFAULT);
@@ -39,7 +40,6 @@ class Usuario
             $resultadoSuperAdministrador->execute();
 
             return true;
-
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -64,9 +64,9 @@ class Usuario
     }
 
 
-    
 
-     public function listarUsuarioPorId($id)
+
+    public function listarUsuarioPorId($id)
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
@@ -89,7 +89,7 @@ class Usuario
     {
         try {
 
-            $claveEncriptada = password_hash($data ['contrasena'], PASSWORD_DEFAULT);
+            $claveEncriptada = password_hash($data['contrasena'], PASSWORD_DEFAULT);
 
             $insertar = "UPDATE usuarios SET email=:email, contrasena=:contrasena, estado=:estado WHERE id=:id";
 
@@ -98,7 +98,7 @@ class Usuario
             $resultado->bindParam(':email', $data['email']);
             $resultado->bindParam(':contrasena', $claveEncriptada);
             $resultado->bindParam(':estado', $data['estado']);
-       
+
 
             $resultado->execute();
             return true;
@@ -108,7 +108,8 @@ class Usuario
         }
     }
 
-      public function eliminar($id) {
+    public function eliminar($id)
+    {
         try {
             $eliminar = "DELETE FROM usuarios WHERE id = :id";
             $resultado = $this->conexion->prepare($eliminar);
@@ -123,4 +124,3 @@ class Usuario
         }
     }
 }
-

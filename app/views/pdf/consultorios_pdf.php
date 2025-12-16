@@ -81,7 +81,7 @@
 
 <p class="descripcion">
     El presente reporte contiene el listado de los consultorios actualmente suscritos a la plataforma E-VITALIX.
-    Este documento permite llevar un control administrativo detallado, facilitando la gestión, auditoría y supervisión de la información asociada a cada consultorio, incluyendo datos de contacto y ubicación.
+    Este documento permite llevar un control administrativo detallado, facilitando la gestión, auditoría y supervisión de la información asociada a cada consultorio, incluyendo datos de contacto y ubicación.g
 </p>
 
 <table>

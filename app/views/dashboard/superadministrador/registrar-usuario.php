@@ -65,7 +65,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <div class="col-md-6 mb-3">
                                     <label for="foto" class="form-label">Foto</label>
                                     <input type="file" class="form-control" id="foto" name="foto"
-                                        required>
+                                        >
                                 </div>
 
                                 <!-- Teléfono -->
