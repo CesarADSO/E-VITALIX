@@ -119,6 +119,7 @@ function registrarConsultorio()
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+        $ruta_foto_consultorio = 'default-consultorio.jpg';
     }
 
     $ruta_foto_administrador = null;
@@ -155,6 +156,7 @@ function registrarConsultorio()
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+        $ruta_foto_administrador = 'default-administrador.jpg';
     }
 
 

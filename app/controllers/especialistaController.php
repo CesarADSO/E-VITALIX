@@ -117,6 +117,7 @@ function registrarEspecialista()
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFECTO
+        $ruta_foto = 'default-especialista.jpg';
     }
 
     // POO - INSTANCIAMOS LA CLASE
