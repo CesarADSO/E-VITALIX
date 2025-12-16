@@ -282,6 +282,23 @@
             cursor: not-allowed;
             transform: none;
         }
+        
+        .login-link-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-login-link {
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-login-link:hover {
+            color: #084298;
+            text-decoration: underline;
+        }
 
         @media (max-width: 992px) {
             .registro-row {
