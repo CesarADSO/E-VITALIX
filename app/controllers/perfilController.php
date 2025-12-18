@@ -3,7 +3,8 @@
 require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/perfilModel.php';
 
-function mostrarPerfilSuperAdmin($id) {
+function mostrarPerfilSuperAdmin($id)
+{
     $objPerfil = new Perfil();
 
     $usuario = $objPerfil->mostrarPerfilSuperAdmin($id);
@@ -11,7 +12,8 @@ function mostrarPerfilSuperAdmin($id) {
     return $usuario;
 }
 
-function mostrarPerfilAdmin($id) {
+function mostrarPerfilAdmin($id)
+{
     $objPerfil = new Perfil();
 
     $usuario = $objPerfil->mostrarPerfilAdmin($id);
@@ -27,29 +29,25 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizarInfoPersonalSuperAdmin') {
             actInfoPersonalSuperAdmin();
-        }
-        elseif ($accion === 'actualizarContrasenaSuperAdmin') {
+        } elseif ($accion === 'actualizarContrasenaSuperAdmin') {
             actContrasenaSuperAdmin();
-        }
-        elseif ($accion === 'actualizarFotoSuperAdmin') {
+        } elseif ($accion === 'actualizarFotoSuperAdmin') {
             actFotoSuperAdmin();
-        }
-        elseif ($accion === 'actualizarInfoPersonalAdmin') {
+        } elseif ($accion === 'actualizarInfoPersonalAdmin') {
             actInfoPersonalAdmin();
-        }
-        elseif ($accion === 'actualizarFotoAdmin') {
+        } elseif ($accion === 'actualizarFotoAdmin') {
             actFotoAdmin();
-        }
-        elseif ($accion === 'actualizarContrasenaAdmin') {
+        } elseif ($accion === 'actualizarContrasenaAdmin') {
             actContrasenaAdmin();
         }
         break;
-    
+
     default:
         break;
 }
 
-function actInfoPersonalSuperAdmin() {
+function actInfoPersonalSuperAdmin()
+{
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
     $nombres = $_POST['nombres'];
@@ -67,11 +65,11 @@ function actInfoPersonalSuperAdmin() {
     $objPerfil = new Perfil();
 
     $data = [
-       'id' => $id,
-       'nombres' => $nombres,
-       'apellidos' => $apellidos,
-       'email' => $email,
-       'telefono' => $telefono
+        'id' => $id,
+        'nombres' => $nombres,
+        'apellidos' => $apellidos,
+        'email' => $email,
+        'telefono' => $telefono
     ];
 
     // ENVIAMOS LA DATA AL METODO actualizarInfoPersonalAdmin() de la clase instanciada anteriormente Perfil()
@@ -82,14 +80,14 @@ function actInfoPersonalSuperAdmin() {
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/superadmin/perfil');
-    }
-    else {
+    } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo modificar su información personal. Intenta nuevamente');
     }
     exit();
 }
 
-function actInfoPersonalAdmin() {
+function actInfoPersonalAdmin()
+{
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
     $nombres = $_POST['nombres'];
@@ -107,11 +105,11 @@ function actInfoPersonalAdmin() {
     $objPerfil = new Perfil();
 
     $data = [
-       'id' => $id,
-       'nombres' => $nombres,
-       'apellidos' => $apellidos,
-       'email' => $email,
-       'telefono' => $telefono
+        'id' => $id,
+        'nombres' => $nombres,
+        'apellidos' => $apellidos,
+        'email' => $email,
+        'telefono' => $telefono
     ];
 
     // ENVIAMOS LA DATA AL METODO actualizarInfoPersonalAdmin() de la clase instanciada anteriormente Perfil()
@@ -121,15 +119,17 @@ function actInfoPersonalAdmin() {
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/superadmin/perfil');
-    }
-    else {
+
+
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/admin/perfil');
+    } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo modificar su información personal. Intenta nuevamente');
     }
     exit();
 }
 
-function actContrasenaSuperAdmin() {
+function actContrasenaSuperAdmin()
+{
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
     $claveActual = $_POST['claveActual'];
@@ -155,7 +155,7 @@ function actContrasenaSuperAdmin() {
     $data = [
         'id' => $id,
         'claveActual' => $claveActual,
-        'claveNueva' => $claveNueva, 
+        'claveNueva' => $claveNueva,
     ];
 
     // ENVIAMOS LA DATA AL METODO actualizarContrasenaAdmin() de la clase instanciada anteriormente Perfil()
@@ -167,14 +167,14 @@ function actContrasenaSuperAdmin() {
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/superadmin/perfil');
-    }
-    else {
+    } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su contraseña. Intenta nuevamente');
     }
     exit();
 }
 
-function actContrasenaAdmin() {
+function actContrasenaAdmin()
+{
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
     $claveActual = $_POST['claveActual'];
@@ -196,7 +196,7 @@ function actContrasenaAdmin() {
     $data = [
         'id' => $id,
         'claveActual' => $claveActual,
-        'claveNueva' => $claveNueva, 
+        'claveNueva' => $claveNueva,
     ];
     // ENVIAMOS LA DATA AL METODO actualizarContrasenaAdmin() de la clase instanciada anteriormente Perfil()
     // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
@@ -205,14 +205,14 @@ function actContrasenaAdmin() {
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/admin/perfil');
-    }
-    else {
+    } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su contraseña. Intenta nuevamente');
     }
     exit();
 }
 
-function actFotoSuperAdmin() {
+function actFotoSuperAdmin()
+{
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
 
@@ -229,7 +229,7 @@ function actFotoSuperAdmin() {
     // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
 
     if (!empty($_FILES['foto']['name'])) {
-        
+
         $file = $_FILES['foto'];
 
         // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
@@ -246,7 +246,7 @@ function actFotoSuperAdmin() {
         }
 
         // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MAX 2MB
-        if ($file['size'] > 2 * 1024 *1024) {
+        if ($file['size'] > 2 * 1024 * 1024) {
             mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
             exit();
         }
@@ -259,9 +259,7 @@ function actFotoSuperAdmin() {
 
         // MOVEMOS EL ARCHIVO A DESTINO
         move_uploaded_file($file['tmp_name'], $destino);
-
-    }
-    else {
+    } else {
         // AGREGAR LA LÓGICA DE UNA IMAGEN POR DEFECTO
     }
 
@@ -281,15 +279,15 @@ function actFotoSuperAdmin() {
     // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/admin/perfil');
-    }
-    else {
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/superadmin/perfil');
+    } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su foto. Intenta nuevamente');
     }
     exit();
 }
 
-function actFotoAdmin() {
+function actFotoAdmin()
+{
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id = $_POST['id'];
 
@@ -306,7 +304,7 @@ function actFotoAdmin() {
     // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
 
     if (!empty($_FILES['foto']['name'])) {
-        
+
         $file = $_FILES['foto'];
 
         // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
@@ -323,7 +321,7 @@ function actFotoAdmin() {
         }
 
         // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MAX 2MB
-        if ($file['size'] > 2 * 1024 *1024) {
+        if ($file['size'] > 2 * 1024 * 1024) {
             mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
             exit();
         }
@@ -336,9 +334,7 @@ function actFotoAdmin() {
 
         // MOVEMOS EL ARCHIVO A DESTINO
         move_uploaded_file($file['tmp_name'], $destino);
-
-    }
-    else {
+    } else {
         // AGREGAR LA LÓGICA DE UNA IMAGEN POR DEFECTO
     }
 
@@ -359,8 +355,7 @@ function actFotoAdmin() {
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/admin/perfil');
-    }
-    else {
+    } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su foto. Intenta nuevamente');
     }
     exit();

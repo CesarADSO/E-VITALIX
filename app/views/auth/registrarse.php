@@ -31,7 +31,7 @@
                         <div class="progress-line" id="progressLine"></div>
                         <div class="wizard-step active" data-step="1">
                             <div class="step-circle">1</div>
-                            <div class="step-label">Datos personales</div>
+                            <div class="step-label">Datos de inicio de sesión</div>
                         </div>
                         <div class="wizard-step" data-step="2">
                             <div class="step-circle">2</div>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="wizard-step" data-step="3">
                             <div class="step-circle">3</div>
-                            <div class="step-label">Seguridad</div>
+                            <div class="step-label">Info adicional</div>
                         </div>
                         <div class="wizard-step" data-step="4">
                             <div class="step-circle">4</div>
@@ -47,33 +47,10 @@
                         </div>
                     </div>
 
-                    <form id="registroForm">
+                    <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data">
                         <!-- Step 1: Datos Personales -->
                         <div class="wizard-form-step active" data-step="1">
                             <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
-                                <div class="form-group-custom">
-                                    <label class="form-label-custom">Nombre:</label>
-                                    <input 
-                                        type="text" 
-                                        class="campos-formulario" 
-                                        placeholder="Ingresa tu nombre..." 
-                                        id="nombre"
-                                        required
-                                    >
-                                </div>
-                                <div class="form-group-custom">
-                                    <label class="form-label-custom">Apellidos:</label>
-                                    <input 
-                                        type="text" 
-                                        class="campos-formulario" 
-                                        placeholder="Ingresa tu apellido..." 
-                                        id="apellidos"
-                                        required
-                                    >
-                                </div>
-                            </div>
-
-                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="500">
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Email:</label>
                                     <input 
@@ -81,19 +58,50 @@
                                         class="campos-formulario" 
                                         placeholder="tucorreo@gmail.com" 
                                         id="email"
+                                        name="email"
                                         required
                                     >
                                 </div>
+
                                 <div class="form-group-custom">
-                                    <label class="form-label-custom">Teléfono:</label>
+                                    <label class="form-label-custom">Contraseña:</label>
                                     <input 
-                                        type="tel" 
+                                        type="password" 
                                         class="campos-formulario" 
-                                        placeholder="xxxxxxxxxx" 
-                                        id="telefono"
+                                        placeholder="Crea una contraseña" 
+                                        id="contrasena"
+                                        name="clave"
                                         required
                                     >
                                 </div>
+                            
+                            </div>
+
+                            <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="500">
+                                <div class="form-group-custom">
+                                    <label class="form-label-custom">Nombres:</label>
+                                    <input 
+                                        type="text" 
+                                        class="campos-formulario" 
+                                        placeholder="Ingresa tu nombre..." 
+                                        id="nombre"
+                                        name="nombres"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="form-group-custom">
+                                    <label class="form-label-custom">Apellidos:</label>
+                                    <input 
+                                        type="text" 
+                                        class="campos-formulario" 
+                                        placeholder="Ingresa tu apellido..." 
+                                        id="apellidos"
+                                        name="apellidos"
+                                        required
+                                    >
+                                </div>
+                                
                             </div>
                         </div>
 
@@ -126,16 +134,6 @@
                         <!-- Step 3: Seguridad -->
                         <div class="wizard-form-step" data-step="3">
                             <div class="form-row-custom" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
-                                <div class="form-group-custom">
-                                    <label class="form-label-custom">Contraseña:</label>
-                                    <input 
-                                        type="password" 
-                                        class="campos-formulario" 
-                                        placeholder="Crea una contraseña" 
-                                        id="contrasena"
-                                        required
-                                    >
-                                </div>
                                 <div class="form-group-custom">
                                     <label class="form-label-custom">Confirmación de contraseña:</label>
                                     <input 

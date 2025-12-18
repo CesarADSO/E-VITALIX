@@ -118,8 +118,8 @@ $hoy = date("Y");
             </tr>
         </thead>
         <tbody>
-            <?php if (!empty($datos)) :  ?>
-                <?php foreach ($datos as $usuario) : ?>
+            <?php if (!empty($usuarios)) :  ?>
+                <?php foreach ($usuarios as $usuario) : ?>
                     <tr>
 
 

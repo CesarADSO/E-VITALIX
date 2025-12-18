@@ -8,12 +8,18 @@ $hoy = date("Y");
 <head>
     <meta charset="UTF-8">
     <style>
+        /* 1. IMPORTAR LA FUENTE NUNITO */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+
         @page {
             margin: 40px 40px 60px 40px;
             /* márgenes internas */
         }
 
         body {
+            /* 2. APLICAR NUNITO COMO FUENTE PRINCIPAL */
+            font-family: 'Nunito', sans-serif;
             font-size: 12px;
             color: #333;
         }

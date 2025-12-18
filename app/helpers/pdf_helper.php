@@ -7,23 +7,26 @@ use Dompdf\Options;
 
 function generarPDF($html, $filename = "documento.pdf", $download = false)
 {
+    // 🔥 LIMPIAR CUALQUIER SALIDA PREVIA
+    if (ob_get_length()) {
+        ob_end_clean();
+    }
+
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
-    $options->set('isRemoteEnabled', true); // permite imágenes externas
+    $options->set('isRemoteEnabled', true);
 
     $dompdf = new Dompdf($options);
 
-    // Cargar el HTML recibido
     $dompdf->loadHtml($html);
-
-    // Opcional: tamaño y orientación
     $dompdf->setPaper('A4', 'portrait');
-
-    // Renderizar
     $dompdf->render();
 
-    // Descargar o mostrar
+    // 🔥 ENVIAR EL PDF
     $dompdf->stream($filename, [
         "Attachment" => $download ? 1 : 0
     ]);
+
+    // 🔥 CORTAR EJECUCIÓN PARA NO CORROMPER EL PDF
+    exit;
 }

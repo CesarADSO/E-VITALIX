@@ -12,7 +12,9 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarUsuario();
-        } 
+        } else {
+            registrarSuperAdministrador();
+        }
         break;
 
     case 'GET':
@@ -31,7 +33,7 @@ switch ($method) {
             listarUsuario($_GET['id']);
         } else {
             // Esta función llena toda la tabla de usuarios
-           $datos = mostrarUsuario();
+            $datos = mostrarUsuario();
 
             require_once __DIR__ . '/../views/dashboard/superadministrador/usuarios.php';
         }
@@ -49,6 +51,79 @@ switch ($method) {
         http_response_code(405);
         echo "Método no permitido";
         break;
+}
+
+function registrarSuperAdministrador()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $email = $_POST['email'] ?? '';
+    $nombres = $_POST['nombres'] ?? '';
+    $apellidos = $_POST['apellidos'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+
+    // Validamos los campos que son obligatorios
+    if (empty($email) || empty($nombres) || empty($apellidos) || empty($telefono)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    // LÓGICA PARA CARGAR IMÁGENES
+    $ruta_foto = null;
+
+    if (!empty($_FILES['foto']['name'])) {
+
+        $file = $_FILES['foto'];
+
+        // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        // DEFINIMOS LAS EXTENSIONES PERMITIDAS
+        $permitidas = ['png', 'jpg', 'jpeg'];
+
+        // VALIDAMOS QUE LA EXTENSIÓN DE LA IMAGEN CARGADA ESTÉ DENTRO DE LAS PERIMITIDAS
+        if (!in_array($ext, $permitidas)) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Señor usuario cargue una extensión que sea permitida');
+            exit();
+        }
+
+        // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MAX 2MB
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
+            exit();
+        }
+
+        // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
+        $ruta_foto = uniqid('superadministrador_') . '.' . $ext;
+
+        // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
+        $destino = BASE_PATH . "/public/uploads/usuarios/" . $ruta_foto;
+
+        // MOVEMOS EL ARCHIVO AL DESTINO
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+    }
+
+
+    // POO - INSTANTIAMOS LA CLASE DEL MODELO USUARIO PARA ACCEDER AL MÉTODO REGISTRAR
+    $objUsuario = new Usuario();
+    $data = [
+        'email' => $email,
+        'nombres' => $nombres,
+        'apellidos' => $apellidos,
+        'foto' => $ruta_foto,
+        'telefono' => $telefono
+    ];
+
+    // ENVIAMOS LA DATA AL MÉTODO "registrar()" DE LA CLASE INSTANTIADA ANTERIORMENTE "Usuario()"
+    $resultado = $objUsuario->registrarSuperAdministrador($data);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Registro exitoso', 'Se ha registrado el Superadministrador', '/E-VITALIX/superadmin/usuarios');
+    } else {
+        mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el Superadministrador. Intenta nuevamente');
+    }
 }
 
 function mostrarUsuario()
@@ -79,20 +154,20 @@ function actualizarUsuario()
     $email = $_POST['correo'] ?? '';
     $contrasena = $_POST['contrasena'] ?? '';
     $estado = $_POST['estado'] ?? '';
-   
+
     // Validamos los campos que son obligatorios
-       if  (empty($email) || empty($estado)) {
+    if (empty($email) || empty($estado)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
 
     $ObjUsuario = new Usuario();
     $data = [
-        'id'=> $id,
+        'id' => $id,
         'email' => $email,
         'contrasena' => $contrasena,
         'estado' => $estado
-       
+
         // 'id_admin' => $id_admin
     ];
     // Enviamos la data al método "actualizar()" de la clase instanciada anteriormente "Consultorio()"
@@ -119,11 +194,9 @@ function eliminarUsuario($id)
     // Si la respuesta del modelo es verdadera confirmamos la eliminación y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el usuario', '/E-VITALIX/admin/usuarios');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el usuario', '/E-VITALIX/superadmin/usuarios');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el usuario. Intenta nuevamente');
     }
     exit();
 }
-
-

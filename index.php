@@ -101,12 +101,12 @@ switch ($request) {
     case '/superadmin/usuarios':
         require BASE_PATH . '/app/views/dashboard/superadministrador/usuarios.php';
         break;
-    // case '/superadmin/registrarUsuario':
-    //     require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-Usuarios.php';
-    //     break;
-    // case '/superadmin/guardar-usuario':
-    //     require BASE_PATH . '/app/controllers/usuarioController.php';
-    //     break;
+    case '/superadmin/registrar-usuario':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/registrar-usuario.php';
+        break;
+    case '/superadmin/guardar-usuario':
+        require BASE_PATH . '/app/controllers/usuarioController.php';
+        break;
     case '/superadmin/actualizar-usuario':
         require BASE_PATH . '/app/views/dashboard/superadministrador/actualizar-usuario.php';
         break;
@@ -188,29 +188,54 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
 
-    case '/admin/disponibilidades':
-        require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
+    case '/admin/generar-reporte':
+        require BASE_PATH . '/app/controllers/reportesPdfControllerAdministrador.php';
+        reportesPdfController();
         break;
 
-    case '/admin/registrar-disponibilidad':
-        require BASE_PATH . '/app/views/dashboard/administrador/registrar-disponibilidad.php';
+    case '/admin/asistentes': 
+        require BASE_PATH . '/app/views/dashboard/administrador/asistentes.php';
         break;
 
-    case '/admin/guardar-disponibilidad':
-        require BASE_PATH . '/app/controllers/disponibilidadController.php';
+    case '/admin/registrar-asistente':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-asistente.php';
+        break;
+    
+    case '/admin/guardar-asistente':
+        require BASE_PATH . '/app/controllers/asistenteController.php';
+        break;
+    
+    case '/admin/actualizar-asistente':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-asistente.php';
         break;
 
-    case '/admin/actualizar-disponibilidad':
-        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-disponibilidad.php';
+    case '/admin/guardar-cambios-asistente':
+        require BASE_PATH . '/app/controllers/asistenteController.php';
         break;
 
-    case '/admin/guardar-cambios-disponibilidad':
-        require BASE_PATH . '/app/controllers/disponibilidadController.php';
-        break;
+    // case '/admin/disponibilidades':
+    //     require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
+    //     break;
 
-    case '/admin/eliminar-disponibilidad':
-        require BASE_PATH . '/app/controllers/disponibilidadController.php';
-        break;
+    // case '/admin/registrar-disponibilidad':
+    //     require BASE_PATH . '/app/views/dashboard/administrador/registrar-disponibilidad.php';
+    //     break;
+
+    // case '/admin/guardar-disponibilidad':
+    //     require BASE_PATH . '/app/controllers/disponibilidadController.php';
+    //     break;
+
+    // case '/admin/actualizar-disponibilidad':
+    //     require BASE_PATH . '/app/views/dashboard/administrador/actualizar-disponibilidad.php';
+    //     break;
+
+    // case '/admin/guardar-cambios-disponibilidad':
+    //     require BASE_PATH . '/app/controllers/disponibilidadController.php';
+    //     break;
+
+    // case '/admin/eliminar-disponibilidad':
+    //     require BASE_PATH . '/app/controllers/disponibilidadController.php';
+    //     break;
 
 
     case '/admin/guardar-foto-perfil':

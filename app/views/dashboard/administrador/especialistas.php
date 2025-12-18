@@ -47,7 +47,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Especialistas Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=especialistas" target="_blank">generar reporte pdf</a>
+                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=especialistas" target="_blank">Generar reporte pdf</a>
                         <table class="table-pacientes">
                             <thead>
                                 <tr>
@@ -76,7 +76,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <td><?= $especialista['especialidad'] ?></td>
                                             <td><?= $especialista['estado'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <!-- <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a> -->
                                                 <a href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                                
                                             </td>

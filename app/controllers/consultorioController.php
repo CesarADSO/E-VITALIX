@@ -62,10 +62,16 @@ function registrarConsultorio()
     $dias = $_POST['dias'] ?? [];
     $hora_apertura = $_POST['hora_apertura'] ?? '';
     $hora_cierre = $_POST['hora_cierre'] ?? '';
+    $email_admin = $_POST['correo_admin'] ?? '';
+    $nombres_admin = $_POST['nombres_admin'] ?? '';
+    $apellidos_admin = $_POST['apellidos_admin'] ?? '';
+    $telefono_admin = $_POST['telefono_admin'] ?? '';
+    $tipo_documento_admin = $_POST['tipo_documento_admin'] ?? '';
+    $numero_documento_admin = $_POST['numero_documento_admin'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatoriossssss');
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($email_admin) || empty($nombres_admin) || empty($apellidos_admin) || empty($telefono_admin) || empty($tipo_documento_admin) || empty($numero_documento_admin)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
 
@@ -76,7 +82,7 @@ function registrarConsultorio()
     //POO - INSTANCIAMOS LA CLASE
     // LÓGICA PARA CARGAR IMÁGENES
 
-    $ruta_foto = null;
+    $ruta_foto_consultorio = null;
 
     // VALIDAMOS SI SE ENVIÓ O NO LA FOTO DESDE EL FORMULARIO
     // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
@@ -104,16 +110,55 @@ function registrarConsultorio()
         }
 
         // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
-        $ruta_foto = uniqid('consultorio_') . '.' . $ext;
+        $ruta_foto_consultorio = uniqid('consultorio_') . '.' . $ext;
 
         // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
-        $destino = BASE_PATH . "/public/uploads/consultorios/" . $ruta_foto;
+        $destino = BASE_PATH . "/public/uploads/consultorios/" . $ruta_foto_consultorio;
 
         // MOVEMOS EL ARCHIVO AL DESTINO
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
         // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+        $ruta_foto_consultorio = 'default-consultorio.jpg';
     }
+
+    $ruta_foto_administrador = null;
+
+    if (!empty($_FILES['foto_admin']['name'])) {
+
+        $file = $_FILES['foto_admin'];
+
+        // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        // DEFINIMOS LAS EXTENSIONES PERMITIDAS
+        $permitidas = ['png', 'jpg', 'jpeg'];
+
+        // VALIDAMOS QUE LA EXTENSIÓN DE LA IMAGEN CARGADA ESTÉ DENTRO DE LAS PERIMITIDAS
+        if (!in_array($ext, $permitidas)) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Señor usuario cargue una extensión que sea permitida');
+            exit();
+        }
+
+        // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MAX 2MB
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
+            exit();
+        }
+
+        // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
+        $ruta_foto_administrador = uniqid('administrador_') . '.' . $ext;
+
+        // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
+        $destino = BASE_PATH . "/public/uploads/usuarios/" . $ruta_foto_administrador;
+
+        // MOVEMOS EL ARCHIVO AL DESTINO
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+        $ruta_foto_administrador = 'default-administrador.jpg';
+    }
+
 
     $horario_atencion = [
         'dias' => $dias,
@@ -133,12 +178,19 @@ function registrarConsultorio()
     $data = [
         'nombre' => $nombre,
         'direccion' => $direccion,
-        'foto' => $ruta_foto,
+        'foto' => $ruta_foto_consultorio,
         'ciudad' => $ciudad,
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
         'especialidades' => $especialidades_json,
-        'horario_atencion' => $horario_atencion_json
+        'horario_atencion' => $horario_atencion_json,
+        'email_admin' => $email_admin,
+        'nombres_admin' => $nombres_admin,
+        'apellidos_admin' => $apellidos_admin,
+        'telefono_admin' => $telefono_admin,
+        'foto_admin' => $ruta_foto_administrador,
+        'tipo_documento_admin' => $tipo_documento_admin,
+        'numero_documento_admin' => $numero_documento_admin,
         // 'id_admin' => $id_admin
     ];
     // Enviamos la data al método "registrar()" de la clase instanciada anteriormente "Consultorio()"

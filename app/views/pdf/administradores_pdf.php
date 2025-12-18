@@ -8,12 +8,17 @@ $hoy = date("Y");
 <head>
     <meta charset="UTF-8">
     <style>
+        /* 1. IMPORTAR LA FUENTE NUNITO */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
         @page {
             margin: 40px 40px 60px 40px;
             /* márgenes internas */
         }
 
         body {
+            /* 2. APLICAR NUNITO COMO FUENTE PRINCIPAL */
+            font-family: 'Nunito', sans-serif;
             font-size: 12px;
             color: #333;
         }
@@ -127,7 +132,6 @@ $hoy = date("Y");
                 <th>Tipo de documento</th>
                 <th>Número de documento</th>
                 <th>Estado</th>
-                <th style="width: 80px;">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -144,11 +148,6 @@ $hoy = date("Y");
                         <td><?= $administrador['tipo_documento'] ?></td>
                         <td><?= $administrador['numero_documento'] ?></td>
                         <td><?= $administrador['estado'] ?></td>
-                        <td>
-                            <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                            <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="<?= BASE_URL ?>/superadmin/eliminar-administrador?id=<?= $administrador['id'] ?>&accion=eliminar&id_usuario=<?= $administrador['id_usuario'] ?>"><i class="fa-solid fa-trash-can"></i></a>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
