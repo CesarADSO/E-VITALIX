@@ -52,4 +52,23 @@ class Asistente
         }
     }
 
+    public function mostrar($id_consultorio) {
+        try {
+            
+            // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL
+            $consultar = "SELECT asistentes.foto, asistentes.nombres, asistentes.apellidos, asistentes.numero_documento, asistentes.telefono, tipo_documento.nombre AS tipo_documento , usuarios.estado FROM asistentes INNER JOIN tipo_documento ON asistentes.id_tipo_documento = tipo_documento.id INNER JOIN usuarios ON asistentes.id_usuario = usuarios.id WHERE asistentes.id_consultorio = :id_consultorio ORDER BY asistentes.nombres ASC";
+            
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+
+        } catch (PDOException $e) {
+            error_log("Error en Asistente::mostrar->" . $e->getMessage());
+            return [];
+        }
+    }
+
 }

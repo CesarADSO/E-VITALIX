@@ -123,4 +123,14 @@ function registrarAsistente()
     }
 }
 
-function mostrarAsistentes() {}
+function mostrarAsistentes() {
+    // POO - INSTANCIAMOS LA CLASE Asistente
+    $ObjAsistente = new Asistente();
+
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    // ACCEDEMOS AL MÉTODO ESPECÍFICO DE LA CLASE PARA MOSTRAR LOS ASISTENTES
+    $resultado = $ObjAsistente->mostrar($id_consultorio);
+    
+    return $resultado;
+}
