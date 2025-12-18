@@ -21,6 +21,7 @@ ob_start();
 
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
+require_once BASE_PATH . '/app/controllers/asistenteController.php';
 
 
 
@@ -34,6 +35,10 @@ function reportesPdfController()
     switch ($tipo) {
         case 'especialistas':
             reporteEspecialistasPDF();
+            break;
+
+        case 'asistentes':
+            reporteAsistentesPDF();
             break;
 
         default:
@@ -55,4 +60,17 @@ function reporteEspecialistasPDF()
     $html = ob_get_clean();
 
     generarPDF($html, 'reporte_especialistas.pdf', false);
+}
+
+function reporteAsistentesPDF() {
+    // CARGAR LA VISTA Y OBTENERLA COMO HTML
+    ob_start();
+    // ASIGNAMOS LOS DATOS DE LA FUNCIÓN EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
+    $asistentes = mostrarAsistentes();
+
+    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
+    require BASE_PATH . '/app/views/pdf/asistentes_pdf.php';
+    $html = ob_get_clean();
+
+    generarPDF($html, 'reporte_asistentes.pdf', false);
 }
