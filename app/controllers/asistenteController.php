@@ -9,11 +9,23 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'POST':
 
-        registrarAsistente();
+        // CREAMOS LA VARIABLE ACCIÓN QUE TRAE EL NAME="accion" DEL FORMULARIO
+        $accion = $_POST['accion'] ?? '';
+
+        // VALIDAMOS LA ACCIÓN
+        if ($accion === 'actualizar') {
+            actualizarAsistente();
+        } else {
+            registrarAsistente();
+        }
 
         break;
     case 'GET':
-        mostrarAsistentes();
+        if (isset($_GET['id'])) {
+            listarAsistente($_GET['id']);
+        } else {
+            mostrarAsistentes();
+        }
         break;
 }
 
@@ -123,7 +135,8 @@ function registrarAsistente()
     }
 }
 
-function mostrarAsistentes() {
+function mostrarAsistentes()
+{
     // POO - INSTANCIAMOS LA CLASE Asistente
     $ObjAsistente = new Asistente();
 
@@ -131,6 +144,84 @@ function mostrarAsistentes() {
 
     // ACCEDEMOS AL MÉTODO ESPECÍFICO DE LA CLASE PARA MOSTRAR LOS ASISTENTES
     $resultado = $ObjAsistente->mostrar($id_consultorio);
-    
+
     return $resultado;
+}
+
+// FUNCIÓN PARA LISTAR UN ASISTENTE POR ID
+function listarAsistente($id)
+{
+    // INSTANCIAMOS EL MODELO
+    $objAsistente = new Asistente();
+
+    // LLAMAMOS AL MÉTODO DEL MODELO
+    $resultado = $objAsistente->listarAsistentePorId($id);
+
+    // RETORNAMOS LOS DATOS A LA VISTA
+    return $resultado;
+}
+
+function actualizarAsistente()
+{
+    // CAPTURAMOS LOS DATOS QUE VIENEN DEL FORMULARIO
+    $idUsuario     = $_POST['id_usuario'] ?? '';
+    $idAsistente   = $_POST['id_asistente'] ?? '';
+    $estado        = $_POST['estado'] ?? '';
+    $tipoDocumento = $_POST['tipo_documento'] ?? '';
+    $nombres       = $_POST['nombres'] ?? '';
+    $apellidos     = $_POST['apellidos'] ?? '';
+    $telefono      = $_POST['telefono'] ?? '';
+
+    // VALIDAMOS CAMPOS OBLIGATORIOS
+    if (
+        empty($idUsuario) ||
+        empty($idAsistente) ||
+        empty($estado) ||
+        empty($tipoDocumento) ||
+        empty($nombres) ||
+        empty($apellidos) ||
+        empty($telefono)
+    ) {
+        mostrarSweetAlert(
+            'error',
+            'Campos incompletos',
+            'Por favor completa todos los campos obligatorios'
+        );
+        exit();
+    }
+
+    // INSTANCIAMOS EL MODELO
+    $objAsistente = new Asistente();
+
+    // ARMAMOS EL ARREGLO DE DATOS
+    $data = [
+        'idUsuario'     => $idUsuario,
+        'idAsistente'   => $idAsistente,
+        'estado'        => $estado,
+        'tipoDocumento' => $tipoDocumento,
+        'nombres'       => $nombres,
+        'apellidos'     => $apellidos,
+        'telefono'      => $telefono
+    ];
+
+    // EJECUTAMOS EL MÉTODO DEL MODELO
+    $resultado = $objAsistente->actualizar($data);
+
+    // VALIDAMOS RESPUESTA
+    if ($resultado === true) {
+        mostrarSweetAlert(
+            'success',
+            'Actualización exitosa',
+            'El asistente fue actualizado correctamente',
+            '/E-VITALIX/admin/asistentes'
+        );
+    } else {
+        mostrarSweetAlert(
+            'error',
+            'Error al actualizar',
+            'No se pudo actualizar el asistente, intenta nuevamente'
+        );
+    }
+
+    exit();
 }

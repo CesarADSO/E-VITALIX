@@ -76,7 +76,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <td><?= $asistente['estado'] ?></td>
                                     <td>
                                         <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                        <a href="<?= BASE_URL ?>/admin/actualizar-asistente"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="<?= BASE_URL ?>/admin/actualizar-asistente?id=<?= $asistente['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                         <!-- <a href=""><i class="fa-solid fa-trash-can"></i></a> -->
                                     </td>
                                 </tr>
