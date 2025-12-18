@@ -54,8 +54,13 @@ if (!$id) {
         </a>
 
         <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
-            <i class="bi bi-people-fill"></i>
+            <i class="fa-solid fa-user-doctor"></i>
             <span>Especialistas</span>
+        </a>
+
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/asistentes">
+            <i class="bi bi-person-gear"></i>
+            <span>Asistentes</span>
         </a>
     </nav>
 
