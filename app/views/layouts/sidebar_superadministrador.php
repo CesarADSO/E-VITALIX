@@ -59,10 +59,10 @@ $perfil = mostrarPerfilSuperAdmin($id);
             <i class="fa-solid fa-user-tie"></i>
             <span>Administradores - Consultorios</span>
         </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/administradores-consultorios">
+        <!-- <a class="nav-item" href="<?= BASE_URL ?>/superadmin/administradores-consultorios">
             <i class="fa-solid fa-building-user"></i>
             <span>Asignación de administradores</span>
-        </a>
+        </a> -->
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">

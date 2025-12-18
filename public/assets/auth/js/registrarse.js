@@ -43,49 +43,7 @@
         function validateCurrentStep() {
             const currentStepElement = document.querySelector(`.wizard-form-step[data-step="${currentStep}"]`);
             const inputs = currentStepElement.querySelectorAll('input, select');
-            
-            for (let input of inputs) {
-                if (input.hasAttribute('required') && !input.value) {
-                    alert(`Por favor, complete el campo: ${input.previousElementSibling.textContent}`);
-                    input.focus();
-                    return false;
-                }
-
-                // Validaciones específicas
-                if (input.type === 'email' && input.value) {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(input.value)) {
-                        alert('Por favor, ingrese un email válido');
-                        input.focus();
-                        return false;
-                    }
-                }
-
-                if (input.id === 'telefono' && input.value) {
-                    const telefonoRegex = /^[0-9]{10}$/;
-                    if (!telefonoRegex.test(input.value)) {
-                        alert('Por favor, ingrese un teléfono válido de 10 dígitos');
-                        input.focus();
-                        return false;
-                    }
-                }
-
-                if (input.id === 'confirmarContrasena' && input.value) {
-                    const contrasena = document.getElementById('contrasena').value;
-                    if (input.value !== contrasena) {
-                        alert('Las contraseñas no coinciden');
-                        input.focus();
-                        return false;
-                    }
-                }
-
-                if (input.id === 'contrasena' && input.value && input.value.length < 6) {
-                    alert('La contraseña debe tener al menos 6 caracteres');
-                    input.focus();
-                    return false;
-                }
-            }
-
+        
             return true;
         }
 

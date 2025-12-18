@@ -16,11 +16,10 @@ switch ($method) {
         // ACÁ VALIDAMOS EL VALUE DE DICHO INPUT
         if ($accion === 'actualizar') {
             actualizarEspecialista();
-        }
-        else {
+        } else {
             registrarEspecialista();
         }
-        
+
         break;
 
     case 'GET':
@@ -54,6 +53,20 @@ function registrarEspecialista()
     $nombres = $_POST['nombres'] ?? '';
     $apellidos = $_POST['apellidos'] ?? '';
     $fechaNacimiento = $_POST['nacimiento'] ?? '';
+    // VALIDAR QUE SEA MAYOR DE 18 AÑOS
+    $fechaNacimientoObj = new DateTime($fechaNacimiento);
+    $fechaActual = new DateTime();
+    $edad = $fechaNacimientoObj->diff($fechaActual)->y;
+
+    if ($edad < 18) {
+        mostrarSweetAlert(
+            'error',
+            'Edad no permitida',
+            'El especialista debe ser mayor de 18 años'
+        );
+        exit();
+    }
+
     $genero = $_POST['genero'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
@@ -195,6 +208,19 @@ function actualizarEspecialista()
     $nombres = $_POST['nombres'] ?? '';
     $apellidos = $_POST['apellidos'] ?? '';
     $fechaNacimiento = $_POST['nacimiento'] ?? '';
+    // VALIDAR QUE SEA MAYOR DE 18 AÑOS
+    $fechaNacimientoObj = new DateTime($fechaNacimiento);
+    $fechaActual = new DateTime();
+    $edad = $fechaNacimientoObj->diff($fechaActual)->y;
+
+    if ($edad < 18) {
+        mostrarSweetAlert(
+            'error',
+            'Edad no permitida',
+            'El especialista debe ser mayor de 18 años'
+        );
+        exit();
+    }
     $genero = $_POST['genero'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
@@ -243,8 +269,9 @@ function actualizarEspecialista()
     exit();
 }
 
-function eliminarEspecialista($idUsuario, $id) {
-    
+function eliminarEspecialista($idUsuario, $id)
+{
+
     // INSTANCIAMOS NUESTRA CLASE ESPECIALISTA 
     $objEspecialista = new Especialista();
 
