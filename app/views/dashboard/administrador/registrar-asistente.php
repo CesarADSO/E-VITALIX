@@ -1,4 +1,12 @@
 <?php
+    require_once BASE_PATH . '/app/helpers/session_administrador.php';
+    require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
+
+    $datos = traerTipoDocumento();
+?>
+
+
+<?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
 
@@ -52,7 +60,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                     <select class="form-select" id="tipo_documento" name="tipo_documento" required>
                                         <option value="">Seleccionar tipo</option>
-                                        <!-- Tipos de documento desde BD -->
+                                        <?php if(isset($datos)): ?>
+                                            <?php foreach ($datos as $tipoDocumento): ?>
+                                                <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
 
