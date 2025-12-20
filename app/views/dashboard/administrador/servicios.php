@@ -71,7 +71,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <td><?= $servicio['estado_servicio'] ?></td>
                                     <td>
                                         <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        <a href="<?= BASE_URL ?>/admin/actualizar-servicio"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="<?= BASE_URL ?>/admin/actualizar-servicio?id=<?= $servicio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                         <a href=""><i class="fa-solid fa-trash-can"></i></a>
                                     </td>
                                 </tr>

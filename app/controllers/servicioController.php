@@ -11,7 +11,13 @@ switch ($method) {
         break;
 
     case 'GET':
-        mostrarServicios();
+        if (isset($_GET['id'])) {
+            listarServicio($_GET['id']);
+        }
+        else {
+            mostrarServicios();
+        }
+        
         break;
 
     default:
@@ -103,4 +109,15 @@ function mostrarServicios()
     $resultado = $objServicio->mostrar($id_consultorio);
 
     return $resultado;
+}
+
+function listarServicio($id) {
+
+    $objServicio = new Servicio();
+
+    $resultado = $objServicio->listarServicio($id);
+
+    
+    return $resultado;
+
 }

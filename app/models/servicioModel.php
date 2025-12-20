@@ -71,4 +71,21 @@ class Servicio
             return [];
         }
     }
+
+    public function listarServicio($id) {
+        try {
+            $mostrarServicio = "SELECT servicios.descripcion, servicios.duracion_minutos, servicios.precio, servicios.id_metodo_pago, metodos_pago.nombre AS metodo_pago, servicios.estado_servicio FROM servicios INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id WHERE servicios.id = :id";
+
+            $resultado = $this->conexion->prepare($mostrarServicio);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Servicio::listarServicio -> " . $e->getMessage());
+            return [];
+        }
+    }
 }
