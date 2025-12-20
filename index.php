@@ -233,7 +233,9 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/servicioController.php';
         break;
     
-
+    case '/admin/eliminar-servicio':
+        require BASE_PATH . '/app/controllers/servicioController.php';
+        break;
     // case '/admin/disponibilidades':
     //     require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
     //     break;

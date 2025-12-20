@@ -11,20 +11,24 @@ switch ($method) {
 
         if ($accion === 'actualizar') {
             actualizarServicio();
-        }
-        else {
+        } else {
             registrarServicio();
         }
         break;
 
     case 'GET':
+        $accion = $_GET['accion'] ?? '';
+
+        if ($accion === 'eliminar') {
+            eliminarServicio($_GET['id']);
+        }
+
         if (isset($_GET['id'])) {
             listarServicio($_GET['id']);
-        }
-        else {
+        } else {
             mostrarServicios();
         }
-        
+
         break;
 
     default:
@@ -101,7 +105,7 @@ function registrarServicio()
 }
 
 function mostrarServicios()
-{   
+{
     // REANUDAMOS LA SESIÓN
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
@@ -118,7 +122,8 @@ function mostrarServicios()
     return $resultado;
 }
 
-function listarServicio($id) {
+function listarServicio($id)
+{
 
     $objServicio = new Servicio();
 
@@ -126,10 +131,10 @@ function listarServicio($id) {
 
 
     return $resultado;
-
 }
 
-function actualizarServicio() {
+function actualizarServicio()
+{
     $id = $_POST['id'] ?? '';
     $descripcion = $_POST['descripcion'] ?? '';
     $duracion = $_POST['duracion_minutos'] ?? '';
@@ -158,13 +163,32 @@ function actualizarServicio() {
     $resultado = $objServicio->actualizar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success',
-        'Modificación exitosa',
-        'El servicio fue modificado correctamente',
-        '/E-VITALIX/admin/servicios');
-    }
-    else {
+        mostrarSweetAlert(
+            'success',
+            'Modificación exitosa',
+            'El servicio fue modificado correctamente',
+            '/E-VITALIX/admin/servicios'
+        );
+    } else {
         mostrarSweetAlert('error', 'Error al modificar', 'No se pudo modificar el servicio. Intenta nuevamente');
     }
+}
 
+function eliminarServicio($id)
+{
+
+    $objServicio = new Servicio();
+
+    $resultado = $objServicio->eliminar($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert(
+            'success',
+            'Eliminación exitosa',
+            'El servicio fue eliminado correctamente',
+            '/E-VITALIX/admin/servicios'
+        );
+    } else {
+        mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el servicio. Intenta nuevamente');
+    }
 }

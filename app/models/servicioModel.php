@@ -106,7 +106,24 @@ class Servicio
 
             return true;
         } catch (PDOException $e) {
-            error_log("Error en Servicio::registrar -> " . $e->getMessage());
+            error_log("Error en Servicio::actualizar -> " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function eliminar($id) {
+        try {
+            $eliminar = "DELETE FROM servicios WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($eliminar);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Servicio::eliminar -> " . $e->getMessage());
             return false;
         }
     }
