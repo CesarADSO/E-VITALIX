@@ -74,7 +74,7 @@ class Servicio
 
     public function listarServicio($id) {
         try {
-            $mostrarServicio = "SELECT servicios.descripcion, servicios.duracion_minutos, servicios.precio, servicios.id_metodo_pago, metodos_pago.nombre AS metodo_pago, servicios.estado_servicio FROM servicios INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id WHERE servicios.id = :id";
+            $mostrarServicio = "SELECT servicios.id, servicios.descripcion, servicios.duracion_minutos, servicios.precio, servicios.id_metodo_pago, metodos_pago.nombre AS metodo_pago, servicios.estado_servicio FROM servicios INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id WHERE servicios.id = :id";
 
             $resultado = $this->conexion->prepare($mostrarServicio);
 
@@ -86,6 +86,28 @@ class Servicio
         } catch (PDOException $e) {
             error_log("Error en Servicio::listarServicio -> " . $e->getMessage());
             return [];
+        }
+    }
+
+    public function actualizar($data) {
+        try {
+            $actualizar = "UPDATE servicios SET descripcion = :descripcion, duracion_minutos = :duracion_minutos, precio = :precio, id_metodo_pago = :id_metodo_pago, estado_servicio = :estado_servicio WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($actualizar);
+
+            $resultado->bindParam(':id', $data['id']);
+            $resultado->bindParam(':descripcion', $data['descripcion']);
+            $resultado->bindParam(':duracion_minutos', $data['duracion_minutos']);
+            $resultado->bindParam(':precio', $data['precio']);
+            $resultado->bindParam(':id_metodo_pago', $data['id_metodo_pago']);
+            $resultado->bindParam(':estado_servicio', $data['estado']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Servicio::registrar -> " . $e->getMessage());
+            return false;
         }
     }
 }

@@ -52,6 +52,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
                         <form id="servicioForm" action="<?= BASE_URL ?>/admin/guardar-cambios-servicio" method="POST">
+                            <input type="hidden" name="id" value="<?= $servicio['id'] ?>">
+                            <input type="hidden" name="accion" value="actualizar">
 
                             <!-- Descripción -->
                             <div class="mb-3">

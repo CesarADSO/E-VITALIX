@@ -7,7 +7,14 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
-        registrarServicio();
+        $accion = $_POST['accion'] ?? '';
+
+        if ($accion === 'actualizar') {
+            actualizarServicio();
+        }
+        else {
+            registrarServicio();
+        }
         break;
 
     case 'GET':
@@ -117,7 +124,47 @@ function listarServicio($id) {
 
     $resultado = $objServicio->listarServicio($id);
 
-    
+
     return $resultado;
+
+}
+
+function actualizarServicio() {
+    $id = $_POST['id'] ?? '';
+    $descripcion = $_POST['descripcion'] ?? '';
+    $duracion = $_POST['duracion_minutos'] ?? '';
+    $precio = $_POST['precio'] ?? '';
+    $idMetodoPago = $_POST['id_metodo_pago'] ?? '';
+    $estado = $_POST['estado'] ?? '';
+
+    // VALIDAMOS CAMPOS OBLIGATORIOS
+    if (empty($descripcion) || empty($precio) || empty($duracion) || empty($idMetodoPago)) {
+        mostrarSweetAlert('error', 'Campos obligatorios', 'Por favor completa los campos requeridos');
+        exit();
+    }
+
+    // INSTANCIAMOS EL MODELO
+    $objServicio = new Servicio();
+
+    $data = [
+        'id' => $id,
+        'descripcion' => $descripcion,
+        'duracion_minutos' => $duracion,
+        'precio' => $precio,
+        'id_metodo_pago' => $idMetodoPago,
+        'estado' => $estado
+    ];
+
+    $resultado = $objServicio->actualizar($data);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success',
+        'Modificación exitosa',
+        'El servicio fue modificado correctamente',
+        '/E-VITALIX/admin/servicios');
+    }
+    else {
+        mostrarSweetAlert('error', 'Error al modificar', 'No se pudo modificar el servicio. Intenta nuevamente');
+    }
 
 }
