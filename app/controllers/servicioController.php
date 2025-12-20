@@ -38,11 +38,22 @@ function registrarServicio()
         exit();
     }
 
+    // INICIAR O REANUDAR LA SESIÓN PARA OBTENER LOS DATOS DEL USUARIO
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
     // INSTANCIAMOS EL MODELO
     $objServicio = new Servicio();
 
     // TRAEMOS EL ID DEL CONSULTORIO DEL ADMINISTRADOR QUE INICIÓ SESIÓN
     $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    // AGREGAMOS UNA VALIDACIÓN POR SI NO SE LOGRÓ TRAER EL ID DEL CONSULTORIO
+    if (empty($id_consultorio)) {
+        mostrarSweetAlert('error', 'Error al traer el id del consultorio', 'Está vacio');
+        exit();
+    }
 
     // ARMAMOS EL ARREGLO DE DATOS
     $data = [
