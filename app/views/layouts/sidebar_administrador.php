@@ -62,6 +62,11 @@ if (!$id) {
             <i class="bi bi-person-gear"></i>
             <span>Asistentes</span>
         </a>
+
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/servicios">
+            <i class="fa-solid fa-stethoscope"></i>
+            <span>Servicios</span>
+        </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">

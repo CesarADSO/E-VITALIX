@@ -213,6 +213,27 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/asistenteController.php';
         break;
 
+    case '/admin/servicios':
+        require BASE_PATH . '/app/views/dashboard/administrador/servicios.php';
+        break;
+
+    case '/admin/registrar-servicio':
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-servicio.php';
+        break;
+    
+    case '/admin/guardar-servicio':
+        require BASE_PATH . '/app/controllers/servicioController.php';
+        break;
+
+    case '/admin/actualizar-servicio':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-servicio.php';
+        break;
+    
+    case '/admin/guardar-cambios-servicio':
+        require BASE_PATH . '/app/controllers/servicioController.php';
+        break;
+    
+
     // case '/admin/disponibilidades':
     //     require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
     //     break;
