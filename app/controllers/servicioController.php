@@ -11,7 +11,7 @@ switch ($method) {
         break;
 
     case 'GET':
-        // mostrarServicios();
+        mostrarServicios();
         break;
 
     default:
@@ -85,4 +85,22 @@ function registrarServicio()
         );
     }
     exit();
+}
+
+function mostrarServicios()
+{   
+    // REANUDAMOS LA SESIÓN
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    // INSTANCIAMOS EL MODELO
+    $objServicio = new Servicio();
+
+    // LLAMAMOS AL MODELO
+    $resultado = $objServicio->mostrar($id_consultorio);
+
+    return $resultado;
 }

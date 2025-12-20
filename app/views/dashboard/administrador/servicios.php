@@ -1,4 +1,13 @@
 <?php
+    require_once BASE_PATH . '/app/helpers/session_administrador.php';
+    require_once BASE_PATH . '/app/controllers/servicioController.php';
+
+    $servicios = mostrarServicios();
+
+?>
+
+
+<?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
 
@@ -51,19 +60,25 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                        <tr>
-                                            <td>Toma de signos vitales</td>
-                                            <td>César Morales</td>
-                                            <td>Dentimax</td>
-                                            <td>10:00</td>
-                                            <td>5000</td>
-                                            <td>Activo</td>
-                                            <td>
-                                                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/actualizar-servicio"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href=""><i class="fa-solid fa-trash-can"></i></a>
-                                            </td>
-                                        </tr>
+                                <?php if(!empty($servicios)) :?>
+                                    <?php foreach($servicios as $servicio) :?>
+                                <tr>
+                                    <td><?= $servicio['nombre'] ?></td>
+                                    <td><?= $servicio['nombre_especialista'] ?> <?= $servicio['apellido_especialista'] ?></td>
+                                    <td><?= $servicio['nombre_consultorio'] ?></td>
+                                    <td><?= $servicio['duracion_minutos'] ?></td>
+                                    <td><?= $servicio['precio'] ?></td>
+                                    <td><?= $servicio['estado_servicio'] ?></td>
+                                    <td>
+                                        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                        <a href="<?= BASE_URL ?>/admin/actualizar-servicio"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href=""><i class="fa-solid fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                                <?php else :?>
+                                    <td>No hay servicios registrados</td>
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>
