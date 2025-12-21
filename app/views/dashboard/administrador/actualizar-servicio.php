@@ -108,7 +108,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <div class="d-flex justify-content-between">
                                 <a href="<?= BASE_URL ?>/admin/servicios" class="btn btn-outline-secondary">Cancelar</a>
-                                <button type="submit" class="btn boton">Registrar Servicio</button>
+                                <button type="submit" class="btn boton">Actualizar Servicio</button>
                             </div>
                     </div>
                     </form>

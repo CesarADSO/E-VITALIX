@@ -56,7 +56,8 @@ class Servicio
         }
     }
 
-    public function mostrar($id_consultorio) {
+    public function mostrar($id_consultorio)
+    {
         try {
             $consultar = "SELECT servicios.*, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, consultorios.nombre AS nombre_consultorio, metodos_pago.nombre AS nombre_metodo_pago FROM servicios INNER JOIN especialistas ON servicios.id_especialista = especialistas.id INNER JOIN consultorios ON servicios.id_consultorio = consultorios.id INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id WHERE servicios.id_consultorio = :id_consultorio";
 
@@ -72,9 +73,10 @@ class Servicio
         }
     }
 
-    public function listarServicio($id) {
+    public function listarServicio($id)
+    {
         try {
-            $mostrarServicio = "SELECT servicios.id, servicios.descripcion, servicios.duracion_minutos, servicios.precio, servicios.id_metodo_pago, metodos_pago.nombre AS metodo_pago, servicios.estado_servicio FROM servicios INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id WHERE servicios.id = :id";
+            $mostrarServicio = "SELECT servicios.id, servicios.nombre, servicios.descripcion, servicios.duracion_minutos, servicios.precio, servicios.id_metodo_pago, metodos_pago.nombre AS metodo_pago, servicios.estado_servicio, servicios.codigo_servicio, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista FROM servicios INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id INNER JOIN especialistas ON servicios.id_especialista = especialistas.id WHERE servicios.id = :id";
 
             $resultado = $this->conexion->prepare($mostrarServicio);
 
@@ -89,7 +91,8 @@ class Servicio
         }
     }
 
-    public function actualizar($data) {
+    public function actualizar($data)
+    {
         try {
             $actualizar = "UPDATE servicios SET descripcion = :descripcion, duracion_minutos = :duracion_minutos, precio = :precio, id_metodo_pago = :id_metodo_pago, estado_servicio = :estado_servicio WHERE id = :id";
 
@@ -111,7 +114,8 @@ class Servicio
         }
     }
 
-    public function eliminar($id) {
+    public function eliminar($id)
+    {
         try {
             $eliminar = "DELETE FROM servicios WHERE id = :id";
 
