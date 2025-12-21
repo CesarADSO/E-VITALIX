@@ -18,6 +18,10 @@
     --texto-auxiliar: 14px;
 }
 
+h1,h2,h3,h4,h5,h6 {
+    color: var(--color-secundario);
+}
+
 body {
     background-color: #f8f9fa;
 }
