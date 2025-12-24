@@ -31,7 +31,7 @@
             <span>Dashboard</span>
         </a>
         <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
-            <i class="bi bi-grid-fill"></i>
+            <i class="fa-regular fa-clock"></i>
             <span>Disponibilidad</span>
         </a>
     </nav>

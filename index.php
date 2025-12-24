@@ -313,6 +313,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
         break;
 
+    case '/especialista/disponibilidad':
+        require BASE_PATH . '/app/views/dashboard/especialista/disponibilidad.php';
+        break;
+
     case '/especialista/perfil':
         require BASE_PATH . '/app/views/dashboard/especialista/perfil-especialista.php';
         break;
