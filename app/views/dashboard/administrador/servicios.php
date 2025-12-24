@@ -67,7 +67,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <td><?= $servicio['nombre_especialista'] ?> <?= $servicio['apellido_especialista'] ?></td>
                                     <td><?= $servicio['nombre_consultorio'] ?></td>
                                     <td><?= $servicio['duracion_minutos'] ?></td>
-                                    <td><?= $servicio['precio'] ?></td>
+                                    <td>$<?= $servicio['precio'] ?></td>
                                     <td><?= $servicio['estado_servicio'] ?></td>
                                     <td>
                                         <a href="<?= BASE_URL ?>/admin/consultar-servicio?id=<?= $servicio['id'] ?>"><i class="fa-solid fa-magnifying-glass"></i></a>

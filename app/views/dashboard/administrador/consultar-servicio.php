@@ -57,7 +57,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <strong>Código:</strong> <?= $servicio['codigo_servicio'] ?>
                                 </div>
                                 <div class="col-md-6">
-                                    <strong>Duración:</strong> <?= $servicio['duracion_minutos'] ?>
+                                    <strong>Duración:</strong> <?= $servicio['duracion_minutos'] ?> minutos
                                 </div>
                             </div>
 
