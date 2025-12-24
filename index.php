@@ -324,6 +324,10 @@ switch ($request) {
     case '/especialista/guardar-configuracion-usuario':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
+
+    case '/especialista/cambiar-contrasena':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
     
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';

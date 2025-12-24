@@ -53,6 +53,9 @@ switch ($method) {
         } elseif ($accion === 'actualizarContrasenaEspecialista') {
             actContrasenaEspecialista();
         }
+        elseif ($accion === 'actualizarFotoEspecialista') {
+            actFotoEspecialista();
+        }
         break;
 
     default:
@@ -346,7 +349,7 @@ function actFotoSuperAdmin()
         }
 
         // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
-        $ruta_foto = uniqid('administrador_') . '.' . $ext;
+        $ruta_foto = uniqid('superadministrador_') . '.' . $ext;
 
         // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
         $destino = BASE_PATH . '/public/uploads/usuarios/' . $ruta_foto;
@@ -449,6 +452,81 @@ function actFotoAdmin()
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/admin/perfil');
+    } else {
+        mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su foto. Intenta nuevamente');
+    }
+    exit();
+}
+
+function actFotoEspecialista()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'];
+
+    // VALIDAMOS LOS DATOS OBLIGATORIOS
+    if (empty($_FILES['foto']['name'])) {
+        mostrarSweetAlert('error', 'Campo vacío', 'Este campo es obligatorio');
+        exit();
+    }
+
+    // LÓGICA PARA CARGAR IMÁGENES
+    $ruta_foto = null;
+
+    // VALIDAMOS SI SE ENVIÓ O NO LA FOTO DESDE EL FORMULARIO
+    // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
+
+    if (!empty($_FILES['foto']['name'])) {
+
+        $file = $_FILES['foto'];
+
+        // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+
+        // DEFINIMOS LAS EXTENSIONES PERMITIDAS
+        $permitidas = ['jpg', 'png', 'jpeg'];
+
+        // VALIDAMOS QUE LA EXTENSIÓN DE LA IMAGEN CARGADA ESTÉ DENTRO DE LAS PERMITIDAS
+        if (!in_array($ext, $permitidas)) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Señor usuario cargue una extensión que sea permitida');
+            exit();
+        }
+
+        // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MAX 2MB
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
+            exit();
+        }
+
+        // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
+        $ruta_foto = uniqid('especialista_') . '.' . $ext;
+
+        // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
+        $destino = BASE_PATH . '/public/uploads/usuarios/' . $ruta_foto;
+
+        // MOVEMOS EL ARCHIVO A DESTINO
+        move_uploaded_file($file['tmp_name'], $destino);
+    } else {
+        // AGREGAR LA LÓGICA DE UNA IMAGEN POR DEFECTO
+    }
+
+    // POO - INSTANCIAMOS LA CLASE
+    $objPerfil = new Perfil();
+
+    $data = [
+        'id' => $id,
+        'foto' => $ruta_foto
+    ];
+
+    // ENVIAMOS LA DATA AL METODO actualizarFotoAdmin() de la clase instanciada anteriormente Perfil()
+    // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+
+    $resultado = $objPerfil->actualizarFotoEspecialista($data);
+
+    // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
+    // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su foto correctamente', '/E-VITALIX/especialista/perfil');
     } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su foto. Intenta nuevamente');
     }

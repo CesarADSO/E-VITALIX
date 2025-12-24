@@ -389,4 +389,24 @@ class Perfil
             return false;
         }
     }
+
+    public function actualizarFotoEspecialista($data) {
+        try {
+
+            // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $actualizar = "UPDATE especialistas SET foto = :foto WHERE id_usuario = :id";
+
+            $resultado = $this->conexion->prepare($actualizar);
+
+            $resultado->bindParam(':id', $data['id']);
+            $resultado->bindParam(':foto', $data['foto']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en perfil::actualizarFotoEspecialista->" . $e->getMessage());
+            return false;
+        }
+    }
 }

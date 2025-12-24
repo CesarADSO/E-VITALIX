@@ -142,7 +142,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             <div class="bg-white rounded shadow-sm p-4">
                                 <h6 style="font-weight: 600; margin-bottom: 20px;">Cambiar Contraseña</h6>
 
-                                <form action="<?= BASE_URL ?>/admin/cambiar-contrasena" method="POST" enctype="multipart/form-data">
+                                <form action="<?= BASE_URL ?>/especialista/cambiar-contrasena" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
                                     <input type="hidden" name="accion" value="actualizarContrasenaEspecialista">
                                     <h6 style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">Contraseña actual
