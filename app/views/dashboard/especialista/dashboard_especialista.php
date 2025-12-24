@@ -1,17 +1,8 @@
-<?php
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/especialistaController.php'; 
 
-
-
-
-$especialitas = mostrarEspecialistas();
-
-?>
 
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_especialista.php';
 
 ?>
 <body>
@@ -21,7 +12,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             <!-- AQUI VA EL INCLUDE EL SIDEBAR -->
 
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
             ?>
 
             <!-- Main Content -->
@@ -32,7 +23,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- AQUI VA EL INCLUDE DEL TOP BAR -->
 
                 <?php
-                include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                include_once __DIR__ . '/../../layouts/topbar_especialista.php';
                 ?>
 
 
@@ -50,7 +41,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Especialistas</div>
-                            <div class="stat-value"><?= count($especialitas) ?></div>
+                            <div class="stat-value">30</div>
                             <div class="stat-subtitle">Registrados</div>
                         </div>
                         <div class="stat-card">
@@ -167,5 +158,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 <!-- AQUI VA EL FOOTER INCLUDE -->
 
 <?php
-include_once __DIR__ . '/../../layouts/footer_administrador.php';
+include_once __DIR__ . '/../../layouts/footer_especialista.php';
 ?>

@@ -309,9 +309,15 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;
         
-    case '/doctor':
-        require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.html';
+    case '/especialista/dashboard':
+        require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
         break;
+
+    case '/especialista/perfil':
+        require BASE_PATH . '/app/views/dashboard/especialista/perfil-especialista.php';
+        break;
+
+    
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
         break;

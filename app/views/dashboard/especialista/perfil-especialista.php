@@ -1,22 +1,8 @@
-<?php
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
-// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE mostrarPerfilAdmin($id)
-
-require_once BASE_PATH . '/app/controllers/perfilController.php';
-
-// EN LA VARIABLE ID GUARDAMOS EL ID DEL USUARIO QUE SE CREA AL INICIAR LA SESIÓN
-$id = $_SESSION['user']['id'];
-
-
-// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
-
-$perfil = mostrarPerfilAdmin($id);
-?>
 
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_especialista.php';
 ?>
 
 <body>
@@ -24,7 +10,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
             ?>
 
             <!-- Main Content -->
@@ -34,7 +20,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="perfilSection" style="display: block;">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_especialista.php';
                     ?>
 
                     <h4 class="mb-4">Perfil</h4>
@@ -190,5 +176,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
     </div>
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_especialista.php';
     ?>
