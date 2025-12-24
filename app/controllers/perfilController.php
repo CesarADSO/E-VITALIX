@@ -21,6 +21,15 @@ function mostrarPerfilAdmin($id)
     return $usuario;
 }
 
+function mostrarPerfilEspecialista($id)
+{
+    $objPerfil = new Perfil();
+
+    $usuario = $objPerfil->mostrarPerfilEspecialista($id);
+
+    return $usuario;
+}
+
 // Capturamos en una variable el método o solicitud hecha al servidor
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -39,6 +48,8 @@ switch ($method) {
             actFotoAdmin();
         } elseif ($accion === 'actualizarContrasenaAdmin') {
             actContrasenaAdmin();
+        } elseif ($accion === 'actualizarInfoPersonalEspecialista') {
+            actInfoPersonalEspecialista();
         }
         break;
 
@@ -122,6 +133,48 @@ function actInfoPersonalAdmin()
 
 
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/admin/perfil');
+    } else {
+        mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo modificar su información personal. Intenta nuevamente');
+    }
+    exit();
+}
+
+function actInfoPersonalEspecialista()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'];
+    $nombres = $_POST['nombres'];
+    $apellidos = $_POST['apellidos'];
+    $email = $_POST['email'];
+    $telefono = $_POST['telefono'];
+
+    // VALIDAMOS LOS DATOS OBLIGATORIOS
+    if (empty($nombres) || empty($apellidos) || empty($email) || empty($telefono)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Todos los campos son obligatorios');
+        exit();
+    }
+
+    // POO - INSTANCIAMOS LA CLASE
+    $objPerfil = new Perfil();
+
+    $data = [
+        'id' => $id,
+        'nombres' => $nombres,
+        'apellidos' => $apellidos,
+        'email' => $email,
+        'telefono' => $telefono
+    ];
+
+    // ENVIAMOS LA DATA AL METODO actualizarInfoPersonalAdmin() de la clase instanciada anteriormente Perfil()
+    // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    $resultado = $objPerfil->actualizarInfoPersonalEspecialista($data);
+
+    // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
+    // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
+    if ($resultado === true) {
+
+
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado su información personal', '/E-VITALIX/especialista/perfil');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo modificar su información personal. Intenta nuevamente');
     }

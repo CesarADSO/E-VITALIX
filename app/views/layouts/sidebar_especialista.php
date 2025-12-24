@@ -1,4 +1,12 @@
+<?php
+    require_once BASE_PATH . '/app/helpers/session_especialista.php';
+    require_once BASE_PATH . '/app/controllers/perfilController.php';
 
+    $id = $_SESSION['user']['id']; 
+
+    $perfil = mostrarPerfilEspecialista($id);
+
+?>
 
 <div class="col-lg-2 col-md-3 sidebar p-0">
     <div class="sidebar-header">
@@ -9,10 +17,10 @@
 
     <div class="user-profile">
         <div class="user-avatar">
-            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['superadmin_nombre'] ?>">
+            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['especialista_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['superadmin_nombre'] ?></h6>
+            <h6><?= $perfil['especialista_nombre'] ?></h6>
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>

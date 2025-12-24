@@ -1,4 +1,11 @@
+<?php
+    require_once BASE_PATH . '/app/helpers/session_especialista.php';
+    require_once BASE_PATH . '/app/controllers/perfilController.php';
 
+    $id = $_SESSION['user']['id'];
+
+    $perfil = mostrarPerfilEspecialista($id);
+?>
 
 
 <?php
@@ -30,7 +37,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                         <div class="col-md-4">
                             <div class=" cont-form-foto bg-white rounded shadow-sm p-4 text-center mb-4">
 
-                                <form class="form-foto" action="<?= BASE_URL ?>/admin/guardar-foto-perfil" method="POST" enctype="multipart/form-data">
+                                <form class="form-foto" action="<?= BASE_URL ?>/especialista/guardar-foto-perfil" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
                                     <input type="hidden" name="accion" value="actualizarFotoAdmin">
                                     <!-- FOTO CON INPUT OCULTO -->
@@ -41,14 +48,14 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                                         <img class="adminImg"
                                             src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>"
-                                            alt="<?= $perfil['admin_nombre'] ?>">
+                                            alt="<?= $perfil['especialista_nombre'] ?>">
                                     </label>
 
                                     <!-- Input file oculto -->  
                                     <input type="file" id="foto" name="foto" accept=".jpg, .png, .jpeg" style="display: none;">
                                     <button class="enviarFoto" type="submit"><i class="bi bi-check-lg"></i></button>
                                 </form>
-                                <h6 style="font-weight: 600;">@<?= $perfil['admin_nombre'] ?></h6>
+                                <h6 style="font-weight: 600;">@<?= $perfil['especialista_nombre'] ?></h6>
                                 <p style="font-size: 13px; color: var(--gris-proyecto);"><?= $perfil['email'] ?></p>
                             </div>
 
@@ -56,7 +63,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 <h6 style="font-weight: 600; margin-bottom: 15px;">Información</h6>
                                 <div style="font-size: 14px; margin-bottom: 10px;">
                                     <span style="color: var(--gris-proyecto);">Nombres:</span> <span
-                                        style="color: var(--color-primario);"><?= $perfil['admin_nombre'] ?>, <?= $perfil['apellidos'] ?></span>
+                                        style="color: var(--color-primario);"><?= $perfil['especialista_nombre'] ?>, <?= $perfil['apellidos'] ?></span>
                                 </div>
                                 <div style="font-size: 14px; margin-bottom: 10px;">
                                     <span style="color: var(--gris-proyecto);">Email:</span> <?= $perfil['email'] ?>
@@ -91,15 +98,15 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 <h6 style="font-weight: 600; margin-bottom: 20px;">Configuración de usuario</h6>
 
                                 <h6 style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">Detalles</h6>
-                                <form action="<?= BASE_URL ?>/admin/guardar-configuracion-usuario" method="POST" enctype="multipart/form-data">
+                                <form action="<?= BASE_URL ?>/especialista/guardar-configuracion-usuario" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
-                                    <input type="hidden" name="accion" value="actualizarInfoPersonalAdmin">
+                                    <input type="hidden" name="accion" value="actualizarInfoPersonalEspecialista">
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label
                                                 style="font-size: 13px; color: var(--gris-proyecto); margin-bottom: 5px;">Nombres</label>
                                             <input type="text" name="nombres" class="form-control campos-formulario" id="nombresInput"
-                                                placeholder="Pepito Rodrick ..." value="<?= $perfil['admin_nombre'] ?>">
+                                                placeholder="Pepito Rodrick ..." value="<?= $perfil['especialista_nombre'] ?>">
                                         </div>
                                         <div class="col-md-6">
                                             <label

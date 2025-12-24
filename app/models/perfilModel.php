@@ -50,6 +50,25 @@ class Perfil
         }
     }
 
+    public function mostrarPerfilEspecialista($id)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $consulta = "SELECT usuarios.*, roles.nombre AS roles_nombre, especialistas.nombres AS especialista_nombre, especialistas.apellidos, especialistas.telefono, especialistas.foto FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE usuarios.id = :id LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();}
+        catch (PDOException $e) {
+            error_log("Error en Perfil::mostrarPerfilEspecialista->" . $e->getMessage());
+            return [];
+        }
+    }
+
     public function actualizarInfoPersonalSuperAdmin($data)
     {
         try {
@@ -285,6 +304,41 @@ class Perfil
             error_log("Error en perfil::actualizarFotoAdmin->" . $e->getMessage());
             return false;
         }
+    }
+
+    public function actualizarInfoPersonalEspecialista($data) {
+
+        try {
+            
+            $actualizarEspecialista = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono WHERE id_usuario = :id";
+
+            $resultadoEspecialista = $this->conexion->prepare($actualizarEspecialista);
+
+            $resultadoEspecialista->bindParam(':id', $data['id']);
+            $resultadoEspecialista->bindParam(':nombres', $data['nombres']);
+            $resultadoEspecialista->bindParam(':apellidos', $data['apellidos']);
+            $resultadoEspecialista->bindParam(':telefono', $data['telefono']);
+
+            $resultadoEspecialista->execute();
+
+            $actualizarUsuario = "UPDATE usuarios SET email = :email WHERE id = :id";
+
+            $resultadoUsuario = $this->conexion->prepare($actualizarUsuario);
+
+            $resultadoUsuario->bindParam(':id', $data['id']);
+            $resultadoUsuario->bindParam(':email', $data['email']);
+
+            $resultadoUsuario->execute();
+
+            return true;
+
+
+        } catch (PDOException $e) {
+            error_log("Error en perfil::actualizarInfoPersonalEspecialista->" . $e->getMessage());
+            return false;
+        }
+
+
     }
 
     
