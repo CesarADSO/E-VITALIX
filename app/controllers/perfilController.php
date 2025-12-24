@@ -50,6 +50,8 @@ switch ($method) {
             actContrasenaAdmin();
         } elseif ($accion === 'actualizarInfoPersonalEspecialista') {
             actInfoPersonalEspecialista();
+        } elseif ($accion === 'actualizarContrasenaEspecialista') {
+            actContrasenaEspecialista();
         }
         break;
 
@@ -258,6 +260,45 @@ function actContrasenaAdmin()
     // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/admin/perfil');
+    } else {
+        mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su contraseña. Intenta nuevamente');
+    }
+    exit();
+}
+
+function actContrasenaEspecialista()
+{
+    // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'];
+    $claveActual = $_POST['claveActual'];
+    $claveNueva = $_POST['claveNueva'];
+    $confirmarClave = $_POST['confirmarClave'];
+
+    // VALIDAMOS LOS DATOS QUE SON OBLIGATORIOS
+    if (empty($claveActual) || empty($claveNueva) || empty($confirmarClave)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Todos los campos son obligatorios');
+        exit();
+    }
+    // VALIDAMOS QUE LA NUEVA CONTRASEÑA Y SU CONFIRMACIÓN COINCIDAN
+    if ($claveNueva !== $confirmarClave) {
+        mostrarSweetAlert('error', 'Contraseñas no coinciden', 'La nueva contraseña y su confirmación deben ser iguales');
+        exit();
+    }
+
+    // POO - INSTANCIAMOS LA CLASE
+    $objPerfil = new Perfil();
+    $data = [
+        'id' => $id,
+        'claveActual' => $claveActual,
+        'claveNueva' => $claveNueva,
+    ];
+    // ENVIAMOS LA DATA AL METODO actualizarContrasenaAdmin() de la clase instanciada anteriormente Perfil()
+    // Y ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    $resultado = $objPerfil->actualizarContrasenaEspecialista($data);
+    // SI LA RESPUESTA DEL MODELO ES VERDADERA CONFIRMAMOS LA MODIFICACIÓN A REDIRECCIONAMOS
+    // SI ES FALSA NOTIFICAMOS Y REDIRECCIONAMOS
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se actualizó su contraseña correctamente', '/E-VITALIX/especialista/perfil');
     } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar su contraseña. Intenta nuevamente');
     }

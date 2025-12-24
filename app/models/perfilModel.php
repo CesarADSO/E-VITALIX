@@ -43,8 +43,8 @@ class Perfil
 
             $resultado->execute();
 
-            return $resultado->fetch();}
-        catch (PDOException $e) {
+            return $resultado->fetch();
+        } catch (PDOException $e) {
             error_log("Error en Perfil::mostrarPerfilAdmin->" . $e->getMessage());
             return [];
         }
@@ -62,8 +62,8 @@ class Perfil
 
             $resultado->execute();
 
-            return $resultado->fetch();}
-        catch (PDOException $e) {
+            return $resultado->fetch();
+        } catch (PDOException $e) {
             error_log("Error en Perfil::mostrarPerfilEspecialista->" . $e->getMessage());
             return [];
         }
@@ -155,7 +155,7 @@ class Perfil
 
             $resultado2->execute();
 
-            
+
 
             return true;
         } catch (PDOException $e) {
@@ -164,9 +164,10 @@ class Perfil
         }
     }
 
-    public function actualizarFotoSuperAdmin($data) {
+    public function actualizarFotoSuperAdmin($data)
+    {
         try {
-            
+
             // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
             $actualizar = "UPDATE superadministradores SET foto = :foto WHERE id_usuario = :id";
 
@@ -178,9 +179,6 @@ class Perfil
             $resultado->execute();
 
             return true;
-
-
-
         } catch (PDOException $e) {
             error_log("Error en perfil::actualizarFotoAdmin->" . $e->getMessage());
             return false;
@@ -274,7 +272,7 @@ class Perfil
 
             $resultado2->execute();
 
-            
+
 
             return true;
         } catch (PDOException $e) {
@@ -283,9 +281,10 @@ class Perfil
         }
     }
 
-    public function actualizarFotoAdmin($data) {
+    public function actualizarFotoAdmin($data)
+    {
         try {
-            
+
             // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
             $actualizar = "UPDATE administradores SET foto = :foto WHERE id_usuario = :id";
 
@@ -297,19 +296,17 @@ class Perfil
             $resultado->execute();
 
             return true;
-
-
-
         } catch (PDOException $e) {
             error_log("Error en perfil::actualizarFotoAdmin->" . $e->getMessage());
             return false;
         }
     }
 
-    public function actualizarInfoPersonalEspecialista($data) {
+    public function actualizarInfoPersonalEspecialista($data)
+    {
 
         try {
-            
+
             $actualizarEspecialista = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono WHERE id_usuario = :id";
 
             $resultadoEspecialista = $this->conexion->prepare($actualizarEspecialista);
@@ -331,15 +328,65 @@ class Perfil
             $resultadoUsuario->execute();
 
             return true;
-
-
         } catch (PDOException $e) {
             error_log("Error en perfil::actualizarInfoPersonalEspecialista->" . $e->getMessage());
             return false;
         }
-
-
     }
 
-    
+    public function actualizarContrasenaEspecialista($data)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+
+            $consultar = "SELECT contrasena FROM usuarios WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($consultar);
+
+            $resultado->bindParam(':id', $data['id']);
+
+            $resultado->execute();
+
+            // TOMAMOS EL RESULTADO DE LA CONSULTA Y LO CONVERTIMOS EN UN ARREGLO PARA PODER LEER LA CONTRASEÑA GUARDADA
+            $usuario = $resultado->fetch(PDO::FETCH_ASSOC);
+
+
+            // VALIDAMOS SI EL USUARIO EXISTE
+            if (!$usuario) {
+                return false;
+            }
+
+            // VALIDAMOS SI LA CONTRASEÑA ACTUAL COINCIDE CON LA DE LA BASE DE DATOS
+            if (!password_verify($data['claveActual'], $usuario['contrasena'])) {
+                return false;
+            }
+
+            // VALIDAMOS QUE LA CONTRASEÑA NUEVA NO SEA IGUAL A LA ACTUAL
+            if (password_verify($data['claveNueva'], $usuario['contrasena'])) {
+                return false;
+            }
+
+            // ENCRIPTAMOS LA NUEVA CONTRASEÑA
+            $claveEncriptada = password_hash($data['claveNueva'], PASSWORD_DEFAULT);
+
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            // EN ESTE CASO HACEMOS EL UPDATE
+
+            $actualizar = "UPDATE usuarios SET contrasena = :claveNueva WHERE id = :id";
+
+            $resultado2 = $this->conexion->prepare($actualizar);
+
+            $resultado2->bindParam(':id', $data['id']);
+            $resultado2->bindParam(':claveNueva', $claveEncriptada);
+
+            $resultado2->execute();
+
+
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en perfil::actualizarContrasenaEspecialista->" . $e->getMessage());
+            return false;
+        }
+    }
 }

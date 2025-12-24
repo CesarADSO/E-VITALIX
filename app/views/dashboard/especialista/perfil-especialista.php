@@ -39,7 +39,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                                 <form class="form-foto" action="<?= BASE_URL ?>/especialista/guardar-foto-perfil" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
-                                    <input type="hidden" name="accion" value="actualizarFotoAdmin">
+                                    <input type="hidden" name="accion" value="actualizarFotoEspecialista">
                                     <!-- FOTO CON INPUT OCULTO -->
                                     <label for="foto" class="user-avatar avatar-editable"
                                         style="width: 150px; height: 150px; border-radius: 50%; 
@@ -144,7 +144,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                                 <form action="<?= BASE_URL ?>/admin/cambiar-contrasena" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $perfil['id'] ?>">
-                                    <input type="hidden" name="accion" value="actualizarContrasenaAdmin">
+                                    <input type="hidden" name="accion" value="actualizarContrasenaEspecialista">
                                     <h6 style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">Contraseña actual
                                     </h6>
                                     <div class="row mb-3">
