@@ -1,19 +1,16 @@
-<?php 
-    require_once BASE_PATH . '/app/helpers/session_admin.php';
-    require_once BASE_PATH . '/app/controllers/horarioController.php';
-    require_once BASE_PATH . '/app/controllers/especialistaController.php';
-    require_once BASE_PATH . '/app/controllers/consultorioController.php';
+<?php
+require_once BASE_PATH . '/app/helpers/session_especialista.php';
+require_once BASE_PATH . '/app/controllers/horarioController.php';
 
-    $id = $_GET['id'];
+$id = $_GET['id'];
 
-    $horario = listarHorarioPorId($id);
-    $especialistas = mostrarEspecialistas();
-    $consultorios = mostrarConsultorios();
+$horario = listarHorarioPorId($id);
+$diasSeleccionados = $horario['diasSeleccionados'] ?? [];
 ?>
 
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_especialista.php';
 ?>
 
 <body>
@@ -21,7 +18,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
             ?>
 
             <!-- Main Content -->
@@ -31,7 +28,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="HorariosSection">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_especialista.php';
                     ?>
 
                     <!-- Horarios Header -->
@@ -42,33 +39,65 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (0)
                             </button>
                         </div>
-                        <a href="/E-VITALIX/admin/horarios" class="btn btn-primary btn-sm"
+                        <a href="/E-VITALIX/especialista/disponibilidad" class="btn btn-primary btn-sm"
                             style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
                     <!-- Formulario de Horarios Médicos -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <h4 class="mb-4">Actualizar Horario Médico</h4>
-                        <p class="text-muted mb-4 texto">Actualiza el horario médico del especialista seleccionado</p>
+                        <h4 class="mb-4">Actualizar disponibilidad</h4>
+                        <p class="text-muted mb-4 texto">Actualiza tu disponibilidad médica seleccionada</p>
 
-                        <form id="horarioForm" action="<?= BASE_URL ?>/admin/guardar-cambios-horario" method="POST">
+                        <form id="horarioForm" action="<?= BASE_URL ?>/especialista/guardar-cambios-disponibilidad" method="POST">
                             <input type="hidden" name="id" value="<?= $horario['id'] ?>">
                             <input type="hidden" name="accion" value="actualizar">
 
                             <div class="row">
                                 <!-- Día de la Semana -->
                                 <div class="col-md-6 mb-3">
-                                    <label for="dia_semana" class="form-label">Día de la Semana</label>
-                                    <select class="form-select" id="dia_semana" name="dia_semana" required>
-                                        <option value="<?= $horario['dia_semana'] ?>"><?= $horario['dia_semana'] ?></option>
-                                        <option value="lunes">Lunes</option>
-                                        <option value="martes">Martes</option>
-                                        <option value="miercoles">Miércoles</option>
-                                        <option value="jueves">Jueves</option>
-                                        <option value="viernes">Viernes</option>
-                                        <option value="sabado">Sábado</option>
-                                        <option value="domingo">Domingo</option>
-                                    </select>
+                                    <label for="dias_semana" class="form-label">Días de la semana</label>
+                                    <div class="row">
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input class="form-check-input" name="dias[]" type="checkbox" value="Lunes" <?= in_array('Lunes', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label class="form-check-label mi-label" for="checkDefault">
+                                                Lunes
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input type="checkbox" class="form-check-input" name="dias[]" value="Martes" <?= in_array('Martes', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label for="checkDefault" class="form-check-label mi-label">Martes</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input type="checkbox" class="form-check-input" name="dias[]" value="Miercoles" <?= in_array('Miercoles', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label for="checkDefault" class="form-check-label mi-label">Miercoles</label>
+                                        </div>
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input type="checkbox" class="form-check-input" name="dias[]" value="Jueves" <?= in_array('Jueves', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label for="checkDefault" class="form-check-label mi-label">Jueves</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input type="checkbox" class="form-check-input" name="dias[]" value="Viernes" <?= in_array('Viernes', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label for="checkDefault" class="form-check-label mi-label">Viernes</label>
+                                        </div>
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input type="checkbox" class="form-check-input" name="dias[]" value="Sabado" <?= in_array('Sabado', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label for="checkDefault" class="form-check-label mi-label ">Sábado</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col-md-6 check-dia">
+                                            <input type="checkbox" class="form-check-input" name="dias[]" value="Domingo" <?= in_array('Domingo', $diasSeleccionados) ? 'checked' : '' ?> id="checkDefault">
+                                            <label for="checkDefault" class="form-check-label mi-label">Domingo</label>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!-- Capacidad Máxima de Citas -->
@@ -122,11 +151,16 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </div>
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
-                                <a href="<?= BASE_URL ?>/admin/horarios" class="btn btn-outline-secondary">Cancelar</a>
+                                <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-outline-secondary">Cancelar</a>
                                 <button type="submit" class="btn boton">Actualizar Horario</button>
                             </div>
                         </form>
                     </div>
-                    <?php
-                    include_once __DIR__ . '/../../layouts/footer_administrador.php';
-                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php
+    include_once __DIR__ . '/../../layouts/footer_especialista.php';
+?>

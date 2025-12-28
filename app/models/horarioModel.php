@@ -17,13 +17,13 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA SENTENCIA SQL A EJECUTAR
-                $registrar = "INSERT INTO disponibilidad_medico(id_especialista, id_consultorio, dia_semana, hora_inicio, hora_fin, pausa_inicio, pausa_fin, capacidad_maxima, estado_disponibilidad) VALUES (:idEspecialista, :idConsultorio, :diaSemana, :horaInicio, :horaFin, :pausaInicio, :pausaFin, :capacidadMaxima, 'Activo')";
+                $registrar = "INSERT INTO disponibilidad_medico(id_especialista, id_consultorio, dia_semana, hora_inicio, hora_fin, pausa_inicio, pausa_fin, capacidad_maxima, estado_disponibilidad) VALUES (:id_especialista, :id_consultorio, :dias, :horaInicio, :horaFin, :pausaInicio, :pausaFin, :capacidadMaxima, 'Activo')";
 
                 $resultado = $this->conexion->prepare($registrar);
 
-                $resultado->bindParam(':idEspecialista', $data['idEspecialista']);
-                $resultado->bindParam(':idConsultorio', $data['idConsultorio']);
-                $resultado->bindParam(':diaSemana', $data['diaSemana']);
+                $resultado->bindParam(':id_especialista', $data['id_especialista']);
+                $resultado->bindParam(':id_consultorio', $data['id_consultorio']);
+                $resultado->bindParam(':dias', $data['dias']);
                 $resultado->bindParam(':horaInicio', $data['horaInicio']);
                 $resultado->bindParam(':horaFin', $data['horaFin']);
                 $resultado->bindParam(':pausaInicio', $data['inicioDescanso']);
@@ -34,18 +34,20 @@
 
                 return true;
             } catch (PDOException $e) {
-                error_log('Error en Horario::registrar->' . $e->getMessage());
+                echo $e->getMessage();
+                // error_log('Error en Horario::registrar->' . $e->getMessage());
                 return false;
             }
         }
 
-        public function mostrar() {
+        public function mostrarParaElEspecialista($id_especialista) {
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR
-                $mostrar = "SELECT disponibilidad_medico.*, especialistas.nombres, especialistas.apellidos FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id";
+                $mostrar = "SELECT * FROM disponibilidad_medico WHERE id_especialista = :id_especialista";
 
                 $resultado = $this->conexion->prepare($mostrar);
+                $resultado->bindParam(':id_especialista', $id_especialista);
 
                 $resultado->execute();
 
@@ -64,7 +66,7 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL QUE VAMOS A UTILIZAR
-                $consultar = "SELECT disponibilidad_medico.*, especialistas.id AS id_especialista, especialistas.nombres, especialistas.apellidos, consultorios.id AS id_consultorio, consultorios.nombre FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id WHERE disponibilidad_medico.id = :id";
+                $consultar = "SELECT disponibilidad_medico.*, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, consultorios.nombre AS consultorio FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id WHERE disponibilidad_medico.id = :id";
 
                 $resultado = $this->conexion->prepare($consultar);
 
@@ -86,11 +88,11 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A UTILIZAR
-                $actualizar = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado WHERE id = :id";
+                $actualizar = "UPDATE disponibilidad_medico SET dia_semana = :dias, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado WHERE id = :id";
 
                 $resultado = $this->conexion->prepare($actualizar);
                 $resultado->bindParam(':id', $data['id']);
-                $resultado->bindParam(':diaSemana', $data['diaSemana']);
+                $resultado->bindParam(':dias', $data['dias']);
                 $resultado->bindParam(':horaInicio', $data['horaInicio']);
                 $resultado->bindParam(':horaFin', $data['horaFin']);
                 $resultado->bindParam(':pausaInicio', $data['inicioDescanso']);

@@ -37,6 +37,7 @@ class Login
             $nombres = '';
             $apellidos = '';
             $id_consultorio = null;
+            $id_especialista = null;
 
             switch ($user['id_rol']) {
                 case 1: // Paciente
@@ -67,12 +68,19 @@ class Login
             $consulta->bindParam(':id', $user['id']);
             $consulta->execute();
             $perfil = $consulta->fetch();
+            
+            // Si el usuario tiene rol de especialista (id_rol == 3)
+            // Y además sí se encontró su registro en la tabla 'especialistas' ($perfil no es false ni está vacío),
+            // entonces podemos tomar con seguridad el id del especialista desde ese perfil.
+            if ($user['id_rol'] === 3 && $perfil) {
+                $id_especialista = $perfil['id'];
+            }
 
             if ($perfil) {
                 $nombres = $perfil['nombres'];
                 $apellidos = $perfil['apellidos'];
                 if (isset($perfil['id_consultorio'])) {
-                $id_consultorio = $perfil['id_consultorio'];  // <-- LO GUARDA SOLO SI EXISTE
+                $id_consultorio = $perfil['id_consultorio']; // <-- LO GUARDA SOLO SI EXISTE
             }
             }
 
@@ -83,7 +91,8 @@ class Login
                 'email' => $user['email'],
                 'nombres' => $nombres,
                 'apellidos' => $apellidos,
-                'id_consultorio' => $id_consultorio
+                'id_consultorio' => $id_consultorio,
+                'id_especialista' => $id_especialista
             ];
         } catch (PDOException $e) {
             error_log("Error de autenticacion: " . $e->getMessage());

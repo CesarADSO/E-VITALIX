@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'nombres' => $resultado['nombres'],
         'apellidos' => $resultado['apellidos'],
         'rol' => $resultado['id_rol'],
-        'id_consultorio' => $resultado['id_consultorio'] ?? null
+        'id_consultorio' => $resultado['id_consultorio'] ?? null,
+        'id_especialista' => $resultado['id_especialista']
     ];
 
     // Redirección según el rol
