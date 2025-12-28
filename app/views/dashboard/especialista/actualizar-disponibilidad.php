@@ -156,6 +156,11 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             </div>
                         </form>
                     </div>
-                    <?php
-                    include_once __DIR__ . '/../../layouts/footer_especialista.php';
-                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php
+    include_once __DIR__ . '/../../layouts/footer_especialista.php';
+?>

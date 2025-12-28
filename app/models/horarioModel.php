@@ -66,7 +66,7 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL QUE VAMOS A UTILIZAR
-                $consultar = "SELECT * FROM disponibilidad_medico WHERE disponibilidad_medico.id = :id";
+                $consultar = "SELECT disponibilidad_medico.*, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, consultorios.nombre AS consultorio FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id WHERE disponibilidad_medico.id = :id";
 
                 $resultado = $this->conexion->prepare($consultar);
 

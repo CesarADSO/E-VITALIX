@@ -337,6 +337,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/horarioController.php';
         break;
 
+    case '/especialista/consultar-disponibilidad':
+        require BASE_PATH . '/app/views/dashboard/especialista/consultar-disponibilidad.php';
+        break;
+
     case '/especialista/perfil':
         require BASE_PATH . '/app/views/dashboard/especialista/perfil-especialista.php';
         break;
