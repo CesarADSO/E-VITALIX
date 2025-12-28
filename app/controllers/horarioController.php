@@ -93,12 +93,20 @@ function registrarHorario()
 }
 
 function mostrarHorarios()
-{
+{   
+    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // Obtenemos el id del especialista cuando inicia sesión
+    $id_especialista = $_SESSION['user']['id_especialista'] ?? null;
+
     // INSTANCIAMOS NUESTRA CLASE HORARIO
     $objhorario = new Horario();
 
     // ACCEDEMOS AL MÉTODO ESPECÍFICO
-    $resultado = $objhorario->mostrar();
+    $resultado = $objhorario->mostrarParaElEspecialista($id_especialista);
 
     return $resultado;
 }

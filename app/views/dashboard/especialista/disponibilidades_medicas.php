@@ -6,6 +6,8 @@ $horarios = mostrarHorarios();
 ?>
 
 
+
+
 <?php
 include_once __DIR__ . '/../../layouts/header_especialista.php';
 ?>
@@ -47,10 +49,6 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             <thead>
                                 <tr>
                                     <th>
-                                        Especialista
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th>
                                         Día de atención
                                         <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                     </th>
@@ -68,8 +66,11 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 <?php if (!empty($horarios)) : ?>
                                     <?php foreach ($horarios as $horario): ?>
                                         <tr>
-                                            <td><?= $horario['nombres'] ?> <?= $horario['apellidos'] ?></td>
-                                            <td><?= $horario['dia_semana'] ?></td>
+                                            <?php
+                                            $diasArray = json_decode($horario['dia_semana'], true);
+                                            $diasTexto = is_array($diasArray) ? implode(',', $diasArray) : '';
+                                            ?>
+                                            <td><?= $diasTexto ?></td>
                                             <td><?= $horario['hora_inicio'] ?></td>
                                             <td><?= $horario['hora_fin'] ?></td>
                                             <td><?= $horario['capacidad_maxima'] ?></td>

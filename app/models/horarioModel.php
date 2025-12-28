@@ -40,13 +40,14 @@
             }
         }
 
-        public function mostrar() {
+        public function mostrarParaElEspecialista($id_especialista) {
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR
-                $mostrar = "SELECT disponibilidad_medico.*, especialistas.nombres, especialistas.apellidos FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id";
+                $mostrar = "SELECT * FROM disponibilidad_medico WHERE id_especialista = :id_especialista";
 
                 $resultado = $this->conexion->prepare($mostrar);
+                $resultado->bindParam(':id_especialista', $id_especialista);
 
                 $resultado->execute();
 
