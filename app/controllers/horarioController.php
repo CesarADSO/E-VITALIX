@@ -192,7 +192,7 @@ function eliminarHorario($id)
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado la disponibilidad', '/E-VITALIX/admin/horarios');
+        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado la disponibilidad', '/E-VITALIX/especialista/disponibilidad');
     } else {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la disponibilidad');
     }
