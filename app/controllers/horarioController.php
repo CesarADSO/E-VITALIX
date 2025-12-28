@@ -120,6 +120,13 @@ function listarHorarioPorId($id)
     // ACCEDEMOS AL MÉTODO ESPECÍFICO
     $resultado = $objhorario->listarHorarioPorId($id);
 
+    // Decodificamos el JSON de días a un array
+    $diasSeleccionados = json_decode($resultado['dia_semana'], true);
+
+    // Agregamos el array al resultado para usarlo en la vista
+    $resultado['diasSeleccionados'] = $diasSeleccionados;
+    
+
     return $resultado;
 }
 
@@ -127,7 +134,7 @@ function actualizarHorario()
 {
     // GUARDAMOS EN VARIABLES LO QUE VIENE DE LOS NAME DE LOS CAMPOS A TRAVÉS DEL METHOD POST
     $id = $_POST['id'] ?? '';
-    $diaSemana = $_POST['dia_semana'] ?? '';
+    $dias = $_POST['dias'] ?? [];
     $capacidadCitas = $_POST['capacidad_citas'] ?? '';
     $horaInicio = $_POST['hora_inicio'] ?? '';
     $horaFin = $_POST['hora_fin'] ?? '';
@@ -136,10 +143,14 @@ function actualizarHorario()
     $estado = $_POST['estado'] ?? '';
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($diaSemana) || empty($capacidadCitas) || empty($horaInicio) || empty($horaFin)) {
+    if (empty($dias) || empty($capacidadCitas) || empty($horaInicio) || empty($horaFin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
+
+    // Convertimos el arreglo de dias a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
+    // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).D
+    $dias_json = json_encode($dias, JSON_UNESCAPED_UNICODE);
 
     // PROGRAMACIÓN ORIENTADA A OBJETOS - INSTANCIAMOS NUESTRA CLASE HORARIO
     $objhorario = new Horario();
@@ -147,7 +158,7 @@ function actualizarHorario()
     // CREAMOS LA VARIABLE DATA PARA INGRESAR TODOS LOS DATOS QUE VIENEN A TRAVÉS DE METHOD POST
     $data = [
         'id' => $id,
-        'diaSemana' => $diaSemana,
+        'dias' => $dias_json,
         'capacidadCitas' => $capacidadCitas,
         'horaInicio' => $horaInicio,
         'horaFin' => $horaFin,
@@ -162,7 +173,7 @@ function actualizarHorario()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha modificado la disponibilidad', '/E-VITALIX/admin/horarios');
+        mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha modificado la disponibilidad', '/E-VITALIX/especialista/disponibilidad');
     } else {
         mostrarSweetAlert('error', 'Error al modificar', 'No se pudo modificar la disponibilidad');
     }

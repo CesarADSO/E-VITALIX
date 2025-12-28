@@ -66,7 +66,7 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL QUE VAMOS A UTILIZAR
-                $consultar = "SELECT disponibilidad_medico.*, especialistas.id AS id_especialista, especialistas.nombres, especialistas.apellidos, consultorios.id AS id_consultorio, consultorios.nombre FROM disponibilidad_medico INNER JOIN especialistas ON disponibilidad_medico.id_especialista = especialistas.id INNER JOIN consultorios ON disponibilidad_medico.id_consultorio = consultorios.id WHERE disponibilidad_medico.id = :id";
+                $consultar = "SELECT * FROM disponibilidad_medico WHERE disponibilidad_medico.id = :id";
 
                 $resultado = $this->conexion->prepare($consultar);
 
@@ -88,11 +88,11 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA CONSULTA SQL A UTILIZAR
-                $actualizar = "UPDATE disponibilidad_medico SET dia_semana = :diaSemana, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado WHERE id = :id";
+                $actualizar = "UPDATE disponibilidad_medico SET dia_semana = :dias, hora_inicio = :horaInicio, hora_fin = :horaFin, pausa_inicio = :pausaInicio, pausa_fin = :pausaFin, capacidad_maxima = :capacidadMaxima, estado_disponibilidad = :estado WHERE id = :id";
 
                 $resultado = $this->conexion->prepare($actualizar);
                 $resultado->bindParam(':id', $data['id']);
-                $resultado->bindParam(':diaSemana', $data['diaSemana']);
+                $resultado->bindParam(':dias', $data['dias']);
                 $resultado->bindParam(':horaInicio', $data['horaInicio']);
                 $resultado->bindParam(':horaFin', $data['horaFin']);
                 $resultado->bindParam(':pausaInicio', $data['inicioDescanso']);

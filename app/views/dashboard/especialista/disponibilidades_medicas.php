@@ -77,7 +77,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                             <td><?= $horario['estado_disponibilidad'] ?></td>
                                             <td>
                                                 <a href="<?= BASE_URL ?>/admin/consultar-disponibilidad"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/actualizar-disponibilidad?id=<?= $horario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/especialista/actualizar-disponibilidad?id=<?= $horario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <a href="<?= BASE_URL ?>/admin/eliminar-disponibilidad?id=<?= $horario['id'] ?>&accion=eliminar"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>
                                         </tr>
