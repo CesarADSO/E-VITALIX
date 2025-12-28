@@ -314,7 +314,15 @@ switch ($request) {
         break;
 
     case '/especialista/disponibilidad':
-        require BASE_PATH . '/app/views/dashboard/especialista/disponibilidad.php';
+        require BASE_PATH . '/app/views/dashboard/especialista/disponibilidades_medicas.php';
+        break;
+
+    case '/especialista/registrar-disponibilidad':
+        require BASE_PATH . '/app/views/dashboard/especialista/registrar-disponibilidad.php';
+        break;
+
+    case '/especialista/guardar-disponibilidad':
+        require BASE_PATH . '/app/controllers/horarioController.php';
         break;
 
     case '/especialista/perfil':

@@ -17,13 +17,13 @@
             try {
                 
                 // GUARDAMOS EN UNA VARIABLE LA SENTENCIA SQL A EJECUTAR
-                $registrar = "INSERT INTO disponibilidad_medico(id_especialista, id_consultorio, dia_semana, hora_inicio, hora_fin, pausa_inicio, pausa_fin, capacidad_maxima, estado_disponibilidad) VALUES (:idEspecialista, :idConsultorio, :diaSemana, :horaInicio, :horaFin, :pausaInicio, :pausaFin, :capacidadMaxima, 'Activo')";
+                $registrar = "INSERT INTO disponibilidad_medico(id_especialista, id_consultorio, dia_semana, hora_inicio, hora_fin, pausa_inicio, pausa_fin, capacidad_maxima, estado_disponibilidad) VALUES (:id_especialista, :id_consultorio, :dias, :horaInicio, :horaFin, :pausaInicio, :pausaFin, :capacidadMaxima, 'Activo')";
 
                 $resultado = $this->conexion->prepare($registrar);
 
-                $resultado->bindParam(':idEspecialista', $data['idEspecialista']);
-                $resultado->bindParam(':idConsultorio', $data['idConsultorio']);
-                $resultado->bindParam(':diaSemana', $data['diaSemana']);
+                $resultado->bindParam(':id_especialista', $data['id_especialista']);
+                $resultado->bindParam(':id_consultorio', $data['id_consultorio']);
+                $resultado->bindParam(':dias', $data['dias']);
                 $resultado->bindParam(':horaInicio', $data['horaInicio']);
                 $resultado->bindParam(':horaFin', $data['horaFin']);
                 $resultado->bindParam(':pausaInicio', $data['inicioDescanso']);
@@ -34,7 +34,8 @@
 
                 return true;
             } catch (PDOException $e) {
-                error_log('Error en Horario::registrar->' . $e->getMessage());
+                echo $e->getMessage();
+                // error_log('Error en Horario::registrar->' . $e->getMessage());
                 return false;
             }
         }

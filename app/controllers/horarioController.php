@@ -12,11 +12,10 @@ switch ($method) {
         $accion = $_POST['accion'] ?? '';
         if ($accion === 'actualizar') {
             actualizarHorario();
-        }
-        else {
+        } else {
             registrarHorario();
         }
-        
+
         break;
     case 'GET':
 
@@ -36,9 +35,7 @@ switch ($method) {
 function registrarHorario()
 {
     // GUARDAMOS EN VARIABLES LOS VALORES QUE NOS ENVIAN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
-    $idEspecialista = $_POST['idEspecialista'] ?? '';
-    $idConsultorio = $_POST['idConsultorio'] ?? '';
-    $diaSemana = $_POST['dia_semana'] ?? '';
+    $dias = $_POST['dias'] ?? [];
     $capacidadMaxima = $_POST['capacidad_citas'] ?? '';
     $horaInicio = $_POST['hora_inicio'] ?? '';
     $horaFin = $_POST['hora_fin'] ?? '';
@@ -47,18 +44,34 @@ function registrarHorario()
 
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($idEspecialista) || empty($idConsultorio) || empty($diaSemana) || empty($capacidadMaxima) || empty($horaInicio) || empty($horaFin)) {
+    if (empty($dias) || empty($capacidadMaxima) || empty($horaInicio) || empty($horaFin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
+
+    // Convertimos el arreglo de dias a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
+    // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).D
+    $dias_json = json_encode($dias, JSON_UNESCAPED_UNICODE);
+
+    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // Obtenemos el id del especialista cuando inicia sesión
+    $id_especialista = $_SESSION['user']['id_especialista'] ?? null;
+
+
+    // ID del consultorio asignado al especialista (puede ser null si no aplica)
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
 
     // POO - INSTANCIAMOS LA CLASE DE NUESTRO MODELO
     $objhorario = new Horario();
 
     $data = [
-        'idEspecialista' => $idEspecialista,
-        'idConsultorio' => $idConsultorio,
-        'diaSemana' => $diaSemana,
+        'id_especialista' => $id_especialista,
+        'id_consultorio' => $id_consultorio,
+        'dias' => $dias_json,
         'capacidadMaxima' => $capacidadMaxima,
         'horaInicio' => $horaInicio,
         'horaFin' => $horaFin,
@@ -72,9 +85,9 @@ function registrarHorario()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Se ha registrado una nueva disponibilidad', '/E-VITALIX/admin/horarios');
+        mostrarSweetAlert('success', 'Registro exitoso', 'Se registró tu disponibilidad', '/E-VITALIX/especialista/disponibilidad');
     } else {
-        mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar una nueva disponibilidad');
+        mostrarSweetAlert('error', 'Error al registrar', 'No se pudo registrar tu disponibilidad');
     }
     exit();
 }
@@ -148,14 +161,15 @@ function actualizarHorario()
     exit();
 }
 
-function eliminarHorario($id) {
+function eliminarHorario($id)
+{
 
     // INSTANCIAMOS NUESTRA CLASE HORARIO
     $objhorario = new Horario();
 
     // ACCEDEMOS AL MÉTODO ESPECÍFICO
     $resultado = $objhorario->eliminar($id);
-    
+
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
@@ -164,5 +178,4 @@ function eliminarHorario($id) {
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar la disponibilidad');
     }
     exit();
-
 }
