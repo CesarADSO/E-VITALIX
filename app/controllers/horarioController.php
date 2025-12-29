@@ -41,10 +41,11 @@ function registrarHorario()
     $horaFin = $_POST['hora_fin'] ?? '';
     $inicioDescanso = $_POST['inicio_descanso'] ?? '';
     $finDescanso = $_POST['fin_descanso'] ?? '';
+    $duracionCita = $_POST['duracion_cita'] ?? '';
 
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($dias) || empty($capacidadMaxima) || empty($horaInicio) || empty($horaFin)) {
+    if (empty($dias) || empty($capacidadMaxima) || empty($horaInicio) || empty($horaFin) || empty($duracionCita)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -76,7 +77,8 @@ function registrarHorario()
         'horaInicio' => $horaInicio,
         'horaFin' => $horaFin,
         'inicioDescanso' => $inicioDescanso,
-        'finDescanso' => $finDescanso
+        'finDescanso' => $finDescanso,
+        'duracion_cita' => $duracionCita
     ];
 
     // ACCEDEMOS AL MÉTODO ESPECÍFICO DE DICHA CLASE

@@ -132,6 +132,11 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 </div>
                             </div>
 
+                            <div class="mb-3">
+                                <label for="duracion_slot">Duración de cada cita (En minutos)</label>
+                                <input type="number" name="duracion_cita" class="form-control" required >
+                            </div>
+
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
                                 <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-outline-secondary">Cancelar</a>
