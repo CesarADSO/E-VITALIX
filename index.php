@@ -341,6 +341,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/consultar-disponibilidad.php';
         break;
 
+
     case '/especialista/perfil':
         require BASE_PATH . '/app/views/dashboard/especialista/perfil-especialista.php';
         break;
@@ -354,6 +355,26 @@ switch ($request) {
         break;
 
     case '/especialista/cambiar-contrasena':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/asistente/dashboard':
+        require BASE_PATH . '/app/views/dashboard/asistente/dashboard_asistente.php';
+        break;
+
+    case '/asistente/perfil': 
+        require BASE_PATH . '/app/views/dashboard/asistente/perfil-asistente.php';
+        break;
+
+    case '/asistente/guardar-configuracion-usuario':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/asistente/cambiar-contrasena':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/asistente/guardar-foto-perfil':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
     
