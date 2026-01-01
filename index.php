@@ -358,6 +358,14 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
+    case '/especialista/slots':
+        require BASE_PATH . '/app/views/dashboard/especialista/slots.php';
+        break;
+
+    case '/especialista/actualizar-slot':
+        require BASE_PATH . '/app/controllers/slotController.php';
+        break;
+
     case '/asistente/dashboard':
         require BASE_PATH . '/app/views/dashboard/asistente/dashboard_asistente.php';
         break;

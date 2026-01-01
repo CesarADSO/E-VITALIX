@@ -34,6 +34,10 @@
             <i class="fa-regular fa-clock"></i>
             <span>Disponibilidad</span>
         </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/especialista/slots">
+            <i class="fa-solid fa-list"></i>
+            <span>Slots de agenda</span>
+        </a>
         <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
             <i class="fa-regular fa-calendar"></i>
             <span>Mis citas</span>
