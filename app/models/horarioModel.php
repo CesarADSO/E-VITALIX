@@ -253,6 +253,15 @@ class Horario
     {
         try {
 
+
+            $eliminarSlots = "DELETE FROM agenda_slot WHERE id_disponibilidad = :id_disponibilidad";
+
+            $resultadoSlot = $this->conexion->prepare($eliminarSlots);
+
+            $resultadoSlot-> bindParam(':id_disponibilidad', $id);
+
+            $resultadoSlot->execute();
+
             $eliminar = "DELETE FROM disponibilidad_medico WHERE id = :id";
 
             $resultado = $this->conexion->prepare($eliminar);
