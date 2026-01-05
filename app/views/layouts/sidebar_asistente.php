@@ -1,10 +1,10 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_especialista.php';
+    require_once BASE_PATH . '/app/helpers/session_asistente.php';
     require_once BASE_PATH . '/app/controllers/perfilController.php';
 
     $id = $_SESSION['user']['id']; 
 
-    $perfil = mostrarPerfilEspecialista($id);
+    $perfil = mostrarPerfilAsistente($id);
 
 ?>
 
@@ -17,35 +17,23 @@
 
     <div class="user-profile">
         <div class="user-avatar">
-            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['especialista_nombre'] ?>">
+            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['asistente_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['especialista_nombre'] ?></h6>
+            <h6><?= $perfil['asistente_nombre'] ?></h6>
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>
 
     <nav class="nav-menu">
-        <a class="nav-item" href="<?= BASE_URL ?>/especialista/dashboard">
+        <a class="nav-item" href="<?= BASE_URL ?>/asistente/dashboard">
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
-        </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
-            <i class="fa-regular fa-clock"></i>
-            <span>Disponibilidad</span>
-        </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/especialista/slots">
-            <i class="fa-solid fa-list"></i>
-            <span>Slots de agenda</span>
-        </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
-            <i class="fa-regular fa-calendar"></i>
-            <span>Mis citas</span>
         </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">
-        <a class="nav-item" href="<?= BASE_URL ?>/especialista/perfil">
+        <a class="nav-item" href="<?= BASE_URL ?>/asistente/perfil">
             <i class="bi bi-person-circle"></i>
             <span>Perfil</span>
         </a>

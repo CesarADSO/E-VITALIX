@@ -69,6 +69,25 @@ class Perfil
         }
     }
 
+    public function mostrarPerfilAsistente($id)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $consulta = "SELECT usuarios.*, roles.nombre AS roles_nombre, asistentes.nombres AS asistente_nombre, asistentes.apellidos, asistentes.telefono, asistentes.foto FROM asistentes INNER JOIN usuarios ON asistentes.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE usuarios.id = :id LIMIT 1";
+
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Perfil::mostrarPerfilAsistente->" . $e->getMessage());
+            return [];
+        }
+    }
+
     public function actualizarInfoPersonalSuperAdmin($data)
     {
         try {
@@ -390,7 +409,8 @@ class Perfil
         }
     }
 
-    public function actualizarFotoEspecialista($data) {
+    public function actualizarFotoEspecialista($data)
+    {
         try {
 
             // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
@@ -406,6 +426,114 @@ class Perfil
             return true;
         } catch (PDOException $e) {
             error_log("Error en perfil::actualizarFotoEspecialista->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function actualizarInfoPersonalAsistente($data)
+    {
+        try {
+
+            $actualizarAsistente = "UPDATE asistentes SET nombres = :nombres, apellidos = :apellidos, telefono = :telefono WHERE id_usuario = :id";
+
+            $resultadoAsistente = $this->conexion->prepare($actualizarAsistente);
+
+            $resultadoAsistente->bindParam(':id', $data['id']);
+            $resultadoAsistente->bindParam(':nombres', $data['nombres']);
+            $resultadoAsistente->bindParam(':apellidos', $data['apellidos']);
+            $resultadoAsistente->bindParam(':telefono', $data['telefono']);
+
+            $resultadoAsistente->execute();
+
+            $actualizarUsuario = "UPDATE usuarios SET email = :email WHERE id = :id";
+
+            $resultadoUsuario = $this->conexion->prepare($actualizarUsuario);
+
+            $resultadoUsuario->bindParam(':id', $data['id']);
+            $resultadoUsuario->bindParam(':email', $data['email']);
+
+            $resultadoUsuario->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en perfil::actualizarInfoPersonalAsistente->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function actualizarContrasenaAsistente($data)
+    {
+        try {
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+
+            $consultar = "SELECT contrasena FROM usuarios WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($consultar);
+
+            $resultado->bindParam(':id', $data['id']);
+
+            $resultado->execute();
+
+            // TOMAMOS EL RESULTADO DE LA CONSULTA Y LO CONVERTIMOS EN UN ARREGLO PARA PODER LEER LA CONTRASEÑA GUARDADA
+            $usuario = $resultado->fetch(PDO::FETCH_ASSOC);
+
+
+            // VALIDAMOS SI EL USUARIO EXISTE
+            if (!$usuario) {
+                return false;
+            }
+
+            // VALIDAMOS SI LA CONTRASEÑA ACTUAL COINCIDE CON LA DE LA BASE DE DATOS
+            if (!password_verify($data['claveActual'], $usuario['contrasena'])) {
+                return false;
+            }
+
+            // VALIDAMOS QUE LA CONTRASEÑA NUEVA NO SEA IGUAL A LA ACTUAL
+            if (password_verify($data['claveNueva'], $usuario['contrasena'])) {
+                return false;
+            }
+
+            // ENCRIPTAMOS LA NUEVA CONTRASEÑA
+            $claveEncriptada = password_hash($data['claveNueva'], PASSWORD_DEFAULT);
+
+            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            // EN ESTE CASO HACEMOS EL UPDATE
+
+            $actualizar = "UPDATE usuarios SET contrasena = :claveNueva WHERE id = :id";
+
+            $resultado2 = $this->conexion->prepare($actualizar);
+
+            $resultado2->bindParam(':id', $data['id']);
+            $resultado2->bindParam(':claveNueva', $claveEncriptada);
+
+            $resultado2->execute();
+
+
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en perfil::actualizarContrasenaAsistente->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function actualizarFotoAsistente($data)
+    {
+        try {
+
+            // DEFINIMOS EN UNA VARIABLE LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
+            $actualizar = "UPDATE asistentes SET foto = :foto WHERE id_usuario = :id";
+
+            $resultado = $this->conexion->prepare($actualizar);
+
+            $resultado->bindParam(':id', $data['id']);
+            $resultado->bindParam(':foto', $data['foto']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en perfil::actualizarFotoAsistente->" . $e->getMessage());
             return false;
         }
     }
