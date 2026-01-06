@@ -35,6 +35,22 @@ class Slot
         }
     }
 
+    public function mostrarParaTodos()
+    {
+        try {
+            $consultar = "SELECT agenda_slot.*, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id ORDER BY agenda_slot.fecha ASC";
+
+            $resultado = $this->conexion->prepare($consultar);
+
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en Slot::mostrar->" . $e->getMessage());
+            return [];
+        }
+    }
+
     public function modificarEstado($id)
     {
         try {

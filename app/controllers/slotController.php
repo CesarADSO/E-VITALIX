@@ -34,6 +34,16 @@ function mostrarSlots()
     return $resultado;
 }
 
+function mostrarSlots2()
+{
+    
+    $objSlot = new Slot();
+
+    $resultado = $objSlot->mostrarParaTodos();
+
+    return $resultado;
+}
+
 function modificarEstadoSlot($id)
 {
     $objSlot = new Slot();

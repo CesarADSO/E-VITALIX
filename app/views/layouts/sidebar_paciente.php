@@ -27,16 +27,16 @@
         </div>
     </div>
 
-                <nav class="nav-menu">
-                    <a class="nav-item" href="<?= BASE_URL ?>/paciente/dashboard">
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a class="nav-item" href="<?= BASE_URL ?>/paciente/ListaDeCitas">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Citas</span>
-                    </a>
-                </nav>
+    <nav class="nav-menu">
+        <a class="nav-item" href="<?= BASE_URL ?>/paciente/dashboard">
+            <i class="bi bi-grid-fill"></i>
+            <span>Dashboard</span>
+        </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/paciente/ListaDeCitas">
+            <i class="bi bi-people-fill"></i>
+            <span>Citas</span>
+        </a>
+    </nav>
 
     <div style="margin-top: auto; padding: 20px;">
         <a class="nav-item" href="<?= BASE_URL ?>/paciente/perfil">
