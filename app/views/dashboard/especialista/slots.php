@@ -64,9 +64,9 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                             <td><?= $slot['id_disponibilidad'] ?></td>
                                             <td><?= $slot['nombres'] ?> <?= $slot['apellidos'] ?></td>
                                             <td><?= $slot['nombre_consultorio'] ?></td>
-                                            <td><?= $slot['fecha'] ?></td>
-                                            <td><?= $slot['hora_inicio'] ?></td>
-                                            <td><?= $slot['hora_fin'] ?></td>
+                                            <td><?= date('d/m/Y', strtotime($slot['fecha'])) ?></td>
+                                            <td><?= substr($slot['hora_inicio'], 0 ,5) ?></td>
+                                            <td><?= substr($slot['hora_fin'], 0 ,5) ?></td>
                                             <td>
                                                 
                                                 <?php if($slot['estado_slot'] === 'Disponible') :?>

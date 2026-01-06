@@ -43,7 +43,10 @@ $servicios = mostrarServicios2();
                                 <option value="">Selecciona un espacio para agendamiento</option>
                                 <?php if (!empty($slots)) : ?>
                                     <?php foreach ($slots as $slot) : ?>
-                                        <option value="<?= $slot['id'] ?>"><?= $slot['nombres'] ?> <?= $slot['nombre_consultorio'] ?> <?= $slot['fecha'] ?> <?= $slot['hora_inicio'] ?> <?= $slot['hora_fin'] ?> <?= $slot['estado_slot'] ?></option>
+                                        <option value="<?= $slot['id'] ?>"> <?= date('d/m/Y', strtotime($slot['fecha'])) ?> |
+                                            <?= substr($slot['hora_inicio'], 0, 5) ?> - <?= substr($slot['hora_fin'], 0, 5) ?> |
+                                            Dr(a). <?= $slot['nombres'] ?> <?= $slot['apellidos'] ?> |
+                                            <?= $slot['nombre_consultorio'] ?></option>
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <option value="">No hay slots registrados</option>

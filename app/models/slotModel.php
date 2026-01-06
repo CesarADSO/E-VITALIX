@@ -20,7 +20,7 @@ class Slot
     public function mostrar($id_especialista)
     {
         try {
-            $consultar = "SELECT agenda_slot.*, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE agenda_slot.id_especialista = :id_especialista ORDER BY agenda_slot.fecha ASC";
+            $consultar = "SELECT agenda_slot.*, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE agenda_slot.id_especialista = :id_especialista AND (agenda_slot.fecha > CURDATE() OR (agenda_slot.fecha = CURDATE() AND agenda_slot.hora_inicio > CURTIME() )) ORDER BY agenda_slot.fecha ASC, agenda_slot.hora_inicio ASC";
 
             $resultado = $this->conexion->prepare($consultar);
 
@@ -38,7 +38,7 @@ class Slot
     public function mostrarParaTodos()
     {
         try {
-            $consultar = "SELECT agenda_slot.*, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id ORDER BY agenda_slot.fecha ASC";
+            $consultar = "SELECT agenda_slot.*, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE agenda_slot.estado_slot = 'Disponible' AND ( agenda_slot.fecha > CURDATE() OR (agenda_slot.fecha = CURDATE() AND agenda_slot.hora_inicio > CURTIME() )) ORDER BY agenda_slot.fecha ASC, agenda_slot.hora_inicio ASC";
 
             $resultado = $this->conexion->prepare($consultar);
 
