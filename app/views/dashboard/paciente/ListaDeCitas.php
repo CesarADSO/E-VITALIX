@@ -14,7 +14,7 @@
 
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <a href="<?= BASE_URL ?>/paciente/agendarCita" class="btn btn-primary btn-sm" style="border-radius: 20px;" target="_blank">
+                <a href="<?= BASE_URL ?>/paciente/agendarCita" class="btn btn-primary btn-sm" style="border-radius: 20px;">
                     <i class="bi bi-plus-lg"></i> Agendar cita
                 </a>
             </div>

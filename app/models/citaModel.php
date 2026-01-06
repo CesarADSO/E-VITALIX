@@ -23,11 +23,28 @@ class Cita
 
             $resultado->execute();
 
+            $cambiarEstadoSlot = "UPDATE agenda_slot SET estado_slot = 'Reservado' WHERE id = :id_agenda_slot";
+
+            $resultado2 = $this->conexion->prepare($cambiarEstadoSlot);
+
+            $resultado2->bindParam(':id_agenda_slot', $data['horario']);
+
+            $resultado2->execute();
+
             return true;
 
         } catch (PDOException $e) {
             error_log("Error en Cita::agendar->" . $e->getMessage());
             return false;
+        }
+    }
+
+    public function mostrar() {
+        try {
+            //code...
+        } catch (PDOException $e) {
+            error_log("Error en Cita::mostrar->" . $e->getMessage());
+            return [];
         }
     }
 
