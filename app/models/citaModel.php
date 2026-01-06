@@ -39,9 +39,18 @@ class Cita
         }
     }
 
-    public function mostrar() {
+    public function mostrar($id_paciente) {
         try {
-            //code...
+            $consultar = "SELECT especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, servicios.nombre AS nombre_servicio, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN servicios ON citas.id_servicio = servicios.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE citas.id_paciente = :id_paciente";
+
+            $resultado = $this->conexion->prepare($consultar);
+
+            $resultado->bindParam(':id_paciente', $id_paciente);
+
+            $resultado->execute();
+
+           return $resultado->fetchAll();
+
         } catch (PDOException $e) {
             error_log("Error en Cita::mostrar->" . $e->getMessage());
             return [];

@@ -14,7 +14,7 @@ switch ($method) {
         break;
 
     case 'GET':
-
+        mostrarCitas();
         break;
 }
 
@@ -51,8 +51,23 @@ function agendarCita()
 
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/ListaDeCitas');
-    }
-    else {
+    } else {
         mostrarSweetAlert('error', 'No se pudo registrar la cita', 'Intente nuevamente');
     }
+}
+
+function mostrarCitas()
+{
+    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    $id_paciente = $_SESSION['user']['id_paciente'];
+
+    $objCita = new Cita();
+
+    $resultado = $objCita->mostrar($id_paciente);
+
+    return $resultado;
 }

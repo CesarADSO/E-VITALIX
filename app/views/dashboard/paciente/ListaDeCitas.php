@@ -1,5 +1,12 @@
-<?php 
-    include_once __DIR__ . '/../../layouts/header_paciente.php';
+<?php
+require_once BASE_PATH . '/app/helpers/session_paciente.php';
+require_once BASE_PATH . '/app/controllers/citaController.php';
+
+$citas = mostrarCitas();
+?>
+
+<?php
+include_once __DIR__ . '/../../layouts/header_paciente.php';
 ?>
 
 <div class="container-fluid">
@@ -13,16 +20,26 @@
             <?php include_once __DIR__ . '/../../layouts/topbar_paciente.php'; ?>
 
             <!-- Header -->
+            <h4 class="mb-4">Gestión de citas médicas</h4>
+            <p class="mb-4">Gestione sus citas médicas: Agende una cita, reagéndela y cancélela si es necesario.</p>
             <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <button class="btn btn-link text-primary p-0"
+                        style="text-decoration: none; font-size: 14px;">
+                        ← Todos (0)
+                    </button>
+                </div>
                 <a href="<?= BASE_URL ?>/paciente/agendarCita" class="btn btn-primary btn-sm" style="border-radius: 20px;">
                     <i class="bi bi-plus-lg"></i> Agendar cita
                 </a>
             </div>
 
             <!-- Tabla de Citas -->
-            <div class="bg-white rounded shadow-sm p-4">
-                
-                <table id="tablaCitas" class="table table-striped table-bordered w-100">
+            <div class="bg-white rounded shadow-sm p-4 ">
+
+
+
+                <table class="table-pacientes">
                     <thead>
                         <tr>
                             <th>Fecha</th>
@@ -35,12 +52,31 @@
                     </thead>
 
                     <tbody>
-                        <!-- Si no hay citas -->
-                        <tr>
-                            <td colspan="6" class="text-center text-muted">
-                                ¡No hay citas agendadas!
-                            </td>
-                        </tr>
+                        <?php if (!empty($citas)) : ?>
+                            <?php foreach ($citas as $cita): ?>
+                                <tr>
+                                    <td><?= date('d/m/Y', strtotime($cita['fecha'])) ?></td>
+                                    <td><?= substr($cita['hora_inicio'], 0, 5) ?> - <?= substr($cita['hora_fin'], 0, 5) ?></td>
+                                    <td><?= $cita['nombres'] ?> <?= $cita['apellidos'] ?></td>
+                                    <td><?= $cita['nombre_consultorio'] ?></td>
+                                    <td><?= $cita['estado_cita'] ?></td>
+                                    <td>
+                                        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="#"><i class="fa-solid fa-x"></i></a>
+                                    </td>
+                                </tr>
+
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">
+                                    ¡No hay citas agendadas!
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+
+
                     </tbody>
                 </table>
             </div>
@@ -48,17 +84,5 @@
         </div>
     </div>
 </div>
-
-<!-- Inicialización DataTable -->
-<script>
-    new DataTable("#tablaCitas", {
-        responsive: true,
-        pageLength: 10,
-        lengthMenu: [5, 10, 20, 50],
-        language: {
-            url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
-        }
-    });
-</script>
 
 <?php include_once __DIR__ . '/../../layouts/footer_paciente.php'; ?>
