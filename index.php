@@ -193,18 +193,18 @@ switch ($request) {
         reportesPdfController();
         break;
 
-    case '/admin/asistentes': 
+    case '/admin/asistentes':
         require BASE_PATH . '/app/views/dashboard/administrador/asistentes.php';
         break;
 
     case '/admin/registrar-asistente':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar-asistente.php';
         break;
-    
+
     case '/admin/guardar-asistente':
         require BASE_PATH . '/app/controllers/asistenteController.php';
         break;
-    
+
     case '/admin/actualizar-asistente':
         require BASE_PATH . '/app/views/dashboard/administrador/actualizar-asistente.php';
         break;
@@ -220,7 +220,7 @@ switch ($request) {
     case '/admin/registrar-servicio':
         require BASE_PATH . '/app/views/dashboard/administrador/registrar-servicio.php';
         break;
-    
+
     case '/admin/guardar-servicio':
         require BASE_PATH . '/app/controllers/servicioController.php';
         break;
@@ -228,11 +228,11 @@ switch ($request) {
     case '/admin/actualizar-servicio':
         require BASE_PATH . '/app/views/dashboard/administrador/actualizar-servicio.php';
         break;
-    
+
     case '/admin/guardar-cambios-servicio':
         require BASE_PATH . '/app/controllers/servicioController.php';
         break;
-    
+
     case '/admin/eliminar-servicio':
         require BASE_PATH . '/app/controllers/servicioController.php';
         break;
@@ -304,11 +304,11 @@ switch ($request) {
     case '/admin/eliminar-paciente':
         require BASE_PATH . '/app/controllers/pacienteController.php';
         break;
-        
+
     case '/admin/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;
-        
+
     case '/especialista/dashboard':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
         break;
@@ -349,7 +349,7 @@ switch ($request) {
     case '/especialista/guardar-foto-perfil':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
-    
+
     case '/especialista/guardar-configuracion-usuario':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
@@ -370,7 +370,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/asistente/dashboard_asistente.php';
         break;
 
-    case '/asistente/perfil': 
+    case '/asistente/perfil':
         require BASE_PATH . '/app/views/dashboard/asistente/perfil-asistente.php';
         break;
 
@@ -385,11 +385,11 @@ switch ($request) {
     case '/asistente/guardar-foto-perfil':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
-    
+
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
         break;
-     case '/paciente/dashboard':
+    case '/paciente/dashboard':
         require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
         break;
     case '/paciente/ListaDeCitas':
@@ -399,18 +399,26 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
         break;
 
-    case '/paciente/guardar-cita': 
+    case '/paciente/guardar-cita':
         require BASE_PATH . '/app/controllers/citaController.php';
         break;
 
-    case '/paciente/perfil': 
+    case '/paciente/reagendarCita':
+        require BASE_PATH . '/app/views/dashboard/paciente/reagendar_cita.php';
+        break;
+
+    case '/paciente/guardar-cambios-cita':
+        require BASE_PATH . '/app/controllers/citaController.php';
+        break;
+
+    case '/paciente/perfil':
         require BASE_PATH . '/app/views/dashboard/paciente/perfil-paciente.php';
         break;
 
     case '/paciente/guardar-foto-perfil':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
-     
+
     case '/paciente/cambiar-contrasena':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;

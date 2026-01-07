@@ -9,11 +9,23 @@ $method = $_SERVER['REQUEST_METHOD'];
 // HACEMOS EL SWITCH CASE PARA VALIDAR LOS CASOS POSIBLES
 switch ($method) {
     case 'POST':
-        agendarCita();
+        $accion = $_POST['accion'] ?? '';
+
+        if ($accion === 'reagendar') {
+            reagendarCita();
+            break;
+        } else {
+            agendarCita();
+        }
+
 
         break;
 
     case 'GET':
+        if (isset($_GET['id'])) {
+            listarCita($_GET['id']);
+            break;
+        }
         mostrarCitas();
         break;
 }
@@ -70,4 +82,43 @@ function mostrarCitas()
     $resultado = $objCita->mostrar($id_paciente);
 
     return $resultado;
+}
+
+function listarCita($id)
+{
+    $objCita = new Cita();
+
+    $resultado = $objCita->listarCita($id);
+
+    return $resultado;
+}
+
+function reagendarCita() {
+    $id_cita = $_POST['id'] ?? '';
+    $slot = $_POST['horario'] ?? '';
+    $servicio = $_POST['servicio'] ?? '';
+    $motivo = $_POST['motivo'] ?? '';
+
+    // Validamos los campos que son obligatorios
+    if (empty($slot) || empty($servicio) || empty($motivo)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $ObjCita = new Cita();
+
+    $data = [
+        'id_cita' => $id_cita,
+        'horario' => $slot,
+        'servicio' => $servicio,
+        'motivo' => $motivo
+    ];
+
+    $resultado = $ObjCita->reagendar($data);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Cita reagendada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/ListaDeCitas');
+    } else {
+        mostrarSweetAlert('error', 'No se pudo reagendar la cita', 'Intente nuevamente');
+    }
 }

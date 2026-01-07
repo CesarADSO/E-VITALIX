@@ -1,8 +1,12 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_paciente.php';
+require_once BASE_PATH . '/app/controllers/citaController.php';
 require_once BASE_PATH . '/app/controllers/slotController.php';
 require_once BASE_PATH . '/app/controllers/servicioController.php';
 
+$id = $_GET['id'];
+
+$cita = listarCita($id);
 
 $slots = mostrarSlots2();
 
@@ -25,17 +29,19 @@ $servicios = mostrarServicios2();
 
             <!-- Formulario de Horarios Médicos -->
             <div class="bg-white rounded shadow-sm p-4">
-                <h4 class="mb-4">Agendar Cita</h4>
-                <p class="text-muted mb-4 texto">Como rol paciente, Agenda tu cita médica</p>
+                <h4 class="mb-4">Reagendar Cita</h4>
+                <p class="text-muted mb-4 texto">Como rol paciente, reagenda la cita médica seleccionada</p>
 
-                <form id="horarioForm" action="<?= BASE_URL ?>/paciente/guardar-cita" method="POST">
+                <form id="horarioForm" action="<?= BASE_URL ?>/paciente/guardar-cambios-cita" method="POST">
+                    <input type="hidden" name="id" value="<?= $cita['id_cita'] ?>">
+                    <input type="hidden" name="accion" value="reagendar">
 
                     <div class="row">
                         <!-- Espacio de agendamiento -->
                         <div class="col-md-6 mb-3">
                             <label for="hora_fin" class="form-label">Horario</label>
                             <select class="form-select" name="horario" id="">
-                                <option value="">Selecciona un espacio para agendamiento</option>
+                                <option value="<?= $cita['id_horario'] ?>"><?= date('d/m/Y', strtotime($cita['fecha'])) ?> | <?= substr($cita['hora_inicio'], 0, 5) ?> - <?= substr($cita['hora_fin'], 0, 5) ?> | Dr(a). <?= $cita['nombres'] ?> <?= $cita['apellidos'] ?> | <?= $cita['nombre_consultorio'] ?></option>
                                 <?php if (!empty($slots)) : ?>
                                     <?php foreach ($slots as $slot) : ?>
                                         <option value="<?= $slot['id'] ?>"> <?= date('d/m/Y', strtotime($slot['fecha'])) ?> |
@@ -51,7 +57,7 @@ $servicios = mostrarServicios2();
                         <div class="col-md-6 mb-3">
                             <label for="hora_fin" class="form-label">Servicio</label>
                             <select class="form-select" name="servicio" id="">
-                                <option value="">Selecciona el servicio que quieres recibir en tu cita</option>
+                                <option value="<?= $cita['id_servicio'] ?>"><?= $cita['nombre_servicio'] ?></option>
                                 <?php if (!empty($servicios)) : ?>
                                     <?php foreach ($servicios as $servicio) : ?>
                                         <option value="<?= $servicio['id'] ?>"><?= $servicio['nombre'] ?> </option>
@@ -65,11 +71,11 @@ $servicios = mostrarServicios2();
 
                     <div class="mb-3">
                         <label class="form-label" for="">Motivo de la consulta</label>
-                        <textarea class="form-control" name="motivo" id="" placeholder="Escribe el motivo de la consulta aquí"></textarea>
+                        <textarea class="form-control" name="motivo" id="" placeholder="Escribe el motivo de la consulta aquí"><?= $cita['motivo_consulta'] ?></textarea>
                     </div>
 
                     <div class="alert alert-info" role="alert">
-                        <i class="bi bi-info-circle"></i> Al agendar la cita el estado de dicha cita por defecto será pendiente.
+                        <i class="bi bi-info-circle"></i> Al reagendar la cita el estado de dicha cita por defecto será pendiente.
                     </div>
 
                     <!-- Botones -->
