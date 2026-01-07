@@ -402,8 +402,22 @@ switch ($request) {
     case '/paciente/guardar-cita': 
         require BASE_PATH . '/app/controllers/citaController.php';
         break;
-     
 
+    case '/paciente/perfil': 
+        require BASE_PATH . '/app/views/dashboard/paciente/perfil-paciente.php';
+        break;
+
+    case '/paciente/guardar-foto-perfil':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+     
+    case '/paciente/cambiar-contrasena':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/paciente/guardar-configuracion-usuario':
+        require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
 
     default:
         http_response_code(404);
