@@ -79,6 +79,24 @@ class Cita
     public function reagendar($data)
     {
         try {
+
+            // 1. OBTENER EL SLOT ANTERIOR DE LA CITA
+            // ANTES DE CAMBIAR LA CITA, NECESITAMOS SABER QUE SLOT ESTABA RESERVADO
+            $obtenerSlotAnterior = "SELECT id_agenda_slot FROM citas WHERE id = :id_cita";
+
+            $resultadoSlotAnterior = $this->conexion->prepare($obtenerSlotAnterior);
+            $resultadoSlotAnterior->bindParam(':id_cita', $data['id_cita']);
+            $resultadoSlotAnterior->execute();
+
+
+            // Guardamos el ID del slot anterior
+            // fetchColumn devuelve SOLO el valor del id del slot anterior
+            $slotAnterior = $resultadoSlotAnterior->fetchColumn();
+
+
+            // ACTUALIZAR LA CITA CON EL NUEVO HORARIO
+
+
             $reagendar = "UPDATE citas SET id_agenda_slot = :id_agenda_slot, id_servicio = :id_servicio, motivo_consulta = :motivo_consulta WHERE id = :id_cita";
 
             $resultado = $this->conexion->prepare($reagendar);
@@ -90,9 +108,64 @@ class Cita
 
             $resultado->execute();
 
+
+            // LIBERAMOS EL SLOT ANTERIOR
+            $liberarSlot = "UPDATE agenda_slot SET estado_slot = 'Disponible' WHERE id = :id_agenda_slot";
+
+            $resultadoLiberar = $this->conexion->prepare($liberarSlot);
+            $resultadoLiberar->bindParam(':id_agenda_slot', $slotAnterior);
+            $resultadoLiberar->execute();
+
+
+            $cambiarEstadoSlot = "UPDATE agenda_slot SET estado_slot = 'Reservado' WHERE id = :id_agenda_slot";
+
+            $resultado2 = $this->conexion->prepare($cambiarEstadoSlot);
+
+            $resultado2->bindParam(':id_agenda_slot', $data['horario']);
+
+            $resultado2->execute();
+
             return true;
         } catch (PDOException $e) {
             error_log("Error en Cita::agendar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function cancelar($id)
+    {
+        try {
+
+            $obtenerIdSlot = "SELECT id_agenda_slot FROM citas WHERE id = :id_cita";
+
+            $resultado = $this->conexion->prepare($obtenerIdSlot);
+            $resultado->bindParam(':id_cita', $id);
+            $resultado->execute();
+
+            // fetchColumn devuelve SOLO el valor del id del slot anterior
+            $id_agenda_slot = $resultado->fetchColumn();
+
+            if ($id_agenda_slot === false) {
+                return false;
+            }
+
+            $cancelar = "UPDATE citas SET estado_cita = 'Cancelada' WHERE id = :id_cita";
+
+            $resultado = $this->conexion->prepare($cancelar);
+
+            $resultado->bindParam(':id_cita', $id);
+
+            $resultado->execute();
+
+            $cambiarEstadoSlot = "UPDATE agenda_slot SET estado_slot = 'Bloqueado' WHERE id = :id_agenda_slot";
+
+            $resultado2 = $this->conexion->prepare($cambiarEstadoSlot);
+            $resultado2->bindParam(':id_agenda_slot', $id_agenda_slot);
+            $resultado2->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Cita::cancelar->" . $e->getMessage());
             return false;
         }
     }

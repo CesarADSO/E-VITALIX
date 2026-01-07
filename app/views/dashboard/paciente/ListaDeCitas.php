@@ -63,7 +63,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                     <td>
                                         <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
                                         <a href="<?= BASE_URL ?>/paciente/reagendarCita?id=<?= $cita['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="#"><i class="fa-solid fa-x"></i></a>
+                                        <a href="<?= BASE_URL ?>/paciente/cancelarCita?id=<?= $cita['id'] ?>&accion=cancelar"><i class="fa-solid fa-x"></i></a>
                                     </td>
                                 </tr>
 
