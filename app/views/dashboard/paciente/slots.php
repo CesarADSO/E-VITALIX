@@ -1,12 +1,12 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_especialista.php';
+require_once BASE_PATH . '/app/helpers/session_paciente.php';
 require_once BASE_PATH . '/app/controllers/slotController.php';
 
-$slots = mostrarSlots();
+$slots = mostrarSlots2();
 ?>
 
 <?php
-include_once __DIR__ . '/../../layouts/header_especialista.php';
+include_once __DIR__ . '/../../layouts/header_paciente.php';
 ?>
 
 <body>
@@ -14,7 +14,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
+            include_once __DIR__ . '/../../layouts/sidebar_paciente.php';
             ?>
 
             <!-- Main Content -->
@@ -24,7 +24,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                 <div id="HorariosSection" style="display: block;">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_especialista.php';
+                    include_once __DIR__ . '/../../layouts/topbar_paciente.php';
                     ?>
 
                     <!-- Horarios Header -->
@@ -64,9 +64,9 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                             <td><?= $slot['id_disponibilidad'] ?></td>
                                             <td><?= $slot['nombres'] ?> <?= $slot['apellidos'] ?></td>
                                             <td><?= $slot['nombre_consultorio'] ?></td>
-                                            <td><?= date('d/m/Y', strtotime($slot['fecha'])) ?></td>
-                                            <td><?= substr($slot['hora_inicio'], 0 ,5) ?></td>
-                                            <td><?= substr($slot['hora_fin'], 0 ,5) ?></td>
+                                            <td><?= $slot['fecha'] ?></td>
+                                            <td><?= $slot['hora_inicio'] ?></td>
+                                            <td><?= $slot['hora_fin'] ?></td>
                                             <td>
                                                 
                                                 <?php if($slot['estado_slot'] === 'Disponible') :?>
@@ -94,5 +94,5 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
     </div>
 
     <?php
-    include_once __DIR__ . '/../../layouts/footer_especialista.php';
+    include_once __DIR__ . '/../../layouts/footer_paciente.php';
     ?>

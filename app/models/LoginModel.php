@@ -38,6 +38,7 @@ class Login
             $apellidos = '';
             $id_consultorio = null;
             $id_especialista = null;
+            $id_paciente = null;
 
             switch ($user['id_rol']) {
                 case 1: // Paciente
@@ -76,6 +77,13 @@ class Login
                 $id_especialista = $perfil['id'];
             }
 
+            // Si el usuario tiene rol de paciente (id_rol == 1)
+            // Y además sí se encontró su registro en la tabla 'pacientes' ($perfil no es false ni está vacío),
+            // entonces podemos tomar con seguridad el id del especialista desde ese perfil.
+            if ($user['id_rol'] === 1 && $perfil) {
+                $id_paciente = $perfil['id'];
+            }
+
             if ($perfil) {
                 $nombres = $perfil['nombres'];
                 $apellidos = $perfil['apellidos'];
@@ -92,7 +100,8 @@ class Login
                 'nombres' => $nombres,
                 'apellidos' => $apellidos,
                 'id_consultorio' => $id_consultorio,
-                'id_especialista' => $id_especialista
+                'id_especialista' => $id_especialista,
+                'id_paciente' => $id_paciente
             ];
         } catch (PDOException $e) {
             error_log("Error de autenticacion: " . $e->getMessage());

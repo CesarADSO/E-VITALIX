@@ -73,6 +73,22 @@ class Servicio
         }
     }
 
+    public function mostrarParaTodos()
+    {
+        try {
+            $consultar = "SELECT servicios.*, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, consultorios.nombre AS nombre_consultorio, metodos_pago.nombre AS nombre_metodo_pago FROM servicios INNER JOIN especialistas ON servicios.id_especialista = especialistas.id INNER JOIN consultorios ON servicios.id_consultorio = consultorios.id INNER JOIN metodos_pago ON servicios.id_metodo_pago = metodos_pago.id";
+
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en Servicio::mostrar -> " . $e->getMessage());
+            return [];
+        }
+    }
+
     public function listarServicio($id)
     {
         try {
