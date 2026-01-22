@@ -1,17 +1,33 @@
 <?php
 
-// ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE MOSTRARPERFILADMIN($ID)
+// Controlador que obtiene los datos del perfil
 require_once BASE_PATH . '/app/controllers/perfilController.php';
 
-// EN LA VARIABLE ID GUARDAMOS EL ID DEL USUARIO QUE SE CREA AL INICIAR LA SESIÓN
-$id = $_SESSION['user']['id'];
+// Validamos que exista el usuario en sesión
+$id = $_SESSION['user']['id'] ?? null;
 
-// EN LA VARIABLE PERFIL LLAMAMOS LA FUNCIÓN DEL CONTROLADOR mostrarPerfilAdmin(id)
-$perfil = mostrarPerfilAdmin($id);
+if (!$id) {
+    // Si no hay usuario logueado, mostramos datos por defecto
+    $perfil = [
+        'foto' => 'default.png',
+        'admin_nombre' => 'Invitado',
+        'roles_nombre' => 'Sin rol'
+    ];
+} else {
+    // Obtenemos el perfil real
+    $perfil = mostrarPerfilAdmin($id);
+
+    // Si la consulta devolvió false (sin datos) evitamos warnings
+    if (!$perfil || !is_array($perfil)) {
+        $perfil = [
+            'foto' => 'default.png',
+            'admin_nombre' => 'Administrador',
+            'roles_nombre' => 'Sin rol'
+        ];
+    }
+}
 
 ?>
-
-
 
 <div class="col-lg-2 col-md-3 sidebar p-0">
     <div class="sidebar-header">
@@ -22,7 +38,8 @@ $perfil = mostrarPerfilAdmin($id);
 
     <div class="user-profile">
         <div class="user-avatar">
-            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['admin_nombre'] ?>">
+            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" 
+                 alt="<?= $perfil['admin_nombre'] ?>">
         </div>
         <div class="user-info">
             <h6><?= $perfil['admin_nombre'] ?></h6>
@@ -35,24 +52,21 @@ $perfil = mostrarPerfilAdmin($id);
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
         </a>
-        <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/pacientes">
-                        <i class="fa-solid fa-hospital-user"></i>
-                        <span>Pacientes</span>
-                    </a> -->
-        
-        <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>Profesionales</span>
-                    </a> -->
-        <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/disponibilidades">
-                        <i class="bi bi-alarm"></i>
-                        <span>Horarios</span>
-                    </a> -->
+
         <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
-            <i class="bi bi-people-fill"></i>
+            <i class="fa-solid fa-user-doctor"></i>
             <span>Especialistas</span>
         </a>
-      
+
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/asistentes">
+            <i class="bi bi-person-gear"></i>
+            <span>Asistentes</span>
+        </a>
+
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/servicios">
+            <i class="fa-solid fa-stethoscope"></i>
+            <span>Servicios</span>
+        </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">

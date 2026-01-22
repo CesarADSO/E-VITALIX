@@ -8,7 +8,7 @@
     --color-primario: #007bff;
     --color-secundario: #0c498a;
     --blanco-color: #ffffff;
-    --gris-proyecto: #969696;
+    --gris-proyecto: #1c1c1c;
     --tercer-azul: #1a73d3;
     --titulo-principal: 48px;
     --subtitulo-seccion: 30px;
@@ -16,6 +16,10 @@
     --subtitulo-menor: 18px;
     --parrafos: 16px;
     --texto-auxiliar: 14px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--color-secundario);
 }
 
 body {
@@ -1096,7 +1100,3 @@ body {
     font-weight: 800;
     color: var(--color-secundario);
 }
-
-
-
-

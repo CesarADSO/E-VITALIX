@@ -16,7 +16,10 @@
 
 <body>
     <div class="recuperar-container">
-        <div class="logo-container">
+       
+        <div class="recuperar-content">
+            <div class="recuperar-card">
+                 <div class="logo-container">
             <div class="logo">
                 <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo" class="img-fluid" style="max-width: 100%;"></a>
                 <!-- Placeholder temporal -->
@@ -24,8 +27,6 @@
             </div>
         </div>
 
-        <div class="recuperar-content">
-            <div class="recuperar-card">
                 <!-- Formulario de recuperación -->
                 <div id="recuperarForm">
                     <h2 class="recuperar-title">

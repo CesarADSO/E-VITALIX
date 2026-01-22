@@ -1,9 +1,13 @@
 <?php
+ob_start();
+
 require_once BASE_PATH . '/app/helpers/pdf_helper.php';
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 require_once BASE_PATH . '/app/controllers/usuarioController.php';
-require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+ require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+
+
 
 // ESTA FUNCIÓN SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCIÓN CORRESPONDIENTE
 function reportesPdfController()
@@ -22,7 +26,7 @@ function reportesPdfController()
         case 'usuarios':
             reporteUsuariosPDF();
             break;
-        case 'admnistradores':
+        case 'administradores':
             reporteAdministradoresPDF();
             break;
 
@@ -66,7 +70,7 @@ function reporteUsuariosPDF()
     ob_start();
 
     // ASIGNAMOS LOS DATOS DE LA FUNCIÓN EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
-    $usuario = mostrarUsuario();
+    $usuarios = mostrarUsuario();
 
     // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
     require BASE_PATH . '/app/views/pdf/usuarios_pdf.php';

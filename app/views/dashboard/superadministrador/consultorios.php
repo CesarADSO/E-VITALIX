@@ -1,5 +1,4 @@
 
-
 <?php
 require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
@@ -48,7 +47,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=consultorios" target="_blank">generar reporte pdf</a>
+                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=consultorios" target="_blank">Generar reporte pdf</a>
                         <table class="table-pacientes">
 
                             <thead>
@@ -79,7 +78,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <td><?= $consultorio['ciudad'] ?></td>
                                             <td><?= $consultorio['estado'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <!-- <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-magnifying-glass"></i></a> -->
                                                 <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <a href="<?= BASE_URL ?>/superadmin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                                             </td>

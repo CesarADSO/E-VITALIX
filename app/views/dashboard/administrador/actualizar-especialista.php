@@ -79,11 +79,20 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <!-- Formulario -->
                         <form id="especialistaForm" action="<?= BASE_URL ?>/admin/guardar-cambios-especialista" method="POST" enctype="multipart/form-data">
                             <!-- INPUTS OCULTOS QUE NOS VAN A SERVIR PARA LA LÓGICA DEL ACTUALIZAR -->
-                             <input type="hidden" name="idUsuario" value="<?= $especialista['id_usuario'] ?>">
-                             <input type="hidden" name="idEspecialista" value="<?= $especialista['id_especialista'] ?>">
-                             <input type="hidden" name="accion" value="actualizar">
+                            <input type="hidden" name="idUsuario" value="<?= $especialista['id_usuario'] ?>">
+                            <input type="hidden" name="idEspecialista" value="<?= $especialista['id_especialista'] ?>">
+                            <input type="hidden" name="accion" value="actualizar">
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
+                                <!-- NUEVO CAMPO ESTADO PARA ACTUALIZAR -->
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
+                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
@@ -144,7 +153,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="direccion" class="form-label">Dirección</label>
                                     <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $especialista['direccion'] ?>">
                                 </div>
-                                
+
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
@@ -185,15 +194,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <p><strong>Registro Profesional:</strong> <span id="resumen-registro-profesional"></span></p>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- NUEVO CAMPO ESTADO PARA ACTUALIZAR -->
-                                <div class="mb-3">
-                                    <label for="estado" class="form-label">Estado del especialista</label>
-                                    <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
-                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                    </select>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
