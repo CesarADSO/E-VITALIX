@@ -54,6 +54,11 @@ switch ($request) {
     case '/registro':
         require BASE_PATH . '/app/views/auth/registrarse.php';
         break;
+
+    case '/registrarse':
+        require BASE_PATH . '/app/controllers/registroController.php';
+        break;
+
     case '/recuperacion':
         require BASE_PATH . '/app/views/auth/recuperar-contraseña.php';
         break;
@@ -392,6 +397,15 @@ switch ($request) {
     case '/paciente/dashboard':
         require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
         break;
+
+    case '/paciente/completar-perfil':
+        require BASE_PATH . '/app/views/dashboard/paciente/completar-perfil.php';
+        break;
+
+    case '/paciente/terminar-perfil':
+        require BASE_PATH . '/app/controllers/registroController.php';
+        break;
+
     case '/paciente/ListaDeCitas':
         require BASE_PATH . '/app/views/dashboard/paciente/ListaDeCitas.php';
         break;
