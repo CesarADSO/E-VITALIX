@@ -62,12 +62,11 @@
 
                             <div class="form-group-custom">
                                 <label class="form-label-custom">Tipo de documento:</label>
-                                <select class="campos-formulario" id="tipoDocumento" required>
+                                <select name="tipo_documento" class="campos-formulario" id="tipoDocumento" required>
                                     <option value="">Selecciona tu tipo de documento</option>
-                                    <option value="CC">Cédula de Ciudadanía</option>
-                                    <option value="CE">Cédula de Extranjería</option>
-                                    <option value="TI">Tarjeta de Identidad</option>
-                                    <option value="PP">Pasaporte</option>
+                                    <option value="1">Cédula de Ciudadanía</option>
+                                    <option value="2">Cédula de Extranjería</option>
+                                    <option value="3">Tarjeta de Identidad</option>
                                 </select>
                             </div>
 
@@ -78,6 +77,7 @@
                                     class="campos-formulario"
                                     placeholder="xxxxxxxxxx"
                                     id="numeroDocumento"
+                                    name="numero_documento"
                                     required>
                             </div>
 

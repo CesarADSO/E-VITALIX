@@ -54,6 +54,11 @@ switch ($request) {
     case '/registro':
         require BASE_PATH . '/app/views/auth/registrarse.php';
         break;
+
+    case '/registrarse':
+        require BASE_PATH . '/app/controllers/registroController.php';
+        break;
+        
     case '/recuperacion':
         require BASE_PATH . '/app/views/auth/recuperar-contraseña.php';
         break;
