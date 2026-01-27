@@ -39,6 +39,7 @@ class Login
             $id_consultorio = null;
             $id_especialista = null;
             $id_paciente = null;
+            $perfil_completo = null;
 
             switch ($user['id_rol']) {
                 case 1: // Paciente
@@ -82,6 +83,7 @@ class Login
             // entonces podemos tomar con seguridad el id del especialista desde ese perfil.
             if ($user['id_rol'] === 1 && $perfil) {
                 $id_paciente = $perfil['id'];
+                $perfil_completo = $perfil['perfil_completo'];
             }
 
             if ($perfil) {
@@ -101,7 +103,8 @@ class Login
                 'apellidos' => $apellidos,
                 'id_consultorio' => $id_consultorio,
                 'id_especialista' => $id_especialista,
-                'id_paciente' => $id_paciente
+                'id_paciente' => $id_paciente,
+                'perfil_completo' => $perfil_completo
             ];
         } catch (PDOException $e) {
             error_log("Error de autenticacion: " . $e->getMessage());
