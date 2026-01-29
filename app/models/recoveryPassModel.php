@@ -491,14 +491,22 @@ class RecoveryPass
             <div class="notification-badge">
                 ✅ Solicitud Procesada
             </div>
+           
 
             <!-- CONTENIDO -->
             <div class="content">
                 <!-- MENSAJE DE BIENVENIDA -->
                 <div class="welcome-message">
                     <h2>¡Tu contraseña ha sido restablecida!</h2>
-                    <p>Hemos generado una nueva contraseña temporal para tu cuenta. Por favor, úsala para iniciar sesión.</p>
+                   <div class="header-subtitle">    
+                        Hola,
+
+                        Hemos recibido una solicitud para restablecer la contraseña asociada a tu cuenta en la plataforma E-VITALIX. Este mensaje tiene como finalidad ayudarte a recuperar el acceso de forma segura y rápida. Esta es tu contraseña temporal, no la compartas con nadie.
+                    </div>
                 </div>
+                
+
+
 
                 <!-- INFO: EMAIL -->
                 <div class="info-card">

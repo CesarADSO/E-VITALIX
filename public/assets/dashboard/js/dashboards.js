@@ -97,3 +97,93 @@ $(document).ready(function () {
         }
     });
 });
+
+// JS PARA EL FORMULARIO DEL COMPLETAR PERFIL DEL PACIENTE
+document.addEventListener('DOMContentLoaded', function () {
+    // Navegación entre pasos
+    const nextButtons = document.querySelectorAll('.next-step');
+    const prevButtons = document.querySelectorAll('.prev-step');
+    const steps = document.querySelectorAll('.wizard-step');
+    const stepIndicators = document.querySelectorAll('.step');
+
+    nextButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const currentStep = document.querySelector('.wizard-step.active');
+            const nextStepId = this.getAttribute('data-next');
+            const nextStep = document.getElementById('step' + nextStepId);
+
+            // Actualizar indicadores de progreso
+            updateStepIndicators(nextStepId);
+
+            // Cambiar paso
+            currentStep.classList.remove('active');
+            nextStep.classList.add('active');
+
+            // Si es el último paso, actualizar resumen
+            if (nextStepId === '4') {
+                updateSummary();
+            }
+        });
+    });
+
+    prevButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const currentStep = document.querySelector('.wizard-step.active');
+            const prevStepId = this.getAttribute('data-prev');
+            const prevStep = document.getElementById('step' + prevStepId);
+
+            // Actualizar indicadores de progreso
+            updateStepIndicators(prevStepId);
+
+            // Cambiar paso
+            currentStep.classList.remove('active');
+            prevStep.classList.add('active');
+        });
+    });
+
+    function updateStepIndicators(activeStep) {
+        stepIndicators.forEach(indicator => {
+            indicator.classList.remove('active');
+            if (parseInt(indicator.getAttribute('data-step')) <= parseInt(activeStep)) {
+                indicator.classList.add('active');
+            }
+        }); 
+    }
+
+    function updateSummary() {
+        // Datos Personales
+        document.getElementById('resumen-fecha-nacimiento').textContent =
+            document.getElementById('fecha_nacimiento').value || 'No ingresado';
+
+        const generoSelect = document.getElementById('genero');
+        document.getElementById('resumen-genero').textContent =
+            generoSelect.options[generoSelect.selectedIndex].text || 'No seleccionado';
+
+        document.getElementById('resumen-ciudad').textContent =
+            document.getElementById('ciudad').value || 'No ingresado';
+        document.getElementById('resumen-direccion').textContent =
+            document.getElementById('direccion').value || 'No ingresado';
+
+        // Información Médica
+        const epsSelect = document.getElementById('eps');
+        document.getElementById('resumen-eps').textContent =
+            epsSelect.options[epsSelect.selectedIndex].text || 'No seleccionado';
+
+        const rhSelect = document.getElementById('rh');
+        document.getElementById('resumen-rh').textContent =
+            rhSelect.options[rhSelect.selectedIndex].text || 'No seleccionado';
+
+        const historial = document.getElementById('historial_medico').value;
+        document.getElementById('resumen-historial').textContent =
+            historial || 'No ingresado';
+
+        // Contacto de Emergencia
+        document.getElementById('resumen-nombre-contacto').textContent =
+            document.getElementById('nombre_contacto').value || 'No ingresado';
+        document.getElementById('resumen-telefono-contacto').textContent =
+            document.getElementById('telefono_contacto').value || 'No ingresado';
+
+        document.getElementById('resumen-direccion-contacto').textContent =
+            document.getElementById('direccion_contacto').value || 'No ingresado';
+    }
+});

@@ -43,7 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'rol' => $resultado['id_rol'],
         'id_consultorio' => $resultado['id_consultorio'] ?? null,
         'id_especialista' => $resultado['id_especialista'] ?? null,
-        'id_paciente' => $resultado['id_paciente'] ?? null
+        'id_paciente' => $resultado['id_paciente'] ?? null,
+        'perfil_completo' => $resultado['perfil_completo'] ?? null
     ];
 
     // Redirección según el rol
@@ -52,7 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($resultado['id_rol']) {
         case 1:
-            $redirecUrl = '/E-VITALIX/paciente/dashboard';
+            if ($resultado['perfil_completo'] === 0) {
+                $redirecUrl = '/E-VITALIX/paciente/completar-perfil';
+            }
+            else {
+                $redirecUrl = '/E-VITALIX/paciente/dashboard';
+            }
             $mensaje = 'Bienvenido Paciente';
             break;
 
