@@ -314,6 +314,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;
 
+    // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
         break;
@@ -346,7 +347,6 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/consultar-disponibilidad.php';
         break;
 
-
     case '/especialista/perfil':
         require BASE_PATH . '/app/views/dashboard/especialista/perfil-especialista.php';
         break;
@@ -371,6 +371,13 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/slotController.php';
         break;
 
+    // NUEVA RUTA: Módulo Mis Citas del Especialista
+    case '/especialista/mis-citas':
+        require BASE_PATH . '/app/controllers/MisCitasController.php';
+        mostrarMisCitas();
+        break;
+
+    // ASISTENTE INTERFACES
     case '/asistente/dashboard':
         require BASE_PATH . '/app/views/dashboard/asistente/dashboard_asistente.php';
         break;
@@ -394,6 +401,8 @@ switch ($request) {
     case '/cerrarSesion':
         require BASE_PATH . '/app/controllers/cerrarSesionController.php';
         break;
+
+    // PACIENTE INTERFACES
     case '/paciente/dashboard':
         require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
         break;

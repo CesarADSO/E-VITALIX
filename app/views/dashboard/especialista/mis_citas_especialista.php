@@ -1,5 +1,6 @@
+<!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
-include_once __DIR__ . '/../../layouts/header_especialista.php';
+include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 ?>
 
 <body>
@@ -7,14 +8,14 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
+            include_once __DIR__ . '/../../../views/layouts/sidebar_especialista.php';
             ?>
 
             <!-- Main Content -->
             <div class="col-lg-10 col-md-9 main-content">
                 <!-- Top Bar -->
                 <?php
-                include_once __DIR__ . '/../../layouts/topbar_especialista.php';
+                include_once __DIR__ . '/../../../views/layouts/topbar_especialista.php';
                 ?>
 
                 <!-- Título de la sección -->
@@ -27,23 +28,23 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                 <div class="stats-cards mb-4">
                     <div class="stat-card">
                         <div class="stat-label">Citas Pendientes</div>
-                        <div class="stat-value"><?= $estadisticas['PENDIENTE'] ?></div>
-                        <div class="stat-subtitle">Por confirmar</div>
+                        <div class="stat-value"><?= $estadisticas['Pendiente'] ?? 0 ?></div>
+                        <div class="stat-subtitle">Por revisar</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Citas Confirmadas</div>
-                        <div class="stat-value"><?= $estadisticas['CONFIRMADA'] ?></div>
-                        <div class="stat-subtitle">Aceptadas</div>
+                        <div class="stat-label">Citas Aceptadas</div>
+                        <div class="stat-value"><?= $estadisticas['Aceptada'] ?? 0 ?></div>
+                        <div class="stat-subtitle">Confirmadas</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Citas Canceladas</div>
-                        <div class="stat-value"><?= $estadisticas['CANCELADA'] ?></div>
+                        <div class="stat-value"><?= $estadisticas['Cancelada'] ?? 0 ?></div>
                         <div class="stat-subtitle">No realizadas</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Citas Completadas</div>
-                        <div class="stat-value"><?= $estadisticas['COMPLETADA'] ?></div>
-                        <div class="stat-subtitle">Finalizadas</div>
+                        <div class="stat-label">Citas Rechazadas</div>
+                        <div class="stat-value"><?= $estadisticas['Rechazada'] ?? 0 ?></div>
+                        <div class="stat-subtitle">Declinadas</div>
                     </div>
                 </div>
 
@@ -100,15 +101,15 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                                     <i class="bi bi-clock-fill me-1"></i>
                                                     <?= date('h:i A', strtotime($cita['hora_fin'])) ?>
                                                 </td>
-                                                <td><?= htmlspecialchars($cita['servicio_nombre']) ?></td>
+                                                <td><?= htmlspecialchars($cita['servicio_nombre'] ?? 'Sin servicio') ?></td>
                                                 <td>
-                                                    <span class="status-badge status-<?= strtolower($cita['estado']) ?>">
-                                                        <?= $cita['estado'] ?>
+                                                    <span class="status-badge status-<?= strtolower($cita['estado_cita']) ?>">
+                                                        <?= $cita['estado_cita'] ?>
                                                     </span>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group" role="group">
-                                                        <?php if ($cita['estado'] === 'PENDIENTE'): ?>
+                                                        <?php if ($cita['estado_cita'] === 'Pendiente'): ?>
                                                             <button
                                                                 class="btn btn-sm btn-success btn-aceptar"
                                                                 data-cita-id="<?= $cita['id'] ?>"
@@ -121,19 +122,12 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                                                 title="Cancelar cita">
                                                                 <i class="bi bi-x-circle"></i>
                                                             </button>
-                                                        <?php elseif ($cita['estado'] === 'CONFIRMADA'): ?>
-                                                            <button
-                                                                class="btn btn-sm btn-warning btn-cancelar"
-                                                                data-cita-id="<?= $cita['id'] ?>"
-                                                                title="Cancelar cita">
-                                                                <i class="bi bi-x-circle"></i> Cancelar
-                                                            </button>
                                                         <?php else: ?>
-                                                            <span class="text-muted">Sin acciones</span>
+                                                            <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>
 
                                                         <button
-                                                            class="btn btn-sm btn-info btn-detalle"
+                                                            class="btn btn-sm btn-info btn-detalle ms-1"
                                                             data-cita-id="<?= $cita['id'] ?>"
                                                             title="Ver detalles">
                                                             <i class="bi bi-eye"></i>
@@ -209,7 +203,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
             color: #856404;
         }
 
-        .status-confirmada {
+        .status-aceptada {
             background-color: #D1ECF1;
             color: #0C5460;
         }
@@ -219,9 +213,9 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
             color: #721C24;
         }
 
-        .status-completada {
-            background-color: #D4EDDA;
-            color: #155724;
+        .status-rechazada {
+            background-color: #F5C6CB;
+            color: #721C24;
         }
 
         #tablaCitas tbody tr {
@@ -269,10 +263,10 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
             // Botón Aceptar
             $(document).on('click', '.btn-aceptar', function() {
                 citaIdActual = $(this).data('cita-id');
-                estadoActual = 'CONFIRMADA';
+                estadoActual = 'Aceptada';
 
                 $('#modalTitulo').text('Aceptar Cita');
-                $('#modalMensaje').html('<p>¿Estás seguro de que deseas <strong>aceptar</strong> esta cita?</p>');
+                $('#modalMensaje').html('<p>¿Estás seguro de que deseas <strong>aceptar</strong> esta cita?</p><p class="text-success small">Esta acción reservará el slot en tu agenda.</p>');
                 $('#btnConfirmarAccion').removeClass('btn-danger').addClass('btn-success');
 
                 new bootstrap.Modal(document.getElementById('modalConfirmacion')).show();
@@ -281,10 +275,10 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
             // Botón Cancelar
             $(document).on('click', '.btn-cancelar', function() {
                 citaIdActual = $(this).data('cita-id');
-                estadoActual = 'CANCELADA';
+                estadoActual = 'Cancelada';
 
                 $('#modalTitulo').text('Cancelar Cita');
-                $('#modalMensaje').html('<p>¿Estás seguro de que deseas <strong>cancelar</strong> esta cita?</p><p class="text-danger small">Esta acción notificará al paciente.</p>');
+                $('#modalMensaje').html('<p>¿Estás seguro de que deseas <strong>cancelar</strong> esta cita?</p><p class="text-danger small">El slot quedará disponible nuevamente.</p>');
                 $('#btnConfirmarAccion').removeClass('btn-success').addClass('btn-danger');
 
                 new bootstrap.Modal(document.getElementById('modalConfirmacion')).show();
@@ -430,8 +424,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 <div class="info-row">
                                     <span class="info-label">Estado:</span>
                                     <span class="info-value">
-                                        <span class="status-badge status-${data.estado.toLowerCase()}">
-                                            ${data.estado}
+                                        <span class="status-badge status-${data.estado_cita.toLowerCase()}">
+                                            ${data.estado_cita}
                                         </span>
                                     </span>
                                 </div>
@@ -448,16 +442,20 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 <hr>
                                 <div class="info-row">
                                     <span class="info-label">Servicio:</span>
-                                    <span class="info-value">${data.servicio_nombre}</span>
+                                    <span class="info-value">${data.servicio_nombre || 'Sin servicio asignado'}</span>
                                 </div>
+                                ${data.servicio_duracion ? `
                                 <div class="info-row">
                                     <span class="info-label">Duración:</span>
                                     <span class="info-value">${data.servicio_duracion} minutos</span>
                                 </div>
+                                ` : ''}
+                                ${data.servicio_precio ? `
                                 <div class="info-row">
                                     <span class="info-label">Precio:</span>
                                     <span class="info-value">$${parseFloat(data.servicio_precio).toFixed(2)}</span>
                                 </div>
+                                ` : ''}
                             </div>
                         </div>
                     </div>
@@ -482,7 +480,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
         }
     </script>
 
+    <!-- AQUI VA EL FOOTER INCLUDE -->
     <?php
-    include_once __DIR__ . '/../../layouts/footer_especialista.php';
+    include_once __DIR__ . '/../../../views/layouts/footer_especialista.php';
     ?>
 </body>
