@@ -236,7 +236,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
             background: linear-gradient(135deg, var(--color-primario) 0%, var(--tercer-azul) 100%);
         }
     </style>
-
+<!-- 
     <script>
         // Variables globales
         let citaIdActual = null;
@@ -480,7 +480,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
 
             $('#modalDetalleContenido').html(contenido);
         }
-    </script>
+    </script> -->
 
     <!-- AQUI VA EL FOOTER INCLUDE -->
     <?php
