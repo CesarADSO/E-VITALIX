@@ -36,7 +36,7 @@ class CitasModel
                 FROM citas c
                 INNER JOIN pacientes p ON c.id_paciente = p.id
                 INNER JOIN servicios s ON c.id_servicio = s.id
-                WHERE c.id_especialista = :id_especialista
+                WHERE agenda_slot.id_especialista = :id_especialista
                 ORDER BY 
                     CASE 
                         WHEN c.estado = 'PENDIENTE' THEN 1
@@ -147,40 +147,32 @@ class CitasModel
      */
     public function contarCitasPorEstado($id_especialista)
     {
-        try {
-            $consulta = "
-                SELECT 
-                    estado,
-                    COUNT(*) as total
-                FROM citas
-                WHERE id_especialista = :id_especialista
-                GROUP BY estado
-            ";
+        $consulta = "
+        SELECT 
+            estado_cita,
+            COUNT(*) AS total
+        FROM citas
+        INNER JOIN agenda_slot 
+            ON citas.id_agenda_slot = agenda_slot.id
+        WHERE agenda_slot.id_especialista = :id_especialista
+        GROUP BY estado_cita
+    ";
 
-            $resultado = $this->conexion->prepare($consulta);
-            $resultado->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
-            $resultado->execute();
+        $stmt = $this->conexion->prepare($consulta);
+        $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
+        $stmt->execute();
 
-            $conteo = [
-                'PENDIENTE' => 0,
-                'CONFIRMADA' => 0,
-                'CANCELADA' => 0,
-                'COMPLETADA' => 0
-            ];
+        $conteo = [
+            'Pendiente' => 0,
+            'Aceptada' => 0,
+            'Cancelada' => 0,
+            'Rechazada' => 0
+        ];
 
-            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                $conteo[$fila['estado']] = (int)$fila['total'];
-            }
-
-            return $conteo;
-        } catch (PDOException $e) {
-            error_log("Error al contar citas: " . $e->getMessage());
-            return [
-                'PENDIENTE' => 0,
-                'CONFIRMADA' => 0,
-                'CANCELADA' => 0,
-                'COMPLETADA' => 0
-            ];
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $conteo[$fila['estado_cita']] = (int)$fila['total'];
         }
+
+        return $conteo;
     }
 }
