@@ -1,6 +1,8 @@
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
 include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
+require_once BASE_PATH . '/app/helpers/session_especialista.php';
+require_once BASE_PATH . '/app/controllers/misCitasController.php';
 ?>
 
 <body>
