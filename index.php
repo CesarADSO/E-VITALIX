@@ -446,6 +446,9 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
+    case '/debug_citas.php';
+        require BASE_PATH . '/debug_citas_mejorado.php';
+
     case '/paciente/cambiar-contrasena':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
