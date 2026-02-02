@@ -67,7 +67,7 @@ class Administrador
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <title>E-VITALIX - Creación de Cuenta Administrador</title>
+    <title>E-VITALIX - Solicitud de cita pendiente</title>
     <style>
         * {
             margin: 0;
@@ -531,8 +531,7 @@ class Administrador
                 <div class="logo-container">
                     <img src="https://raw.githubusercontent.com/CesarADSO/imagenes-evitalix/refs/heads/main/LOGO%20NEGATIVO.png" alt="E-VITALIX Logo" class="logo">
                 </div>
-                <h1 class="header-title">✨ Cuenta Creada Exitosamente</h1>
-                <p class="header-subtitle">Bienvenido a E-VITALIX</p>
+                <h1 class="header-title">Solicitud de Cita Pendiente</h1>
             </div>
 
             <!-- BADGE -->
@@ -555,7 +554,7 @@ class Administrador
                         <div class="info-icon">📧</div>
                         <div class="info-label">Correo Electrónico</div>
                     </div>
-                    <div class="info-value">'.$data['email'].'</div>
+                    <div class="info-value">' . $data['email'] . '</div>
                 </div>
 
                 <!-- INFO: NOMBRE -->
@@ -564,7 +563,7 @@ class Administrador
                         <div class="info-icon">👤</div>
                         <div class="info-label">Nombre Completo</div>
                     </div>
-                    <div class="info-value">'.$data['nombres'].' '.$data['apellidos'].'</div>
+                    <div class="info-value">' . $data['nombres'] . ' ' . $data['apellidos'] . '</div>
                 </div>
 
                 <div class="divider"></div>
@@ -578,12 +577,12 @@ class Administrador
                     
                     <div class="credential-item">
                         <div class="credential-label">📧 Usuario / Email</div>
-                        <div class="credential-value">'.$data['email'].'</div>
+                        <div class="credential-value">' . $data['email'] . '</div>
                     </div>
 
                     <div class="credential-item">
                         <div class="credential-label">🔐 Contraseña Temporal</div>
-                        <div class="credential-value">'.$data['numeroDocumento'].'</div>
+                        <div class="credential-value">' . $data['numeroDocumento'] . '</div>
                     </div>
 
                     <div class="warning-box">
@@ -738,7 +737,8 @@ class Administrador
         }
     }
 
-    public function asignarConsultorio($data) {
+    public function asignarConsultorio($data)
+    {
         try {
             $asignar = "UPDATE administradores SET id_consultorio = :id_consultorio WHERE id = :id";
 
@@ -756,7 +756,8 @@ class Administrador
         }
     }
 
-    public function desasignarConsultorio($id) {
+    public function desasignarConsultorio($id)
+    {
         try {
             $desasignar = "UPDATE administradores SET id_consultorio = NULL WHERE id = :id";
 
