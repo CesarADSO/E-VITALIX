@@ -25,7 +25,7 @@
                     </div>
 
                     <p class="subtitle-registro">
-                        Regístrate para poder crear tu cuenta
+                        Regístrate para poder crear tu cuenta de paciente.
                     </p>
 
 
@@ -114,6 +114,7 @@
                         <button type="submit" class="btn-azul">Registrarse</button>
 
                     </form>
+
                     <div class="login-link-container">
                         <a href="login" class="btn-login-link">
                             ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
