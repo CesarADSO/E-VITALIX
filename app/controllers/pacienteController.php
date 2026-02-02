@@ -1,12 +1,11 @@
 <?php
 // Importamos las dependencias 
 require_once __DIR__ . '/../helpers/alert_helper.php';
-    
+
 require_once __DIR__ . '/../models/pacienteModel.php';
 
 // Capturamos en una variable el metodo o solicitud hecha al servidor 
 $method = $_SERVER['REQUEST_METHOD'];
-
 switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';

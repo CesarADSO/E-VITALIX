@@ -1,10 +1,10 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_especialista.php';
-    require_once BASE_PATH . '/app/controllers/perfilController.php';
+require_once BASE_PATH . '/app/helpers/session_especialista.php';
+require_once BASE_PATH . '/app/controllers/perfilController.php';
 
-    $id = $_SESSION['user']['id']; 
+$id = $_SESSION['user']['id'];
 
-    $perfil = mostrarPerfilEspecialista($id);
+$perfil = mostrarPerfilEspecialista($id);
 
 ?>
 
@@ -38,7 +38,7 @@
             <i class="fa-solid fa-list"></i>
             <span>Slots de agenda</span>
         </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
+        <a class="nav-item" href="<?= BASE_URL ?>/especialista/mis-citas">
             <i class="fa-regular fa-calendar"></i>
             <span>Mis citas</span>
         </a>
