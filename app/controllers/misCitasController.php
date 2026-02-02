@@ -14,18 +14,18 @@ function mostrarMisCitas()
     }
 
     $id_especialista = $_SESSION['user']['id_especialista'];
-
+    
     // Instanciar el modelo
     $citasModel = new CitasModel();
-
+    
     // Obtener las citas del especialista
     $citas = $citasModel->obtenerCitasPorEspecialista($id_especialista);
-
+    
     // Obtener estadísticas
     $estadisticas = $citasModel->contarCitasPorEstado($id_especialista);
-
+    
     // Incluir la vista
-    require_once __DIR__ . '/../views/dashboard/mis_citas_especialista.php';
+    require_once __DIR__ . '/../views/dashboard/especialista/mis_citas_especialista.php';
 }
 
 /**
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
 
             // Validar que el estado sea válido
-            $estados_validos = ['CONFIRMADA', 'CANCELADA'];
+            $estados_validos = ['Aceptada', 'Cancelada', 'Rechazada'];
             if (!in_array($nuevo_estado, $estados_validos)) {
                 echo json_encode([
                     'success' => false,
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
 
             $detalle = $citasModel->obtenerDetalleCita($id_cita, $id_especialista);
-
+            
             if ($detalle) {
                 echo json_encode([
                     'success' => true,
