@@ -48,6 +48,7 @@ class CitasModel
                     END,
                     a.fecha DESC, 
                     a.hora_inicio DESC
+                    
             ";
 
             $resultado = $this->conexion->prepare($consulta);
