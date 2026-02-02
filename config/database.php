@@ -6,7 +6,7 @@
 class Conexion
 {
     private $host = "localhost";
-    private $db = "evitalix";
+    private $db = "evitalix2";
     private $user = "root";
     private $pass = "";
     private $conexion;

@@ -82,6 +82,7 @@ function initCharts() {
     }
 }
 
+// SCRIPT DEL DATATABLES
 $(document).ready(function () {
     $('.table-pacientes').DataTable({
         "pageLength": 10,
