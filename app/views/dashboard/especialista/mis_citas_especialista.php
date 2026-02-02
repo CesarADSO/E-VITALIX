@@ -30,17 +30,17 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                 <div class="stats-cards mb-4">
                     <div class="stat-card">
                         <div class="stat-label">Citas Pendientes</div>
-                        <div class="stat-value"><?= $estadisticas['Pendiente'] ?? 0 ?></div>
+                        <div class="stat-value"><?= $estadisticas['PENDIENTE'] ?? 0 ?></div>
                         <div class="stat-subtitle">Por revisar</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Citas Aceptadas</div>
-                        <div class="stat-value"><?= $estadisticas['Aceptada'] ?? 0 ?></div>
+                        <div class="stat-value"><?= $estadisticas['CONFIRMADA'] ?? 0 ?></div>
                         <div class="stat-subtitle">Confirmadas</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Citas Canceladas</div>
-                        <div class="stat-value"><?= $estadisticas['Cancelada'] ?? 0 ?></div>
+                        <div class="stat-value"><?= $estadisticas['CANCELADA'] ?? 0 ?></div>
                         <div class="stat-subtitle">No realizadas</div>
                     </div>
                     <div class="stat-card">
@@ -83,8 +83,8 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                             <tr data-cita-id="<?= $cita['id'] ?>">
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <div class="user-avatar me-2">
-                                                            <i class="bi bi-person-circle" style="font-size: 32px; color: var(--color-primario);"></i>
+                                                        <div class="user-avatar">
+                                                            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $cita['foto_paciente'] ?>" alt="<?= $cita['nombre_paciente'] ?>">
                                                         </div>
                                                         <div>
                                                             <strong><?= htmlspecialchars($cita['nombre_paciente']) ?></strong>
@@ -111,7 +111,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group" role="group">
-                                                        <?php if ($cita['estado_cita'] === 'Pendiente'): ?>
+                                                        <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
                                                             <button
                                                                 class="btn btn-sm btn-success btn-aceptar"
                                                                 data-cita-id="<?= $cita['id'] ?>"
