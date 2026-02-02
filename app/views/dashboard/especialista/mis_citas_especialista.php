@@ -53,7 +53,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                 <!-- Tabla de Citas -->
                 <div class="card shadow-sm">
                     <div class="card-header card-header-primary">
-                        <h5 class="mb-0">
+                        <h5 class="mb-0 text-white">
                             <i class="bi bi-calendar-check me-2"></i>
                             Lista de Citas
                         </h5>
@@ -66,7 +66,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                             </div>
                         <?php else: ?>
                             <div class="table-responsive">
-                                <table class="table table-hover align-middle" id="tablaCitas">
+                                <table class="table table-hover align-middle table-pacientes" id="tablaCitas">
                                     <thead class="table-light">
                                         <tr>
                                             <th>Paciente</th>
@@ -237,7 +237,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
         }
     </style>
 
-    <!-- <script>
+    <script>
         // Variables globales
         let citaIdActual = null;
         let estadoActual = null;
@@ -480,7 +480,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
 
             $('#modalDetalleContenido').html(contenido);
         }
-    </script> -->
+    </script>
 
     <!-- AQUI VA EL FOOTER INCLUDE -->
     <?php

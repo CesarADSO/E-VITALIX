@@ -46,9 +46,8 @@ class CitasModel
                         WHEN c.estado_cita = 'CANCELADA' THEN 3
                         ELSE 4
                     END,
-                    a.fecha DESC, 
-                    a.hora_inicio DESC
-                    
+                    c.fecha DESC, 
+                    c.hora_inicio DESC
             ";
 
             $resultado = $this->conexion->prepare($consulta);
