@@ -20,7 +20,7 @@ class CitasModel
     {
         try {
             $consulta = "
-                SELECT 
+               SELECT 
                     c.id,
                     a.fecha,
                     a.hora_inicio,
@@ -46,8 +46,8 @@ class CitasModel
                         WHEN c.estado_cita = 'CANCELADA' THEN 3
                         ELSE 4
                     END,
-                    c.fecha DESC, 
-                    c.hora_inicio DESC
+                    a.fecha DESC, 
+                    a.hora_inicio DESC
             ";
 
             $resultado = $this->conexion->prepare($consulta);
