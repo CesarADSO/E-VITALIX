@@ -237,7 +237,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
         }
     </style>
 
-    <script>
+    <!-- <script>
         // Variables globales
         let citaIdActual = null;
         let estadoActual = null;
@@ -480,7 +480,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
 
             $('#modalDetalleContenido').html(contenido);
         }
-    </script>
+    </script> -->
 
     <!-- AQUI VA EL FOOTER INCLUDE -->
     <?php
