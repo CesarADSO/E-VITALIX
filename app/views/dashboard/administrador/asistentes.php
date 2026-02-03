@@ -1,9 +1,9 @@
-<?php 
-    require_once BASE_PATH . '/app/helpers/session_administrador.php';
-    require_once BASE_PATH . '/app/controllers/asistenteController.php';
+<?php
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/controllers/asistenteController.php';
 
 
-    $datos = mostrarAsistentes();
+$datos = mostrarAsistentes();
 ?>
 
 
@@ -43,55 +43,73 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <a href="<?= BASE_URL ?>/admin/registrar-asistente" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
                     </div>
 
-                    <!-- asistentes Table -->
-                    <div class="bg-white rounded shadow-sm p-4">
-                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=asistentes" target="_blank">Generar reporte pdf</a>
-                        <table class="table-pacientes">
-                            <thead>
-                                <tr>
-                                    <th>Foto</th>
-                                    <th>
-                                        Nombres y Apellidos
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th>Tipo de documento</th>
-                                    <th>Número de documento</th>
-                                    <th>Teléfono</th>
-                                    <th>Estado</th>
-                                    <th style="width: 80px;">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if(isset($datos)) :?>
-                                <?php foreach($datos as $asistente):?>
-                                <tr>
-                                    <td>
-                                        <img class="imgAsistente"
-                                            src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $asistente['foto'] ?>"
-                                            alt="<?= $asistente['nombres'] ?> <?= $asistente['apellidos'] ?>"
-                                            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-                                    </td>
-                                    <td><?= $asistente['nombres'] ?> <?= $asistente['apellidos'] ?></td>
-                                    <td><?= $asistente['tipo_documento'] ?></td>
-                                    <td><?= $asistente['numero_documento'] ?></td>
-                                    <td><?= $asistente['telefono'] ?></td>
-                                    <td><?= $asistente['estado'] ?></td>
-                                    <td>
-                                        <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                        <a href="<?= BASE_URL ?>/admin/actualizar-asistente?id=<?= $asistente['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <!-- <a href=""><i class="fa-solid fa-trash-can"></i></a> -->
-                                    </td>
-                                </tr>
-                                
+                    <div class="card shadow-sm">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                Lista de asistentes
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <?php if (empty($datos)): ?>
+                                <div class="alert alert-info text-center" role="alert">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    No tienes asistentes registrados.
+                                </div>
+                            <?php else: ?>
+                                <!-- asistentes Table -->
+                                <div class="bg-white rounded shadow-sm p-4">
+                                    <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=asistentes" target="_blank">Generar reporte pdf</a>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle table-pacientes table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Foto</th>
+                                                    <th>
+                                                        Nombres y Apellidos
+                                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                                    </th>
+                                                    <th>Tipo de documento</th>
+                                                    <th>Número de documento</th>
+                                                    <th>Teléfono</th>
+                                                    <th>Estado</th>
+                                                    <th style="width: 80px;">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (isset($datos)) : ?>
+                                                    <?php foreach ($datos as $asistente): ?>
+                                                        <tr>
+                                                            <td>
+                                                                <img class="imgAsistente"
+                                                                    src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $asistente['foto'] ?>"
+                                                                    alt="<?= $asistente['nombres'] ?> <?= $asistente['apellidos'] ?>"
+                                                                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                                            </td>
+                                                            <td><?= $asistente['nombres'] ?> <?= $asistente['apellidos'] ?></td>
+                                                            <td><?= $asistente['tipo_documento'] ?></td>
+                                                            <td><?= $asistente['numero_documento'] ?></td>
+                                                            <td><?= $asistente['telefono'] ?></td>
+                                                            <td><?= $asistente['estado'] ?></td>
+                                                            <td>
+                                                                <!-- <a href=""><i class="fa-solid fa-magnifying-glass"></i></a> -->
+                                                                <a href="<?= BASE_URL ?>/admin/actualizar-asistente?id=<?= $asistente['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                                <!-- <a href=""><i class="fa-solid fa-trash-can"></i></a> -->
+                                                            </td>
+                                                        </tr>
 
-                                <?php endforeach; ?>
-                                <?php else :?>
-                                    <td>No hay asistentes registrados</td>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+
+                                                    <?php endforeach; ?>
+                                                <?php else : ?>
+                                                    <td>No hay asistentes registrados</td>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
-
+                <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -47,7 +47,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
                         <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=administradores" target="_blank">Generar reporte pdf</a>
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
 
                             <thead>
                                 <tr>
@@ -90,6 +91,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
 

@@ -43,7 +43,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Pacientes Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th>Foto</th>
@@ -109,6 +110,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                 </div>
