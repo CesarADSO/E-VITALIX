@@ -59,9 +59,13 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                     <td><?= $cita['nombre_consultorio'] ?></td>
                                     <td><?= $cita['estado_cita'] ?></td>
                                     <td>
+                                        <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
                                         <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
                                         <a href="<?= BASE_URL ?>/paciente/reagendarCita?id=<?= $cita['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                         <a href="<?= BASE_URL ?>/paciente/cancelarCita?id=<?= $cita['id'] ?>&accion=cancelar"><i class="fa-solid fa-x"></i></a>
+                                        <?php else :?>
+                                            <span class="text-muted small">Sin acciones disponibles</span>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
 

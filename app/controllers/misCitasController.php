@@ -10,6 +10,9 @@ switch ($method) {
         if ($accion === 'aceptar') {
             aceptarCita($_GET['id']);
         }
+        elseif ($accion === 'cancelar') {
+            cancelarCita($_GET['id']);
+        }
         break;
     
     default:
@@ -195,5 +198,21 @@ function aceptarCita($id) {
     }
     else {
         mostrarSweetAlert('error', 'Error al aceptar la cita', 'No se pudo aceptar la cita', '/E-VITALIX/especialista/mis-citas');
+    }
+}
+
+function cancelarCita($id) {
+    // INSTANCIAMOS EL MODELO
+    $objCita = new CitasModel();
+
+    // ACCEDEMOS AL METHOD DE LA CLASE
+    $resultado = $objCita->cancelarCita($id);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    if ($resultado === true) {
+         mostrarSweetAlert('success', 'Cita cancelada exitosamente', 'La cita ha sido cancelada', '/E-VITALIX/especialista/mis-citas');
+    }
+    else {
+        mostrarSweetAlert('error', 'Error al cancelar la cita', 'No se pudo cancelar la cita', '/E-VITALIX/especialista/mis-citas');
     }
 }

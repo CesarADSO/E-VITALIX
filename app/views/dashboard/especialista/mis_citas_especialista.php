@@ -116,7 +116,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                                 data-cita-id="<?= $cita['id'] ?>"
                                                                 title="Aceptar cita">
                                                                 <i class="bi bi-check-circle"></i></a>
-                                                            <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id'] ?>" class="btn btn-sm btn-danger btn-cancelar"
+                                                            <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id'] ?>&accion=cancelar" class="btn btn-sm btn-danger btn-cancelar"
                                                                 data-cita-id="<?= $cita['id'] ?>"
                                                                 title="Cancelar cita">
                                                                 <i class="bi bi-x-circle"></i></a>
@@ -124,12 +124,12 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>
 
-                                                        <button
+                                                        <!-- <button
                                                             class="btn btn-sm btn-info btn-detalle ms-1"
                                                             data-cita-id="<?= $cita['id'] ?>"
                                                             title="Ver detalles">
                                                             <i class="bi bi-eye"></i>
-                                                        </button>
+                                                        </button> -->
                                                     </div>
                                                 </td>
                                             </tr>
