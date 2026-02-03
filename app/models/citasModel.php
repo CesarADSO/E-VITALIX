@@ -178,4 +178,18 @@ class CitasModel
 
         return $conteo;
     }
+
+    public function aceptarCita($id) {
+        try {
+            $aceptarCita = "UPDATE citas SET estado_cita = 'CONFIRMADA' WHERE id = :id_cita";
+            $resultado = $this->conexion->prepare($aceptarCita);
+            $resultado->bindParam(':id_cita', $id);
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en CitasModel::aceptarCita->" . $e->getMessage());
+            return false;
+        }
+    }
 }

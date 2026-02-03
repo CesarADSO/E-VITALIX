@@ -112,18 +112,14 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                 <td class="text-center">
                                                     <div class="btn-group" role="group">
                                                         <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                                            <button
-                                                                class="btn btn-sm btn-success btn-aceptar"
+                                                            <a href="<?= BASE_URL ?>/especialista/aceptar-cita?id=<?= $cita['id'] ?>&accion=aceptar" class="btn btn-sm btn-success btn-aceptar"
                                                                 data-cita-id="<?= $cita['id'] ?>"
                                                                 title="Aceptar cita">
-                                                                <i class="bi bi-check-circle"></i>
-                                                            </button>
-                                                            <button
-                                                                class="btn btn-sm btn-danger btn-cancelar"
+                                                                <i class="bi bi-check-circle"></i></a>
+                                                            <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id'] ?>" class="btn btn-sm btn-danger btn-cancelar"
                                                                 data-cita-id="<?= $cita['id'] ?>"
                                                                 title="Cancelar cita">
-                                                                <i class="bi bi-x-circle"></i>
-                                                            </button>
+                                                                <i class="bi bi-x-circle"></i></a>
                                                         <?php else: ?>
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>

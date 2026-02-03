@@ -1,6 +1,21 @@
 <?php
 require_once __DIR__ . '/../models/CitasModel.php';
 require_once __DIR__ . '/../helpers/session_especialista.php';
+require_once __DIR__ . '/../helpers/alert_helper.php';
+
+$method = $_SERVER['REQUEST_METHOD'];
+switch ($method) {
+    case 'GET':
+        $accion = $_GET['accion'] ?? '';
+        if ($accion === 'aceptar') {
+            aceptarCita($_GET['id']);
+        }
+        break;
+    
+    default:
+        # code...
+        break;
+}
 
 /**
  * Función para mostrar la vista de Mis Citas
@@ -163,4 +178,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             break;
     }
     exit();
+}
+
+
+function aceptarCita($id) {
+    // INSTANCIAMOS EL MODELO
+    $objCita = new CitasModel();
+
+
+    // ACCEDEMOS AL METHOD DE LA CLASE
+    $resultado = $objCita->aceptarCita($id);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    if ($resultado === true) {
+         mostrarSweetAlert('success', 'Cita aceptada exitosamente', 'La cita ha sido aceptada', '/E-VITALIX/especialista/mis-citas');
+    }
+    else {
+        mostrarSweetAlert('error', 'Error al aceptar la cita', 'No se pudo aceptar la cita', '/E-VITALIX/especialista/mis-citas');
+    }
 }
