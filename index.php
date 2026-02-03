@@ -385,6 +385,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/misCitasController.php';
         break;
 
+    case '/especialista/iniciar-consulta':
+        require BASE_PATH . '/app/views/dashboard/especialista/registrar_consulta.php';
+        break;
+
     // NUEVA RUTA: Procesar actualización de estado de cita (AJAX)
     case '/especialista/citas/estado':
         require BASE_PATH . '/app/controllers/misCitasController.php';

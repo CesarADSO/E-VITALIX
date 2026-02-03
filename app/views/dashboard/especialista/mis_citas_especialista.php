@@ -105,9 +105,19 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                 </td>
                                                 <td><?= htmlspecialchars($cita['servicio_nombre'] ?? 'Sin servicio') ?></td>
                                                 <td>
-                                                    <span class="status-badge status-<?= strtolower($cita['estado_cita']) ?>">
+                                                    <?php if ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                        <span class="status-badge status status-aceptada">
+                                                        <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php elseif ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                    <span class="status-badge status status-pendiente">
                                                         <?= $cita['estado_cita'] ?>
                                                     </span>
+                                                    <?php else:?>
+                                                    <span class="status-badge status status-cancelada">
+                                                        <?= $cita['estado_cita'] ?>
+                                                    </span>
+                                                    <?php endif; ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group" role="group">
@@ -120,6 +130,8 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                                 data-cita-id="<?= $cita['id'] ?>"
                                                                 title="Cancelar cita">
                                                                 <i class="bi bi-x-circle"></i></a>
+                                                        <?php elseif ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id=<?= $cita['id'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
                                                         <?php else: ?>
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>
