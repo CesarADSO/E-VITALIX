@@ -373,8 +373,14 @@ switch ($request) {
 
     // NUEVA RUTA: Módulo Mis Citas del Especialista
     case '/especialista/mis-citas':
-        require BASE_PATH . '/app/controllers/MisCitasController.php';
+        require BASE_PATH . '/app/controllers/misCitasController.php';
         mostrarMisCitas();
+        break;
+
+    // NUEVA RUTA: Procesar actualización de estado de cita (AJAX)
+    case '/especialista/citas/estado':
+        require BASE_PATH . '/app/controllers/misCitasController.php';
+        actualizarEstadoCita();
         break;
 
     // ASISTENTE INTERFACES

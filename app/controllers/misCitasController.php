@@ -50,6 +50,39 @@ function mostrarMisCitas()
     require_once __DIR__ . '/../views/dashboard/especialista/mis_citas_especialista.php';
 }
 
+
+function actualizarEstadoCita()
+{
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+        return;
+    }
+
+    if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] != 3) {
+        echo json_encode(['success' => false, 'message' => 'No autorizado']);
+        return;
+    }
+
+    $idCita = $_POST['id_cita'] ?? null;
+    $estado = $_POST['estado'] ?? null;
+
+    if (!$idCita || !$estado) {
+        echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+        return;
+    }
+
+    require_once __DIR__ . '/../models/CitasModel.php';
+    $model = new CitasModel();
+
+    $ok = $model->actualizarEstadoCita($idCita, $estado, $_SESSION['user']['id_especialista']);
+
+    echo json_encode([
+        'success' => $ok,
+        'message' => $ok ? 'Estado actualizado correctamente' : 'No se pudo actualizar'
+    ]);
+};
+
+
 /**
  * Procesar actualización de estado de cita (AJAX)
  */
@@ -82,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
 
             // Validar que el estado sea válido
-            $estados_validos = ['Aceptada', 'Cancelada', 'Rechazada'];
+            $estados_validos = ['CONFIRMADA', 'CANCELADA', 'RECHAZADA'];
             if (!in_array($nuevo_estado, $estados_validos)) {
                 echo json_encode([
                     'success' => false,

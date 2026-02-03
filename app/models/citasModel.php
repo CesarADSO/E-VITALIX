@@ -31,13 +31,18 @@ class CitasModel
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
                     p.telefono AS telefono_paciente,
                     u.email AS email_paciente,
+                    u.email AS email_paciente,
                     s.nombre AS servicio_nombre,
+                    s.duracion_minutos AS servicio_duracion,
                     s.duracion_minutos AS servicio_duracion,
                     s.precio AS servicio_precio
                 FROM citas c
                 INNER JOIN pacientes p ON c.id_paciente = p.id
                 INNER JOIN usuarios u ON p.id_usuario = u.id
+                INNER JOIN usuarios u ON p.id_usuario = u.id
                 INNER JOIN servicios s ON c.id_servicio = s.id
+                INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
+                WHERE a.id_especialista = :id_especialista
                 INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
                 WHERE a.id_especialista = :id_especialista
                 ORDER BY 
@@ -45,8 +50,13 @@ class CitasModel
                         WHEN c.estado_cita = 'PENDIENTE' THEN 1
                         WHEN c.estado_cita = 'CONFIRMADA' THEN 2
                         WHEN c.estado_cita = 'CANCELADA' THEN 3
+                        WHEN c.estado_cita = 'PENDIENTE' THEN 1
+                        WHEN c.estado_cita = 'CONFIRMADA' THEN 2
+                        WHEN c.estado_cita = 'CANCELADA' THEN 3
                         ELSE 4
                     END,
+                    a.fecha DESC, 
+                    a.hora_inicio DESC
                     a.fecha DESC, 
                     a.hora_inicio DESC
             ";
