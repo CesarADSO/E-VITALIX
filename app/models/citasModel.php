@@ -25,6 +25,7 @@ class CitasModel
                     a.fecha,
                     a.hora_inicio,
                     a.hora_fin,
+                    p.foto AS foto_paciente,
                     c.estado_cita,
                     c.motivo_consulta,
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
