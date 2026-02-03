@@ -36,10 +36,8 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
 
             <!-- Tabla de Citas -->
             <div class="bg-white rounded shadow-sm p-4 ">
-
-
-
-                <table class="table-pacientes">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle table-pacientes table-bordered">
                     <thead>
                         <tr>
                             <th>Fecha</th>
@@ -79,6 +77,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
 
                     </tbody>
                 </table>
+                </div>
             </div>
 
         </div>

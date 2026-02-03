@@ -183,7 +183,8 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
 
                     <!-- Pacientes Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -206,6 +207,7 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                                 <!-- Los pacientes se cargan dinámicamente con JavaScript -->
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <!-- Perfil Section -->
@@ -371,7 +373,8 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -394,6 +397,7 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                                 <!-- Los consultorios se cargan dinámicamente con JavaScript -->
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <!-- End Consultorios Section -->
@@ -425,7 +429,8 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
 
                     <!-- Profesionales Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -447,6 +452,7 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                                 <!-- Los profesionales se cargan dinámicamente con JavaScript -->
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <!-- End Profesionales Section -->

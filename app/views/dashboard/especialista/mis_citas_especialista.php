@@ -66,7 +66,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                             </div>
                         <?php else: ?>
                             <div class="table-responsive">
-                                <table class="table table-hover align-middle table-pacientes" id="tablaCitas">
+                                <table class="table table-hover align-middle table-pacientes table-bordered" id="tablaCitas">
                                     <thead class="table-light">
                                         <tr>
                                             <th>Paciente</th>

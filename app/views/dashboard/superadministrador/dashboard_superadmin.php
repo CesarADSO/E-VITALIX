@@ -185,7 +185,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Pacientes Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -208,6 +209,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <!-- Los pacientes se cargan dinámicamente con JavaScript -->
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <!-- Perfil Section -->
@@ -373,7 +375,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Consultorios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -396,6 +399,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <!-- Los consultorios se cargan dinámicamente con JavaScript -->
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <!-- End Consultorios Section -->
@@ -427,7 +431,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Profesionales Table -->
                     <div class="bg-white rounded shadow-sm p-4">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th style="width: 40px;">
@@ -449,6 +454,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <!-- Los profesionales se cargan dinámicamente con JavaScript -->
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
                 <!-- End Profesionales Section -->

@@ -42,7 +42,8 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
 
                     <!-- Horarios Table -->
                     <div class="bg-white rounded shadow-sm p-4 cont-tabla-consultorios">
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th>Disponibilidad</th>
@@ -84,6 +85,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
 

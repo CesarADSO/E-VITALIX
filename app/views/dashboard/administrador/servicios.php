@@ -45,7 +45,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- Servicios Table -->
                     <div class="bg-white rounded shadow-sm p-4">
                         <!-- <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/admin/generar-reporte?tipo=asistentes" target="_blank">Generar reporte pdf</a> -->
-                        <table class="table-pacientes">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-pacientes table-bordered">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -81,6 +82,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <?php endif;?>
                             </tbody>
                         </table>
+                        </div>
                     </div>
 
                 </div>
