@@ -58,18 +58,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="steps">
                                 <div class="step active" data-step="1">
                                     <span class="step-number">1</span>
-                                    <span class="step-label">Información Personal</span>
+                                    <span class="step-label">Personal</span>
                                 </div>
                                 <div class="step" data-step="2">
                                     <span class="step-number">2</span>
-                                    <span class="step-label">Contacto</span>
+                                    <span class="step-label">Información Profesional</span>
                                 </div>
+            
                                 <div class="step" data-step="3">
                                     <span class="step-number">3</span>
-                                    <span class="step-label">Profesional</span>
-                                </div>
-                                <div class="step" data-step="4">
-                                    <span class="step-number">4</span>
                                     <span class="step-label">Confirmación</span>
                                 </div>
                             </div>
@@ -80,27 +77,20 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico">
-                                    </div>
+                                    
                                     <div class="col-md-6 mb-3">
                                         <label for="nombres" class="form-label">Nombres</label>
                                         <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresa los nombres">
                                     </div>
-                                </div>
-                                <div class="row">
+
                                     <div class="col-md-6 mb-3">
                                         <label for="apellidos" class="form-label">Apellidos</label>
                                         <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Ingresa los apellidos">
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="foto" class="form-label">Foto</label>
-                                        <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
-                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+
+                                <div class="col-md-6 mb-3">
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                         <select name="tipoDocumento" class="form-select" id="tipo_documento">
                                             <!-- Los tipos de documento se cargarán desde la base de datos -->
@@ -118,12 +108,36 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <label for="numero_documento" class="form-label">Número de Documento</label>
                                         <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento">
                                     </div>
+                                   
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" name="correo" class="form-control" id="email" placeholder="Ingresa el correo electrónico">
+                                    </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico">
+                                    </div>
+                                  
+                                </div>
+
+                                <div class="row">
+                                   
+                                    <div class="mb-3 col-md-6">
+                                        <label for="direccion" class="form-label">Dirección</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
+                                    </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="tipo_documento" class="form-label">Fecha de nacimiento</label>
                                         <input type="date" name="nacimiento" class="form-control" id="fecha_nacimiento">
                                     </div>
+                                </div>
+
+
+                                <div class="row">
+                                    
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento" class="form-label">Genero</label>
                                         <select name="genero" id="genero" class="form-select">
@@ -133,6 +147,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <option value="Otro">Otro</option>
                                         </select>
                                     </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="foto" class="form-label">Foto</label>
+                                            <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
+                                        </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -141,35 +159,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- Paso 2: Contacto -->
                             <div class="wizard-step" id="step2">
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
-                                        <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="direccion" class="form-label">Dirección</label>
-                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="mb-3 col-md-6">
 
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-
-
-
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
-                                </div>
-                            </div>
-
-                            <!-- Paso 3: Información Profesional -->
-                            <div class="wizard-step" id="step3">
-                                <div class="row">
+                            <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="especialidad" class="form-label">Especialidad</label>
                                         <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ingresa la especialidad">
@@ -180,16 +171,27 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                 </div>
 
+                               
+                                
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
+                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
+                                </div>
+                            </div>
+
+                            <!-- Paso 3: Información Profesional -->
+                            <!-- <div class="wizard-step" id="step3">
+                               
 
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="4">Siguiente</button>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                             <!-- Paso 4: Confirmación -->
-                            <div class="wizard-step" id="step4">
+                            <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
