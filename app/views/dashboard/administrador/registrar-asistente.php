@@ -46,12 +46,21 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                         <form id="asistenteForm" action="<?= BASE_URL ?>/admin/guardar-asistente" method="POST" enctype="multipart/form-data">
 
-                            <!-- 1. FOTO -->
-                            <div class="mb-4">
-                                <label for="foto" class="form-label">Foto de Perfil</label>
-                                <input type="file" class="form-control" id="foto" name="foto"
-                                    accept=".jpg,.jpeg,.png">
-                                <div class="form-text">Tamaño máximo: 2MB</div>
+                           
+
+                            <!-- 1. DATOS PERSONALES -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombres" class="form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="nombres" name="nombres"
+                                        placeholder="Ingresa los nombres" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="apellidos" class="form-label">Apellidos</label>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos"
+                                        placeholder="Ingresa los apellidos" required>
+                                </div>
                             </div>
 
                             <!-- 2. DATOS DE IDENTIFICACIÓN LEGAL -->
@@ -75,22 +84,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                             </div>
 
-                            <!-- 3. DATOS PERSONALES -->
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="nombres" class="form-label">Nombres</label>
-                                    <input type="text" class="form-control" id="nombres" name="nombres"
-                                        placeholder="Ingresa los nombres" required>
-                                </div>
+                            
 
-                                <div class="col-md-6">
-                                    <label for="apellidos" class="form-label">Apellidos</label>
-                                    <input type="text" class="form-control" id="apellidos" name="apellidos"
-                                        placeholder="Ingresa los apellidos" required>
-                                </div>
-                            </div>
-
-                            <!-- 4. DATOS DE CONTACTO -->
+                            <!-- 3. DATOS DE CONTACTO -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Correo Electrónico</label>
@@ -105,6 +101,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         placeholder="Ingresa el número telefónico" required>
                                     <div class="form-text">Para contacto directo</div>
                                 </div>
+                            </div>
+
+                             <!-- 4. FOTO -->
+                             <div class="mb-4">
+                                <label for="foto" class="form-label">Foto de Perfil</label>
+                                <input type="file" class="form-control" id="foto" name="foto"
+                                    accept=".jpg,.jpeg,.png">
+                                <div class="form-text">Tamaño máximo: 2MB</div>
                             </div>
 
                             <!-- Botones -->
