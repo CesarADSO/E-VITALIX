@@ -63,14 +63,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="step" data-step="2">
                                     <span class="step-number">2</span>
-                                    <span class="step-label">Contacto</span>
+                                    <span class="step-label">Información Profesional</span>
                                 </div>
                                 <div class="step" data-step="3">
                                     <span class="step-number">3</span>
-                                    <span class="step-label">Profesional</span>
-                                </div>
-                                <div class="step" data-step="4">
-                                    <span class="step-number">4</span>
                                     <span class="step-label">Confirmación</span>
                                 </div>
                             </div>
@@ -85,14 +81,18 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
                                 <!-- NUEVO CAMPO ESTADO PARA ACTUALIZAR -->
-                                <div class="mb-3">
-                                    <label for="estado" class="form-label">Estado</label>
-                                    <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
-                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                    </select>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="nombres" class="form-label">Nombres</label>
+                                        <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresa los nombres" value="<?= $especialista['nombres'] ?>">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="apellidos" class="form-label">Apellidos</label>
+                                        <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Ingresa los apellidos" value="<?= $especialista['apellidos'] ?>">
+                                    </div>
                                 </div>
+                               
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
@@ -113,18 +113,19 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" value="<?= $especialista['numero_documento'] ?>">
                                     </div>
                                 </div>
+                                
                                 <div class="row">
+
                                     <div class="col-md-6 mb-3">
-                                        <label for="nombres" class="form-label">Nombres</label>
-                                        <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresa los nombres" value="<?= $especialista['nombres'] ?>">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>">
                                     </div>
+
                                     <div class="col-md-6 mb-3">
-                                        <label for="apellidos" class="form-label">Apellidos</label>
-                                        <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Ingresa los apellidos" value="<?= $especialista['apellidos'] ?>">
+                                        <label for="direccion" class="form-label">Dirección</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $especialista['direccion'] ?>">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <!-- <div class="col-md-6 mb-3">
                                         <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
                                         <input type="date" name="nacimiento" class="form-control" id="fecha_nacimiento" value="<?= $especialista['fecha_nacimiento'] ?>">
                                     </div>
@@ -136,7 +137,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <option value="Femenino">Femenino</option>
                                             <option value="Otro">Otro</option>
                                         </select>
-                                    </div>
+                                    </div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
+                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -144,24 +153,18 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </div>
 
                             <!-- Paso 2: Contacto -->
-                            <div class="wizard-step" id="step2">
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $especialista['direccion'] ?>">
-                                </div>
+                            <!-- <div class="wizard-step" id="step2">
+                               
+                               
 
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <!-- Paso 3: Información Profesional -->
-                            <div class="wizard-step" id="step3">
+                            <!-- Paso 2: Información Profesional -->
+                            <div class="wizard-step" id="step2">
                                 <div class="mb-3">
                                     <label for="especialidad" class="form-label">Especialidad</label>
                                     <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ingresa la especialidad" value="<?= $especialista['especialidad'] ?>">
@@ -171,13 +174,13 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <input type="text" name="registro" class="form-control" id="registro_profesional" placeholder="Ingresa el registro profesional" value="<?= $especialista['registro_profesional'] ?>">
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="4">Siguiente</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
+                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
                                 </div>
                             </div>
 
-                            <!-- Paso 5: Confirmación -->
-                            <div class="wizard-step" id="step4">
+                            <!-- Paso 3: Confirmación -->
+                            <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -196,7 +199,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
                                     <button type="submit" class="btn boton">Actualizar Especialista</button>
                                 </div>
                             </div>

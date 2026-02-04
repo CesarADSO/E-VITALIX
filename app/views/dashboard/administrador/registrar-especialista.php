@@ -212,7 +212,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
                                     <button type="submit" class="btn boton">Registrar Especialista</button>
                                 </div>
                             </div>
