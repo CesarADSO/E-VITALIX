@@ -393,6 +393,9 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/consultaMedicaController.php';
         break;
 
+    case '/especialista/pacientes-atendidos':
+        require BASE_PATH . '/app/views/dashboard/especialista/pacientes_atendidos.php';
+        break;
 
     // ASISTENTE INTERFACES
     case '/asistente/dashboard':
