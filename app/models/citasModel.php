@@ -21,7 +21,8 @@ class CitasModel
         try {
             $consulta = "
                 SELECT 
-                    c.id,
+                    p.id AS id_paciente,
+                    c.id AS id_cita,
                     a.fecha,
                     a.hora_inicio,
                     a.hora_fin,
@@ -59,6 +60,22 @@ class CitasModel
         } catch (PDOException $e) {
             error_log("Error al obtener citas: " . $e->getMessage());
             return [];
+        }
+    }
+
+    public function obtenerIdCita ($id_cita, $id_paciente) {
+        try {
+            $obtenerIdCitaYPaciente = "SELECT pacientes.id AS id_paciente, citas.id AS id_cita FROM citas INNER JOIN pacientes ON citas.id_paciente = pacientes.id WHERE citas.id = :id_cita AND pacientes.id = :id_paciente";
+            $resultado = $this->conexion->prepare($obtenerIdCitaYPaciente);
+            $resultado->bindParam(':id_cita', $id_cita);
+            $resultado->bindParam(':id_paciente', $id_paciente);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        
+             } catch (PDOException $e) {
+            error_log("Error al obtener ID de cita: " . $e->getMessage());
+            return null;
         }
     }
 

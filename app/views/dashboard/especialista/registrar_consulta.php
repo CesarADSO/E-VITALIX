@@ -1,3 +1,13 @@
+<?php 
+    require_once BASE_PATH . '/app/controllers/misCitasController.php';
+
+    // OBTENEMOS LOS DATOS DE LA CITA Y EL PACIENTE
+    $id_cita = $_GET['id_cita'] ?? '';
+    $id_paciente = $_GET['id_paciente'] ?? '';
+    
+    $cita = obtenerIdCitaYPaciente($id_cita, $id_paciente);
+?>
+
 <?php
 include_once __DIR__ . '/../../layouts/header_especialista.php';
 ?>
@@ -37,8 +47,10 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                         <h4 class="mb-4">Registrar Consulta Médica</h4>
                         <p class="text-muted mb-4 texto">Registrar información de la consulta médica</p>
 
-                        <form id="consultaForm" action="<?= BASE_URL ?>/medico/guardar-consulta" method="POST">
+                        <form id="consultaForm" action="<?= BASE_URL ?>/especialista/guardar-consulta" method="POST">
                             <!-- Motivo de la Consulta -->
+                             <input type="hidden" name="id_cita" value="<?= $cita['id_cita'] ?>">
+                             <input type="hidden" name="id_paciente" value="<?= $cita['id_paciente'] ?>">
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label for="motivo_consulta" class="form-label">Motivo de la Consulta</label>
@@ -83,8 +95,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
-                                <a href="<?= BASE_URL ?>/medico/consultas" class="btn btn-outline-secondary">Cancelar</a>
-                                <button type="submit" class="btn boton">Registrar Consulta</button>
+                                <a href="<?= BASE_URL ?>/especialista/mis-citas" class="btn btn-outline-secondary">Cancelar</a>
+                                <button type="submit" class="btn boton">Completar Cita</button>
                             </div>
                         </form>
                     </div>
