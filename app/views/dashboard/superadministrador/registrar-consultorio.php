@@ -50,20 +50,20 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     <span class="step-number">1</span>
                                     <span class="step-label">Información Básica</span>
                                 </div>
-                                <div class="step" data-step="2">
+                                <!-- <div class="step" data-step="2">
                                     <span class="step-number">2</span>
                                     <span class="step-label">Contacto</span>
+                                </div> -->
+                                <div class="step" data-step="2">
+                                    <span class="step-number">2</span>
+                                    <span class="step-label">Administrador</span>
                                 </div>
                                 <div class="step" data-step="3">
                                     <span class="step-number">3</span>
-                                    <span class="step-label">Administrador</span>
+                                    <span class="step-label">Servicios</span>
                                 </div>
                                 <div class="step" data-step="4">
                                     <span class="step-number">4</span>
-                                    <span class="step-label">Servicios</span>
-                                </div>
-                                <div class="step" data-step="5">
-                                    <span class="step-number">5</span>
                                     <span class="step-label">Confirmación</span>
                                 </div>
                             </div>
@@ -74,61 +74,66 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <!-- Paso 1: Información Básica -->
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="foto" class="form-label">Foto</label>
-                                        <input type="file" name="foto" class="form-control" id="foto" accept=".jpg, .png, .svg">
-                                    </div>
+                                    
 
                                     <div class="col-md-6 mb-3">
                                         <label for="nombre" class="form-label">Nombre</label>
                                         <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingresa el nombre del consultorio">
                                     </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="ciudad" class="form-label">Ciudad</label>
                                         <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad">
                                     </div>
+                                </div>
 
+                                <div class="row">
+                                    
                                     <div class="col-md-6 mb-3">
                                         <label for="direccion" class="form-label">Dirección</label>
                                         <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
                                     </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico del consultorio">
+                                    </div>
                                 </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6 mb-3">
+                                        <label for="correo_contacto" class="form-label">Correo de Contacto</label>
+                                        <input type="email" name="correo" class="form-control" id="correo_contacto" placeholder="Ingresa el correo electrónico">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="foto" class="form-label">Foto</label>
+                                        <input type="file" name="foto" class="form-control" id="foto" accept=".jpg, .png, .svg">
+                                    </div>
+                                </div>
+
+                                
 
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
                                 </div>
                             </div>
 
-                            <!-- Paso 2: Contacto -->
+                            <!-- Paso 2: Contacto
                             <div class="wizard-step" id="step2">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico del consultorio">
-                                    </div>
+                                    
 
-                                    <div class="col-md-6 mb-3">
-                                        <label for="correo_contacto" class="form-label">Correo de Contacto</label>
-                                        <input type="email" name="correo" class="form-control" id="correo_contacto" placeholder="Ingresa el correo electrónico del consultorio">
-                                    </div>
+                                    
                                 </div>
 
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Paso 3: Administrador -->
-                            <div class="wizard-step" id="step3">
+                            <div class="wizard-step" id="step2">
 
-                                <div class="mb-3">
-                                    <label for="correo_admin" class="form-label">Email</label>
-                                    <input type="email" name="correo_admin" class="form-control" id="correo_admin" placeholder="Ingresa el correo electrónico">
-                                </div>
+                               
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -140,18 +145,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         <input type="text" name="apellidos_admin" class="form-control" id="apellido_admin" placeholder="Ingresa los apellidos">
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="foto_admin" class="form-label">Foto</label>
-                                        <input type="file" name="foto_admin" class="form-control" id="foto_admin" accept=".jpg, .png, .svg">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="telefono_admin" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono_admin" class="form-control" id="telefono_admin" placeholder="Ingresa el número telefónico">
-                                    </div>
-                                </div>
-
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="tipo_documento_admin" class="form-label">Tipo de documento</label>
@@ -172,15 +165,36 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="correo_admin" class="form-label">Email</label>
+                                        <input type="email" name="correo_admin" class="form-control" id="correo_admin" placeholder="Ingresa el correo electrónico">
+                                    </div>
+                                   
+                                    <div class="col-md-6 mb-3">
+                                        <label for="telefono_admin" class="form-label">Teléfono</label>
+                                        <input type="tel" name="telefono_admin" class="form-control" id="telefono_admin" placeholder="Ingresa el número telefónico">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="foto_admin" class="form-label">Foto</label>
+                                        <input type="file" name="foto_admin" class="form-control" id="foto_admin" accept=".jpg, .png, .svg">
+                                    </div>
+
+                                </div>
+
 
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="4">Siguiente</button>
+                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
                                 </div>
                             </div>
 
                             <!-- Paso 4: Servicios -->
-                            <div class="wizard-step" id="step4">
+                            <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <label class="form-label" for="especialidades">Especialidades (Selecciona una o varias)</label>
                                     <div class="form-check check-especialidad">
@@ -248,13 +262,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
 
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="5">Siguiente</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
+                                    <button type="button" class="btn btn-primary next-step" data-next="4">Siguiente</button>
                                 </div>
                             </div>
 
                             <!-- Paso 5: Confirmación -->
-                            <div class="wizard-step" id="step5">
+                            <div class="wizard-step" id="step4">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -279,7 +293,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between cont-botones">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="4">Anterior</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
                                     <button type="submit" class="btn boton">Registrar Consultorio</button>
                                 </div>
                             </div>
