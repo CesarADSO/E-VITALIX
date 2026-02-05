@@ -397,6 +397,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/pacientes_atendidos.php';
         break;
 
+    case '/especialista/historial_clinico':
+        require BASE_PATH . '/app/views/dashboard/especialista/historial_clinico.php';
+        break;
+
     // ASISTENTE INTERFACES
     case '/asistente/dashboard':
         require BASE_PATH . '/app/views/dashboard/asistente/dashboard_asistente.php';

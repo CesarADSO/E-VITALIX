@@ -43,7 +43,7 @@ $perfil = mostrarPerfilEspecialista($id);
             <span>Mis citas</span>
         </a>
          <a class="nav-item" href="<?= BASE_URL ?>/especialista/pacientes-atendidos">
-            <i class="fa-regular fa-calendar"></i>
+            <i class="fa-solid fa-person"></i>
             <span>Pacientes atendidos</span>
         </a>
     </nav>
