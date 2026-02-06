@@ -1,5 +1,9 @@
     <?php
     include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
+
+    require_once BASE_PATH . '/app/controllers/historialesController.php';
+
+    $pacienteConConsulta = mostrarPacientesConConsulta();
     ?>
 
     <body>
@@ -49,16 +53,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php if(!empty($pacienteConConsulta)):?>
+                                                <?php foreach($pacienteConConsulta as $paciente): ?>
                                             <tr>
-                                                <td>Julio Morales</td>
-                                                <td>CC</td>
-                                                <td>123456789</td>
-                                                <td>2024-05-20</td>
-                                                <td><a href="<?= BASE_URL ?>/especialista/historial_clinico" class="btn btn-sm btn-info"
+                                                <td><?= $paciente['nombres'] . ' ' . $paciente['apellidos'] ?></td>
+                                                <td><?= $paciente['tipo_documento'] ?></td>
+                                                <td><?= $paciente['numero_documento'] ?></td>
+                                                <td><?= $paciente['ultima_consulta'] ?></td>
+                                                <td><a href="<?= BASE_URL ?>/especialista/historial_clinico?id_consulta=<?= $paciente['id_consulta'] ?>" class="btn btn-sm btn-info"
                                                         title="Consultar historial clínico">
                                                         <i class="bi bi-check-circle"></i></a></td>
                                             </tr>
-
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">No se han encontrado pacientes atendidos.</td>
+                                                </tr>
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
