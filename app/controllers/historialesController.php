@@ -5,7 +5,12 @@
     $method = $_SERVER['REQUEST_METHOD'];
     switch ($method) {
         case 'GET':
-            mostrarPacientesConConsulta();
+            if (isset($_GET['id_paciente'])) {
+                consultarHistorialClinicoPaciente($_GET['id_paciente']);
+            }
+            else {
+                mostrarPacientesConConsulta();
+            }            
             break;
         
         default:
@@ -34,4 +39,14 @@
     }
 
 
+    function consultarHistorialClinicoPaciente($id_paciente) {
+        // INSTANCIAMOS EL MODELO
+        $objHistorial = new Historiales();
+
+        // ACCEDEMOS AL METODO
+        $resultado = $objHistorial->consultarHistorialClinicoPaciente($id_paciente);
+
+        // RETORNAMOS RESULTADO
+        return $resultado;
+    }
 ?>

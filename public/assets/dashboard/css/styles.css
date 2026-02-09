@@ -1671,3 +1671,16 @@
     ::-webkit-scrollbar-thumb:hover {
         background: var(--color-secundario);
     }
+
+    .lupa {
+        color: var(--blanco-color);
+    }
+
+    .patient-avatar .img-paciente {
+        background-size: 100%;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+    }

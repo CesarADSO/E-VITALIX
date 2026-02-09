@@ -1,4 +1,12 @@
 <?php
+require_once BASE_PATH . '/app/controllers/historialesController.php';
+
+$id_paciente = $_GET['id_paciente'];
+
+$historial = consultarHistorialClinicoPaciente($id_paciente);
+?>
+
+<?php
 include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 ?>
 
@@ -33,32 +41,32 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                 <div class="row align-items-center">
                                     <div class="col-md-auto text-center mb-3 mb-md-0">
                                         <div class="patient-avatar">
-                                            <i class="bi bi-person-fill"></i>
+                                            <img class="img-paciente" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $historial['foto'] ?>" alt="<?= $historial['nombre_paciente'] ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-md">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <h2 class="patient-name mb-2">María Fernanda González Pérez</h2>
+                                                <h2 class="patient-name mb-2"><?= $historial['nombre_paciente'] ?> <?= $historial['apellido_paciente'] ?></h2>
                                                 <p class="patient-info mb-1">
                                                     <i class="bi bi-card-text text-primary"></i>
-                                                    <strong>CC:</strong> 1.045.678.901
+                                                    <strong><?= $historial['tipo_documento'] ?>:</strong> <?= $historial['numero_documento'] ?>
                                                 </p>
                                                 <p class="patient-info mb-1">
                                                     <i class="bi bi-calendar text-primary"></i>
-                                                    <strong>Edad:</strong> 34 años
+                                                    <strong>Edad:</strong> <?= $historial['edad'] ?> años
                                                 </p>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <p class="patient-info mb-1">
                                                     <i class="bi bi-droplet-fill text-danger"></i>
-                                                    <strong>Tipo de sangre:</strong> O+
+                                                    <strong>Tipo de sangre:</strong> <?= $historial['rh'] ?>
                                                 </p>
                                                 <p class="patient-info mb-1">
-                                                    <i class="bi bi-exclamation-triangle-fill text-warning"></i>
-                                                    <strong>Alergias:</strong> Penicilina, Polen
+                                                    <i class="fa-solid fa-user"></i>
+                                                    <strong>Sexo:</strong> <?= $historial['genero'] ?>
                                                 </p>
                                                 <span class="badge badge-readonly">
                                                     <i class="bi bi-lock-fill"></i> Solo lectura
@@ -95,7 +103,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                             <div class="col-md-8">
                                                 <h5 class="consultation-date mb-0">
                                                     <i class="bi bi-calendar-event"></i>
-                                                    15 de Enero, 2026 - 10:30 AM
+                                                    <?= date('d/m/Y', strtotime($historial['fecha_consulta']))  ?>
                                                 </h5>
                                             </div>
                                             <div class="col-md-4 text-md-end mt-2 mt-md-0">
@@ -107,14 +115,14 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                     <div class="card-body">
                                         <div class="consultation-summary">
                                             <p class="consultation-reason">
-                                                <strong>Motivo:</strong> Control post-operatorio - Revisión de herida quirúrgica
+                                                <strong>Motivo:</strong> <?= $historial['motivo_consulta'] ?>
                                             </p>
                                             <p class="consultation-diagnosis">
-                                                <strong>Diagnóstico:</strong> Evolución satisfactoria post-apendicectomía
+                                                <strong>Diagnóstico:</strong> <?= $historial['diagnostico'] ?>
                                             </p>
                                             <p class="consultation-doctor">
                                                 <i class="bi bi-person-badge"></i>
-                                                <strong>Especialista:</strong> Dr. Carlos Rodríguez - Cirugía General
+                                                <strong>Especialista:</strong> <?= $historial['nombre_especialista'] ?> <?= $historial['apellido_especialista'] ?> -
                                             </p>
                                         </div>
 
