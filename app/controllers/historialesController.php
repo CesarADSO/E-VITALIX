@@ -1,52 +1,53 @@
 <?php
-    require_once __DIR__ . '/../helpers/alert_helper.php';
-    require_once __DIR__ . '/../models/historialesModel.php';
+require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../models/historialesModel.php';
 
-    $method = $_SERVER['REQUEST_METHOD'];
-    switch ($method) {
-        case 'GET':
-            if (isset($_GET['id_paciente'])) {
-                consultarHistorialClinicoPaciente($_GET['id_paciente']);
-            }
-            else {
-                mostrarPacientesConConsulta();
-            }            
-            break;
-        
-        default:
-            # code...
-            break;
-    }
-
-    function mostrarPacientesConConsulta() {
-        
-        // INSTANCIAMOS LA CLASE 
-        $historiales = new Historiales();
-
-        // REANUDAMOS LA SESIÓN DE FORMA SEGURA
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
+$method = $_SERVER['REQUEST_METHOD'];
+switch ($method) {
+    case 'GET':
+        if (isset($_GET['id_paciente'])) {
+            consultarHistorialClinicoPaciente($_GET['id_paciente']);
+        } else {
+            mostrarPacientesConConsulta();
         }
+        break;
 
-        // OBTENEMOS EL ID DEL ESPECIALISTA 
-        $id_especialista = $_SESSION['user']['id_especialista'];
+    default:
+        # code...
+        break;
+}
 
+function mostrarPacientesConConsulta()
+{
 
-        // ACCEDEMOS AL MÉTODO DE LA CLASE HISTORIALES
-        $resultado = $historiales->ConsultarPacienteConConsulta($id_especialista);
+    // INSTANCIAMOS LA CLASE 
+    $historiales = new Historiales();
 
-        return $resultado;
+    // REANUDAMOS LA SESIÓN DE FORMA SEGURA
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
     }
 
+    // OBTENEMOS EL ID DEL ESPECIALISTA 
+    $id_especialista = $_SESSION['user']['id_especialista'];
 
-    function consultarHistorialClinicoPaciente($id_paciente) {
-        // INSTANCIAMOS EL MODELO
-        $objHistorial = new Historiales();
 
-        // ACCEDEMOS AL METODO
-        $resultado = $objHistorial->consultarHistorialClinicoPaciente($id_paciente);
+    // ACCEDEMOS AL MÉTODO DE LA CLASE HISTORIALES
+    $resultado = $historiales->ConsultarPacienteConConsulta($id_especialista);
 
-        // RETORNAMOS RESULTADO
-        return $resultado;
-    }
-?>
+    return $resultado;
+}
+
+
+
+
+function consultarHistorialClinicoPaciente($id_paciente)
+{
+    // INSTANCIAMOS EL MODELO
+    $objHistorial = new Historiales();
+
+    return [
+        'paciente'   => $objHistorial->consultarInfoPaciente($id_paciente),
+        'historial'  => $objHistorial->consultarHistorialClinicoPaciente($id_paciente)
+    ];
+}
