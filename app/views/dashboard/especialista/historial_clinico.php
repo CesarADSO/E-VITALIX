@@ -99,15 +99,17 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                     <div class="timeline">
 
                         <!-- Consulta 1 -->
-                        <div class="timeline-item">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <?php if (empty($historiales)) : ?>
-                                    <div class="alert alert-warning">
-                                        No hay consultas registradas
-                                    </div>
-                                <?php else: ?>
-                                    <?php foreach ($historiales as $historial): ?>
+
+
+                        <?php if (empty($historiales)) : ?>
+                            <div class="alert alert-warning">
+                                No hay consultas registradas
+                            </div>
+                        <?php else: ?>
+                            <?php foreach ($historiales as $historial): ?>
+                                <div class="timeline-item">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
                                         <div class="card consultation-card">
                                             <div class="card-header">
                                                 <div class="row align-items-center">
@@ -144,24 +146,24 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                 <!-- Detalle expandible -->
                                                 <div class="collapse mt-3" id="detalle<?= $historial['id_consulta'] ?>">
                                                     <div class="detail-container">
-                                                        <ul class="nav nav-tabs" id="tabs1" role="tablist">
+                                                        <ul class="nav nav-tabs" id="tabs<?= $historial['id_consulta'] ?>" role="tablist">
                                                             <li class="nav-item" role="presentation">
-                                                                <button class="nav-link active" id="diagnostico1-tab" data-bs-toggle="tab" data-bs-target="#diagnostico1" type="button">
+                                                                <button class="nav-link active" id="diagnostico<?= $historial['id_consulta'] ?>-tab" data-bs-toggle="tab" data-bs-target="#diagnostico<?= $historial['id_consulta'] ?>" type="button">
                                                                     <i class="bi bi-clipboard-pulse"></i> Diagnóstico
                                                                 </button>
                                                             </li>
                                                             <li class="nav-item" role="presentation">
-                                                                <button class="nav-link" id="medicamentos1-tab" data-bs-toggle="tab" data-bs-target="#medicamentos1" type="button">
+                                                                <button class="nav-link" id="medicamentos<?= $historial['id_consulta'] ?>-tab" data-bs-toggle="tab" data-bs-target="#medicamentos<?= $historial['id_consulta'] ?>" type="button">
                                                                     <i class="bi bi-capsule"></i> Medicamentos
                                                                 </button>
                                                             </li>
                                                             <li class="nav-item" role="presentation">
-                                                                <button class="nav-link" id="ordenes1-tab" data-bs-toggle="tab" data-bs-target="#ordenes1" type="button">
+                                                                <button class="nav-link" id="ordenes<?= $historial['id_consulta'] ?>-tab" data-bs-toggle="tab" data-bs-target="#ordenes<?= $historial['id_consulta'] ?>" type="button">
                                                                     <i class="bi bi-file-medical"></i> Órdenes Médicas
                                                                 </button>
                                                             </li>
                                                             <li class="nav-item" role="presentation">
-                                                                <button class="nav-link" id="examenes1-tab" data-bs-toggle="tab" data-bs-target="#examenes1" type="button">
+                                                                <button class="nav-link" id="examenes<?= $historial['id_consulta'] ?>-tab" data-bs-toggle="tab" data-bs-target="#examenes<?= $historial['id_consulta'] ?>" type="button">
                                                                     <i class="bi bi-clipboard-data"></i> Exámenes
                                                                 </button>
                                                             </li>
@@ -169,7 +171,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 
                                                         <div class="tab-content p-3" id="tabsContent<?= $historial['id_consulta'] ?>">
                                                             <!-- Tab Diagnóstico -->
-                                                            <div class="tab-pane fade show active" id="diagnostico<?= $historial['id_consulta'] ?>">
+                                                            <div class="tab-pane fade show active" id="diagnostico<?= $historial['id_consulta'] ?>" role="tabpanel"
+                                                                aria-labelledby="diagnostico<?= $historial['id_consulta'] ?>-tab">
                                                                 <h6 class="detail-subtitle">Signos Vitales</h6>
                                                                 <div class="row mb-3">
                                                                     <div class="col-md-3">
@@ -210,8 +213,9 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                             </div>
 
                                                             <!-- Tab Medicamentos -->
-                                                            <div class="tab-pane fade" id="medicamentos<?= $historial['id_consulta'] ?>">
-                                                                <div class="table-responsive">
+                                                            <div class="tab-pane fade" id="medicamentos<?= $historial['id_consulta'] ?>" role="tabpanel"
+                                                                aria-labelledby="medicamentos<?= $historial['id_consulta'] ?>-tab">
+                                                                <div class=" table-responsive">
                                                                     <table class="table table-hover">
                                                                         <thead>
                                                                             <tr>
@@ -240,7 +244,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                             </div>
 
                                                             <!-- Tab Órdenes Médicas -->
-                                                            <div class="tab-pane fade" id="ordenes<?= $historial['id_consulta'] ?>">
+                                                            <div class="tab-pane fade" id="ordenes<?= $historial['id_consulta'] ?>" role="tabpanel"
+                                                                aria-labelledby="ordenes<?= $historial['id_consulta'] ?>-tab">
                                                                 <ul class="list-group">
                                                                     <li class="list-group-item">
                                                                         <i class="bi bi-check-circle-fill text-success"></i>
@@ -258,7 +263,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                             </div>
 
                                                             <!-- Tab Exámenes -->
-                                                            <div class="tab-pane fade" id="examenes<?= $historial['id_consulta'] ?>">
+                                                            <div class="tab-pane fade" id="examenes<?= $historial['id_consulta'] ?>" role="tabpanel"
+                                                                aria-labelledby="examenes<?= $historial['id_consulta'] ?>-tab">
                                                                 <div class="alert alert-info">
                                                                     <i class="bi bi-info-circle"></i>
                                                                     No se solicitaron exámenes de laboratorio en esta consulta.
@@ -269,10 +275,10 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </div>
-                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
