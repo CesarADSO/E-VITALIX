@@ -1688,3 +1688,24 @@
     .timeline-content .consultation-card {
         margin-bottom: 40px;
     }
+
+    .editar {
+        color: var(--blanco-color);
+    }
+
+    .btn-estado {
+        text-decoration: none;
+    }
+
+    .btn-añadir-volver {
+        border-radius: 20px;
+    }
+
+    .modal-header {
+        background: var(--tercer-azul);
+    }
+
+    .modal-header .modal-title {
+        color: var(--blanco-color);
+        font-weight: 700;
+    }

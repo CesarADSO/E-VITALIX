@@ -245,6 +245,18 @@ switch ($request) {
     case '/admin/consultar-servicio':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar-servicio.php';
         break;
+
+    case '/admin/especialidades';
+        require BASE_PATH . '/app/views/dashboard/administrador/especialidades.php';
+        break;
+
+    case '/admin/registrar-especialidad';
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-especialidad.php';
+        break;
+    
+    case '/admin/guardar-especialidad';
+        require BASE_PATH . '/app/controllers/especialidadController.php';
+        break;
     // case '/admin/disponibilidades':
     //     require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
     //     break;

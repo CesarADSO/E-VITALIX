@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (parseInt(indicator.getAttribute('data-step')) <= parseInt(activeStep)) {
                 indicator.classList.add('active');
             }
-        }); 
+        });
     }
 
     function updateSummary() {
@@ -188,3 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('direccion_contacto').value || 'No ingresado';
     }
 });
+
+// Cerrar modal
+const modal = document.getElementById('formularioModal');
+modal.hide();
