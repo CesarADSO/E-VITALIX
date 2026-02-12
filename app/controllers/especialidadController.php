@@ -14,6 +14,10 @@ switch ($method) {
         break;
 
     case 'GET':
+        $accion = $_GET['accion'] ?? '';
+        if ($accion === 'modificarEstado') {
+            modificarEstadoEspecialidad($_GET['id']);
+        }
         listarEspecialidades();
         break;
 
@@ -82,4 +86,20 @@ function listarEspecialidades()
     $resultado = $objEspecialidad->listar($id_consultorio);
 
     return $resultado;
+}
+
+function modificarEstadoEspecialidad($id)
+{
+    // INSTANCIAMOS LA CLASE Especialidad del modelo especialidadModel.php
+    $objEspecialidad = new Especialidad();
+
+    // ACCEDEMOS AL MÉTODO modificarEstado DE LA CLASE Especialidad
+    $resultado = $objEspecialidad->modificarEstado($id);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO PARA CONFIRMAR LA MODIFICACIÓN DEL ESTADO O INFORMAR UN ERROR
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Modificación de estado exitosa', 'Se ha modificado el estado de la especialidad', '/E-VITALIX/admin/especialidades');
+    } else {
+        mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar el estado de la especialidad. Intenta nuevamente');
+    }
 }

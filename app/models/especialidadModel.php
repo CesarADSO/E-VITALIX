@@ -11,7 +11,8 @@ class Especialidad
         $this->conexion = $db->getConexion();
     }
 
-    public function registrar($data) {
+    public function registrar($data)
+    {
         try {
             $registrarEspecialidad = "INSERT INTO especialidades(id_consultorio, nombre, descripcion, estado) VALUES (:id_consultorio, :nombre, :descripcion, 'ACTIVA')";
 
@@ -30,7 +31,8 @@ class Especialidad
         }
     }
 
-    public function listar($id_consultorio) {
+    public function listar($id_consultorio)
+    {
         try {
             $listarEspecialidades = "SELECT * FROM especialidades WHERE id_consultorio = :id_consultorio";
             $resultado = $this->conexion->prepare($listarEspecialidades);
@@ -40,6 +42,21 @@ class Especialidad
         } catch (PDOException $e) {
             error_log("Error en Especialidad::listar->" . $e->getMessage());
             return [];
+        }
+    }
+
+    public function modificarEstado($id)
+    {
+        try {
+            // ESTA CONSULTA SQL ES UN UPDATE CON UN CASE WHEN THEN ELSE END QUE ES UNA ESTRUCTURA CONDICIONAL ASI COMO EL IF ELSE
+            $modificarEstado = "UPDATE especialidades SET estado = CASE WHEN estado = 'ACTIVA' THEN 'INACTIVA' ELSE 'ACTIVA' END WHERE id = :id";
+            $resultado = $this->conexion->prepare($modificarEstado);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::modificarEstado->" . $e->getMessage());
+            return false;
         }
     }
 }

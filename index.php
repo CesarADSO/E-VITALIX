@@ -257,6 +257,10 @@ switch ($request) {
     case '/admin/guardar-especialidad';
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
+
+    case '/admin/cambiar-estado-especialidad';
+        require BASE_PATH . '/app/controllers/especialidadController.php';
+        break;
     // case '/admin/disponibilidades':
     //     require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
     //     break;
