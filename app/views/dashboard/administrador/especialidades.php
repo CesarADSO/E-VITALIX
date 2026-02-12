@@ -1,4 +1,12 @@
 <?php
+    require_once BASE_PATH . '/app/helpers/session_administrador.php';
+    require_once BASE_PATH . '/app/controllers/especialidadController.php';
+
+    $especialidades = listarEspecialidades();
+?>
+
+
+<?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 ?>
 
@@ -62,16 +70,28 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php if(!empty($especialidades)):?>
+                                                <?php foreach($especialidades as $especialidad):?>
                                             <tr>
-                                                <td>Dermatología</td>
-                                                <td>hola</td>
-                                                <td><a class="badge bg-success status-badge status btn-estado" href="#">Activa</a></td>
+                                                <td><?= $especialidad['nombre'] ?></td>
+                                                <td><?= $especialidad['descripcion'] ?></td>
+                                                <td>
+                                                    <?php if($especialidad['estado'] === 'ACTIVA'):?>
+                                                    <a class="badge bg-success status-badge status btn-estado" href="#"><?= $especialidad['estado'] ?></a>
+                                                    <?php else:?>
+                                                    <a class="badge bg-danger status-badge status btn-estado" href="#"><?= $especialidad['estado'] ?></a>
+                                                    <?php endif;?>
+                                                </td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info"
                                                         title="Editar especialidad">
                                                         <i class="fa-solid fa-pen-to-square editar"></i></a>
                                                 </td>
                                             </tr>
+                                            <?php endforeach;?>
+                                            <?php else:?>
+                                                <h2>No hay especialidades registradas</h2>
+                                            <?php endif;?>
                                         </tbody>
                                     </table>
                                 </div>

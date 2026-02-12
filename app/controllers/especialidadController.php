@@ -3,11 +3,18 @@ require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/especialidadModel.php';
 
 
+
+
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
         registrarEspecialidad();
+        break;
+
+    case 'GET':
+        listarEspecialidades();
         break;
 
     default:
@@ -33,6 +40,7 @@ function registrarEspecialidad()
         session_start();
     }
 
+
     // OBTENEMOS EL ID DEL CONSULTORIO
     $id_consultorio = $_SESSION['user']['id_consultorio'];
 
@@ -56,4 +64,22 @@ function registrarEspecialidad()
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar la especialidad. Intenta nuevamente');
     }
     exit();
+}
+
+function listarEspecialidades()
+{
+
+    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    $objEspecialidad = new Especialidad();
+
+    $resultado = $objEspecialidad->listar($id_consultorio);
+
+    return $resultado;
 }
