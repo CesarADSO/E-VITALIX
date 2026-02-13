@@ -189,9 +189,9 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
 
-    case '/admin/eliminar-especialista':
-        require BASE_PATH . '/app/controllers/especialistaController.php';
-        break;
+    case '/admin/consultar-especialista':
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar-especialista.php';
+        
 
     case '/admin/generar-reporte':
         require BASE_PATH . '/app/controllers/reportesPdfControllerAdministrador.php';
@@ -259,6 +259,14 @@ switch ($request) {
         break;
 
     case '/admin/cambiar-estado-especialidad';
+        require BASE_PATH . '/app/controllers/especialidadController.php';
+        break;
+
+    case '/admin/editar-especialidad';
+        require BASE_PATH . '/app/views/dashboard/administrador/editar-especialidad.php';
+        break;
+
+    case '/admin/guardar-cambios-especialidad';
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
     // case '/admin/disponibilidades':
@@ -486,7 +494,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
-    case '/debug_citas.php';
+    case '/debug_citas.php':
         require BASE_PATH . '/debug_citas_mejorado.php';
 
     case '/paciente/cambiar-contrasena':

@@ -83,12 +83,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-sm btn-info btn-editar-especialidad"
-                                                                title="Editar especialidad"
-                                                                data-id="<?= $especialidad['id'] ?>"
-                                                                data-nombre="<?= $especialidad['nombre'] ?>"
-                                                                data-descripcion="<?= $especialidad['descripcion'] ?>">
-                                                                <i class="fa-solid fa-pen-to-square editar"></i></button>
+                                                            <a href="<?= BASE_URL ?>/admin/editar-especialidad?id=<?= $especialidad['id'] ?>" class="btn btn-sm btn-info btn-editar-especialidad" title="Editar especialidad"><i class="fa-solid fa-pen-to-square editar"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -114,7 +109,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <h5 class="modal-title" id="formularioModalLabelRegistrar">
                                     Registrar especialidad
                                 </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modalRegistrar" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <!-- Body del Modal con Formulario -->
@@ -157,77 +152,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                     <!-- Footer del Modal -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modalRegistrar">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                             Cancelar
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             Registrar especialidad
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal para actualizar una especialidad -->
-                <div class="modal fade" id="formularioModalActualizar" tabindex="-1" aria-labelledby="formularioModalLabelActualizar" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-
-                            <!-- Header del Modal -->
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="formularioModalLabelActualizar">
-                                    Actualizar especialidad
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modalActualizar" aria-label="Close"></button>
-                            </div>
-
-                            <!-- Body del Modal con Formulario -->
-                            <div class="modal-body">
-                                <form id="miFormularioActualizar" action="<?= BASE_URL ?>/admin/guardar-cambios-especialidad" method="POST">
-
-                                    <!-- Campo Nombre -->
-                                    <div class="mb-4">
-                                        <label for="nombre" class="form-label">
-                                            Nombre <span class="required">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="nombreActualizar"
-                                            name="nombre"
-                                            placeholder="Ingrese el nombre"
-                                            required>
-
-                                    </div>
-
-                                    <!-- Campo Descripción -->
-                                    <div class="mb-4">
-                                        <label for="descripcion" class="form-label">
-                                            Descripción <span class="required">*</span>
-                                        </label>
-
-                                        <textarea
-                                            class="form-control"
-                                            id="descripcionActualizar"
-                                            name="descripcion"
-                                            rows="4"
-                                            placeholder="Ingrese una descripción detallada"
-                                            required></textarea>
-
-                                        <div class="form-text">
-                                            Proporcione una descripción clara y detallada
-                                        </div>
-                                    </div>
-
-                                    <!-- Footer del Modal -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modalActualizar">
-                                            Cancelar
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">
-                                            Actualizar especialidad
                                         </button>
                                     </div>
                                 </form>

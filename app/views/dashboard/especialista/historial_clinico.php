@@ -34,10 +34,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                 <div class="patient-header">
                     <div class="container">
                         <div class="row align-items-center">
-                            <div class="col-12">
-                                <button class="btn btn-outline-light btn-sm mb-3" onclick="window.history.back()">
-                                    <i class="bi bi-arrow-left"></i> Volver a pacientes atendidos
-                                </button>
+                            <div class="col-md-12">
+                                <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver a pacientes atendidos</a>
                             </div>
                         </div>
 

@@ -59,4 +59,43 @@ class Especialidad
             return false;
         }
     }
+
+    public function listarEspecialidadPorID($id)
+    {
+        try {
+            $listarEspecialidadPorId = "SELECT * FROM especialidades WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($listarEspecialidadPorId);
+
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetch();
+
+
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::listarEspecialidadPorId->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function actualizarEspecialidad($data) {
+        try {
+            $actualizar = "UPDATE especialidades SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
+
+            $resultado = $this->conexion->prepare($actualizar);
+            $resultado->bindParam(':id', $data['id']);
+            $resultado->bindParam(':nombre', $data['nombre']);
+            $resultado->bindParam(':descripcion', $data['descripcion']);
+
+            $resultado->execute();
+
+            return true;
+
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::actualizarEspecialidad->" . $e->getMessage());
+            return false;
+        }
+    }
 }

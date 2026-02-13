@@ -345,36 +345,3 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// ==================== MANEJO DE MODALES DE ESPECIALIDADES ====================
-/**
- * Este código abre el modal de actualización cuando haces clic en el botón "Editar"
- * de una especialidad en la tabla
- */
-
-document.addEventListener('DOMContentLoaded', function () {
-    // DOMContentLoaded = Espera a que la página HTML esté completamente cargada
-    // Esto asegura que todos los botones existan en el DOM antes de ejecutar el código
-    
-    document.querySelectorAll('.btn-editar-especialidad').forEach(button => {
-        // Busca TODOS los botones con la clase "btn-editar-especialidad"
-        // forEach(button => {...}) = Ejecuta el código para cada botón encontrado
-        
-        button.addEventListener('click', function () {
-            // addEventListener('click', ...) = Escucha cuando el usuario hace clic en el botón
-            // function() {...} = Función que se ejecuta cuando ocurre el clic
-            
-            const modalActualizar = new bootstrap.Modal(
-                // new bootstrap.Modal() = Crea una nueva instancia del modal
-                // (es necesario para poder abrirlo con .show())
-                
-                document.getElementById('formularioModalActualizar')
-                // getElementById('formularioModalActualizar') = Busca el div del modal en el HTML
-                // Este div tiene el atributo id="formularioModalActualizar"
-            );
-            
-            modalActualizar.show();
-            // .show() = Abre/muestra el modal en la pantalla
-            // El usuario verá el formulario para editar la especialidad
-        });
-    });
-});

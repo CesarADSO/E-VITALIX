@@ -10,7 +10,13 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
-        registrarEspecialidad();
+        $accion = $_POST['accion'] ?? '';
+        if ($accion === 'actualizar') {
+            actualizarEspecialidad();
+        }
+        else {
+            registrarEspecialidad();
+        }
         break;
 
     case 'GET':
@@ -18,6 +24,11 @@ switch ($method) {
         if ($accion === 'modificarEstado') {
             modificarEstadoEspecialidad($_GET['id']);
         }
+
+        if (isset($_GET['id'])) {
+            listarEspecialidadPorId($_GET['id']);
+        }
+
         listarEspecialidades();
         break;
 
@@ -102,4 +113,48 @@ function modificarEstadoEspecialidad($id)
     } else {
         mostrarSweetAlert('error', 'Error al Modificar', 'No se pudo modificar el estado de la especialidad. Intenta nuevamente');
     }
+}
+
+function listarEspecialidadPorId($id) {
+    // INSTANCIAMOS LA CLASE Especialidad DEL MODELO especialidadModel.php
+    $objEspecialidad = new Especialidad();
+
+    // ACCEDEMOS AL MÉTODO listarEspecialidadPorID DE LA CLASE Especialidad
+    $resultado = $objEspecialidad->listarEspecialidadPorId($id);
+
+    return $resultado;
+}
+
+function actualizarEspecialidad() {
+    // CAPTURAMOS EN VARIABLES LOS DATOS QUE SE VAN A OBTENER DEL FORMULARIO A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
+    $id = $_POST['id'] ?? '';
+    $nombre = $_POST['nombre'] ?? '';
+    $descripcion = $_POST['descripcion'] ?? '';
+
+    if (empty($nombre) || empty($descripcion)) {
+        mostrarSweetAlert('error', 'campos vacios', 'por favor completar los campos obligatorios');
+        exit();
+    }
+
+    // INSTANCIAMOS LA CLASE DEL MODELO especialidadModel.php
+    $objEspecialidad = new Especialidad();
+
+    // EN LA VARIABLE DATA GUARDAMOS LOS DATOS EN UN TIPO ARREGLO CON CLAVE VALOR
+    $data = [
+        'id' => $id,
+        'nombre' => $nombre,
+        'descripcion' => $descripcion
+    ];
+
+    // ACCEDEMOS AL MÉTODO O FUNCIÓN ESPECÍFICA DE LA CLASE Especialidad
+    $resultado = $objEspecialidad->actualizarEspecialidad($data);
+    
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Actualización exitosa', 'Se ha actualizado la especialidad', '/E-VITALIX/admin/especialidades');
+    }
+    else {
+        mostrarSweetAlert('error', 'Error al actualizar', 'No se pudo actualizar el consultorio. Intenta nuevamente');
+    }
+    exit();
 }
