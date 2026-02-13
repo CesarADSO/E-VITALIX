@@ -21,8 +21,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             <!-- Main Content -->
             <div class="col-lg-10 col-md-9 main-content">
 
-                <!-- asistentes Section -->
-                <div id="asistentesSection" style="display: block;">
+                <!-- especialidades Section -->
+                <div id="especialidadesSection" style="display: block;">
                     <!-- Top Bar -->
                     <?php
                     include_once __DIR__ . '/../../layouts/topbar_administrador.php';
@@ -38,7 +38,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (0)
                             </button>
                         </div>
-                        <button class="btn btn-primary btn-sm btn-añadir-volver" data-bs-toggle="modal" data-bs-target="#formularioModal"><i class="bi bi-plus-lg"></i>AÑADIR</button>
+                        <button class="btn btn-primary btn-sm btn-añadir-volver" data-bs-toggle="modal" data-bs-target="#formularioModalRegistrar"><i class="bi bi-plus-lg"></i>AÑADIR</button>
                     </div>
 
                     <div class="card shadow-sm">
@@ -83,9 +83,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <a href="#" class="btn btn-sm btn-info"
-                                                                title="Editar especialidad">
-                                                                <i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                            <button type="button" class="btn btn-sm btn-info btn-editar-especialidad"
+                                                                title="Editar especialidad"
+                                                                data-id="<?= $especialidad['id'] ?>"
+                                                                data-nombre="<?= $especialidad['nombre'] ?>"
+                                                                data-descripcion="<?= $especialidad['descripcion'] ?>">
+                                                                <i class="fa-solid fa-pen-to-square editar"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -101,22 +104,22 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                 </div>
 
-                <!-- Modal -->
-                <div class="modal fade" id="formularioModal" tabindex="-1" aria-labelledby="formularioModalLabel" aria-hidden="true">
+                <!-- Modal para registrar una especialidad -->
+                <div class="modal fade" id="formularioModalRegistrar" tabindex="-1" aria-labelledby="formularioModalLabelRegistrar" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
 
                             <!-- Header del Modal -->
                             <div class="modal-header">
-                                <h5 class="modal-title" id="formularioModalLabel">
+                                <h5 class="modal-title" id="formularioModalLabelRegistrar">
                                     Registrar especialidad
                                 </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modalRegistrar" aria-label="Close"></button>
                             </div>
 
                             <!-- Body del Modal con Formulario -->
                             <div class="modal-body">
-                                <form id="miFormulario" action="<?= BASE_URL ?>/admin/guardar-especialidad" method="POST">
+                                <form id="miFormularioRegistrar" action="<?= BASE_URL ?>/admin/guardar-especialidad" method="POST">
 
                                     <!-- Campo Nombre -->
                                     <div class="mb-4">
@@ -126,7 +129,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="nombre"
+                                            id="nombreRegistrar"
                                             name="nombre"
                                             placeholder="Ingrese el nombre"
                                             required>
@@ -154,11 +157,77 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                     <!-- Footer del Modal -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modalRegistrar">
                                             Cancelar
                                         </button>
                                         <button type="submit" class="btn btn-primary">
                                             Registrar especialidad
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para actualizar una especialidad -->
+                <div class="modal fade" id="formularioModalActualizar" tabindex="-1" aria-labelledby="formularioModalLabelActualizar" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                            <!-- Header del Modal -->
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="formularioModalLabelActualizar">
+                                    Actualizar especialidad
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modalActualizar" aria-label="Close"></button>
+                            </div>
+
+                            <!-- Body del Modal con Formulario -->
+                            <div class="modal-body">
+                                <form id="miFormularioActualizar" action="<?= BASE_URL ?>/admin/guardar-cambios-especialidad" method="POST">
+
+                                    <!-- Campo Nombre -->
+                                    <div class="mb-4">
+                                        <label for="nombre" class="form-label">
+                                            Nombre <span class="required">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="nombreActualizar"
+                                            name="nombre"
+                                            placeholder="Ingrese el nombre"
+                                            required>
+
+                                    </div>
+
+                                    <!-- Campo Descripción -->
+                                    <div class="mb-4">
+                                        <label for="descripcion" class="form-label">
+                                            Descripción <span class="required">*</span>
+                                        </label>
+
+                                        <textarea
+                                            class="form-control"
+                                            id="descripcionActualizar"
+                                            name="descripcion"
+                                            rows="4"
+                                            placeholder="Ingrese una descripción detallada"
+                                            required></textarea>
+
+                                        <div class="form-text">
+                                            Proporcione una descripción clara y detallada
+                                        </div>
+                                    </div>
+
+                                    <!-- Footer del Modal -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modalActualizar">
+                                            Cancelar
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">
+                                            Actualizar especialidad
                                         </button>
                                     </div>
                                 </form>
