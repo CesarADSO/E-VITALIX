@@ -153,6 +153,7 @@ function registrarEspecialista()
         'id_consultorio' => $id_consultorio
     ];
 
+
     // CREAMOS UNA VARIABLE DONDE SE VA A GUARDAR EL OBJETO DONDE INSTANCIAMOS LA CLASE ACCEDIENDO AL MÉTODO DEL MODELO
     $resultado = $objEspecialista->registrar($data);
 

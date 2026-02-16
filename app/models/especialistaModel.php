@@ -52,7 +52,7 @@ class Especialista
             telefono,
             direccion,
             foto,
-            especialidad,
+            id_especialidad,
             registro_profesional)
             VALUES 
             (:id_usuario,
@@ -103,7 +103,7 @@ class Especialista
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
-            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_consultorio = :id_consultorio ORDER BY especialistas.nombres ASC";
+            $mostrar = "SELECT especialistas.*, especialidades.nombre AS nombre_especialidad, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id WHERE especialistas.id_consultorio = :id_consultorio ORDER BY especialistas.nombres ASC";
 
             // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
             $resultado = $this->conexion->prepare($mostrar);
@@ -138,14 +138,17 @@ class Especialista
                             especialistas.telefono,
                             especialistas.direccion,
                             especialistas.foto,
-                            especialistas.especialidad,
+                            especialidades.id AS id_especialidad,
+                            especialidades.nombre AS nombre_especialidad,
                             especialistas.registro_profesional,
                             usuarios.id AS id_usuario,
                             usuarios.estado,
+                            usuarios.email,
                             tipo_documento.nombre AS documento
                             FROM especialistas INNER JOIN tipo_documento
                             ON especialistas.id_tipo_documento = tipo_documento.id
                             INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id
+                            INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id
                             WHERE especialistas.id = :id
                             LIMIT 1;";
 

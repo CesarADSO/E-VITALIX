@@ -2,6 +2,8 @@
 // IMPORTAMOS LAS DEPENDENCIAS NECESARIAS
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
+require_once BASE_PATH . '/app/controllers/especialidadController.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
 // ASIGNAMOS EL VALOR ID DEL REGISTRO SEGÚN LA TABLA
 $id = $_GET['id'];
@@ -11,6 +13,8 @@ $id = $_GET['id'];
 $especialista = listarEspecialista($id);
 
 $datos = traerTipoDocumento();
+
+$especialidades = listarEspecialidades();
 ?>
 
 
@@ -164,7 +168,16 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <label for="especialidad" class="form-label">Especialidad</label>
-                                    <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ingresa la especialidad" value="<?= $especialista['especialidad'] ?>">
+                                    <select name="especialidad" id="especialidad" class="form-control">
+                                        <option value="<?= $especialista['id_especialidad'] ?>"><?= $especialista['nombre_especialidad'] ?></option>
+                                            <?php if(!empty($especialidades)):?>
+                                                <?php foreach($especialidades as $especialidad):?>
+                                                    <option value="<?= $especialidad['id'] ?>"><?= $especialidad['nombre'] ?></option>
+                                                <?php endforeach;?>
+                                            <?php else:?>
+                                                <option value="">No hay especialidades registradas</option>
+                                            <?php endif;?>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="registro_profesional" class="form-label">Registro Profesional</label>
