@@ -7,10 +7,14 @@ require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
 
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR DE LOS ROLES QUE TIENE LA FUNCIÓN DE mostrarConsultorios()
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
+
+require_once BASE_PATH . '/app/controllers/especialidadController.php';
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
 $datos = traertipoDocumento();
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
 $consultorios = mostrarConsultorios();
+// LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
+$especialidades = listarEspecialidades();
 ?>
 
 
@@ -163,7 +167,16 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="especialidad" class="form-label">Especialidad</label>
-                                        <input type="text" name="especialidad" class="form-control" id="especialidad" placeholder="Ingresa la especialidad">
+                                        <select name="especialidad" id="especialidad" class="form-control">
+                                            <option value="">Selecciona una especialidad</option>
+                                            <?php if(!empty($especialidades)):?>
+                                                <?php foreach($especialidades as $especialidad):?>
+                                                    <option value="<?= $especialidad['id'] ?>"><?= $especialidad['nombre'] ?></option>
+                                                <?php endforeach;?>
+                                            <?php else:?>
+                                                <option value="">No hay especialidades registradas</option>
+                                            <?php endif;?>
+                                        </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="registro_profesional" class="form-label">Registro Profesional</label>

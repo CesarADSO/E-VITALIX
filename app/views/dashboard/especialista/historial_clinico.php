@@ -44,7 +44,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                 <div class="row align-items-center">
                                     <div class="col-md-auto text-center mb-3 mb-md-0">
                                         <div class="patient-avatar">
-                                            <img class="img-paciente" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>" alt="<?= $paciente['nombre_paciente'] ?>">
+                                            <img class="img-usuario" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>" alt="<?= $paciente['nombre_paciente'] ?>">
                                         </div>
                                     </div>
 
