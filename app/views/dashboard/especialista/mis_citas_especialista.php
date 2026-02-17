@@ -45,7 +45,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Citas Rechazadas</div>
-                        <div class="stat-value"><?= $estadisticas['Rechazada'] ?? 0 ?></div>
+                        <div class="stat-value"><?= $estadisticas['RECHAZADA'] ?? 0 ?></div>
                         <div class="stat-subtitle">Declinadas</div>
                     </div>
                 </div>
@@ -69,10 +69,10 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                 <table class="table table-hover align-middle table-pacientes table-bordered" id="tablaCitas">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Paciente</th>
+                                            <th>Foto</th>
+                                            <th>Nombres y apellidos</th>
                                             <th>Fecha</th>
                                             <th>Hora Inicio</th>
-                                            <th>Hora Fin</th>
                                             <th>Servicio</th>
                                             <th>Estado</th>
                                             <th class="text-center">Acciones</th>
@@ -80,17 +80,18 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                     </thead>
                                     <tbody>
                                         <?php foreach ($citas as $cita): ?>
-                                            <tr data-cita-id="<?= $cita['id'] ?>">
+                                            <tr data-cita-id="<?= $cita['id_cita'] ?>">
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="user-avatar">
                                                             <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $cita['foto_paciente'] ?>" alt="<?= $cita['nombre_paciente'] ?>">
                                                         </div>
                                                         <div>
-                                                            <strong><?= htmlspecialchars($cita['nombre_paciente']) ?></strong>
+                                                            
                                                         </div>
                                                     </div>
                                                 </td>
+                                                <td><strong><?= htmlspecialchars($cita['nombre_paciente']) ?></strong></td>
                                                 <td>
                                                     <i class="bi bi-calendar3 me-1"></i>
                                                     <?= date('d/m/Y', strtotime($cita['fecha'])) ?>
@@ -99,27 +100,39 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                     <i class="bi bi-clock me-1"></i>
                                                     <?= date('h:i A', strtotime($cita['hora_inicio'])) ?>
                                                 </td>
-                                                <td>
-                                                    <i class="bi bi-clock-fill me-1"></i>
-                                                    <?= date('h:i A', strtotime($cita['hora_fin'])) ?>
-                                                </td>
                                                 <td><?= htmlspecialchars($cita['servicio_nombre'] ?? 'Sin servicio') ?></td>
                                                 <td>
-                                                    <span class="status-badge status-<?= strtolower($cita['estado_cita']) ?>">
+                                                    <?php if ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                        <span class="status-badge status status-aceptada">
+                                                        <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php elseif ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                    <span class="status-badge status status-pendiente">
                                                         <?= $cita['estado_cita'] ?>
                                                     </span>
+                                                    <?php elseif($cita['estado_cita'] === 'COMPLETADA'):?>
+                                                        <span class="status-badge status status-completada">
+                                                        <?= $cita['estado_cita'] ?>
+                                                    </span>
+                                                    <?php else:?>
+                                                    <span class="status-badge status status-cancelada">
+                                                        <?= $cita['estado_cita'] ?>
+                                                    </span>
+                                                    <?php endif; ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group" role="group">
                                                         <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                                            <a href="<?= BASE_URL ?>/especialista/aceptar-cita?id=<?= $cita['id'] ?>&accion=aceptar" class="btn btn-sm btn-success btn-aceptar"
-                                                                data-cita-id="<?= $cita['id'] ?>"
+                                                            <a href="<?= BASE_URL ?>/especialista/aceptar-cita?id=<?= $cita['id_cita'] ?>&accion=aceptar" class="btn btn-sm btn-success btn-aceptar"
+                                                                data-cita-id="<?= $cita['id_cita'] ?>"
                                                                 title="Aceptar cita">
                                                                 <i class="bi bi-check-circle"></i></a>
-                                                            <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id'] ?>&accion=cancelar" class="btn btn-sm btn-danger btn-cancelar"
-                                                                data-cita-id="<?= $cita['id'] ?>"
+                                                            <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger btn-cancelar"
+                                                                data-cita-id="<?= $cita['id_cita'] ?>"
                                                                 title="Cancelar cita">
                                                                 <i class="bi bi-x-circle"></i></a>
+                                                        <?php elseif ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
                                                         <?php else: ?>
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>
@@ -184,55 +197,6 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
             </div>
         </div>
     </div>
-
-    <style>
-        /* Estilos personalizados para el módulo de Mis Citas */
-        .status-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-            text-transform: uppercase;
-        }
-
-        .status-pendiente {
-            background-color: #FFF3CD;
-            color: #856404;
-        }
-
-        .status-aceptada {
-            background-color: #D1ECF1;
-            color: #0C5460;
-        }
-
-        .status-cancelada {
-            background-color: #F8D7DA;
-            color: #721C24;
-        }
-
-        .status-rechazada {
-            background-color: #F5C6CB;
-            color: #721C24;
-        }
-
-        #tablaCitas tbody tr {
-            transition: background-color 0.2s;
-        }
-
-        #tablaCitas tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .btn-group .btn {
-            margin: 0 2px;
-        }
-
-        .card-header-primary {
-            background: linear-gradient(135deg, var(--color-primario) 0%, var(--tercer-azul) 100%);
-        }
-    </style>
-
 
 
     <!-- AQUI VA EL FOOTER INCLUDE -->

@@ -77,7 +77,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <td><?= $especialista['especialidad'] ?></td>
                                             <td><?= $especialista['estado'] ?></td>
                                             <td>
-                                                <!-- <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a> -->
+                                                <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a>
                                                 <a href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                                
                                             </td>
