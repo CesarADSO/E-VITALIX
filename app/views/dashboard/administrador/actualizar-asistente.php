@@ -59,19 +59,23 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <input type="hidden" name="id_asistente" value="<?= $asistente['id_asistente'] ?>">
                             <input type="hidden" name="accion" value="actualizar">
 
-                            <!-- 2. DATOS DE IDENTIFICACIÓN LEGAL -->
+                            
+                            <!-- 1. DATOS PERSONALES -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="estado" class="form-label">Estado</label>
-                                    <select name="estado" id="estado" class="form-select">
-                                        <!-- Estado actual -->
-                                        <option value="<?= $asistente['estado'] ?>">
-                                            <?= $asistente['estado'] ?>
-                                        </option>
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                    </select>
+                                    <label for="nombres" class="form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="nombres" name="nombres" value="<?= $asistente['nombres'] ?>" required>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label for="apellidos" class="form-label">Apellidos</label>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?= $asistente['apellidos'] ?>" required>
+                                </div>
+                            </div>
+
+                            <!-- 2. DATOS DE IDENTIFICACIÓN LEGAL -->
+                            <div class="row mb-3">
+                                
                                 <div class="col-md-6">
                                     <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                     <select class="form-select" id="tipo_documento" name="tipo_documento" required>
@@ -89,20 +93,20 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <?php endif; ?>
                                     </select>
                                 </div>
-                            </div>
-
-                            <!-- 3. DATOS PERSONALES -->
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="nombres" class="form-label">Nombres</label>
-                                    <input type="text" class="form-control" id="nombres" name="nombres" value="<?= $asistente['nombres'] ?>" required>
-                                </div>
 
                                 <div class="col-md-6">
-                                    <label for="apellidos" class="form-label">Apellidos</label>
-                                    <input type="text" class="form-control" id="apellidos" name="apellidos" value="<?= $asistente['apellidos'] ?>" required>
+                                    <label for="estado" class="form-label">Estado</label>
+                                    <select name="estado" id="estado" class="form-select">
+                                        <!-- Estado actual -->
+                                        <option value="<?= $asistente['estado'] ?>">
+                                            <?= $asistente['estado'] ?>
+                                        </option>
+                                        <option value="Activo">Activo</option>
+                                        <option value="Inactivo">Inactivo</option>
+                                    </select>
                                 </div>
                             </div>
+
 
                             <!-- 4. DATOS DE CONTACTO -->
 
