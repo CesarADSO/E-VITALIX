@@ -35,6 +35,23 @@ class ConsultaMedica
             $resultado->bindParam(':frecuencia_respiratoria', $data['frecuencia_respiratoria']);
             $resultado->execute();
 
+            // OBTENEMOS EL ID DE LA CONSULTA RECIÉN REGISTRADA
+            $id_consulta = $this->conexion->lastInsertId();
+
+            // HACEMOS LA CONSULTA SQL PARA INSERTAR LOS DATOS EN LA TABLA FORMULACION_MEDICAMENTOS
+            $formular = "INSERT INTO formulacion_medicamentos(id_consulta, nombre_medicamento, dosis, frecuencia, duracion) VALUES (:id_consulta, :nombre_medicamento, :dosis, :frecuencia, :duracion)";
+
+            // EN LA VARIABLE RESULTADOFORMULAR ACCEDEMOS A LA FUNCIÓN PREPARE
+            $resultadoFormular = $this->conexion->prepare($formular);
+
+            // INSERTAMOS LOS DATOS QUE VIENEN EN DATA EN LOS PARAMETROS DE LA CONSULTA
+            $resultadoFormular->bindParam(':id_consulta', $id_consulta);
+            $resultadoFormular->bindParam(':nombre_medicamento', $data['medicamento']);
+            $resultadoFormular->bindParam(':dosis', $data['dosis']);
+            $resultadoFormular->bindParam(':frecuencia', $data['frecuencia']);
+            $resultadoFormular->bindParam(':duracion', $data['duracion']);
+            $resultadoFormular->execute();
+
             // AHORA MODIFICAMOS EL ESTADO DE LA CITA A 'COMPLETADA'
             $actualizarCita = "UPDATE citas SET estado_cita = 'COMPLETADA' WHERE id = :id_cita";
 
