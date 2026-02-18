@@ -36,6 +36,11 @@ function registrarConsultaMedica()
     $sintomas = $_POST['sintomas'] ?? '';
     $diagnostico = $_POST['diagnostico'] ?? '';
     $tratamiento = $_POST['tratamiento'] ?? '';
+    $presion_sistolica = $_POST['presion_sistolica'] ?? '';
+    $presion_diastolica = $_POST['presion_diastolica'] ?? '';
+    $temperatura = $_POST['temperatura'] ?? '';
+    $frecuencia_cardiaca = $_POST['frecuencia_cardiaca'] ?? '';
+    $frecuencia_respiratoria = $_POST['frecuencia_respiratoria'] ?? '';
     $observaciones = $_POST['observaciones'] ?? '';
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
@@ -65,6 +70,11 @@ function registrarConsultaMedica()
         'sintomas' => $sintomas,
         'diagnostico' => $diagnostico,
         'tratamiento' => $tratamiento,
+        'presion_sistolica' => $presion_sistolica,
+        'presion_diastolica' => $presion_diastolica,
+        'temperatura' => $temperatura,
+        'frecuencia_cardiaca' => $frecuencia_cardiaca,
+        'frecuencia_respiratoria' => $frecuencia_respiratoria,
         'observaciones' => $observaciones
     ];
 

@@ -17,7 +17,7 @@ class ConsultaMedica
     public function registrarConsultaMedica($data)
     {
         try {
-            $registrarConsulta = "INSERT INTO consulta_medica(id_paciente, id_especialista, id_cita, diagnostico, motivo_consulta, sintomas, tratamiento, observaciones, estado) VALUES (:id_paciente, :id_especialista, :id_cita, :diagnostico, :motivo_consulta, :sintomas, :tratamiento, :observaciones, 'COMPLETADA')";
+            $registrarConsulta = "INSERT INTO consulta_medica(id_paciente, id_especialista, id_cita, diagnostico, motivo_consulta, sintomas, tratamiento, observaciones, presion_sistolica, presion_diastolica, temperatura, frecuencia_cardiaca, frecuencia_respiratoria, estado) VALUES (:id_paciente, :id_especialista, :id_cita, :diagnostico, :motivo_consulta, :sintomas, :tratamiento, :observaciones, :presion_sistolica, :presion_diastolica, :temperatura, :frecuencia_cardiaca, :frecuencia_respiratoria, 'COMPLETADA')";
 
             $resultado = $this->conexion->prepare($registrarConsulta);
             $resultado->bindParam(':id_paciente', $data['id_paciente']);
@@ -28,6 +28,11 @@ class ConsultaMedica
             $resultado->bindParam(':sintomas', $data['sintomas']);
             $resultado->bindParam(':tratamiento', $data['tratamiento']);
             $resultado->bindParam(':observaciones', $data['observaciones']);
+            $resultado->bindParam(':presion_sistolica', $data['presion_sistolica']);
+            $resultado->bindParam(':presion_diastolica', $data['presion_diastolica']);
+            $resultado->bindParam(':temperatura', $data['temperatura']);
+            $resultado->bindParam(':frecuencia_cardiaca', $data['frecuencia_cardiaca']);
+            $resultado->bindParam(':frecuencia_respiratoria', $data['frecuencia_respiratoria']);
             $resultado->execute();
 
             // AHORA MODIFICAMOS EL ESTADO DE LA CITA A 'COMPLETADA'
