@@ -68,14 +68,10 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 </div>
                                 <div class="step" data-step="2">
                                     <span class="step-number">2</span>
-                                    <span class="step-label">Contacto</span>
+                                    <span class="step-label">Servicios</span>
                                 </div>
                                 <div class="step" data-step="3">
                                     <span class="step-number">3</span>
-                                    <span class="step-label">Servicios</span>
-                                </div>
-                                <div class="step" data-step="4">
-                                    <span class="step-number">4</span>
                                     <span class="step-label">Confirmación</span>
                                 </div>
                             </div>
@@ -87,41 +83,36 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <input type="hidden" name="accion" value="actualizar">
                             <!-- Paso 1: Información Básica -->
                             <div class="wizard-step active" id="step1">
-                                <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingresa el nombre del consultorio" value="<?= $consultorio['nombre'] ?>">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="nombre" class="form-label">Nombre</label>
+                                        <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingresa el nombre del consultorio" value="<?= $consultorio['nombre'] ?>">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="direccion" class="form-label">Dirección</label>
+                                        <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $consultorio['direccion'] ?>">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="ciudad" class="form-label">Ciudad</label>
+                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad" value="<?= $consultorio['ciudad'] ?>">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="telefono" class="form-label">Teléfono</label>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa tu número telefónico" value="<?= $consultorio['telefono'] ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="correo_contacto" class="form-label">Correo de Contacto</label>
+                                        <input type="email" name="correo" class="form-control" id="correo_contacto" placeholder="Ingresa el correo electrónico" value="<?= $consultorio['correo_contacto'] ?>">
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección</label>
-                                    <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $consultorio['direccion'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="ciudad" class="form-label">Ciudad</label>
-                                    <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad" value="<?= $consultorio['ciudad'] ?>">
-                                </div>
+
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
                                 </div>
                             </div>
 
-                            <!-- Paso 2: Contacto -->
-                            <div class="wizard-step" id="step2">
-                                <div class="mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa tu número telefónico" value="<?= $consultorio['telefono'] ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="correo_contacto" class="form-label">Correo de Contacto</label>
-                                    <input type="email" name="correo" class="form-control" id="correo_contacto" placeholder="Ingresa el correo electrónico" value="<?= $consultorio['correo_contacto'] ?>">
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
-                                </div>
-                            </div>
-
                             <!-- Paso 3: Servicios -->
-                            <div class="wizard-step" id="step3">
+                            <div class="wizard-step" id="step2">
                                 <div class="mb-3">
                                     <label class="form-label" for="especialidades">Especialidades (Selecciona una o varias)</label>
                                     <div class="form-check check-especialidad">
@@ -186,13 +177,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="4">Siguiente</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
+                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
                                 </div>
                             </div>
 
                             <!-- Paso 4: Confirmación -->
-                            <div class="wizard-step" id="step4">
+                            <div class="wizard-step is-last" id="step3">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -202,8 +193,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <p><strong>Ciudad:</strong> <span id="resumen-ciudad"></span></p>
                                             <p><strong>Teléfono:</strong> <span id="resumen-telefono"></span></p>
                                             <p><strong>Correo:</strong> <span id="resumen-correo"></span></p>
-                                            <p><strong>Especialidades:</strong> <span id="resumen-especialidades"></span></p>
-                                            <p><strong>Horario:</strong> <span id="resumen-horario"></span></p>
+                                            <!-- <p><strong>Especialidades:</strong> <span id="resumen-especialidades"></span></p>
+                                            <p><strong>Horario:</strong> <span id="resumen-horario"></span></p> -->
                                         </div>
                                     </div>
                                 </div>
@@ -217,7 +208,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </select>
                                 </div>
                                 <div class="d-flex justify-content-between cont-botones">
-                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3">Anterior</button>
+                                    <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
                                     <button type="submit" class="btn boton">Actualizar Consultorio</button>
                                 </div>
                             </div>
@@ -227,77 +218,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
             </div>
         </div>
     </div>
-
-    <!-- SOLO EL JAVASCRIPT DEL WIZARD - SIN ESTILOS CSS -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navegación entre pasos
-            const nextButtons = document.querySelectorAll('.next-step');
-            const prevButtons = document.querySelectorAll('.prev-step');
-            const steps = document.querySelectorAll('.wizard-step');
-            const stepIndicators = document.querySelectorAll('.step');
-
-            nextButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = document.querySelector('.wizard-step.active');
-                    const nextStepId = this.getAttribute('data-next');
-                    const nextStep = document.getElementById('step' + nextStepId);
-
-                    // Actualizar indicadores de progreso
-                    updateStepIndicators(nextStepId);
-
-                    // Cambiar paso
-                    currentStep.classList.remove('active');
-                    nextStep.classList.add('active');
-
-                    // Si es el último paso, actualizar resumen
-                    if (nextStepId === '4') {
-                        updateSummary();
-                    }
-                });
-            });
-
-            prevButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = document.querySelector('.wizard-step.active');
-                    const prevStepId = this.getAttribute('data-prev');
-                    const prevStep = document.getElementById('step' + prevStepId);
-
-                    // Actualizar indicadores de progreso
-                    updateStepIndicators(prevStepId);
-
-                    // Cambiar paso
-                    currentStep.classList.remove('active');
-                    prevStep.classList.add('active');
-                });
-            });
-
-            function updateStepIndicators(activeStep) {
-                stepIndicators.forEach(indicator => {
-                    indicator.classList.remove('active');
-                    if (parseInt(indicator.getAttribute('data-step')) <= parseInt(activeStep)) {
-                        indicator.classList.add('active');
-                    }
-                });
-            }
-
-            function updateSummary() {
-                document.getElementById('resumen-nombre').textContent = document.getElementById('nombre').value || 'No ingresado';
-                document.getElementById('resumen-direccion').textContent = document.getElementById('direccion').value || 'No ingresado';
-                document.getElementById('resumen-ciudad').textContent = document.getElementById('ciudad').value || 'No ingresado';
-                document.getElementById('resumen-telefono').textContent = document.getElementById('telefono').value || 'No ingresado';
-                document.getElementById('resumen-correo').textContent = document.getElementById('correo_contacto').value || 'No ingresado';
-
-                // Especialidades como texto
-                document.getElementById('resumen-especialidades').textContent = document.getElementById('especialidades').value || 'No ingresado';
-
-                document.getElementById('resumen-horario').textContent = document.getElementById('horario_atencion').value || 'No ingresado';
-                document.getElementById('resumen-servicios').textContent = document.getElementById('servicios_adicionales').value || 'No ingresado';
-            }
-
-
-        });
-    </script>
 
     <?php
     include_once __DIR__ . '/../../layouts/footer_superadministrador.php';

@@ -68,7 +68,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <span class="step-number">2</span>
                                     <span class="step-label">Información Profesional</span>
                                 </div>
-            
+
                                 <div class="step" data-step="3">
                                     <span class="step-number">3</span>
                                     <span class="step-label">Confirmación</span>
@@ -81,7 +81,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 1: Información Personal -->
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
-                                    
+
                                     <div class="col-md-6 mb-3">
                                         <label for="nombres" class="form-label">Nombres</label>
                                         <input type="text" name="nombres" class="form-control" id="nombres" placeholder="Ingresa los nombres">
@@ -94,7 +94,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="row">
 
-                                <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                         <select name="tipoDocumento" class="form-select" id="tipo_documento">
                                             <!-- Los tipos de documento se cargarán desde la base de datos -->
@@ -112,7 +112,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <label for="numero_documento" class="form-label">Número de Documento</label>
                                         <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento">
                                     </div>
-                                   
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -124,11 +124,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <label for="telefono" class="form-label">Teléfono</label>
                                         <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico">
                                     </div>
-                                  
+
                                 </div>
 
                                 <div class="row">
-                                   
+
                                     <div class="mb-3 col-md-6">
                                         <label for="direccion" class="form-label">Dirección</label>
                                         <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección">
@@ -141,7 +141,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
                                 <div class="row">
-                                    
+
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento" class="form-label">Genero</label>
                                         <select name="genero" id="genero" class="form-select">
@@ -151,10 +151,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <option value="Otro">Otro</option>
                                         </select>
                                     </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label for="foto" class="form-label">Foto</label>
-                                            <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
-                                        </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="foto" class="form-label">Foto</label>
+                                        <input type="file" name="foto" class="form-control" id="foto" placeholder="Ingresa la dirección">
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -164,18 +164,18 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 2: Contacto -->
                             <div class="wizard-step" id="step2">
 
-                            <div class="row">
+                                <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="especialidad" class="form-label">Especialidad</label>
                                         <select name="especialidad" id="especialidad" class="form-control">
                                             <option value="">Selecciona una especialidad</option>
-                                            <?php if(!empty($especialidades)):?>
-                                                <?php foreach($especialidades as $especialidad):?>
+                                            <?php if (!empty($especialidades)): ?>
+                                                <?php foreach ($especialidades as $especialidad): ?>
                                                     <option value="<?= $especialidad['id'] ?>"><?= $especialidad['nombre'] ?></option>
-                                                <?php endforeach;?>
-                                            <?php else:?>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
                                                 <option value="">No hay especialidades registradas</option>
-                                            <?php endif;?>
+                                            <?php endif; ?>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -184,8 +184,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                 </div>
 
-                               
-                                
+
+
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
                                     <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
@@ -204,7 +204,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
                             <!-- Paso 4: Confirmación -->
-                            <div class="wizard-step" id="step3">
+                            <div class="wizard-step is-last" id="step3">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -235,81 +235,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             </div>
         </div>
     </div>
-
-    <!-- SOLO EL JAVASCRIPT DEL WIZARD - SIN ESTILOS CSS -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navegación entre pasos
-            const nextButtons = document.querySelectorAll('.next-step');
-            const prevButtons = document.querySelectorAll('.prev-step');
-            const steps = document.querySelectorAll('.wizard-step');
-            const stepIndicators = document.querySelectorAll('.step');
-
-            nextButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = document.querySelector('.wizard-step.active');
-                    const nextStepId = this.getAttribute('data-next');
-                    const nextStep = document.getElementById('step' + nextStepId);
-
-                    // Actualizar indicadores de progreso
-                    updateStepIndicators(nextStepId);
-
-                    // Cambiar paso
-                    currentStep.classList.remove('active');
-                    nextStep.classList.add('active');
-
-                    // Si es el último paso, actualizar resumen
-                    if (nextStepId === '4') {
-                        updateSummary();
-                    }
-                });
-            });
-
-            prevButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = document.querySelector('.wizard-step.active');
-                    const prevStepId = this.getAttribute('data-prev');
-                    const prevStep = document.getElementById('step' + prevStepId);
-
-                    // Actualizar indicadores de progreso
-                    updateStepIndicators(prevStepId);
-
-                    // Cambiar paso
-                    currentStep.classList.remove('active');
-                    prevStep.classList.add('active');
-                });
-            });
-
-            function updateStepIndicators(activeStep) {
-                stepIndicators.forEach(indicator => {
-                    indicator.classList.remove('active');
-                    if (parseInt(indicator.getAttribute('data-step')) <= parseInt(activeStep)) {
-                        indicator.classList.add('active');
-                    }
-                });
-            }
-
-            function updateSummary() {
-                // Información Personal
-                document.getElementById('resumen-tipo-documento').textContent = document.getElementById('tipo_documento').options[document.getElementById('tipo_documento').selectedIndex].text || 'No seleccionado';
-                document.getElementById('resumen-numero-documento').textContent = document.getElementById('numero_documento').value || 'No ingresado';
-                document.getElementById('resumen-nombres').textContent = document.getElementById('nombres').value || 'No ingresado';
-                document.getElementById('resumen-apellidos').textContent = document.getElementById('apellidos').value || 'No ingresado';
-                document.getElementById('resumen-fecha-nacimiento').textContent = document.getElementById('fecha_nacimiento').value || 'No ingresado';
-                document.getElementById('resumen-genero').textContent = document.getElementById('genero').options[document.getElementById('genero').selectedIndex].text || 'No seleccionado';
-
-                // Contacto
-                document.getElementById('resumen-telefono').textContent = document.getElementById('telefono').value || 'No ingresado';
-                document.getElementById('resumen-direccion').textContent = document.getElementById('direccion').value || 'No ingresado';
-                document.getElementById('resumen-foto').textContent = document.getElementById('foto').value || 'No ingresado';
-                document.getElementById('resumen-email').textContent = document.getElementById('email').value || 'No ingresado';
-
-                // Profesional
-                document.getElementById('resumen-especialidad').textContent = document.getElementById('especialidad').value || 'No ingresado';
-                document.getElementById('resumen-registro-profesional').textContent = document.getElementById('registro_profesional').value || 'No ingresado';
-            }
-        });
-    </script>
 
     <?php
     include_once __DIR__ . '/../../layouts/footer_administrador.php';

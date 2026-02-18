@@ -254,7 +254,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             </div>
 
                             <!-- Paso 5: Confirmación -->
-                            <div class="wizard-step" id="step5">
+                            <div class="wizard-step is-last" id="step5">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -272,7 +272,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <p><strong>Teléfono del administrador:</strong> <span id="resumen-telefono-administrador"></span></p>
                                             <p><strong>Tipo de documento del administrador:</strong> <span id="resumen-tipo-documento"></span></p>
                                             <p><strong>Número de documento del administrador:</strong> <span id="resumen-numero-documento"></span></p>
-                                            <p><strong>Correo del consultorio:</strong> <span id="resumen-correo"></span></p>
                                             <p><strong>Especialidades:</strong> <span id="resumen-especialidades"></span></p>
                                             <p><strong>Horario del consultorio:</strong> <span id="resumen-horario"></span></p>
                                         </div>
@@ -289,186 +288,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
             </div>
         </div>
     </div>
-
-    <!-- SOLO EL JAVASCRIPT DEL WIZARD - SIN ESTILOS CSS -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navegación entre pasos
-            const nextButtons = document.querySelectorAll('.next-step');
-            const prevButtons = document.querySelectorAll('.prev-step');
-            const steps = document.querySelectorAll('.wizard-step');
-            const stepIndicators = document.querySelectorAll('.step');
-
-            nextButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = document.querySelector('.wizard-step.active');
-                    const nextStepId = this.getAttribute('data-next');
-                    const nextStep = document.getElementById('step' + nextStepId);
-
-                    // Actualizar indicadores de progreso
-                    updateStepIndicators(nextStepId);
-
-                    // Cambiar paso
-                    currentStep.classList.remove('active');
-                    nextStep.classList.add('active');
-
-                    // Si es el último paso, actualizar resumen
-                    if (nextStepId === '4') {
-                        updateSummary();
-                    }
-                });
-            });
-
-            prevButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const currentStep = document.querySelector('.wizard-step.active');
-                    const prevStepId = this.getAttribute('data-prev');
-                    const prevStep = document.getElementById('step' + prevStepId);
-
-                    // Actualizar indicadores de progreso
-                    updateStepIndicators(prevStepId);
-
-                    // Cambiar paso
-                    currentStep.classList.remove('active');
-                    prevStep.classList.add('active');
-                });
-            });
-
-            function updateStepIndicators(activeStep) {
-                stepIndicators.forEach(indicator => {
-                    indicator.classList.remove('active');
-                    if (parseInt(indicator.getAttribute('data-step')) <= parseInt(activeStep)) {
-                        indicator.classList.add('active');
-                    }
-                });
-            }
-
-            function updateSummary() {
-
-                // --- Campos normales tipo texto ---
-                // Cada línea toma el valor del input y si está vacío muestra "No ingresado".
-
-                document.getElementById('resumen-nombre').textContent =
-                    document.getElementById('nombre').value || 'No ingresado';
-
-                document.getElementById('resumen-direccion').textContent =
-                    document.getElementById('direccion').value || 'No ingresado';
-
-                document.getElementById('resumen-foto').textContent =
-                    document.getElementById('foto').value || 'No ingresado';
-
-                document.getElementById('resumen-ciudad').textContent =
-                    document.getElementById('ciudad').value || 'No ingresado';
-
-                document.getElementById('resumen-telefono').textContent =
-                    document.getElementById('telefono').value || 'No ingresado';
-
-                document.getElementById('resumen-correo').textContent =
-                    document.getElementById('correo_contacto').value || 'No ingresado';
-
-                document.getElementById('resumen-correo-administrador').textContent =
-                    document.getElementById('correo_admin').value || 'No ingresado';
-
-                document.getElementById('resumen-nombre-administrador').textContent =
-                    document.getElementById('nombre_admin').value || 'No ingresado';
-
-                document.getElementById('resumen-apellidos-administrador').textContent =
-                    document.getElementById('apellido_admin').value || 'No ingresado';
-
-                document.getElementById('resumen-foto-administrador').textContent =
-                    document.getElementById('foto_admin').value || 'No ingresado';
-
-                document.getElementById('resumen-telefono-administrador').textContent =
-                    document.getElementById('telefono_admin').value || 'No ingresado';
-
-                // Actualiza el resumen del tipo de documento del administrador.
-                // Busca el elemento <span> donde se mostrará el resumen.
-                // Obtiene el texto de la opción seleccionada en el <select> de tipo de documento.
-                // Si no hay ninguna opción seleccionada, muestra "No ingresado".
-                // Esto permite que el usuario vea en el resumen el nombre legible del tipo de documento elegido.
-                document.getElementById('resumen-tipo-documento').textContent =
-                    document.getElementById('tipo_documento').options[
-                        document.getElementById('tipo_documento').selectedIndex
-                    ].text || 'No ingresado';
-
-                document.getElementById('resumen-numero-documento').textContent =
-                    document.getElementById('numero_documento_admin').value || 'No ingresado';
-
-
-                // ----------------------------------------------------------------------
-                // --- Especialidades seleccionadas (nueva lógica para los checkboxes) ---
-                // ----------------------------------------------------------------------
-
-                // PASO 1:
-                // Seleccionamos TODOS los checkboxes cuyo name sea "especialidades[]"
-                // y que estén marcados (checked).
-                //
-                // querySelectorAll devuelve un NodeList (no es array), por eso usamos "..."
-                // para convertirlo en un arreglo real.
-                const especialidadesSeleccionadas = [
-                        ...document.querySelectorAll('input[name="especialidades[]"]:checked')
-                    ]
-
-                    // PASO 2:
-                    // Con .map(cb => cb.value) obtenemos el valor "value" de cada checkbox marcado.
-                    // Esto convierte una lista de inputs en un arreglo de strings.
-                    // Ejemplo:
-                    // [inputCheckbox1, inputCheckbox2] → ["dermatologia", "urologia"]
-                    .map(cb => cb.value);
-
-                // PASO 3:
-                // Si hay al menos una especialidad marcada, las mostramos separadas por comas.
-                // Si no hay ninguna, mostramos "No ingresado".
-                document.getElementById('resumen-especialidades').textContent =
-                    especialidadesSeleccionadas.length > 0 ?
-                    especialidadesSeleccionadas.join(', ') // Ejemplo: "dermatologia, urologia"
-                    :
-                    'No ingresado';
-
-                // --- Horario de atención ---
-                /* 1. Seleccionamos todos los checkboxes de días que estén marcados
-                   querySelectorAll devuelve una NodeList → Array.from lo convierte en arreglo
-                   map extrae solo el valor de cada checkbox */
-                const diasSeleccionados = Array.from(
-                    document.querySelectorAll('input[name="dias[]"]:checked')
-                ).map(dia => dia.value);
-
-                /* 2. Obtenemos los valores de hora de apertura y hora de cierre desde los inputs correspondientes */
-                const horaApertura = document.getElementById('hora_apertura').value;
-                const horaCierre = document.getElementById('hora_cierre').value;
-
-                /* 3. Inicializamos la variable que contendrá el texto final del horario */
-                let textoHorario = '';
-
-                /* 4. Validamos si no se seleccionó ningún día */
-                if (diasSeleccionados.length === 0) {
-                    // Si no hay días seleccionados, mostramos "No ingresado"
-                    textoHorario = 'No ingresado';
-                } else {
-                    /* 5. Convertimos el arreglo de días seleccionados en un texto separado por comas
-                       Ejemplo: ["Lunes", "Miércoles"] → "Lunes, Miércoles" */
-                    const diasTexto = diasSeleccionados.join(', ');
-
-                    /* 6. Validamos si falta la hora de apertura o cierre */
-                    if (!horaApertura || !horaCierre) {
-                        // Si alguna de las horas no está completa, mostramos los días y un aviso
-                        textoHorario = `${diasTexto} (horas no completadas)`;
-                    } else {
-                        /* 7. Si todo está completo, armamos el texto final del horario
-                           Ejemplo: "Lunes, Miércoles • 08:00 - 17:00" */
-                        textoHorario = `${diasTexto} • ${horaApertura} - ${horaCierre}`;
-                    }
-                }
-
-                /* 8. Finalmente colocamos el texto generado en el span del resumen
-                       Esto actualiza dinámicamente lo que ve el usuario */
-                document.getElementById('resumen-horario').textContent = textoHorario;
-            }
-
-
-
-        });
-    </script>
 
     <?php
     include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
