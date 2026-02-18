@@ -53,17 +53,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if(!empty($pacienteConConsulta)):?>
-                                                <?php foreach($pacienteConConsulta as $paciente): ?>
-                                            <tr>
-                                                <td><?= $paciente['nombres'] . ' ' . $paciente['apellidos'] ?></td>
-                                                <td><?= $paciente['tipo_documento'] ?></td>
-                                                <td><?= $paciente['numero_documento'] ?></td>
-                                                <td><?= $paciente['ultima_consulta'] ?></td>
-                                                <td><a href="<?= BASE_URL ?>/especialista/historial_clinico?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-sm btn-info"
-                                                        title="Consultar historial clínico">
-                                                        <i class="fa-solid fa-magnifying-glass lupa"></i></a></td>
-                                            </tr>
+                                            <?php if (!empty($pacienteConConsulta)): ?>
+                                                <?php foreach ($pacienteConConsulta as $paciente): ?>
+                                                    <tr>
+                                                        <td><?= $paciente['nombres'] . ' ' . $paciente['apellidos'] ?></td>
+                                                        <td><?= $paciente['tipo_documento'] ?></td>
+                                                        <td><?= $paciente['numero_documento'] ?></td>
+                                                        <td><?= $paciente['ultima_consulta'] ?></td>
+                                                        <td><a href="<?= BASE_URL ?>/especialista/historial_clinico?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-sm btn-info"
+                                                                title="Consultar historial clínico">
+                                                                <i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                                </td>
+                                                    </tr>
                                                 <?php endforeach; ?>
                                             <?php else: ?>
                                                 <tr>

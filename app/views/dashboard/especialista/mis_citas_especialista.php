@@ -87,7 +87,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                             <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $cita['foto_paciente'] ?>" alt="<?= $cita['nombre_paciente'] ?>">
                                                         </div>
                                                         <div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </td>
@@ -104,20 +104,20 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                 <td>
                                                     <?php if ($cita['estado_cita'] === 'CONFIRMADA'): ?>
                                                         <span class="status-badge status status-aceptada">
-                                                        <?= $cita['estado_cita'] ?>
+                                                            <?= $cita['estado_cita'] ?>
                                                         </span>
                                                     <?php elseif ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                                    <span class="status-badge status status-pendiente">
-                                                        <?= $cita['estado_cita'] ?>
-                                                    </span>
-                                                    <?php elseif($cita['estado_cita'] === 'COMPLETADA'):?>
+                                                        <span class="status-badge status status-pendiente">
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php elseif ($cita['estado_cita'] === 'COMPLETADA'): ?>
                                                         <span class="status-badge status status-completada">
-                                                        <?= $cita['estado_cita'] ?>
-                                                    </span>
-                                                    <?php else:?>
-                                                    <span class="status-badge status status-cancelada">
-                                                        <?= $cita['estado_cita'] ?>
-                                                    </span>
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <span class="status-badge status status-cancelada">
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td class="text-center">
