@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #0c498a;
+    --blanco-color: #ffffff;
+    --gris-proyecto: #969696;
+    --tercer-azul: #1a73d3;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #f4f6f9;
+}
+
+.ticket-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: var(--blanco-color);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.ticket-container h1 {
+    color: var(--color-secundario);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 700;
+    color: var(--color-secundario);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border: 1px solid var(--gris-proyecto);
+    border-radius: 8px;
+}
+
+button {
+    background: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--tercer-azul);
+}
+
+.btn-ticket {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.btn-ticket a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 14px 22px;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        var(--azul-principal),
+        var(--verde-acento)
+    );
+
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+
+    box-shadow: 0 6px 15px var(--sombra);
+    transition: all 0.3s ease;
+}
+
+/* Hover */
+.btn-ticket a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px var(--sombra);
+    opacity: 0.95;
+}
+
+/* Click */
+.btn-ticket a:active {
+    transform: scale(0.97);
+}
+
+/* Opcional: foco accesible */
+.btn-ticket a:focus {
+    outline: 2px solid var(--verde-acento);
+    outline-offset: 3px;
+}

@@ -513,6 +513,18 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
+    case '/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/crear-ticket.php';
+        break;
+    
+    case '/crear-ticket-asistente':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket-asistente.php';
+        break;
+        
+    case '/crear-ticket-especialista':
+        require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
+        break;
+
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';
