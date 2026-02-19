@@ -73,7 +73,7 @@ if (!$id) {
             <span>Especialidades</span>
         </a>
 
-        <a class="nav-item" href="<?= BASE_URL ?>/admin/crear-ticket">
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/mis-tickets">
             <i class="bi bi-ticket-detailed"></i>
             <span>Soporte técnico</span>
         </a>

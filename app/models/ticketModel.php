@@ -33,13 +33,23 @@ class Ticket
         }
     }
 
-    // public function listarConUsuario() {
-    //     $sql = "SELECT t.*, u.email, u.nombre 
-    //             FROM tickets t
-    //             INNER JOIN usuarios u ON t.usuario_id = u.id
-    //             ORDER BY t.created_at DESC";
-    //     return $this->db->query($sql);
-    // }
+    public function listarConIdDeUsuario($id_usuario)
+    {
+        try {
+
+            $listar = "SELECT * FROM tickets WHERE id_usuario = :id_usuario";
+
+            $resultado = $this->conexion->prepare($listar);
+            $resultado->bindParam(':id_usuario', $id_usuario);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+
+        } catch (PDOException $e) {
+            error_log("Error en Ticket::listarConIdDeUsuario->" . $e->getMessage());
+            return [];
+        }
+    }
 
     // public function responder($id, $respuesta) {
     //     $sql = "UPDATE tickets SET respuesta=?, estado='respondido' WHERE id=?";

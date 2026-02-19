@@ -11,6 +11,10 @@ switch ($method) {
         crear();
         break;
 
+    case 'GET':
+        listarConIdDeUsuario();
+        break;
+
     default:
         # code...
         break;
@@ -106,6 +110,28 @@ function crear()
     }
     exit();
 }
+
+// CREAMOS LA FUNCIÓN QUE VA A LLENAR LA TABLA DE LOS TICKETS Y SE VA A EJECUTAR CUANDO EL REQUEST SEA GET
+function listarConIdDeUsuario() {
+
+    // NECESITAMOS EL ID DEL USUARIO LOGEADO ENTONCES VAMOS REANUDAR LA SESIÓN DE FORMA SEGURA
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // OBTENEMOS EL ID DEL USUARIO LOGEADO PARA LUEGO FILTRAR LOS TICKETS POR ESE ID
+    $id_usuario = $_SESSION['user']['id'];
+
+    // INSTANCIAMOS LA CLASE Ticket DEL MODELO ticketModel.php;
+    $objTicket = new Ticket();
+
+    // ACCEDEMOS AL MÉTODO O FUNCIÓN DEL MODELO QUE NECESITAMOS Y ENVIAMOS EL ID DEL USUARIO AL MODELO
+    $resultado = $objTicket->listarConIdDeUsuario($id_usuario);
+
+    // RETORNAMOS EL RESULTADO CON EL ARRAY DE DATOS A LA VISTA
+    return $resultado;
+}
+
 
 
 
