@@ -70,7 +70,7 @@ class Login
             $consulta->bindParam(':id', $user['id']);
             $consulta->execute();
             $perfil = $consulta->fetch();
-            
+
             // Si el usuario tiene rol de especialista (id_rol == 3)
             // Y además sí se encontró su registro en la tabla 'especialistas' ($perfil no es false ni está vacío),
             // entonces podemos tomar con seguridad el id del especialista desde ese perfil.
@@ -83,15 +83,14 @@ class Login
             // entonces podemos tomar con seguridad el id del especialista desde ese perfil.
             if ($user['id_rol'] === 1 && $perfil) {
                 $id_paciente = $perfil['id'];
-                $perfil_completo = $perfil['perfil_completo'];
             }
 
             if ($perfil) {
                 $nombres = $perfil['nombres'];
                 $apellidos = $perfil['apellidos'];
                 if (isset($perfil['id_consultorio'])) {
-                $id_consultorio = $perfil['id_consultorio']; // <-- LO GUARDA SOLO SI EXISTE
-            }
+                    $id_consultorio = $perfil['id_consultorio']; // <-- LO GUARDA SOLO SI EXISTE
+                }
             }
 
             // 3. Retornar todos los datos que necesitas

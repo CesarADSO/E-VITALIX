@@ -124,12 +124,12 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>
 
-                                                        <!-- <button
+                                                        <button
                                                             class="btn btn-sm btn-info btn-detalle ms-1"
                                                             data-cita-id="<?= $cita['id'] ?>"
                                                             title="Ver detalles">
                                                             <i class="bi bi-eye"></i>
-                                                        </button> -->
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -185,53 +185,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
         </div>
     </div>
 
-    <style>
-        /* Estilos personalizados para el módulo de Mis Citas */
-        .status-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-            text-transform: uppercase;
-        }
 
-        .status-pendiente {
-            background-color: #FFF3CD;
-            color: #856404;
-        }
-
-        .status-aceptada {
-            background-color: #D1ECF1;
-            color: #0C5460;
-        }
-
-        .status-cancelada {
-            background-color: #F8D7DA;
-            color: #721C24;
-        }
-
-        .status-rechazada {
-            background-color: #F5C6CB;
-            color: #721C24;
-        }
-
-        #tablaCitas tbody tr {
-            transition: background-color 0.2s;
-        }
-
-        #tablaCitas tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .btn-group .btn {
-            margin: 0 2px;
-        }
-
-        .card-header-primary {
-            background: linear-gradient(135deg, var(--color-primario) 0%, var(--tercer-azul) 100%);
-        }
-    </style>
 
 
 
