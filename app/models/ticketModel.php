@@ -66,6 +66,21 @@ class Ticket
         }
     }
 
+    public function cerrarTicket($id) {
+        try {
+            $cerrar = "UPDATE tickets SET estado = 'CERRADO' WHERE id = :id"; 
+            $resultado = $this->conexion->prepare($cerrar);
+            $resultado->bindParam(':id', $id);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Ticket::cerrarTicket->" . $e->getMessage());
+            return false;
+        }
+    }
+
     // public function responder($id, $respuesta) {
     //     $sql = "UPDATE tickets SET respuesta=?, estado='respondido' WHERE id=?";
     //     $stmt = $this->db->prepare($sql);

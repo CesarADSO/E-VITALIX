@@ -64,7 +64,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                     <!-- BOTONES -->
 
-                                        <a href="<?= BASE_URL ?>/admin/cerrar-ticket" class="btn btn-primary btn-custom">Cerrar Ticket</a>
+                                        <a href="<?= BASE_URL ?>/admin/cerrar-ticket?id=<?= $ticket['id'] ?>&accion=cerrar" class="btn btn-primary btn-custom">Cerrar Ticket</a>
                                 </form>
 
                             </div>

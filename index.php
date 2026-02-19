@@ -521,6 +521,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/consultar-ticket.php';
         break;
 
+    case '/admin/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
     case '/admin/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/administrador/crear-ticket.php';
         break;

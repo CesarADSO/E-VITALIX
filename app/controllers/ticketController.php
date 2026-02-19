@@ -12,10 +12,15 @@ switch ($method) {
         break;
 
     case 'GET':
-        // ACA PONEMOS LA CONDICIÓN DE QUE SI EXISTE UN ID TRAIDO POR METODO GET ENTONCES SE VA A EJECUTAR LA FUNCIÓN consultarTicket($_GET['id'])
-        if (isset($_GET['id'])) {
-            consultarTicketPorId($_GET['id']);
+        // DECLARAMOS LA VARIABLE ACCIÓN QUE VA A TRAER LA ACCIÓN QUE VENGA A TRAVÉS DE METODO GET PARA EJECUTAR UNA FUNCIÓN ESPECÍFICA
+        $accion = $_GET['accion'] ?? '';
+        if ($accion === 'cerrar') {
+            cerrarTicket($_GET['id']);
         }
+        // ACA PONEMOS LA CONDICIÓN DE QUE SI EXISTE UN ID TRAIDO POR METODO GET ENTONCES SE VA A EJECUTAR LA FUNCIÓN consultarTicket($_GET['id'])
+        elseif (isset($_GET['id'])) {
+            consultarTicketPorId($_GET['id']);
+        }  
         else {
             listarConIdDeUsuario();
         }
@@ -111,7 +116,7 @@ function crear()
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Creación de ticket exitosa', 'Espera a que el super administrador devuelva una respuesta', '/E-VITALIX/administrador/dashboard');
+        mostrarSweetAlert('success', 'Creación de ticket exitosa', 'Espera a que el super administrador devuelva una respuesta', '/E-VITALIX/admin/mis-tickets');
     } else {
         mostrarSweetAlert('error', 'Error al crear el ticket', 'No se pudo crear el ticket. Intenta nuevamente');
     }
@@ -149,6 +154,23 @@ function consultarTicketPorId($id) {
 
     // RETORNAMOS LOS DATOS
     return $resultado;
+}
+
+function cerrarTicket($id) {
+    // INSTANCIAMOS LA CLASE DEL MODELO
+    $objTicket = new Ticket();
+
+    // ACCEDEMOS AL METODO O FUNCIÓN DEL MODELO QUE NECESITAMOS
+    $resultado = $objTicket->cerrarTicket($id);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Ticket cerrado correctamente', 'Redirigiendo a mis tickets', '/E-VITALIX/admin/mis-tickets');
+    }
+    else {
+        mostrarSweetAlert('error', 'Error al cerrar el ticket', 'No se pudo cerrar el ticket. Intenta nuevamente');
+    }
+    exit();
 }
 
 
