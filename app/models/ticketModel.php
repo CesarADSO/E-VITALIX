@@ -51,19 +51,26 @@ class Ticket
         }
     }
 
+    public function consultarTicketPorId($id) {
+        try {
+            $consultarPorId = "SELECT * FROM tickets WHERE id = :id";
+            $resultado = $this->conexion->prepare($consultarPorId);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+
+            return $resultado->fetch();
+
+        } catch (PDOException $e) {
+            error_log("Error en Ticket::consultarTicketPorId->" . $e->getMessage());
+            return [];
+        }
+    }
+
     // public function responder($id, $respuesta) {
     //     $sql = "UPDATE tickets SET respuesta=?, estado='respondido' WHERE id=?";
     //     $stmt = $this->db->prepare($sql);
     //     return $stmt->execute([$respuesta, $id]);
     // }
 
-    // public function obtenerPorId($id) {
-    //     $sql = "SELECT t.*, u.email 
-    //             FROM tickets t
-    //             INNER JOIN usuarios u ON t.usuario_id = u.id
-    //             WHERE t.id=?";
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute([$id]);
-    //     return $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
+    
 }

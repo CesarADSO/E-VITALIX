@@ -70,7 +70,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                 </td>
                                                 <td><?= $ticket['created_at'] ?></td>
                                                 <td>
-                                                    <a href="<?= BASE_URL ?>/admin/consultar-ticket" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                    <a href="<?= BASE_URL ?>/admin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
                                                     <a href="<?= BASE_URL ?>/admin/actualizar-ticket" class="btn btn-sm btn-danger" title="Editar ticket"><i class="fa-solid fa-pen-to-square editar"></i></a>
                                                 </td>
                                             </tr>

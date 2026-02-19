@@ -12,7 +12,14 @@ switch ($method) {
         break;
 
     case 'GET':
-        listarConIdDeUsuario();
+        // ACA PONEMOS LA CONDICIÓN DE QUE SI EXISTE UN ID TRAIDO POR METODO GET ENTONCES SE VA A EJECUTAR LA FUNCIÓN consultarTicket($_GET['id'])
+        if (isset($_GET['id'])) {
+            consultarTicketPorId($_GET['id']);
+        }
+        else {
+            listarConIdDeUsuario();
+        }
+        
         break;
 
     default:
@@ -132,7 +139,17 @@ function listarConIdDeUsuario() {
     return $resultado;
 }
 
+// CREAMOS LA FUNCIÓN QUE VA A LLENAR LA VISTA DONDE SE VA A PODER VISUALIZAR TODO EL TICKET DE SOPORTE INCLUYENDO LA RESPUESTA
+function consultarTicketPorId($id) {
+    // INSTANCIAMOS LA CLASE Ticket DEL MODELO ticketModel.php;
+    $objTicket = new Ticket();
 
+    // ACCEDEMOS AL MÉTODO QUE NECESITEMOS DE DICHA CLASE
+    $resultado = $objTicket->consultarTicketPorId($id);
+
+    // RETORNAMOS LOS DATOS
+    return $resultado;
+}
 
 
 // require_once __DIR__ . '/../views/dashboard/administrador/crear-ticket.php';
