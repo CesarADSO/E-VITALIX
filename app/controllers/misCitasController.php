@@ -13,6 +13,9 @@ switch ($method) {
         elseif ($accion === 'cancelar') {
             cancelarCita($_GET['id']);
         }
+        elseif (isset($_GET['id_cita']) && isset($_GET['id_paciente'])) {
+            obtenerIdCitaYPaciente($_GET['id_cita'], $_GET['id_paciente']);
+        }
         break;
     
     default:
@@ -215,4 +218,14 @@ function cancelarCita($id) {
     else {
         mostrarSweetAlert('error', 'Error al cancelar la cita', 'No se pudo cancelar la cita', '/E-VITALIX/especialista/mis-citas');
     }
+}
+
+function obtenerIdCitaYPaciente($id_cita, $id_paciente) {
+    // INSTANCIAMOS EL MODELO
+    $objCita = new CitasModel();
+
+    // ACCEDEMOS AL METHOD DE LA CLASE
+    $resultado = $objCita->obtenerIdCita($id_cita, $id_paciente);
+
+    return $resultado;
 }

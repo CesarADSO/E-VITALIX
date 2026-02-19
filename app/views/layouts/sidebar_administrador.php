@@ -67,6 +67,11 @@ if (!$id) {
             <i class="fa-solid fa-stethoscope"></i>
             <span>Servicios</span>
         </a>
+
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/especialidades">
+            <i class="fa-solid fa-book-medical"></i>
+            <span>Especialidades</span>
+        </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">
