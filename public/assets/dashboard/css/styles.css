@@ -1104,5 +1104,52 @@
     .main-content h3 {
         font-size: var(--titulo-bloque);
         font-weight: 800;
-        color: var(--color-secundario);
+        color: var(--color-primario);
     }
+
+    .btn-ticket {
+        display: inline-block;
+        margin-top: 20px;
+    }
+    
+    .btn-ticket a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    
+        padding: 14px 22px;
+        border-radius: 12px;
+    
+        background: linear-gradient(
+            135deg,
+            var(--azul-principal),
+            var(--verde-acento)
+        );
+    
+        color: var(--color-primario);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+    
+        box-shadow: 0 6px 15px var(--sombra);
+        transition: all 0.3s ease;
+    }
+    
+    /* Hover */
+    .btn-ticket a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px var(--sombra);
+        opacity: 0.95;
+    }
+    
+    /* Click */
+    .btn-ticket a:active {
+        transform: scale(0.97);
+    }
+    
+    /* Opcional: foco accesible */
+    .btn-ticket a:focus {
+        outline: 2px solid var(--verde-acento);
+        outline-offset: 3px;
+    }
+    
