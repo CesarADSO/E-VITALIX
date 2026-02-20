@@ -40,11 +40,15 @@ $perfil = mostrarPerfilEspecialista($id);
         </a>
         <a class="nav-item" href="<?= BASE_URL ?>/especialista/slots">
             <i class="fa-solid fa-list"></i>
-            <span>Slots de agenda</span>
+            <span>Espacios de agendamiento</span>
         </a>
         <a class="nav-item" href="<?= BASE_URL ?>/especialista/mis-citas">
             <i class="fa-regular fa-calendar"></i>
             <span>Mis citas</span>
+        </a>
+         <a class="nav-item" href="<?= BASE_URL ?>/especialista/pacientes-atendidos">
+            <i class="fa-solid fa-person"></i>
+            <span>Pacientes atendidos</span>
         </a>
     </nav>
 

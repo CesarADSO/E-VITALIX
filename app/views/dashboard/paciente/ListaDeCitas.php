@@ -38,49 +38,67 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
             <div class="bg-white rounded shadow-sm p-4 ">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle table-pacientes table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Especialista</th>
-                            <th>Consultorio</th>
-                            <th>Estado</th>
-                            <th style="width: 80px;">Acciones</th>
-                        </tr>
-                    </thead>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Especialista</th>
+                                <th>Consultorio</th>
+                                <th>Estado</th>
+                                <th style="width: 80px;">Acciones</th>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <?php if (!empty($citas)) : ?>
-                            <?php foreach ($citas as $cita): ?>
+                        <tbody>
+                            <?php if (!empty($citas)) : ?>
+                                <?php foreach ($citas as $cita): ?>
+                                    <tr>
+                                        <td><?= date('d/m/Y', strtotime($cita['fecha'])) ?></td>
+                                        <td><?= substr($cita['hora_inicio'], 0, 5) ?> - <?= substr($cita['hora_fin'], 0, 5) ?></td>
+                                        <td><?= $cita['nombres'] ?> <?= $cita['apellidos'] ?></td>
+                                        <td><?= $cita['nombre_consultorio'] ?></td>
+                                        <td>
+                                            <?php if($cita['estado_cita'] === 'COMPLETADA'):?>
+                                            <span class="status-badge status status-completada">
+                                                <?= $cita['estado_cita'] ?>
+                                            </span>
+                                            <?php elseif($cita['estado_cita'] === 'PENDIENTE'):?>
+                                            <span class="status-badge status status-pendiente">
+                                                <?= $cita['estado_cita'] ?>
+                                            </span>
+                                            <?php elseif($cita['estado_cita'] === 'CONFIRMADA'):?>
+                                            <span class="status-badge status status-aceptada">
+                                                <?= $cita['estado_cita'] ?>
+                                            </span>
+                                            <?php else:?>
+                                            <span class="status-badge status status-cancelada">
+                                                <?= $cita['estado_cita'] ?>
+                                            </span>
+                                            <?php endif;?>
+                                        </td>
+                                        <td>
+                                            <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/paciente/reagendarCita?id=<?= $cita['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/paciente/cancelarCita?id=<?= $cita['id'] ?>&accion=cancelar"><i class="fa-solid fa-x"></i></a>
+                                            <?php else : ?>
+                                                <span class="text-muted small">Sin acciones disponibles</span>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+
+                                <?php endforeach; ?>
+                            <?php else : ?>
                                 <tr>
-                                    <td><?= date('d/m/Y', strtotime($cita['fecha'])) ?></td>
-                                    <td><?= substr($cita['hora_inicio'], 0, 5) ?> - <?= substr($cita['hora_fin'], 0, 5) ?></td>
-                                    <td><?= $cita['nombres'] ?> <?= $cita['apellidos'] ?></td>
-                                    <td><?= $cita['nombre_consultorio'] ?></td>
-                                    <td><?= $cita['estado_cita'] ?></td>
-                                    <td>
-                                        <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                        <a href="<?= BASE_URL ?>/paciente/reagendarCita?id=<?= $cita['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="<?= BASE_URL ?>/paciente/cancelarCita?id=<?= $cita['id'] ?>&accion=cancelar"><i class="fa-solid fa-x"></i></a>
-                                        <?php else :?>
-                                            <span class="text-muted small">Sin acciones disponibles</span>
-                                        <?php endif; ?>
+                                    <td colspan="6" class="text-center text-muted">
+                                        ¡No hay citas agendadas!
                                     </td>
                                 </tr>
-
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            <tr>
-                                <td colspan="6" class="text-center text-muted">
-                                    ¡No hay citas agendadas!
-                                </td>
-                            </tr>
-                        <?php endif; ?>
+                            <?php endif; ?>
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 

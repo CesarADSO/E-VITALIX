@@ -21,7 +21,8 @@ class CitasModel
         try {
             $consulta = "
                 SELECT 
-                    c.id,
+                    p.id AS id_paciente,
+                    c.id AS id_cita,
                     a.fecha,
                     a.hora_inicio,
                     a.hora_fin,
@@ -31,24 +32,30 @@ class CitasModel
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
                     p.telefono AS telefono_paciente,
                     u.email AS email_paciente,
+                    
                     s.nombre AS servicio_nombre,
                     s.duracion_minutos AS servicio_duracion,
+                    
                     s.precio AS servicio_precio
                 FROM citas c
                 INNER JOIN pacientes p ON c.id_paciente = p.id
                 INNER JOIN usuarios u ON p.id_usuario = u.id
+                
                 INNER JOIN servicios s ON c.id_servicio = s.id
                 INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
                 WHERE a.id_especialista = :id_especialista
+                
                 ORDER BY 
                     CASE 
                         WHEN c.estado_cita = 'PENDIENTE' THEN 1
                         WHEN c.estado_cita = 'CONFIRMADA' THEN 2
                         WHEN c.estado_cita = 'CANCELADA' THEN 3
+                        
                         ELSE 4
                     END,
                     a.fecha DESC, 
                     a.hora_inicio DESC
+                    
             ";
 
             $resultado = $this->conexion->prepare($consulta);
@@ -59,6 +66,22 @@ class CitasModel
         } catch (PDOException $e) {
             error_log("Error al obtener citas: " . $e->getMessage());
             return [];
+        }
+    }
+
+    public function obtenerIdCita ($id_cita, $id_paciente) {
+        try {
+            $obtenerIdCitaYPaciente = "SELECT pacientes.id AS id_paciente, citas.id AS id_cita FROM citas INNER JOIN pacientes ON citas.id_paciente = pacientes.id WHERE citas.id = :id_cita AND pacientes.id = :id_paciente";
+            $resultado = $this->conexion->prepare($obtenerIdCitaYPaciente);
+            $resultado->bindParam(':id_cita', $id_cita);
+            $resultado->bindParam(':id_paciente', $id_paciente);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        
+             } catch (PDOException $e) {
+            error_log("Error al obtener ID de cita: " . $e->getMessage());
+            return null;
         }
     }
 

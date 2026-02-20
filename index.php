@@ -189,9 +189,9 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/especialistaController.php';
         break;
 
-    case '/admin/eliminar-especialista':
-        require BASE_PATH . '/app/controllers/especialistaController.php';
-        break;
+    case '/admin/consultar-especialista':
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar-especialista.php';
+        
 
     case '/especialista/calendario':
         require BASE_PATH . '/app/views/dashboard/especialista/calendario_especialista.php';
@@ -252,6 +252,30 @@ switch ($request) {
 
     case '/admin/consultar-servicio':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar-servicio.php';
+        break;
+
+    case '/admin/especialidades';
+        require BASE_PATH . '/app/views/dashboard/administrador/especialidades.php';
+        break;
+
+    case '/admin/registrar-especialidad';
+        require BASE_PATH . '/app/views/dashboard/administrador/registrar-especialidad.php';
+        break;
+    
+    case '/admin/guardar-especialidad';
+        require BASE_PATH . '/app/controllers/especialidadController.php';
+        break;
+
+    case '/admin/cambiar-estado-especialidad';
+        require BASE_PATH . '/app/controllers/especialidadController.php';
+        break;
+
+    case '/admin/editar-especialidad';
+        require BASE_PATH . '/app/views/dashboard/administrador/editar-especialidad.php';
+        break;
+
+    case '/admin/guardar-cambios-especialidad';
+        require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
     // case '/admin/disponibilidades':
     //     require BASE_PATH . '/app/views/dashboard/administrador/disponibilidades_medicas.php';
@@ -393,10 +417,20 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/misCitasController.php';
         break;
 
-    // NUEVA RUTA: Procesar actualización de estado de cita (AJAX)
-    case '/especialista/citas/estado':
-        require BASE_PATH . '/app/controllers/misCitasController.php';
-        actualizarEstadoCita();
+    case '/especialista/iniciar-consulta':
+        require BASE_PATH . '/app/views/dashboard/especialista/registrar_consulta.php';
+        break;
+
+    case '/especialista/guardar-consulta':
+        require BASE_PATH . '/app/controllers/consultaMedicaController.php';
+        break;
+
+    case '/especialista/pacientes-atendidos':
+        require BASE_PATH . '/app/views/dashboard/especialista/pacientes_atendidos.php';
+        break;
+
+    case '/especialista/historial_clinico':
+        require BASE_PATH . '/app/views/dashboard/especialista/historial_clinico.php';
         break;
 
     // ASISTENTE INTERFACES
@@ -468,7 +502,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
-    case '/debug_citas.php';
+    case '/debug_citas.php':
         require BASE_PATH . '/debug_citas_mejorado.php';
 
     case '/paciente/cambiar-contrasena':
@@ -477,6 +511,18 @@ switch ($request) {
 
     case '/paciente/guardar-configuracion-usuario':
         require BASE_PATH . '/app/controllers/perfilController.php';
+        break;
+
+    case '/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/crear-ticket.php';
+        break;
+    
+    case '/crear-ticket-asistente':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket-asistente.php';
+        break;
+        
+    case '/crear-ticket-especialista':
+        require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
         break;
 
     default:
