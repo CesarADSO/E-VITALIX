@@ -63,6 +63,11 @@ $perfil = mostrarPerfilSuperAdmin($id);
             <i class="fa-solid fa-building-user"></i>
             <span>Asignación de administradores</span>
         </a> -->
+
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/tickets-usuarios">
+            <i class="bi bi-ticket-detailed"></i>
+            <span>Tickets de soporte</span>
+        </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">

@@ -42,7 +42,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (<?= count($especialistas) ?>)
                             </button>
                         </div>
-                        <a href="/E-VITALIX/admin/registrar-especialista" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
+                        <a href="/E-VITALIX/admin/registrar-especialista" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-plus-lg"></i> AÑADIR</a>
                     </div>
 
                     <!-- Especialistas Table -->

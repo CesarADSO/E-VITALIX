@@ -36,10 +36,19 @@ function registrarConsultaMedica()
     $sintomas = $_POST['sintomas'] ?? '';
     $diagnostico = $_POST['diagnostico'] ?? '';
     $tratamiento = $_POST['tratamiento'] ?? '';
+    $presion_sistolica = $_POST['presion_sistolica'] ?? '';
+    $presion_diastolica = $_POST['presion_diastolica'] ?? '';
+    $temperatura = $_POST['temperatura'] ?? '';
+    $frecuencia_cardiaca = $_POST['frecuencia_cardiaca'] ?? '';
+    $frecuencia_respiratoria = $_POST['frecuencia_respiratoria'] ?? '';
     $observaciones = $_POST['observaciones'] ?? '';
+    $medicamento = $_POST['medicamento'] ?? '';
+    $dosis = $_POST['dosis'] ?? '';
+    $frecuencia = $_POST['frecuencia'] ?? '';
+    $duracion = $_POST['duracion'] ?? '';
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($motivo_consulta) || empty($sintomas) || empty($diagnostico) || empty($tratamiento)) {
+    if (empty($motivo_consulta) || empty($sintomas) || empty($diagnostico) || empty($tratamiento) || empty($presion_sistolica) || empty($presion_diastolica) || empty($temperatura) || empty($frecuencia_cardiaca) || empty($frecuencia_respiratoria)) {
         mostrarSweetAlert('error', 'Campos vacios','Por favor llene todos los campos');
         exit();
     }
@@ -65,7 +74,16 @@ function registrarConsultaMedica()
         'sintomas' => $sintomas,
         'diagnostico' => $diagnostico,
         'tratamiento' => $tratamiento,
-        'observaciones' => $observaciones
+        'presion_sistolica' => $presion_sistolica,
+        'presion_diastolica' => $presion_diastolica,
+        'temperatura' => $temperatura,
+        'frecuencia_cardiaca' => $frecuencia_cardiaca,
+        'frecuencia_respiratoria' => $frecuencia_respiratoria,
+        'observaciones' => $observaciones,
+        'medicamento' => $medicamento,
+        'dosis' => $dosis,
+        'frecuencia' => $frecuencia,
+        'duracion' => $duracion
     ];
 
     // ACCEDEMOS AL MÉTODO DEL MODELO

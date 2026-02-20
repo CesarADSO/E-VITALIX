@@ -101,7 +101,7 @@ function registrarSuperAdministrador()
         // MOVEMOS EL ARCHIVO AL DESTINO
         move_uploaded_file($file['tmp_name'], $destino);
     } else {
-        // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+        $ruta_foto = 'default-superadministrador.jpg';
     }
 
 

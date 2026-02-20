@@ -38,8 +38,8 @@ if (!$id) {
 
     <div class="user-profile">
         <div class="user-avatar">
-            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" 
-                 alt="<?= $perfil['admin_nombre'] ?>">
+            <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>"
+                alt="<?= $perfil['admin_nombre'] ?>">
         </div>
         <div class="user-info">
             <h6><?= $perfil['admin_nombre'] ?></h6>
@@ -72,6 +72,12 @@ if (!$id) {
             <i class="fa-solid fa-book-medical"></i>
             <span>Especialidades</span>
         </a>
+
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/mis-tickets">
+            <i class="bi bi-ticket-detailed"></i>
+            <span>Soporte técnico</span>
+        </a>
+
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">
