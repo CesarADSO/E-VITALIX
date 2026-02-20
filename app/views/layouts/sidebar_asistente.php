@@ -30,6 +30,10 @@
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
         </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/asistente/mis-tickets">
+            <i class="bi bi-ticket-detailed"></i>
+            <span>Soporte técnico</span>
+        </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">

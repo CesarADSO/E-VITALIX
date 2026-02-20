@@ -569,11 +569,70 @@ switch ($request) {
     case '/asistente/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
         break;
+
+    case '/especialista/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/especialista/mis-tickets.php';
+        break;
         
     case '/especialista/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket.php';
         break;
 
+    case '/especialista/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+    
+    case '/especialista/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/especialista/consultar-ticket.php';
+        break;
+
+     case '/especialista/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/especialista/actualizar-ticket.php';
+        break;
+
+    case '/especialista/guardar-cambios-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/especialista/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/asistente/mis-tickets.php';
+        break;
+
+    case '/asistente/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
+        break;
+
+    case '/asistente/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/consultar-ticket.php';
+        break;
+
+    case '/asistente/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/actualizar-ticket.php';
+        break;
+
+    case '/asistente/guardar-cambios-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/paciente/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/paciente/mis-tickets.php';
+        break;
+
+    case '/asistente/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
+        break;
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';
