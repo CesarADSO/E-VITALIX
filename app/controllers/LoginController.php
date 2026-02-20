@@ -55,8 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         case 1:
             if ($resultado['perfil_completo'] === 0) {
                 $redirecUrl = '/E-VITALIX/paciente/completar-perfil';
-            }
-            else {
+            } else {
                 $redirecUrl = '/E-VITALIX/paciente/dashboard';
             }
             $mensaje = 'Bienvenido Paciente';

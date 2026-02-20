@@ -193,6 +193,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/consultar-especialista.php';
         
 
+    case '/especialista/calendario':
+        require BASE_PATH . '/app/views/dashboard/especialista/calendario_especialista.php';
+        break;
+
+    case '/especialista/calendario-api':
+        require BASE_PATH . '/app/controllers/calendarioController.php';
+        break;
+
     case '/admin/generar-reporte':
         require BASE_PATH . '/app/controllers/reportesPdfControllerAdministrador.php';
         reportesPdfController();
