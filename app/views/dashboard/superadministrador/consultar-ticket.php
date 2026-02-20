@@ -1,5 +1,5 @@
 <?php
-require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 require_once BASE_PATH . '/app/controllers/ticketController.php';
 
 // EN UNA VARIABLE ID GUARDAMOS LA VARIABLE QUE VIENE POR METHOD GET DESDE LA TABLA DE MIS TICKETS
@@ -10,7 +10,7 @@ $ticket = consultarTicketPorId($id);
 ?>
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 
@@ -20,7 +20,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
             <!-- SIDEBAR -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <div class="col-lg-10 col-md-9 main-content">
@@ -28,7 +28,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div class="ticketsSection">
                     <!-- TOP BAR -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <div class="container-fluid ticket-wrapper d-flex align-items-center justify-content-center">
@@ -58,17 +58,17 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <!-- DESCRIPCIÓN -->
                                     <div class="mb-3">
                                         <label class="form-label fw-semibold">Respuesta</label>
-                                        <?php if ($ticket['respuesta'] !== null): ?>
-                                            <textarea rows="4" class="form-control"
-                                                disabled><?= $ticket['respuesta'] ?></textarea>
+                                        <?php if($ticket['respuesta'] !== null ):?>
+                                        <textarea rows="4" class="form-control"
+                                            disabled><?= $ticket['respuesta'] ?></textarea>
                                         <?php else: ?>
-                                            <textarea rows="4" class="form-control" disabled>Su ticket aún no ha sido respondido por el super administrador.</textarea>
-                                        <?php endif; ?>
+                                            <textarea rows="4" class="form-control" disabled>Aún no has respondido este ticket.</textarea>
+                                        <?php endif;?>
                                     </div>
 
                                     <!-- BOTONES -->
 
-                                    <a href="<?= BASE_URL ?>/admin/mis-tickets" class="btn btn-outline-secondary btn-custom"> ← Regresar</a>
+                                    <a href="<?= BASE_URL ?>/superadmin/tickets-usuarios" class="btn btn-outline-secondary btn-custom"> ← Regresar</a>
                                 </form>
 
                             </div>
@@ -85,5 +85,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         </div>
     </div>
 <?php 
-    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
 ?>

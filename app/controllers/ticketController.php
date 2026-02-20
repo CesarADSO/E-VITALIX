@@ -8,7 +8,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 // ACÁ VALIDAMOS QUE SI LA REQUEST QUE VIENE EN LA VARIABLE ES TAL PUES QUE HAGA TAL COSA
 switch ($method) {
     case 'POST':
-        crear();
+        $accion = $_POST['accion'] ?? '';
+        if ($accion === 'actualizar') {
+            actualizarTicket();
+        }
+        elseif ($accion === 'responder') {
+            responderTicket();
+        }
+        else {
+            crear();
+        }
         break;
 
     case 'GET':
@@ -23,12 +32,9 @@ switch ($method) {
         }  
         else {
             listarConIdDeUsuario();
+            listarTodosParaSuperAdmin();
         }
         
-        break;
-
-    default:
-        # code...
         break;
 }
 
@@ -144,6 +150,17 @@ function listarConIdDeUsuario() {
     return $resultado;
 }
 
+function listarTodosParaSuperAdmin() {
+    // INSTANCIAMOS LA CLASE Ticket DEL MODELO ticketModel.php;
+    $objTicket = new Ticket();
+
+    // ACCEDEMOS AL MÉTODO O FUNCIÓN DEL MODELO QUE NECESITAMOS
+    $resultado = $objTicket->listarTodosParaSuperAdmin();
+
+    // RETORNAMOS EL RESULTADO CON EL ARRAY DE DATOS A LA VISTA
+    return $resultado;
+}
+
 // CREAMOS LA FUNCIÓN QUE VA A LLENAR LA VISTA DONDE SE VA A PODER VISUALIZAR TODO EL TICKET DE SOPORTE INCLUYENDO LA RESPUESTA
 function consultarTicketPorId($id) {
     // INSTANCIAMOS LA CLASE Ticket DEL MODELO ticketModel.php;
@@ -154,6 +171,115 @@ function consultarTicketPorId($id) {
 
     // RETORNAMOS LOS DATOS
     return $resultado;
+}
+
+function actualizarTicket() {
+    // GUARDAMOS EN VARIABLES LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS DEL FORMULARIO
+    $id = $_POST['id'];
+    $titulo = $_POST['titulo'];
+    $descripcion = $_POST['descripcion'];
+
+    // VALIDAMOS LOS CAMPOS QUE SON OBLIGATORIOS
+    if (empty($id) || empty($titulo) || empty($descripcion)) {
+        mostrarSweetAlert('error', 'Campos vacios', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    // DECLARAMOS UNA VARIABLE VACÍA QUE DESPUES CONTENDRÁ LA IMAGEN QUE SE ENVIARA DESDE EL TICKET DE SOPORTE
+    $ruta_foto = null;
+
+    // VALIDAMOS SI SE ENVIÓ O NO LA FOTO DESDE EL FORMULARIO
+    // **** SI EL ADMINISTRADOR NO REGISTRÓ UNA FOTO DEJAR UNA IMAGEN POR DEFECTO
+    if (!empty($_FILES['foto']['name'])) {
+        
+        $file = $_FILES['foto'];
+
+        // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        // DEFINIMOS LAS EXTENSIONES PERMITIDAS
+        $permitidas = ['png', 'jpg', 'jpeg'];
+
+        // VALIDAMOS QUE LA EXTENSIÓN DE LA IMAGEN CARGADA ESTÉ DENTRO DE LAS PERMITIDAS
+        if (!in_array($ext, $permitidas)) {
+            mostrarSweetAlert('error', 'Extensión no permitida', 'Señor usuario cargue una extensión que sea permitida');
+            exit();
+        }
+
+        // VALIDAR QUE EL TAMAÑO DE LA IMAGEN SEA MAX DE 2MB
+        if ($file['size'] > 2 * 1024 * 1024) {
+            mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2 mb');
+            exit();
+        }
+
+        // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
+        $ruta_foto = uniqid('ticket_') . '.' . $ext;
+
+        // DEFINIMOS EL DESTINO DONDE MOVEREMOS EL ARCHIVO
+        $destino = BASE_PATH . '/app/public/uploads/tickets/' . $ruta_foto;
+
+        // MOVEMOS EL ARCHIVO A DESTINO
+        move_uploaded_file($file['tmp_name'], $destino);
+    }
+    else {
+        // AGREGAR LA LÓGICA DE LA IMAGEN POR DEFAULT
+        $ruta_foto = 'default-administrador.jpg';
+    }
+
+    // INSTANCIAMOS LA CLASE Ticket DEL MODELO ticketModel.php
+    $objTicket = new Ticket();
+
+    // EN EL ARREGLO DATA INSERTAMOS LOS DATOS QUE SE VAN A ENVIAR
+    $data = [
+        'id' => $id,
+        'titulo' => $titulo,
+        'descripcion' => $descripcion,
+        'foto' => $ruta_foto
+    ];
+
+    // ACCEDEMOS AL MÉTODO O FUNCIÓN DE LA CLASE Ticket
+    $resultado = $objTicket->actualizarTicket($data);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Actualización de ticket exitosa', 'El ticket se ha actualizado correctamente', '/E-VITALIX/admin/mis-tickets');
+    } else {
+        mostrarSweetAlert('error', 'Error al actualizar el ticket', 'No se pudo actualizar el ticket. Intenta nuevamente');
+    }
+    exit();
+
+}
+
+function responderTicket() {
+    // GUARDAMOS EN VARIABLES LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS DEL FORMULARIO
+    $id = $_POST['id'];
+    $respuesta = $_POST['respuesta'];
+
+    // VALIDAMOS LOS CAMPOS QUE SON OBLIGATORIOS
+    if (empty($id) || empty($respuesta)) {
+        mostrarSweetAlert('error', 'Campos vacios', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    // INSTANCIAMOS LA CLASE Ticket DEL MODELO ticketModel.php
+    $objTicket = new Ticket();
+
+    // EN EL ARREGLO DATA INSERTAMOS LOS DATOS QUE SE VAN A ENVIAR
+    $data = [
+        'id' => $id,
+        'respuesta' => $respuesta
+    ];
+
+    // ACCEDEMOS AL MÉTODO O FUNCIÓN DE LA CLASE Ticket
+    $resultado = $objTicket->responderTicket($data);
+
+    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Respuesta enviada con éxito', 'El ticket se ha respondido correctamente', '/E-VITALIX/superadmin/tickets-usuarios');
+    } else {
+        mostrarSweetAlert('error', 'Error al responder el ticket', 'No se pudo responder el ticket. Intenta nuevamente');
+    }
+    exit();
 }
 
 function cerrarTicket($id) {

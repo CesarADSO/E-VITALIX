@@ -1,6 +1,10 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_administrador.php';
-   
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/controllers/ticketController.php';
+
+$id = $_GET['id'];
+
+$ticket = consultarTicketPorId($id);
 
 ?>
 
@@ -9,6 +13,7 @@
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 ?>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -32,26 +37,29 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <div class="container-fluid ticket-wrapper d-flex align-items-center justify-content-center">
                         <div class="col-lg-7 col-md-9">
-                             <div class="card ticket-card p-4 bg-white">
+                            <div class="card ticket-card p-4 bg-white">
 
                                 <div class="text-center mb-4">
-                                    <h2 class="ticket-title">🎫 Soporte E-VITALIX</h2>
-                                    <p class="text-muted">Este espacio está destinado para reportar errores, fallas o inconvenientes relacionados con el funcionamiento del aplicativo. Envíanos tu inconveniente y nuestro equipo lo solucionará pronto..</p>
+                                    <h2 class="ticket-title">Actualizar ticket</h2>
+                                    <p class="text-muted">Acá podrá actualizar los datos del ticket seleccionado.</p>
                                 </div>
 
-                                <form action="<?= BASE_URL ?>/admin/guardar-ticket" method="POST" enctype="multipart/form-data">
+                                <form action="<?= BASE_URL ?>/admin/guardar-cambios-ticket" method="POST" enctype="multipart/form-data">
+
+                                        <input type="hidden" name="id" value="<?= $ticket['id'] ?>">
+                                        <input type="hidden" name="accion" value="actualizar">
 
                                     <!-- TÍTULO -->
                                     <div class="mb-3">
                                         <label class="form-label fw-semibold">Título del Ticket</label>
-                                        <input type="text" name="titulo" class="form-control" placeholder="Ej: Error al iniciar sesión" required>
+                                        <input type="text" name="titulo" class="form-control" value="<?= $ticket['titulo'] ?>" placeholder="Ej: Error al iniciar sesión" required>
                                     </div>
 
                                     <!-- DESCRIPCIÓN -->
                                     <div class="mb-3">
                                         <label class="form-label fw-semibold">Descripción</label>
                                         <textarea name="descripcion" rows="4" class="form-control"
-                                            placeholder="Describe detalladamente el problema..." required></textarea>
+                                            placeholder="Describe detalladamente el problema..." required><?= $ticket['descripcion'] ?></textarea>
                                     </div>
 
                                     <!-- IMAGEN -->
@@ -67,7 +75,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         </a>
 
                                         <button type="submit" class="btn btn-primary btn-custom">
-                                            Enviar Ticket
+                                            Actualizar Ticket
                                         </button>
                                     </div>
 
@@ -76,16 +84,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </div>
 
                         </div>
-                    </div>   
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-<!-- AQUI VA EL FOOTER INCLUDE -->
+    <!-- AQUI VA EL FOOTER INCLUDE -->
 
-<?php
-include_once __DIR__ . '/../../layouts/footer_administrador.php';
-?>
-
-
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    ?>

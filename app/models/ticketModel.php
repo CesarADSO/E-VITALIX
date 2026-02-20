@@ -51,9 +51,25 @@ class Ticket
         }
     }
 
+    public function listarTodosParaSuperAdmin() {
+        try {
+
+            $listar = "SELECT tickets.*, usuarios.email, roles.nombre AS rol FROM tickets INNER JOIN usuarios ON tickets.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id";
+
+            $resultado = $this->conexion->prepare($listar);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+
+        } catch (PDOException $e) {
+            error_log("Error en Ticket::listarTodosParaSuperAdmin->" . $e->getMessage());
+            return [];
+        }
+    }
+
     public function consultarTicketPorId($id) {
         try {
-            $consultarPorId = "SELECT * FROM tickets WHERE id = :id";
+            $consultarPorId = "SELECT tickets.*, usuarios.email, roles.nombre AS rol FROM tickets INNER JOIN usuarios ON tickets.id_usuario = usuarios.id INNER JOIN roles ON usuarios.id_rol = roles.id WHERE tickets.id = :id";
             $resultado = $this->conexion->prepare($consultarPorId);
             $resultado->bindParam(':id', $id);
             $resultado->execute();
@@ -63,6 +79,40 @@ class Ticket
         } catch (PDOException $e) {
             error_log("Error en Ticket::consultarTicketPorId->" . $e->getMessage());
             return [];
+        }
+    }
+
+    public function actualizarTicket($data) {
+        try {
+            $actualizar = "UPDATE tickets SET titulo = :titulo, descripcion = :descripcion, imagen = :foto WHERE id = :id"; 
+            $resultado = $this->conexion->prepare($actualizar);
+            $resultado->bindParam(':titulo', $data['titulo']);
+            $resultado->bindParam(':descripcion', $data['descripcion']);
+            $resultado->bindParam(':foto', $data['foto']);
+            $resultado->bindParam(':id', $data['id']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Ticket::actualizarTicket->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function responderTicket($data) {
+        try {
+            $responder = "UPDATE tickets SET respuesta = :respuesta, estado = 'RESPONDIDO' WHERE id = :id"; 
+            $resultado = $this->conexion->prepare($responder);
+            $resultado->bindParam(':respuesta', $data['respuesta']);
+            $resultado->bindParam(':id', $data['id']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Ticket::responderTicket->" . $e->getMessage());
+            return false;
         }
     }
 

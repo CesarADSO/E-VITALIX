@@ -521,6 +521,26 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
+    case '/superadmin/tickets-usuarios':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/tickets-usuarios.php';
+        break;
+
+    case '/superadmin/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/consultar-ticket.php';
+        break;
+
+    case '/superadmin/responder-ticket':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/responder-ticket.php';
+        break;
+
+    case '/superadmin/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/superadmin/guardar-respuesta-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
     case '/admin/mis-tickets':
         require BASE_PATH . '/app/views/dashboard/administrador/mis-tickets.php';
         break;
@@ -538,6 +558,14 @@ switch ($request) {
         break;
 
     case '/admin/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/admin/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-ticket.php';
+        break;
+
+    case '/admin/guardar-cambios-ticket':
         require BASE_PATH . '/app/controllers/ticketController.php';
         break;
     

@@ -28,7 +28,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- TICKETS HEADER -->
                     <h4 class="mb-4">Mis tickets</h4>
-                    <p class="mb-4">En esta interfaz usted podrá consultar los tickets de soporte técnico que ha enviado, podrá visualizar su estado y podrá dar por finalizado el ticket cuando el super administrador de la plataforma haya dado respuesta</p>
+                    <p class="mb-4">En esta interfaz usted podrá consultar los tickets de soporte técnico que ha enviado, podrá visualizar su estado y podrá dar por finalizado el ticket cuando usted quiera</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos()</button>
@@ -70,8 +70,16 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                 </td>
                                                 <td><?= $ticket['created_at'] ?></td>
                                                 <td>
+                                                    <?php if($ticket['estado'] === 'ABIERTO'):?>
                                                     <a href="<?= BASE_URL ?>/admin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
-                                                    <a href="<?= BASE_URL ?>/admin/actualizar-ticket" class="btn btn-sm btn-danger" title="Editar ticket"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                    <a href="<?= BASE_URL ?>/admin/actualizar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-success" title="Editar ticket"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                    <a href="<?= BASE_URL ?>/admin/cerrar-ticket?id=<?= $ticket['id'] ?>&accion=cerrar" class="btn btn-sm btn-danger" title="Cerrar ticket"><i class="fa-solid fa-x"></i></a>
+                                                    <?php elseif($ticket['estado'] === 'RESPONDIDO'):?>
+                                                        <a href="<?= BASE_URL ?>/admin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                        <a href="<?= BASE_URL ?>/admin/cerrar-ticket?id=<?= $ticket['id'] ?>&accion=cerrar" class="btn btn-sm btn-danger" title="Cerrar ticket"><i class="fa-solid fa-x"></i></a>
+                                                    <?php else:?>
+                                                        <span class="text-muted small">No hay acciones disponibles</span>
+                                                    <?php endif;?>
                                                 </td>
                                             </tr>
                                             <?php endforeach;?>
