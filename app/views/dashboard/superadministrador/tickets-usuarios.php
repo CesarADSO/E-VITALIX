@@ -76,10 +76,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                             <?php if ($ticket['estado'] === 'ABIERTO'): ?>
                                                                 <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
                                                                 <a href="<?= BASE_URL ?>/superadmin/responder-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-success" title="Responder ticket"><i class="fa-solid fa-pen-to-square editar"></i></a>
-                                                                <a href="<?= BASE_URL ?>/superadmin/cerrar-ticket?id=<?= $ticket['id'] ?>&accion=cerrar" class="btn btn-sm btn-danger" title="Cerrar ticket"><i class="fa-solid fa-x"></i></a>
                                                             <?php elseif ($ticket['estado'] === 'RESPONDIDO'): ?>
                                                                 <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
-                                                                <a href="<?= BASE_URL ?>/superadmin/cerrar-ticket?id=<?= $ticket['id'] ?>&accion=cerrar" class="btn btn-sm btn-danger" title="Cerrar ticket"><i class="fa-solid fa-x"></i></a>
                                                             <?php else: ?>
                                                                 <span class="text-muted small">No hay acciones disponibles</span>
                                                             <?php endif; ?>
