@@ -69,10 +69,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <span class="step-number">2</span>
                                     <span class="step-label">Información Profesional</span>
                                 </div>
-                                <div class="step" data-step="3">
-                                    <span class="step-number">3</span>
-                                    <span class="step-label">Confirmación</span>
-                                </div>
                             </div>
                         </div>
 
@@ -96,7 +92,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <input type="text" name="apellidos" class="form-control" id="apellidos" placeholder="Ingresa los apellidos" value="<?= $especialista['apellidos'] ?>">
                                     </div>
                                 </div>
-                               
+
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
@@ -112,22 +108,28 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <?php endif; ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="numero_documento" class="form-label">Número de Documento</label>
-                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" value="<?= $especialista['numero_documento'] ?>">
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
 
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
                                         <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>">
                                     </div>
+                                </div>
+
+                                <div class="row">
+
+
 
                                     <div class="col-md-6 mb-3">
                                         <label for="direccion" class="form-label">Dirección</label>
                                         <input type="text" name="direccion" class="form-control" id="direccion" placeholder="Ingresa la dirección" value="<?= $especialista['direccion'] ?>">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="estado" class="form-label">Estado</label>
+                                        <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
+                                            <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
+                                            <option value="Activo">Activo</option>
+                                            <option value="Inactivo">Inactivo</option>
+                                        </select>
                                     </div>
                                     <!-- <div class="col-md-6 mb-3">
                                         <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
@@ -142,14 +144,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <option value="Otro">Otro</option>
                                         </select>
                                     </div> -->
-                                </div>
-                                <div class="mb-3">
-                                    <label for="estado" class="form-label">Estado</label>
-                                    <select class="form-select" id="estadoEspecialista" name="estadoEspecialista">
-                                        <option value="<?= $especialista['estado'] ?>"><?= $especialista['estado'] ?></option>
-                                        <option value="Activo">Activo</option>
-                                        <option value="Inactivo">Inactivo</option>
-                                    </select>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
@@ -173,13 +167,13 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <label for="especialidad" class="form-label">Especialidad</label>
                                     <select name="especialidad" id="especialidad" class="form-control">
                                         <option value="<?= $especialista['id_especialidad'] ?>"><?= $especialista['nombre_especialidad'] ?></option>
-                                            <?php if(!empty($especialidades)):?>
-                                                <?php foreach($especialidades as $especialidad):?>
-                                                    <option value="<?= $especialidad['id'] ?>"><?= $especialidad['nombre'] ?></option>
-                                                <?php endforeach;?>
-                                            <?php else:?>
-                                                <option value="">No hay especialidades registradas</option>
-                                            <?php endif;?>
+                                        <?php if (!empty($especialidades)): ?>
+                                            <?php foreach ($especialidades as $especialidad): ?>
+                                                <option value="<?= $especialidad['id'] ?>"><?= $especialidad['nombre'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <option value="">No hay especialidades registradas</option>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -188,12 +182,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1">Anterior</button>
-                                    <button type="button" class="btn btn-primary next-step" data-next="3">Siguiente</button>
+                                    <button type="submit" class="btn boton">Actualizar Especialista</button>
                                 </div>
                             </div>
 
                             <!-- Paso 3: Confirmación -->
-                            <div class="wizard-step" id="step3">
+                            <!-- <div class="wizard-step" id="step3">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
                                     <div class="card">
@@ -213,9 +207,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
-                                    <button type="submit" class="btn boton">Actualizar Especialista</button>
+                                    
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>

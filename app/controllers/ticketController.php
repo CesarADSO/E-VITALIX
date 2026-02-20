@@ -122,7 +122,7 @@ function crear()
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Creación de ticket exitosa', 'Espera a que el super administrador devuelva una respuesta');
+        mostrarSweetAlert('success', 'Creación de ticket exitosa', 'Espera a que el super administrador devuelva una respuesta', '/E-VITALIX/admin/mis-tickets');
     } else {
         mostrarSweetAlert('error', 'Error al crear el ticket', 'No se pudo crear el ticket. Intenta nuevamente');
     }
@@ -242,7 +242,7 @@ function actualizarTicket() {
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Actualización de ticket exitosa', 'El ticket se ha actualizado correctamente');
+        mostrarSweetAlert('success', 'Actualización de ticket exitosa', 'El ticket se ha actualizado correctamente', '/E-VITALIX/admin/mis-tickets');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar el ticket', 'No se pudo actualizar el ticket. Intenta nuevamente');
     }

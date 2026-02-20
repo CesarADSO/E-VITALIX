@@ -407,25 +407,6 @@ document.addEventListener('DOMContentLoaded', function () {
         //
         // querySelectorAll devuelve un NodeList (no es array), por eso usamos "..."
         // para convertirlo en un arreglo real.
-        const especialidadesSeleccionadas = [
-            ...document.querySelectorAll('input[name="especialidades[]"]:checked')
-        ]
-
-            // PASO 2:
-            // Con .map(cb => cb.value) obtenemos el valor "value" de cada checkbox marcado.
-            // Esto convierte una lista de inputs en un arreglo de strings.
-            // Ejemplo:
-            // [inputCheckbox1, inputCheckbox2] → ["dermatologia", "urologia"]
-            .map(cb => cb.value);
-
-        // PASO 3:
-        // Si hay al menos una especialidad marcada, las mostramos separadas por comas.
-        // Si no hay ninguna, mostramos "No ingresado".
-        document.getElementById('resumen-especialidades').textContent =
-            especialidadesSeleccionadas.length > 0 ?
-                especialidadesSeleccionadas.join(', ') // Ejemplo: "dermatologia, urologia"
-                :
-                'No ingresado';
 
         // --- Horario de atención ---
         /* 1. Seleccionamos todos los checkboxes de días que estén marcados
