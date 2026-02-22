@@ -35,7 +35,7 @@ $perfil = mostrarPerfilPaciente($id);
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
         </a>
-        <a class="nav-item" href="<?= BASE_URL ?>/paciente/ListaDeCitas">
+        <a class="nav-item" href="<?= BASE_URL ?>/paciente/modulo-citas">
             <i class="bi bi-people-fill"></i>
             <span>Citas</span>
         </a>

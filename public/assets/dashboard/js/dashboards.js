@@ -472,3 +472,53 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// // ===================================================
+// // 1. EVENTO DEL FORMULARIO
+// // ===================================================
+// /**
+//  * Escucha el evento 'submit' del formulario de búsqueda
+//  * Cuando el usuario hace clic en "Buscar", se ejecuta esta función
+//  */
+// document.getElementById('formBusquedaConsultorio').addEventListener('submit', function (e) {
+//     // Previene el comportamiento por defecto del formulario (que recargue la página)
+//     e.preventDefault();
+
+//     // Obtiene el valor seleccionado del select de especialidad
+//     const especialidadId = document.getElementById('especialidad').value;
+//     const especialidadTexto = document.getElementById('especialidad').options[document.getElementById('especialidad').selectedIndex].text;
+
+//     // Llama a la función que busca los consultorios
+//     buscarConsultorios(especialidadId, especialidadTexto);
+// });
+
+// function buscarConsultorios(especialidadId, especialidadTexto) {
+//     // Oculta el mensaje inicial
+//     document.getElementById('mensajeInicial').classList.add('d-none');
+//     document.getElementById('mensajeSinResultados').classList.add('d-none');
+//     document.getElementById('tituloResultados').classList.add('d-none');
+
+//     // Limpia resultados anteriores
+//     document.getElementById('resultadosConsultorios').innerHTML = '';
+
+//     // Muestra el loader (mientras "carga")
+//     document.getElementById('loaderResultados').classList.remove('d-none');
+
+//     // SIMULACIÓN DE PETICIÓN AJAX A LA BASE DE DATOS
+//     // En tu proyecto real, aquí harías un fetch() o XMLHttpRequest a tu backend PHP
+//     setTimeout(() => {
+//         // Oculta el loader
+//         document.getElementById('loaderResultados').classList.add('d-none');
+
+//         // AQUÍ SIMULO DATOS DE LA BASE DE DATOS
+//         // En tu proyecto real, estos datos vendrán de tu servidor PHP
+//         const consultorios = obtenerConsultoriosSimulados(especialidadId);
+
+//         // Si hay resultados, los muestra
+//         if (consultorios.length > 0) {
+//             mostrarResultados(consultorios, especialidadTexto);
+//         } else {
+//             // Si no hay resultados, muestra mensaje
+//             document.getElementById('mensajeSinResultados').classList.remove('d-none');
+//         }
+//     }, 1500); // Simula 1.5 segundos de "carga"
+// }

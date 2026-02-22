@@ -69,10 +69,9 @@ class Slot
 
             // 2. Definir nuevo estado
             if ($estadoActual === 'Disponible') {
-                $nuevoEstado = 'Reservado';
-            } elseif ($estadoActual === 'Reservado') {
                 $nuevoEstado = 'Bloqueado';
-            } else {
+            } 
+            else {
                 $nuevoEstado = 'Disponible';
             }
 
