@@ -510,11 +510,19 @@ switch ($request) {
         break;
     
     case '/crear-ticket-asistente':
-        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket-asistente.php';
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
         break;
         
     case '/crear-ticket-especialista':
-        require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
+        require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket.php';
+        break;
+
+    case '/crear-ticket-paciente':
+        require BASE_PATH . '/app/views/dashboard/paciente/crear-ticket.php';
+        break;
+
+    case '/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/crear-ticket.php';
         break;
 
     default:

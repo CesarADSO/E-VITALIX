@@ -1,12 +1,12 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_administrador.php';
+    require_once BASE_PATH . '/app/helpers/session_paciente.php';
    
 
 ?>
 
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_paciente.php';
 
 ?>
 <body>
@@ -16,7 +16,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             <!-- AQUI VA EL INCLUDE EL SIDEBAR -->
 
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_paciente.php';
             ?>
 
             <!-- Main Content -->
@@ -27,7 +27,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- AQUI VA EL INCLUDE DEL TOP BAR -->
 
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_paciente.php';
                     ?>
 
                     <div class="container-fluid ticket-wrapper d-flex align-items-center justify-content-center">
@@ -94,7 +94,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 <!-- AQUI VA EL FOOTER INCLUDE -->
 
 <?php
-include_once __DIR__ . '/../../layouts/footer_administrador.php';
+include_once __DIR__ . '/../../layouts/footer_paciente.php';
 ?>
 
 
