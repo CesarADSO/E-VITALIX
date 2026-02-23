@@ -39,6 +39,10 @@ $perfil = mostrarPerfilPaciente($id);
             <i class="bi bi-people-fill"></i>
             <span>Citas</span>
         </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/paciente/mis-tickets">
+            <i class="bi bi-ticket-detailed"></i>
+            <span>Soporte técnico</span>
+        </a>
     </nav>
 
     <div style="margin-top: auto; padding: 20px;">

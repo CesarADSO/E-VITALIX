@@ -52,7 +52,7 @@ class Especialista
             telefono,
             direccion,
             foto,
-            especialidad,
+            id_especialidad,
             registro_profesional)
             VALUES 
             (:id_usuario,
@@ -103,7 +103,7 @@ class Especialista
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
-            $mostrar = "SELECT especialistas.*, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_consultorio = :id_consultorio ORDER BY especialistas.nombres ASC";
+            $mostrar = "SELECT especialistas.*, especialidades.nombre AS nombre_especialidad, usuarios.id AS id_usuario, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id WHERE especialistas.id_consultorio = :id_consultorio ORDER BY especialistas.nombres ASC";
 
             // PREPARAMOS LA ACCIÓN A EJECUTAR Y LA EJECUTAMOS
             $resultado = $this->conexion->prepare($mostrar);
@@ -138,14 +138,17 @@ class Especialista
                             especialistas.telefono,
                             especialistas.direccion,
                             especialistas.foto,
-                            especialistas.especialidad,
+                            especialidades.id AS id_especialidad,
+                            especialidades.nombre AS nombre_especialidad,
                             especialistas.registro_profesional,
                             usuarios.id AS id_usuario,
                             usuarios.estado,
+                            usuarios.email,
                             tipo_documento.nombre AS documento
                             FROM especialistas INNER JOIN tipo_documento
                             ON especialistas.id_tipo_documento = tipo_documento.id
                             INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id
+                            INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id
                             WHERE especialistas.id = :id
                             LIMIT 1;";
 
@@ -181,16 +184,13 @@ class Especialista
 
              $resultado->execute();
 
-            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, telefono = :telefono, direccion = :direccion, id_especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
 
             $resultado2 = $this->conexion->prepare($actualizar2);
             $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
             $resultado2->bindParam(':nombres', $data['nombres']);
             $resultado2->bindParam(':apellidos', $data['apellidos']);
             $resultado2->bindParam(':idTipoDocumento', $data['tipoDocumento']);
-            $resultado2->bindParam(':numeroDocumento', $data['numeroDocumento']);
-            $resultado2->bindParam(':fechaNacimiento', $data['fechaNacimiento']);
-            $resultado2->bindParam(':genero', $data['genero']);
             $resultado2->bindParam(':telefono', $data['telefono']);
             $resultado2->bindParam(':direccion', $data['direccion']);
             $resultado2->bindParam(':especialidad', $data['especialidad']);

@@ -44,7 +44,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                 <div class="row align-items-center">
                                     <div class="col-md-auto text-center mb-3 mb-md-0">
                                         <div class="patient-avatar">
-                                            <img class="img-paciente" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>" alt="<?= $paciente['nombre_paciente'] ?>">
+                                            <img class="img-usuario" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>" alt="<?= $paciente['nombre_paciente'] ?>">
                                         </div>
                                     </div>
 
@@ -225,16 +225,10 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                                         </thead>
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td>Ibuprofeno 400mg</td>
-                                                                                <td>1 tableta</td>
-                                                                                <td>Cada 8 horas</td>
-                                                                                <td>5 días</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>Omeprazol 20mg</td>
-                                                                                <td>1 cápsula</td>
-                                                                                <td>Cada 24 horas</td>
-                                                                                <td>7 días</td>
+                                                                                <td><?= $historial['nombre_medicamento'] ?></td>
+                                                                                <td><?= $historial['dosis'] ?></td>
+                                                                                <td><?= $historial['frecuencia'] ?></td>
+                                                                                <td><?= $historial['duracion'] ?></td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>

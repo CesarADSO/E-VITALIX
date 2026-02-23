@@ -49,7 +49,7 @@ class Consultorio
             $id_admin = $this->conexion->lastInsertId();
 
             // HACEMOS EL INSERT EN CONSULTORIOS
-            $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, especialidades, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :especialidades, :horario_atencion, 'Activo')";
+            $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :horario_atencion, 'Activo')";
 
 
 
@@ -60,7 +60,6 @@ class Consultorio
             $resultado->bindParam(':ciudad', $data['ciudad']);
             $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':correo_contacto', $data['correo_contacto']);
-            $resultado->bindParam(':especialidades', $data['especialidades']);
             $resultado->bindParam(':horario_atencion', $data['horario_atencion']);
 
             $resultado->execute();
@@ -125,7 +124,7 @@ class Consultorio
     public function actualizar($data)
     {
         try {
-            $actualizar = "UPDATE consultorios SET nombre = :nombre, direccion = :direccion, ciudad = :ciudad, telefono = :telefono, correo_contacto = :correo_contacto, especialidades = :especialidades, horario_atencion = :horario_atencion, estado = :estado WHERE id = :id";
+            $actualizar = "UPDATE consultorios SET nombre = :nombre, direccion = :direccion, ciudad = :ciudad, telefono = :telefono, correo_contacto = :correo_contacto, horario_atencion = :horario_atencion, estado = :estado WHERE id = :id";
 
             $resultado = $this->conexion->prepare($actualizar);
             $resultado->bindParam(':id', $data['id']);
@@ -134,7 +133,6 @@ class Consultorio
             $resultado->bindParam(':direccion', $data['direccion']);
             $resultado->bindParam(':telefono', $data['telefono']);
             $resultado->bindParam(':correo_contacto', $data['correo_contacto']);
-            $resultado->bindParam(':especialidades', $data['especialidades']);
             $resultado->bindParam(':horario_atencion', $data['horario_atencion']);
             $resultado->bindParam(':estado', $data['estado']);
 

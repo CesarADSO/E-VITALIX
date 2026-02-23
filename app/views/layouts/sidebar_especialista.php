@@ -26,6 +26,10 @@ $perfil = mostrarPerfilEspecialista($id);
     </div>
 
     <nav class="nav-menu">
+        <a class="nav-item" href="<?= BASE_URL ?>/especialista/calendario">
+            <i class="bi bi-calendar-event me-2"></i>
+            <span>Mi Calendario</span>
+        </a>
         <a class="nav-item" href="<?= BASE_URL ?>/especialista/dashboard">
             <i class="bi bi-grid-fill"></i>
             <span>Dashboard</span>
@@ -42,9 +46,13 @@ $perfil = mostrarPerfilEspecialista($id);
             <i class="fa-regular fa-calendar"></i>
             <span>Mis citas</span>
         </a>
-         <a class="nav-item" href="<?= BASE_URL ?>/especialista/pacientes-atendidos">
+        <a class="nav-item" href="<?= BASE_URL ?>/especialista/pacientes-atendidos">
             <i class="fa-solid fa-person"></i>
             <span>Pacientes atendidos</span>
+        </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/especialista/mis-tickets">
+            <i class="bi bi-ticket-detailed"></i>
+            <span>Soporte técnico</span>
         </a>
     </nav>
 

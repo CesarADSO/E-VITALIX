@@ -31,7 +31,7 @@ header("Expires: 0");
                     <!-- Aquí va tu logo - Reemplaza el src con la ruta de tu imagen -->
                     <div class="logo">
                         <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo"
-                            class="img-fluid" style="max-width: 100%;"></a>
+                                class="img-fluid" style="max-width: 100%;"></a>
                         <!-- Mientras tanto, placeholder: -->
                         <!-- <div class="logo-placeholder">E-VITALIX</div> -->
                     </div>
@@ -52,7 +52,7 @@ header("Expires: 0");
                     </div>
 
                     <div class="form-options">
-                        
+
 
                         <a href="recuperacion" class="forgot-password">
                             ¿Olvidó su contraseña?

@@ -42,7 +42,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (<?= count($especialistas) ?>)
                             </button>
                         </div>
-                        <a href="/E-VITALIX/admin/registrar-especialista" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a>
+                        <a href="/E-VITALIX/admin/registrar-especialista" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-plus-lg"></i> AÑADIR</a>
                     </div>
 
                     <!-- Especialistas Table -->
@@ -74,10 +74,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             </td>
                                             <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
                                             <td><?= $especialista['telefono'] ?></td>
-                                            <td><?= $especialista['especialidad'] ?></td>
+                                            <td><?= $especialista['nombre_especialidad'] ?></td>
                                             <td><?= $especialista['estado'] ?></td>
                                             <td>
-                                                <a href="<?= BASE_URL ?>/admin/consultar-especialista"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/admin/consultar-especialista?id=<?= $especialista['id'] ?>"><i class="fa-solid fa-magnifying-glass"></i></a>
                                                 <a href="<?= BASE_URL ?>/admin/actualizar-especialista?id=<?= $especialista['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                                                
                                             </td>

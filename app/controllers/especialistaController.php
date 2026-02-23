@@ -153,6 +153,7 @@ function registrarEspecialista()
         'id_consultorio' => $id_consultorio
     ];
 
+
     // CREAMOS UNA VARIABLE DONDE SE VA A GUARDAR EL OBJETO DONDE INSTANCIAMOS LA CLASE ACCEDIENDO AL MÉTODO DEL MODELO
     $resultado = $objEspecialista->registrar($data);
 
@@ -204,24 +205,8 @@ function actualizarEspecialista()
     $idUsuario = $_POST['idUsuario'] ?? '';
     $idEspecialista = $_POST['idEspecialista'] ?? '';
     $tipoDocumento = $_POST['tipoDocumento'] ?? '';
-    $numeroDocumento = $_POST['numeroDocumento'] ?? '';
     $nombres = $_POST['nombres'] ?? '';
     $apellidos = $_POST['apellidos'] ?? '';
-    $fechaNacimiento = $_POST['nacimiento'] ?? '';
-    // VALIDAR QUE SEA MAYOR DE 18 AÑOS
-    $fechaNacimientoObj = new DateTime($fechaNacimiento);
-    $fechaActual = new DateTime();
-    $edad = $fechaNacimientoObj->diff($fechaActual)->y;
-
-    if ($edad < 18) {
-        mostrarSweetAlert(
-            'error',
-            'Edad no permitida',
-            'El especialista debe ser mayor de 18 años'
-        );
-        exit();
-    }
-    $genero = $_POST['genero'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $direccion = $_POST['direccion'] ?? '';
     $especialidad = $_POST['especialidad'] ?? '';
@@ -229,7 +214,7 @@ function actualizarEspecialista()
     $estadoEspecialista = $_POST['estadoEspecialista'] ?? '';
 
     // VALIDAMOS LOS CAMPOS QUE SON OBLIGATORIOS
-    if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) ||  empty($especialidad) || empty($registroProfesional)) {
+    if (empty($tipoDocumento) || empty($nombres) || empty($apellidos) || empty($telefono) || empty($direccion) ||  empty($especialidad) || empty($registroProfesional)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -242,11 +227,8 @@ function actualizarEspecialista()
         'idUsuario' => $idUsuario,
         'idEspecialista' => $idEspecialista,
         'tipoDocumento' => $tipoDocumento,
-        'numeroDocumento' => $numeroDocumento,
         'nombres' => $nombres,
         'apellidos' => $apellidos,
-        'fechaNacimiento' => $fechaNacimiento,
-        'genero' => $genero,
         'telefono' => $telefono,
         'direccion' => $direccion,
         'especialidad' => $especialidad,
