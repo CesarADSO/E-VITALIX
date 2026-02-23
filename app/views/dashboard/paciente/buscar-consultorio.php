@@ -204,41 +204,30 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                 Servicios Disponibles
                                             </h6>
                                             <ul class="servicios-lista">
-                                                 <?php 
-                                                // Dividimos la cadena de servicios por comas
-                                                // Ejemplo: "Toma de signos vitales, consulta de ojos" se convierte en un array
-                                                $servicios = explode(', ', $consultorio['nombres_servicios']);
+                                                <?php
+                                                if (!empty($consultorio['servicios_agrupados'])):
+                                                    // 1. Separamos cada bloque de servicio por el pipe |
+                                                    $servicios = explode('|', $consultorio['servicios_agrupados']);
+                                                    foreach ($servicios as $item): 
+                                                    // 2. Separamos el ID del Nombre por los dos puntos :
+                                                    list($id_serv, $nombre_serv) = explode(':', $item);
+                                                ?>
+                                                    <li class="servicio-item">
+                                                            <i class="bi bi-check-circle-fill servicio-icon"></i>
+                                                            <span class="servicio-texto"><!-- trim() elimina espacios en blanco al inicio y final -->
+                                                                <?= trim($nombre_serv) ?>
+                                                            </span>
 
-                                                // Iteramos sobre cada servicio para crear un nuevo rectangulo independiente con el servicio 
-                                                foreach($servicios as $servicio):
-                                                 ?> 
-                                                <li class="servicio-item">
-                                                    <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                    <span class="servicio-texto"><!-- trim() elimina espacios en blanco al inicio y final -->
-                                                        <?= trim($servicio) ?>
-                                                    </span>
-                                                </li>
-                                                <?php endforeach;?>
-                                                <!-- <li class="servicio-item">
-                                                    <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                    <span class="servicio-texto">Exámenes de laboratorio</span> 
-                                                </li>
-                                                <li class="servicio-item">
-                                                    <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                    <span class="servicio-texto">Electrocardiogramas</span>
-                                                </li>
-                                                <li class="servicio-item">
-                                                    <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                    <span class="servicio-texto">Toma de presión arterial</span>
-                                                </li>
-                                                <li class="servicio-item">
-                                                    <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                    <span class="servicio-texto">Vacunación</span>
-                                                </li>
-                                                <li class="servicio-item">
-                                                    <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                    <span class="servicio-texto">Inyectología</span>
-                                                </li> -->
+                                                        <a href="<?= BASE_URL ?>/paciente/agendar_paso2?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>&id_servicio=<?= $id_serv ?>"
+                                                            class="btn btn-sm btn-outline-primary py-0" style="font-size: 0.8rem;">
+                                                            Agendar
+                                                        </a>
+
+                                                    </li>
+                                                <?php endforeach; ?>
+                                                <?php else:?>
+                                                    <p>No hay servicios disponibles de esta especialidad</p>
+                                                <?php endif; ?>
                                             </ul>
                                         </div>
 

@@ -604,6 +604,7 @@ class Cita
         }
     }
 
+
     public function listarCita($id)
     {
         try {
