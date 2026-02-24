@@ -115,6 +115,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Body del Modal con Formulario -->
                             <div class="modal-body">
                                 <form id="miFormularioRegistrar" action="<?= BASE_URL ?>/admin/guardar-especialidad" method="POST">
+                                    <input type="hidden" name="accion" value="registrarEspecialidad">
 
                                     <!-- Campo Nombre -->
                                     <div class="mb-4">

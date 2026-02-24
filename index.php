@@ -479,9 +479,26 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/registroController.php';
         break;
 
-    case '/paciente/ListaDeCitas':
-        require BASE_PATH . '/app/views/dashboard/paciente/ListaDeCitas.php';
+    case '/paciente/modulo-citas':
+        require BASE_PATH . '/app/views/dashboard/paciente/buscar-consultorio.php';
         break;
+
+    case '/paciente/buscar-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
+    case '/paciente/agendar_paso2':
+        require BASE_PATH . '/app/views/dashboard/paciente/seleccionar-horario.php';
+        break;
+
+    case '/paciente/confirmar-cita':
+        require BASE_PATH . '/app/controllers/citaController.php';
+        break;
+
+    case '/paciente/lista-de-citas':
+        require BASE_PATH . '/app/views/dashboard/paciente/lista-de-citas.php';
+        break;
+
     case '/paciente/agendarCita':
         require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
         break;

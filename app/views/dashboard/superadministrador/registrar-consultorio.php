@@ -71,6 +71,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                         <!-- Formulario -->
                         <form id="consultorioForm" action="<?= BASE_URL ?>/superadmin/guardar-consultorio" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="accion" value="registrar">
                             <!-- Paso 1: Información Básica -->
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
