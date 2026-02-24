@@ -36,8 +36,12 @@ $perfil = mostrarPerfilPaciente($id);
             <span>Dashboard</span>
         </a>
         <a class="nav-item" href="<?= BASE_URL ?>/paciente/modulo-citas">
-            <i class="bi bi-people-fill"></i>
-            <span>Citas</span>
+            <i class="fa-solid fa-book-medical"></i>
+            <span>Agendar cita</span>
+        </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/paciente/lista-de-citas">
+            <i class="fa-solid fa-calendar"></i>
+            <span>Mis citas</span>
         </a>
         <a class="nav-item" href="<?= BASE_URL ?>/paciente/mis-tickets">
             <i class="bi bi-ticket-detailed"></i>
