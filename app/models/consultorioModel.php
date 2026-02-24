@@ -115,7 +115,7 @@ class Consultorio
         GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades,
         /* TRUCO PARA EL PROYECTO: Agrupamos ID y Nombre del servicio juntos */
         /* Usamos un formato como 'ID:Nombre' para separarlos luego en PHP */
-        GROUP_CONCAT(DISTINCT CONCAT(servicios.id, ':', servicios.nombre) SEPARATOR '|') AS servicios_agrupados
+        GROUP_CONCAT(DISTINCT CONCAT(servicios.id, ':', servicios.nombre, ':', servicios.precio) SEPARATOR '|') AS servicios_agrupados
     FROM consultorios
     INNER JOIN consultorio_especialidad 
         ON consultorio_especialidad.id_consultorio = consultorios.id

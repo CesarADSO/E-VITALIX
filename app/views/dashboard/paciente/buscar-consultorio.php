@@ -210,13 +210,14 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                     $servicios = explode('|', $consultorio['servicios_agrupados']);
                                                     foreach ($servicios as $item): 
                                                     // 2. Separamos el ID del Nombre por los dos puntos :
-                                                    list($id_serv, $nombre_serv) = explode(':', $item);
+                                                    list($id_serv, $nombre_serv, $precio_serv) = explode(':', $item);
                                                 ?>
                                                     <li class="servicio-item">
                                                             <i class="bi bi-check-circle-fill servicio-icon"></i>
                                                             <span class="servicio-texto"><!-- trim() elimina espacios en blanco al inicio y final -->
-                                                                <?= trim($nombre_serv) ?> - 
+                                                                <?= trim($nombre_serv) ?> -
                                                             </span>
+                                                            <span class="servicio-texto">Precio: $<?= trim($precio_serv) ?></span>
 
                                                         <a href="<?= BASE_URL ?>/paciente/agendar_paso2?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>&id_servicio=<?= $id_serv ?>"
                                                             class="btn btn-sm btn-outline-primary py-0" style="font-size: 0.8rem;">
