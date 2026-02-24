@@ -204,26 +204,39 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
                             <!-- Paso 4: Confirmación -->
+                            <!-- Paso 3: Confirmación -->
                             <div class="wizard-step is-last" id="step3">
                                 <div class="mb-3">
                                     <h5>Resumen de la información</h5>
-                                    <div class="card">
+                                    <div class="card shadow-sm">
                                         <div class="card-body">
-                                            <p><strong>Tipo Documento:</strong> <span id="resumen-tipo-documento"></span></p>
-                                            <p><strong>Número Documento:</strong> <span id="resumen-numero-documento"></span></p>
-                                            <p><strong>Nombres:</strong> <span id="resumen-nombres"></span></p>
-                                            <p><strong>Apellidos:</strong> <span id="resumen-apellidos"></span></p>
-                                            <p><strong>Fecha Nacimiento:</strong> <span id="resumen-fecha-nacimiento"></span></p>
-                                            <p><strong>Género:</strong> <span id="resumen-genero"></span></p>
-                                            <p><strong>Teléfono:</strong> <span id="resumen-telefono"></span></p>
-                                            <p><strong>Dirección:</strong> <span id="resumen-direccion"></span></p>
-                                            <p><strong>Foto:</strong> <span id="resumen-foto"></span></p>
-                                            <p><strong>Email:</strong> <span id="resumen-email"></span></p>
-                                            <p><strong>Especialidad:</strong> <span id="resumen-especialidad"></span></p>
-                                            <p><strong>Registro Profesional:</strong> <span id="resumen-registro-profesional"></span></p>
+                                            <div class="row">
+
+                                                <!-- Columna 1 -->
+                                                <div class="col-md-6">
+                                                    <p><strong>Tipo Documento:</strong><br> <span id="resumen-tipo-documento"></span></p>
+                                                    <p><strong>Número Documento:</strong><br> <span id="resumen-numero-documento"></span></p>
+                                                    <p><strong>Nombres:</strong><br> <span id="resumen-nombres"></span></p>
+                                                    <p><strong>Apellidos:</strong><br> <span id="resumen-apellidos"></span></p>
+                                                    <p><strong>Fecha Nacimiento:</strong><br> <span id="resumen-fecha-nacimiento"></span></p>
+                                                    <p><strong>Género:</strong><br> <span id="resumen-genero"></span></p>
+                                                </div>
+
+                                                <!-- Columna 2 -->
+                                                <div class="col-md-6">
+                                                    <p><strong>Teléfono:</strong><br> <span id="resumen-telefono"></span></p>
+                                                    <p><strong>Email:</strong><br> <span id="resumen-email"></span></p>
+                                                    <p><strong>Dirección:</strong><br> <span id="resumen-direccion"></span></p>
+                                                    <p><strong>Especialidad:</strong><br> <span id="resumen-especialidad"></span></p>
+                                                    <p><strong>Registro Profesional:</strong><br> <span id="resumen-registro-profesional"></span></p>
+                                                    <p><strong>Foto:</strong><br> <span id="resumen-foto"></span></p>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2">Anterior</button>
                                     <button type="submit" class="btn boton">Registrar Especialista</button>
