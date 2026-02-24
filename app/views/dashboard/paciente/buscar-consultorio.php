@@ -215,7 +215,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                     <li class="servicio-item">
                                                             <i class="bi bi-check-circle-fill servicio-icon"></i>
                                                             <span class="servicio-texto"><!-- trim() elimina espacios en blanco al inicio y final -->
-                                                                <?= trim($nombre_serv) ?>
+                                                                <?= trim($nombre_serv) ?> - 
                                                             </span>
 
                                                         <a href="<?= BASE_URL ?>/paciente/agendar_paso2?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>&id_servicio=<?= $id_serv ?>"
@@ -233,13 +233,13 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
 
                                     </div>
 
-                                    <!-- Footer -->
+                                    <!-- Footer
                                     <div class="consultorio-card-footer-tipo-a">
                                         <button class="btn btn-ver-detalles" onclick="verDetalles()">
                                             <i class="bi bi-eye-fill"></i>
                                             Ver Detalles y Agendar
                                         </button>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             <?php endforeach; ?>

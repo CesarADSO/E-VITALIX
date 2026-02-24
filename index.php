@@ -491,6 +491,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/paciente/seleccionar-horario.php';
         break;
 
+    case '/paciente/confirmar-cita':
+        require BASE_PATH . '/app/controllers/citaController.php';
+        break;
+
     case '/paciente/agendarCita':
         require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
         break;

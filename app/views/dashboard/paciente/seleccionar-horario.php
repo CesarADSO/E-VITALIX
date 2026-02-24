@@ -96,9 +96,10 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_consultorio, $id_especialidad
                                         </div>
 
                                         <div class="horario-card-footer">
-                                            <form action="confirmar_cita.php" method="POST">
-                                                <input type="hidden" name="id_slot" value="1">
-                                                <input type="hidden" name="id_servicio" value="5">
+                                            <form action="<?= BASE_URL ?>/paciente/confirmar-cita" method="POST">
+                                                <input type="hidden" name="accion" value="agendar">
+                                                <input type="hidden" name="id_slot" value="<?= $espacioDeAgendamiento['id_slot'] ?>">
+                                                <input type="hidden" name="id_servicio" value="<?= $id_servicio ?>">
                                                 <button type="submit" class="btn-seleccionar">
                                                     <i class="bi bi-check-circle-fill"></i>
                                                     Seleccionar este Turno
