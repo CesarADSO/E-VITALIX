@@ -228,14 +228,3 @@ function obtenerIdCitaYPaciente($id_cita, $id_paciente)
 
     return $resultado;
 }
-function obtenerCitasPaciente()
-{
-    $objCita = new CitasModel();
-    if (session_status() !== PHP_SESSION_ACTIVE) {
-        session_start();
-    }
-    $id_paciente = $_SESSION['user']['id_paciente'];
-    $resultado = $objCita->obtenerCitasPorPaciente($id_paciente);
-
-    return $resultado;
-}
