@@ -39,7 +39,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <p class="text-muted">Este espacio está destinado para reportar errores, fallas o inconvenientes relacionados con el funcionamiento del aplicativo. Envíanos tu inconveniente y nuestro equipo lo solucionará pronto..</p>
                                 </div>
 
-                                <form method="POST" enctype="multipart/form-data">
+                                <form action="<?= BASE_URL ?>/admin/guardar-ticket" method="POST" enctype="multipart/form-data">
 
                                     <!-- TÍTULO -->
                                     <div class="mb-3">
@@ -57,12 +57,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <!-- IMAGEN -->
                                     <div class="mb-4">
                                         <label class="form-label fw-semibold">Adjuntar Imagen (opcional)</label>
-                                        <input type="file" name="imagen" class="form-control">
+                                        <input type="file" name="foto" class="form-control" accept=".jpg, .png, .jpeg">
                                     </div>
 
                                     <!-- BOTONES -->
                                     <div class="d-flex justify-content-between">
-                                        <a href="<?= BASE_URL ?>/app/views/dashboard/administrador/dashboard-administrador.php" class="btn btn-outline-secondary btn-custom">
+                                        <a href="<?= BASE_URL ?>/admin/mis-tickets" class="btn btn-outline-secondary btn-custom">
                                             ← Regresar
                                         </a>
 
@@ -76,16 +76,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </div>
 
                         </div>
-                    </div>
-
-
-
-
-                    
-
-                    
-
-                    
+                    </div>   
                 </div>
 
             </div>
@@ -96,21 +87,5 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 <?php
 include_once __DIR__ . '/../../layouts/footer_administrador.php';
 ?>
-
-
-
-
-
-
-
-
-<body>
-
-    <?php
-        include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
-    ?>
-
-    
-</body>
 
 

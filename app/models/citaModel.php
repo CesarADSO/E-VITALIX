@@ -14,14 +14,13 @@ class Cita
     public function agendar($data)
     {
         try {
-            $agendar = "INSERT INTO citas(id_agenda_slot, id_paciente, id_servicio, motivo_consulta, estado_cita) VALUES (:id_agenda_slot, :id_paciente, :id_servicio, :motivo_consulta, 'Pendiente')";
+            $agendar = "INSERT INTO citas(id_agenda_slot, id_paciente, id_servicio, estado_cita) VALUES (:id_agenda_slot, :id_paciente, :id_servicio, 'Pendiente')";
 
             $resultado = $this->conexion->prepare($agendar);
 
-            $resultado->bindParam(':id_agenda_slot', $data['horario']);
+            $resultado->bindParam(':id_agenda_slot', $data['id_slot']);
             $resultado->bindParam(':id_paciente', $data['id_paciente']);
-            $resultado->bindParam(':id_servicio', $data['servicio']);
-            $resultado->bindParam(':motivo_consulta', $data['motivo']);
+            $resultado->bindParam(':id_servicio', $data['id_servicio']);
 
             $resultado->execute();
 
@@ -31,7 +30,7 @@ class Cita
 
             $resultado2 = $this->conexion->prepare($cambiarEstadoSlot);
 
-            $resultado2->bindParam(':id_agenda_slot', $data['horario']);
+            $resultado2->bindParam(':id_agenda_slot', $data['id_slot']);
 
             $resultado2->execute();
 
@@ -54,7 +53,7 @@ class Cita
             // OBTENEMOS LA FECHA Y HORA DE LA CITA PARA USARLOS EN EL CORREO ELECTRÓNICO
             $obtenerFechaHoraCita = "SELECT fecha, hora_inicio FROM agenda_slot WHERE id = :id_agenda_slot";
             $resultadoFechaHora = $this->conexion->prepare($obtenerFechaHoraCita);
-            $resultadoFechaHora->bindParam(':id_agenda_slot', $data['horario']);
+            $resultadoFechaHora->bindParam(':id_agenda_slot', $data['id_slot']);
             $resultadoFechaHora->execute();
 
             // GUARDAMOS LOS DATOS EN UN ARRAY
@@ -69,7 +68,7 @@ class Cita
             $obtenerEmailEspecialista = "SELECT usuarios.email FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE agenda_slot.id = :id_agenda_slot";
 
             $resultadoEmail = $this->conexion->prepare($obtenerEmailEspecialista);
-            $resultadoEmail->bindParam(':id_agenda_slot', $data['horario']);
+            $resultadoEmail->bindParam(':id_agenda_slot', $data['id_slot']);
             $resultadoEmail->execute();
 
             // OBTENGO SOLO EL EMAIL DEL ESPECIALISTA SIN ARRAYS SOLO EL STRING EJEMPLO: adriana@gmail.com PARA ESO USO EL fetchColumn
@@ -531,17 +530,10 @@ class Cita
                         <div class="info-row-icon">🏥</div>
                         <div class="info-row-content">
                             <div class="info-row-label">Tipo de Consulta</div>
-                            <div class="info-row-value">' . htmlspecialchars($data['servicio']) . '</div>
+                            <div class="info-row-value">' . htmlspecialchars($data['id_servicio']) . '</div>
                         </div>
                     </div>
 
-                    <div class="info-row">
-                        <div class="info-row-icon">📝</div>
-                        <div class="info-row-content">
-                            <div class="info-row-label">Motivo de Consulta</div>
-                            <div class="info-row-value">' . htmlspecialchars($data['motivo']) . '</div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="divider"></div>
@@ -603,6 +595,7 @@ class Cita
             return [];
         }
     }
+
 
     public function listarCita($id)
     {

@@ -27,7 +27,8 @@ class CalendarioModel
 
             $stmt = $this->conexion->prepare($consulta);
             $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
-
+            $stmt->bindParam(':fecha_inicio', $fecha_inicio);
+            $stmt->bindParam(':fecha_fin', $fecha_fin);
             $stmt->execute();
 
             $eventos = [];

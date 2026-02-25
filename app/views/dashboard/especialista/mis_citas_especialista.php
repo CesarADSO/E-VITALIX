@@ -137,12 +137,12 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>
 
-                                                        <button
+                                                        <!-- <button
                                                             class="btn btn-sm btn-info btn-detalle ms-1"
                                                             data-cita-id="<?= $cita['id_cita'] ?>"
                                                             title="Ver detalles">
                                                             <i class="bi bi-eye"></i>
-                                                        </button>
+                                                        </button> -->
                                                     </div>
                                                 </td>
                                             </tr>

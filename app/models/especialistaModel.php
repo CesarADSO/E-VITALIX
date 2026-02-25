@@ -184,16 +184,13 @@ class Especialista
 
              $resultado->execute();
 
-            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, numero_documento = :numeroDocumento, fecha_nacimiento = :fechaNacimiento, genero = :genero, telefono = :telefono, direccion = :direccion, especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
+            $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, telefono = :telefono, direccion = :direccion, id_especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
 
             $resultado2 = $this->conexion->prepare($actualizar2);
             $resultado2->bindParam(':idEspecialista', $data['idEspecialista']);
             $resultado2->bindParam(':nombres', $data['nombres']);
             $resultado2->bindParam(':apellidos', $data['apellidos']);
             $resultado2->bindParam(':idTipoDocumento', $data['tipoDocumento']);
-            $resultado2->bindParam(':numeroDocumento', $data['numeroDocumento']);
-            $resultado2->bindParam(':fechaNacimiento', $data['fechaNacimiento']);
-            $resultado2->bindParam(':genero', $data['genero']);
             $resultado2->bindParam(':telefono', $data['telefono']);
             $resultado2->bindParam(':direccion', $data['direccion']);
             $resultado2->bindParam(':especialidad', $data['especialidad']);

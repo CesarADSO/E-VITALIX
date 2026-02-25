@@ -433,6 +433,14 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/historial_clinico.php';
         break;
 
+    case '/especialista/formular_medicamentos':
+        require BASE_PATH . '/app/views/dashboard/especialista/formular_medicamentos.php';
+        break;
+
+    case '/especialista/guardar-medicamento':
+        require BASE_PATH . '/app/controllers/medicamentoController.php';
+        break;
+
     // ASISTENTE INTERFACES
     case '/asistente/dashboard':
         require BASE_PATH . '/app/views/dashboard/asistente/dashboard_asistente.php';
@@ -471,9 +479,26 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/registroController.php';
         break;
 
-    case '/paciente/ListaDeCitas':
-        require BASE_PATH . '/app/views/dashboard/paciente/ListaDeCitas.php';
+    case '/paciente/modulo-citas':
+        require BASE_PATH . '/app/views/dashboard/paciente/buscar-consultorio.php';
         break;
+
+    case '/paciente/buscar-consultorio':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
+    case '/paciente/agendar_paso2':
+        require BASE_PATH . '/app/views/dashboard/paciente/seleccionar-horario.php';
+        break;
+
+    case '/paciente/confirmar-cita':
+        require BASE_PATH . '/app/controllers/citaController.php';
+        break;
+
+    case '/paciente/lista-de-citas':
+        require BASE_PATH . '/app/views/dashboard/paciente/lista-de-citas.php';
+        break;
+
     case '/paciente/agendarCita':
         require BASE_PATH . '/app/views/dashboard/paciente/agendar_cita.php';
         break;
@@ -513,18 +538,117 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
-    case '/crear-ticket':
+    case '/superadmin/tickets-usuarios':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/tickets-usuarios.php';
+        break;
+
+    case '/superadmin/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/consultar-ticket.php';
+        break;
+
+    case '/superadmin/responder-ticket':
+        require BASE_PATH . '/app/views/dashboard/superadministrador/responder-ticket.php';
+        break;
+
+
+    case '/superadmin/guardar-respuesta-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/admin/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/administrador/mis-tickets.php';
+        break;
+
+    case '/admin/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/consultar-ticket.php';
+        break;
+
+    case '/admin/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/admin/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/administrador/crear-ticket.php';
         break;
 
     case '/crear-ticket-asistente':
         require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket-asistente.php';
+
+    case '/admin/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/admin/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/administrador/actualizar-ticket.php';
+        break;
+
+    case '/admin/guardar-cambios-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
+        break;
+
+    case '/especialista/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/especialista/mis-tickets.php';
         break;
 
     case '/crear-ticket-especialista':
         require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
         break;
 
+    case '/especialista/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/especialista/consultar-ticket.php';
+        break;
+
+    case '/especialista/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/especialista/actualizar-ticket.php';
+        break;
+
+    case '/especialista/guardar-cambios-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/especialista/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/asistente/mis-tickets.php';
+        break;
+
+    case '/asistente/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
+        break;
+
+    case '/asistente/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/consultar-ticket.php';
+        break;
+
+    case '/asistente/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/actualizar-ticket.php';
+        break;
+
+    case '/asistente/guardar-cambios-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/asistente/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/paciente/mis-tickets':
+        require BASE_PATH . '/app/views/dashboard/paciente/mis-tickets.php';
+        break;
+
+    case '/asistente/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
+        break;
     default:
         http_response_code(404);
         require BASE_PATH . '/app/views/auth/404.php';

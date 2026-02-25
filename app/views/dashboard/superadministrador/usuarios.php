@@ -72,7 +72,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <td><?= $usuario['estado'] ?></td>
                                             <td>
                                                 <a href="<?= BASE_URL ?>/superadmin/actualizar-usuario?id=<?= $usuario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/superadmin/eliminar-usuario?accion=eliminar&id=<?= $usuario['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                                                <!-- <a href="<?= BASE_URL ?>/superadmin/eliminar-usuario?accion=eliminar&id=<?= $usuario['id'] ?>"><i class="fa-solid fa-trash-can"></i></a> -->
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

@@ -23,7 +23,7 @@ class Historiales
             // $id_consulta = $resultadoIdConsulta->fetchColumn();
 
 
-            $consultar = "SELECT pacientes.id AS id_paciente, pacientes.nombres, pacientes.apellidos, tipo_documento.nombre AS tipo_documento, pacientes.numero_documento, MAX(consulta_medica.created_at) AS ultima_consulta FROM consulta_medica INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN tipo_documento ON pacientes.id_tipo_documento = tipo_documento.id WHERE consulta_medica.id_especialista = :id_especialista GROUP BY pacientes.id ORDER BY consulta_medica.created_at DESC";
+            $consultar = "SELECT pacientes.id AS id_paciente, consulta_medica.id AS id_consulta, pacientes.nombres, pacientes.apellidos, tipo_documento.nombre AS tipo_documento, pacientes.numero_documento, MAX(consulta_medica.created_at) AS ultima_consulta FROM consulta_medica INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN tipo_documento ON pacientes.id_tipo_documento = tipo_documento.id WHERE consulta_medica.id_especialista = :id_especialista GROUP BY pacientes.id ORDER BY consulta_medica.created_at DESC";
 
             $resultado = $this->conexion->prepare($consultar);
             // $resultado->bindParam(':id_consulta', $id_consulta);
@@ -59,7 +59,7 @@ class Historiales
     public function consultarHistorialClinicoPaciente($id_paciente)
     {
         try {
-            $consultarHistorial = "SELECT consulta_medica.id AS id_consulta, consulta_medica.created_at AS fecha_consulta, consulta_medica.motivo_consulta, consulta_medica.diagnostico, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, especialistas.especialidad, consulta_medica.presion_sistolica, consulta_medica.presion_diastolica, consulta_medica.temperatura, consulta_medica.frecuencia_cardiaca, consulta_medica.frecuencia_respiratoria, consulta_medica.tratamiento, consulta_medica.observaciones FROM consulta_medica INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN especialistas ON consulta_medica.id_especialista = especialistas.id WHERE pacientes.id = :id_paciente ORDER BY consulta_medica.created_at DESC";
+            $consultarHistorial = "SELECT consulta_medica.id AS id_consulta, consulta_medica.created_at AS fecha_consulta, consulta_medica.motivo_consulta, consulta_medica.diagnostico, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, especialistas.id_especialidad, especialidades.nombre AS especialidad, consulta_medica.presion_sistolica, consulta_medica.presion_diastolica, consulta_medica.temperatura, consulta_medica.frecuencia_cardiaca, consulta_medica.frecuencia_respiratoria, consulta_medica.tratamiento, consulta_medica.observaciones, formulacion_medicamentos.nombre_medicamento, formulacion_medicamentos.dosis, formulacion_medicamentos.frecuencia, formulacion_medicamentos.duracion FROM consulta_medica LEFT JOIN formulacion_medicamentos ON formulacion_medicamentos.id_consulta = consulta_medica.id INNER JOIN especialistas ON consulta_medica.id_especialista = especialistas.id INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id WHERE pacientes.id = :id_paciente ORDER BY consulta_medica.created_at DESC";
 
             $resultado = $this->conexion->prepare($consultarHistorial);
             $resultado->bindParam(':id_paciente', $id_paciente);

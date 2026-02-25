@@ -37,12 +37,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <p class="text-muted mb-4 texto">Crear cuenta con permisos de superadministrador</p>
 
                         <form id="superadminForm" action="<?= BASE_URL ?>/superadmin/guardar-usuario" method="POST" enctype="multipart/form-data">
-                            <!-- email -->
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Ingresé el correo electrónico" required>
-                            </div>
+
 
                             <div class="row">
                                 <!-- Nombres -->
@@ -60,20 +55,26 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 </div>
                             </div>
 
+
                             <div class="row">
                                 <!-- Foto -->
                                 <div class="col-md-6 mb-3">
                                     <label for="foto" class="form-label">Foto</label>
-                                    <input type="file" class="form-control" id="foto" name="foto"
-                                        >
+                                    <input type="file" class="form-control" id="foto" name="foto">
                                 </div>
 
-                                <!-- Teléfono -->
-                                <div class="col-md-6 mb-3">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="telefono" name="telefono"
-                                        placeholder="Ingresa el número telefónico" required>
+                                <div class="mb-3 col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Ingresé el correo electrónico" required>
                                 </div>
+                            </div>
+
+                            <!-- Teléfono -->
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono"
+                                    placeholder="Ingresa el número telefónico" required>
                             </div>
 
                             <!-- Botones -->

@@ -8,12 +8,31 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
+
         $accion = $_POST['accion'] ?? '';
+
+        if ($accion === 'buscarPorEspecialidad') {
+
+            $consultorios = consultarConsultoriosPorEspecialidad();
+
+            require_once __DIR__ . '/../views/dashboard/paciente/buscar-consultorio.php';
+            exit();
+
+            // consultarConsultoriosPorEspecialidad();
+
+
+            // echo 'llegue aqui';
+            // exit();
+        }
+
         if ($accion === 'actualizar') {
             actualizarConsultorio();
-        } else {
+        }
+
+        if ($accion === 'registrar') {
             registrarConsultorio();
         }
+
         break;
 
     case 'GET':
@@ -58,7 +77,6 @@ function registrarConsultorio()
     $ciudad = $_POST['ciudad'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $correo_contacto = $_POST['correo'] ?? '';
-    $especialidades = $_POST['especialidades'] ?? [];
     $dias = $_POST['dias'] ?? [];
     $hora_apertura = $_POST['hora_apertura'] ?? '';
     $hora_cierre = $_POST['hora_cierre'] ?? '';
@@ -70,7 +88,7 @@ function registrarConsultorio()
     $numero_documento_admin = $_POST['numero_documento_admin'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($email_admin) || empty($nombres_admin) || empty($apellidos_admin) || empty($telefono_admin) || empty($tipo_documento_admin) || empty($numero_documento_admin)) {
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($email_admin) || empty($nombres_admin) || empty($apellidos_admin) || empty($telefono_admin) || empty($tipo_documento_admin) || empty($numero_documento_admin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -166,9 +184,6 @@ function registrarConsultorio()
         'hora_cierre' => $hora_cierre
     ];
 
-    // Convertimos el arreglo de especialidades en un texto JSON
-    // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
-    $especialidades_json = json_encode($especialidades);
 
     // Convertimos el arreglo de horario a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
     // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).
@@ -182,7 +197,6 @@ function registrarConsultorio()
         'ciudad' => $ciudad,
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
-        'especialidades' => $especialidades_json,
         'horario_atencion' => $horario_atencion_json,
         'email_admin' => $email_admin,
         'nombres_admin' => $nombres_admin,
@@ -228,6 +242,20 @@ function listarConsultorio($id)
     return $consultorio;
 }
 
+function consultarConsultoriosPorEspecialidad()
+{
+    // echo 'llegue aqui a la funcion';
+    // exit();
+
+    $id_especialidad = $_POST['id_especialidad'] ?? null;
+
+    $objConsultorio = new Consultorio();
+
+    $resultado = $objConsultorio->listarConsultoriosPorEspecialidad($id_especialidad);
+
+    return $resultado;
+}
+
 function actualizarConsultorio()
 {
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
@@ -237,15 +265,14 @@ function actualizarConsultorio()
     $ciudad = $_POST['ciudad'] ?? '';
     $telefono = $_POST['telefono'] ?? '';
     $correo_contacto = $_POST['correo'] ?? '';
-    $especialidades = $_POST['especialidades'] ?? [];
     $dias = $_POST['dias'] ?? [];
     $hora_apertura = $_POST['hora_apertura'] ?? '';
     $hora_cierre = $_POST['hora_cierre'] ?? '';
     $estado = $_POST['estado'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($especialidades) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($estado)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatoriosaaaaa');
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($estado)) {
+        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
 
@@ -255,9 +282,6 @@ function actualizarConsultorio()
         'hora_cierre' => $hora_cierre
     ];
 
-    // Convertimos el arreglo de especialidades en un texto JSON
-    // Ejemplo: ["dermatologia", "urologia"] → '["dermatologia","urologia"]'
-    $especialidades_json = json_encode($especialidades);
 
     // Convertimos el arreglo de horario a JSON manteniendo acentos, eñes y caracteres especiales tal cual,
     // evitando que se conviertan en códigos Unicode como \u00f1 (JSON_UNESCAPED_UNICODE mejora la legibilidad).
@@ -272,7 +296,6 @@ function actualizarConsultorio()
         'ciudad' => $ciudad,
         'telefono' => $telefono,
         'correo_contacto' => $correo_contacto,
-        'especialidades' => $especialidades_json,
         'horario_atencion' => $horario_atencion_json,
         'estado' => $estado
         // 'id_admin' => $id_admin
