@@ -191,7 +191,7 @@ switch ($request) {
 
     case '/admin/consultar-especialista':
         require BASE_PATH . '/app/views/dashboard/administrador/consultar-especialista.php';
-        
+
 
     case '/especialista/calendario':
         require BASE_PATH . '/app/views/dashboard/especialista/calendario_especialista.php';
@@ -261,7 +261,7 @@ switch ($request) {
     case '/admin/registrar-especialidad';
         require BASE_PATH . '/app/views/dashboard/administrador/registrar-especialidad.php';
         break;
-    
+
     case '/admin/guardar-especialidad';
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
@@ -516,11 +516,11 @@ switch ($request) {
     case '/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/administrador/crear-ticket.php';
         break;
-    
+
     case '/crear-ticket-asistente':
         require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket-asistente.php';
         break;
-        
+
     case '/crear-ticket-especialista':
         require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
         break;

@@ -1,141 +1,196 @@
 <?php
-// IMPORTAMOS LA DEPENDENCIAS NECESARIAS
-// EN ESTE CASO EL ALERT HELPER Y EL MODELO
+// IMPORTAMOS LAS DEPENDENCIAS NECESARIAS
 require_once __DIR__ . '/../helpers/alert_helper.php';
-require_once __DIR__ . '/../models/citaModel.php';
+
+// traemos los modelos que vamos a usar tanto para listado como para crear/reagendar
+require_once __DIR__ . '/../models/citasModel.php'; // usado en algunas consultas genéricas
+require_once __DIR__ . '/../models/citaModel.php';  // maneja agendar / reagendar / cancelar desde el paciente
+
+// arrancamos sesión si todavía no se ha hecho
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-// HACEMOS EL SWITCH CASE PARA VALIDAR LOS CASOS POSIBLES
 switch ($method) {
     case 'POST':
         $accion = $_POST['accion'] ?? '';
 
         if ($accion === 'reagendar') {
             reagendarCita();
-            break;
         } else {
             agendarCita();
         }
-
-
         break;
 
     case 'GET':
         $accion = $_GET['accion'] ?? '';
-        if ($accion === 'cancelar') {
-            cancelarCita($_GET['id']);
+
+        // CASO 1: Retornar JSON para el Modal de detalles
+        if ($accion === 'detalle_json') {
+            obtenerDetalleJSON();
+            exit();
         }
 
-        if (isset($_GET['id'])) {
-            listarCita($_GET['id']);
-            break;
+        // CASO 2: Cancelar cita
+        if ($accion === 'cancelar') {
+            cancelarCita($_GET['id']);
+            exit();
         }
+
+        // CASO 3: Listar una cita específica (si lo usas para edición)
+        if (isset($_GET['id']) && empty($accion)) {
+            listarCita($_GET['id']);
+            exit();
+        }
+
+        // POR DEFECTO: Mostrar la lista de citas (Cards)
         mostrarCitas();
         break;
 }
 
-function agendarCita()
+/**
+ * Función para enviar los datos detallados de una cita al modal vía AJAX
+ */
+function obtenerDetalleJSON()
 {
-    $slot = $_POST['horario'] ?? '';
-    $servicio = $_POST['servicio'] ?? '';
-    $motivo = $_POST['motivo'] ?? '';
+    header('Content-Type: application/json');
+    $id_cita = $_GET['id'] ?? null;
 
-    // Validamos los campos que son obligatorios
-    if (empty($slot) || empty($servicio) || empty($motivo)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
-        exit();
+    if (!$id_cita) {
+        echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
+        return;
     }
 
-    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
-    if (session_status() !== PHP_SESSION_ACTIVE) {
-        session_start();
-    }
+    // en la interfaz de paciente usamos el modelo "Cita" y su método listarCita,
+    // porque el método de CitasModel requiere un id_especialista y no está disponible
+    // cuando quien consulta es un paciente.
+    $modeloPaciente = new Cita();
+    $detalle = $modeloPaciente->listarCita($id_cita);
 
-    // Obtenemos el id del paciente
-    $id_paciente = $_SESSION['user']['id_paciente'];
-
-    $ObjCita = new Cita();
-
-    $data = [
-        'id_paciente' => $id_paciente,
-        'horario' => $slot,
-        'servicio' => $servicio,
-        'motivo' => $motivo
-    ];
-
-    $resultado = $ObjCita->agendar($data);
-
-    if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/ListaDeCitas');
+    if ($detalle) {
+        echo json_encode($detalle);
     } else {
-        mostrarSweetAlert('error', 'No se pudo registrar la cita', 'Intente nuevamente');
+        http_response_code(404);
+        echo json_encode(['success' => false, 'message' => 'No se encontró la cita']);
     }
 }
 
+/**
+ * Carga la vista de "Mis Citas" con los datos necesarios para las Cards
+ */
 function mostrarCitas()
 {
-    // Iniciar o reanudar sesión de forma segura y obtener datos del usuario
-    if (session_status() !== PHP_SESSION_ACTIVE) {
-        session_start();
-    }
+    if (session_status() === PHP_SESSION_NONE) session_start();
 
-    $id_paciente = $_SESSION['user']['id_paciente'];
-
-    $objCita = new Cita();
-
-    $resultado = $objCita->mostrar($id_paciente);
-
-    return $resultado;
-}
-
-function listarCita($id)
-{
-    $objCita = new Cita();
-
-    $resultado = $objCita->listarCita($id);
-
-    return $resultado;
-}
-
-function reagendarCita() {
-    $id_cita = $_POST['id'] ?? '';
-    $slot = $_POST['horario'] ?? '';
-    $servicio = $_POST['servicio'] ?? '';
-    $motivo = $_POST['motivo'] ?? '';
-
-    // Validamos los campos que son obligatorios
-    if (empty($slot) || empty($servicio) || empty($motivo)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    // Validar sesión
+    if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] != 1) {
+        header('Location: ' . BASE_URL . '/login');
         exit();
     }
 
-    $ObjCita = new Cita();
+    $id_paciente = $_SESSION['user']['id_paciente'];
+    $citasModel = new CitasModel();
 
-    $data = [
-        'id_cita' => $id_cita,
-        'horario' => $slot,
-        'servicio' => $servicio,
-        'motivo' => $motivo
-    ];
+    // Obtenemos todas las citas para pasarlas a la vista
+    $citas = $citasModel->obtenerCitasPorPaciente($id_paciente);
 
-    $resultado = $ObjCita->reagendar($data);
+    // Cargamos la vista de Cards
+    require_once BASE_PATH . '/app/views/dashboard/paciente/ListaDeCitas.php';
+}
 
-    if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita reagendada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/ListaDeCitas');
+// --- TUS FUNCIONES EXISTENTES (Mantenlas igual) ---
+
+/**
+ * Devuelve un arreglo con los datos de la cita solicitada.
+ * Se usa desde la vista de reagendar (reagendar_cita.php).
+ */
+function listarCita($id)
+{
+    $modelo = new Cita();
+    return $modelo->listarCita($id);
+}
+
+/**
+ * Procesa la petición de agendar una nueva cita desde el formulario del paciente.
+ */
+function agendarCita()
+{
+    // validación básica de sesión y rol
+    if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] != 1) {
+        header('Location: ' . BASE_URL . '/login');
+        exit();
+    }
+
+    $id_paciente = $_SESSION['user']['id_paciente'];
+    $horario = $_POST['horario'] ?? null;
+    $servicio = $_POST['servicio'] ?? null;
+    $motivo   = trim($_POST['motivo'] ?? '');
+
+    if (empty($horario) || empty($servicio)) {
+        mostrarSweetAlert('error', 'Datos incompletos', 'Debe seleccionar horario y servicio');
+        return;
+    }
+
+    $modelo = new Cita();
+    $ok = $modelo->agendar([
+        'horario'     => $horario,
+        'id_paciente' => $id_paciente,
+        'servicio'    => $servicio,
+        'motivo'      => $motivo
+    ]);
+
+    if ($ok) {
+        mostrarSweetAlert('success', 'Cita agendada', 'Tu cita ha sido registrada', BASE_URL . '/paciente/ListaDeCitas');
     } else {
-        mostrarSweetAlert('error', 'No se pudo reagendar la cita', 'Intente nuevamente');
+        mostrarSweetAlert('error', 'Error', 'No se pudo agendar la cita, inténtalo de nuevo');
     }
 }
 
-function cancelarCita($id) {
-    $ObjCita = new Cita();
+/**
+ * Procesa la petición de reagendar una cita existente.
+ */
+function reagendarCita()
+{
+    if (!isset($_SESSION['user']) || $_SESSION['user']['rol'] != 1) {
+        header('Location: ' . BASE_URL . '/login');
+        exit();
+    }
 
-    $resultado = $ObjCita->cancelar($id);
+    $id_cita  = $_POST['id'] ?? null;
+    $horario  = $_POST['horario'] ?? null;
+    $servicio = $_POST['servicio'] ?? null;
+    $motivo   = trim($_POST['motivo'] ?? '');
+
+    if (empty($id_cita) || empty($horario) || empty($servicio)) {
+        mostrarSweetAlert('error', 'Datos incompletos', 'Faltan campos obligatorios');
+        return;
+    }
+
+    $modelo = new Cita();
+    $ok = $modelo->reagendar([
+        'id_cita' => $id_cita,
+        'horario' => $horario,
+        'servicio' => $servicio,
+        'motivo'  => $motivo
+    ]);
+
+    if ($ok) {
+        mostrarSweetAlert('success', 'Cita reagendada', 'Se actualizó la fecha/hora de tu cita', BASE_URL . '/paciente/ListaDeCitas');
+    } else {
+        mostrarSweetAlert('error', 'Error', 'No se pudo reagendar la cita');
+    }
+}
+
+function cancelarCita($id)
+{
+    $ObjCita = new CitasModel();
+    $resultado = $ObjCita->cancelarCita($id); // Ajustado al nombre de tu método en el modelo
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/ListaDeCitas');
+        mostrarSweetAlert('success', 'Cita cancelada', 'Tu cita ha sido cancelada correctamente', BASE_URL . '/paciente/ListaDeCitas');
     } else {
-        mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
+        mostrarSweetAlert('error', 'Error', 'No se pudo cancelar la cita');
     }
 }

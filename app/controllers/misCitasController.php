@@ -9,15 +9,13 @@ switch ($method) {
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'aceptar') {
             aceptarCita($_GET['id']);
-        }
-        elseif ($accion === 'cancelar') {
+        } elseif ($accion === 'cancelar') {
             cancelarCita($_GET['id']);
-        }
-        elseif (isset($_GET['id_cita']) && isset($_GET['id_paciente'])) {
+        } elseif (isset($_GET['id_cita']) && isset($_GET['id_paciente'])) {
             obtenerIdCitaYPaciente($_GET['id_cita'], $_GET['id_paciente']);
         }
         break;
-    
+
     default:
         # code...
         break;
@@ -187,7 +185,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 
-function aceptarCita($id) {
+function aceptarCita($id)
+{
     // INSTANCIAMOS EL MODELO
     $objCita = new CitasModel();
 
@@ -197,14 +196,14 @@ function aceptarCita($id) {
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
-         mostrarSweetAlert('success', 'Cita aceptada exitosamente', 'La cita ha sido aceptada', '/E-VITALIX/especialista/mis-citas');
-    }
-    else {
+        mostrarSweetAlert('success', 'Cita aceptada exitosamente', 'La cita ha sido aceptada', '/E-VITALIX/especialista/mis-citas');
+    } else {
         mostrarSweetAlert('error', 'Error al aceptar la cita', 'No se pudo aceptar la cita', '/E-VITALIX/especialista/mis-citas');
     }
 }
 
-function cancelarCita($id) {
+function cancelarCita($id)
+{
     // INSTANCIAMOS EL MODELO
     $objCita = new CitasModel();
 
@@ -213,19 +212,30 @@ function cancelarCita($id) {
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
-         mostrarSweetAlert('success', 'Cita cancelada exitosamente', 'La cita ha sido cancelada', '/E-VITALIX/especialista/mis-citas');
-    }
-    else {
+        mostrarSweetAlert('success', 'Cita cancelada exitosamente', 'La cita ha sido cancelada', '/E-VITALIX/especialista/mis-citas');
+    } else {
         mostrarSweetAlert('error', 'Error al cancelar la cita', 'No se pudo cancelar la cita', '/E-VITALIX/especialista/mis-citas');
     }
 }
 
-function obtenerIdCitaYPaciente($id_cita, $id_paciente) {
+function obtenerIdCitaYPaciente($id_cita, $id_paciente)
+{
     // INSTANCIAMOS EL MODELO
     $objCita = new CitasModel();
 
     // ACCEDEMOS AL METHOD DE LA CLASE
     $resultado = $objCita->obtenerIdCita($id_cita, $id_paciente);
+
+    return $resultado;
+}
+function obtenerCitasPaciente()
+{
+    $objCita = new CitasModel();
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+    $id_paciente = $_SESSION['user']['id_paciente'];
+    $resultado = $objCita->obtenerCitasPorPaciente($id_paciente);
 
     return $resultado;
 }

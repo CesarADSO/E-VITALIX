@@ -1,109 +1,103 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_paciente.php';
-require_once BASE_PATH . '/app/controllers/citaController.php';
-
-$citas = mostrarCitas();
-?>
-
-<?php
 include_once __DIR__ . '/../../layouts/header_paciente.php';
+require_once BASE_PATH . '/app/controllers/misCitasController.php';
+$citas = obtenerCitasPaciente();
+
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="row">
+        <div class="col-12 mb-4">
+            <h3 class="fw-bold">Mis Citas Médicas</h3>
+            <p class="text-muted">Gestiona tus consultas próximas y el historial médico.</p>
+        </div>
 
-        <?php include_once __DIR__ . '/../../layouts/sidebar_paciente.php'; ?>
+        <?php if (empty($citas)): ?>
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-calendar-x display-1 text-muted"></i>
+                <p class="mt-3">Aún no tienes citas agendadas.</p>
+                <a href="<?= BASE_URL ?>/paciente/agendarCita" class="btn btn-primary">Agendar mi primera cita</a>
+            </div>
+        <?php else: ?>
+        <?php endif; ?>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <?php foreach ($citas as $cita):
+                $colorEstado = [
+                    'PENDIENTE' => 'warning',
+                    'CONFIRMADA' => 'success',
+                    'CANCELADA' => 'danger',
+                    'RECHAZADA' => 'secondary'
+                ][$cita['estado_cita']] ?? 'primary';
+            ?>
+            <?php endforeach; ?>
+            <div class="col">
 
-        <div class="col-lg-10 col-md-9 main-content">
+                <?php if (!empty($citas)): ?>
+                    <?php foreach ($citas as $cita): ?>
 
-            <!-- Top Bar -->
-            <?php include_once __DIR__ . '/../../layouts/topbar_paciente.php'; ?>
 
-            <!-- Header -->
-            <h4 class="mb-4">Gestión de citas médicas</h4>
-            <p class="mb-4">Gestione sus citas médicas: Agende una cita, reagéndela y cancélela si es necesario.</p>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <button class="btn btn-link text-primary p-0"
-                        style="text-decoration: none; font-size: 14px;">
-                        ← Todos (0)
-                    </button>
-                </div>
-                <a href="<?= BASE_URL ?>/paciente/agendarCita" class="btn btn-primary btn-sm" style="border-radius: 20px;">
-                    <i class="bi bi-plus-lg"></i> Agendar cita
-                </a>
+
+                        <div class="card h-100 border-0 shadow-sm hover-shadow">
+                            <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center pt-3">
+                                <span class="badge bg-<?= $colorEstado ?>"><?= $cita['estado_cita'] ?></span>
+                                <small class="text-muted"><i class="bi bi-calendar3"></i> <?= $cita['fecha'] ?></small>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Dr. <?= $cita['especialista_nombre'] . ' ' . $cita['especialista_apellido'] ?></h5>
+                                <p class="card-text text-primary mb-1"><i class="bi bi-stethoscope"></i> <?= $cita['servicio_nombre'] ?></p>
+                                <p class="card-text"><i class="bi bi-clock"></i> <?= date('h:i A', strtotime($cita['hora_inicio'])) ?></p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0 pb-3">
+                                <button class="btn btn-outline-primary w-100 btn-detalle-paciente" data-id="<?= $cita['id_cita'] ?>">
+                                    <i class="bi bi-eye me-2"></i>Ver Detalles
+                                </button>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
-            <!-- Tabla de Citas -->
-            <div class="bg-white rounded shadow-sm p-4 ">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle table-pacientes table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-                                <th>Especialista</th>
-                                <th>Consultorio</th>
-                                <th>Estado</th>
-                                <th style="width: 80px;">Acciones</th>
-                            </tr>
-                        </thead>
+        </div>
 
-                        <tbody>
-                            <?php if (!empty($citas)) : ?>
-                                <?php foreach ($citas as $cita): ?>
-                                    <tr>
-                                        <td><?= date('d/m/Y', strtotime($cita['fecha'])) ?></td>
-                                        <td><?= substr($cita['hora_inicio'], 0, 5) ?> - <?= substr($cita['hora_fin'], 0, 5) ?></td>
-                                        <td><?= $cita['nombres'] ?> <?= $cita['apellidos'] ?></td>
-                                        <td><?= $cita['nombre_consultorio'] ?></td>
-                                        <td>
-                                            <?php if($cita['estado_cita'] === 'COMPLETADA'):?>
-                                            <span class="status-badge status status-completada">
-                                                <?= $cita['estado_cita'] ?>
-                                            </span>
-                                            <?php elseif($cita['estado_cita'] === 'PENDIENTE'):?>
-                                            <span class="status-badge status status-pendiente">
-                                                <?= $cita['estado_cita'] ?>
-                                            </span>
-                                            <?php elseif($cita['estado_cita'] === 'CONFIRMADA'):?>
-                                            <span class="status-badge status status-aceptada">
-                                                <?= $cita['estado_cita'] ?>
-                                            </span>
-                                            <?php else:?>
-                                            <span class="status-badge status status-cancelada">
-                                                <?= $cita['estado_cita'] ?>
-                                            </span>
-                                            <?php endif;?>
-                                        </td>
-                                        <td>
-                                            <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/paciente/reagendarCita?id=<?= $cita['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/paciente/cancelarCita?id=<?= $cita['id'] ?>&accion=cancelar"><i class="fa-solid fa-x"></i></a>
-                                            <?php else : ?>
-                                                <span class="text-muted small">Sin acciones disponibles</span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
+    </div>
+</div>
 
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <tr>
-                                    <td colspan="6" class="text-center text-muted">
-                                        ¡No hay citas agendadas!
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-
-
-                        </tbody>
-                    </table>
-                </div>
+<div class="modal fade" id="modalCitaPaciente" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Detalle de tu Cita</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-
+            <div id="detalleCitaBody" class="modal-body text-center py-4">
+                <div class="spinner-border text-primary"></div>
+            </div>
         </div>
     </div>
 </div>
 
 <?php include_once __DIR__ . '/../../layouts/footer_paciente.php'; ?>
+
+<!-- <script>
+    $(document).on('click', '.btn-detalle-paciente', function() {
+        const idCita = $(this).data('id');
+        const modal = new bootstrap.Modal(document.getElementById('modalCitaPaciente'));
+        modal.show();
+
+        $.get(`<?= BASE_URL ?>/paciente/ListaDeCitas?action=detalle_json&id=${idCita}`, function(data) {
+            let html = `
+            <div class="text-start">
+                <p><strong>Especialista:</strong> Dr. ${data.especialista_nombre} ${data.especialista_apellido}</p>
+                <p><strong>Servicio:</strong> ${data.servicio_nombre}</p>
+                <p><strong>Fecha:</strong> ${data.fecha}</p>
+                <p><strong>Hora:</strong> ${data.hora_inicio} - ${data.hora_fin}</p>
+                <p><strong>Motivo:</strong> ${data.motivo_consulta || 'No especificado'}</p>
+                <p><strong>Precio:</strong> $${data.servicio_precio}</p>
+                <hr>
+                <div class="alert alert-info">Recuerda llegar 15 minutos antes de tu cita.</div>
+            </div>`;
+            $('#detalleCitaBody').html(html);
+        });
+    });
+</script> -->

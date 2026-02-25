@@ -69,7 +69,8 @@ class CitasModel
         }
     }
 
-    public function obtenerIdCita ($id_cita, $id_paciente) {
+    public function obtenerIdCita($id_cita, $id_paciente)
+    {
         try {
             $obtenerIdCitaYPaciente = "SELECT pacientes.id AS id_paciente, citas.id AS id_cita FROM citas INNER JOIN pacientes ON citas.id_paciente = pacientes.id WHERE citas.id = :id_cita AND pacientes.id = :id_paciente";
             $resultado = $this->conexion->prepare($obtenerIdCitaYPaciente);
@@ -78,10 +79,43 @@ class CitasModel
             $resultado->execute();
 
             return $resultado->fetch();
-        
-             } catch (PDOException $e) {
+        } catch (PDOException $e) {
             error_log("Error al obtener ID de cita: " . $e->getMessage());
             return null;
+        }
+    }
+    public function obtenerCitasPorPaciente($id_paciente)
+    {
+        try {
+            $sql = "SELECT 
+                    c.id AS id_cita,
+                    a.fecha,
+                    a.hora_inicio,
+                    a.hora_fin,
+                    c.estado_cita,
+                    e.nombres AS especialista_nombre,
+                    es.nombre AS especialidad_nombre,
+                    e.apellidos AS especialista_apellido,
+                    s.nombre AS servicio_nombre,
+                    co.nombre AS nombre_consultorio,
+                    co.ciudad, 
+                    co.direccion,
+                    s.precio AS servicio_precio
+                FROM citas c
+                INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
+                INNER JOIN especialistas e ON a.id_especialista = e.id INNER JOIN especialidades es ON e.id_especialidad = es.id
+                INNER JOIN consultorios co ON e.id_consultorio = co.id 
+                INNER JOIN servicios s ON c.id_servicio = s.id
+                WHERE c.id_paciente = :id_paciente
+                ORDER BY a.fecha DESC, a.hora_inicio DESC";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_paciente', $id_paciente, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en obtenerCitasPorPaciente: " . $e->getMessage());
+            return [];
         }
     }
 
@@ -202,7 +236,8 @@ class CitasModel
         return $conteo;
     }
 
-    public function aceptarCita($id) {
+    public function aceptarCita($id)
+    {
         try {
             $aceptarCita = "UPDATE citas SET estado_cita = 'CONFIRMADA' WHERE id = :id_cita";
             $resultado = $this->conexion->prepare($aceptarCita);
@@ -216,7 +251,8 @@ class CitasModel
         }
     }
 
-    public function cancelarCita($id) {
+    public function cancelarCita($id)
+    {
         try {
             $cancelarCita = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita";
             $resultado = $this->conexion->prepare($cancelarCita);

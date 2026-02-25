@@ -23,12 +23,11 @@ class CalendarioModel
                      LEFT JOIN pacientes p ON p.id = c.id_paciente 
                      LEFT JOIN servicios srv ON c.id_servicio = srv.id 
                      WHERE s.id_especialista = :id_especialista 
-                     AND s.fecha BETWEEN :fecha_inicio AND :fecha_fin";
+                     AND (s.fecha > CURDATE() OR (s.fecha = CURDATE() AND s.hora_inicio > CURTIME() ))";
 
             $stmt = $this->conexion->prepare($consulta);
             $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
-            $stmt->bindParam(':fecha_inicio', $fecha_inicio);
-            $stmt->bindParam(':fecha_fin', $fecha_fin);
+
             $stmt->execute();
 
             $eventos = [];
@@ -74,6 +73,36 @@ class CalendarioModel
             return $eventos;
         } catch (PDOException $e) {
             error_log("Error en CalendarioModel: " . $e->getMessage());
+            return [];
+        }
+    }
+    public function obtenerCitasPorPaciente($id_paciente)
+    {
+        try {
+            $sql = "SELECT 
+                    c.id AS id_cita,
+                    a.fecha,
+                    a.hora_inicio,
+                    a.hora_fin,
+                    c.estado_cita,
+                    c.motivo_consulta,
+                    e.nombres AS especialista_nombre,
+                    e.apellidos AS especialista_apellido,
+                    s.nombre AS servicio_nombre,
+                    s.precio AS servicio_precio
+                FROM citas c
+                INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
+                INNER JOIN especialistas e ON a.id_especialista = e.id
+                INNER JOIN servicios s ON c.id_servicio = s.id
+                WHERE c.id_paciente = :id_paciente
+                ORDER BY a.fecha DESC, a.hora_inicio DESC";
+
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_paciente', $id_paciente, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Error en obtenerCitasPorPaciente: " . $e->getMessage());
             return [];
         }
     }
