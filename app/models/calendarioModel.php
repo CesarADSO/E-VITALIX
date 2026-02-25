@@ -18,17 +18,17 @@ class CalendarioModel
                             c.id AS cita_id, c.estado_cita, c.motivo_consulta, 
                             CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente, 
                             srv.nombre AS servicio_nombre 
-                     FROM agenda_slot s 
-                     LEFT JOIN citas c ON s.id = c.id_agenda_slot 
-                     LEFT JOIN pacientes p ON p.id = c.id_paciente 
-                     LEFT JOIN servicios srv ON c.id_servicio = srv.id 
-                     WHERE s.id_especialista = :id_especialista AND (s.fecha > CURDATE() OR (s.fecha = CURDATE() AND s.hora_inicio > CURTIME() ))";
-                    // --  AND s.fecha BETWEEN :fecha_inicio AND :fecha_fin";
+                    FROM agenda_slot s 
+                    LEFT JOIN citas c ON s.id = c.id_agenda_slot 
+                    LEFT JOIN pacientes p ON p.id = c.id_paciente 
+                    LEFT JOIN servicios srv ON c.id_servicio = srv.id 
+                    WHERE s.id_especialista = :id_especialista 
+                    AND (s.fecha > CURDATE() OR (s.fecha = CURDATE() AND s.hora_inicio > CURTIME() ))";
 
             $stmt = $this->conexion->prepare($consulta);
             $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
-            // $stmt->bindParam(':fecha_inicio', $fecha_inicio);
-            // $stmt->bindParam(':fecha_fin', $fecha_fin);
+            $stmt->bindParam(':fecha_inicio', $fecha_inicio);
+            $stmt->bindParam(':fecha_fin', $fecha_fin);
             $stmt->execute();
 
             $eventos = [];
