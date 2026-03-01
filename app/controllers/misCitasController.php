@@ -65,8 +65,16 @@ function mostrarMisCitas()
         exit();
     }
 
+    
+
     // Incluir la vista
     require_once __DIR__ . '/../views/dashboard/especialista/mis_citas_especialista.php';
+
+    // IMPORTANTE: Retornar los datos en un array
+    return [
+        'citas' => $citas,
+        'estadisticas' => $estadisticas
+    ];
 }
 
 
