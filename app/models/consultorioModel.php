@@ -32,7 +32,7 @@ class Consultorio
             // HACEMOS EL INSERT EN ADMINISTRADORES SIN EL ID DEL CONSULTORIO, LO MANTENEMOS EN NULL
             $insertarAdmin = "INSERT INTO administradores(id_usuario, id_consultorio, nombres, apellidos, foto, telefono, id_tipo_documento, numero_documento) VALUES (:id_usuario, NULL, :nombres, :apellidos, :foto, :telefono, :id_tipo_documento, :numero_documento)";
 
-        
+
             $resultadoAdmin = $this->conexion->prepare($insertarAdmin);
             // AQUÍ LE ASIGNAMOS AL CAMPO ID_USUARIO EL ID DEL ÚLTIMO USUARIO REGISTRADO
             $resultadoAdmin->bindParam(':id_usuario', $id_usuario_admin);
@@ -77,7 +77,6 @@ class Consultorio
             $resultadoAsignar->execute();
 
             return true;
-
         } catch (PDOException $e) {
             error_log("Error en consultorio::registrar->" . $e->getMessage());
             return false;
@@ -98,6 +97,49 @@ class Consultorio
             return $resultado->fetchAll();
         } catch (PDOException $e) {
             error_log("Error en consultorio::consultar->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function listarConsultoriosPorEspecialidad($id_especialidad)
+    {
+        try {
+
+            // HACEMOS LA CONSULTA DE LOS CONSULTORIOS
+
+    $consulta = "SELECT 
+        consultorios.*, consultorios.id AS id_consultorio,
+        consultorio_especialidad.id_especialidad,
+        /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
+        /* SEPARATOR define cómo separaremos los nombres para luego usarlos en PHP */
+        GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades,
+        /* TRUCO PARA EL PROYECTO: Agrupamos ID y Nombre del servicio juntos */
+        /* Usamos un formato como 'ID:Nombre' para separarlos luego en PHP */
+        GROUP_CONCAT(DISTINCT CONCAT(servicios.id, ':', servicios.nombre, ':', servicios.precio) SEPARATOR '|') AS servicios_agrupados
+    FROM consultorios
+    INNER JOIN consultorio_especialidad 
+        ON consultorio_especialidad.id_consultorio = consultorios.id
+    INNER JOIN especialidades 
+        ON especialidades.id = consultorio_especialidad.id_especialidad
+    LEFT JOIN servicios 
+        ON servicios.id_consultorio = consultorios.id
+        AND servicios.id_especialidad = :id_especialidad -- <--- ESTA ES LA LÍNEA CLAVE PARA QUE NO ME TRAIGA LOS SERVICIOS DE OTRA ESPECIALIDAD
+    WHERE consultorios.id IN (
+        /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
+        /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
+        SELECT id_consultorio FROM consultorio_especialidad WHERE id_especialidad = :id_especialidad
+    )
+    /* LA CLAVE: Colapsa todos los resultados en una sola fila por cada ID de consultorio */
+    /* El GROUP_CONCAT ahora captura TODAS las especialidades del consultorio */
+    GROUP BY consultorios.id";
+
+            $resultado = $this->conexion->prepare($consulta);
+            $resultado->bindParam(':id_especialidad', $id_especialidad);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en consultorio::listarConsultoriosPorEspecialidad->" . $e->getMessage());
             return [];
         }
     }

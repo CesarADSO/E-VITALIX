@@ -28,7 +28,6 @@ class CitasModel
                     a.hora_fin,
                     p.foto AS foto_paciente,
                     c.estado_cita,
-                    c.motivo_consulta,
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
                     p.telefono AS telefono_paciente,
                     u.email AS email_paciente,
@@ -69,7 +68,8 @@ class CitasModel
         }
     }
 
-    public function obtenerIdCita ($id_cita, $id_paciente) {
+    public function obtenerIdCita($id_cita, $id_paciente)
+    {
         try {
             $obtenerIdCitaYPaciente = "SELECT pacientes.id AS id_paciente, citas.id AS id_cita FROM citas INNER JOIN pacientes ON citas.id_paciente = pacientes.id WHERE citas.id = :id_cita AND pacientes.id = :id_paciente";
             $resultado = $this->conexion->prepare($obtenerIdCitaYPaciente);
@@ -78,8 +78,7 @@ class CitasModel
             $resultado->execute();
 
             return $resultado->fetch();
-        
-             } catch (PDOException $e) {
+        } catch (PDOException $e) {
             error_log("Error al obtener ID de cita: " . $e->getMessage());
             return null;
         }
@@ -202,12 +201,15 @@ class CitasModel
         return $conteo;
     }
 
-    public function aceptarCita($id) {
+    public function aceptarCita($id)
+    {
         try {
             $aceptarCita = "UPDATE citas SET estado_cita = 'CONFIRMADA' WHERE id = :id_cita";
             $resultado = $this->conexion->prepare($aceptarCita);
             $resultado->bindParam(':id_cita', $id);
             $resultado->execute();
+
+            // IMPORTANTE FALTA ENVIO DE CORREO ELECTRÓNICO AL PACIENTE INFORMANDO QUE SE ACEPTO LA CITA
 
             return true;
         } catch (PDOException $e) {
@@ -216,12 +218,15 @@ class CitasModel
         }
     }
 
-    public function cancelarCita($id) {
+    public function cancelarCita($id)
+    {
         try {
             $cancelarCita = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita";
             $resultado = $this->conexion->prepare($cancelarCita);
             $resultado->bindParam(':id_cita', $id);
             $resultado->execute();
+
+            // IMPORTANTE FALTA ENVÍO DE CORREO ELECTRONICO AL PACIENTE INFORMANDO QUE SE DECLINO LA CITA
 
             return true;
         } catch (PDOException $e) {

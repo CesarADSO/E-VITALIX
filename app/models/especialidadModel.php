@@ -38,9 +38,22 @@ class Especialidad
             $resultado = $this->conexion->prepare($listarEspecialidades);
             $resultado->bindParam(':id_consultorio', $id_consultorio);
             $resultado->execute();
-            return $resultado->fetchAll(PDO::FETCH_ASSOC);
+            return $resultado->fetchAll();
         } catch (PDOException $e) {
             error_log("Error en Especialidad::listar->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function listarParaLosPacientes() {
+        try {
+            $listarEspecialidades = "SELECT * FROM especialidades WHERE estado = 'ACTIVA'";
+            $resultado = $this->conexion->prepare($listarEspecialidades);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::listarParaLosPacientes->" . $e->getMessage());
             return [];
         }
     }

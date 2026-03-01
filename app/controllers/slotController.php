@@ -14,6 +14,15 @@ switch ($method) {
         if ($accion === 'modificarEstado') {
             modificarEstadoSlot($_GET['id']);
         }
+
+        if (isset($_GET['id_servicio'])) {
+            consultarNombreServicio($_GET['id_servicio']);
+        }
+
+        if (isset($_GET['id_consultorio']) && isset($_GET['id_especialidad']) && isset($_GET['id_servicio'])) {
+
+            listarDisponibilidad($_GET['id_consultorio'], $_GET['id_especialidad'], $_GET['id_servicio']);
+        }
         mostrarSlots();
         break;
 }
@@ -36,10 +45,27 @@ function mostrarSlots()
 
 function mostrarSlots2()
 {
-    
+
     $objSlot = new Slot();
 
     $resultado = $objSlot->mostrarParaTodos();
+
+    return $resultado;
+}
+
+ function consultarNombreServicio($id_servicio) {
+    $objSlot = new Slot();
+
+    $resultado = $objSlot->consultarNombreServicio($id_servicio);
+
+    return $resultado;
+ }
+
+function listarDisponibilidad($id_consultorio, $id_especialidad, $id_servicio)
+{
+    $objSlot = new Slot();
+
+    $resultado = $objSlot->listarDisponibilidad($id_consultorio, $id_especialidad, $id_servicio);
 
     return $resultado;
 }

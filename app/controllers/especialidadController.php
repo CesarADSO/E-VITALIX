@@ -14,7 +14,8 @@ switch ($method) {
         if ($accion === 'actualizar') {
             actualizarEspecialidad();
         }
-        else {
+
+        if ($accion === 'registrarEspecialidad') {
             registrarEspecialidad();
         }
         break;
@@ -23,13 +24,13 @@ switch ($method) {
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'modificarEstado') {
             modificarEstadoEspecialidad($_GET['id']);
-        }
-
-        if (isset($_GET['id'])) {
+        } elseif (isset($_GET['id'])) {
             listarEspecialidadPorId($_GET['id']);
+        } else {
+            listarEspecialidades();
+            listarParaLosPacientes();
         }
 
-        listarEspecialidades();
         break;
 
     default:
@@ -95,6 +96,14 @@ function listarEspecialidades()
     $objEspecialidad = new Especialidad();
 
     $resultado = $objEspecialidad->listar($id_consultorio);
+
+    return $resultado;
+}
+
+function listarParaLosPacientes() {
+    $objEspecialidad = new Especialidad();
+
+    $resultado = $objEspecialidad->listarParaLosPacientes();
 
     return $resultado;
 }

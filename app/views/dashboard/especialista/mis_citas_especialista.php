@@ -3,6 +3,11 @@
 include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 require_once BASE_PATH . '/app/helpers/session_especialista.php';
 require_once BASE_PATH . '/app/controllers/misCitasController.php';
+
+// Obtenemos el array con todo
+$data = mostrarMisCitas();
+$citas = $data['citas'];
+$estadisticas = $data['estadisticas'];
 ?>
 
 <body>

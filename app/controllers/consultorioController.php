@@ -8,12 +8,31 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
+
         $accion = $_POST['accion'] ?? '';
+
+        if ($accion === 'buscarPorEspecialidad') {
+
+            $consultorios = consultarConsultoriosPorEspecialidad();
+
+            require_once __DIR__ . '/../views/dashboard/paciente/buscar-consultorio.php';
+            exit();
+
+            // consultarConsultoriosPorEspecialidad();
+
+
+            // echo 'llegue aqui';
+            // exit();
+        }
+
         if ($accion === 'actualizar') {
             actualizarConsultorio();
-        } else {
+        }
+
+        if ($accion === 'registrar') {
             registrarConsultorio();
         }
+
         break;
 
     case 'GET':
@@ -221,6 +240,20 @@ function listarConsultorio($id)
     $consultorio = $objConsultorio->listarConsultorioPorId($id);
 
     return $consultorio;
+}
+
+function consultarConsultoriosPorEspecialidad()
+{
+    // echo 'llegue aqui a la funcion';
+    // exit();
+
+    $id_especialidad = $_POST['id_especialidad'] ?? null;
+
+    $objConsultorio = new Consultorio();
+
+    $resultado = $objConsultorio->listarConsultoriosPorEspecialidad($id_especialidad);
+
+    return $resultado;
 }
 
 function actualizarConsultorio()
