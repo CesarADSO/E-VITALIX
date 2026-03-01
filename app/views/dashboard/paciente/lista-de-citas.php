@@ -48,10 +48,24 @@ $citas = mostrarCitas();
                                         <p class="card-text text-primary mb-1"><i class="bi bi-stethoscope"></i> <?= $cita['servicio_nombre'] ?></p>
                                         <p class="card-text"><i class="bi bi-clock"></i> <?= date('h:i A', strtotime($cita['hora_inicio'])) ?></p>
                                     </div>
-                                    <div class="card-footer bg-transparent border-0 pb-3">
-                                        <button class="btn btn-outline-primary w-100 btn-detalle-paciente" data-id="<?= $cita['id_cita'] ?>">
+                                    <div class="card-footer d-flex justify-content-between bg-transparent border-0 pb-3">
+                                        <?php if($cita['estado_cita'] === 'PENDIENTE'):?>
+                                        <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>" class="btn btn-sm btn-success mx-2" title="Reprogramar cita médica">
+                                            <i class="fa-solid fa-pen-to-square text-white"></i>
+                                        </a>
+                                        <a href="" class="btn btn-sm btn-danger mx-2" title="Cancelar cita médica">
+                                            <i class="fa-solid fa-x text-white"></i>
+                                        </a>
+                                        
+                                        <button class="btn btn-sm btn-outline-primary w-100 btn-detalle-paciente mx-2" data-id="<?= $cita['id_cita'] ?>">
                                             <i class="bi bi-eye me-2"></i>Ver Detalles
                                         </button>
+                                        <?php else: ?>
+                                            
+                                        <button class="btn btn-sm btn-outline-primary w-100 btn-detalle-paciente mx-2" data-id="<?= $cita['id_cita'] ?>">
+                                            <i class="bi bi-eye me-2"></i>Ver Detalles
+                                        </button>
+                                        <?php endif;?>
                                     </div>
                                 </div>
 

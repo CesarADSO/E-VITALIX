@@ -507,8 +507,12 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/citaController.php';
         break;
 
-    case '/paciente/reagendarCita':
-        require BASE_PATH . '/app/views/dashboard/paciente/reagendar_cita.php';
+    case '/paciente/reprogramar-cita':
+        require BASE_PATH . '/app/views/dashboard/paciente/reprogramar-cita.php';
+        break;
+
+    case '/paciente/actualizar-cita':
+        require BASE_PATH . '/app/controllers/citaController.php';
         break;
 
     case '/paciente/guardar-cambios-cita':

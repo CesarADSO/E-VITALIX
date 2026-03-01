@@ -28,7 +28,6 @@ class CitasModel
                     a.hora_fin,
                     p.foto AS foto_paciente,
                     c.estado_cita,
-                    c.motivo_consulta,
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
                     p.telefono AS telefono_paciente,
                     u.email AS email_paciente,
@@ -210,6 +209,8 @@ class CitasModel
             $resultado->bindParam(':id_cita', $id);
             $resultado->execute();
 
+            // IMPORTANTE FALTA ENVIO DE CORREO ELECTRÓNICO AL PACIENTE INFORMANDO QUE SE ACEPTO LA CITA
+
             return true;
         } catch (PDOException $e) {
             error_log("Error en CitasModel::aceptarCita->" . $e->getMessage());
@@ -224,6 +225,8 @@ class CitasModel
             $resultado = $this->conexion->prepare($cancelarCita);
             $resultado->bindParam(':id_cita', $id);
             $resultado->execute();
+
+            // IMPORTANTE FALTA ENVÍO DE CORREO ELECTRONICO AL PACIENTE INFORMANDO QUE SE DECLINO LA CITA
 
             return true;
         } catch (PDOException $e) {
