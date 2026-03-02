@@ -519,7 +519,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/citaController.php';
         break;
 
-    case '/paciente/cancelarCita':
+    case '/paciente/cancelar-cita':
         require BASE_PATH . '/app/controllers/citaController.php';
         break;
 
