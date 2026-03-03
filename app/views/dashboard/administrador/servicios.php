@@ -51,7 +51,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <tr>
                                     <th>Nombre</th>
                                     <th>
-                                        Especialista
+                                        Especialidad
                                     </th>
                                     <th>Consultorio</th>
                                     <th>Duración</th>
@@ -65,7 +65,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <?php foreach($servicios as $servicio) :?>
                                 <tr>
                                     <td><?= $servicio['nombre'] ?></td>
-                                    <td><?= $servicio['nombre_especialista'] ?> <?= $servicio['apellido_especialista'] ?></td>
+                                    <td><?= $servicio['nombre_especialidad'] ?></td>
                                     <td><?= $servicio['nombre_consultorio'] ?></td>
                                     <td><?= $servicio['duracion_minutos'] ?></td>
                                     <td>$<?= $servicio['precio'] ?></td>
