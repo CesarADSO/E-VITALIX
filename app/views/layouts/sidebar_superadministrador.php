@@ -64,6 +64,11 @@ $perfil = mostrarPerfilSuperAdmin($id);
             <span>Asignación de administradores</span>
         </a> -->
 
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/especialidades">
+            <i class="fa-solid fa-book-medical"></i>
+            <span>Especialidades</span>
+        </a>
+
         <a class="nav-item" href="<?= BASE_URL ?>/superadmin/tickets-usuarios">
             <i class="bi bi-ticket-detailed"></i>
             <span>Tickets de soporte</span>

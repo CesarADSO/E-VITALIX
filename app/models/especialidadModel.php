@@ -14,11 +14,10 @@ class Especialidad
     public function registrar($data)
     {
         try {
-            $registrarEspecialidad = "INSERT INTO especialidades(id_consultorio, nombre, descripcion, estado) VALUES (:id_consultorio, :nombre, :descripcion, 'ACTIVA')";
+            $registrarEspecialidad = "INSERT INTO especialidades(nombre, descripcion, estado) VALUES (:nombre, :descripcion, 'ACTIVA')";
 
             $resultado = $this->conexion->prepare($registrarEspecialidad);
 
-            $resultado->bindParam(':id_consultorio', $data['id_consultorio']);
             $resultado->bindParam(':nombre', $data['nombre']);
             $resultado->bindParam(':descripcion', $data['descripcion']);
 
@@ -34,7 +33,7 @@ class Especialidad
     public function listar($id_consultorio)
     {
         try {
-            $listarEspecialidades = "SELECT * FROM especialidades WHERE id_consultorio = :id_consultorio";
+            $listarEspecialidades = "SELECT especialidades.id, especialidades.nombre, especialidades.descripcion, especialidades.estado FROM especialidades INNER JOIN consultorio_especialidad ON consultorio_especialidad.id_especialidad = especialidades.id INNER JOIN consultorios ON consultorio_especialidad.id_consultorio = consultorios.id WHERE consultorio_especialidad.id_consultorio = :id_consultorio";
             $resultado = $this->conexion->prepare($listarEspecialidades);
             $resultado->bindParam(':id_consultorio', $id_consultorio);
             $resultado->execute();
@@ -45,7 +44,8 @@ class Especialidad
         }
     }
 
-    public function listarParaLosPacientes() {
+    public function listarParaLosPacientes()
+    {
         try {
             $listarEspecialidades = "SELECT * FROM especialidades WHERE estado = 'ACTIVA'";
             $resultado = $this->conexion->prepare($listarEspecialidades);
@@ -54,6 +54,20 @@ class Especialidad
             return $resultado->fetchAll();
         } catch (PDOException $e) {
             error_log("Error en Especialidad::listarParaLosPacientes->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function listarParaLosSuperAdminstradores()
+    {
+        try {
+            $listarEspecialidades = "SELECT * FROM especialidades";
+            $resultado = $this->conexion->prepare($listarEspecialidades);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::listarParaLosSuperAdministradores->" . $e->getMessage());
             return [];
         }
     }
@@ -85,15 +99,14 @@ class Especialidad
             $resultado->execute();
 
             return $resultado->fetch();
-
-
         } catch (PDOException $e) {
             error_log("Error en Especialidad::listarEspecialidadPorId->" . $e->getMessage());
             return [];
         }
     }
 
-    public function actualizarEspecialidad($data) {
+    public function actualizarEspecialidad($data)
+    {
         try {
             $actualizar = "UPDATE especialidades SET nombre = :nombre, descripcion = :descripcion WHERE id = :id";
 
@@ -105,9 +118,26 @@ class Especialidad
             $resultado->execute();
 
             return true;
-
         } catch (PDOException $e) {
             error_log("Error en Especialidad::actualizarEspecialidad->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function asociarEspecialidad($data)
+    {
+        try {
+            $asociarEspecialidad = "INSERT INTO consultorio_especialidad(id_consultorio, id_especialidad) VALUES (:id_consultorio, :id_especialidad)";
+
+            $resultado = $this->conexion->prepare($asociarEspecialidad);
+            $resultado->bindParam(':id_consultorio', $data['id_consultorio']);
+            $resultado->bindParam(':id_especialidad', $data['id_especialidad']);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::asociarEspecialidad->" . $e->getMessage());
             return false;
         }
     }
