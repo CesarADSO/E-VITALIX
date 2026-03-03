@@ -29,11 +29,11 @@ switch ($method) {
     case 'GET':
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'cancelar') {
-            cancelarCita($_GET['id']);
+            cancelarCita($_GET['id_cita']);
         }
 
-        if (isset($_GET['id'])) {
-            listarCita($_GET['id']);
+        if (isset($_GET['id_cita'])) {
+            listarCita($_GET['id_cita']);
             break;
         }
         mostrarCitas();
@@ -179,14 +179,14 @@ function reagendarCita()
     }
 }
 
-function cancelarCita($id)
-{
+function cancelarCita($id_cita)
+{   
     $ObjCita = new Cita();
 
-    $resultado = $ObjCita->cancelar($id);
+    $resultado = $ObjCita->cancelar($id_cita);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/ListaDeCitas');
+        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
     }
