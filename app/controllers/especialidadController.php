@@ -28,13 +28,20 @@ switch ($method) {
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'modificarEstado') {
             modificarEstadoEspecialidad($_GET['id']);
-        } elseif (isset($_GET['id'])) {
-            listarEspecialidadPorId($_GET['id']);
-        } else {
-            listarEspecialidades();
-            listarParaLosPacientes();
-            listarParaLosSuperAdministradores();
         }
+
+
+        if (isset($_GET['id'])) {
+            listarEspecialidadPorId($_GET['id']);
+        }
+
+        if ($accion === 'desasociar') {
+            desasociarEspecialidad($_GET['id']);
+        }
+
+        listarEspecialidades();
+        listarParaLosPacientes();
+        listarParaLosSuperAdministradores();
 
         break;
 
@@ -211,7 +218,20 @@ function asociarEspecialidadAConsultorio()
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Asociación exitosa', 'Se ha asociado esta especialidad a tu consultorio', '/E-VITALIX/admin/especialidades');
     } else {
-        mostrarSweetAlert('error', 'Error al asociar', 'No se pudo asociar esta disponibilidad a tu consultorio. Intenta nuevamente');
+        mostrarSweetAlert('error', 'Error al asociar', 'No se pudo asociar esta especialidad a tu consultorio. Intenta nuevamente');
+    }
+    exit();
+}
+
+function desasociarEspecialidad($id) {
+    $objEspecialidad = new Especialidad();
+
+    $resultado = $objEspecialidad->desasociarEspecialidad($id);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Desasociación exitosa', 'Se ha desasociado esta especialidad de tu consultorio', '/E-VITALIX/admin/especialidades');
+    } else {
+        mostrarSweetAlert('error', 'Error al Desasociar', 'No se pudo Desasociar esta especialidad a tu consultorio. Intenta nuevamente');
     }
     exit();
 }

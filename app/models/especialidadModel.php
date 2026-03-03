@@ -141,4 +141,19 @@ class Especialidad
             return false;
         }
     }
+
+    public function desasociarEspecialidad($id) {
+        try {
+            $desasociarEspecialidad = "DELETE FROM consultorio_especialidad WHERE id_especialidad = :id_especialidad";
+            $resultado = $this->conexion->prepare($desasociarEspecialidad);
+            $resultado->bindParam(':id_especialidad', $id);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::desasociarEspecialidad->" . $e->getMessage());
+            return false;
+        }
+    }
 }

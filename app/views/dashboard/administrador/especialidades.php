@@ -85,8 +85,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
-                                                            <p>No hay acciones disponibles</p>
-                                                            <!-- <a href="<?= BASE_URL ?>/admin/editar-especialidad?id=<?= $especialidad['id'] ?>" class="btn btn-sm btn-info btn-editar-especialidad" title="Editar especialidad"><i class="fa-solid fa-pen-to-square editar"></i></a> -->
+                                                            <a href="<?= BASE_URL ?>/admin/desasociar-especialidad?id=<?= $especialidad['id'] ?>&accion=desasociar" class="btn btn-sm btn-danger btn-editar-especialidad" title="Desasociar especialidad"><i class="fa-solid fa-x"></i></a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
