@@ -85,7 +85,7 @@ $citas = mostrarCitas();
 
 <?php include_once __DIR__ . '/../../layouts/footer_paciente.php'; ?>
 
-<!-- <script>
+<script>
     $(document).on('click', '.btn-detalle-paciente', function() {
         const idCita = $(this).data('id');
         const modal = new bootstrap.Modal(document.getElementById('modalCitaPaciente'));
@@ -106,4 +106,4 @@ $citas = mostrarCitas();
             $('#detalleCitaBody').html(html);
         });
     });
-</script> -->
+</script>
