@@ -42,7 +42,7 @@ if (!$id) {
                 alt="<?= $perfil['admin_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['admin_nombre'] ?></h6>
+            <!-- <h6><?= $perfil['admin_nombre'] ?></h6> -->
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>

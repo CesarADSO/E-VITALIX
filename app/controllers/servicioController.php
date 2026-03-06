@@ -122,17 +122,17 @@ function mostrarServicios()
     return $resultado;
 }
 
-function mostrarServicios2()
-{
+// function mostrarServicios2()
+// {
 
-    // INSTANCIAMOS EL MODELO
-    $objServicio = new Servicio();
+//     // INSTANCIAMOS EL MODELO
+//     $objServicio = new Servicio();
 
-    // LLAMAMOS AL MODELO
-    $resultado = $objServicio->mostrarParaTodos();
+//     // LLAMAMOS AL MODELO
+//     $resultado = $objServicio->mostrarParaTodos();
 
-    return $resultado;
-}
+//     return $resultado;
+// }
 
 function listarServicio($id)
 {

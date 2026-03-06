@@ -29,11 +29,11 @@ switch ($method) {
     case 'GET':
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'cancelar') {
-            cancelarCita($_GET['id']);
+            cancelarCita($_GET['id_cita']);
         }
 
-        if (isset($_GET['id'])) {
-            listarCita($_GET['id']);
+        if (isset($_GET['id_cita'])) {
+            listarCita($_GET['id_cita']);
             break;
         }
         mostrarCitas();
@@ -112,7 +112,7 @@ function agendarCita()
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/ListaDeCitas');
+        mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo registrar la cita', 'Intente nuevamente');
     }
@@ -145,13 +145,19 @@ function listarCita($id)
 
 function reagendarCita()
 {
-    $id_cita = $_POST['id'] ?? '';
-    $slot = $_POST['horario'] ?? '';
-    $servicio = $_POST['servicio'] ?? '';
-    $motivo = $_POST['motivo'] ?? '';
+    $id_cita = $_POST['id_cita'] ?? '';
+    $id_slot = $_POST['id_slot'] ?? '';
+
+    // REANUDAMOS LA SESIÓN DE FORMA SEGURA
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // OBTENEMOS EL ID DEL PACIENTE LOGUEADO
+    $id_paciente = $_SESSION['user']['id_paciente'] ?? null;
 
     // Validamos los campos que son obligatorios
-    if (empty($slot) || empty($servicio) || empty($motivo)) {
+    if (empty($id_slot) || empty($id_cita) || empty($id_paciente)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -160,28 +166,27 @@ function reagendarCita()
 
     $data = [
         'id_cita' => $id_cita,
-        'horario' => $slot,
-        'servicio' => $servicio,
-        'motivo' => $motivo
+        'id_slot' => $id_slot,
+        'id_paciente' => $id_paciente
     ];
 
     $resultado = $ObjCita->reagendar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita reagendada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/ListaDeCitas');
+        mostrarSweetAlert('success', 'Cita reagendada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo reagendar la cita', 'Intente nuevamente');
     }
 }
 
-function cancelarCita($id)
-{
+function cancelarCita($id_cita)
+{   
     $ObjCita = new Cita();
 
-    $resultado = $ObjCita->cancelar($id);
+    $resultado = $ObjCita->cancelar($id_cita);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/ListaDeCitas');
+        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
     }

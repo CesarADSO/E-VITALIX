@@ -20,7 +20,7 @@
             <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['asistente_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['asistente_nombre'] ?></h6>
+            <!-- <h6><?= $perfil['asistente_nombre'] ?></h6> -->
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>

@@ -25,7 +25,7 @@ $perfil = mostrarPerfilPaciente($id);
             <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $perfil['foto'] ?>" alt="<?= $perfil['paciente_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['paciente_nombre'] ?></h6>
+            <!-- <h6><?= $perfil['paciente_nombre'] ?></h6> -->
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>

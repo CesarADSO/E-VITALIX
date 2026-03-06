@@ -124,6 +124,7 @@ class Consultorio
     LEFT JOIN servicios 
         ON servicios.id_consultorio = consultorios.id
         AND servicios.id_especialidad = :id_especialidad -- <--- ESTA ES LA LÍNEA CLAVE PARA QUE NO ME TRAIGA LOS SERVICIOS DE OTRA ESPECIALIDAD
+        AND servicios.estado_servicio = 'ACTIVO' -- <--- NUEVA LÍNEA CLAVE PARA QUE SOLO SE PUEDAN AGENDAR SERVICIOS ACTIVOS
     WHERE consultorios.id IN (
         /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
         /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */

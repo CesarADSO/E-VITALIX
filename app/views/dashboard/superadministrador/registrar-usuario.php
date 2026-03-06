@@ -79,7 +79,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
-                                <a href="<?= BASE_URL ?>/admin/superadministradores" class="btn btn-outline-secondary">Cancelar</a>
+                                <a href="<?= BASE_URL ?>/superadmin/usuarios" class="btn btn-outline-secondary">Cancelar</a>
                                 <button type="submit" class="btn boton">Registrar Superadministrador</button>
                             </div>
                         </form>

@@ -28,21 +28,21 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                     ?>
 
                     <!-- Horarios Header -->
-                    <h4 class="mb-4">Gestión de slots de agenda</h4>
+                    <h4 class="mb-4">Disponibilidad de horarios</h4>
                     <p class="mb-4">Gestione sus bloques en los cuales puede atender pacientes: Acá podrá visualizarlos, y modificar su estado si es necesario.</p>
                     <!-- Horarios Table -->
                     <div class="card shadow-sm">
                         <div class="card-header card-header-primary">
                             <h5 class="mb-0 text-white">
                                 <i class="bi bi-calendar-check me-2"></i>
-                                Slots de Agenda
+                                Gestión de horarios
                             </h5>
                         </div>
                         <div class="card-body" style="padding: 0;">
                             <?php if (empty($slots)): ?>
                                 <div class="alert alert-info text-center" role="alert">
                                     <i class="bi bi-info-circle me-2"></i>
-                                    No tienes slots registrados en este momento
+                                    No tienes disponibilidad registrada en este momento
                                 </div>
                             <?php else: ?>
                                 <div class="bg-white rounded shadow-sm p-4 cont-tabla-consultorios table-responsive">
@@ -84,7 +84,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else: ?>
-                                                <td>No hay slots registrados</td>
+                                                <td>No hay disponibilidad registrada</td>
                                             <?php endif; ?>
                                         </tbody>
                                     </table>

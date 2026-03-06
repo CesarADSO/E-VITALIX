@@ -1,15 +1,15 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_administrador.php';
-    require_once BASE_PATH . '/app/controllers/servicioController.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/controllers/servicioController.php';
 
 
-    $id = $_GET['id'];
+$id = $_GET['id'];
 
-    $servicio = listarServicio($id);
+$servicio = listarServicio($id);
 
-    $estado = strtolower($servicio['estado_servicio']);
+$estado = strtolower($servicio['estado_servicio']);
 
-    $claseEstado = ($estado === 'activo') ? 'activo' : 'inactivo';
+$claseEstado = ($estado === 'activo') ? 'activo' : 'inactivo';
 ?>
 
 
@@ -37,12 +37,12 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Detalle del Servicio</h5>
                             <span class="badge <?= $claseEstado ?>">
-                                <?php if($estado === 'activo'): ?>
+                                <?php if ($estado === 'activo'): ?>
                                     <span class="badge bg-success"><?= $servicio['estado_servicio'] ?></span>
-                                <?php else:?>
+                                <?php else: ?>
                                     <span class="badge bg-danger"><?= $servicio['estado_servicio'] ?></span>
-                                <?php endif;?>
-                                
+                                <?php endif; ?>
+
                             </span>
                         </div>
 
@@ -68,14 +68,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="col-md-6">
                                     <strong>Método de pago:</strong> <?= $servicio['metodo_pago'] ?>
                                 </div>
+
                             </div>
 
-                            <hr>
-
-                            <h6>Especialista asignado</h6>
-                            <p>
-                                <?= $servicio['nombre_especialista'] ?> <?= $servicio['apellido_especialista'] ?>
-                            </p>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong>Especialidad:</strong> <?= $servicio['nombre_especialidad'] ?>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="card-footer d-flex justify-content-between">

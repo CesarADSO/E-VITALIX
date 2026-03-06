@@ -1,15 +1,15 @@
-<?php 
-    require_once BASE_PATH . '/app/helpers/session_administrador.php';
-    require_once BASE_PATH . '/app/controllers/especialidadController.php';
+<?php
+require_once BASE_PATH . '/app/helpers/session_superadmin.php';
+require_once BASE_PATH . '/app/controllers/especialidadController.php';
 
-    $id = $_GET['id'];
+$id = $_GET['id'];
 
-    $especialidad = listarEspecialidadPorId($id);
+$especialidad = listarEspecialidadPorId($id);
 ?>
 
 
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 ?>
 
 <body>
@@ -17,7 +17,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_superadministrador.php';
             ?>
 
             <!-- Main Content -->
@@ -27,7 +27,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                 <div id="especialidadesSection">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <!-- Asistentes Header -->
@@ -38,7 +38,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (0)
                             </button>
                         </div>
-                        <a href="<?= BASE_URL ?>/admin/especialidades" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                        <a href="<?= BASE_URL ?>/superadmin/especialidades" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
                     <!-- Formulario de modificación de especialidades -->
@@ -47,7 +47,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <p class="text-muted mb-4 texto">Actualiza la información de la especialidad seleccionada</p>
 
 
-                        <form id="especialidadForm" action="<?= BASE_URL ?>/admin/guardar-cambios-especialidad" method="POST">
+                        <form id="especialidadForm" action="<?= BASE_URL ?>/superadmin/guardar-cambios-especialidad" method="POST">
                             <input type="hidden" name="id" value="<?= $especialidad['id'] ?>">
                             <input type="hidden" name="accion" value="actualizar">
 
@@ -66,9 +66,15 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
                             <div class="d-flex justify-content-between">
-                                <a href="<?= BASE_URL ?>/admin/especialidades" class="btn btn-outline-secondary">Cancelar</a>
+                                <a href="<?= BASE_URL ?>/superadmin/especialidades" class="btn btn-outline-secondary">Cancelar</a>
                                 <button type="submit" class="btn boton">Actualizar Especialidad</button>
                             </div>
                     </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+<?php
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
+?>

@@ -25,7 +25,7 @@ $perfil = mostrarPerfilSuperAdmin($id);
             <img class="adminImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>" alt="<?= $perfil['superadmin_nombre'] ?>">
         </div>
         <div class="user-info">
-            <h6><?= $perfil['superadmin_nombre'] ?></h6>
+            <!-- <h6><?= $perfil['superadmin_nombre'] ?></h6> -->
             <div class="user-role"><?= $perfil['roles_nombre'] ?></div>
         </div>
     </div>
@@ -63,6 +63,11 @@ $perfil = mostrarPerfilSuperAdmin($id);
             <i class="fa-solid fa-building-user"></i>
             <span>Asignación de administradores</span>
         </a> -->
+
+        <a class="nav-item" href="<?= BASE_URL ?>/superadmin/especialidades">
+            <i class="fa-solid fa-book-medical"></i>
+            <span>Especialidades</span>
+        </a>
 
         <a class="nav-item" href="<?= BASE_URL ?>/superadmin/tickets-usuarios">
             <i class="bi bi-ticket-detailed"></i>
