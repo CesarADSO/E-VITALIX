@@ -44,6 +44,10 @@ switch ($request) {
     case '/contacto':
         require BASE_PATH . '/app/views/website/contacto.html';
         break;
+
+    case '/precios':
+        require BASE_PATH . '/app/views/website/precios.html';
+        break;
     // Inicio rutas login
     case '/login':
         require BASE_PATH . '/app/views/auth/inicioSesion.php';
