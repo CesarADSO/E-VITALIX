@@ -45,9 +45,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/contacto.html';
         break;
 
-    case '/precios':
-        require BASE_PATH . '/app/views/website/precios.html';
-        break;
+    
     // Inicio rutas login
     case '/login':
         require BASE_PATH . '/app/views/auth/inicioSesion.php';
@@ -171,6 +169,10 @@ switch ($request) {
     // ADMIN INTERFACES
     case '/administrador/dashboard':
         require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
+        break;
+
+    case '/admin/precios':
+        require BASE_PATH . '/app/views/dashboard/administrador/planes.php';
         break;
 
     case '/admin/especialistas':
