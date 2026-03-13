@@ -25,7 +25,7 @@
                     </div>
 
                     <p class="subtitle-registro">
-                        Regístrate para poder crear tu cuenta de pacientee.
+                        Regístrate para poder crear tu cuenta de paciente.
                     </p>
 
 
