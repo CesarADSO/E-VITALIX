@@ -53,6 +53,11 @@ if (!$id) {
             <span>Dashboard</span>
         </a>
 
+        <a class="nav-item" href="<?= BASE_URL ?>/admin/precios">
+            <i class="fas fa-gem"></i>
+            <span>Planes y suscripción</span>
+        </a>
+
         <a class="nav-item" href="<?= BASE_URL ?>/admin/especialistas">
             <i class="fa-solid fa-user-doctor"></i>
             <span>Especialistas</span>
