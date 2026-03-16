@@ -349,6 +349,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;
 
+    case '/admin/confirmar-compra':
+        require BASE_PATH . '/app/views/dashboard/administrador/confirmar-compra.php';
+        break;
+
     // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':
         require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
