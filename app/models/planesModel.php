@@ -25,4 +25,19 @@ class Plan
             return [];
         }
     }
+
+    // CREAMOS LA FUNCIÓN PARA TRAER EL RESUMEN DEL PLAN SELECCIONADO
+    public function consultarPlanPorId($id) {
+        try {
+            $consultar = "SELECT * FROM planes_suscripcion WHERE id = :id";
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Plan::consultarPlanPorId->" . $e->getMessage());
+            return [];
+        }
+    }
 }

@@ -1,5 +1,11 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/controllers/planesController.php';
+
+$id = $_GET['id_plan'];
+
+$plan = consultarPlanPorId($id);
 ?>
 
 <body>
@@ -59,12 +65,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="icono-plan-nombre">
                                     <i class="bi bi-rocket-takeoff-fill"></i>
                                 </div>
-                                Plan Básico
+                                <?= $plan['nombre'] ?>
                             </h2>
 
                             <p class="descripcion-plan-seleccionado">
-                                Ideal para consultorios en crecimiento. Gestiona hasta 100 especialistas
-                                con todas las herramientas necesarias para optimizar tu consultorio médico.
+                                <?= $plan['descripcion'] ?>. tienes la capacidad de gestionar <?= $plan['limite_citas_mensuales'] ?> citas al mes.
                             </p>
 
                             <!-- Características incluidas -->
@@ -73,10 +78,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <i class="bi bi-check-circle-fill"></i>
                                     Lo que incluye este plan
                                 </h3>
+                                <?php if($plan['id'] == 2): ?>
                                 <ul class="lista-incluye">
                                     <li class="item-incluye">
                                         <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Hasta 100 especialistas registrados</span>
+                                        <span class="texto-incluye">Hasta 300 citas al mes</span>
                                     </li>
                                     <li class="item-incluye">
                                         <i class="bi bi-check-circle-fill icono-check-verde"></i>
@@ -99,6 +105,18 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <span class="texto-incluye">Recordatorios automáticos por SMS</span>
                                     </li>
                                 </ul>
+                                <?php else:?>
+                                   <ul class="lista-incluye">
+                                    <li class="item-incluye">
+                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                        <span class="texto-incluye">Hasta 3000 citas al mes</span>
+                                    </li>
+                                    <li class="item-incluye">
+                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                        <span class="texto-incluye">Todo lo del plan profesional</span>
+                                    </li>
+                                </ul> 
+                                <?php endif;?>
                             </div>
                         </div>
 
@@ -196,7 +214,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <br>
 
-                            <a href="planes.php" class="boton-volver">
+                            <a href="<?= BASE_URL ?>/admin/precios" class="boton-volver">
                                 <i class="bi bi-arrow-left"></i>
                                 Volver a planes
                             </a>

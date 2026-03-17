@@ -143,7 +143,7 @@ $plan = traerId();
 
                                 <!-- Botón de acción -->
                                 <div class="contenedor-boton">
-                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan<?= $plan[0]['id'] ?>" class="boton-plan boton-basico">
+                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=<?= $plan[1]['id'] ?>" class="boton-plan boton-basico">
                                         Elegir Plan profesional
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -199,7 +199,7 @@ $plan = traerId();
 
                                 <!-- Botón de acción -->
                                 <div class="contenedor-boton">
-                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=<?= $plan[1]['id'] ?>" class="boton-plan boton-premium">
+                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=<?= $plan[2]['id'] ?>" class="boton-plan boton-premium">
                                         Elegir plan élite
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
