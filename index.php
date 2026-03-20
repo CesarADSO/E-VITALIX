@@ -350,8 +350,17 @@ switch ($request) {
         break;
 
     case '/admin/confirmar-compra':
-        require BASE_PATH . '/app/views/dashboard/administrador/confirmar-compra.php';
+        require BASE_PATH . '/app/controllers/planesController.php';
+        PrepararResumenPago($_GET['id_plan']);
         break;
+
+    // case '/admin/pago-exitoso':
+    //     require BASE_PATH . '/app/views/dashboard/administrador/planes.php';
+    //     break;
+
+    // case '/admin/pago-fallido':
+    //     require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador-php';
+    //     break;
 
     // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':

@@ -1,12 +1,10 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/planesController.php';
+// require_once BASE_PATH . '/app/controllers/planesController.php';
 
-$id = $_GET['id_plan'];
-
-$plan = consultarPlanPorId($id);
 ?>
+
 
 <body>
     <div class="container-fluid">
@@ -65,11 +63,11 @@ $plan = consultarPlanPorId($id);
                                 <div class="icono-plan-nombre">
                                     <i class="bi bi-rocket-takeoff-fill"></i>
                                 </div>
-                                <?= $plan['nombre'] ?>
+                                <?= $resultado['nombre'] ?>
                             </h2>
 
                             <p class="descripcion-plan-seleccionado">
-                                <?= $plan['descripcion'] ?>. tienes la capacidad de gestionar <?= $plan['limite_citas_mensuales'] ?> citas al mes.
+                                <?= $resultado['descripcion'] ?>. tienes la capacidad de gestionar <?= $resultado['limite_citas_mensuales'] ?> citas al mes.
                             </p>
 
                             <!-- Características incluidas -->
@@ -78,45 +76,45 @@ $plan = consultarPlanPorId($id);
                                     <i class="bi bi-check-circle-fill"></i>
                                     Lo que incluye este plan
                                 </h3>
-                                <?php if($plan['id'] == 2): ?>
-                                <ul class="lista-incluye">
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Hasta 300 citas al mes</span>
-                                    </li>
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Gestión avanzada de citas médicas</span>
-                                    </li>
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Historial clínico digital completo</span>
-                                    </li>
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Soporte prioritario 24/7</span>
-                                    </li>
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Reportes y analíticas avanzadas</span>
-                                    </li>
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Recordatorios automáticos por SMS</span>
-                                    </li>
-                                </ul>
-                                <?php else:?>
-                                   <ul class="lista-incluye">
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Hasta 3000 citas al mes</span>
-                                    </li>
-                                    <li class="item-incluye">
-                                        <i class="bi bi-check-circle-fill icono-check-verde"></i>
-                                        <span class="texto-incluye">Todo lo del plan profesional</span>
-                                    </li>
-                                </ul> 
-                                <?php endif;?>
+                                <?php if ($resultado['id'] == 2): ?>
+                                    <ul class="lista-incluye">
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Hasta 300 citas al mes</span>
+                                        </li>
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Gestión avanzada de citas médicas</span>
+                                        </li>
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Historial clínico digital completo</span>
+                                        </li>
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Soporte prioritario 24/7</span>
+                                        </li>
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Reportes y analíticas avanzadas</span>
+                                        </li>
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Recordatorios automáticos por SMS</span>
+                                        </li>
+                                    </ul>
+                                <?php else: ?>
+                                    <ul class="lista-incluye">
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Hasta 3000 citas al mes</span>
+                                        </li>
+                                        <li class="item-incluye">
+                                            <i class="bi bi-check-circle-fill icono-check-verde"></i>
+                                            <span class="texto-incluye">Todo lo del plan profesional</span>
+                                        </li>
+                                    </ul>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -124,22 +122,22 @@ $plan = consultarPlanPorId($id);
                         <div class="seccion-periodo">
                             <h3 class="titulo-seccion">
                                 <i class="bi bi-calendar-range"></i>
-                                Elige tu período de facturación
+                                Periodo de facturación seleccionado
                             </h3>
 
-                            <div class="opciones-periodo">
+                            <div class="row opciones-periodo">
                                 <!-- Opción Mensual -->
-                                <div class="opcion-periodo">
+                                <div class="col-md-12 opcion-periodo">
                                     <input type="radio" name="periodo" id="mensual" value="mensual" checked>
                                     <label for="mensual" class="label-periodo">
                                         <span class="nombre-periodo">Mensual</span>
                                         <span class="precio-periodo">
-                                            $49 <small>/mes</small>
+                                            $<?= $resultado['precio'] ?> <small>/mes</small>
                                         </span>
                                     </label>
                                 </div>
 
-                                <!-- Opción Anual -->
+                                <!-- Opción Anual
                                 <div class="opcion-periodo">
                                     <span class="badge-ahorro">Ahorra 20%</span>
                                     <input type="radio" name="periodo" id="anual" value="anual">
@@ -149,7 +147,7 @@ $plan = consultarPlanPorId($id);
                                             $39 <small>/mes</small>
                                         </span>
                                     </label>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -159,34 +157,34 @@ $plan = consultarPlanPorId($id);
 
                             <div class="fila-costo">
                                 <span class="label-costo">Subtotal (Plan Básico - Mensual)</span>
-                                <span class="valor-costo" id="subtotal">$49.00</span>
+                                <span class="valor-costo" id="subtotal">$<?= $resultado['precio'] ?></span>
                             </div>
 
-                            <div class="fila-costo fila-descuento" style="display: none;" id="fila-descuento">
+                            <!-- <div class="fila-costo fila-descuento" style="display: none;" id="fila-descuento">
                                 <span class="label-costo">Descuento (20% pago anual)</span>
                                 <span class="valor-costo" id="descuento">-$0.00</span>
-                            </div>
+                            </div> -->
 
-                            <div class="fila-costo">
+                            <!-- <div class="fila-costo">
                                 <span class="label-costo">IVA (19%)</span>
                                 <span class="valor-costo" id="iva">$9.31</span>
-                            </div>
+                            </div> -->
 
                             <div class="fila-costo fila-total">
                                 <span class="label-costo">Total a pagar</span>
-                                <span class="valor-costo" id="total">$58.31</span>
+                                <span class="valor-costo" id="total">$<?= $resultado['precio'] ?></span>
                             </div>
                         </div>
 
                         <!-- Información adicional -->
                         <div class="seccion-info-adicional">
-                            <div class="caja-info">
+                            <!-- <div class="caja-info">
                                 <i class="bi bi-shield-fill-check icono-info"></i>
                                 <div class="texto-info">
                                     <h6>Garantía de 30 días</h6>
                                     <p>Si no estás satisfecho, te devolvemos tu dinero sin hacer preguntas.</p>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="caja-info">
                                 <i class="bi bi-credit-card-fill icono-info"></i>
@@ -196,21 +194,25 @@ $plan = consultarPlanPorId($id);
                                 </div>
                             </div>
 
-                            <div class="caja-info">
+                            <!-- <div class="caja-info">
                                 <i class="bi bi-arrow-repeat icono-info"></i>
                                 <div class="texto-info">
                                     <h6>Renovación automática</h6>
                                     <p>Tu plan se renovará automáticamente. Puedes cancelar en cualquier momento.</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <!-- Botones de acción -->
                         <div class="seccion-acciones">
-                            <a href="pasarela-pago.php" class="boton-proceder-pago">
+                            <!-- <a href="pasarela-pago.php" class="boton-proceder-pago">
                                 <i class="bi bi-lock-fill"></i>
                                 Proceder al Pago Seguro
-                            </a>
+                            </a> -->
+                            <!-- contenedor para el botón de mercadoPago -->
+                            <div id="wallet_container">
+
+                            </div>
 
                             <br>
 
@@ -224,6 +226,33 @@ $plan = consultarPlanPorId($id);
             </div>
         </div>
     </div>
+
+    <!-- CÓDIGO JAVASCRIPT PARA CREAR EL BOTÓN PARA EL PAGO -->
+    <!-- IMPORTAMOS EL SDK DE MERCADO PAGO DE JAVASCRIPT -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <!-- CREAMOS EL PEQUEÑO SCRIPT QUE NOS VA A GENERAR EL BOTÓN PARA EL PAGO -->
+     <script>
+        // EMPEZAMOS INSERTANDO NUESTRA PUBLIC KEY DE PRUEBA
+        const mp = new MercadoPago('APP_USR-8774ef0b-9aa5-4aba-9d6f-b0246f211215');
+        const bricksBuilder = mp.bricks();
+        
+        bricksBuilder.create('wallet', 'wallet_container', {
+            // EN ESTA PARTE DEL CÓDIGO INICIALIZAMOS EL BOTÓN, POR DEFECTO NOS VA A TRAER UN BOTÓN POR DEFECTO DE MERCADO PAGO
+            initialization: {
+                // Aquí usamos la variable que el controlador nos dejó lista
+                preferenceId: '<?= $preferenceId ?>',
+            },
+            // EN ESTA PARTE CUSTOMIZAMOS O PERSONALIZAMOS EL BOTÓN PARA QUE NO SE VEA GENÉRICO
+            // customization: {
+            //     texts: {
+            //         action: 'pay',
+            //         valueProp: 'smart_option',
+            //     },
+            // },
+        })
+     </script>
+
     <?php
     include_once __DIR__ . '/../../layouts/footer_administrador.php';
     ?>

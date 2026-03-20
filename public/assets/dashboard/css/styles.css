@@ -1102,6 +1102,7 @@
 
     /* Título principal de la vista */
     .main-content h3 {
+        margin-top: 20px;
         font-size: var(--titulo-bloque);
         font-weight: 800;
         color: var(--color-primario);
@@ -3491,7 +3492,7 @@
     }
 
     .opciones-periodo {
-        display: grid;
+        /* display: grid; */
         grid-template-columns: 1fr 1fr;
         gap: 15px;
     }

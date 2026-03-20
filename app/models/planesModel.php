@@ -21,23 +21,42 @@ class Plan
             return $resultado->fetchAll();
 
         } catch (PDOException $e) {
-            error_log("Error en Plan::mostrar->" . $e->getMessage());
+            error_log("Error en Plan::traerId->" . $e->getMessage());
             return [];
         }
     }
 
     // CREAMOS LA FUNCIÓN PARA TRAER EL RESUMEN DEL PLAN SELECCIONADO
-    public function consultarPlanPorId($id) {
+    public function consultarPlanPorId($id_plan) {
         try {
             $consultar = "SELECT * FROM planes_suscripcion WHERE id = :id";
             $resultado = $this->conexion->prepare($consultar);
-            $resultado->bindParam(':id', $id);
+            $resultado->bindParam(':id', $id_plan);
             $resultado->execute();
 
             return $resultado->fetch();
         } catch (PDOException $e) {
             error_log("Error en Plan::consultarPlanPorId->" . $e->getMessage());
             return [];
+        }
+    }
+
+    // CREAMOS LA FUNCIÓN PARA ACTUALIZAR EL PLAN AL CONSULTORIO
+    public function actualizarPlanConsultorio($id_consultorio, $id_plan) {
+        try {
+            // CREAMOS LA QUERY PARA ACTUALIZAR EL PLAN DEL CONSULTORIO
+            $actualizarPlan = "UPDATE consultorios SET id_plan = :id_plan WHERE id = :id_consultorio";
+            $resultado = $this->conexion->prepare($actualizarPlan);
+
+            $resultado->bindParam(':id_plan', $id_plan);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
+
+            $resultado->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Plan::actualizarPlanConsultorio->" . $e->getMessage());
+            return false;
         }
     }
 }
