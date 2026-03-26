@@ -45,7 +45,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/contacto.html';
         break;
 
-    
+
     // Inicio rutas login
     case '/login':
         require BASE_PATH . '/app/views/auth/inicioSesion.php';
@@ -271,7 +271,7 @@ switch ($request) {
     case '/admin/asociar-especialidad':
         require BASE_PATH . '/app/views/dashboard/administrador/asociar-especialidad.php';
         break;
-    
+
     case '/admin/guardar-asociacion':
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
@@ -354,13 +354,11 @@ switch ($request) {
         PrepararResumenPago($_GET['id_plan']);
         break;
 
-    // case '/admin/pago-exitoso':
-    //     require BASE_PATH . '/app/views/dashboard/administrador/planes.php';
-    //     break;
+    case '/admin/pago-exitoso':
+    case '/admin/pago-fallido':
+        require BASE_PATH . '/app/controllers/planesController.php';
+        break;
 
-    // case '/admin/pago-fallido':
-    //     require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador-php';
-    //     break;
 
     // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':

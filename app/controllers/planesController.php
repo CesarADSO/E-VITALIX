@@ -15,14 +15,23 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        // CASO A: El usuario entra a revisar el plan antes de pagar
-        if (isset($_GET['id_plan'])) {
-            prepararResumenPago($_GET['id_plan']);
+        // PRIORIDAD 1: ¿Viene de Mercado Pago con un resultado?
+        if (isset($_GET['status'])) {
+            if ($_GET['status'] === 'approved') {
+                finalizarPagoExitoso();
+            } else {
+                finalizarPagoFallido();
+            }
+            // Importante: detenemos la ejecución para que no cargue nada más
+            exit; 
         }
 
-        if (isset($_GET['status']) && $_GET['status'] === 'approved') {
-            finalizarPagoExitoso();
+        // PRIORIDAD 2: ¿El usuario apenas va a revisar el plan?
+        if (isset($_GET['id_plan'])) {
+            prepararResumenPago($_GET['id_plan']);
+            exit;
         }
+
 
         traerId();
         break;
@@ -100,7 +109,8 @@ function PrepararResumenPago($id_plan)
     require_once BASE_PATH . '/app/views/dashboard/administrador/confirmar-compra.php';
 }
 
-function finalizarPagoExitoso() {
+function finalizarPagoExitoso()
+{
     // PRIMERO REANUDAMOS LA SESSIÓN DE FORMA SEGURA
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
@@ -108,8 +118,12 @@ function finalizarPagoExitoso() {
 
     // OBTENEMOS EL ID DEL CONSULTORIO DE LA EXTERNAL_REFERENCE DE MERCADO PAGO
     // Y EL ID DEL PLAN DE LA SESSIÓN QUE CREAMOS EN LA FUNCIÓN ANTERIOR COMO ES UNA VARIABLE SESSION ENTONCES ESTÁ ESTÁ DENTRO DEL SCOPE DE ESTA FUNCIÓN Y NO MUERE CUANDO TERMINA LA FUNCIÓN PrepararResumenPago
+    $status = $_GET['status'] ?? $_GET['collection_status'] ?? null;
     $id_consultorio = $_GET['external_reference'];
     $id_plan = $_SESSION['plan_seleccionado_id'];
+
+    // DEBUG: Si quieres estar seguro en la consola de XAMPP
+    error_log("Procesando pago: Consultorio $id_consultorio, Plan $id_plan, Status $status");
 
     // VALIDAMOS SI EXISTEN LOS DOS IDS EMPEZAMOS A HACER LA LÓGICA
     if ($id_consultorio && $id_plan) {
@@ -125,10 +139,25 @@ function finalizarPagoExitoso() {
             unset($_SESSION['plan_seleccionado_id']);
 
             // MOSTRAMOS EL MENSAJE DE CONFIRMACIÓN
-            mostrarSweetAlert('success', '¡Suscripción exitosa!', 'Tu plan ya ha sido actualizado ya puedes disfrutar de los nuevos beneficios', '/E-VITALIX/admin/dashboard');
-        }
-        else {
+            mostrarSweetAlert('success', '¡Suscripción exitosa!', 'Tu plan ya ha sido actualizado ya puedes disfrutar de los nuevos beneficios', '/E-VITALIX/administrador/dashboard');
+        } else {
             mostrarSweetAlert('error', 'Error al actualizar tu plan', 'La compra fue aprobada pero no pudimos actualizar tu plan contacta a soporte', '/E-VITALIX/admin/precios');
         }
     }
+}
+
+function finalizarPagoFallido()
+{
+    // REANUDAMOS LA SESIÓN
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // LIMPIAMOS EL ID DEL PLAN PARA EVITAR ERRORES SI REINTENTA
+    if (isset($_SESSION['plan_seleccionado_id'])) {
+        unset($_SESSION['plan_seleccionado_id']);
+    }
+
+    // MOSTRAR EL MENSAJE DE ERROR Y REDIRECCIONAR
+    mostrarSweetAlert('error', 'Pago no completado', 'No pudimos procesar tu pago. Por favor, intenta de nuevo o usa otro método de pago', '/E-VITALIX/admin/precios');
 }
