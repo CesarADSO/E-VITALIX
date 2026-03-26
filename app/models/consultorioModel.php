@@ -203,4 +203,13 @@ class Consultorio
             return false;
         }
     }
+
+    public function verificarVigenciaPlan($id_consultorio) {
+        try {
+            //code...
+        } catch (PDOException $e) {
+            error_log("Error en Consultorio::verificarVigenciaPlan->" . $e->getMessage());
+            return false;
+        }
+    }
 }
