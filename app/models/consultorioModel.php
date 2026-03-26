@@ -107,7 +107,7 @@ class Consultorio
 
             // HACEMOS LA CONSULTA DE LOS CONSULTORIOS
 
-    $consulta = "SELECT 
+            $consulta = "SELECT 
         consultorios.*, consultorios.id AS id_consultorio,
         consultorio_especialidad.id_especialidad,
         /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
@@ -204,9 +204,52 @@ class Consultorio
         }
     }
 
-    public function verificarVigenciaPlan($id_consultorio) {
+    public function verificarVigenciaPlan($id_consultorio)
+    {
         try {
-            //code...
+            // Obtenemos los datos actuales del consultorio
+            $obtenerDatosConsultorio = "SELECT id_plan, fecha_vencimiento_plan FROM consultorios WHERE id = :id_consultorio";
+
+            $resultado = $this->conexion->prepare($obtenerDatosConsultorio);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
+
+            $resultado->execute();
+
+            // En la variable consultorio guardamos esos datos
+            $consultorio = $resultado->fetch();
+
+            // Si el consultorio no existe o está en el plan 1 no hacemos nada
+            if (!$consultorio || $consultorio['id_plan'] == 1 || $consultorio['fecha_vencimiento_plan'] == null) {
+                return false;
+            }
+
+            // ==========================================
+            // PASO 2: LA MATEMÁTICA EN PHP (El IF)
+            // ==========================================
+
+            // Extraemos en una variable la fecha de vencimiento de ese plan
+            $fechaVencimiento = $consultorio['fecha_vencimiento_plan'];
+
+            // Obtenemos la fecha de hoy
+            $fechaHoy = date('Y-m-d');
+
+            // Validamos que si la fecha de vencimiento es menor a la fecha de hoy para hacer el update del id_plan a 1
+            if ($fechaVencimiento < $fechaHoy) {
+                // ==========================================
+                // PASO 3: IR A MODIFICAR (El UPDATE)
+                // ==========================================
+
+                $modificarIdPlan = "UPDATE consultorios SET id_plan = 1, fecha_vencimiento_plan = NULL WHERE id = :id_consultorio";
+                $resultado2 = $this->conexion->prepare($modificarIdPlan);
+                $resultado2->bindParam(':id_consultorio', $id_consultorio);
+
+                // Ejecutamos la consulta sql
+                $resultado2->execute();
+
+                // Retornamos true
+                return true;
+            }
+            
         } catch (PDOException $e) {
             error_log("Error en Consultorio::verificarVigenciaPlan->" . $e->getMessage());
             return false;
