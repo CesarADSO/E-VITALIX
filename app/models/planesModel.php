@@ -45,7 +45,8 @@ class Plan
     public function actualizarPlanConsultorio($id_consultorio, $id_plan) {
         try {
             // CREAMOS LA QUERY PARA ACTUALIZAR EL PLAN DEL CONSULTORIO
-            $actualizarPlan = "UPDATE consultorios SET id_plan = :id_plan WHERE id = :id_consultorio";
+            // AGREGAMOS EL CAMPOS fecha_vencimiento_plan, LA FUNCIÓN DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH) LO QUE HACE ES AGREAGARLE UN MES EJEMPLO SI HOY ES 26 DE MARZO AUTOMÁTICAMENTE AGREGAR EL 26 DE ABRIL
+            $actualizarPlan = "UPDATE consultorios SET id_plan = :id_plan, fecha_vencimiento_plan = DATE_ADD(CURRENT_DATE(), INTERVAL 1 MONTH) WHERE id = :id_consultorio";
             $resultado = $this->conexion->prepare($actualizarPlan);
 
             $resultado->bindParam(':id_plan', $id_plan);
