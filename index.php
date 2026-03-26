@@ -45,9 +45,7 @@ switch ($request) {
         require BASE_PATH . '/app/views/website/contacto.html';
         break;
 
-    case '/precios':
-        require BASE_PATH . '/app/views/website/precios.html';
-        break;
+
     // Inicio rutas login
     case '/login':
         require BASE_PATH . '/app/views/auth/inicioSesion.php';
@@ -173,6 +171,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
         break;
 
+    case '/admin/precios':
+        require BASE_PATH . '/app/views/dashboard/administrador/planes.php';
+        break;
+
     case '/admin/especialistas':
         require BASE_PATH . '/app/views/dashboard/administrador/especialistas.php';
         break;
@@ -269,7 +271,7 @@ switch ($request) {
     case '/admin/asociar-especialidad':
         require BASE_PATH . '/app/views/dashboard/administrador/asociar-especialidad.php';
         break;
-    
+
     case '/admin/guardar-asociacion':
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
@@ -346,6 +348,17 @@ switch ($request) {
     case '/admin/perfil':
         require BASE_PATH . '/app/views/dashboard/administrador/perfil-admin.php';
         break;
+
+    case '/admin/confirmar-compra':
+        require BASE_PATH . '/app/controllers/planesController.php';
+        PrepararResumenPago($_GET['id_plan']);
+        break;
+
+    case '/admin/pago-exitoso':
+    case '/admin/pago-fallido':
+        require BASE_PATH . '/app/controllers/planesController.php';
+        break;
+
 
     // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':

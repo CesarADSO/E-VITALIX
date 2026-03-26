@@ -1,0 +1,4 @@
+# Ignorar configuraciones específicas del entorno
+config/config.php
+config/database.php
+.htaccess

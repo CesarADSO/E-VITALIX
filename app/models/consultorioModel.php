@@ -149,7 +149,7 @@ class Consultorio
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT * FROM consultorios WHERE id = :id LIMIT 1";
+            $consulta = "SELECT consultorios.*, planes_suscripcion.limite_citas_mensuales FROM consultorios INNER JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id WHERE consultorios.id = :id LIMIT 1";
 
             $resultado = $this->conexion->prepare($consulta);
 

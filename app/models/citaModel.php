@@ -2458,4 +2458,20 @@ class Cita
             return false;
         }
     }
+
+    public function contarCitasMensuales($id_consultorio) {
+        try {
+            // CREAMOS LA CONSULTA PARA CONTAR LAS CITAS MENSUALES DEL CONSULTORIO
+            $contarCitas = "SELECT COUNT(citas.id) AS total_citas FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE consultorios.id = :id_consultorio AND MONTH(agenda_slot.fecha) = MONTH(CURRENT_DATE()) AND YEAR(agenda_slot.fecha) = YEAR(CURRENT_DATE())";
+
+            $resultado = $this->conexion->prepare($contarCitas);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Cita::contarCitasMensuales->" . $e->getMessage());
+            return [];
+        }
+    }
 }

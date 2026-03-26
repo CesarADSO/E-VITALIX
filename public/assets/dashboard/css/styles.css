@@ -1102,6 +1102,7 @@
 
     /* Título principal de la vista */
     .main-content h3 {
+        margin-top: 20px;
         font-size: var(--titulo-bloque);
         font-weight: 800;
         color: var(--color-primario);
@@ -2757,4 +2758,1020 @@
     .empty-state p {
         font-size: var(--parrafos);
         color: #6c757d;
+    }
+
+    /* ========================================
+   SECCIÓN PRINCIPAL DE PLANES
+======================================== */
+    .seccion-planes {
+        padding: 50px 0;
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .seccion-planes::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(0, 123, 255, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .seccion-planes::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: -10%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(12, 73, 138, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    /* ========================================
+   ENCABEZADO DE LA SECCIÓN
+======================================== */
+    .encabezado-planes {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 60px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .etiqueta-superior {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        color: white;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-size: var(--texto-auxiliar);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+    }
+
+    .titulo-principal-planes {
+        font-size: var(--titulo-principal);
+        font-weight: 800;
+        color: var(--color-secundario);
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .descripcion-planes {
+        font-size: var(--parrafos);
+        color: #6c757d;
+        line-height: 1.8;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* ========================================
+   SELECTOR DE PERÍODO
+======================================== */
+    .selector-periodo {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .contenedor-selector {
+        display: inline-flex;
+        background: white;
+        padding: 8px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 2px solid #e9ecef;
+    }
+
+    .boton-periodo {
+        padding: 14px 32px;
+        border: none;
+        background: transparent;
+        color: #6c757d;
+        font-weight: 700;
+        font-size: var(--parrafos);
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .boton-periodo.activo {
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .etiqueta-descuento {
+        display: inline-block;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+
+    /* ========================================
+   GRID DE PLANES
+======================================== */
+    .grid-planes {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ========================================
+   TARJETAS DE PLANES
+======================================== */
+    .tarjeta-plan {
+        background: white;
+        border-radius: 24px;
+        padding: 40px 32px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        border: 2px solid transparent;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .tarjeta-plan::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--color-primario), var(--tercer-azul));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .tarjeta-plan:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 16px 48px rgba(0, 123, 255, 0.2);
+        border-color: var(--color-primario);
+    }
+
+    .tarjeta-plan:hover::before {
+        opacity: 1;
+    }
+
+    /* Plan destacado (Básico) */
+    .plan-destacado {
+        border: 3px solid var(--color-primario);
+        box-shadow: 0 12px 40px rgba(0, 123, 255, 0.15);
+        transform: scale(1.05);
+    }
+
+    .plan-destacado::before {
+        opacity: 1;
+        height: 8px;
+    }
+
+    .plan-destacado:hover {
+        transform: scale(1.08) translateY(-12px);
+    }
+
+    /* Insignia de popular */
+    .insignia-popular {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #ffd700, #ffed4e);
+        color: var(--gris-proyecto);
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: var(--texto-auxiliar);
+        font-weight: 800;
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .insignia-popular i {
+        font-size: 14px;
+    }
+
+    /* ========================================
+   ENCABEZADO DEL PLAN
+======================================== */
+    .encabezado-plan {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .icono-plan {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 40px;
+        color: white;
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .tarjeta-plan:hover .icono-plan {
+        transform: rotateY(360deg);
+    }
+
+    .plan-gratuito .icono-plan {
+        background: linear-gradient(135deg, #6c757d, #495057);
+        box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+    }
+
+    .plan-premium .icono-plan {
+        background: linear-gradient(135deg, #6f42c1, #5a32a3);
+        box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+    }
+
+    .nombre-plan {
+        font-size: var(--titulo-bloque);
+        font-weight: 800;
+        color: var(--color-secundario);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .descripcion-plan {
+        font-size: var(--parrafos);
+        color: #6c757d;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* ========================================
+   PRECIO
+======================================== */
+    .contenedor-precio {
+        text-align: center;
+        padding: 30px 0;
+        border-top: 2px solid #f8f9fa;
+        border-bottom: 2px solid #f8f9fa;
+        margin-bottom: 30px;
+    }
+
+    .precio-principal {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .simbolo-moneda {
+        font-size: var(--titulo-bloque);
+        font-weight: 700;
+        color: var(--color-primario);
+        margin-right: 4px;
+        margin-top: 8px;
+    }
+
+    .numero-precio {
+        font-size: 64px;
+        font-weight: 900;
+        color: var(--color-secundario);
+        line-height: 1;
+    }
+
+    .periodo-precio {
+        font-size: var(--subtitulo-menor);
+        color: #6c757d;
+        font-weight: 600;
+        margin-left: 4px;
+        margin-top: 36px;
+    }
+
+    .texto-precio-anual {
+        font-size: var(--texto-auxiliar);
+        color: #6c757d;
+        margin: 0;
+    }
+
+    .precio-anual-mostrar {
+        display: none;
+    }
+
+    /* ========================================
+   CARACTERÍSTICA DESTACADA
+======================================== */
+    .caracteristica-destacada {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 16px;
+        padding: 24px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        border: 2px solid #dee2e6;
+    }
+
+    .caracteristica-destacada i {
+        font-size: 36px;
+        color: var(--color-primario);
+    }
+
+    .info-destacada {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .numero-destacado {
+        font-size: 32px;
+        font-weight: 900;
+        color: var(--color-secundario);
+        line-height: 1;
+    }
+
+    .texto-destacado {
+        font-size: var(--texto-auxiliar);
+        color: #6c757d;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* ========================================
+   LISTA DE CARACTERÍSTICAS
+======================================== */
+    .lista-caracteristicas {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 30px 0;
+        flex-grow: 1;
+    }
+
+    .item-caracteristica {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .item-caracteristica:last-child {
+        border-bottom: none;
+    }
+
+    .item-caracteristica:hover {
+        padding-left: 8px;
+    }
+
+    .icono-check {
+        font-size: 20px;
+        color: #28a745;
+        min-width: 20px;
+        margin-top: 2px;
+    }
+
+    .icono-x {
+        font-size: 20px;
+        color: #dc3545;
+        min-width: 20px;
+        margin-top: 2px;
+    }
+
+    .item-caracteristica span {
+        font-size: var(--parrafos);
+        color: var(--gris-proyecto);
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .item-deshabilitado {
+        opacity: 0.5;
+    }
+
+    .item-deshabilitado span {
+        text-decoration: line-through;
+        color: #6c757d;
+    }
+
+    /* ========================================
+   BOTONES DE PLANES
+======================================== */
+    .contenedor-boton {
+        margin-top: auto;
+    }
+
+    .boton-plan {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 18px 32px;
+        border: none;
+        border-radius: 12px;
+        font-size: var(--parrafos);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .boton-gratuito {
+        background: linear-gradient(135deg, #6c757d, #495057);
+        color: white;
+        box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+    }
+
+    .boton-gratuito:hover {
+        background: linear-gradient(135deg, #5a6268, #343a40);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+        color: white;
+    }
+
+    .boton-basico {
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .boton-basico:hover {
+        background: linear-gradient(135deg, var(--tercer-azul), var(--color-secundario));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+        color: white;
+    }
+
+    .boton-premium {
+        background: linear-gradient(135deg, #6f42c1, #5a32a3);
+        color: white;
+        box-shadow: 0 4px 12px rgba(111, 66, 193, 0.3);
+    }
+
+    .boton-premium:hover {
+        background: linear-gradient(135deg, #5a32a3, #4a2889);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(111, 66, 193, 0.5);
+        color: white;
+    }
+
+    .boton-plan i {
+        font-size: 18px;
+        transition: transform 0.3s ease;
+    }
+
+    .boton-plan:hover i {
+        transform: translateX(4px);
+    }
+
+    /* SECCIÓN RESUMEN DE COMPRA */
+    /* ========================================
+           CONTENEDOR PRINCIPAL
+        ======================================== */
+    .contenedor-resumen {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* ========================================
+           BREADCRUMB PERSONALIZADO
+        ======================================== */
+    .breadcrumb-personalizado {
+        background: white;
+        border-radius: 12px;
+        padding: 20px 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .pasos-progreso {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .paso-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .numero-paso {
+        width: 40px;
+        height: 40px;
+        background: #e9ecef;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #6c757d;
+        font-size: var(--parrafos);
+    }
+
+    .paso-item.activo .numero-paso {
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        color: white;
+    }
+
+    .paso-item.completado .numero-paso {
+        background: #28a745;
+        color: white;
+    }
+
+    .texto-paso {
+        font-size: var(--texto-auxiliar);
+        font-weight: 600;
+        color: #6c757d;
+    }
+
+    .paso-item.activo .texto-paso {
+        color: var(--color-secundario);
+    }
+
+    .separador-paso {
+        width: 50px;
+        height: 2px;
+        background: #e9ecef;
+    }
+
+    .paso-item.completado~.separador-paso {
+        background: #28a745;
+    }
+
+    /* ========================================
+           HEADER DEL RESUMEN
+        ======================================== */
+    .header-resumen {
+        background: linear-gradient(135deg, var(--color-secundario), var(--color-primario));
+        border-radius: 16px 16px 0 0;
+        padding: 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .header-resumen::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+    }
+
+    .icono-resumen {
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 50px;
+        color: white;
+        position: relative;
+        z-index: 1;
+    }
+
+    .titulo-resumen {
+        font-size: var(--subtitulo-seccion);
+        font-weight: 800;
+        color: white;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .subtitulo-resumen {
+        font-size: var(--parrafos);
+        color: rgba(255, 255, 255, 0.95);
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ========================================
+           CARD PRINCIPAL
+        ======================================== */
+    .card-resumen {
+        background: white;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    /* ========================================
+           INFORMACIÓN DEL PLAN
+        ======================================== */
+    .seccion-plan {
+        padding: 40px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .badge-plan-seleccionado {
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        color: white;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: var(--texto-auxiliar);
+        font-weight: 700;
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    .nombre-plan-seleccionado {
+        font-size: var(--titulo-bloque);
+        font-weight: 800;
+        color: var(--color-secundario);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .icono-plan-nombre {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--color-primario), var(--tercer-azul));
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+    }
+
+    .descripcion-plan-seleccionado {
+        font-size: var(--parrafos);
+        color: #6c757d;
+        margin-bottom: 25px;
+        line-height: 1.7;
+    }
+
+    /* Características incluidas */
+    .caracteristicas-incluidas {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 20px;
+    }
+
+    .titulo-caracteristicas {
+        font-size: var(--subtitulo-menor);
+        font-weight: 700;
+        color: var(--color-secundario);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .lista-incluye {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .item-incluye {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .item-incluye:last-child {
+        border-bottom: none;
+    }
+
+    .icono-check-verde {
+        font-size: 20px;
+        color: #28a745;
+        min-width: 20px;
+    }
+
+    .texto-incluye {
+        font-size: var(--parrafos);
+        color: var(--gris-proyecto);
+        font-weight: 600;
+    }
+
+    /* ========================================
+           SELECTOR DE PERÍODO
+        ======================================== */
+    .seccion-periodo {
+        padding: 0 40px 30px 40px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .titulo-seccion {
+        font-size: var(--subtitulo-menor);
+        font-weight: 700;
+        color: var(--color-secundario);
+        margin-bottom: 20px;
+    }
+
+    .opciones-periodo {
+        /* display: grid; */
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .opcion-periodo {
+        position: relative;
+    }
+
+    .opcion-periodo input[type="radio"] {
+        display: none;
+    }
+
+    .label-periodo {
+        display: block;
+        background: #f8f9fa;
+        border: 3px solid #e9ecef;
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .opcion-periodo input[type="radio"]:checked+.label-periodo {
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.05), rgba(26, 115, 211, 0.05));
+        border-color: var(--color-primario);
+    }
+
+    .label-periodo:hover {
+        border-color: var(--tercer-azul);
+        transform: translateY(-2px);
+    }
+
+    .nombre-periodo {
+        font-size: var(--parrafos);
+        font-weight: 700;
+        color: var(--gris-proyecto);
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .precio-periodo {
+        font-size: var(--titulo-bloque);
+        font-weight: 900;
+        color: var(--color-secundario);
+        display: block;
+    }
+
+    .precio-periodo small {
+        font-size: var(--texto-auxiliar);
+        color: #6c757d;
+        font-weight: 600;
+    }
+
+    .badge-ahorro {
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    /* ========================================
+           RESUMEN DE COSTOS
+        ======================================== */
+    .seccion-costos {
+        padding: 30px 40px;
+        border-bottom: 2px solid #f8f9fa;
+    }
+
+    .fila-costo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+
+    .fila-costo:last-child {
+        border-bottom: none;
+    }
+
+    .label-costo {
+        font-size: var(--parrafos);
+        color: #6c757d;
+        font-weight: 600;
+    }
+
+    .valor-costo {
+        font-size: var(--parrafos);
+        color: var(--gris-proyecto);
+        font-weight: 700;
+    }
+
+    .fila-descuento .valor-costo {
+        color: #28a745;
+    }
+
+    .fila-total {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-radius: 12px;
+        padding: 20px !important;
+        margin-top: 15px;
+        border: none !important;
+    }
+
+    .fila-total .label-costo {
+        font-size: var(--subtitulo-menor);
+        color: var(--color-secundario);
+        font-weight: 800;
+    }
+
+    .fila-total .valor-costo {
+        font-size: 32px;
+        color: var(--color-primario);
+        font-weight: 900;
+    }
+
+    /* ========================================
+           INFORMACIÓN ADICIONAL
+        ======================================== */
+    .seccion-info-adicional {
+        padding: 30px 40px;
+        background: #f8f9fa;
+    }
+
+    .caja-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        border-left: 4px solid var(--color-primario);
+        margin-bottom: 15px;
+    }
+
+    .caja-info:last-child {
+        margin-bottom: 0;
+    }
+
+    .icono-info {
+        font-size: 24px;
+        color: var(--color-primario);
+        min-width: 24px;
+        margin-top: 2px;
+    }
+
+    .texto-info h6 {
+        font-size: var(--parrafos);
+        font-weight: 700;
+        color: var(--color-secundario);
+        margin-bottom: 5px;
+    }
+
+    .texto-info p {
+        font-size: var(--texto-auxiliar);
+        color: #6c757d;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* ========================================
+           BOTONES DE ACCIÓN
+        ======================================== */
+    .seccion-acciones {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .boton-proceder-pago {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        border: none;
+        color: white;
+        font-weight: 800;
+        padding: 18px 50px;
+        border-radius: 12px;
+        font-size: var(--parrafos);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+    }
+
+    .boton-proceder-pago:hover {
+        background: linear-gradient(135deg, #20c997, #17a2b8);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+        color: white;
+    }
+
+    .boton-proceder-pago i {
+        font-size: 20px;
+    }
+
+    .boton-volver {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #6c757d;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: var(--parrafos);
+        margin-top: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .boton-volver:hover {
+        color: var(--color-primario);
+        gap: 12px;
+    }
+
+    /* ========================================
+           RESPONSIVE
+        ======================================== */
+    @media (max-width: 768px) {
+        .breadcrumb-personalizado {
+            padding: 15px 20px;
+        }
+
+        .pasos-progreso {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .separador-paso {
+            width: 2px;
+            height: 30px;
+        }
+
+        .header-resumen {
+            padding: 30px 20px;
+        }
+
+        .titulo-resumen {
+            font-size: 24px;
+        }
+
+        .seccion-plan,
+        .seccion-periodo,
+        .seccion-costos,
+        .seccion-acciones {
+            padding: 25px 20px;
+        }
+
+        .seccion-info-adicional {
+            padding: 25px 20px;
+        }
+
+        .opciones-periodo {
+            grid-template-columns: 1fr;
+        }
+
+        .boton-proceder-pago {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .fila-total .valor-costo {
+            font-size: 26px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .nombre-plan-seleccionado {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .caracteristicas-incluidas {
+            padding: 20px;
+        }
     }
