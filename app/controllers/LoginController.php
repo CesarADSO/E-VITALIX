@@ -47,6 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'perfil_completo' => $resultado['perfil_completo'] ?? null
     ];
 
+    // ====================================================================
+    // 🛡️ INICIO DEL GUARDIÁN: VERIFICAR VIGENCIA DEL PLAN
+    // ====================================================================
+
+    // Obtenemos el ID del consultorio del arreglo session['user'] y le asignamos ese valor a una variable
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    // Si existe el Id del consultorio importamos el modelo de consultorios para acceder a la función verificarVigenciaPlan
+    if ($id_consultorio) {
+        // Importamos el modelo de los consultorios
+        require_once __DIR__ . '/../models/consultorioModel.php';
+        // Instanciamos la clase de ese modelo y accedemos al método verificarVigenciaPlan
+        $objConsultorio = new Consultorio();
+        
+
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión';
