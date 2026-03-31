@@ -632,6 +632,10 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/mis-tickets.php';
         break;
 
+    case '/especialista/consultar-paciente':
+        require BASE_PATH . '/app/views/dashboard/especialista/consultar-paciente.php';
+        break;
+
     case '/crear-ticket-especialista':
         require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
         break;

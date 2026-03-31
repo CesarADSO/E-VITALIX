@@ -149,7 +149,7 @@ class Consultorio
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT consultorios.*, planes_suscripcion.limite_citas_mensuales FROM consultorios INNER JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id WHERE consultorios.id = :id LIMIT 1";
+            $consulta = "SELECT consultorios.*, planes_suscripcion.limite_citas_mensuales FROM consultorios LEFT JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id  WHERE consultorios.id = :id LIMIT 1";
 
             $resultado = $this->conexion->prepare($consulta);
 
@@ -159,7 +159,23 @@ class Consultorio
 
             return $resultado->fetch();
         } catch (PDOException $e) {
-            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            error_log("Error en consultorio::listarConsultorioPorId->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function traerEspecialidadesConsultorios($id) {
+        try {
+            $consultar = "SELECT especialidades.id, especialidades.nombre AS nombre_especialidad FROM especialidades INNER JOIN consultorio_especialidad ON especialidades.id = consultorio_especialidad.id_especialidad INNER JOIN consultorios ON consultorio_especialidad.id_consultorio = consultorios.id WHERE consultorios.id = :id_consultorio";
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id_consultorio', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en consultorio::traerEspecialidadesConsultorios->" . $e->getMessage());
             return [];
         }
     }
