@@ -24,6 +24,7 @@ class CitasModel
                 SELECT 
                     p.id AS id_paciente,
                     c.id AS id_cita,
+                    c.id_servicio,
                     a.fecha,
                     a.hora_inicio,
                     a.hora_fin,
