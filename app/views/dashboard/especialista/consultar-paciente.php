@@ -2,15 +2,16 @@
 require_once BASE_PATH . '/app/helpers/session_especialista.php';
 
 
-// // ENLAZAMOS LA DEPENDENCIA DE TIPOS DE DOCUMENTO
+// ENLAZAMOS LA DEPENDENCIA DE TIPOS DE DOCUMENTO
 // require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
+require_once BASE_PATH . '/app/controllers/pacienteController.php';
 
 
-// // ASIGNAMOS EL VALOR ID DEL REGISTRO SEGÚN LA TABLA
-// $id = $_GET['id'];
+// ASIGNAMOS EL VALOR ID DEL REGISTRO SEGÚN LA TABLA
+$id = $_GET['id'];
 // // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR Y LE PASAMOS LOS DATOS A UNA VARIABLE
 // // QUE PODAMOS MANIPULAR EN ESTE ARCHIVO
-// $administrador = listarAdministradorConsultorioId($id);
+$paciente = listarPaciente($id);
 
 // $datos = traerTipoDocumento();
 ?>
@@ -76,11 +77,11 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     value="<?= $paciente['numero_documento'] ?>" disabled>
                             </div>
 
-                            <div class="col-md-6 mb-3">
+                            <!-- <div class="col-md-6 mb-3">
                                 <label for="numero_documento" class="form-label">Número de documento</label>
                                 <input type="number" class="form-control" id="numero_documento" name="numero_documento"
                                     value="<?= $paciente['numero_documento'] ?>" disabled>
-                            </div>
+                            </div> -->
 
                             <div class="col-md-6 mb-3">
                                 <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
@@ -125,12 +126,29 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 <input type="text" class="form-control" id="rh" name="rh"
                                     value="<?= $paciente['rh'] ?>" disabled>
                             </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="contacto_emergencia" class="form-label">Contacto de emergencia</label>
+                                <input type="text" class="form-control" id="contacto_emergencia" name="contacto_emergencia"
+                                    value="<?= $paciente['nombre_contacto_emergencia'] ?>" disabled>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="telefono_contacto_emergencia" class="form-label">Teléfono contacto de emergencia</label>
+                                <input type="text" class="form-control" id="telefono_contacto_emergencia" name="telefono_contacto_emergencia"
+                                    value="<?= $paciente['telefono_contacto_emergencia'] ?>" disabled>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="direccion_contacto_emergencia" class="form-label">Dirección contacto de emergencia</label>
+                                <input type="text" class="form-control" id="direccion_contacto_emergencia" name="direccion_contacto_emergencia"
+                                    value="<?= $paciente['direccion_contacto_emergencia'] ?>" disabled>
+                            </div>
                         </div>
 
                         <!-- Botones -->
                         <div class="d-flex justify-content-between cont-botones mt-4">
-                            <a href="<?= BASE_URL ?>/superadmin/administradores-consultorio" class="btn btn-outline-secondary">Cancelar</a>
-                            <button type="submit" class="btn boton">Actualizar Administrador</button>
+                            <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-primary">Volver a pacientes atendidos</a>
                         </div>
                     </form>
                 </div>
