@@ -636,8 +636,12 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/especialista/consultar-paciente.php';
         break;
 
-    case '/crear-ticket-especialista':
-        require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket-especialista.php';
+    case '/especialista/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/especialista/crear-ticket.php';
+        break;
+
+    case '/especialista/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
         break;
 
     case '/especialista/consultar-ticket':
@@ -688,6 +692,30 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/paciente/mis-tickets.php';
         break;
 
+    case '/paciente/crear-ticket':
+        require BASE_PATH . '/app/views/dashboard/paciente/crear-ticket.php';
+        break;
+
+    case '/paciente/guardar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/paciente/consultar-ticket':
+        require BASE_PATH . '/app/views/dashboard/paciente/consultar-ticket.php';
+        break;
+
+    case '/paciente/actualizar-ticket':
+        require BASE_PATH . '/app/views/dashboard/paciente/actualizar-ticket.php';
+        break;
+
+    case '/paciente/guardar-cambios-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+
+    case '/paciente/cerrar-ticket':
+        require BASE_PATH . '/app/controllers/ticketController.php';
+        break;
+        
     case '/asistente/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
         break;
