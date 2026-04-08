@@ -716,6 +716,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/ticketController.php';
         break;
         
+    case '/paciente/historial-clinico':
+        require BASE_PATH . '/app/views/dashboard/paciente/historial_clinico.php';
+        break;
+    
     case '/asistente/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
         break;
