@@ -233,8 +233,8 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
 
     <!-- CREAMOS EL PEQUEÑO SCRIPT QUE NOS VA A GENERAR EL BOTÓN PARA EL PAGO -->
      <script>
-        // EMPEZAMOS INSERTANDO NUESTRA PUBLIC KEY DE PRUEBA
-        const mp = new MercadoPago('APP_USR-8774ef0b-9aa5-4aba-9d6f-b0246f211215');
+        // EMPEZAMOS INSERTANDO NUESTRA PUBLIC KEY DE PRODUCCIÓN
+        const mp = new MercadoPago('APP_USR-632cdb3f-6a96-417f-b3d0-ad3dcdc79a59');
         const bricksBuilder = mp.bricks();
         
         bricksBuilder.create('wallet', 'wallet_container', {
