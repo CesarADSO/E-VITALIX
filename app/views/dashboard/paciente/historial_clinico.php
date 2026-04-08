@@ -12,7 +12,7 @@ $historiales = $datos['historial'];
 ?>
 
 <?php
-include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
+include_once __DIR__ . '/../../../views/layouts/header_paciente.php';
 ?>
 
 <body>
@@ -20,14 +20,14 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
         <div class="row">
             <!-- Sidebar -->
             <?php
-            include_once __DIR__ . '/../../../views/layouts/sidebar_especialista.php';
+            include_once __DIR__ . '/../../../views/layouts/sidebar_paciente.php';
             ?>
 
             <!-- Main Content -->
             <div class="col-lg-10 col-md-9 main-content">
                 <!-- Top Bar -->
                 <?php
-                include_once __DIR__ . '/../../../views/layouts/topbar_especialista.php';
+                include_once __DIR__ . '/../../../views/layouts/topbar_paciente.php';
                 ?>
 
                 <!-- Header del Paciente -->
@@ -35,7 +35,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-md-12">
-                                <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver a pacientes atendidos</a>
+                                <a href="<?= BASE_URL ?>/paciente/dashboard" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver al dashboard</a>
                             </div>
                         </div>
 
@@ -268,5 +268,5 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
             </div>
 
             <?php
-            include_once __DIR__ . '/../../../views/layouts/footer_especialista.php';
+            include_once __DIR__ . '/../../../views/layouts/footer_paciente.php';
             ?>

@@ -594,6 +594,7 @@
     .btn-primary {
         background-color: var(--color-primario);
         border-color: var(--color-primario);
+        text-decoration: none;
     }
 
     .btn-primary:hover {
@@ -3775,3 +3776,140 @@
             padding: 20px;
         }
     }
+
+    /* ================================================== */
+    /* ESTILOS ESPECÍFICOS: WIDGET DE SUSCRIPCIÓN */
+    /* ================================================== */
+
+    .subscription-widget {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        /* Ajustar según el padding de tus chart-cards */
+    }
+
+    /* Encabezado */
+    .subscription-widget .chart-header {
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        padding-bottom: 15px;
+    }
+
+    .subscription-widget .chart-title {
+        font-size: var(--titulo-bloque);
+        /* 24px */
+        color: var(--color-secundario);
+        font-weight: 700;
+    }
+
+    /* Contenido Principal */
+    .subscription-body {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    /* Fila de Info del Plan */
+    .plan-info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .plan-active-name {
+        font-size: var(--subtitulo-seccion);
+        /* 30px */
+        color: var(--color-secundario);
+        /* #0c498a */
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    /* Medidor de Citas (Barra de Progreso) */
+    .appointment-meter-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .meter-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .meter-title {
+        font-size: var(--parrafos);
+        color: var(--gris-proyecto);
+    }
+
+    .meter-count {
+        color: var(--color-primario);
+        /* #007bff */
+    }
+
+
+    /* Fecha de Corte */
+    .expiry-date-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #f8f9fa;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        font-size: var(--parrafos);
+    }
+
+    .expiry-date-section i {
+        color: var(--tercer-azul);
+        /* #1a73d3 */
+        font-size: 1.2rem;
+    }
+
+    .expiry-date {
+        color: var(--color-secundario);
+        font-weight: 700;
+    }
+
+    /* Clases Auxiliares de Texto (Nunito) */
+    .text-auxiliar {
+        font-size: var(--texto-auxiliar);
+        /* 14px */
+        color: var(--gris-proyecto);
+        margin: 0;
+    }
+
+    /* ================================================== */
+    /* ESTADOS VISUALES (BADGES DE COLORES) */
+    /* ================================================== */
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: var(--texto-auxiliar);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Estado: Activa (Verde) */
+    .status-active {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-azul {
+        background: var(--color-primario);
+        color: var(--blanco-color);
+    }
+
+    /* Estado: Vencida (Rojo) */
+    .status-expired {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    /* ================================================== */

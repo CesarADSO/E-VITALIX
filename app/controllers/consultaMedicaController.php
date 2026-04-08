@@ -32,6 +32,7 @@ function registrarConsultaMedica()
     // GUARDAMOS EN VARIABLES LOS DATOS QUE SE VAN A ENVIAR A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id_cita = $_POST['id_cita'] ?? '';
     $id_paciente = $_POST['id_paciente'] ?? '';
+    $id_servicio = $_POST['id_servicio'] ?? '';
     $motivo_consulta = $_POST['motivo_consulta'] ?? '';
     $sintomas = $_POST['sintomas'] ?? '';
     $diagnostico = $_POST['diagnostico'] ?? '';
@@ -46,9 +47,11 @@ function registrarConsultaMedica()
     $dosis = $_POST['dosis'] ?? '';
     $frecuencia = $_POST['frecuencia'] ?? '';
     $duracion = $_POST['duracion'] ?? '';
+    $orden_medica = $_POST['orden_medica'] ?? '';
+
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($motivo_consulta) || empty($sintomas) || empty($diagnostico) || empty($tratamiento) || empty($presion_sistolica) || empty($presion_diastolica) || empty($temperatura) || empty($frecuencia_cardiaca) || empty($frecuencia_respiratoria)) {
+    if (empty($motivo_consulta) || empty($sintomas) || empty($diagnostico) || empty($tratamiento) || empty($presion_sistolica) || empty($presion_diastolica) || empty($temperatura) || empty($frecuencia_cardiaca) || empty($frecuencia_respiratoria) || empty($orden_medica)) {
         mostrarSweetAlert('error', 'Campos vacios','Por favor llene todos los campos');
         exit();
     }
@@ -69,6 +72,7 @@ function registrarConsultaMedica()
     $data = [
         'id_cita' => $id_cita,
         'id_paciente' => $id_paciente,
+        'id_servicio'=> $id_servicio,
         'id_especialista' => $id_especialista,
         'motivo_consulta' => $motivo_consulta,
         'sintomas' => $sintomas,
@@ -83,7 +87,8 @@ function registrarConsultaMedica()
         'medicamento' => $medicamento,
         'dosis' => $dosis,
         'frecuencia' => $frecuencia,
-        'duracion' => $duracion
+        'duracion' => $duracion,
+        'orden_medica' => $orden_medica
     ];
 
     // ACCEDEMOS AL MÉTODO DEL MODELO

@@ -6,6 +6,9 @@ require_once BASE_PATH . '/app/controllers/perfilController.php';
 // EN LA VARIABLE ID GUARDAMOS EL ID DEL USUARIO QUE SE CREA AL INICIAR LA SESIÓN
 $id = $_SESSION['user']['id'];
 
+// EN LA VARIABLE ID_PACIENTE GUARDAMOS EL ID_PACIENTE DEL USUARIO QUE SE CREA AL INICIAR LA SESIÓN, ESTE ID LO NECESITAMOS PARA MOSTRAR EL HISTORIAL CLÍNICO DEL PACIENTE
+$id_paciente = $_SESSION['user']['id_paciente'];
+
 // EN LA VARIABLE PERFIL LLAMAMOS LA FUNCIÓN DEL CONTROLADOR mostrarPerfilAdmin(id)
 $perfil = mostrarPerfilPaciente($id);
 
@@ -42,6 +45,10 @@ $perfil = mostrarPerfilPaciente($id);
         <a class="nav-item" href="<?= BASE_URL ?>/paciente/lista-de-citas">
             <i class="fa-solid fa-calendar"></i>
             <span>Mis citas</span>
+        </a>
+        <a class="nav-item" href="<?= BASE_URL ?>/paciente/historial-clinico?id_paciente=<?= $id_paciente ?>">
+            <i class="fa-solid fa-book"></i>
+            <span>Mi historial clínico</span>
         </a>
         <a class="nav-item" href="<?= BASE_URL ?>/paciente/mis-tickets">
             <i class="bi bi-ticket-detailed"></i>

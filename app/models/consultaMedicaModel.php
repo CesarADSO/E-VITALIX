@@ -59,6 +59,15 @@ class ConsultaMedica
             $resultadoActualizar->bindParam(':id_cita', $data['id_cita']);
             $resultadoActualizar->execute();
 
+            // CREAMOS LA CONSULTAR PARA LA ORDEN MÉDICA
+            $registrarOrdenMedica = "INSERT INTO orden_medica(id_consulta, id_servicio, observaciones, estado_orden) VALUES (:id_consulta, :id_servicio, :observaciones, 'Pendiente')";
+
+            $resultadoOrdenMedica = $this->conexion->prepare($registrarOrdenMedica);
+            $resultadoOrdenMedica->bindParam(':id_consulta', $id_consulta);
+            $resultadoOrdenMedica->bindParam(':id_servicio', $data['id_servicio']);
+            $resultadoOrdenMedica->bindParam(':observaciones', $data['orden_medica']);
+            $resultadoOrdenMedica->execute();
+
             return true;
         } catch (PDOException $e) {
             error_log("Error en ConsultaMedica::registrar->" . $e->getMessage());

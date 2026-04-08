@@ -47,6 +47,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'perfil_completo' => $resultado['perfil_completo'] ?? null
     ];
 
+    // ====================================================================
+    // 🛡️ INICIO DEL GUARDIÁN: VERIFICAR VIGENCIA DEL PLAN
+    // ====================================================================
+
+    // Obtenemos el ID del consultorio del arreglo session['user'] y le asignamos ese valor a una variable
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    // Si existe el Id del consultorio importamos el modelo de consultorios para acceder a la función verificarVigenciaPlan
+    if ($id_consultorio) {
+        // Importamos el modelo de los consultorios
+        require_once __DIR__ . '/../models/consultorioModel.php';
+        // Instanciamos la clase de ese modelo y accedemos al método verificarVigenciaPlan
+        $objConsultorio = new Consultorio();
+
+        // Accedemos al método de esa clase que necesitamos
+        $plan_vencido = $objConsultorio->verificarVigenciaPlan($id_consultorio);
+
+        // Ahora si la función devolvió true osea que si degradó el plan preparamos la respuesta
+        if ($plan_vencido) {
+            // Guardamos esta "bandera" en $_SESSION para que el dato sobreviva a la redirección y el Dashboard sepa que debe mostrar la alerta.
+            // USAMOS UN SOLO IGUAL (=) para asignar el valor
+            $_SESSION['alerta_vencimiento'] = true;
+        }
+    }
+
+    // ====================================================================
+    // 🔓 FIN DEL GUARDIÁN
+    // ====================================================================
+
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión';
