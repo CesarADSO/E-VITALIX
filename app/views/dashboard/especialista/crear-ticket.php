@@ -1,12 +1,12 @@
 <?php
-    require_once BASE_PATH . '/app/helpers/session_administrador.php';
+    require_once BASE_PATH . '/app/helpers/session_especialista.php';
    
 
 ?>
 
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
-include_once __DIR__ . '/../../layouts/header_administrador.php';
+include_once __DIR__ . '/../../layouts/header_especialista.php';
 
 ?>
 <body>
@@ -16,7 +16,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             <!-- AQUI VA EL INCLUDE EL SIDEBAR -->
 
             <?php
-            include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+            include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
             ?>
 
             <!-- Main Content -->
@@ -27,7 +27,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- AQUI VA EL INCLUDE DEL TOP BAR -->
 
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    include_once __DIR__ . '/../../layouts/topbar_especialista.php';
                     ?>
 
                     <div class="container-fluid ticket-wrapper d-flex align-items-center justify-content-center">
@@ -39,7 +39,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <p class="text-muted">Este espacio está destinado para reportar errores, fallas o inconvenientes relacionados con el funcionamiento del aplicativo. Envíanos tu inconveniente y nuestro equipo lo solucionará pronto..</p>
                                 </div>
 
-                                <form method="POST" enctype="multipart/form-data">
+                                <form method="POST" action="<?= BASE_URL ?>/especialista/guardar-ticket" enctype="multipart/form-data">
 
                                     <!-- TÍTULO -->
                                     <div class="mb-3">
@@ -62,7 +62,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                     <!-- BOTONES -->
                                     <div class="d-flex justify-content-between">
-                                        <a href="<?= BASE_URL ?>/app/views/dashboard/administrador/dashboard-administrador.php" class="btn btn-outline-secondary btn-custom">
+                                        <a href="<?= BASE_URL ?>/especialista/mis-tickets" class="btn btn-outline-secondary btn-custom">
                                             ← Regresar
                                         </a>
 
@@ -107,7 +107,7 @@ include_once __DIR__ . '/../../layouts/footer_administrador.php';
 <body>
 
     <?php
-        include_once __DIR__ . '/../../layouts/sidebar_administrador.php';
+        include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
     ?>
 
     

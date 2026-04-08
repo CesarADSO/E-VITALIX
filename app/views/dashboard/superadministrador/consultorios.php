@@ -79,8 +79,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <td><?= $consultorio['ciudad'] ?></td>
                                             <td><?= $consultorio['estado'] ?></td>
                                             <td>
-                                                <!-- <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-success btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <!-- <a href="<?= BASE_URL ?>/superadmin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a> -->
                                             </td>
                                         </tr>
