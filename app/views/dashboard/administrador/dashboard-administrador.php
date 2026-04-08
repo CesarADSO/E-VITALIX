@@ -118,11 +118,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <div class="chart-header">
                             <h3 class="chart-title">Estado de su Suscripción</h3>
                             <div class="d-flex align-items-center gap-3">
-                                <?php if($plan['estado'] === 'ACTIVO'): ?>
-                                <span class="status-badge status-active"><?= $plan['estado'] ?></span>
-                                <?php else:?>
-                                <span class="status-badge status-expired"><?= $plan['estado'] ?></span>
-                                <?php endif;?>
+                                <?php if ($plan['estado'] === 'ACTIVO'): ?>
+                                    <span class="status-badge status-active"><?= $plan['estado'] ?></span>
+                                <?php else: ?>
+                                    <span class="status-badge status-expired"><?= $plan['estado'] ?></span>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -133,9 +133,20 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <small class="text-auxiliar">Plan Actual</small>
                                     <p class="plan-active-name"><?= $plan['nombre'] ?></p>
                                 </div>
-                                <a href="/E-VITALIX/planes" class="btn-upgrade">
+                                <?php if($plan['nombre'] === 'Plan élite'):?>
+                            
+                                <span class="status-badge status-azul">Tienes el plan máximo</span>
+
+                                <?php elseif($plan['nombre'] === 'Plan profesional'): ?>
+                                <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=3" class="btn-primary text-white">
+                                    <i class="bi bi-star-fill"></i> Mejorar a plan élite
+                                </a>
+
+                                <?php else: ?>
+                                <a href="<?= BASE_URL ?>/admin/precios" class="btn-primary text-white">
                                     <i class="bi bi-star-fill"></i> Mejorar Plan
                                 </a>
+                                <?php endif; ?>
                             </div>
 
                             <div class="appointment-meter-section">
@@ -143,8 +154,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <span class="meter-title">Consumo de citas mensual</span>
                                     <span class="meter-count"><?= $conteo_citas_agendadas ?> de <?= $plan['limite_citas_mensuales'] ?> citas</span>
                                 </div>
-                                <div class="progress-container">
-                                    <div class="progress-bar-fill" style="width: <?= $porcentaje_citas ?>%;"></div>
+                                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: <?= $porcentaje_citas ?>%"></div>
                                 </div>
                                 <small class="text-auxiliar mt-1 d-block text-end">Agendadas este mes</small>
                             </div>
@@ -152,10 +163,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="expiry-date-section">
                                 <i class="bi bi-calendar3"></i>
                                 <span>Fecha de próximo corte:</span>
-                                <strong class="expiry-date"><?php if(empty($fecha_vencimiento)): ?>
-                                    No tiene fecha de vencimiento
+                                <strong class="expiry-date"><?php if (empty($fecha_vencimiento)): ?>
+                                        No tiene fecha de vencimiento
                                     <?php else: ?>
-                                    <?= date('d/m/Y', strtotime($fecha_vencimiento)) ?>
+                                        <?= date('d/m/Y', strtotime($fecha_vencimiento)) ?>
                                     <?php endif; ?>
                                 </strong>
                             </div>
