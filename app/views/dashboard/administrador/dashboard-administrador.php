@@ -74,27 +74,42 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     </div>
 
                     <!-- Chart -->
-                    <div class="chart-card">
+                    <div class="chart-card subscription-widget">
                         <div class="chart-header">
-                            <h3 class="chart-title">Pacientes nuevos vs recurrentes por mes</h3>
+                            <h3 class="chart-title">Estado de su Suscripción</h3>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="chart-legend">
-                                    <div class="legend-item">
-                                        <div class="legend-dot" style="background-color: #007bff;"></div>
-                                        <span>Nuevos</span>
-                                    </div>
-                                    <div class="legend-item">
-                                        <div class="legend-dot" style="background-color: #90CAF9;"></div>
-                                        <span>Recurrentes</span>
-                                    </div>
-                                </div>
-                                <button class="filter-btn">
-                                    Meses <i class="bi bi-chevron-down"></i>
-                                </button>
+                                <span class="status-badge status-warning">Al límite de citas</span>
                             </div>
                         </div>
-                        <div class="chart-container">
-                            <canvas id="monthlyChart"></canvas>
+
+                        <div class="subscription-body">
+
+                            <div class="plan-info-row">
+                                <div class="plan-name-container">
+                                    <small class="text-auxiliar">Plan Actual</small>
+                                    <p class="plan-active-name">Plan Premium</p>
+                                </div>
+                                <a href="/E-VITALIX/planes" class="btn-upgrade">
+                                    <i class="bi bi-star-fill"></i> Mejorar Plan
+                                </a>
+                            </div>
+
+                            <div class="appointment-meter-section">
+                                <div class="meter-labels">
+                                    <span class="meter-title">Consumo de citas mensual</span>
+                                    <span class="meter-count">45 de 50 citas</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar-fill" style="width: 90%;"></div>
+                                </div>
+                                <small class="text-auxiliar mt-1 d-block text-end">Agendadas este mes</small>
+                            </div>
+
+                            <div class="expiry-date-section">
+                                <i class="bi bi-calendar3"></i>
+                                <span>Fecha de próximo corte:</span>
+                                <strong class="expiry-date">26 de Abril, 2026</strong>
+                            </div>
                         </div>
                     </div>
 
