@@ -71,7 +71,7 @@ function PrepararResumenPago($id_plan)
     $_SESSION['plan_seleccionado_id'] = $id_plan;
 
     // CONFIGURACIÓN DE MERCADO PAGO
-    MercadoPagoConfig::setAccessToken('APP_USR-3664831415325463-031718-62ff1d0ac2d63b96a7029f6058001f74-3273776043');
+    MercadoPagoConfig::setAccessToken('APP_USR-2681349028882389-022514-f4ddad9c4de0474a5a616ceb2b27f6a2-2131980827');
 
 
     // CREAMOS UNA VARIABLE $client E INSTANCIAMOS LA CLASE PreferenceClient
@@ -91,9 +91,9 @@ function PrepararResumenPago($id_plan)
             "external_reference" => $_SESSION['user']['id_consultorio'],
             "back_urls" => [
                 "success" => BASE_URL . '/admin/pago-exitoso',
-                "failure" => BASE_URL . '/admin/pago-fallido'
+                "failure" => BASE_URL . '/admin/pago-fallido',
             ],
-            // "auto_return" => "approved",
+            "auto_return" => "approved",
         ]);
         $preferenceId = $preference->id;
     } catch (MercadoPago\Exceptions\MPApiException $e) {
@@ -120,11 +120,9 @@ function finalizarPagoExitoso()
     // OBTENEMOS EL ID DEL CONSULTORIO DE LA EXTERNAL_REFERENCE DE MERCADO PAGO
     // Y EL ID DEL PLAN DE LA SESSIÓN QUE CREAMOS EN LA FUNCIÓN ANTERIOR COMO ES UNA VARIABLE SESSION ENTONCES ESTÁ ESTÁ DENTRO DEL SCOPE DE ESTA FUNCIÓN Y NO MUERE CUANDO TERMINA LA FUNCIÓN PrepararResumenPago
     $status = $_GET['status'] ?? $_GET['collection_status'] ?? null;
-    $id_consultorio = $_GET['external_reference'];
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
     $id_plan = $_SESSION['plan_seleccionado_id'];
 
-    // DEBUG: Si quieres estar seguro en la consola de XAMPP
-    error_log("Procesando pago: Consultorio $id_consultorio, Plan $id_plan, Status $status");
 
     // VALIDAMOS SI EXISTEN LOS DOS IDS EMPEZAMOS A HACER LA LÓGICA
     if ($id_consultorio && $id_plan) {
@@ -140,9 +138,9 @@ function finalizarPagoExitoso()
             unset($_SESSION['plan_seleccionado_id']);
 
             // MOSTRAMOS EL MENSAJE DE CONFIRMACIÓN
-            mostrarSweetAlert('success', '¡Suscripción exitosa!', 'Tu plan ya ha sido actualizado ya puedes disfrutar de los nuevos beneficios', '/E-VITALIX/administrador/dashboard');
+            mostrarSweetAlert('success', '¡Suscripción exitosa!', 'Tu plan ya ha sido actualizado ya puedes disfrutar de los nuevos beneficios', BASE_URL . '/administrador/dashboard');
         } else {
-            mostrarSweetAlert('error', 'Error al actualizar tu plan', 'La compra fue aprobada pero no pudimos actualizar tu plan contacta a soporte', '/E-VITALIX/admin/precios');
+            mostrarSweetAlert('error', 'Error al actualizar tu plan', 'La compra fue aprobada pero no pudimos actualizar tu plan contacta a soporte', BASE_URL . '/admin/precios');
         }
     }
 }
@@ -160,7 +158,7 @@ function finalizarPagoFallido()
     }
 
     // MOSTRAR EL MENSAJE DE ERROR Y REDIRECCIONAR
-    mostrarSweetAlert('error', 'Pago no completado', 'No pudimos procesar tu pago. Por favor, intenta de nuevo o usa otro método de pago', '/E-VITALIX/admin/precios');
+    mostrarSweetAlert('error', 'Pago no completado', 'No pudimos procesar tu pago. Por favor, intenta de nuevo o usa otro método de pago', BASE_URL . '/admin/precios');
 }
 
 function mostrarInfoPlanContratado($id_plan) {
