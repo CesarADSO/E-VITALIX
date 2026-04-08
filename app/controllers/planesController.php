@@ -29,6 +29,7 @@ switch ($method) {
         // PRIORIDAD 2: ¿El usuario apenas va a revisar el plan?
         if (isset($_GET['id_plan'])) {
             prepararResumenPago($_GET['id_plan']);
+            mostrarInfoPlanContratado($_GET['id_plan']);
             exit;
         }
 
@@ -160,4 +161,15 @@ function finalizarPagoFallido()
 
     // MOSTRAR EL MENSAJE DE ERROR Y REDIRECCIONAR
     mostrarSweetAlert('error', 'Pago no completado', 'No pudimos procesar tu pago. Por favor, intenta de nuevo o usa otro método de pago', '/E-VITALIX/admin/precios');
+}
+
+function mostrarInfoPlanContratado($id_plan) {
+    // INTANCIAMOS LA CLASE DEL MODELO
+    $objPlan = new Plan();
+
+    // ACCEDEMOS AL MÉTODO DE LA CLASE
+    $resultado = $objPlan->consultarPlanPorId($id_plan);
+
+    // RETORNAMOS RESULTADO
+    return $resultado;
 }

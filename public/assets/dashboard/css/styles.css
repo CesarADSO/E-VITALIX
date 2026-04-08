@@ -3936,12 +3936,6 @@
         color: #155724;
     }
 
-    /* Estado: Al Límite o Próximo Vencimiento (Amarillo) */
-    .status-warning {
-        background-color: var(--color-primario);
-        color: var(--blanco-color);
-    }
-
     /* Estado: Vencida (Rojo) */
     .status-expired {
         background-color: #f8d7da;

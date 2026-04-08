@@ -1876,7 +1876,7 @@ class Cita
 
             // AHORA OBTENEMOS LOS DATOS DE LA CITA CANCELADA
             $obtenerDatosCita = "SELECT a.fecha, a.hora_inicio, a.hora_fin, s.nombre FROM citas c INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id INNER JOIN servicios s ON c.id_servicio = s.id WHERE c.id = :id_cita";
-           
+
             $resultado4 = $this->conexion->prepare($obtenerDatosCita);
             $resultado4->bindParam(':id_cita', $id_cita);
             $resultado4->execute();
@@ -2444,8 +2444,8 @@ class Cita
 </body>
 </html>';
 
-        // ENVIAR CORREO 
-        $mail->send();
+            // ENVIAR CORREO 
+            $mail->send();
 
             return true;
         } catch (PDOException $e) {
@@ -2459,19 +2459,26 @@ class Cita
         }
     }
 
-    public function contarCitasMensuales($id_consultorio) {
+    public function contarCitasMensuales($id_consultorio)
+    {
         try {
             // CREAMOS LA CONSULTA PARA CONTAR LAS CITAS MENSUALES DEL CONSULTORIO
-            $contarCitas = "SELECT COUNT(citas.id) AS total_citas FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE consultorios.id = :id_consultorio AND MONTH(agenda_slot.fecha) = MONTH(CURRENT_DATE()) AND YEAR(agenda_slot.fecha) = YEAR(CURRENT_DATE())";
+            $contarCitas = "SELECT COUNT(citas.id) AS total_citas 
+                FROM citas 
+                INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id 
+                WHERE agenda_slot.id_consultorio = :id_consultorio 
+                AND MONTH(agenda_slot.fecha) = MONTH(CURRENT_DATE()) 
+                AND YEAR(agenda_slot.fecha) = YEAR(CURRENT_DATE()) 
+                AND citas.estado_cita != 'CANCELADA'";
 
             $resultado = $this->conexion->prepare($contarCitas);
             $resultado->bindParam(':id_consultorio', $id_consultorio);
             $resultado->execute();
 
-            return $resultado->fetch();
+            return $resultado->fetchColumn();
         } catch (PDOException $e) {
             error_log("Error en Cita::contarCitasMensuales->" . $e->getMessage());
-            return [];
+            return 0;
         }
     }
 }

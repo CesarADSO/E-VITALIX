@@ -40,6 +40,11 @@ switch ($method) {
         }
         mostrarCitas();
 
+        if (isset($_GET['id_consultorio'])) {
+            contarCitasMensuales($_GET['id_consultorio']);
+        }
+        
+
         break;
 }
 
@@ -220,4 +225,17 @@ function cancelarCita($id_cita)
     } else {
         mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
     }
+}
+
+
+function contarCitasMensuales($id_consultorio) {
+    // INSTACIAMOS LA CLASE Cita para acceder al método de conteo
+    $objCita = new Cita();
+    
+    // LLAMAMOS AL MÉTODO DEL MODELO PARA CONTAR LAS CITAS MENSUALES Y PASAMOS EL ID DEL CONSULTORIO
+    $resultado = $objCita->contarCitasMensuales($id_consultorio);
+
+    // RETORNAMOS A LA VISTA
+    return $resultado;
+    
 }
