@@ -120,7 +120,7 @@ function finalizarPagoExitoso()
     // OBTENEMOS EL ID DEL CONSULTORIO DE LA EXTERNAL_REFERENCE DE MERCADO PAGO
     // Y EL ID DEL PLAN DE LA SESSIÓN QUE CREAMOS EN LA FUNCIÓN ANTERIOR COMO ES UNA VARIABLE SESSION ENTONCES ESTÁ ESTÁ DENTRO DEL SCOPE DE ESTA FUNCIÓN Y NO MUERE CUANDO TERMINA LA FUNCIÓN PrepararResumenPago
     $status = $_GET['status'] ?? $_GET['collection_status'] ?? null;
-    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+    $id_consultorio = $_SESSION['external_reference'] ?? null;
     $id_plan = $_SESSION['plan_seleccionado_id'];
 
 

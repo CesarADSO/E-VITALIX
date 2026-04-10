@@ -3913,3 +3913,20 @@
     }
 
     /* ================================================== */
+
+/* ESTILOS RESPONSIVE SMARTPHONE */
+@media screen and (min-width: 320px) and (max-width: 767px) { 
+    .chart-header 
+    {
+        display: inline-block;
+    }
+
+    .main-content h3 {
+        text-align: center;
+    }
+
+    .logo {
+        align-items: center;
+        justify-content: center;
+    }
+}
