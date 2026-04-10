@@ -588,6 +588,7 @@ class Cita
                     a.hora_fin,
                     c.estado_cita,
                     es.id AS id_especialidad,
+                    e.id AS id_especialista,
                     e.nombres AS especialista_nombre,
                     es.nombre AS especialidad_nombre,
                     e.apellidos AS especialista_apellido,

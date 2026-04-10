@@ -1,17 +1,18 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_paciente.php';
 require_once BASE_PATH . '/app/controllers/slotController.php';
-require_once BASE_PATH . '/app/controllers/servicioController.php';
+require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
 $id_consultorio = $_GET['id_consultorio'];
 $id_especialidad = $_GET['id_especialidad'];
 $id_servicio = $_GET['id_servicio'];
 $id_cita = $_GET['id_cita'];
+$id_especialista = $_GET['id_especialista'];
 
-$servicio = consultarNombreServicio($id_servicio);
 
+$especialista = listarEspecialista($id_especialista);
 
-$espaciosDeAgendamiento = listarDisponibilidad($id_consultorio, $id_especialidad, $id_servicio);
+$espaciosDeAgendamiento = listarDisponibilidad($id_especialista);
 ?>
 
 <body>
@@ -44,9 +45,9 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_consultorio, $id_especialidad
                             </h1>
 
                             <div class="servicio-info">
-                                <div class="servicio-label">Servicio Seleccionado</div>
+                                <div class="servicio-label">Especialista Seleccionado</div>
                                 <h3 class="servicio-nombre text-white">
-                                    <?= $servicio['nombre'] ?>
+                                    <?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?>
                                 </h3>
                             </div>
                         </div>
@@ -62,17 +63,6 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_consultorio, $id_especialidad
                                 <div class="col-md-4 mb-4">
                                     <div class="horario-card">
                                         <div class="horario-card-header">
-                                            <div class="patient-avatar">
-                                                <img class="img-usuario" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $espacioDeAgendamiento['foto_especialista'] ?>" alt="<?= $espacioDeAgendamiento['nombre_especialista'] ?> <?= $espacioDeAgendamiento['apellidos_especialista'] ?>">
-                                            </div>
-                                            <h5 class="doctor-nombre"><?= $espacioDeAgendamiento['nombre_especialista'] ?> <?= $espacioDeAgendamiento['apellidos_especialista'] ?></h5>
-                                            <span class="badge-disponible">
-                                                <i class="bi bi-check-circle-fill"></i>
-                                                <?= $espacioDeAgendamiento['estado_slot'] ?>
-                                            </span>
-                                        </div>
-
-                                        <div class="horario-card-body">
                                             <div class="horario-info-group">
                                                 <div class="horario-info-item">
                                                     <div class="horario-info-icon">
@@ -96,12 +86,14 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_consultorio, $id_especialidad
                                             </div>
                                         </div>
 
+                                        
+
                                         <div class="horario-card-footer">
                                             <form action="<?= BASE_URL ?>/paciente/actualizar-cita" method="POST">
                                                 <input type="hidden" name="accion" value="reagendar">
                                                 <input type="hidden" name="id_slot" value="<?= $espacioDeAgendamiento['id_slot'] ?>">
                                                 <input type="hidden" name="id_cita" value="<?= $id_cita ?>">
-                                                <!-- <input type="hidden" name="id_servicio" value="<?= $id_servicio ?>"> -->
+                                                <input type="hidden" name="id_servicio" value="<?= $id_servicio ?>">
                                                 <button type="submit" class="btn-seleccionar">
                                                     <i class="bi bi-check-circle-fill"></i>
                                                     Seleccionar este Turno
