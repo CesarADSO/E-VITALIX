@@ -38,6 +38,10 @@ switch ($method) {
             mostrarEspecialistas();
         }
 
+        if (isset($_GET['id_especialidad'])) {
+            listarEspecialistasPorEspecialidad($_GET['id_especialidad']);
+        }
+
         break;
     default:
         # code...
@@ -268,4 +272,15 @@ function eliminarEspecialista($idUsuario, $id)
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el consultorio. Intenta nuevamente');
     }
     exit();
+}
+
+
+function listarEspecialistasPorEspecialidad($id_especialidad) {
+    // INSTANCIAMOS LA CLASE DEL MODELO
+    $objEspecialista = new Especialista();
+
+    // ACCEDEMOS AL MÉTODO QUE VAMOS A USAR
+    $resultado = $objEspecialista->listarEspecialistasPorEspecialidad($id_especialidad);
+
+    return $resultado;
 }

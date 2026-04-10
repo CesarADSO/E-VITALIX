@@ -51,32 +51,14 @@ class Slot
         }
     }
 
-    public function consultarNombreServicio($id_servicio) {
-        try {
-            $consulta = "SELECT nombre FROM servicios WHERE id = :id_servicio";
-            $resultado = $this->conexion->prepare($consulta);
-
-            $resultado->bindParam(':id_servicio', $id_servicio);
-
-            $resultado->execute();
-
-            return $resultado->fetch();
-
-        } catch (PDOException $e) {
-            error_log("Error en Slot::consultarNombreServicio-> " . $e->getMessage());
-            return [];
-        }
-    }
-
-    public function listarDisponibilidad($id_consultorio, $id_especialidad, $id_servicio)
+    
+    public function listarDisponibilidad($id_especialista)
     {
         try {
-            $consulta = "SELECT servicios.nombre AS nombre_servicio, especialistas.foto AS foto_especialista, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellidos_especialista, agenda_slot.id AS id_slot, agenda_slot.estado_slot, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, usuarios.estado FROM agenda_slot INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id INNER JOIN servicios ON servicios.id_especialidad = especialidades.id WHERE agenda_slot.id_consultorio = :id_consultorio AND especialidades.id = :id_especialidad AND servicios.id = :id_servicio AND agenda_slot.fecha >= CURDATE() AND agenda_slot.estado_slot = 'Disponible' AND usuarios.estado = 'ACTIVO'";
+            $consulta = "SELECT id AS id_slot, fecha, hora_inicio, hora_fin FROM agenda_slot WHERE agenda_slot.id_especialista = :id_especialista AND agenda_slot.estado_slot = 'Disponible' AND (agenda_slot.fecha > CURDATE() OR (agenda_slot.fecha = CURDATE() AND agenda_slot.hora_inicio > CURTIME() )) ORDER BY agenda_slot.fecha ASC, agenda_slot.hora_inicio ASC";
 
             $resultado = $this->conexion->prepare($consulta);
-            $resultado->bindParam(':id_consultorio', $id_consultorio);
-            $resultado->bindParam(':id_especialidad', $id_especialidad);
-            $resultado->bindParam(':id_servicio', $id_servicio);
+            $resultado->bindParam(':id_especialista', $id_especialista);
 
             $resultado->execute();
 
