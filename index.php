@@ -501,7 +501,11 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/consultorioController.php';
         break;
 
-    case '/paciente/agendar_paso2':
+    case '/paciente/seleccionar-especialista':
+        require BASE_PATH . '/app/views/dashboard/paciente/seleccionar-especialista.php';
+        break;
+
+    case '/paciente/seleccionar-horario':
         require BASE_PATH . '/app/views/dashboard/paciente/seleccionar-horario.php';
         break;
 
