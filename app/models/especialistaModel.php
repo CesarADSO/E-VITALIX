@@ -72,7 +72,7 @@ class Especialista
             // PREPARAMOS LA ACCIÓN A EJECUTAR
             $resultado2 = $this->conexion->prepare($registrarEspecialista);
 
-            
+
             $resultado2->bindParam(':id_usuario', $idUsuario);
             $resultado2->bindParam(':id_consultorio', $data['id_consultorio']);
             $resultado2->bindParam(':nombres', $data['nombres']);
@@ -170,19 +170,20 @@ class Especialista
         }
     }
 
-    public function actualizar($data) {
+    public function actualizar($data)
+    {
         // CREAMOS EL TRY-CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE DECLARAMOS LA CONSULTA SQL A UTILIZAR
             $actualizar = "UPDATE usuarios SET estado = :estadoEspecialista WHERE id = :idUsuario";
 
-             // PREPARAMOS LA ACCIÓN A EJECUTAR
-             $resultado = $this->conexion->prepare($actualizar);
+            // PREPARAMOS LA ACCIÓN A EJECUTAR
+            $resultado = $this->conexion->prepare($actualizar);
 
-             $resultado->bindParam(':idUsuario', $data['idUsuario']);
-             $resultado->bindParam(':estadoEspecialista', $data['estadoEspecialista']);
+            $resultado->bindParam(':idUsuario', $data['idUsuario']);
+            $resultado->bindParam(':estadoEspecialista', $data['estadoEspecialista']);
 
-             $resultado->execute();
+            $resultado->execute();
 
             $actualizar2 = "UPDATE especialistas SET nombres = :nombres, apellidos = :apellidos, id_tipo_documento = :idTipoDocumento, telefono = :telefono, direccion = :direccion, id_especialidad = :especialidad, registro_profesional = :registroProfesional WHERE id = :idEspecialista";
 
@@ -206,7 +207,8 @@ class Especialista
         }
     }
 
-    public function eliminar($idUsuario, $id) {
+    public function eliminar($idUsuario, $id)
+    {
         // CREAMOS EL TRY - CATCH PARA MANEJAR ERRORES
         try {
 
@@ -227,11 +229,27 @@ class Especialista
             $resultado->execute();
 
             return true;
-
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();
             error_log("Error en Especialista::actualizar->" . $e->getMessage());
             return false;
+        }
+    }
+
+    public function listarEspecialistasPorEspecialidad($id_especialidad)
+    {
+        try {
+            $listar = "SELECT especialistas.id, especialistas.id_usuario, especialistas.nombres, especialistas.apellidos, especialistas.foto, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_especialidad = :id_especialidad AND usuarios.estado = 'Activo'";
+
+            $resultado = $this->conexion->prepare($listar);
+            $resultado->bindParam(':id_especialidad', $id_especialidad);
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+            error_log("Error en Especialista::listarEspecialistasPorEspecialidad->" . $e->getMessage());
+            return [];
         }
     }
 }

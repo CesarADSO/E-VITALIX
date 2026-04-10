@@ -29,6 +29,10 @@ switch ($method) {
             mostrarServicios();
         }
 
+        if (isset($_GET['id_servicio'])) {
+            consultarNombreServicio($_GET['id_servicio']);
+        }
+
         break;
 
     default:
@@ -204,3 +208,11 @@ function eliminarServicio($id)
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el servicio. Intenta nuevamente');
     }
 }
+
+function consultarNombreServicio($id_servicio) {
+    $objServicio = new Servicio();
+
+    $resultado = $objServicio->consultarNombreServicio($id_servicio);
+
+    return $resultado;
+ }
