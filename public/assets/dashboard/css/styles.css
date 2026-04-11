@@ -636,13 +636,6 @@
         color: var(--blanco-color);
     }
 
-    .cont-tabla-consultorios .btn-reporte {
-        margin-bottom: 20px;
-    }
-
-    .boton-reporte {
-        margin-bottom: 20px;
-    }
 
     .check-especialidad .mi-label {
         color: var(--color-primario);
@@ -3957,4 +3950,6 @@
     .mb-2 {
         font-weight: 700;
     }
+
+    
 }
