@@ -485,7 +485,7 @@
     }
 
     .form-control::placeholder {
-        color: var(--color-primario);
+        color: var(--gris-proyecto);
     }
 
     .form-text {
@@ -636,13 +636,6 @@
         color: var(--blanco-color);
     }
 
-    .cont-tabla-consultorios .btn-reporte {
-        margin-bottom: 20px;
-    }
-
-    .boton-reporte {
-        margin-bottom: 20px;
-    }
 
     .check-especialidad .mi-label {
         color: var(--color-primario);
@@ -3931,4 +3924,32 @@
         align-items: center;
         justify-content: center;
     }
+
+    .mb-4 {
+        text-align: center;
+        font-weight: 800;
+    }
+
+    .consultorio-logo {
+        display: none;
+    }
+
+    .text-end {
+        display: flex;
+        
+    }
+
+    .badge-estado {
+        top: 143px;
+    }
+
+    .gap-3 {
+        margin-bottom: 20px;
+    }
+
+    .mb-2 {
+        font-weight: 700;
+    }
+
+    
 }
