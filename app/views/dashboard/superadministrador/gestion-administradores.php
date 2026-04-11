@@ -41,7 +41,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 ← Todos (<?= count($administradores) ?>)
                             </button>
                         </div>
-                        <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=administradores" target="_blank">Generar reporte pdf</a>
+                        <a class="btn btn-outline-primary boton-reporte rounded-pill px-4" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=administradores" target="_blank">Generar reporte pdf</a>
                         <!-- <a href="<?= BASE_URL ?>/superadmin/registrar-administrador" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a> -->
                     </div>
 

@@ -30,7 +30,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- Pacientes Header -->
                     <h4 class="mb-4">Gestión de especialidades globales del sistema</h4>
-                    <p class="mb-4">Gestione las especialidades globales del sistema.</p>
+                    <p class="mb-4 d-none d-lg-block">Gestione las especialidades globales del sistema.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -41,7 +41,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <button class="btn btn-primary btn-sm btn-añadir-volver" data-bs-toggle="modal" data-bs-target="#formularioModalRegistrar"><i class="bi bi-plus-lg"></i>AÑADIR</button>
                     </div>
 
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm d-none d-lg-block">
                         <div class="card-header card-header-primary">
                             <h5 class="mb-0 text-white">
                                 <i class="bi bi-calendar-check me-2"></i>
@@ -100,6 +100,38 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         </div>
                     </div>
 
+                </div>
+
+                <!-- VISTA MOVIL -->
+                <div class="row d-lg-none mt-3">
+                    <?php if (!empty($especialidades)): ?>
+                        <?php foreach ($especialidades as $especialidad): ?>
+                            <div class="col-md-12 mt-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title"><?= $especialidad['nombre'] ?></h5>
+                                            <?php if ($especialidad['estado'] === 'ACTIVA'): ?>
+                                                <!-- <span class="badge bg-success status-bagde status text-white"><?= $especialidad['estado'] ?></span> -->
+                                                <a class="badge bg-success status-badge status btn-estado" href="<?= BASE_URL ?>/superadmin/cambiar-estado-especialidad?id=<?= $especialidad['id'] ?>&accion=modificarEstado"><?= $especialidad['estado'] ?></a>
+                                            <?php else: ?>
+                                                <!-- <span class="badge bg-danger status-bagde status text-white"><?= $especialidad['estado'] ?></span> -->
+                                                <a class="badge bg-danger status-badge status btn-estado" href="<?= BASE_URL ?>/superadmin/cambiar-estado-especialidad?id=<?= $especialidad['id'] ?>&accion=modificarEstado"><?= $especialidad['estado'] ?></a>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle mb-2 text-body-secondary">Descripción: <?= $especialidad['descripcion'] ?></h6>
+                                        </div>
+                                        <div class="cont-botones d-flex justify-content-end gap-2">
+                                            <a href="<?= BASE_URL ?>/superadmin/editar-especialidad?id=<?= $especialidad['id'] ?>" class="btn btn-sm btn-info btn-editar-especialidad" title="Editar especialidad"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No hay administradores registrados.</p>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Modal para registrar una especialidad -->
