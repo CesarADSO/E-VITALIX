@@ -117,7 +117,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <div class="chart-card subscription-widget">
                         <div class="chart-header">
                             <h3 class="chart-title">Estado de su Suscripción</h3>
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-3 cont-estado-plan">
                                 <?php if ($plan['estado'] === 'ACTIVO'): ?>
                                     <span class="status-badge status-active"><?= $plan['estado'] ?></span>
                                 <?php else: ?>

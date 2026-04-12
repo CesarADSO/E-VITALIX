@@ -48,34 +48,34 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h2 class="patient-name mb-2"><?= $especialista['nombres'] . ' ' . $especialista['apellidos'] ?></h2>
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="bi bi-card-text text-primary"></i>
                                                     <strong><?= $especialista['documento'] ?>:</strong> <?= $especialista['numero_documento'] ?>
                                                 </p>
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="fa-solid fa-user-doctor text-primary"></i>
-                                                    <strong>Especialidad:</strong> <?= $especialista['especialidad'] ?>
+                                                    <strong>Especialidad:</strong> <?= $especialista['nombre_especialidad'] ?>
                                                 </p>
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="fa-solid fa-at text-primary"></i>
                                                     <strong>Correo:</strong> <?= $especialista['email'] ?>
                                                 </p>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="fa-solid fa-book-medical text-primary"></i>
                                                     <strong>Registro Profesional:</strong> <?= $especialista['registro_profesional'] ?>
                                                 </p>
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="fa-solid fa-phone text-primary"></i>
                                                     <strong>Teléfono:</strong> <?= $especialista['telefono'] ?>
                                                 </p>
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="fa-solid fa-location-crosshairs text-primary"></i>
                                                     <strong>Dirección:</strong> <?= $especialista['direccion'] ?>
                                                 </p>
-                                                <p class="patient-info mb-1">
+                                                <p class="patient-info mb-3">
                                                     <i class="fa-solid fa-user text-primary"></i>
                                                     <strong>Estado:</strong>
                                                     <?php if ($especialista['estado'] == 'Activo'): ?>
