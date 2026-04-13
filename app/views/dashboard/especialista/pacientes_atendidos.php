@@ -22,8 +22,8 @@
                     ?>
 
                     <!-- historiales Header -->
-                    <h4 class="mb-4">Gestión de historiales clínicos de pacientes atendidos</h4>
-                    <p class="mb-4">Consulte los historiales clínicos de los pacientes atendidos por usted.</p>
+                    <h4 class="mb-4">Gestión de los pacientes atendidos</h4>
+                    <p class="mb-4">Consulte la información de los pacientes que usted ha atendido.</p>
 
                     <div class="card shadow-sm">
                         <div class="card-header card-header-primary">
@@ -60,9 +60,10 @@
                                                         <td><?= $paciente['tipo_documento'] ?></td>
                                                         <td><?= $paciente['numero_documento'] ?></td>
                                                         <td><?= $paciente['ultima_consulta'] ?></td>
-                                                        <td><a href="<?= BASE_URL ?>/especialista/historial_clinico?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-sm btn-info"
+                                                        <td><a href="<?= BASE_URL ?>/especialista/historial_clinico?id_paciente=<?= $paciente['id_paciente'] ?>" class="btn btn-sm btn-success text-white"
                                                                 title="Consultar historial clínico">
-                                                                <i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                                <i class="fa-solid fa-book"></i></a>
+                                                                <a href="<?= BASE_URL ?>/especialista/consultar-paciente?id=<?= $paciente['id_paciente'] ?>" class="btn btn-info btn-sm text-white" title="Consultar Paciente"><i class="fa-solid fa-magnifying-glass"></i></a>
                                                                 </td>
                                                     </tr>
                                                 <?php endforeach; ?>

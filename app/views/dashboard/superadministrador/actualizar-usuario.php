@@ -36,10 +36,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <!-- Consultorios Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
-                            </button>
+                            <a href="<?= BASE_URL ?>/superadmin/usuarios" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
                         </div>
                         <a href="<?= BASE_URL ?>/superadmin/usuarios" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>

@@ -1,5 +1,9 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
+require_once BASE_PATH . '/app/helpers/session_administrador.php';
+require_once BASE_PATH . '/app/controllers/planesController.php';
+
+$plan = traerId();
 ?>
 
 
@@ -139,7 +143,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                 <!-- Botón de acción -->
                                 <div class="contenedor-boton">
-                                    <a href="registro" class="boton-plan boton-basico">
+                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=<?= $plan[1]['id'] ?>" class="boton-plan boton-basico">
                                         Elegir Plan profesional
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
@@ -195,7 +199,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                 <!-- Botón de acción -->
                                 <div class="contenedor-boton">
-                                    <a href="contacto" class="boton-plan boton-premium">
+                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=<?= $plan[2]['id'] ?>" class="boton-plan boton-premium">
                                         Elegir plan élite
                                         <i class="bi bi-arrow-right"></i>
                                     </a>

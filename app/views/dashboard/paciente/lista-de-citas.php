@@ -50,7 +50,7 @@ $citas = mostrarCitas();
                                     </div>
                                     <div class="card-footer d-flex justify-content-between bg-transparent border-0 pb-3">
                                         <?php if($cita['estado_cita'] === 'PENDIENTE'):?>
-                                        <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>" class="btn btn-sm btn-success mx-2" title="Reprogramar cita médica">
+                                        <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success mx-2" title="Reprogramar cita médica">
                                             <i class="fa-solid fa-pen-to-square text-white"></i>
                                         </a>
                                         <a href="<?= BASE_URL ?>/paciente/cancelar-cita?id_cita=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger mx-2" title="Cancelar cita médica">

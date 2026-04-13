@@ -147,4 +147,21 @@ class Servicio
             return false;
         }
     }
+
+    public function consultarNombreServicio($id_servicio)
+    {
+        try {
+            $consulta = "SELECT nombre FROM servicios WHERE id = :id_servicio";
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id_servicio', $id_servicio);
+
+            $resultado->execute();
+
+            return $resultado->fetch();
+        } catch (PDOException $e) {
+            error_log("Error en Slot::consultarNombreServicio-> " . $e->getMessage());
+            return [];
+        }
+    }
 }

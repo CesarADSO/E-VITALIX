@@ -219,7 +219,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                             </span>
                                                             <span class="servicio-texto">Precio: $<?= trim($precio_serv) ?></span>
 
-                                                        <a href="<?= BASE_URL ?>/paciente/agendar_paso2?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>&id_servicio=<?= $id_serv ?>"
+                                                        <a href="<?= BASE_URL ?>/paciente/seleccionar-especialista?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>&id_servicio=<?= $id_serv ?>"
                                                             class="btn btn-sm btn-outline-primary py-0" style="font-size: 0.8rem;">
                                                             Agendar
                                                         </a>

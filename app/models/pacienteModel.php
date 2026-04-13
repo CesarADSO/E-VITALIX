@@ -158,9 +158,11 @@ class Paciente
                             p.*,
                             u.email,
                             u.estado,
-                            u.id as id_usuario_tabla
+                            u.id as id_usuario_tabla,
+                            td.nombre as tipo_documento
                           FROM pacientes p
                           INNER JOIN usuarios u ON p.id_usuario = u.id
+                          INNER JOIN tipo_documento td ON p.id_tipo_documento = td.id
                           WHERE p.id = :id 
                           LIMIT 1";
 

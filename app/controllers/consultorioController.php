@@ -48,6 +48,7 @@ switch ($method) {
         if (isset($_GET['id'])) {
             // Esta función llena el formulario de editar con un solo consultorio
             listarConsultorio($_GET['id']);
+            traerEspecialidadesPorConsultorio($_GET['id']);
         } else {
             // Esta función llena toda la tabla de consultorios
             mostrarConsultorios();
@@ -238,6 +239,14 @@ function listarConsultorio($id)
     $objConsultorio = new Consultorio();
 
     $consultorio = $objConsultorio->listarConsultorioPorId($id);
+
+    return $consultorio;
+}
+
+function traerEspecialidadesPorConsultorio($id) {
+    $objConsultorio = new Consultorio();
+
+    $consultorio = $objConsultorio->traerEspecialidadesConsultorios($id);
 
     return $consultorio;
 }

@@ -28,14 +28,14 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- TICKETS HEADER -->
                     <h4 class="mb-4">Tickets de los usuarios</h4>
-                    <p class="mb-4">En esta interfaz usted podrá consultar los tickets de soporte técnico que han enviado los usuarios, podrá visualizar su estado y podrá dar por finalizado el ticket cuando usted quiera</p>
+                    <p class="mb-4 d-none d-md-block">En esta interfaz usted podrá consultar los tickets de soporte técnico que han enviado los usuarios, podrá visualizar su estado y podrá dar por finalizado el ticket cuando usted quiera</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos(<?= count($tickets) ?>)</button>
                         </div>
                     </div>
 
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm d-none d-md-block">
                         <div class="card-header card-header-primary">
                             <h5 class="mb-0 text-white"><i class="bi bi-calendar-check me-2"></i>Lista de tickets</h5>
                         </div>
@@ -79,7 +79,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                             <?php elseif ($ticket['estado'] === 'RESPONDIDO'): ?>
                                                                 <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
                                                             <?php else: ?>
-                                                                <span class="text-muted small">No hay acciones disponibles</span>
+                                                                <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
                                                             <?php endif; ?>
                                                         </td>
                                                     </tr>
@@ -93,6 +93,50 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             </div>
                         </div>
                     </div>
+
+                    <!-- VISTA MOVIL -->
+                    <div class="row d-lg-none mt-3">
+                        <?php if (!empty($tickets)): ?>
+                            <?php foreach ($tickets as $ticket): ?>
+                                <div class="col-md-12 mt-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h5 class="card-title text-truncate"><?= $ticket['email'] ?></h5>
+                                                <?php if ($ticket['estado'] === 'ABIERTO'): ?>
+                                                    <span class="badge bg-info status-badge status text-white"><?= $ticket['estado'] ?></span>
+                                                <?php elseif ($ticket['estado'] === 'RESPONDIDO'): ?>
+                                                    <span class="badge bg-success status-badge status text-white"><?= $ticket['estado'] ?></span>
+                                                <?php else: ?>
+                                                    <span class="badge bg-danger status-badge status text-white"><?= $ticket['estado'] ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Rol: <?= $ticket['rol'] ?></h6>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Título: <?= $ticket['titulo'] ?></h6>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Fecha de creación: <?= $ticket['created_at'] ?></h6>
+                                            </div>
+                                            <div class="cont-botones d-flex justify-content-end gap-2">
+                                                <?php if ($ticket['estado'] === 'ABIERTO'): ?>
+                                                    <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                    <a href="<?= BASE_URL ?>/superadmin/responder-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-success" title="Responder ticket"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                <?php elseif ($ticket['estado'] === 'RESPONDIDO'): ?>
+                                                    <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                <?php else: ?>
+                                                    <a href="<?= BASE_URL ?>/superadmin/consultar-ticket?id=<?= $ticket['id'] ?>" class="btn btn-sm btn-info" title="Consultar ticket"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>No hay consultorios registrados.</p>
+
+                        <?php endif; ?>
+                    </div>
+
+
                 </div>
             </div>
         </div>
