@@ -3951,5 +3951,12 @@
         font-weight: 700;
     }
 
-    
+    .cont-estado-plan {
+        justify-content: center;
+    }
+
+    .subscription-widget .chart-title {
+        margin-bottom: 20px;
+    }
+
 }
