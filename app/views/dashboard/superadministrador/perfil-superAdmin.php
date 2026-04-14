@@ -41,8 +41,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                                                                <label for="foto" class="user-avatar avatar-editable"
                                                                       style="width:150px;height:150px;border-radius:50%;
-        background-color:#e9ecef;margin:0 auto 20px;
-        cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+                                                                      background-color:#e9ecef;margin:0 auto 20px;
+                                                                      cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;">
 
                                                                       <img class="adminImg"
                                                                              src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $perfil['foto'] ?>"
