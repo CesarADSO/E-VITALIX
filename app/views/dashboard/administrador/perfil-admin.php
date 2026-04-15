@@ -84,6 +84,7 @@ $perfil = mostrarPerfilAdmin($id);
                                                  </div>
                                           </div>
 
+
                                           <!-- ===================== COLUMNA DERECHA ===================== -->
                                           <div class="col-md-8">
 
