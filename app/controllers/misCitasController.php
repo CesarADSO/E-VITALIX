@@ -43,27 +43,6 @@ function mostrarMisCitas()
     // Obtener estadísticas
     $estadisticas = $citasModel->contarCitasPorEstado($id_especialista);
 
-    // DEBUG TEMPORAL - Eliminar después de verificar
-    if (isset($_GET['debug'])) {
-        echo "<h2>DEBUG - Controlador</h2>";
-        echo "<h3>ID Especialista:</h3>";
-        echo "<pre>";
-        var_dump($id_especialista);
-        echo "</pre>";
-        echo "<h3>Estadísticas:</h3>";
-        echo "<pre>";
-        print_r($estadisticas);
-        echo "</pre>";
-        echo "<h3>Total Citas:</h3>";
-        echo "<pre>";
-        echo count($citas);
-        echo "</pre>";
-        echo "<h3>Primeras 3 citas:</h3>";
-        echo "<pre>";
-        print_r(array_slice($citas, 0, 3));
-        echo "</pre>";
-        exit();
-    }
 
     
 
