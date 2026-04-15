@@ -1704,12 +1704,12 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        background: var(--color-primario);
+        background: #f1f1f1;
         border-radius: 5px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: var(--color-secundario);
+        background: #969696;
     }
 
     .lupa {
