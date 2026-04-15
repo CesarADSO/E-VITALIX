@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/CitasModel.php';
+require_once __DIR__ . '/../models/citasModel.php';
 require_once __DIR__ . '/../helpers/session_especialista.php';
 require_once __DIR__ . '/../helpers/alert_helper.php';
 
