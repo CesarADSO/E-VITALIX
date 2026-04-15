@@ -51,21 +51,13 @@ $perfil = mostrarPerfilEspecialista($id);
         </div>
 
         <nav class="nav-menu w-100 mt-4">
-            <a class="nav-item" href="<?= BASE_URL ?>/especialista/calendario">
-                <i class="bi bi-calendar-event me-2"></i>
-                <span>Mi Calendario</span>
-            </a>
             <a class="nav-item" href="<?= BASE_URL ?>/especialista/dashboard">
                 <i class="bi bi-grid-fill"></i>
                 <span>Dashboard</span>
             </a>
-            <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
-                <i class="fa-regular fa-clock"></i>
-                <span>Disponibilidad</span>
-            </a>
-            <a class="nav-item" href="<?= BASE_URL ?>/especialista/slots">
-                <i class="fa-solid fa-list"></i>
-                <span>Espacios de agendamiento</span>
+            <a class="nav-item" href="<?= BASE_URL ?>/especialista/calendario">
+                <i class="bi bi-calendar-event me-2"></i>
+                <span>Mi Calendario</span>
             </a>
             <a class="nav-item" href="<?= BASE_URL ?>/especialista/mis-citas">
                 <i class="fa-regular fa-calendar"></i>
@@ -74,6 +66,14 @@ $perfil = mostrarPerfilEspecialista($id);
             <a class="nav-item" href="<?= BASE_URL ?>/especialista/pacientes-atendidos">
                 <i class="fa-solid fa-person"></i>
                 <span>Pacientes atendidos</span>
+            </a>
+            <a class="nav-item" href="<?= BASE_URL ?>/especialista/disponibilidad">
+                <i class="fa-regular fa-clock"></i>
+                <span>Disponibilidad</span>
+            </a>
+            <a class="nav-item" href="<?= BASE_URL ?>/especialista/slots">
+                <i class="fa-solid fa-list"></i>
+                <span>Espacios de agendamiento</span>
             </a>
             <a class="nav-item" href="<?= BASE_URL ?>/especialista/mis-tickets">
                 <i class="bi bi-ticket-detailed"></i>
