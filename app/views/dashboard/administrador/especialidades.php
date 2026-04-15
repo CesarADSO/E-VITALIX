@@ -30,7 +30,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Pacientes Header -->
                     <h4 class="mb-4">Gestión de especialidades del consultorio</h4>
-                    <p class="mb-4">Gestione las especialidades de su consultorio.</p>
+                    <p class="mb-4 d-none d-md-block">Gestione las especialidades de su consultorio.</p>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
                             <button class="btn btn-link text-primary p-0"
@@ -38,10 +38,10 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 ← Todos (0)
                             </button>
                         </div>
-                        <a  class="btn btn-primary btn-sm btn-añadir-volver" href="<?= BASE_URL ?>/admin/asociar-especialidad"><i class="bi bi-plus-lg"></i> ASOCIAR</a>
+                        <a class="btn btn-primary btn-sm btn-añadir-volver" href="<?= BASE_URL ?>/admin/asociar-especialidad"><i class="bi bi-plus-lg"></i> ASOCIAR</a>
                     </div>
 
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm d-none d-lg-block">
                         <div class="card-header card-header-primary">
                             <h5 class="mb-0 text-white">
                                 <i class="bi bi-calendar-check me-2"></i>
@@ -99,9 +99,40 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         </div>
                     </div>
 
+                    <!-- VISTA MOVIL -->
+                    <div class="row d-lg-none mt-3">
+                        <?php if (!empty($especialidades)): ?>
+                            <?php foreach ($especialidades as $especialidad): ?>
+                                <div class="col-md-12 mt-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h5 class="card-title text-truncate"><?= $especialidad['nombre'] ?></h5>
+                                                <?php if ($especialidad['estado'] === 'ACTIVA'): ?>
+                                                    <span class="status-badge bg-success text-white"><?= $especialidad['estado'] ?></span>
+                                                <?php else: ?>
+                                                    <span class="status-badge bg-danger text-white"><?= $servicio['estado'] ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Descripción: <?= $especialidad['descripcion'] ?></h6>
+                                            </div>
+                                            <div class="cont-botones d-flex justify-content-end gap-2">
+                                                <a href="<?= BASE_URL ?>/admin/desasociar-especialidad?id=<?= $especialidad['id'] ?>&accion=desasociar" class="btn btn-sm btn-danger btn-editar-especialidad" title="Desasociar especialidad"><i class="fa-solid fa-x"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>No hay especialidades registradas.</p>
+
+                        <?php endif; ?>
+                    </div>
+
                 </div>
 
-                
+
 
             </div>
         </div>
