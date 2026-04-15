@@ -401,6 +401,11 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
 
+    case '/especialista/generar-reporte':
+        require BASE_PATH . '/app/controllers/reportesPdfControllerEspecialista.php';
+        reportesPdfController();
+        break;
+
     case '/especialista/guardar-configuracion-usuario':
         require BASE_PATH . '/app/controllers/perfilController.php';
         break;
