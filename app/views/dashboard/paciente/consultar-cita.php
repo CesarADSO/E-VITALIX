@@ -29,6 +29,11 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                 include_once __DIR__ . '/../../layouts/topbar_paciente.php';
                 ?>
 
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <a href="<?= BASE_URL ?>/paciente/lista-de-citas" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
+                    <a href="<?= BASE_URL ?>/paciente/lista-de-citas" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                </div>
+
                 <!-- Formulario de Registro de Administrador de Consultorio -->
                 <div class="bg-white rounded shadow-sm p-4">
                     <h4 class="mb-4">Detalle de la cita</h4>
@@ -72,13 +77,13 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                             <div class="col-md-6 mb-3">
                                 <label for="estado_cita" class="form-label">Estado de la cita</label>
                                 <input type="text" class="form-control" id="estado_cita" name="estado_cita"
-                                    value="<?= $cita['estado_cita']?>" disabled>
+                                    value="<?= $cita['estado_cita'] ?>" disabled>
                             </div>
 
-                        <!-- Botones -->
-                        <div class="d-flex justify-content-between cont-botones mt-4">
-                            <a href="<?= BASE_URL ?>/paciente/lista-de-citas" class="btn btn-primary">Volver a mi lista de citas</a>
-                        </div>
+                            <!-- Botones -->
+                            <div class="d-flex justify-content-between cont-botones mt-4">
+                                <a href="<?= BASE_URL ?>/paciente/lista-de-citas" class="btn btn-primary">Volver a mi lista de citas</a>
+                            </div>
                     </form>
                 </div>
             </div>

@@ -174,7 +174,8 @@ class CitasModel
      */
     public function contarCitasPorEstado($id_especialista)
     {
-        $consulta = "
+        try {
+            $consulta = "
         SELECT 
             estado_cita,
             COUNT(*) AS total
@@ -185,22 +186,34 @@ class CitasModel
         GROUP BY estado_cita
     ";
 
-        $stmt = $this->conexion->prepare($consulta);
-        $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
-        $stmt->execute();
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
+            $stmt->execute();
 
-        $conteo = [
-            'Pendiente' => 0,
-            'Aceptada' => 0,
-            'Cancelada' => 0,
-            'Rechazada' => 0
-        ];
+            $conteo = [
+                'PENDIENTE' => 0,
+                'CONFIRMADA' => 0,
+                'CANCELADA' => 0,
+                'RECHAZADA' => 0
+            ];
 
-        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $conteo[$fila['estado_cita']] = (int)$fila['total'];
+            while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $conteo[$fila['estado_cita']] = (int)$fila['total'];
+            }
+
+            return $conteo;
+        } catch (\Throwable $e) {
+            // SI HAY UN ERROR EN SQL, LO ATRAPAMOS AQUÍ Y EVITAMOS EL ERROR 500
+            error_log("Error fatal en contarCitasPorEstado: " . $e->getMessage());
+
+            // Devolvemos el arreglo en ceros para que la vista no se rompa
+            return [
+                'PENDIENTE' => 0,
+                'CONFIRMADA' => 0,
+                'CANCELADA' => 0,
+                'RECHAZADA' => 0
+            ];
         }
-
-        return $conteo;
     }
 
     public function aceptarCita($id)
@@ -816,8 +829,8 @@ class CitasModel
 </body>
 </html>';
 
-        // ENVIAR CORREO
-        $mail->send();
+            // ENVIAR CORREO
+            $mail->send();
 
 
 
