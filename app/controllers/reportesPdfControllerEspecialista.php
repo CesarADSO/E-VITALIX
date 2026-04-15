@@ -1,0 +1,70 @@
+<?php
+// Iniciar sesión primero
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Verificar autenticación básica (sin validación de rol específico)
+if (!isset($_SESSION['user'])) {
+    http_response_code(401);
+    echo "Acceso no autorizado";
+    exit();
+}
+
+
+require_once BASE_PATH . '/app/helpers/pdf_helper.php';
+require_once BASE_PATH . '/app/controllers/historialesController.php';
+
+
+
+// ESTA FUNCIÓN SE ENCARGA DE VALIDAR EL TIPO DE REPORTE Y EJECUTAR LA FUNCIÓN CORRESPONDIENTE
+function reportesPdfController()
+{
+    // VALIDACIÓN DE CONTEXTO:
+    // Este controlador puede ser incluido desde otras vistas del sistema,
+    // por lo tanto NO siempre existirá el parámetro 'tipo' en la URL.
+    // 
+    // Si no se valida, PHP lanzará un warning (Undefined array key)
+    // que puede romper el renderizado de vistas normales.
+    //
+    // Con esta validación garantizamos que el controlador
+    // SOLO ejecute lógica cuando realmente se está solicitando
+    // la generación de un reporte PDF.
+    if (!isset($_GET['tipo'])) {
+        return; // No hay solicitud de reporte, se sale del controlador
+    }
+
+    // Se obtiene el tipo de reporte solicitado desde la URL
+    $tipo = $_GET['tipo'];
+
+    // Según el tipo de reporte recibido, se ejecuta
+    // la función correspondiente para generar el PDF
+    switch ($tipo) {
+        case 'historial_clinico':
+            reporteHistorialClinicoPDF();
+            break;
+
+        default:
+            exit();
+            break;
+    }
+}
+
+function reporteHistorialClinicoPDF()
+{
+    // CARGAR LA VISTA Y OBTENERLA COMO HTML
+    ob_start();
+
+    // ASIGNAMOS LOS DATOS DE LA FUNCIÓN EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
+    $id_paciente = $_GET['id_paciente'] ?? null;
+    $datos = consultarHistorialClinicoPaciente($id_paciente);
+
+    $paciente = $datos['paciente'];
+    $historial = $datos['historial'];
+
+    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
+    require BASE_PATH . '/app/views/pdf/historial_clinico_pdf.php';
+    $html = ob_get_clean();
+
+    generarPDF($html, 'reporte_historial_clinico.pdf', true);
+}

@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../vendor/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-function generarPDF($html, $filename = "documento.pdf", $download = false)
+function generarPDF($html, $filename = "documento.pdf", $download = true)
 {
     // 🔥 LIMPIAR CUALQUIER SALIDA PREVIA
     if (ob_get_length()) {
