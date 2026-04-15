@@ -5,7 +5,7 @@ require_once BASE_PATH . '/app/helpers/pdf_helper.php';
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 require_once BASE_PATH . '/app/controllers/usuarioController.php';
- require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+require_once BASE_PATH . '/app/controllers/administradorConsultorioController.php';
 
 
 
@@ -47,7 +47,7 @@ function reporteConsultoriosPDF()
     require BASE_PATH . '/app/views/pdf/consultorios_pdf.php';
     $html = ob_get_clean();
 
-    generarPDF($html, 'reporte_consultorios.pdf', false);
+    generarPDF($html, 'reporte_consultorios.pdf', true);
 }
 
 function reporteEspecialistasPDF()
@@ -61,7 +61,7 @@ function reporteEspecialistasPDF()
     require BASE_PATH . '/app/views/pdf/especialistas_pdf.php';
     $html = ob_get_clean();
 
-    generarPDF($html, 'reporte_especialistas.pdf', false);
+    generarPDF($html, 'reporte_especialistas.pdf', true);
 }
 
 function reporteUsuariosPDF()
@@ -76,10 +76,11 @@ function reporteUsuariosPDF()
     require BASE_PATH . '/app/views/pdf/usuarios_pdf.php';
     $html = ob_get_clean();
 
-    generarPDF($html, 'reporte_usuarios.pdf', false);
+    generarPDF($html, 'reporte_usuarios.pdf', true);
 }
 
-function reporteAdministradoresPDF() {
+function reporteAdministradoresPDF()
+{
     // CARGAR LA VISTA Y OBTENERLA COMO HTML
     ob_start();
 
@@ -90,5 +91,23 @@ function reporteAdministradoresPDF() {
     require BASE_PATH . '/app/views/pdf/administradores_pdf.php';
     $html = ob_get_clean();
 
-    generarPDF($html, 'reporte_administradores.pdf', false);
+    generarPDF($html, 'reporte_administradores.pdf', true);
+}
+
+function reporteHistorialClinicoPDF() {
+    // CARGAR LA VISTA Y OBTENERLA COMO HTML
+    ob_start();
+
+    // ASIGNAMOS LOS DATOS DE LA FUNCIÓN EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
+    $id_paciente = $_GET['id_paciente'] ?? null;
+    $datos = consultarHistorialClinicoPaciente($id_paciente);
+
+    $paciente = $datos['paciente'];
+    $historial = $datos['historial'];
+
+    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
+    require BASE_PATH . '/app/views/pdf/historial_clinico_pdf.php';
+    $html = ob_get_clean();
+
+    generarPDF($html, 'reporte_historial_clinico.pdf', true);
 }

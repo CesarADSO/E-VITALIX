@@ -41,7 +41,7 @@ class Historiales
     public function consultarInfoPaciente($id_paciente)
     {
         try {
-            $consultarInfo = "SELECT pacientes.foto, pacientes.nombres AS nombre_paciente, pacientes.apellidos AS apellido_paciente, tipo_documento.nombre AS tipo_documento, pacientes.numero_documento, pacientes.edad, pacientes.rh, pacientes.genero FROM pacientes INNER JOIN tipo_documento ON pacientes.id_tipo_documento = tipo_documento.id WHERE pacientes.id = :id_paciente";
+            $consultarInfo = "SELECT pacientes.foto, pacientes.nombres AS nombre_paciente, pacientes.apellidos AS apellido_paciente, tipo_documento.nombre AS tipo_documento, pacientes.numero_documento, pacientes.edad, pacientes.rh, pacientes.genero, pacientes.telefono FROM pacientes INNER JOIN tipo_documento ON pacientes.id_tipo_documento = tipo_documento.id WHERE pacientes.id = :id_paciente";
             $resultado = $this->conexion->prepare($consultarInfo);
             $resultado->bindParam(':id_paciente', $id_paciente);
             $resultado->execute();
