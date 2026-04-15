@@ -36,7 +36,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                         <div class="row align-items-center">
                             <div class="col-md-12 d-flex justify-content-between align-items-centers">
                                 <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver a pacientes atendidos</a>
-                                <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=historial_clinico&id_paciente=<?= $id_paciente ?>" class="btn btn-outline-light btn-sm mb-3">Generar reporte pdf</a>
+                                <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=historial_clinico&id_paciente=<?= $id_paciente ?>" class="btn btn-outline-light btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                             </div>
                         </div>
 

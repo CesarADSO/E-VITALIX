@@ -60,7 +60,7 @@ function reporteHistorialClinicoPDF()
     $datos = consultarHistorialClinicoPaciente($id_paciente);
 
     $paciente = $datos['paciente'];
-    $historial = $datos['historial'];
+    $historiales = $datos['historial'];
 
     // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
     require BASE_PATH . '/app/views/pdf/historial_clinico_pdf.php';
