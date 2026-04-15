@@ -31,12 +31,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Asistentes Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
-                            </button>
-                        </div>
+                        <a href="<?= BASE_URL ?>/admin/especialidades" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
                         <a href="<?= BASE_URL ?>/admin/especialidades" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 

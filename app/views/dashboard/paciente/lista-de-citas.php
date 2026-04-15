@@ -57,14 +57,10 @@ $citas = mostrarCitas();
                                             <i class="fa-solid fa-x text-white"></i>
                                         </a>
                                         
-                                        <button class="btn btn-sm btn-outline-primary w-100 btn-detalle-paciente mx-2" data-id="<?= $cita['id_cita'] ?>">
-                                            <i class="bi bi-eye me-2"></i>Ver Detalles
-                                        </button>
+                                        <a href="<?= BASE_URL ?>/paciente/detalle-cita?id_cita=<?= $cita['id_cita'] ?>" class="btn btn-sm btn-outline-primary w-100 btn-detalle-paciente mx-2"><i class="bi bi-eye me-2"></i>Ver Detalles</a>
                                         <?php else: ?>
                                             
-                                        <button class="btn btn-sm btn-outline-primary w-100 btn-detalle-paciente mx-2" data-id="<?= $cita['id_cita'] ?>">
-                                            <i class="bi bi-eye me-2"></i>Ver Detalles
-                                        </button>
+                                        <a href="<?= BASE_URL ?>/paciente/detalle-cita?id_cita=<?= $cita['id_cita'] ?>" class="btn btn-sm btn-outline-primary w-100 btn-detalle-paciente mx-2"><i class="bi bi-eye me-2"></i>Ver Detalles</a>
                                         <?php endif;?>
                                     </div>
                                 </div>
