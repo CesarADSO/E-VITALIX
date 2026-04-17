@@ -119,7 +119,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                         </h5>
                                                     </div>
                                                     <div class="col-md-4 text-md-end mt-2 mt-md-0">
-                                                        <span class="badge badge-control">Control</span>
+                                                        <!-- <span class="badge badge-control">Control</span> -->
+                                                        <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=consulta_medica&id_consulta=<?= $historial['id_consulta'] ?>" class="btn btn-primary btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                                                     </div>
                                                 </div>
                                             </div>
