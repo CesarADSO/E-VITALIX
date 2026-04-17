@@ -68,7 +68,7 @@ $perfil = mostrarPerfilPaciente($id);
                 <i class="fa-solid fa-calendar"></i>
                 <span>Mis citas</span>
             </a>
-            <a class="nav-item" href="<?= BASE_URL ?>/paciente/historial-clinico?id_paciente=<?= $id_paciente ?>">
+            <a class="nav-item" href="<?= BASE_URL ?>/paciente/historial-clinico">
                 <i class="fa-solid fa-book"></i>
                 <span>Mi historial clínico</span>
             </a>
