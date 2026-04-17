@@ -16,15 +16,9 @@ switch ($method) {
             registrarPaciente();
         }
         break;
-
-
-
     default:
-
         break;
 }
-
-
 function registrarPaciente()
 {
     // CAPTURAMOS LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
@@ -65,7 +59,8 @@ function registrarPaciente()
     }
 }
 
-function completarPerfilPaciente($id_paciente) {
+function completarPerfilPaciente($id_paciente)
+{
     // CAPTURAMOS LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $fecha_nacimiento = $_POST['fecha_nacimiento'] ?? '';
     $genero = $_POST['genero'] ?? '';
@@ -77,7 +72,6 @@ function completarPerfilPaciente($id_paciente) {
     $nombre_contacto = $_POST['nombre_contacto'] ?? '';
     $telefono_contacto = $_POST['telefono_contacto'] ?? '';
     $direccion_contacto = $_POST['direccion_contacto'] ?? '';
-
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
     if (empty($fecha_nacimiento) || empty($genero) || empty($ciudad) || empty($direccion) || empty($eps) || empty($rh) || empty($nombre_contacto) || empty($telefono_contacto) || empty($direccion_contacto)) {

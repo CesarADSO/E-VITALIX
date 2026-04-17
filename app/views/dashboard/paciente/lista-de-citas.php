@@ -118,4 +118,4 @@ $citas = mostrarCitas();
             $('#detalleCitaBody').html(html);
         });
     });
-</script> -->
+</script>
