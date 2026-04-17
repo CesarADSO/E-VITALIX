@@ -729,6 +729,11 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/paciente/historial_clinico.php';
         break;
 
+    case '/paciente/generar-reporte':
+        require BASE_PATH . '/app/controllers/reportesPdfControllerPaciente.php';
+        reportesPdfController();
+        break;
+
     case '/paciente/detalle-cita':
         require BASE_PATH . '/app/views/dashboard/paciente/consultar-cita.php';
         break;
