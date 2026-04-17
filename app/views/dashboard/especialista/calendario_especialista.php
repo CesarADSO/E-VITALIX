@@ -28,7 +28,6 @@
             <div class="modal-body">
                 <p><strong>Paciente:</strong> <span id="detPaciente"></span></p>
                 <p><strong>Servicio:</strong> <span id="detServicio"></span></p>
-                <p><strong>Motivo:</strong> <span id="detMotivo"></span></p>
                 <div id="areaAcciones" class="d-none mt-3">
                     <hr>
                     <button class="btn btn-success w-100 mb-2" id="btnAceptarCita">Aceptar Cita</button>
@@ -54,7 +53,6 @@
                 const data = info.event.extendedProps;
                 document.getElementById('detPaciente').innerText = data.paciente;
                 document.getElementById('detServicio').innerText = data.servicio;
-                document.getElementById('detMotivo').innerText = data.motivo || 'N/A';
 
                 const areaAcciones = document.getElementById('areaAcciones');
                 if (data.tipo === 'cita' && data.estado === 'Pendiente') {
