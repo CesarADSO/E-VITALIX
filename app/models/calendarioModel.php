@@ -16,7 +16,7 @@ class CalendarioModel
         try {
 
             $consulta = "SELECT s.id, s.fecha, s.hora_inicio, s.hora_fin, s.estado_slot, 
-                        c.id AS cita_id, c.estado_cita, c.motivo_consulta, 
+                        c.id AS cita_id, c.estado_cita, 
                         CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente, 
                         srv.nombre AS servicio_nombre 
                 FROM agenda_slot s 
