@@ -1,7 +1,7 @@
 <?php
 require_once BASE_PATH . '/app/controllers/historialesController.php';
 
-$id_paciente = $_GET['id_paciente'];
+$id_paciente = $_SESSION['user']['id_paciente'];
 
 
 $datos = consultarHistorialClinicoPaciente($id_paciente);
