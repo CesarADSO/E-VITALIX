@@ -44,6 +44,10 @@ function reportesPdfController()
             reporteHistorialClinicoPDF();
             break;
 
+        case 'consulta_medica':
+            reporteConsultaMedicaPDF();
+            break;
+
         default:
             exit();
             break;
@@ -66,5 +70,25 @@ function reporteHistorialClinicoPDF()
     require BASE_PATH . '/app/views/pdf/historial_clinico_pdf.php';
     $html = ob_get_clean();
 
-    generarPDF($html, 'reporte_historial_clinico.pdf', true);
+    generarPDF($html, 'reporte_historial_clinico.pdf', false);
+}
+
+function reporteConsultaMedicaPDF() {
+    // CARGAR LA VISTA Y OBTENERLA COMO HTML
+    ob_start();
+
+    // ASIGNAMOS LOS DATOS DE LA FUNCIÓN EN EL CONTROLADOR ENLAZADO A UNA VARIABLE QUE PODAMOS MANIPULAR EN LA VISTA DEL PDF
+    $id_consulta = $_GET['id_consulta'] ?? null;
+    $consulta = consultarConsultaMedica($id_consulta);
+    $id_paciente = $consulta['id_paciente'];
+    
+    $datos = consultarHistorialClinicoPaciente($id_paciente);
+
+    $paciente = $datos['paciente'];
+
+    // ARCHIVO QUE TIENE LA INTERFAZ DISEÑADA EN HTML
+    require BASE_PATH . '/app/views/pdf/consulta_medica_pdf.php';
+    $html = ob_get_clean();
+
+    generarPDF($html, 'reporte_consulta_medica.pdf', false);
 }
