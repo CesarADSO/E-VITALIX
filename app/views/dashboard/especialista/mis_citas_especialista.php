@@ -3,6 +3,11 @@
 include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 require_once BASE_PATH . '/app/helpers/session_especialista.php';
 require_once BASE_PATH . '/app/controllers/misCitasController.php';
+
+// Obtenemos el array con todo
+$data = mostrarMisCitas();
+$citas = $data['citas'];
+$estadisticas = $data['estadisticas'];
 ?>
 
 <body>
@@ -132,7 +137,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
                                                                 title="Cancelar cita">
                                                                 <i class="bi bi-x-circle"></i></a>
                                                         <?php elseif ($cita['estado_cita'] === 'CONFIRMADA'): ?>
-                                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
+                                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?>&id_servicio=<?= $cita['id_servicio'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
                                                         <?php else: ?>
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>

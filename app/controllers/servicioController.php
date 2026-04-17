@@ -29,6 +29,10 @@ switch ($method) {
             mostrarServicios();
         }
 
+        if (isset($_GET['id_servicio'])) {
+            consultarNombreServicio($_GET['id_servicio']);
+        }
+
         break;
 
     default:
@@ -122,17 +126,17 @@ function mostrarServicios()
     return $resultado;
 }
 
-function mostrarServicios2()
-{
+// function mostrarServicios2()
+// {
 
-    // INSTANCIAMOS EL MODELO
-    $objServicio = new Servicio();
+//     // INSTANCIAMOS EL MODELO
+//     $objServicio = new Servicio();
 
-    // LLAMAMOS AL MODELO
-    $resultado = $objServicio->mostrarParaTodos();
+//     // LLAMAMOS AL MODELO
+//     $resultado = $objServicio->mostrarParaTodos();
 
-    return $resultado;
-}
+//     return $resultado;
+// }
 
 function listarServicio($id)
 {
@@ -204,3 +208,11 @@ function eliminarServicio($id)
         mostrarSweetAlert('error', 'Error al eliminar', 'No se pudo eliminar el servicio. Intenta nuevamente');
     }
 }
+
+function consultarNombreServicio($id_servicio) {
+    $objServicio = new Servicio();
+
+    $resultado = $objServicio->consultarNombreServicio($id_servicio);
+
+    return $resultado;
+ }

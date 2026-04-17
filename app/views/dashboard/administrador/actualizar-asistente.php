@@ -40,12 +40,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                     <!-- Asistentes Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
-                            </button>
-                        </div>
+                        <a href="<?= BASE_URL ?>/admin/asistentes" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
                         <a href="<?= BASE_URL ?>/admin/asistentes" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
@@ -59,7 +54,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <input type="hidden" name="id_asistente" value="<?= $asistente['id_asistente'] ?>">
                             <input type="hidden" name="accion" value="actualizar">
 
-                            
+
                             <!-- 1. DATOS PERSONALES -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -75,7 +70,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                             <!-- 2. DATOS DE IDENTIFICACIÓN LEGAL -->
                             <div class="row mb-3">
-                                
+
                                 <div class="col-md-6">
                                     <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                     <select class="form-select" id="tipo_documento" name="tipo_documento" required>
@@ -94,7 +89,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-2">
                                     <label for="estado" class="form-label">Estado</label>
                                     <select name="estado" id="estado" class="form-select">
                                         <!-- Estado actual -->
@@ -105,16 +100,18 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <option value="Inactivo">Inactivo</option>
                                     </select>
                                 </div>
+
+                                <div class="col-md-12">
+                                    <label for="telefono" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono" value="<?= $asistente['telefono'] ?>" required>
+                                    <div class="form-text">Para contacto directo</div>
+                                </div>
                             </div>
 
 
                             <!-- 4. DATOS DE CONTACTO -->
 
-                            <div class="mb-4">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" value="<?= $asistente['telefono'] ?>" required>
-                                <div class="form-text">Para contacto directo</div>
-                            </div>
+
 
                             <div class="alert alert-info" role="alert">
                                 <i class="bi bi-info-circle"></i> La foto solo la puede modificar el usuario, el número de documento no se puede modificar y el correo solo lo puede modificar el superadministrador o en su defecto el usuario en su sección del perfil.

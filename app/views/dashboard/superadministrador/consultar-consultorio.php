@@ -8,6 +8,9 @@ $id = $_GET['id'];
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR Y LE PASAMOS LOS DATOS A UNA VARIABLE
 // QUE PODAMOS MANIPULAR EN ESTE ARCHIVO
 $consultorio = listarConsultorio($id);
+
+$especialidades = traerEspecialidadesPorConsultorio($id);
+
 // Decodificamos el campo "horario_atencion" que viene almacenado en la base de datos.
 // Este campo es un JSON con estructura similar a:
 // {"dias":["Martes","Miercoles"],"hora_apertura":"23:13","hora_cierre":"23:13"}
@@ -103,7 +106,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <!-- General Information -->
                             <div class="card shadow-sm mb-4">
                                 <div class="card-header card-header-primary">
-                                    <h5 class="mb-0">
+                                    <h5 class="mb-0 text-white">
                                         <i class="bi bi-info-circle-fill me-2"></i>
                                         Información General
                                     </h5>
@@ -149,17 +152,19 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <!-- Especialidades -->
                             <div class="card shadow-sm mb-4">
                                 <div class="card-header card-header-tertiary">
-                                    <h5 class="mb-0">
+                                    <h5 class="mb-0 text-white">
                                         <i class="bi bi-heart-pulse-fill me-2"></i>
                                         Especialidades Médicas
                                     </h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="especialidades-container" id="especialidades-lista">
+                                        <?php if(!empty($especialidades)): ?>
+                                            <?php foreach($especialidades as $especialidad):?>
                                         <span class="badge-especialidad">
-                                            <i class="bi bi-bandaid"></i> Medicina General
+                                            <i class="bi bi-bandaid"></i> <?= $especialidad['nombre_especialidad'] ?>
                                         </span>
-                                        <span class="badge-especialidad">
+                                        <!-- <span class="badge-especialidad">
                                             <i class="bi bi-heart"></i> Cardiología
                                         </span>
                                         <span class="badge-especialidad">
@@ -173,7 +178,11 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         </span>
                                         <span class="badge-especialidad">
                                             <i class="bi bi-tooth"></i> Odontología
-                                        </span>
+                                        </span> -->
+                                        <?php endforeach; ?>
+                                        <?php else: ?>  
+                                            <p class="text-muted">No se han registrado especialidades para este consultorio.</p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +191,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <!-- Horario de Atención -->
                             <div class="card shadow-sm mb-4">
                                 <div class="card-header card-header-secondary">
-                                    <h5 class="mb-0">
+                                    <h5 class="mb-0 text-white">
                                         <i class="bi bi-clock-fill me-2"></i>
                                         Horario de Atención
                                     </h5>

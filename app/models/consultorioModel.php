@@ -107,7 +107,7 @@ class Consultorio
 
             // HACEMOS LA CONSULTA DE LOS CONSULTORIOS
 
-    $consulta = "SELECT 
+            $consulta = "SELECT 
         consultorios.*, consultorios.id AS id_consultorio,
         consultorio_especialidad.id_especialidad,
         /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
@@ -124,6 +124,7 @@ class Consultorio
     LEFT JOIN servicios 
         ON servicios.id_consultorio = consultorios.id
         AND servicios.id_especialidad = :id_especialidad -- <--- ESTA ES LA LÍNEA CLAVE PARA QUE NO ME TRAIGA LOS SERVICIOS DE OTRA ESPECIALIDAD
+        AND servicios.estado_servicio = 'ACTIVO' -- <--- NUEVA LÍNEA CLAVE PARA QUE SOLO SE PUEDAN AGENDAR SERVICIOS ACTIVOS
     WHERE consultorios.id IN (
         /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
         /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
@@ -148,7 +149,7 @@ class Consultorio
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT * FROM consultorios WHERE id = :id LIMIT 1";
+            $consulta = "SELECT consultorios.*, planes_suscripcion.limite_citas_mensuales FROM consultorios LEFT JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id  WHERE consultorios.id = :id LIMIT 1";
 
             $resultado = $this->conexion->prepare($consulta);
 
@@ -158,7 +159,23 @@ class Consultorio
 
             return $resultado->fetch();
         } catch (PDOException $e) {
-            error_log("Error en consultorio::consultar->" . $e->getMessage());
+            error_log("Error en consultorio::listarConsultorioPorId->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function traerEspecialidadesConsultorios($id) {
+        try {
+            $consultar = "SELECT especialidades.id, especialidades.nombre AS nombre_especialidad FROM especialidades INNER JOIN consultorio_especialidad ON especialidades.id = consultorio_especialidad.id_especialidad INNER JOIN consultorios ON consultorio_especialidad.id_consultorio = consultorios.id WHERE consultorios.id = :id_consultorio";
+
+            $resultado = $this->conexion->prepare($consultar);
+            $resultado->bindParam(':id_consultorio', $id);
+
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en consultorio::traerEspecialidadesConsultorios->" . $e->getMessage());
             return [];
         }
     }
@@ -199,6 +216,58 @@ class Consultorio
             return true;
         } catch (PDOException $e) {
             error_log("Error en consultorio::eliminar->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function verificarVigenciaPlan($id_consultorio)
+    {
+        try {
+            // Obtenemos los datos actuales del consultorio
+            $obtenerDatosConsultorio = "SELECT id_plan, fecha_vencimiento_plan FROM consultorios WHERE id = :id_consultorio";
+
+            $resultado = $this->conexion->prepare($obtenerDatosConsultorio);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
+
+            $resultado->execute();
+
+            // En la variable consultorio guardamos esos datos
+            $consultorio = $resultado->fetch();
+
+            // Si el consultorio no existe o está en el plan 1 no hacemos nada
+            if (!$consultorio || $consultorio['id_plan'] == 1 || $consultorio['fecha_vencimiento_plan'] == null) {
+                return false;
+            }
+
+            // ==========================================
+            // PASO 2: LA MATEMÁTICA EN PHP (El IF)
+            // ==========================================
+
+            // Extraemos en una variable la fecha de vencimiento de ese plan
+            $fechaVencimiento = $consultorio['fecha_vencimiento_plan'];
+
+            // Obtenemos la fecha de hoy
+            $fechaHoy = date('Y-m-d');
+
+            // Validamos que si la fecha de vencimiento es menor a la fecha de hoy para hacer el update del id_plan a 1
+            if ($fechaVencimiento < $fechaHoy) {
+                // ==========================================
+                // PASO 3: IR A MODIFICAR (El UPDATE)
+                // ==========================================
+
+                $modificarIdPlan = "UPDATE consultorios SET id_plan = 1, fecha_vencimiento_plan = NULL WHERE id = :id_consultorio";
+                $resultado2 = $this->conexion->prepare($modificarIdPlan);
+                $resultado2->bindParam(':id_consultorio', $id_consultorio);
+
+                // Ejecutamos la consulta sql
+                $resultado2->execute();
+
+                // Retornamos true
+                return true;
+            }
+            
+        } catch (PDOException $e) {
+            error_log("Error en Consultorio::verificarVigenciaPlan->" . $e->getMessage());
             return false;
         }
     }

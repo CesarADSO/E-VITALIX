@@ -34,8 +34,9 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                 <div class="patient-header">
                     <div class="container">
                         <div class="row align-items-center">
-                            <div class="col-md-12">
+                            <div class="col-md-12 d-flex justify-content-between align-items-centers">
                                 <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver a pacientes atendidos</a>
+                                <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=historial_clinico&id_paciente=<?= $id_paciente ?>" class="btn btn-outline-light btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                             </div>
                         </div>
 
@@ -118,7 +119,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                         </h5>
                                                     </div>
                                                     <div class="col-md-4 text-md-end mt-2 mt-md-0">
-                                                        <span class="badge badge-control">Control</span>
+                                                        <!-- <span class="badge badge-control">Control</span> -->
+                                                        <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=consulta_medica&id_consulta=<?= $historial['id_consulta'] ?>" class="btn btn-primary btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,11 +160,6 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                             <li class="nav-item" role="presentation">
                                                                 <button class="nav-link" id="ordenes<?= $historial['id_consulta'] ?>-tab" data-bs-toggle="tab" data-bs-target="#ordenes<?= $historial['id_consulta'] ?>" type="button">
                                                                     <i class="bi bi-file-medical"></i> Órdenes Médicas
-                                                                </button>
-                                                            </li>
-                                                            <li class="nav-item" role="presentation">
-                                                                <button class="nav-link" id="examenes<?= $historial['id_consulta'] ?>-tab" data-bs-toggle="tab" data-bs-target="#examenes<?= $historial['id_consulta'] ?>" type="button">
-                                                                    <i class="bi bi-clipboard-data"></i> Exámenes
                                                                 </button>
                                                             </li>
                                                         </ul>
@@ -241,26 +238,9 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                                 <ul class="list-group">
                                                                     <li class="list-group-item">
                                                                         <i class="bi bi-check-circle-fill text-success"></i>
-                                                                        Control post-operatorio en 1 mes
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <i class="bi bi-check-circle-fill text-success"></i>
-                                                                        Curación de herida cada 3 días
-                                                                    </li>
-                                                                    <li class="list-group-item">
-                                                                        <i class="bi bi-check-circle-fill text-success"></i>
-                                                                        Evitar ejercicio físico intenso por 3 semanas
+                                                                        <?= $historial['orden_medica'] ?>
                                                                     </li>
                                                                 </ul>
-                                                            </div>
-
-                                                            <!-- Tab Exámenes -->
-                                                            <div class="tab-pane fade" id="examenes<?= $historial['id_consulta'] ?>" role="tabpanel"
-                                                                aria-labelledby="examenes<?= $historial['id_consulta'] ?>-tab">
-                                                                <div class="alert alert-info">
-                                                                    <i class="bi bi-info-circle"></i>
-                                                                    No se solicitaron exámenes de laboratorio en esta consulta.
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

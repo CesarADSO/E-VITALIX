@@ -39,7 +39,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     <p class="text-muted">Este espacio está destinado para reportar errores, fallas o inconvenientes relacionados con el funcionamiento del aplicativo. Envíanos tu inconveniente y nuestro equipo lo solucionará pronto..</p>
                                 </div>
 
-                                <form action="<?= BASE_URL ?>/especialista/guardar-ticket" method="POST" enctype="multipart/form-data">
+                                <form method="POST" action="<?= BASE_URL ?>/especialista/guardar-ticket" enctype="multipart/form-data">
 
                                     <!-- TÍTULO -->
                                     <div class="mb-3">
@@ -57,7 +57,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     <!-- IMAGEN -->
                                     <div class="mb-4">
                                         <label class="form-label fw-semibold">Adjuntar Imagen (opcional)</label>
-                                        <input type="file" name="foto" class="form-control" accept=".jpg, .png, .jpeg">
+                                        <input type="file" name="imagen" class="form-control">
                                     </div>
 
                                     <!-- BOTONES -->
@@ -76,7 +76,16 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             </div>
 
                         </div>
-                    </div>   
+                    </div>
+
+
+
+
+                    
+
+                    
+
+                    
                 </div>
 
             </div>
@@ -85,7 +94,23 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 <!-- AQUI VA EL FOOTER INCLUDE -->
 
 <?php
-include_once __DIR__ . '/../../layouts/footer_especialista.php';
+include_once __DIR__ . '/../../layouts/footer_administrador.php';
 ?>
+
+
+
+
+
+
+
+
+<body>
+
+    <?php
+        include_once __DIR__ . '/../../layouts/sidebar_especialista.php';
+    ?>
+
+    
+</body>
 
 

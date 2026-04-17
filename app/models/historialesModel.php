@@ -41,7 +41,7 @@ class Historiales
     public function consultarInfoPaciente($id_paciente)
     {
         try {
-            $consultarInfo = "SELECT pacientes.foto, pacientes.nombres AS nombre_paciente, pacientes.apellidos AS apellido_paciente, tipo_documento.nombre AS tipo_documento, pacientes.numero_documento, pacientes.edad, pacientes.rh, pacientes.genero FROM pacientes INNER JOIN tipo_documento ON pacientes.id_tipo_documento = tipo_documento.id WHERE pacientes.id = :id_paciente";
+            $consultarInfo = "SELECT pacientes.foto, pacientes.nombres AS nombre_paciente, pacientes.apellidos AS apellido_paciente, tipo_documento.nombre AS tipo_documento, pacientes.numero_documento, pacientes.edad, pacientes.rh, pacientes.genero, pacientes.telefono FROM pacientes INNER JOIN tipo_documento ON pacientes.id_tipo_documento = tipo_documento.id WHERE pacientes.id = :id_paciente";
             $resultado = $this->conexion->prepare($consultarInfo);
             $resultado->bindParam(':id_paciente', $id_paciente);
             $resultado->execute();
@@ -59,7 +59,7 @@ class Historiales
     public function consultarHistorialClinicoPaciente($id_paciente)
     {
         try {
-            $consultarHistorial = "SELECT consulta_medica.id AS id_consulta, consulta_medica.created_at AS fecha_consulta, consulta_medica.motivo_consulta, consulta_medica.diagnostico, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, especialistas.id_especialidad, especialidades.nombre AS especialidad, consulta_medica.presion_sistolica, consulta_medica.presion_diastolica, consulta_medica.temperatura, consulta_medica.frecuencia_cardiaca, consulta_medica.frecuencia_respiratoria, consulta_medica.tratamiento, consulta_medica.observaciones, formulacion_medicamentos.nombre_medicamento, formulacion_medicamentos.dosis, formulacion_medicamentos.frecuencia, formulacion_medicamentos.duracion FROM consulta_medica LEFT JOIN formulacion_medicamentos ON formulacion_medicamentos.id_consulta = consulta_medica.id INNER JOIN especialistas ON consulta_medica.id_especialista = especialistas.id INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id WHERE pacientes.id = :id_paciente ORDER BY consulta_medica.created_at DESC";
+            $consultarHistorial = "SELECT consulta_medica.id AS id_consulta, consulta_medica.created_at AS fecha_consulta, consulta_medica.motivo_consulta, consulta_medica.diagnostico, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, especialistas.id_especialidad, especialidades.nombre AS especialidad, consulta_medica.presion_sistolica, consulta_medica.presion_diastolica, consulta_medica.temperatura, consulta_medica.frecuencia_cardiaca, consulta_medica.frecuencia_respiratoria, consulta_medica.tratamiento, consulta_medica.observaciones, formulacion_medicamentos.nombre_medicamento, formulacion_medicamentos.dosis, formulacion_medicamentos.frecuencia, formulacion_medicamentos.duracion, orden_medica.observaciones AS orden_medica FROM consulta_medica LEFT JOIN formulacion_medicamentos ON formulacion_medicamentos.id_consulta = consulta_medica.id INNER JOIN especialistas ON consulta_medica.id_especialista = especialistas.id INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id LEFT JOIN orden_medica ON orden_medica.id_consulta = consulta_medica.id WHERE pacientes.id = :id_paciente ORDER BY consulta_medica.created_at DESC";
 
             $resultado = $this->conexion->prepare($consultarHistorial);
             $resultado->bindParam(':id_paciente', $id_paciente);
@@ -70,6 +70,22 @@ class Historiales
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();
             error_log("Error en Historiales::consultarHistorialClinicoPaciente->" . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function consultarConsultaMedica($id_consulta) {
+        try {
+            $consultarConsultaMedica = "SELECT pacientes.id AS id_paciente, consulta_medica.created_at AS fecha_consulta, consulta_medica.motivo_consulta, consulta_medica.diagnostico, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, especialistas.id_especialidad, especialidades.nombre AS especialidad, consulta_medica.presion_sistolica, consulta_medica.presion_diastolica, consulta_medica.temperatura, consulta_medica.frecuencia_cardiaca, consulta_medica.frecuencia_respiratoria, consulta_medica.tratamiento, consulta_medica.observaciones, formulacion_medicamentos.nombre_medicamento, formulacion_medicamentos.dosis, formulacion_medicamentos.frecuencia, formulacion_medicamentos.duracion, orden_medica.observaciones AS orden_medica FROM consulta_medica LEFT JOIN formulacion_medicamentos ON formulacion_medicamentos.id_consulta = consulta_medica.id INNER JOIN especialistas ON consulta_medica.id_especialista = especialistas.id INNER JOIN pacientes ON consulta_medica.id_paciente = pacientes.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id LEFT JOIN orden_medica ON orden_medica.id_consulta = consulta_medica.id WHERE consulta_medica.id = :id_consulta";
+
+            $resultado = $this->conexion->prepare($consultarConsultaMedica);
+            $resultado->bindParam(':id_consulta', $id_consulta);
+            $resultado->execute();
+
+            return $resultado->fetch();
+
+        } catch (PDOException $e) {
+            error_log("Error en Historiales::consultarConsultaMedica->" . $e->getMessage());
             return [];
         }
     }
