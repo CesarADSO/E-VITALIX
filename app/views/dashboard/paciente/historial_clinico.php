@@ -34,8 +34,9 @@ include_once __DIR__ . '/../../../views/layouts/header_paciente.php';
                 <div class="patient-header">
                     <div class="container">
                         <div class="row align-items-center">
-                            <div class="col-md-12">
+                            <div class="col-md-12 d-flex justify-content-between align-items-center">
                                 <a href="<?= BASE_URL ?>/paciente/dashboard" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver al dashboard</a>
+                                <a href="<?= BASE_URL ?>/paciente/generar-reporte?tipo=historial_clinico" class="btn btn-outline-light btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                             </div>
                         </div>
 
@@ -118,7 +119,7 @@ include_once __DIR__ . '/../../../views/layouts/header_paciente.php';
                                                         </h5>
                                                     </div>
                                                     <div class="col-md-4 text-md-end mt-2 mt-md-0">
-                                                        <span class="badge badge-control">Control</span>
+                                                        <a href="<?= BASE_URL ?>/paciente/generar-reporte?tipo=consulta_medica&id_consulta=<?= $historial['id_consulta'] ?>" class="btn btn-primary btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                                                     </div>
                                                 </div>
                                             </div>
