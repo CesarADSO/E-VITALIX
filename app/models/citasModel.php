@@ -847,10 +847,29 @@ class CitasModel
             // INICIAMOS UNA TRANSACCIÓN
             $this->conexion->beginTransaction();
 
+            $obtenerIdSlot = "SELECT id_agenda_slot FROM citas WHERE id = :id_cita";
+
+            $resultado = $this->conexion->prepare($obtenerIdSlot);
+            $resultado->bindParam(':id_cita', $id);
+            $resultado->execute();
+
+            // fetchColumn devuelve SOLO el valor del id del slot anterior
+            $id_agenda_slot = $resultado->fetchColumn();
+
+            if ($id_agenda_slot === false) {
+                return false;
+            }
+
             $cancelarCita = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita";
             $resultado = $this->conexion->prepare($cancelarCita);
             $resultado->bindParam(':id_cita', $id);
             $resultado->execute();
+
+            $cambiarEstadoSlot = "UPDATE agenda_slot SET estado_slot = 'Bloqueado' WHERE id = :id_agenda_slot";
+
+            $resultado2 = $this->conexion->prepare($cambiarEstadoSlot);
+            $resultado2->bindParam(':id_agenda_slot', $id_agenda_slot);
+            $resultado2->execute();
 
             // IMPORTANTE FALTA ENVÍO DE CORREO ELECTRONICO AL PACIENTE INFORMANDO QUE SE DECLINO LA CITA
             // OBTENEMOS LOS DATOS QUE NECESITAMOS PARA ENVIAR EL CORREO
