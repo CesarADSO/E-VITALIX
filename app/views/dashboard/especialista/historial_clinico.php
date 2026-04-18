@@ -34,7 +34,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                 <div class="patient-header">
                     <div class="container">
                         <div class="row align-items-center">
-                            <div class="col-md-12 d-flex justify-content-between align-items-centers">
+                            <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-between">
                                 <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver a pacientes atendidos</a>
                                 <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=historial_clinico&id_paciente=<?= $id_paciente ?>" class="btn btn-outline-light btn-sm mb-3" target="_blank">Generar reporte pdf</a>
                             </div>
@@ -42,7 +42,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 
                         <div class="card patient-card shadow-sm">
                             <div class="card-body">
-                                <div class="row align-items-center">
+                                <div class="row align-items-center text-center text-md-start">
                                     <div class="col-md-auto text-center mb-3 mb-md-0">
                                         <div class="patient-avatar">
                                             <img class="img-usuario" src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>" alt="<?= $paciente['nombre_paciente'] ?>">
@@ -51,8 +51,8 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
 
                                     <div class="col-md">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <h2 class="patient-name mb-2"><?= $paciente['nombre_paciente'] ?> <?= $paciente['apellido_paciente'] ?></h2>
+                                            <div class="col-md-6 d-inline-block text-start">
+                                                <h2 class="patient-name mb-2 text-center text-md-start"><?= $paciente['nombre_paciente'] ?> <?= $paciente['apellido_paciente'] ?></h2>
                                                 <p class="patient-info mb-1">
                                                     <i class="bi bi-card-text text-primary"></i>
                                                     <strong><?= $paciente['tipo_documento'] ?>:</strong> <?= $paciente['numero_documento'] ?>
@@ -63,7 +63,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                 </p>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 d-inline-block text-start">
                                                 <p class="patient-info mb-1">
                                                     <i class="bi bi-droplet-fill text-danger"></i>
                                                     <strong>Tipo de sangre:</strong> <?= $paciente['rh'] ?>
