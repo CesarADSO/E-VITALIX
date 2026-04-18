@@ -16,7 +16,7 @@ class CalendarioModel
         try {
 
             $consulta = "SELECT s.id, s.fecha, s.hora_inicio, s.hora_fin, s.estado_slot, 
-                        c.id AS cita_id, c.estado_cita, c.motivo_consulta, 
+                        c.id AS cita_id, c.estado_cita, 
                         CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente, 
                         srv.nombre AS servicio_nombre 
                 FROM agenda_slot s 
@@ -24,7 +24,10 @@ class CalendarioModel
                 LEFT JOIN pacientes p ON p.id = c.id_paciente 
                 LEFT JOIN servicios srv ON c.id_servicio = srv.id 
                 WHERE s.id_especialista = :id_especialista 
-                AND s.fecha BETWEEN :fecha_inicio AND :fecha_fin";
+                AND s.fecha BETWEEN :fecha_inicio AND :fecha_fin AND (
+                        s.fecha > CURDATE() 
+                        OR (s.fecha = CURDATE() AND s.hora_inicio >= CURTIME())
+                    )";
 
             $stmt = $this->conexion->prepare($consulta);
             $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
@@ -74,7 +77,6 @@ class CalendarioModel
                         'tipo' => $row['cita_id'] ? 'cita' : 'slot',
                         'paciente' => $row['nombre_paciente'] ?? 'N/A',
                         'servicio' => $row['servicio_nombre'] ?? 'N/A',
-                        'motivo' => $row['motivo_consulta'] ?? '',
                         'estado' => $row['estado_cita'] ?? $row['estado_slot']
                     ]
                 ];
