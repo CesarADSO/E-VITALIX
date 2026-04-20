@@ -124,7 +124,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             </div>
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
-                                <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-outline-secondary">Volver a la interfaz anterior</a>
+                                <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-outline-secondary btn-volver-disponibilidad">Volver</a>
                                 <a href="<?= BASE_URL ?>/especialista/actualizar-disponibilidad?id=<?= $horario['id'] ?>" class="btn boton">Ir a actualizar la disponibilidad</a>
                             </div>
                         </form>
