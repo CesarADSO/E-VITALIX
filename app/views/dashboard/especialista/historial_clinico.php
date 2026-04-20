@@ -95,7 +95,7 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                     </div>
 
                     <!-- Timeline Container -->
-                    <div class="timeline">
+                    <div class="timeline d-none d-lg-block">
 
                         <!-- Consulta 1 -->
 
@@ -252,9 +252,127 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
+
+                    <!-- Timeline Container Movil -->
+                    <div class="timeline d-lg-none">
+
+                        <div class="timeline d-lg-none">
+                            <?php if (empty($historiales)) : ?>
+                                <div class="alert alert-warning">
+                                    No hay consultas registradas
+                                </div>
+                            <?php else: ?>
+                                <?php foreach ($historiales as $historial): ?>
+                                    <div class="timeline-item position-relative mb-4 pb-3" style="border-left: 3px solid #007bff; margin-left: 15px; padding-left: 20px;">
+                                        <div class="timeline-node position-absolute" style="left: -9px; top: 0; width: 15px; height: 15px; background-color: white; border: 3px solid #007bff; border-radius: 50%;"></div>
+
+                                        <div class="card shadow-sm border-0">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                                                    <h5 class="mb-0 text-primary fw-bold">
+                                                        <i class="bi bi-calendar-event me-2"></i><?= date('d/m/Y', strtotime($historial['fecha_consulta'])) ?>
+                                                    </h5>
+                                                    <a href="<?= BASE_URL ?>/especialista/generar-reporte?tipo=consulta_medica&id_consulta=<?= $historial['id_consulta'] ?>" class="btn btn-outline-primary btn-sm" target="_blank">
+                                                        <i class="bi bi-file-earmark-pdf"></i> <span class="d-none d-sm-inline">PDF</span>
+                                                    </a>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <p class="mb-2" style="font-size: 15px;">
+                                                        <strong class="text-secondary">Motivo:</strong> <?= $historial['motivo_consulta'] ?>
+                                                    </p>
+                                                    <p class="mb-2" style="font-size: 15px;">
+                                                        <strong class="text-secondary">Diagnóstico:</strong> <?= $historial['diagnostico'] ?>
+                                                    </p>
+                                                    <p class="mb-0 text-muted" style="font-size: 14px;">
+                                                        <i class="bi bi-person-badge me-1"></i>
+                                                        <strong>Especialista:</strong> <?= $historial['nombre_especialista'] ?> - <?= $historial['especialidad'] ?>
+                                                    </p>
+                                                </div>
+
+                                                <div class="d-grid gap-2">
+                                                    <button class="btn btn-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#detalleMovil<?= $historial['id_consulta'] ?>">
+                                                        <i class="bi bi-eye me-2"></i>Ver detalle completo
+                                                    </button>
+                                                </div>
+
+                                                <div class="collapse mt-3" id="detalleMovil<?= $historial['id_consulta'] ?>">
+                                                    <div class="accordion accordion-flush shadow-sm rounded border" id="accordion<?= $historial['id_consulta'] ?>">
+
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed fw-bold text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiag<?= $historial['id_consulta'] ?>">
+                                                                    <i class="bi bi-clipboard-pulse me-2"></i> Signos y Diagnóstico
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapseDiag<?= $historial['id_consulta'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordion<?= $historial['id_consulta'] ?>">
+                                                                <div class="accordion-body text-muted" style="font-size: 14px;">
+                                                                    <div class="row g-2 mb-3 text-center">
+                                                                        <div class="col-6 border rounded p-2"><i class="bi bi-heart-pulse text-danger"></i> PA: <?= $historial['presion_sistolica'] ?>/<?= $historial['presion_diastolica'] ?></div>
+                                                                        <div class="col-6 border rounded p-2"><i class="bi bi-thermometer-half text-warning"></i> Temp: <?= $historial['temperatura'] ?>°C</div>
+                                                                        <div class="col-6 border rounded p-2"><i class="bi bi-activity text-info"></i> FC: <?= $historial['frecuencia_cardiaca'] ?> lpm</div>
+                                                                        <div class="col-6 border rounded p-2"><i class="bi bi-lungs text-primary"></i> FR: <?= $historial['frecuencia_respiratoria'] ?> rpm</div>
+                                                                    </div>
+                                                                    <h6 class="fw-bold text-dark mb-1">Tratamiento:</h6>
+                                                                    <p><?= $historial['tratamiento'] ?> <?= $historial['observaciones'] ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed fw-bold text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMeds<?= $historial['id_consulta'] ?>">
+                                                                    <i class="bi bi-capsule me-2"></i> Medicamentos
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapseMeds<?= $historial['id_consulta'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordion<?= $historial['id_consulta'] ?>">
+                                                                <div class="accordion-body bg-light p-2">
+                                                                    <div class="card border-0 shadow-sm">
+                                                                        <div class="card-body p-3">
+                                                                            <h6 class="fw-bold text-dark mb-1"><?= $historial['nombre_medicamento'] ?></h6>
+                                                                            <div class="d-flex justify-content-between text-muted" style="font-size: 13px;">
+                                                                                <span><strong>Dosis:</strong> <?= $historial['dosis'] ?></span>
+                                                                                <span><strong>Frecuencia:</strong> <?= $historial['frecuencia'] ?></span>
+                                                                            </div>
+                                                                            <div class="text-muted mt-1" style="font-size: 13px;">
+                                                                                <span><strong>Duración:</strong> <?= $historial['duracion'] ?></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header">
+                                                                <button class="accordion-button collapsed fw-bold text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrdenes<?= $historial['id_consulta'] ?>">
+                                                                    <i class="bi bi-file-medical me-2"></i> Órdenes Médicas
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapseOrdenes<?= $historial['id_consulta'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordion<?= $historial['id_consulta'] ?>">
+                                                                <div class="accordion-body">
+                                                                    <ul class="list-group list-group-flush" style="font-size: 14px;">
+                                                                        <li class="list-group-item px-0">
+                                                                            <i class="bi bi-check-circle-fill text-success me-2"></i><?= $historial['orden_medica'] ?>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <?php
-            include_once __DIR__ . '/../../../views/layouts/footer_especialista.php';
-            ?>
+        </div>
+    </div>
+<?php
+    include_once __DIR__ . '/../../../views/layouts/footer_especialista.php';
+?>
