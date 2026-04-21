@@ -33,14 +33,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                     <!-- Horarios Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
-                            </button>
-                        </div>
-                        <a href="/E-VITALIX/especialista/disponibilidad" class="btn btn-primary btn-sm"
-                            style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                        <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
+                        <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
                     <!-- Formulario de Horarios Médicos -->
@@ -124,7 +118,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             </div>
                             <!-- Botones -->
                             <div class="d-flex justify-content-between cont-botones mt-4">
-                                <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-outline-secondary">Volver a la interfaz anterior</a>
+                                <a href="<?= BASE_URL ?>/especialista/disponibilidad" class="btn btn-outline-secondary btn-volver-disponibilidad">Volver</a>
                                 <a href="<?= BASE_URL ?>/especialista/actualizar-disponibilidad?id=<?= $horario['id'] ?>" class="btn boton">Ir a actualizar la disponibilidad</a>
                             </div>
                         </form>
