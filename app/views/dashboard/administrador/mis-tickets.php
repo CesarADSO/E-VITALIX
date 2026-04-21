@@ -130,7 +130,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <p>No hay especialistas registrados.</p>
+                            <p>No hay tickets registrados.</p>
 
                         <?php endif; ?>
                     </div>
