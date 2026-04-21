@@ -131,7 +131,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <p>No hay consultorios registrados.</p>
+                            <p>No hay tickets creados.</p>
 
                         <?php endif; ?>
                     </div>

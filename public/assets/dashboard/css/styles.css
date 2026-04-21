@@ -636,6 +636,9 @@
         color: var(--blanco-color);
     }
 
+    .btn-volver-disponibilidad {
+        margin-right: 20px;
+    }
 
     .check-especialidad .mi-label {
         color: var(--color-primario);
