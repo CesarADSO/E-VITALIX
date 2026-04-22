@@ -30,7 +30,6 @@ if ($pagina_actual > $total_paginas && $total_paginas > 0) {
 $indice_inicio = ($pagina_actual - 1) * $registros_por_pagina;
 $citas = is_array($todas_las_citas) ? array_slice($todas_las_citas, $indice_inicio, $registros_por_pagina) : [];
 ?>
-?>
 
 <body>
 
