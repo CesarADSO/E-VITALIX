@@ -52,6 +52,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                 include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                 ?>
 
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <a href="<?= BASE_URL ?>/superadmin/consultorios" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
+
+                    <a href="<?= BASE_URL ?>/superadmin/consultorios" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                </div>
+
                 <!-- Consultorio Detail Container -->
                 <div class="container-fluid mt-4">
                     <!-- Consultorio Header Card -->
@@ -159,12 +166,12 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 </div>
                                 <div class="card-body">
                                     <div class="especialidades-container" id="especialidades-lista">
-                                        <?php if(!empty($especialidades)): ?>
-                                            <?php foreach($especialidades as $especialidad):?>
-                                        <span class="badge-especialidad">
-                                            <i class="bi bi-bandaid"></i> <?= $especialidad['nombre_especialidad'] ?>
-                                        </span>
-                                        <!-- <span class="badge-especialidad">
+                                        <?php if (!empty($especialidades)): ?>
+                                            <?php foreach ($especialidades as $especialidad): ?>
+                                                <span class="badge-especialidad">
+                                                    <i class="bi bi-bandaid"></i> <?= $especialidad['nombre_especialidad'] ?>
+                                                </span>
+                                                <!-- <span class="badge-especialidad">
                                             <i class="bi bi-heart"></i> Cardiología
                                         </span>
                                         <span class="badge-especialidad">
@@ -179,8 +186,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                         <span class="badge-especialidad">
                                             <i class="bi bi-tooth"></i> Odontología
                                         </span> -->
-                                        <?php endforeach; ?>
-                                        <?php else: ?>  
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
                                             <p class="text-muted">No se han registrado especialidades para este consultorio.</p>
                                         <?php endif; ?>
                                     </div>
