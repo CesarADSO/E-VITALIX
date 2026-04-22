@@ -2,8 +2,33 @@
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
 require_once BASE_PATH . '/app/controllers/asistenteController.php';
 
+// Lógica para paginación segura
 
-$datos = mostrarAsistentes();
+// 1. Traer todos los asistentes de la base de datos
+$todos_los_asistentes = mostrarAsistentes();
+
+
+// 2. Configurar la paginación
+$registros_por_pagina = 10; // Mostrar 10 asistentes por página
+$total_registros = is_array($todos_los_asistentes) ? count($todos_los_asistentes) : 0;
+$total_paginas = ceil($total_registros / $registros_por_pagina);
+
+// 3. Capturar en que página estamos
+$pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+// 4. Validar que la pagina actual sea un número válido y esté dentro del rango permitido
+if ($pagina_actual < 1) {
+    $pagina_actual = 1;
+}
+
+if ($pagina_actual > $total_paginas && $total_paginas > 0) {
+    $pagina_actual = $total_paginas;
+}
+
+// 5. Calcular el índice de inicio para la consulta SQL
+$indice_inicio = ($pagina_actual - 1) * $registros_por_pagina;
+$asistentes = is_array($todos_los_asistentes) ? array_slice($todos_los_asistentes, $indice_inicio, $registros_por_pagina) : [];
+
 ?>
 
 
@@ -37,7 +62,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <div>
                             <button class="btn btn-link text-primary p-0"
                                 style="text-decoration: none; font-size: 14px;">
-                                ← Todos (<?= count($datos) ?>)
+                                ← Todos (<?= count($asistentes) ?>)
                             </button>
                         </div>
                         <div class="d-grid gap-2 d-lg-flex justify-content-lg-end align-items-lg-center">
@@ -55,7 +80,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </h5>
                         </div>
                         <div class="card-body">
-                            <?php if (empty($datos)): ?>
+                            <?php if (empty($asistentes)): ?>
                                 <div class="alert alert-info text-center" role="alert">
                                     <i class="bi bi-info-circle me-2"></i>
                                     No tienes asistentes registrados.
@@ -80,8 +105,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (isset($datos)) : ?>
-                                                    <?php foreach ($datos as $asistente): ?>
+                                                <?php if (isset($asistentes)) : ?>
+                                                    <?php foreach ($asistentes as $asistente): ?>
                                                         <tr>
                                                             <td>
                                                                 <img class="imgAsistente"
@@ -117,8 +142,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                 <!-- VISTA MOVIL -->
                 <div class="row d-lg-none mt-3">
-                    <?php if (!empty($datos)): ?>
-                        <?php foreach ($datos as $asistente): ?>
+                    <?php if (!empty($asistentes)): ?>
+                        <?php foreach ($asistentes as $asistente): ?>
                             <div class="col-md-12 mt-4">
                                 <div class="card">
                                     <div class="card-body">
@@ -142,6 +167,59 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 </div>
                             </div>
                         <?php endforeach; ?>
+
+                        <?php if (isset($total_paginas) && $total_paginas > 1) : ?>
+                            <div class="col-12 mt-4 mb-5">
+                                <nav aria-label="Navegación de horarios móvil">
+                                    <ul class="pagination pagination-sm justify-content-center">
+
+                                        <!-- Si la página actual es menor o igual a 1 entonces ponemos la clase disabled para evitar que se pueda ir a una página "0" que no existe y al botón anterior cogemos la página actual y le restamos 1 para volver una página atrás -->
+                                        <li class="page-item <?= ($pagina_actual <= 1) ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="?pagina=<?= $pagina_actual - 1 ?>">
+                                                <i class="bi bi-chevron-left"></i>
+                                            </a>
+                                        </li>
+
+                                        <!-- Si la página actual es igual a 1 entonces ponemos la clase active que pinta el botón de azulito y a ese botón le ponemos el número 1 -->
+
+                                        <li class="page-item <?= ($pagina_actual == 1) ? 'active' : '' ?>">
+                                            <a class="page-link" href="?pagina=1">1</a>
+                                        </li>
+                                        <!-- Si la página actual es mayor a 3 entonces mostramos un botón con puntos suspensivos pero con la clase disabled eso quiere decir que se muestran de a 3 botones disponibles para presionar -->
+                                        <?php if ($pagina_actual > 3): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; ?>
+
+                                        <!-- Aquí hacemos el bucle para que los botones de paginación se muestren según el número de página que sean necesarias para mostrar todos los registros -->
+                                        <?php for ($i = max(2, $pagina_actual - 1); $i <= min($total_paginas - 1, $pagina_actual + 1); $i++) : ?>
+                                            <li class="page-item <?= ($pagina_actual == $i) ? 'active' : '' ?>">
+                                                <a class="page-link" href="?pagina=<?= $i ?>"><?= $i ?></a>
+                                            </li>
+                                        <?php endfor; ?>
+
+                                        <!-- Si la página actual es menor que el total de páginas menos 2 entonces mostramos un botón con puntos suspensivos pero con la clase disabled -->
+                                        <?php if ($pagina_actual < $total_paginas - 2): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; ?>
+
+                                        <!-- Si la página actual es igual al total de páginas entonces ponemos la clase active que pinta el botón de azulito -->
+                                        <li class="page-item <?= ($pagina_actual == $total_paginas) ? 'active' : '' ?>">
+                                            <a class="page-link" href="?pagina=<?= $total_paginas ?>"><?= $total_paginas ?></a>
+                                        </li>
+
+
+                                        <!-- Si la página actual es mayor o igual al total de páginas entonces desabilitamos la flecha derecha para evitar que siga avanzando a una página que no existe -->
+                                        <li class="page-item <?= ($pagina_actual >= $total_paginas) ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="?pagina=<?= $pagina_actual + 1 ?>">
+                                                <i class="bi bi-chevron-right"></i>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        <?php endif; ?>
                     <?php else: ?>
                         <p>No hay asistentes registrados.</p>
 
