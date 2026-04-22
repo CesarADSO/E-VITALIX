@@ -150,6 +150,7 @@ $hoy = date("Y")
 </head>
 
 <body>
+    <p id="footer">© E-VITALIX - <?= $hoy ?></p>
 
     <div class="header">
         <div class="header-text">
@@ -247,7 +248,7 @@ $hoy = date("Y")
             </div>
     <?php endif; ?>
 
-    <p id="footer">© E-VITALIX - <?= $hoy ?></p>
+    
 </body>
 
 </html>
