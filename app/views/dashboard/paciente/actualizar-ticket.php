@@ -35,6 +35,11 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                     include_once __DIR__ . '/../../layouts/topbar_paciente.php';
                     ?>
 
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <a href="<?= BASE_URL ?>/paciente/mis-tickets" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
+                        <a href="<?= BASE_URL ?>/paciente/mis-tickets" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                    </div>
+
                     <div class="container-fluid ticket-wrapper d-flex align-items-center justify-content-center">
                         <div class="col-lg-7 col-md-9">
                             <div class="card ticket-card p-4 bg-white">
@@ -46,8 +51,8 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
 
                                 <form action="<?= BASE_URL ?>/paciente/guardar-cambios-ticket" method="POST" enctype="multipart/form-data">
 
-                                        <input type="hidden" name="id" value="<?= $ticket['id'] ?>">
-                                        <input type="hidden" name="accion" value="actualizar">
+                                    <input type="hidden" name="id" value="<?= $ticket['id'] ?>">
+                                    <input type="hidden" name="accion" value="actualizar">
 
                                     <!-- TÍTULO -->
                                     <div class="mb-3">
