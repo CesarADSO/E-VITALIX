@@ -1,9 +1,4 @@
 <?php
-// --- MODO DEBUG ACTIVADO ---
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-// ---------------------------
 
 // index.php - Router principal (EN LARAVEL SE TIENE UN ARCHIVO POR CADA CARPETA DE VIEWS)
 
