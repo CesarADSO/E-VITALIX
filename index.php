@@ -1,4 +1,5 @@
 <?php
+
 // index.php - Router principal (EN LARAVEL SE TIENE UN ARCHIVO POR CADA CARPETA DE VIEWS)
 
 require_once __DIR__ . '/config/config.php';
