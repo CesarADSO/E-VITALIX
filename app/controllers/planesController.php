@@ -1,28 +1,30 @@
 <?php
+// 1. PRIMERO SIEMPRE LOS 'USE' (Regla estricta de PHP)
+// IMPORTAMOS LAS DEPENDENCIAS DE MERCADOPAGO
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Client\Payment\PaymentClient; // <-- AGREGA ESTA LÍNEA
+
+// 2. DESPUÉS LAS DEPENDENCIAS Y AUTOLOADS
 // IMPORTAMOS LAS DEPENDENCIAS NECESARIAS
 require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/planesModel.php';
 // IMPORTAMOS EL AUTOLOAD DE MERCADO PAGO
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-// IMPORTAMOS LAS DEPENDENCIAS DE MERCADOPAGO
-use MercadoPago\MercadoPagoConfig;
-use MercadoPago\Client\Preference\PreferenceClient;
-
-
 
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        // PRIORIDAD 1: ¿Viene de Mercado Pago con un resultado?
-        if (isset($_GET['status'])) {
-            if ($_GET['status'] === 'approved') {
-                finalizarPagoExitoso();
-            } else {
-                finalizarPagoFallido();
-            }
-            // Importante: detenemos la ejecución para que no cargue nada más
+        // 1. CAPTURAMOS LO QUE VENGA EN LA URL
+        $payment_id = $_GET['payment_id'] ?? $_GET['collection_id'] ?? null;
+        $status = $_GET['status'] ?? $_GET['collection_status'] ?? null;
+
+        // 2. PRIORIDAD 1: Si viene un ID de pago o un Status, procesamos el retorno
+        if ($payment_id || $status) {
+            // Esta función ahora será la encargada de validar todo
+            procesarRetornoPago();
             exit; 
         }
 
@@ -35,10 +37,6 @@ switch ($method) {
 
 
         traerId();
-        break;
-
-    default:
-        # code...
         break;
 }
 
@@ -110,38 +108,74 @@ function PrepararResumenPago($id_plan)
     require_once BASE_PATH . '/app/views/dashboard/administrador/confirmar-compra.php';
 }
 
-function finalizarPagoExitoso()
+
+
+
+function procesarRetornoPago()
 {
     // PRIMERO REANUDAMOS LA SESSIÓN DE FORMA SEGURA
     if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start();
     }
 
-    // OBTENEMOS EL ID DEL CONSULTORIO DE LA EXTERNAL_REFERENCE DE MERCADO PAGO
-    // Y EL ID DEL PLAN DE LA SESSIÓN QUE CREAMOS EN LA FUNCIÓN ANTERIOR COMO ES UNA VARIABLE SESSION ENTONCES ESTÁ ESTÁ DENTRO DEL SCOPE DE ESTA FUNCIÓN Y NO MUERE CUANDO TERMINA LA FUNCIÓN PrepararResumenPago
-    $status = $_GET['status'] ?? $_GET['collection_status'] ?? null;
-    $id_consultorio = $_GET['external_reference'] ?? null;
-    $id_plan = $_SESSION['plan_seleccionado_id'];
+    // 1. CAPTURAMOS LOS DATOS
+    // Mercado pago puede mandar 'payment_id' o a veces 'collection_id' dependiendo del flujo, por eso validamos ambos
+    $payment_id = $_GET['payment_id'] ?? $_GET['collection_id'] ?? null;
+    $id_plan = $_SESSION['plan_seleccionado_id'] ?? null;
+    
+    // --- 🚨 INICIO DE PRUEBA DE DEBUGGING ---
+    if (isset($_GET['debug'])) {
+        echo "<h3>Reporte de Diagnóstico:</h3>";
+        echo "Payment ID recibido: " . ($payment_id ? $payment_id : 'NULO') . "<br>";
+        echo "ID del Plan en Sesión: " . ($id_plan ? $id_plan : 'NULO (Se perdió la sesión)') . "<br>";
+        exit; // Detenemos todo para poder leer
+    }
 
+    // Si no hay ID de pago o no sabemos qué plan quería, lo mandamos a error
+    if (!$payment_id || !$id_plan) {
+        finalizarPagoFallido();
+        return;
+    }
+    
 
-    // VALIDAMOS SI EXISTEN LOS DOS IDS EMPEZAMOS A HACER LA LÓGICA
-    if ($id_consultorio && $id_plan) {
-        // INSTANCIAMOS LA CLASE DEL MODELO
-        $objPlan = new Plan();
+    // 2. NOS CONECTAMOS A MERCADO PAGO PARA PREGUNTAR LA VERDAD
+    MercadoPagoConfig::setAccessToken('APP_USR-2681349028882389-022514-f4ddad9c4de0474a5a616ceb2b27f6a2-2131980827');
+    $client = new PaymentClient();
+    
+    try {
+        // Buscamos el recibo real en los servidores de Mercado Pago
+        $payment = $client->get($payment_id);
 
-        // ACCEDEMOS AL MÉTODO DE LA CLASE
-        $resultado = $objPlan->actualizarPlanConsultorio($id_consultorio, $id_plan);
+        // Extraemos los datos a prueba de hackers
+        $estado_real = $payment->status; // 'approved', 'pending', 'rejected', etc.
+        $id_consultorio = $payment->external_reference; // El ID del consultorio que mandamos originalmente
 
-        // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
-        if ($resultado === true) {
-            // Limpiamos la sesión
-            unset($_SESSION['plan_seleccionado_id']);
+        // 3. LÓGICA DE DECISIÓN: Solo si el estado real es 'approved' y el ID del consultorio coincide, damos por bueno el pago
+        if ($estado_real === 'approved' && $id_consultorio) {
+            // INSTANCIAMOS LA CLASE DEL MODELO
+            $objPlan = new Plan();
 
-            // MOSTRAMOS EL MENSAJE DE CONFIRMACIÓN
-            mostrarSweetAlert('success', '¡Suscripción exitosa!', 'Tu plan ya ha sido actualizado ya puedes disfrutar de los nuevos beneficios', BASE_URL . '/administrador/dashboard');
-        } else {
-            mostrarSweetAlert('error', 'Error al actualizar tu plan', 'La compra fue aprobada pero no pudimos actualizar tu plan contacta a soporte', BASE_URL . '/admin/precios');
+            $resultado = $objPlan->actualizarPlanConsultorio($id_consultorio, $id_plan);
+            
+            if ($resultado === true) {
+                // Limpiamos la sesión
+                unset($_SESSION['plan_seleccionado_id']);
+
+                // MOSTRAMOS EL MENSAJE DE CONFIRMACIÓN Y REDIRECCIONAMOS
+                mostrarSweetAlert('success', '¡Suscripción exitosa!', 'Tu plan ya ha sido actualizado. Gracias por tu compra.', BASE_URL . '/administrador/dashboard');
+            }
+            else {
+                mostrarSweetAlert('error', 'Error al actualizar plan', 'Tu pago fue aprobado pero hubo un error al actualizar tu plan. Por favor contacta soporte.', BASE_URL . '/admin/precios');
+            }
         }
+        else {
+            // si el estado del pago es rechazado, pendiente o cualquier otro, lo tratamos como un pago fallido
+            finalizarPagoFallido();
+        }
+
+    } catch (Exception $e) {
+        // Si el payment_id no es válido o hay un error de conexión, lo tratamos como un pago fallido
+        finalizarPagoFallido();
     }
 }
 
