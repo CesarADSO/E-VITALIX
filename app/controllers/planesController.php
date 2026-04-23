@@ -122,14 +122,6 @@ function procesarRetornoPago()
     // Mercado pago puede mandar 'payment_id' o a veces 'collection_id' dependiendo del flujo, por eso validamos ambos
     $payment_id = $_GET['payment_id'] ?? $_GET['collection_id'] ?? null;
     $id_plan = $_SESSION['plan_seleccionado_id'] ?? null;
-    
-    // --- 🚨 INICIO DE PRUEBA DE DEBUGGING ---
-    if (isset($_GET['debug'])) {
-        echo "<h3>Reporte de Diagnóstico:</h3>";
-        echo "Payment ID recibido: " . ($payment_id ? $payment_id : 'NULO') . "<br>";
-        echo "ID del Plan en Sesión: " . ($id_plan ? $id_plan : 'NULO (Se perdió la sesión)') . "<br>";
-        exit; // Detenemos todo para poder leer
-    }
 
     // Si no hay ID de pago o no sabemos qué plan quería, lo mandamos a error
     if (!$payment_id || !$id_plan) {
