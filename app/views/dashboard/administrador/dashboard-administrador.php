@@ -1,6 +1,7 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/especialistaController.php'; 
+require_once BASE_PATH . '/app/controllers/especialistaController.php';
+require_once BASE_PATH . '/app/helpers/alert_helper.php';
 
 
 
@@ -9,11 +10,23 @@ $especialitas = mostrarEspecialistas();
 
 ?>
 
+<?php
+// Verificamos si la sesión trae la "nota" de vencimiento
+if (isset($_SESSION['alerta_vencimiento']) && $_SESSION['alerta_vencimiento'] === true) {
+    // Mostramos la alerta
+    mostrarSweetAlert('info', 'Suscripción vencida', 'Tu plan premium ha terminado. Has regresado automáticamente al plan semilla', '/E-VITALIX/administrador/dashboard');
+
+    // Destruimos la nota para que no se repita al recargar
+    unset($_SESSION['alerta_vencimiento']);
+}
+?>
+
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
 include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 ?>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -31,9 +44,9 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     <!-- Top Bar -->
                     <!-- AQUI VA EL INCLUDE DEL TOP BAR -->
 
-                <?php
-                include_once __DIR__ . '/../../layouts/topbar_administrador.php';
-                ?>
+                    <?php
+                    include_once __DIR__ . '/../../layouts/topbar_administrador.php';
+                    ?>
 
 
                     <!-- Stats Cards -->
@@ -164,8 +177,11 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
             </div>
         </div>
     </div>
-<!-- AQUI VA EL FOOTER INCLUDE -->
 
-<?php
-include_once __DIR__ . '/../../layouts/footer_administrador.php';
-?>
+
+
+    <!-- AQUI VA EL FOOTER INCLUDE -->
+
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_administrador.php';
+    ?>
