@@ -42,7 +42,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
 
                         <form id="especialidadForm" action="<?= BASE_URL ?>/admin/guardar-asociacion" method="POST">
-                            <input type="hidden" name="id" value="<?= $especialidad['id'] ?>">
                             <input type="hidden" name="accion" value="asociarEspecialidad">
 
                             <!-- SELECT DE ESPECIALIDADES -->
