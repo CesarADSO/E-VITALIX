@@ -92,6 +92,8 @@ header nav {
 #hero {
     width: 100%;
     background: var(--color-secundario);
+    height: 90vh;
+    padding: 90px 0px 90px 90px;
 }
 
 .cont-info .subtitulo-pequeño {
@@ -101,4 +103,44 @@ header nav {
 
 .cont-info .subtitulo-pequeño img {
     margin-right: 10px;
+}
+
+.subtitulo-pequeño {
+    margin-bottom: 24px;
+}
+
+.titulo-principal {
+    margin-bottom: 24px;
+}
+
+.info-hero {
+    font-size: 24px;
+    margin-bottom: 48px;
+}
+
+.boton1 .circulo {
+    width: 35px;
+    height: 35px;
+    background-color: #BBCFFF;
+    margin-left: 10px;
+    position: relative;
+}
+
+.boton2 .circulo {
+    width: 35px;
+    height: 35px;
+    background-color: #BBCFFF;
+    margin-left: 10px;
+    position: relative;
+}
+
+.circulo .flecha-derecha {
+    font-size: 16px;
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+}
+
+.cont-foto img{
+    overflow-x: hidden;
 }
