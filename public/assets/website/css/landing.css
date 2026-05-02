@@ -149,7 +149,7 @@ main {
 }
 
 #funcionalidades {
-    padding: 100px;
+    padding: 120px;
 }
 
 #funcionalidades .titulo-funcionalidades {
@@ -232,4 +232,65 @@ main {
 
 .cont-info-3 h2 {
     margin-bottom: 40px;
+}
+
+#beneficios {
+    padding: 120px;
+}
+
+.titulo-beneficios {
+    margin-bottom: 56px;
+}
+
+.fila-beneficios {
+    margin-bottom: 56px;
+}
+
+.fila-beneficios .cont-foto {
+    border-radius: 40px;
+}
+
+.cont-1,.cont-2,.cont-3 {
+    height: 400px;
+}
+
+.cont-1 img {
+    width: 100%;
+    border-radius: 40px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cont-2 img {
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cont-3 img {
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titulo-carrusel {
+    margin-bottom: 40px;
+}
+
+.parrafo-carrusel {
+    padding-right: 200px;
+}
+
+.cont-botones-carrusel {
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.cont-botones-carrusel .boton-carrusel {
+    border-radius: 50%;
+    width: 40px;
 }
