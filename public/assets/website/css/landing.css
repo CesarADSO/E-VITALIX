@@ -142,3 +142,94 @@ header nav {
     bottom: 5px;
 }
 
+main {
+    background: #0c498a;
+    position: relative;
+    width: 100%;
+}
+
+#funcionalidades {
+    padding: 100px;
+}
+
+#funcionalidades .titulo-funcionalidades {
+    margin-bottom: 50px;
+    color: var(--blanco-color);
+}
+
+.cont-fun-1, .cont-fun-2, .cont-fun-3 {
+    border-radius: 40px;
+}
+
+.cont-fun-1 {
+    padding-right: 0;
+    height: 70vh;
+    margin-bottom: 16px;
+}
+
+.cont-info-1 {
+   margin-top: 130px;
+   padding-left: 40px;
+}
+
+.cont-info-1 h5 {
+    margin-bottom: 56px;
+    font-size: var(--parrafos);
+}
+
+.cont-info-1 h2 {
+    margin-bottom: 56px;
+}
+
+.cont-info-1 h5,h2,p {
+    color: var(--gris-proyecto);
+}
+
+.cont-foto-1 {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.cont-fun-2 {
+    padding: 30px;
+}
+
+.cont-info-2 {
+    padding-right: 200px;
+    margin-top: 56px;
+}
+
+.cont-info-2 h5,h2,p {
+    color: var(--gris-proyecto);
+}
+
+.cont-info-2 h5 {
+    margin-bottom: 40px;
+    font-size: var(--parrafos);
+}
+
+.cont-info-2 h2 {
+    margin-bottom: 40px;
+}
+
+.cont-fun-3 {
+    padding: 30px;
+}
+
+.cont-info-3 {
+    margin-top: 56px;
+}
+
+.cont-info-3 h5,h2,p {
+    color: var(--gris-proyecto);
+}
+
+.cont-info-3 h5 {
+    font-size: var(--parrafos);
+    margin-bottom: 40px;
+}
+
+.cont-info-3 h2 {
+    margin-bottom: 40px;
+}
