@@ -94,6 +94,7 @@ header nav {
     background: var(--color-secundario);
     height: 90vh;
     padding: 90px 0px 90px 90px;
+    overflow: hidden;
 }
 
 .cont-info .subtitulo-pequeño {
@@ -141,6 +142,3 @@ header nav {
     bottom: 5px;
 }
 
-.cont-foto img{
-    overflow-x: hidden;
-}
