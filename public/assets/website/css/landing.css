@@ -464,3 +464,26 @@ main {
     border: transparent;
     box-shadow: 0 3px 3px 0 #5E8DFF;
 }
+
+footer {
+    padding: 90px;
+    background: var(--color-secundario);
+}
+
+footer .fila-footer {
+    margin-top: 199px;
+}
+
+.cont-info-footer {
+    margin-top: auto;
+}
+
+.cont-redes-sociales {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+}
+
+.cont-redes-sociales .redes {
+    font-size: 30px;
+}
