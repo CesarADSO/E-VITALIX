@@ -416,3 +416,51 @@ main {
 .cabecera-acordion h3 {
     font-weight: 300;
 }
+
+#convencer {
+    padding: 120px;
+    background-image: url('../img/imagen\ para\ sección\ convencer.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.cont-info .titulo-convencer {
+    font-size: 115px;
+    margin-bottom: 20px;
+}
+
+.cont-descriptivo {
+    padding-top: 230px;
+}
+
+.cont-descriptivo h3 {
+    margin-bottom: 60px;
+}
+
+.cont-botones-2 {
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+}
+
+.cont-botones-2 .boton1, .boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones-2 .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-2 .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
