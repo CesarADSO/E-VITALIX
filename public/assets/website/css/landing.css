@@ -296,3 +296,67 @@ main {
     border: none;
     
 }
+
+#precios {
+    width: 100%;
+    position: relative;
+    padding: 120px;
+}
+
+#precios .titulo-precios {
+    margin-bottom: 40px;
+}
+
+.parrafo-planes {
+    margin-bottom: 40px;
+}
+
+.cont-plan .plan {
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.plan .cont-popular {
+    display: flex;
+    justify-content: space-between;
+}
+
+.plan h3 {
+    font-size: var(--titulo-bloque);
+    margin-bottom: 40px;
+    color: var(--gris-proyecto);
+}
+
+.plan h2 {
+    margin-bottom: 40px;
+}
+
+.plan .p-descriptivo-plan {
+    font-size: var(--texto-auxiliar);
+    margin-bottom: 40px;
+}
+
+.plan a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    border-radius: 20px;
+    background: var(--color-primario);
+    margin-bottom: 40px;
+}
+
+.plan .chulo {
+    color: var(--gris-proyecto);
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.cont-popular span {
+    display: inline-block; /* Obligatorio para que respete el padding arriba/abajo */
+    padding: 8px 20px;
+    background: var(--color-primario);
+    height: 30px;
+    border-radius: 20px;
+    color: var(--blanco-color);
+}
