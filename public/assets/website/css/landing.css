@@ -293,4 +293,6 @@ main {
 .cont-botones-carrusel .boton-carrusel {
     border-radius: 50%;
     width: 40px;
+    border: none;
+    
 }
