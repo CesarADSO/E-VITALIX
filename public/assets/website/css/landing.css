@@ -71,7 +71,8 @@ header nav {
     gap: 20px;
 }
 
-.cont-botones .boton1, .boton2 {
+.cont-botones .boton1,
+.boton2 {
     border-radius: 25px;
     padding: 10px 20px;
 }
@@ -157,7 +158,9 @@ main {
     color: var(--blanco-color);
 }
 
-.cont-fun-1, .cont-fun-2, .cont-fun-3 {
+.cont-fun-1,
+.cont-fun-2,
+.cont-fun-3 {
     border-radius: 40px;
 }
 
@@ -168,8 +171,8 @@ main {
 }
 
 .cont-info-1 {
-   margin-top: 130px;
-   padding-left: 40px;
+    margin-top: 130px;
+    padding-left: 40px;
 }
 
 .cont-info-1 h5 {
@@ -181,7 +184,9 @@ main {
     margin-bottom: 56px;
 }
 
-.cont-info-1 h5,h2,p {
+.cont-info-1 h5,
+h2,
+p {
     color: var(--gris-proyecto);
 }
 
@@ -200,7 +205,9 @@ main {
     margin-top: 56px;
 }
 
-.cont-info-2 h5,h2,p {
+.cont-info-2 h5,
+h2,
+p {
     color: var(--gris-proyecto);
 }
 
@@ -221,7 +228,9 @@ main {
     margin-top: 56px;
 }
 
-.cont-info-3 h5,h2,p {
+.cont-info-3 h5,
+h2,
+p {
     color: var(--gris-proyecto);
 }
 
@@ -250,7 +259,9 @@ main {
     border-radius: 40px;
 }
 
-.cont-1,.cont-2,.cont-3 {
+.cont-1,
+.cont-2,
+.cont-3 {
     height: 400px;
 }
 
@@ -291,10 +302,30 @@ main {
 }
 
 .cont-botones-carrusel .boton-carrusel {
+    width: 55px;
+    /* Ajusta según el tamaño exacto de tu Figma */
+    height: 55px;
     border-radius: 50%;
-    width: 40px;
+    background-color: #eef3fc;
+    /* Tu color azul clarito de fondo */
     border: none;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover opcional para que se sienta interactivo */
+.boton-carrusel:hover {
+    background-color: #dbe4f4; 
+}
+
+/* El estilo de la flecha */
+.boton-carrusel i {
+    font-size: 1.2rem; /* Tamaño de la flecha */
+    color: var(--gris-proyecto); /* El color oscuro/negro de la flecha en tu diseño */
+    font-weight: bold;
 }
 
 #precios {
@@ -353,7 +384,8 @@ main {
 }
 
 .cont-popular span {
-    display: inline-block; /* Obligatorio para que respete el padding arriba/abajo */
+    display: inline-block;
+    /* Obligatorio para que respete el padding arriba/abajo */
     padding: 8px 20px;
     background: var(--color-primario);
     height: 30px;
@@ -389,7 +421,8 @@ main {
 .boton-acordion {
     border-radius: 50%;
     background: var(--color-primario);
-    flex-shrink: 0; /* Vital: Evita que el texto aplaste el botón en celulares */
+    flex-shrink: 0;
+    /* Vital: Evita que el texto aplaste el botón en celulares */
 }
 
 /* Transición suave para la flecha */
@@ -447,7 +480,8 @@ main {
     justify-content: end;
 }
 
-.cont-botones-2 .boton1, .boton2 {
+.cont-botones-2 .boton1,
+.boton2 {
     border-radius: 25px;
     padding: 10px 20px;
 }
