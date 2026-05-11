@@ -58,21 +58,18 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <!-- Chart -->
                     <div class="chart-card">
                         <div class="chart-header">
-                            <h3 class="chart-title">Pacientes nuevos vs recurrentes por mes</h3>
+                            <h3 class="chart-title">Crecimiento de la infraestructura</h3>
                             <div class="d-flex align-items-center gap-3">
                                 <div class="chart-legend">
                                     <div class="legend-item">
                                         <div class="legend-dot" style="background-color: #007bff;"></div>
-                                        <span>Nuevos</span>
+                                        <span>Nuevas sedes</span>
                                     </div>
                                     <div class="legend-item">
                                         <div class="legend-dot" style="background-color: #90CAF9;"></div>
-                                        <span>Recurrentes</span>
+                                        <span>Nuevos usuarios</span>
                                     </div>
                                 </div>
-                                <button class="filter-btn">
-                                    Meses <i class="bi bi-chevron-down"></i>
-                                </button>
                             </div>
                         </div>
                         <div class="chart-container">
@@ -113,26 +110,23 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                         <!-- Appointments Chart -->
                         <div class="appointments-card">
-                            <h3 class="section-title">Promedio de Citas</h3>
+                            <h3 class="section-title">Estado de Afiliaciones Global</h3>
                             <div class="donut-chart">
                                 <canvas id="donutChart"></canvas>
                                 <div class="donut-center">
-                                    <div class="donut-value">856</div>
-                                    <div class="donut-label">citas agendas</div>
+                                    <div class="donut-value"><?= $totalConsultorios ?></div>
+                                    <div class="donut-label">Sedes totales</div>
                                 </div>
                             </div>
                             <div class="appointments-legend">
                                 <div class="legend-item">
                                     <div class="legend-dot" style="background-color: #007bff;"></div>
-                                    <span>Exitosas</span>
+                                    <span>Sedes activas</span>
                                 </div>
                                 <div class="legend-item">
                                     <div class="legend-dot" style="background-color: #90CAF9;"></div>
-                                    <span>Canceladas</span>
+                                    <span>Sedes inactivas</span>
                                 </div>
-                            </div>
-                            <div class="text-center mt-3">
-                                <div style="font-weight: 600; font-size: 18px;">65%</div>
                             </div>
                         </div>
                     </div>
