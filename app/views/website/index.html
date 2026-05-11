@@ -4,419 +4,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Bootstrap Icons CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <!-- Boostrap CSS -->
+    <title>e-vitalix</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <!-- MI CSS -->
-    <link rel="stylesheet" href="public/assets/website/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="public/assets/website/css/landing.css">
 </head>
 
 <body>
-
     <header>
-        <div class="container contenedor">
-            <div class="row fila">
-                <div class="col-md-3 cont-img">
-                    <a href="/E-VITALIX/"><img src="public/assets/website/img/LOGO-PRINCIPAL 2.svg" alt="Logo E-VITALIX"></a>
-                </div>
-                <div class="col-md-3 col-info">
-                    <i class="bi bi-telephone-outbound"></i>
-                    <p>EMERGENCIA <br><span>(237) 681-812-255</span></p>
-                </div>
-                <div class="col-md-3 col-info">
-                    <i class="bi bi-clock"></i>
-                    <p>HORARIO DE TRABAJO <br><span>09:00-20:00 Todos los días</span></p>
-                </div>
-                <div class="col-md-3 col-info">
-                    <i class="bi bi-geo-alt"></i>
-                    <p>UBICACIÓN <br><span>SENA VILLETA</span></p>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg barra-navegacion">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="/E-VITALIX/"><img src="public/assets/website/img/LOGO NEGATIVO 1.svg" alt=""></a>
+                <a class="navbar-brand" href="/E-VITALIX/"><img src="public/assets/website/img/LOGO NEGATIVO 1.svg"
+                        alt="Logo de evitalix"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse items-menu" id="navbarNav">
-                    <ul class="navbar-nav lista-items">
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" aria-current="page" href="/E-VITALIX/">Inicio</a>
+                <div class="collapse navbar-collapse cont-nav" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item item">
+                            <a class="nav-link active text-white enlace" aria-current="page" href="#"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Inicio</a>
                         </li>
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" href="sobreNosotros">Sobre Nosotros</a>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#funcionalidades"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Funcionalidades</a>
                         </li>
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" href="servicios">Servicios</a>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#beneficios"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Beneficios</a>
                         </li>
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" href="doctores">Doctores</a>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#precios"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Planes</a>
                         </li>
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" href="noticias">Noticias</a>
-                        </li>
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" href="contacto">Contacto</a>
-                        </li>
-                        <li class="nav-item item-menu">
-                            <a class="nav-link" href="precios">Precios</a>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#preguntas"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Preguntas</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ingresar">
-                    <li class="nav-item item-ingresar">
-                        <a class="nav-link" aria-current="page" href="login">Ingresar</a>
-                    </li>
-                    <li class="nav-item item-registrar">
-                        <a class="nav-link" href="registro">Registrarse</a>
-                    </li>
-                </ul>
+                </div>
+                <div class="cont-botones">
+                    <a href="login" class="btn btn-primary boton1">Iniciar sesión</a>
+                    <a href="registro" class="btn btn-outline-primary boton boton2">Soy paciente</a>
                 </div>
             </div>
         </nav>
-        <div id="hero" data-aos="fade-up">
-        <img src="public/assets/website/img/foto del hero.svg" alt="imagen de fondo" class="fondo-hero">
-        <img src="public/assets/website/img/Ellipse 2.svg" alt="elipse 2" class="elipse elipse-izquierda">
-        <img src="public/assets/website/img/Ellipse 1.svg" alt="elipse 1" class="elipse elipse-derecha">
-        <div class="container contenido">
-            <div class="row fila">
-                <div class="col-md-6 cont-info">
-                    <h3>CUIDANDO TU SALUD</h3>
-                    <h1>Innovando en salud,
-                        cuidando tu bienestar</h1>
-                    <a href="servicios">Nuestros servicios</a>
+        <div id="hero">
+            <div class="container-fluid pe-0">
+                <div class="row fila-hero">
+                    <div class="col-md-6 cont-info">
+                        <h3 class="subtitulo-pequeño text-white"><img src="public/assets/website/img/estetoscopio.svg"
+                                alt="">Plataforma de gestión médica
+                            integral</h3>
+                        <h1 class="text-white titulo-principal">Optimiza el tiempo de tu consultorio médico sin
+                            complicaciones</h1>
+                        <h2 class="text-white info-hero">E-VITALIX centraliza el agendamiento de citas, las historias
+                            clínicas y las órdenes médicas
+                            en una plataforma en la nube, rápida y segura.</h2>
+                        <div class="cont-botones">
+                            <a href="registroAdmin" class="btn btn-primary boton1">Empieza gratis <span
+                                    class="rounded-circle d-inline-block align-middle circulo"><i
+                                        class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
+                            <a href="#precios" class="btn btn-outline-primary boton2">Ver planes <span
+                                    class="rounded-circle d-inline-block align-middle circulo"><i
+                                        class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end">
+                        <img src="public/assets/website/img/dashboard hero prueba.svg" alt="Dashboard">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </header>
     <main>
-
-        <section id="bienvenidos">
-            <div class="cont-tarjetas">
-                <a href="#" class="cont-cita">
-                    <p>Agenda una cita</p>
-                    <i class="bi bi-calendar3"></i>
-                </a>
-                <a href="#" class="cont-especialista">
-                    <p>Encuentra el especialista que necesitas</p>
-                    <i class="bi bi-people-fill"></i>
-                </a>
-            </div>
-
+        <section id="funcionalidades">
             <div class="container">
-                <!-- Texto principal -->
-                <div class="cont-info info-evitalix" data-aos="fade-down" data-aos-duration="1000">
-                    <h3>BIENVENIDOS A E-VITALIX</h3>
-                    <h2>Un sitio en pro de tu bienestar</h2>
-                    <p>
-                        En E-VITALIX trabajamos por tu salud con innovación, compromiso y atención de calidad.
-                        Nuestro objetivo es cuidar de ti con excelencia médica y humana.
-                    </p>
-                    
-                </div>
-
-                <!-- Columnas informativas -->
-                <div class="row info-columns mt-4" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="col-md-6 info-box">
-                        <h4>¿Qué es E-VITALIX?</h4>
-                        <p>
-                            E-VITALIX es una plataforma digital de salud que conecta pacientes con servicios médicos,
-                            especialistas y herramientas tecnológicas que facilitan el acceso a una atención rápida,
-                            segura y confiable.
-                        </p>
-                    </div>
-
-                    <div class="col-md-6 info-box">
-                        <h4>¿Qué ofrece la plataforma?</h4>
-                        <p>
-                            La plataforma permite gestionar citas, acceder a especialistas, consultar información médica
-                            confiable y recibir soporte digital, mejorando la experiencia del paciente y la eficiencia
-                            del sistema de salud.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Imagen doctores -->
-                <div class="row fila" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="col-md-12 cont-foto">
-                        <img src="public/assets/website/img/elipse 2.svg" alt="elipse 2" class="elipse elipse-izquierdo">
-                        <img src="public/assets/website/img/elipse 1.svg" alt="Elipse 1" class="elipse elipse-derecho">
-                        <img src="public/assets/website/img/equipo de doctores.svg" alt="equipo de doctores"
-                            class="foto-doctores">
-                        <img src="public/assets/website/img/rectangulo 1.svg" alt="rectangulo 1"
-                            class="rectangulo rectangulo1">
-                        <img src="public/assets/website/img/rectangulo 2.svg" alt="rectangulo 2"
-                            class="rectangulo rectangulo2">
-                        <img src="public/assets/website/img/rectangulo 3.svg" alt="rectangulo 3"
-                            class="rectangulo rectangulo3">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="nuestrosServicios">
-            <div class="container">
-                <h3 class="subtitulo-seccion" data-aos="fade-down" data-aos-duration="1000">PORQUE TU BIENESTAR ES
-                    NUESTRA PRIORIDAD</h3>
-                <h2 data-aos="fade-down" data-aos-duration="1000">Nuestros servicios</h2>
-                <div class="row fila" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="col-md-3 lista-servicios">
-                        <div class="cont-servicio">
-                            <i class="bi bi-bandaid"></i>
-                            <p>Medicina General</p>
-                        </div>
-                        <div class="cont-servicio cardiograma">
-                            <i class="bi bi-heart-pulse-fill"></i>
-                            <p>Cardiograma</p>
-                        </div>
-                        <div class="cont-servicio adn">
-                            <i class="fa-solid fa-dna"></i>
-                            <p>Prueba de ADN</p>
-                        </div>
-                        <a href="servicios">Ver todos</a>
-                    </div>
-                    <div class="col-md-6 lista-textos">
-                        <h3>Nuestros pacientes son lo primero</h3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul>
-                                    <li>Una pasión por sanar</li>
-                                    <li>Encuentra el médico que necesitas</li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul>
-                                    <li>Servicio de calidad</li>
-                                    <li>Encuentra el médico que necesitas</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p>En Evitalix creemos que la salud merece más que un tratamiento: merece confianza, cercanía y
-                            excelencia. Por eso ofrecemos un servicio integral, desde la consulta general hasta la
-                            atención especializada, siempre con profesionales que se preocupan por ti.</p>
-                    </div>
-                    <div class="col-md-3 cont-fotos">
-                        <img src="public/assets/website/img/doctor revisando señora.svg" alt="Doctor revisando señora">
-                        <img src="public/assets/website/img/Rectangle 77.svg" alt="rectangulo"
-                            class="rectangulo rectangulo-1">
-                        <img src="public/assets/website/img/Rectangle 76.svg" alt="Rectangulo"
-                            class="rectangulo rectangulo-2">
-                        <img src="public/assets/website/img/Rectangle 78.svg" alt="Rectangulo"
-                            class="rectangulo rectangulo-3">
-                        <img src="public/assets/website/img/grupo de doctoras.svg" alt="Grupo de doctoras">
-                        <img src="public/assets/website/img/Rectangle 77.svg" alt="rectangulo"
-                            class="rectangulo rectangulo-4">
-                        <img src="public/assets/website/img/Rectangle 76.svg" alt="Rectangulo"
-                            class="rectangulo rectangulo-5">
-                        <img src="public/assets/website/img/Rectangle 78.svg" alt="Rectangulo"
-                            class="rectangulo rectangulo-6">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="especialidades">
-            <div class="container">
-                <h3 data-aos="fade-down" data-aos-duration="1000">SIEMPRE CUIDANDO DE TI</h3>
-                <h2 data-aos="fade-down" data-aos-duration="1000">Nuestras especialidades</h2>
-                <div id="cont-especialidades" class="row">
-                </div>
-            </div>
-        </section>
-
-        <section id="equipo">
-            <div class="container">
-                <h3>ATENCIÓN DE CONFIANZA</h3>
-                <h2>Nuestro equipo</h2>
-
-                <!-- Swiper -->
-                <div class="swiper equipoSwiper">
-                    <div id="cont-equipo" class="swiper-wrapper">
-                        <!-- Slide 1 -->
-                        <div class="swiper-slide">
-                            <div class="card tarjeta" style="width: 18rem;">
-                                <img src="public/assets/website/img/Nicolas.svg" class="card-img-top" alt="Nicolas">
-                                <div class="card-body cuerpo-tarjeta">
-                                    <h5 class="card-title">Nicolás Pinzón</h5>
-                                    <p class="card-text">DESARROLLADOR BACKEND</p>
-                                    <div class="redes">
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/Linkedin.svg" alt="Linkedin"></a>
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/face.svg" alt="Facebook"></a>
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/insta.svg" alt="Instagram"></a>
-                                    </div>
-                                </div>
-                                <a class="perfil" href="#">Ver perfil</a>
-                            </div>
-                        </div>
-
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide">
-                            <div class="card tarjeta" style="width: 18rem;">
-                                <img src="public/assets/website/img/cesar.svg" class="card-img-top" alt="César">
-                                <div class="card-body cuerpo-tarjeta">
-                                    <h5 class="card-title">César Morales</h5>
-                                    <p class="card-text">DESARROLLADOR FRONTEND</p>
-                                    <div class="redes">
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/Linkedin.svg" alt="Linkedin"></a>
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/face.svg" alt="Facebook"></a>
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/insta.svg" alt="Instagram"></a>
-                                    </div>
-                                </div>
-                                <a class="perfil" href="#">Ver perfil</a>
-                            </div>
-                        </div>
-
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide">
-                            <div class="card tarjeta" style="width: 18rem;">
-                                <img src="public/assets/website/img/diego.svg" class="card-img-top" alt="Diego">
-                                <div class="card-body cuerpo-tarjeta">
-                                    <h5 class="card-title">Diego Riaño</h5>
-                                    <p class="card-text">TESTER Y DISEÑADOR UX/UI</p>
-                                    <div class="redes">
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/Linkedin.svg" alt="Linkedin"></a>
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/face.svg" alt="Facebook"></a>
-                                        <a class="social" href="#"><img class="social"
-                                                src="public/assets/website/img/insta.svg" alt="Instagram"></a>
-                                    </div>
-                                </div>
-                                <a class="perfil" href="#">Ver perfil</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Navegación con flechas -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-
-                    <!-- Paginación (tus botones) -->
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contacto">
-            <div class="container">
-                <h3>HABLEMOS</h3>
-                <h2>Contacto</h2>
+                <h2 class="text-center titulo-funcionalidades">Funcionalidades</h2>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 cont-contacto">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body tarjeta">
-                                <i class="bi bi-telephone-outbound"></i>
-                                <p class="card-text titulo">EMERGENCIA</p>
-                                <p class="texto">(237) 681-812-255</p>
-                                <p class="texto">(237) 666-331-894</p>
+                    <div class="col-md-12">
+                        <div class="bg-white cont-fun-1">
+                            <div class="row">
+                                <div class="col-md-4 cont-info-1">
+                                    <h5>Funcionalidad 01</h5>
+                                    <h2>Historias clínicas Electrónicas</h2>
+                                    <p>Acceso inmediato y seguro al historial completo de tus pacientes. Genera reportes
+                                        en
+                                        PDF al instante y mantén la información siempre disponible.</p>
+                                </div>
+                                <div class="col-md-8 cont-foto-1">
+                                    <img src="public/assets/website/img/imagen de prueba 1.svg" alt="Imagen de prueba">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 cont-contacto">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body tarjeta">
-                                <i class="bi bi-geo-alt"></i>
-                                <p class="card-text titulo">UBICACIÓN</p>
-                                <p class="texto">SENA VILLETA</p>
+                    <div class="col-md-6">
+                        <div class="bg-white cont-fun-2">
+                            <div class="row">
+                                <div class="col-md-12 cont-foto-2">
+                                    <img src="public/assets/website/img/imagen de prueba 2.svg"
+                                        alt="Imagen de prueba 2">
+                                </div>
+                                <div class="col-md-12 cont-info-2">
+                                    <h5>Funcionalidad 02</h5>
+                                    <h2>Visualización Clara de Agenda</h2>
+                                    <p>Controla tu disponibilidad al instante. Calendario interactivo diseñado para
+                                        identificar espacios libres rápidamente y consultar los detalles de cada
+                                        paciente programado, manteniendo tu día organizado sin complicaciones.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 cont-contacto">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body tarjeta">
-                                <i class="bi bi-envelope"></i>
-                                <p class="card-text titulo">EMAIL</p>
-                                <p class="texto">evitalix@gmail.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 cont-contacto">
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body tarjeta">
-                                <i class="bi bi-clock"></i>
-                                <p class="card-text titulo">ATENCIÓN</p>
-                                <p class="texto">Lunes-Domingo</p>
-                                <p class="texto">09:00-20:00</p>
+                    <div class="col-md-6">
+                        <div class="bg-white cont-fun-3">
+                            <div class="row">
+                                <div class="col-md-12 cont-foto-3">
+                                    <img src="public/assets/website/img/imagen de prueba 3.svg"
+                                        alt="Imagen de prueba 3">
+                                </div>
+                                <div class="col-md-12 cont-info-3">
+                                    <h5>Funcionalidad 03</h5>
+                                    <h2>Portal de Agendamiento Directo</h2>
+                                    <p>Facilita la vida de tu recepción y de tus pacientes. E-VITALIX incluye un módulo
+                                        donde el paciente puede buscar por especialidad y elegir tu consultorio
+                                        directamente, automatizando el ingreso de nuevas citas a tu sistema.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section id="beneficios">
+            <div class="container">
+                <h2 class="text-center text-white titulo-beneficios">Beneficios para el consultorio</h2>
+                <div class="row fila-beneficios gx-3">
+                    <div class="col-md-6">
+                        <div class="cont-foto cont-1">
+                            <img src="public/assets/website/img/beneficios 1.svg" alt="beneficios 1">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cont-foto cont-2">
+                            <img src="public/assets/website/img/beneficios 2.svg" alt="beneficios 2">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cont-foto cont-3">
+                            <img src="public/assets/website/img/beneficios 3.svg" alt="beneficios 3">
+                        </div>
+                    </div>
+                </div>
+                <div id="carouselExample" class="carousel slide">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <h3 class="text-white titulo-carrusel">Cero papel máxima eficiencia</h3>
+                                    <p class="text-white parrafo-carrusel">Transforma montañas de carpetas en un archivo
+                                        digital organizado. Encuentra la
+                                        historia
+                                        clínica de cualquier paciente en segundos, sin ocupar espacio físico en tu
+                                        clínica.
+                                    </p>
+                                </div>
+                                <div class="carousel-item">
+                                    <h3 class="text-white titulo-carrusel">Cero papel máxima eficiencia</h3>
+                                    <p class="text-white parrafo-carrusel">Transforma montañas de carpetas en un archivo
+                                        digital organizado. Encuentra la
+                                        historia
+                                        clínica de cualquier paciente en segundos, sin ocupar espacio físico en tu
+                                        clínica.
+                                    </p>
+                                </div>
+                                <div class="carousel-item">
+                                    <h3 class="text-white titulo-carrusel">Cero papel máxima eficiencia</h3>
+                                    <p class="text-white parrafo-carrusel">Transforma montañas de carpetas en un archivo
+                                        digital organizado. Encuentra la
+                                        historia
+                                        clínica de cualquier paciente en segundos, sin ocupar espacio físico en tu
+                                        clínica.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 cont-botones-carrusel">
+                            <button class="boton-carrusel" type="button" data-bs-target="#carouselExample"
+                                data-bs-slide="prev">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <button class="boton-carrusel" type="button" data-bs-target="#carouselExample"
+                                data-bs-slide="next">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="precios">
+            <div class="container">
+                <h2 class="text-white text-center titulo-precios">Planes y precios</h2>
+                <p class="text-white text-center parrafo-planes">Planes simples y transparentes diseñados para el
+                    crecimiento de tu consultorio.</p>
+                <div class="row">
+                    <div class="col-md-4 cont-plan">
+                        <div class="bg-white plan">
+                            <h3>Plan semilla</h3>
+                            <h2>Gratis</h2>
+                            <p class="p-descriptivo-plan">Perfecto para comenzar y probar la plataforma</p>
+                            <a href="#" class="btn btn-primary boton-plan">Crear cuenta gratis</a>
+                            <p><i class="bi bi-check2 chulo"></i>Hasta 30 citas mensuales</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 cont-plan">
+                        <div class="bg-white plan">
+                            <div class="cont-popular">
+                                <h3>Plan pro</h3>
+                                <span>El más popular</span>
+                            </div>
+                            <h2>$50,000/ mensual</h2>
+                            <p class="p-descriptivo-plan">Ideal para consultorios en crecimiento</p>
+                            <a href="#" class="btn btn-primary boton-plan">Comprar plan pro</a>
+                            <p><i class="bi bi-check2 chulo"></i>Hasta 300 citas mensuales</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 cont-plan">
+                        <div class="bg-white plan">
+                            <h3>Plan premium</h3>
+                            <h2>$150,000/ mensual</h2>
+                            <p class="p-descriptivo-plan">Para grandes redes de consultorios médicos</p>
+                            <a href="#" class="btn btn-primary boton-plan">Comprar plan premium</a>
+                            <p><i class="bi bi-check2 chulo"></i>Hasta 3,000 citas mensuales</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="preguntas">
+            <div class="container">
+                <h2 class="text-white text-center titulo-preguntas">Preguntas frecuentes</h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="bg-white cont-pregunta">
+                            <div class="accordion accordion-flush" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header cabecera-acordion">
+                                        <h3>¿Cómo funciona el plan gratuito y cuáles son sus límites?</h3>
+                                        <button class="btn btn-primary boton-acordion collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                                            aria-controls="collapseOne"><i
+                                                class="bi bi-chevron-down text-white icono-flecha"></i></button>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body cuerpo-acordion">
+                                            <strong>Nuestro Plan Básico te permite usar E-VITALIX sin costo por tiempo
+                                                indefinido, con un límite de 30 citas agendadas al mes. Es la forma
+                                                perfecta de digitalizar tu consultorio sin riesgo. Si tu clínica crece y
+                                                necesitas gestionar un volumen mayor, puedes actualizar en cualquier
+                                                momento a nuestro Plan Profesional para obtener más citas que se puedan
+                                                agendar en tu consultorio.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="bg-white cont-pregunta">
+                            <div class="accordion accordion-flush" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header cabecera-acordion">
+                                        <h3>¿Necesito conocimientos técnicos avanzados para usar el sistema?</h3>
+                                        <button class="btn btn-primary boton-acordion collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo"><i
+                                                class="bi bi-chevron-down text-white icono-flecha"></i></button>
+                                    </div>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body cuerpo-acordion">
+                                            <strong>En absoluto. Diseñamos E-VITALIX con una interfaz moderna, limpia e
+                                                intuitiva (Clarity over complexity). Tanto los médicos como el personal
+                                                administrativo pueden agendar citas, generar órdenes y redactar
+                                                historias clínicas desde el primer día, como si estuvieran usando su
+                                                correo electrónico.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="bg-white cont-pregunta">
+                            <div class="accordion accordion-flush" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header cabecera-acordion">
+                                        <h3>¿Puedo acceder a la información desde mi celular o fuera del consultorio?
+                                        </h3>
+                                        <button class="btn btn-primary boton-acordion collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree"><i
+                                                class="bi bi-chevron-down text-white icono-flecha"></i></button>
+                                    </div>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body cuerpo-acordion">
+                                            <strong>Sí. E-VITALIX es una plataforma 100% en la nube. Puedes acceder al
+                                                historial completo de tus pacientes, revisar tu agenda del día o emitir
+                                                recetas desde cualquier computador, tablet o smartphone con conexión a
+                                                internet, las 24 horas del día.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="bg-white cont-pregunta">
+                            <div class="accordion accordion-flush" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header cabecera-acordion">
+                                        <h3>¿Están seguros los datos médicos y las historias clínicas de mis pacientes?
+                                        </h3>
+                                        <button class="btn btn-primary boton-acordion collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                            aria-expanded="false" aria-controls="collapseFour"><i
+                                                class="bi bi-chevron-down text-white icono-flecha"></i></button>
+                                    </div>
+                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body cuerpo-acordion">
+                                            <strong>La seguridad es nuestra máxima prioridad. Toda la información
+                                                operativa y los historiales clínicos se almacenan en servidores seguros
+                                                con arquitecturas de bases de datos robustas. Solo el personal de salud
+                                                autorizado por el consultorio tiene acceso a los datos de los pacientes,
+                                                garantizando la confidencialidad.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="convencer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 cont-info">
+                        <h2 class="titulo-convencer text-white">100%</h2>
+                        <h4 class="text-white">De tu consultorio gestionado de forma digital y segura en la nube.</h4>
+                    </div>
+                    <div class="col-md-6 cont-descriptivo">
+                        <h3 class="text-white">E-VITALIX transformó el caos de las agendas y el papeleo en un flujo de
+                            trabajo organizado.
+                            Dejamos de perder tiempo buscando historias clínicas y empezamos a enfocarnos en lo que
+                            importa: los pacientes.</h3>
+                        <div class="cont-botones-2">
+                            <a href="#" class="btn btn-primary boton1">Empieza gratis <span
+                                    class="rounded-circle d-inline-block align-middle circulo"><i
+                                        class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
+                            <a href="#precios" class="btn btn-outline-primary boton2">Ver planes <span
+                                    class="rounded-circle d-inline-block align-middle circulo"><i
+                                        class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 cont-info">
-                    <a href="/E-VITALIX/"><img src="public/assets/website/img/LOGO NEGATIVO 1.svg" alt="Logo negativo"></a>
-                    <p class="descriptivo">Liderando el camino en
-                        excelencia médica
-                        y atención confiable</p>
-                </div>
-                <div class="col-md-3 cont-enlaces">
-                    <h5>Otros Links</h5>
-                    <a href="/E-VITALIX/">Inicio</a>
-                    <a href="doctores">Doctores</a>
-                    <a href="servicios">Servicios</a>
-                    <a href="sobreNosotros">Sobre Nosotros</a>
-                </div>
-                <div class="col-md-3 cont-info">
-                    <h5 class="titulo-contacto">Contactanos</h5>
-                    <p class="contacto">Llama: 3219219323</p>
-                    <p class="contacto">Email: evitalix@gmail.com</p>
-                    <p class="contacto">Dirección: SENA VILLETA</p>
-                    <p class="contacto">Villeta - Cundinamarca</p>
-                </div>
-                <div class="col-md-3 cont-info">
-                    <h5 class="hoja-informativa">Hoja informativa</h5>
-                    <form action="" method="post">
-                        <input type="email" name="email" placeholder="Introduce tu correo">
-                        <button type="submit" class="btn-enviar">
-                            <i class="bi bi-send-fill"></i>
-                        </button>
-                    </form>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse cont-nav" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item item">
+                            <a class="nav-link active text-white enlace" aria-current="page" href="#"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Inicio</a>
+                        </li>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#funcionalidades"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Funcionalidades</a>
+                        </li>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#beneficios"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Beneficios</a>
+                        </li>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#precios"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Planes</a>
+                        </li>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#preguntas"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Preguntas</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <hr>
-            <div class="row fila">
-                <div class="col-md-10">
-                    <p class="derechos">© 2025 E-VITALIX Todos los Derechos Reservados by PNTEC-LTD</p>
+        </nav>
+        <div class="container">
+            <div class="row fila-footer">
+                <div class="col-md-10 cont-logo-footer">
+                    <a href="/E-VITALIX/"><img src="public/assets/website/img/LOGO NEGATIVO 1.svg" alt="Logo evitalix"></a>
+                    <p class="text-white"> E-VITALIX — Plataforma integral de gestión médica y agendamiento.</p>
                 </div>
-                <div class="col-md-2 cont-redes d-flex gap-3">
-                    <a href="#"><img src="public/assets/website/img/linkedin blanco.svg" alt="Linkedin"></a>
-                    <a href="#"><img src="public/assets/website/img/facebook circulo.svg" alt=""></a>
-                    <a href="#"><img src="public/assets/website/img/instagram blanco.svg" alt="Instagram"></a>
+                <div class="col-md-2 cont-info-footer">
+                    <div class="cont-redes-sociales">
+                        <a href="#" class="text-white redes"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white redes"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                    <p class="text-white text-end">evitalix558@gmail.com</p>
                 </div>
             </div>
         </div>
     </footer>
-    <!-- AOS JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- Boostrap Js -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="public/assets/website/js/main.js"></script>
 </body>
 
 </html>

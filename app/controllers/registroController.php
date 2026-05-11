@@ -10,9 +10,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
+        $accion = $_POST['accion'] ?? '';
         if (isset($_SESSION['user']['id_paciente'])) {
             completarPerfilPaciente($_SESSION['user']['id_paciente']);
-        } else {
+        }
+
+        if ($accion === 'registrarPaciente') {
             registrarPaciente();
         }
         break;
