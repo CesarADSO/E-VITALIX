@@ -1,8 +1,6 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_superadmin.php';
-require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
-$especialitas = mostrarEspecialistas();
 
 ?>
 
@@ -36,23 +34,23 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <!-- Stats Cards -->
                     <div class="stats-cards">
                         <div class="stat-card">
-                            <div class="stat-label">Citas Agendas</div>
-                            <div class="stat-value">856</div>
-                            <div class="stat-subtitle">por semana</div>
+                            <div class="stat-label">Total de consultorios</div>
+                            <div class="stat-value"><?= $totalConsultorios ?></div>
+                            <div class="stat-subtitle">registrados</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Citas exitosas</div>
-                            <div class="stat-value">200</div>
-                            <div class="stat-subtitle">Por día</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Especialistas</div>
-                            <div class="stat-value"><?= count($especialitas) ?></div>
+                            <div class="stat-label">Total de usuarios</div>
+                            <div class="stat-value"><?= $totalUsuarios ?></div>
                             <div class="stat-subtitle">Registrados</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Nuevo pacientes registrados<br>este mes</div>
-                            <div class="stat-value">20</div>
+                            <div class="stat-label">Especialidades activas</div>
+                            <div class="stat-value"><?= $totalEspecialidades ?></div>
+                            <div class="stat-subtitle">Registradas</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Nuevos consultorios<br>este mes</div>
+                            <div class="stat-value"><?= $nuevosConsultoriosPorMes ?></div>
                             <div class="stat-subtitle">En este mes</div>
                         </div>
                     </div>
@@ -83,53 +81,35 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     </div>
 
                     <!-- Bottom Section -->
-                    <!-- <div class="bottom-section"> -->
+                    <div class="bottom-section">
                         <!-- Specialists Table -->
-                        <!-- <div class="specialists-card">
+                        <div class="specialists-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="section-title mb-0">Estado de los especialistas</h3>
-                                <button class="filter-btn">
-                                    Filtros <i class="bi bi-sliders"></i>
-                                </button>
-                            </div> -->
-                            <!-- <div class="table-header">
-                                <div>Nombres</div>
-                                <div>Especialidad</div>
-                                <div>Edad</div>
-                                <div>Disponible</div>
+                                <h3 class="section-title mb-0">últimos 5 consultorios</h3>
+                            </div>
+                            <div class="table-header">
+                                <div>Consultorio</div>
+                                <div>Ciudad</div>
+                                <div>Administrador</div>
                                 <div>Estado</div>
-                            </div> -->
-                            <!-- <div class="specialist-row">
+                            </div>
+                            <?php if(!empty($ultimosConsultorios)):?>
+                            <?php foreach ($ultimosConsultorios as $consultorio): ?>
+                            <div class="specialist-row">
                                 <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Justin Lipshutz</div>
+                                    <div class="specialist-name"><?= $consultorio['nombre'] ?></div>
                                 </div>
-                                <div>Médico General</div>
-                                <div>22</div>
-                                <div class="progress-text">+100%</div>
-                                <div><span class="status-badge status-espera">En espera</span></div>
-                            </div> -->
-                            <!-- <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Marcus Culhane</div>
+                                <div><?= $consultorio['ciudad'] ?></div>
+                                <div><?= $consultorio['nombres'] ?> <?= $consultorio['apellidos'] ?></div>
+                                <div>
+                                    <span class="status-badge status-espera"><?= $consultorio['estado'] ?></span>
                                 </div>
-                                <div>Cardiólogo</div>
-                                <div>24</div>
-                                <div class="progress-text">+95%</div>
-                                <div><span class="status-badge status-bloqueado">Bloqueado</span></div>
-                            </div> -->
-                            <!-- <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Leo Stanton</div>
-                                </div>
-                                <div>Dermatólogo</div>
-                                <div>28</div>
-                                <div class="progress-text">+88%</div>
-                                <div><span class="status-badge status-active">Activo</span></div>
-                            </div> -->
-                        <!-- </div> -->
+                            </div>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="text-center py-4">No hay consultorios registrados.</div>
+                            <?php endif; ?>
+                         </div>
 
                         <!-- Appointments Chart -->
                         <div class="appointments-card">
