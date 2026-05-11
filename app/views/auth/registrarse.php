@@ -17,7 +17,7 @@
 <body>
     <div class="registro-container">
         <div class="registro-content">
-            <div class="row">
+            <div class="row fila-general">
                 <div class="form-section col-md-6">
                     <div class="logo-header">
                         <!-- Reemplaza con tu logo -->
@@ -30,8 +30,9 @@
 
 
                     <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data">
-                        <div class="form-row-custom">
-                            <div class="form-group-custom">
+                        <input type="hidden" name="accion" value="registrarPaciente">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label class="form-label-custom">Nombres:</label>
                                 <input
                                     type="text"
@@ -42,7 +43,7 @@
                                     required>
                             </div>
 
-                            <div class="form-group-custom">
+                            <div class="col-md-6">
                                 <label class="form-label-custom">Apellidos:</label>
                                 <input
                                     type="text"
@@ -53,14 +54,7 @@
                                     required>
                             </div>
 
-
-
-
-                        </div>
-
-                        <div class="form-row-custom">
-
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Tipo de documento:</label>
                                 <select name="tipo_documento" class="campos-formulario" id="tipoDocumento" required>
                                     <option value="">Selecciona tu tipo de documento</option>
@@ -70,7 +64,7 @@
                                 </select>
                             </div>
 
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Número de documento:</label>
                                 <input
                                     type="text"
@@ -81,14 +75,7 @@
                                     required>
                             </div>
 
-
-
-
-                        </div>
-
-                        <div class="form-row-custom">
-
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Email:</label>
                                 <input
                                     type="email"
@@ -99,7 +86,7 @@
                                     required>
                             </div>
 
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Teléfono:</label>
                                 <input
                                     type="text"
@@ -109,9 +96,11 @@
                                     name="telefono"
                                     required>
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn-azul">Registrarse</button>
+                        </div>
+     
+
+                        <button type="submit" class="btn-azul btn-registrarse-paciente">Registrarse</button>
 
                     </form>
 

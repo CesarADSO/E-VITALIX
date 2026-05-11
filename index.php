@@ -66,6 +66,10 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/registroController.php';
         break;
 
+    case '/registrarse-admin':
+        require BASE_PATH . '/app/controllers/consultorioController.php';
+        break;
+
     case '/recuperacion':
         require BASE_PATH . '/app/views/auth/recuperar-contraseña.php';
         break;

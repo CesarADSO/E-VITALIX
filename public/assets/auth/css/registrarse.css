@@ -279,3 +279,11 @@
         color: var(--color-primario);
         font-weight: bold;
     }
+
+.btn-registrarse-paciente {
+    margin-top: 40px;
+}
+
+.cont-input {
+    margin-top: 15px;
+}

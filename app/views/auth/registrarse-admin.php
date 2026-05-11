@@ -13,8 +13,13 @@
     <link rel="stylesheet" href="public/assets/auth/css/registrarse.css">
     <style>
         /* Solo agrego esto para que el JS pueda ocultar/mostrar los pasos */
-        .wizard-form-step { display: none; }
-        .wizard-form-step.active { display: block; }
+        .wizard-form-step {
+            display: none;
+        }
+
+        .wizard-form-step.active {
+            display: block;
+        }
     </style>
 </head>
 
@@ -42,60 +47,57 @@
                                 <span class="step-label">Crea tu cuenta</span>
                             </div>
                         </div>
-                        <div style="width: 100%; height: 2px; background: #eee; margin-top: 10px; position: relative;">
-                            <div id="progressLine" style="height: 100%; background: var(--primary-color, blue); width: 0%; transition: 0.3s;"></div>
-                        </div>
                     </div>
 
 
-                    <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data">
+                    <form id="registroForm" action="<?= BASE_URL ?>/registrarse-admin" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="accion" value="registrar">
+                        <input type="hidden" name="origen" value="publico">
 
                         <div class="wizard-form-step active" data-step="1" id="step1">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label-custom">Nombre:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa el nombre del consultorio" id="nombre_consultorio" name="nombre_consultorio" required>
+                                    <input type="text" class="campos-formulario" placeholder="Ingresa el nombre del consultorio" id="nombre_consultorio" name="nombre" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label-custom">Ciudad:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa la ciudad" id="ciudad_consultorio" name="ciudad_consultorio" required>
+                                    <input type="text" class="campos-formulario" placeholder="Ingresa la ciudad" id="ciudad_consultorio" name="ciudad" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Dirección:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa la dirección del consultorio" id="direccion_consultorio" name="direccion_consultorio" required>
+                                    <input type="text" class="campos-formulario" placeholder="Ingresa la dirección del consultorio" id="direccion_consultorio" name="direccion" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Teléfono:</label>
-                                    <input type="number" class="campos-formulario" id="telefono_consultorio" name="telefono_consultorio">
+                                    <input type="number" class="campos-formulario" id="telefono_consultorio" placeholder="ingresa el teléfono" name="telefono">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Foto:</label>
-                                    <input type="file" class="campos-formulario" id="foto_consultorio" name="foto_consultorio">
+                                    <input type="file" class="campos-formulario" id="foto_consultorio" name="foto">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Correo de contacto:</label>
-                                    <input type="email" class="campos-formulario" id="correo_contacto" placeholder="ingrese el correo del consultorio" name="correo_contacto">
+                                    <input type="email" class="campos-formulario" id="correo_contacto" placeholder="ingrese el correo del consultorio" name="correo">
                                 </div>
                             </div>
                         </div>
 
                         <div class="wizard-form-step" data-step="2" id="step2">
-                            <div class="form-row-custom">
-                                <div class="form-group-custom">
+                            <div class="row">
+                                <div class="col-md-6">
                                     <label class="form-label-custom">Nombres:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu nombre..." id="nombre" name="nombres" required>
+                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu nombre..." id="nombre" name="nombres_admin" required>
                                 </div>
 
-                                <div class="form-group-custom">
+                                <div class="col-md-6">
                                     <label class="form-label-custom">Apellidos:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu apellido..." id="apellidos" name="apellidos" required>
+                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu apellido..." id="apellidos" name="apellidos_admin" required>
                                 </div>
-                            </div>
 
-                            <div class="form-row-custom">
-                                <div class="form-group-custom">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Tipo de documento:</label>
-                                    <select name="tipo_documento" class="campos-formulario" id="tipoDocumento" required>
+                                    <select name="tipo_documento_admin" class="campos-formulario" id="tipoDocumento" required>
                                         <option value="">Selecciona tu tipo de documento</option>
                                         <option value="1">Cédula de Ciudadanía</option>
                                         <option value="2">Cédula de Extranjería</option>
@@ -103,29 +105,21 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group-custom">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Número de documento:</label>
-                                    <input type="text" class="campos-formulario" placeholder="xxxxxxxxxx" id="numeroDocumento" name="numero_documento" required>
+                                    <input type="text" class="campos-formulario" placeholder="xxxxxxxxxx" id="numeroDocumento" name="numero_documento_admin" required>
                                 </div>
-                            </div>
 
-                            <div class="form-row-custom">
-                                <div class="form-group-custom">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Email:</label>
-                                    <input type="email" class="campos-formulario" placeholder="tucorreo@gmail.com" id="email" name="email" required>
+                                    <input type="email" class="campos-formulario" placeholder="tucorreo@gmail.com" id="email" name="correo_admin" required>
                                 </div>
 
-                                <div class="form-group-custom">
+                                <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Teléfono:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu número de teléfono..." id="telefono" name="telefono" required>
+                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu número de teléfono..." id="telefono" name="telefono_admin" required>
                                 </div>
-                            </div>
-                            
-                            <div class="form-row-custom" style="margin-top: 15px;">
-                                <div class="form-group-custom" style="width: 100%;">
-                                    <label class="form-label-custom">Contraseña:</label>
-                                    <input type="password" class="campos-formulario" placeholder="Crea una contraseña segura" id="password" name="password" required>
-                                </div>
+
                             </div>
                         </div>
 
