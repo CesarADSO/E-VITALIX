@@ -137,7 +137,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
+
     }
+
+    // 2. EL DISPARADOR (Esto va FUERA de la función)
+    document.addEventListener('DOMContentLoaded', function () {
+        initCharts();
+    });
 
     // ==================== SCRIPT DEL DATATABLES ====================
     // DataTables es una librería que hace que las tablas sean interactivas (búsqueda, paginación, etc.)
