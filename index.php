@@ -80,7 +80,7 @@ switch ($request) {
 
     // SUPER ADMIN INTERFACES
     case '/superadmin/dashboard':
-        require BASE_PATH . '/app/views/dashboard/superadministrador/dashboard_superadmin.php';
+        require BASE_PATH . '/app/controllers/superAdminDashboardController.php';
         break;
 
     case '/superadmin/consultorios':

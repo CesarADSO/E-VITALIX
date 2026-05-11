@@ -353,6 +353,7 @@
         font-size: 13px;
         color: var(--gris-proyecto);
         font-weight: 600;
+        gap: 20px;
     }
 
     .specialist-row {
@@ -361,6 +362,7 @@
         padding: 15px 0;
         align-items: center;
         border-bottom: 1px solid #f1f1f1;
+        gap: 20px;
     }
 
     .specialist-info {
