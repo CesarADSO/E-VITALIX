@@ -177,7 +177,7 @@ switch ($request) {
 
     // ADMIN INTERFACES
     case '/administrador/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
+        require BASE_PATH . '/app/controllers/adminConsultorioDashboardController.php';
         break;
 
     case '/admin/precios':
