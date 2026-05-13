@@ -1,10 +1,10 @@
-
-
 <!-- AQUI VA EL INCLUDE DEL HEADER -->
 <?php
 include_once __DIR__ . '/../../layouts/header_especialista.php';
 
+
 ?>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -22,9 +22,9 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                     <!-- Top Bar -->
                     <!-- AQUI VA EL INCLUDE DEL TOP BAR -->
 
-                <?php
-                include_once __DIR__ . '/../../layouts/topbar_especialista.php';
-                ?>
+                    <?php
+                    include_once __DIR__ . '/../../layouts/topbar_especialista.php';
+                    ?>
 
 
                     <!-- Stats Cards -->
@@ -52,7 +52,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                     </div>
 
                     <!-- Chart -->
-                    <div class="chart-card">
+                    <!-- <div class="chart-card">
                         <div class="chart-header">
                             <h3 class="chart-title">Pacientes nuevos vs recurrentes por mes</h3>
                             <div class="d-flex align-items-center gap-3">
@@ -74,55 +74,67 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                         <div class="chart-container">
                             <canvas id="monthlyChart"></canvas>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Bottom Section -->
                     <div class="bottom-section">
                         <!-- Specialists Table -->
                         <div class="specialists-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="section-title mb-0">Estado de los especialistas</h3>
-                                <button class="filter-btn">
-                                    Filtros <i class="bi bi-sliders"></i>
-                                </button>
+                                <h3 class="section-title mb-0">Citas pendientes por atender</h3>
                             </div>
                             <div class="table-header">
-                                <div>Nombres</div>
-                                <div>Especialidad</div>
-                                <div>Edad</div>
-                                <div>Disponible</div>
+                                <div>Paciente</div>
+                                <div>Hora</div>
                                 <div>Estado</div>
+                                <div>Acciones</div>
                             </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Justin Lipshutz</div>
+                            <?php if (!empty($citas)): ?>
+                                <?php foreach ($citas as $cita) ?>
+                                <div class="specialist-row">
+                                    <div class="specialist-name"><?= $cita['nombre_paciente'] ?> <?= $cita['apellido_paciente'] ?></div>
+                                    <div><?= $cita['fecha'] ?></div>
+                                    <div>
+                                        <?php if ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                        <span class="status-badge status status-aceptada">
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php elseif ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                        <span class="status-badge status status-pendiente">
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php elseif ($cita['estado_cita'] === 'COMPLETADA'): ?>
+                                                        <span class="status-badge status status-completada">
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <span class="status-badge status status-cancelada">
+                                                            <?= $cita['estado_cita'] ?>
+                                                        </span>
+                                                    <?php endif; ?>
+                                    </div>
+                                    <div>
+                                        <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                            <a href="<?= BASE_URL ?>/especialista/aceptar-cita?id=<?= $cita['id_cita'] ?>&accion=aceptar" class="btn btn-sm btn-success btn-aceptar"
+                                                data-cita-id="<?= $cita['id_cita'] ?>"
+                                                title="Aceptar cita">
+                                                <i class="bi bi-check-circle"></i></a>
+                                            <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger btn-cancelar"
+                                                data-cita-id="<?= $cita['id_cita'] ?>"
+                                                title="Cancelar cita">
+                                                <i class="bi bi-x-circle"></i></a>
+                                        <?php elseif ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?>&id_servicio=<?= $cita['id_servicio'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
+                                        <?php else: ?>
+                                            <span class="text-muted small">Sin acciones disponibles</span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                                <div>Médico General</div>
-                                <div>22</div>
-                                <div class="progress-text">+100%</div>
-                                <div><span class="status-badge status-espera">En espera</span></div>
-                            </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Marcus Culhane</div>
+                                <?php else :?>
+                                <div class="text-center p-4">
+                                    <p class="mb-0">No hay citas pendientes.</p>
                                 </div>
-                                <div>Cardiólogo</div>
-                                <div>24</div>
-                                <div class="progress-text">+95%</div>
-                                <div><span class="status-badge status-bloqueado">Bloqueado</span></div>
-                            </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Leo Stanton</div>
-                                </div>
-                                <div>Dermatólogo</div>
-                                <div>28</div>
-                                <div class="progress-text">+88%</div>
-                                <div><span class="status-badge status-active">Activo</span></div>
-                            </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Appointments Chart -->
@@ -131,8 +143,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             <div class="donut-chart">
                                 <canvas id="donutChart"></canvas>
                                 <div class="donut-center">
-                                    <div class="donut-value">856</div>
-                                    <div class="donut-label">citas agendas</div>
+                                    <div class="donut-value"><?= $totalCitasProgramadas ?></div>
+                                    <div class="donut-label">citas agendadas</div>
                                 </div>
                             </div>
                             <div class="appointments-legend">
@@ -145,9 +157,6 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     <span>Canceladas</span>
                                 </div>
                             </div>
-                            <div class="text-center mt-3">
-                                <div style="font-weight: 600; font-size: 18px;">65%</div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,8 +164,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
             </div>
         </div>
     </div>
-<!-- AQUI VA EL FOOTER INCLUDE -->
+    <!-- AQUI VA EL FOOTER INCLUDE -->
 
-<?php
-include_once __DIR__ . '/../../layouts/footer_especialista.php';
-?>
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_especialista.php';
+    ?>

@@ -69,4 +69,22 @@ class EspecialistaDashboard
             error_log("Error en EspecialistaDashboard::contarCitasProgramadasHoy-> " . $e->getMessage());
         }
     }
+
+    // 5. Mostrar en el dashboard del especialista las últimas 5 citas pendientes por atender
+    public function obtenerUltimasCitasPendientes($id_especialista) {
+        try {
+            $consulta = "SELECT citas.id AS id_cita, servicios.id AS id_servicio, pacientes.id AS id_paciente, pacientes.nombres AS nombre_paciente, pacientes.apellidos AS apellido_paciente, agenda_slot.fecha, servicios.nombre AS nombre_servicio, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN pacientes ON citas.id_paciente = pacientes.id INNER JOIN servicios ON citas.id_servicio = servicios.id WHERE agenda_slot.id_especialista = :id_especialista AND citas.estado_cita IN ('PENDIENTE', 'CONFIRMADA') ORDER BY agenda_slot.fecha ASC LIMIT 5";
+
+            $resultado = $this->conexion->prepare($consulta);
+
+            $resultado->bindParam(':id_especialista', $id_especialista);
+
+            $resultado->execute();
+
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en EspecialistaDashboard::obtenerUltimasCitasPendientes-> " . $e->getMessage());
+            return [];
+        }
+    }
 }

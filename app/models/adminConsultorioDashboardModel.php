@@ -21,7 +21,7 @@ class AdminConsultorioDashboard
             $resultado->execute();
 
             return $resultado->fetchColumn();
-        } catch (\Throwable $e) {
+        } catch (PDOException $e) {
             error_log("Error en AdminConsultorioDashboard::contarPacientesAtendidos-> " . $e->getMessage());
         }
     }
@@ -37,7 +37,7 @@ class AdminConsultorioDashboard
             $resultado->execute();
 
             return $resultado->fetchColumn();
-        } catch (\Throwable $e) {
+        } catch (PDOException $e) {
             error_log("Error en AdminConsultorioDashboard::contarCitasProgramadas-> " . $e->getMessage());
         }
     }
@@ -52,7 +52,7 @@ class AdminConsultorioDashboard
             $resultado->execute();
 
             return $resultado->fetchColumn();
-        } catch (\Throwable $e) {
+        } catch (PDOException $e) {
             error_log("Error en AdminConsultorioDashboard::contarCitasProgramadasHoy-> " . $e->getMessage());
         }
     }

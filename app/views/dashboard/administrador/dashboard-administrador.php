@@ -218,7 +218,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <canvas id="donutChart"></canvas>
                                 <div class="donut-center">
                                     <div class="donut-value"><?= $totalCitasProgramadas ?></div>
-                                    <div class="donut-label">citas agendas</div>
+                                    <div class="donut-label">citas agendadas</div>
                                 </div>
                             </div>
                             <div class="appointments-legend">

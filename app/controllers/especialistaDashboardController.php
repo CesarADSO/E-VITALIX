@@ -27,6 +27,10 @@ function mostrarDatosDashboard() {
     $totalPacientesAtendidos = $objDashboard->contarPacientesAtendidos($id_especialista);
     $totalCitasProgramadasHoy = $objDashboard->contarCitasProgramadasHoy($id_especialista);
 
+    // VARIABLE PARA GUARDAR LOS DATOS QUE VAMOS A PASAR A A LA VISTA
+    $citas = $objDashboard->obtenerUltimasCitasPendientes($id_especialista);
+    
+
     // INCLUIMOS LA VISTA Y PASAMOS LOS DATOS
     require_once __DIR__ . '/../views/dashboard/especialista/dashboard-especialista.php';
 }
