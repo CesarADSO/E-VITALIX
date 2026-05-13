@@ -26,6 +26,9 @@ function mostrarDatosDashboard() {
     $totalCitasProgramadas = $objDashboard->contarCitasProgramadas($id_consultorio);
     $totalCitasProgramadasHoy = $objDashboard->contarCitasProgramadasHoy($id_consultorio);
 
+    // VARIABLE PARA GUARDAR LOS ÚLTIMOS 5 ESPECIALISTAS REGISTRADOS EN EL CONSULTORIO
+    $ultimosEspecialistas = $objDashboard->obtenerUltimosEspecialistas($id_consultorio);
+
     // INCLUIMOS LA VISTA Y PASAMOS LOS DATOS
     require_once __DIR__ . '/../views/dashboard/administrador/dashboard-administrador.php';
 }

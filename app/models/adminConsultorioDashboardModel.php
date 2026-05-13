@@ -56,4 +56,20 @@ class AdminConsultorioDashboard
             error_log("Error en AdminConsultorioDashboard::contarCitasProgramadasHoy-> " . $e->getMessage());
         }
     }
+
+    // 4. Mostrar en el dashboard del administrador del consultorio los últimos 5 especialistas registrados en su consultorio
+    public function obtenerUltimosEspecialistas($id_consultorio) {
+        try {
+            $consultar = "SELECT especialistas.foto, especialistas.nombres, especialistas.apellidos, especialidades.nombre AS nombre_especialidad, usuarios.estado FROM especialistas INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_consultorio = :id_consultorio ORDER BY especialistas.created_at DESC LIMIT 5";
+            $resultado = $this->conexion->prepare($consultar);
+
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
+
+            $resultado->execute();
+            
+            return $resultado->fetchAll();
+        } catch (PDOException $e) {
+            error_log("Error en AdminConsultorioDashboard::obtenerUltimosEspecialistas->" . $e->getMessage());
+        }
+    }
 }

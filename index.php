@@ -371,7 +371,7 @@ switch ($request) {
 
     // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':
-        require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
+        require BASE_PATH . '/app/controllers/especialistaDashboardController.php';
         break;
 
     case '/especialista/disponibilidad':

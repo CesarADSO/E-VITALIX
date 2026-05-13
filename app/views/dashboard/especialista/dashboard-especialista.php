@@ -30,24 +30,24 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                     <!-- Stats Cards -->
                     <div class="stats-cards">
                         <div class="stat-card">
-                            <div class="stat-label">Citas Agendas</div>
-                            <div class="stat-value">856</div>
-                            <div class="stat-subtitle">por semana</div>
+                            <div class="stat-label">Total citas agendadas</div>
+                            <div class="stat-value"><?= $totalCitasProgramadas ?></div>
+                            <div class="stat-subtitle">Contigo</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Citas exitosas</div>
-                            <div class="stat-value">200</div>
-                            <div class="stat-subtitle">Por día</div>
+                            <div class="stat-label">Total citas pendientes</div>
+                            <div class="stat-value"><?= $totalCitasPendientes ?></div>
+                            <div class="stat-subtitle">Por atender</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Especialistas</div>
-                            <div class="stat-value">30</div>
-                            <div class="stat-subtitle">Registrados</div>
+                            <div class="stat-label">Pacientes atendidos</div>
+                            <div class="stat-value"><?= $totalPacientesAtendidos ?></div>
+                            <div class="stat-subtitle">Por ti</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Nuevo pacientes registrados<br>este mes</div>
-                            <div class="stat-value">20</div>
-                            <div class="stat-subtitle">En este mes</div>
+                            <div class="stat-label">Citas programadas para hoy</div>
+                            <div class="stat-value"><?= $totalCitasProgramadasHoy ?></div>
+                            <div class="stat-subtitle">Para hoy</div>
                         </div>
                     </div>
 

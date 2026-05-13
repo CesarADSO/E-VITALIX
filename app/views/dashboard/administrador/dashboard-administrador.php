@@ -139,19 +139,19 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <small class="text-auxiliar">Plan Actual</small>
                                     <p class="plan-active-name"><?= $plan['nombre'] ?></p>
                                 </div>
-                                <?php if($plan['nombre'] === 'Plan élite'):?>
-                            
-                                <span class="status-badge status-azul">Tienes el plan máximo</span>
+                                <?php if ($plan['nombre'] === 'Plan élite'): ?>
 
-                                <?php elseif($plan['nombre'] === 'Plan profesional'): ?>
-                                <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=3" class="btn-primary text-white">
-                                    <i class="bi bi-star-fill"></i> Mejorar a plan élite
-                                </a>
+                                    <span class="status-badge status-azul">Tienes el plan máximo</span>
+
+                                <?php elseif ($plan['nombre'] === 'Plan profesional'): ?>
+                                    <a href="<?= BASE_URL ?>/admin/confirmar-compra?id_plan=3" class="btn-primary text-white">
+                                        <i class="bi bi-star-fill"></i> Mejorar a plan élite
+                                    </a>
 
                                 <?php else: ?>
-                                <a href="<?= BASE_URL ?>/admin/precios" class="btn-primary text-white">
-                                    <i class="bi bi-star-fill"></i> Mejorar Plan
-                                </a>
+                                    <a href="<?= BASE_URL ?>/admin/precios" class="btn-primary text-white">
+                                        <i class="bi bi-star-fill"></i> Mejorar Plan
+                                    </a>
                                 <?php endif; ?>
                             </div>
 
@@ -184,48 +184,31 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                         <!-- Specialists Table -->
                         <div class="specialists-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="section-title mb-0">Estado de los especialistas</h3>
-                                <button class="filter-btn">
-                                    Filtros <i class="bi bi-sliders"></i>
-                                </button>
+                                <h3 class="section-title mb-0">Últimos Especialistas Registrados</h3>
                             </div>
                             <div class="table-header">
+                                <div>Foto</div>
                                 <div>Nombres</div>
                                 <div>Especialidad</div>
-                                <div>Edad</div>
-                                <div>Disponible</div>
                                 <div>Estado</div>
                             </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Justin Lipshutz</div>
+                            <?php if (!empty($ultimosEspecialistas)): ?>
+                                <?php foreach ($ultimosEspecialistas as $especialista): ?>
+                                    <div class="specialist-row">
+                                        <div class="specialist-info">
+                                            <div class="specialist-avatar"><img src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" class="imagen-especialista" alt="Foto del especialista"></div>
+
+                                        </div>
+                                        <div class="specialist-name"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></div>
+                                        <div><?= $especialista['nombre_especialidad'] ?></div>
+                                        <div><span class="status-badge status-espera"><?= $especialista['estado'] ?></span></div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="text-center p-3">
+                                    No hay especialistas registrados en este consultorio.
                                 </div>
-                                <div>Médico General</div>
-                                <div>22</div>
-                                <div class="progress-text">+100%</div>
-                                <div><span class="status-badge status-espera">En espera</span></div>
-                            </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Marcus Culhane</div>
-                                </div>
-                                <div>Cardiólogo</div>
-                                <div>24</div>
-                                <div class="progress-text">+95%</div>
-                                <div><span class="status-badge status-bloqueado">Bloqueado</span></div>
-                            </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Leo Stanton</div>
-                                </div>
-                                <div>Dermatólogo</div>
-                                <div>28</div>
-                                <div class="progress-text">+88%</div>
-                                <div><span class="status-badge status-active">Activo</span></div>
-                            </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Appointments Chart -->
@@ -234,7 +217,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <div class="donut-chart">
                                 <canvas id="donutChart"></canvas>
                                 <div class="donut-center">
-                                    <div class="donut-value">856</div>
+                                    <div class="donut-value"><?= $totalCitasProgramadas ?></div>
                                     <div class="donut-label">citas agendas</div>
                                 </div>
                             </div>
@@ -247,9 +230,6 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     <div class="legend-dot" style="background-color: #90CAF9;"></div>
                                     <span>Canceladas</span>
                                 </div>
-                            </div>
-                            <div class="text-center mt-3">
-                                <div style="font-weight: 600; font-size: 18px;">65%</div>
                             </div>
                         </div>
                     </div>
