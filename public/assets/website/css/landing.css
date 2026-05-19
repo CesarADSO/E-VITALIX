@@ -66,6 +66,29 @@ header nav {
     margin-right: 10px;
 }
 
+.cont-botones-inicio {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones-inicio .boton1, .boton2 {
+    border-radius: 25px;
+    padding: 10px 20px; 
+}
+
+.cont-botones-inicio .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-inicio .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
 .cont-botones {
     display: flex;
     gap: 20px;
@@ -84,6 +107,30 @@ header nav {
 }
 
 .cont-botones .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
+.cont-botones-hero {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones-hero .boton1,
+.boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones-hero .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-hero .boton2 {
     background: var(--gris-proyecto);
     color: var(--blanco-color);
     border: transparent;
@@ -520,4 +567,154 @@ footer .fila-footer {
 
 .cont-redes-sociales .redes {
     font-size: 30px;
+}
+
+.navbar-toggler {
+    background-color: #ffffff !important;
+}
+
+/* ESTILOS SMARTPHONE */
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #hero {
+        padding: 30px;
+        height: auto;
+    }
+
+    .info-hero {
+        font-size: 20px;
+    }
+
+    .imagen-inicio {
+        width: 100%;
+        height: auto;
+    }
+
+    .fila-botones-inicio {
+        margin-top: 40px;
+        gap: 20px;
+    }
+
+    .cont-botones-hero .boton1 {
+        width: 100%;
+    }
+
+    .cont-botones-hero .boton2 {
+        width: 100%;
+    }
+
+    #funcionalidades {
+        padding: 120px 0 0 0;
+    }
+
+    .cont-info-1 {
+        margin-top: 59px;
+        padding-left: 29px;
+    }
+
+    .cont-foto-1 {
+        margin-top: 0;
+    }
+
+    .cont-foto-1 img {
+        width: 90%;
+    }
+
+    .cont-info-1 h5 {
+        margin-bottom: 20px;
+    }
+
+    .cont-info-1 h2 {
+        margin-bottom: 25px;
+    }
+
+    .cont-foto-2 img {
+        width: 100%;
+    }
+
+    .cont-info-2 {
+        padding-right: 0;
+    }
+
+    .cont-info-2 h2 {
+        margin-bottom: 25px;
+    }
+
+    .cont-info-2 h5 {
+        margin-bottom: 25px;
+    }
+
+    .cont-fun-2 {
+        margin-bottom: 16px;
+    }
+
+    .cont-foto-3 img {
+        width: 100%;
+    }
+
+    .cont-info-3 h5 {
+        margin-bottom: 25px;
+    }
+
+    .cont-info-3 h2 {
+        margin-bottom: 25px;
+    }
+
+    #beneficios {
+        padding: 120px 0 0 0;
+    }
+
+    .titulo-carrusel {
+        text-align: center;
+    }
+
+    .parrafo-carrusel {
+        text-align: center;
+        padding: 0;
+        margin-bottom: 40px;
+    }
+
+    .cont-botones-carrusel {
+        justify-content: center;
+    }
+
+    #precios {
+        padding: 120px 0 0 0;
+    }
+
+    .fila-planes {
+        gap: 20px;
+    }
+
+    .cont-plan .plan {
+        padding: 35px;
+    }
+
+    .plan h3 {
+        font-weight: 900;
+    }
+
+    .plan h2 {
+        font-size: xx-large;
+    }
+
+    .cont-popular span {
+        padding-top: 4px;
+    }
+
+    .plan a {
+        font-size: larger;
+    }
+
+    #preguntas {
+        padding: 120px 0 70px 0;
+    }
+
+    .boton-acordion {
+        height: 45px;
+    }
+
+    #convencer {
+        padding: 0;
+    }
 }
