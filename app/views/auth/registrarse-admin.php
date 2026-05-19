@@ -38,7 +38,7 @@
             <div class="row fila-general">
                 <div class="form-section col-md-6">
                     <div class="logo-header">
-                        <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix" class="logo-registro"></a>
+                        <a href="<?= BASE_URL ?>/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix" class="logo-registro"></a>
                     </div>
 
                     <p class="subtitle-registro">

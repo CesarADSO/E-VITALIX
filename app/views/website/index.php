@@ -1,9 +1,9 @@
-<?php 
-    // IMPORTAMOS EL CONTROLADOR DE LOS PLANES
-    require_once BASE_PATH . '/app/controllers/planesController.php';
+<?php
+// IMPORTAMOS EL CONTROLADOR DE LOS PLANES
+require_once BASE_PATH . '/app/controllers/planesController.php';
 
-    // Creamos la variable donde vamos a traer los ids de los planes
-    $plan = traerId();
+// Creamos la variable donde vamos a traer los ids de los planes
+$plan = traerId();
 ?>
 
 
@@ -24,7 +24,7 @@
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="/E-VITALIX/"><img src="public/assets/website/img/LOGO NEGATIVO 1.svg"
+                <a class="navbar-brand" href="<?= BASE_URL ?>/"><img src="public/assets/website/img/LOGO NEGATIVO 1.svg"
                         alt="Logo de evitalix"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,11 +58,12 @@
                                     alt="Punto blanco">Preguntas</a>
                         </li>
                     </ul>
+                    <div class="cont-botones-inicio">
+                        <a href="login" class="btn btn-primary boton1">Iniciar sesión</a>
+                        <a href="registro" class="btn btn-outline-primary boton boton2">Soy paciente</a>
+                    </div>
                 </div>
-                <div class="cont-botones">
-                    <a href="login" class="btn btn-primary boton1">Iniciar sesión</a>
-                    <a href="registro" class="btn btn-outline-primary boton boton2">Soy paciente</a>
-                </div>
+
             </div>
         </nav>
         <div id="hero">
@@ -77,7 +78,7 @@
                         <h2 class="text-white info-hero">E-VITALIX centraliza el agendamiento de citas, las historias
                             clínicas y las órdenes médicas
                             en una plataforma en la nube, rápida y segura.</h2>
-                        <div class="cont-botones">
+                        <div class="cont-botones d-none d-md-block">
                             <a href="registroAdmin" class="btn btn-primary boton1">Empieza gratis <span
                                     class="rounded-circle d-inline-block align-middle circulo"><i
                                         class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
@@ -87,10 +88,25 @@
                         </div>
                     </div>
                     <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end">
-                        <img src="public/assets/website/img/dashboard hero prueba.svg" alt="Dashboard">
+                        <img class="imagen-inicio" src="public/assets/website/img/dashboard hero prueba.svg" alt="Dashboard">
+                    </div>
+
+                    <!-- BOTONES MOVIL -->
+                    <div class="row fila-botones-inicio">
+                        <div class="col-md-12 cont-botones-hero d-md-none">
+                            <a href="registroAdmin" class="btn btn-primary boton1">Empieza gratis <span
+                                    class="rounded-circle d-inline-block align-middle circulo"><i
+                                        class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
+                        </div>
+                        <div class="col-md-12 cont-botones-hero d-md-none">
+                            <a href="#precios" class="btn btn-outline-primary boton2">Ver planes <span
+                                    class="rounded-circle d-inline-block align-middle circulo"><i
+                                        class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </header>
     <main>

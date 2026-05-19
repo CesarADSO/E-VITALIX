@@ -66,6 +66,29 @@ header nav {
     margin-right: 10px;
 }
 
+.cont-botones-inicio {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones-inicio .boton1, .boton2 {
+    border-radius: 25px;
+    padding: 10px 20px; 
+}
+
+.cont-botones-inicio .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-inicio .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
 .cont-botones {
     display: flex;
     gap: 20px;
@@ -84,6 +107,30 @@ header nav {
 }
 
 .cont-botones .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
+.cont-botones-hero {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones-hero .boton1,
+.boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones-hero .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-hero .boton2 {
     background: var(--gris-proyecto);
     color: var(--blanco-color);
     border: transparent;
@@ -520,4 +567,39 @@ footer .fila-footer {
 
 .cont-redes-sociales .redes {
     font-size: 30px;
+}
+
+.navbar-toggler {
+    background-color: #ffffff !important;
+}
+
+/* ESTILOS SMARTPHONE */
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #hero {
+        padding: 30px;
+        height: auto;
+    }
+
+    .info-hero {
+        font-size: 20px;
+    }
+
+    .imagen-inicio {
+        width: 100%;
+        height: auto;
+    }
+
+    .fila-botones-inicio {
+        margin-top: 40px;
+        gap: 20px;
+    }
+
+    .cont-botones-hero .boton1 {
+        width: 100%;
+    }
+
+    .cont-botones-hero .boton2 {
+        width: 100%;
+    }
 }
