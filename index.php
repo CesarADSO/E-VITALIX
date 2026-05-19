@@ -22,28 +22,7 @@ if ($request === '') $request = '/';
 // Enrutamiento básico
 switch ($request) {
     case '/':
-        require BASE_PATH . '/app/views/website/index.html';
-        break;
-    case '/sobreNosotros':
-        require BASE_PATH . '/app/views/website/about_us.html';
-        break;
-    case '/servicios':
-        require BASE_PATH . '/app/views/website/servicios.html';
-        break;
-    case '/servicio':
-        require BASE_PATH . '/app/views/website/servicio.html';
-        break;
-    case '/doctores':
-        require BASE_PATH . '/app/views/website/doctores.php';
-        break;
-    case '/noticias':
-        require BASE_PATH . '/app/views/website/noticias.html';
-        break;
-    case '/noticia':
-        require BASE_PATH . '/app/views/website/noticia.html';
-        break;
-    case '/contacto':
-        require BASE_PATH . '/app/views/website/contacto.html';
+        require BASE_PATH . '/app/views/website/index.php';
         break;
 
 
@@ -360,7 +339,22 @@ switch ($request) {
 
     case '/admin/confirmar-compra':
         require BASE_PATH . '/app/controllers/planesController.php';
-        PrepararResumenPago($_GET['id_plan']);
+        // Si el id viene desde el login lo guardamos en la variable id_plan
+        if (isset($_SESSION['suscripcion_deseada']) && !empty($_SESSION['suscripcion_deseada'])) {
+            $id_plan = $_SESSION['suscripcion_deseada'];
+        } 
+        // Si viene desde url lo guardamos en la variable id_plan
+        elseif (isset($_GET['id_plan']) && !empty($_GET['id_plan'])){
+            $id_plan = $_GET['id_plan'];
+        }
+        else {
+            // Si no se encuentra un ID del plan, redirigimos al administrador al dashboard para evitar que compre un plan que no existe o que no seleccionó
+            header('Location:' . BASE_URL . '/administrador/dashboard');
+            exit();
+        }
+
+        // Si tenemos el id enviarmos al administrador a hacer la compra
+        PrepararResumenPago($id_plan);
         break;
 
     case '/admin/pago-exitoso':
@@ -733,7 +727,7 @@ switch ($request) {
     case '/paciente/cerrar-ticket':
         require BASE_PATH . '/app/controllers/ticketController.php';
         break;
-        
+
     case '/paciente/historial-clinico':
         require BASE_PATH . '/app/views/dashboard/paciente/historial_clinico.php';
         break;
@@ -746,7 +740,7 @@ switch ($request) {
     case '/paciente/detalle-cita':
         require BASE_PATH . '/app/views/dashboard/paciente/consultar-cita.php';
         break;
-    
+
     case '/asistente/crear-ticket':
         require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
         break;

@@ -1,3 +1,12 @@
+<?php 
+    // Validamos si hay un plan seleccionado en la URL, y lo guardamos en la sesión
+    if (isset($_GET['plan'])) {
+        $_SESSION['suscripcion_deseada'] = $_GET['plan'];
+    }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -132,9 +141,19 @@
                     </form>
 
                     <div class="login-link-container">
+                        <!-- Este condicional es para validar si el usuario trae un id del plan deseado -->
+                        <?php 
+                            if(isset($_SESSION['suscripcion_deseada'])): 
+                        ?>
+                        <a href="login?plan=<?= $_SESSION['suscripcion_deseada'] ?>" class="btn-login-link">
+                            ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
+                        </a>
+
+                        <?php else:?>
                         <a href="login" class="btn-login-link">
                             ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
                         </a>
+                        <?php endif;?>
                     </div>
                 </div>
 

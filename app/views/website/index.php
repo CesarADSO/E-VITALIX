@@ -1,3 +1,12 @@
+<?php 
+    // IMPORTAMOS EL CONTROLADOR DE LOS PLANES
+    require_once BASE_PATH . '/app/controllers/planesController.php';
+
+    // Creamos la variable donde vamos a traer los ids de los planes
+    $plan = traerId();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -220,7 +229,7 @@
                             <h3>Plan semilla</h3>
                             <h2>Gratis</h2>
                             <p class="p-descriptivo-plan">Perfecto para comenzar y probar la plataforma</p>
-                            <a href="#" class="btn btn-primary boton-plan">Crear cuenta gratis</a>
+                            <a href="registroAdmin" class="btn btn-primary boton-plan">Crear cuenta gratis</a>
                             <p><i class="bi bi-check2 chulo"></i>Hasta 30 citas mensuales</p>
                         </div>
                     </div>
@@ -232,7 +241,7 @@
                             </div>
                             <h2>$50,000/ mensual</h2>
                             <p class="p-descriptivo-plan">Ideal para consultorios en crecimiento</p>
-                            <a href="#" class="btn btn-primary boton-plan">Comprar plan pro</a>
+                            <a href="registroAdmin?plan=<?= $plan[1]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan pro</a>
                             <p><i class="bi bi-check2 chulo"></i>Hasta 300 citas mensuales</p>
                         </div>
                     </div>
@@ -241,7 +250,7 @@
                             <h3>Plan premium</h3>
                             <h2>$150,000/ mensual</h2>
                             <p class="p-descriptivo-plan">Para grandes redes de consultorios médicos</p>
-                            <a href="#" class="btn btn-primary boton-plan">Comprar plan premium</a>
+                            <a href="registroAdmin?plan=<?= $plan[2]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan premium</a>
                             <p><i class="bi bi-check2 chulo"></i>Hasta 3,000 citas mensuales</p>
                         </div>
                     </div>

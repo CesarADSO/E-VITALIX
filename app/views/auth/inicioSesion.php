@@ -2,6 +2,10 @@
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 header("Expires: 0");
+
+if (isset($_GET['plan'])) {
+    $plan_id = $_GET['plan'] ?? null;
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +46,10 @@ header("Expires: 0");
                 <p class="login-pharagraf">Ingrese sus
                     credenciales para Iniciar sesión</p>
                 <form id="loginForm" action="iniciar-sesion" method="POST">
+                    <?php if(!empty($plan_id)):?>
+                        <input type="hidden" name="plan_pendiente" value="<?= $plan_id ?>">
+                    <?php endif;?>
+
                     <div>
                         <input type="email" name="email" class="campos-formulario" placeholder="Email" id="email" required>
                     </div>
