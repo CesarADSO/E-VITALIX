@@ -1,4 +1,7 @@
-<?php $hoy = date("Y"); ?>
+<?php $hoy = date("Y");
+date_default_timezone_set('America/Bogota');
+?>
+
 
 <style>
     /* 1. IMPORTAR LA FUENTE NUNITO */
