@@ -496,7 +496,7 @@ switch ($request) {
 
     // PACIENTE INTERFACES
     case '/paciente/dashboard':
-        require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
+        require BASE_PATH . '/app/controllers/pacienteDashboardController.php';
         break;
 
     case '/paciente/completar-perfil':

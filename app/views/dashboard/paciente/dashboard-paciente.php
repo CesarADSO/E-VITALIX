@@ -34,28 +34,28 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                     <!-- Stats Cards -->
                     <div class="stats-cards">
                         <div class="stat-card">
-                            <div class="stat-label">Citas Agendas</div>
-                            <div class="stat-value">856</div>
-                            <div class="stat-subtitle">por semana</div>
+                            <div class="stat-label">Total de citas</div>
+                            <div class="stat-value"><?= $totalcitasPaciente ?></div>
+                            <div class="stat-subtitle">Agendadas por ti</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-label">Citas exitosas</div>
-                            <div class="stat-value">200</div>
-                            <div class="stat-subtitle">Por día</div>
+                            <div class="stat-value"><?= $totalCitasCompletadas ?></div>
+                            <div class="stat-subtitle">En total</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Especialistas</div>
-                            <div class="stat-value">77</div>
-                            <div class="stat-subtitle">Asistentes</div>
+                            <div class="stat-label">citas</div>
+                            <div class="stat-value"><?= $totalCitasHoy ?></div>
+                            <div class="stat-subtitle">Para hoy</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-label">Nuevo pacientes registrados<br>este mes</div>
-                            <div class="stat-value">20</div>
-                            <div class="stat-subtitle">En este mes</div>
+                            <div class="stat-label">Citas canceladas o rechazadas</div>
+                            <div class="stat-value"><?= $totalCitasCanceladas ?></div>
+                            <div class="stat-subtitle">en total</div>
                         </div>
                     </div>
 
-                    <!-- Chart -->
+                    <!-- Chart
                     <div class="chart-card">
                         <div class="chart-header">
                             <h3 class="chart-title">Pacientes nuevos vs recurrentes por mes</h3>
@@ -78,55 +78,58 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                         <div class="chart-container">
                             <canvas id="monthlyChart"></canvas>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Bottom Section -->
                     <div class="bottom-section">
                         <!-- Specialists Table -->
                         <div class="specialists-card">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="section-title mb-0">Estado de los especialistas</h3>
-                                <button class="filter-btn">
-                                    Filtros <i class="bi bi-sliders"></i>
-                                </button>
+                                <h3 class="section-title mb-0">Ultimas 5 citas</h3>
                             </div>
                             <div class="table-header">
-                                <div>Nombres</div>
-                                <div>Especialidad</div>
-                                <div>Edad</div>
-                                <div>Disponible</div>
+                                <div>Especialista</div>
+                                <div>Fecha</div>
+                                <div>Hora</div>
                                 <div>Estado</div>
+                                <div>Acciones</div>
                             </div>
+                            <?php if (!empty($mostrarUltimasCitas)): ?>
+                                <?php foreach ($mostrarUltimasCitas as $cita): 
+                                    $colorEstado = [
+                                    'PENDIENTE' => 'warning',
+                                    'CONFIRMADA' => 'success',
+                                    'CANCELADA' => 'danger',
+                                    'RECHAZADA' => 'secondary'
+                                ][$cita['estado_cita']] ?? 'primary';
+                                ?>
                             <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Justin Lipshutz</div>
+                                    <div class="specialist-name"><?= $cita['nombre_especialista'] ?> <?= $cita['apellido_especialista'] ?></div>
+                                <div><?= $cita['fecha'] ?></div>
+                                <div><?= date('h:i A', strtotime($cita['hora_inicio'])) ?></div>
+                                <div class="badge bg-<?= $colorEstado ?>"><?= $cita['estado_cita'] ?></div>
+                                <div>
+                                    <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success" title="Reprogramar cita médica">
+                                                    <i class="fa-solid fa-pen-to-square text-white"></i>
+                                                </a>
+                                                <a href="<?= BASE_URL ?>/paciente/cancelar-cita?id_cita=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger " title="Cancelar cita médica">
+                                                    <i class="fa-solid fa-x text-white"></i>
+                                                </a>
+
+                                                <a href="<?= BASE_URL ?>/paciente/detalle-cita?id_cita=<?= $cita['id_cita'] ?>" class="btn btn-sm btn-outline-primary btn-detalle-paciente mt-2"><i class="bi bi-eye me-2"></i></a>
+                                            <?php else: ?>
+
+                                                <a href="<?= BASE_URL ?>/paciente/detalle-cita?id_cita=<?= $cita['id_cita'] ?>" class="btn btn-sm btn-outline-primary btn-detalle-paciente"><i class="bi bi-eye me-2"></i></a>
+                                            <?php endif; ?>
                                 </div>
-                                <div>Médico General</div>
-                                <div>22</div>
-                                <div class="progress-text">+100%</div>
-                                <div><span class="status-badge status-espera">En espera</span></div>
                             </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Marcus Culhane</div>
+                            <?php endforeach;?>
+                            <?php else: ?>
+                                <div class="text-center p-4" style="color: var(--gris-proyecto);">
+                                    No tienes citas registradas.
                                 </div>
-                                <div>Cardiólogo</div>
-                                <div>24</div>
-                                <div class="progress-text">+95%</div>
-                                <div><span class="status-badge status-bloqueado">Bloqueado</span></div>
-                            </div>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-avatar"></div>
-                                    <div class="specialist-name">Leo Stanton</div>
-                                </div>
-                                <div>Dermatólogo</div>
-                                <div>28</div>
-                                <div class="progress-text">+88%</div>
-                                <div><span class="status-badge status-active">Activo</span></div>
-                            </div>
+                            <?php endif; ?>
                         </div>
 
                         <!-- Appointments Chart -->
@@ -135,8 +138,8 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                             <div class="donut-chart">
                                 <canvas id="donutChart"></canvas>
                                 <div class="donut-center">
-                                    <div class="donut-value">856</div>
-                                    <div class="donut-label">citas agendas</div>
+                                    <div class="donut-value"><?= $totalcitasPaciente ?></div>
+                                    <div class="donut-label">citas agendadas</div>
                                 </div>
                             </div>
                             <div class="appointments-legend">
@@ -148,9 +151,6 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                                     <div class="legend-dot" style="background-color: #90CAF9;"></div>
                                     <span>Canceladas</span>
                                 </div>
-                            </div>
-                            <div class="text-center mt-3">
-                                <div style="font-weight: 600; font-size: 18px;">65%</div>
                             </div>
                         </div>
                     </div>
