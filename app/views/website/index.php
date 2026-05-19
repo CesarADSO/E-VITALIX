@@ -171,19 +171,33 @@ $plan = traerId();
             <div class="container">
                 <h2 class="text-center text-white titulo-beneficios">Beneficios para el consultorio</h2>
                 <div class="row fila-beneficios gx-3">
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none d-lg-block">
                         <div class="cont-foto cont-1">
                             <img src="public/assets/website/img/beneficios 1.svg" alt="beneficios 1">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 d-none d-lg-block">
                         <div class="cont-foto cont-2">
                             <img src="public/assets/website/img/beneficios 2.svg" alt="beneficios 2">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 d-none d-lg-block">
                         <div class="cont-foto cont-3">
                             <img src="public/assets/website/img/beneficios 3.svg" alt="beneficios 3">
+                        </div>
+                    </div>
+
+                    <div id="carouselExampleSlidesOnly" class="carousel slide d-lg-none" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="public/assets/website/img/beneficios 1.svg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="public/assets/website/img/beneficios 1.svg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="public/assets/website/img/beneficios 1.svg" class="d-block w-100" alt="...">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -239,7 +253,7 @@ $plan = traerId();
                 <h2 class="text-white text-center titulo-precios">Planes y precios</h2>
                 <p class="text-white text-center parrafo-planes">Planes simples y transparentes diseñados para el
                     crecimiento de tu consultorio.</p>
-                <div class="row">
+                <div class="row fila-planes">
                     <div class="col-md-4 cont-plan">
                         <div class="bg-white plan">
                             <h3>Plan semilla</h3>

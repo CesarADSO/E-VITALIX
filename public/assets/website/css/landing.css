@@ -602,4 +602,111 @@ footer .fila-footer {
     .cont-botones-hero .boton2 {
         width: 100%;
     }
+
+    #funcionalidades {
+        padding: 120px 0 0 0;
+    }
+
+    .cont-info-1 {
+        margin-top: 59px;
+        padding-left: 29px;
+    }
+
+    .cont-foto-1 {
+        margin-top: 0;
+    }
+
+    .cont-foto-1 img {
+        width: 90%;
+    }
+
+    .cont-info-1 h5 {
+        margin-bottom: 20px;
+    }
+
+    .cont-info-1 h2 {
+        margin-bottom: 25px;
+    }
+
+    .cont-foto-2 img {
+        width: 100%;
+    }
+
+    .cont-info-2 {
+        padding-right: 0;
+    }
+
+    .cont-info-2 h2 {
+        margin-bottom: 25px;
+    }
+
+    .cont-info-2 h5 {
+        margin-bottom: 25px;
+    }
+
+    .cont-fun-2 {
+        margin-bottom: 16px;
+    }
+
+    .cont-foto-3 img {
+        width: 100%;
+    }
+
+    .cont-info-3 h5 {
+        margin-bottom: 25px;
+    }
+
+    .cont-info-3 h2 {
+        margin-bottom: 25px;
+    }
+
+    #beneficios {
+        padding: 120px 0 0 0;
+    }
+
+    .titulo-carrusel {
+        text-align: center;
+    }
+
+    .parrafo-carrusel {
+        text-align: center;
+        padding: 0;
+        margin-bottom: 40px;
+    }
+
+    .cont-botones-carrusel {
+        justify-content: center;
+    }
+
+    #precios {
+        padding: 120px 0 0 0;
+    }
+
+    .fila-planes {
+        gap: 20px;
+    }
+
+    .cont-plan .plan {
+        padding: 35px;
+    }
+
+    .plan h3 {
+        font-weight: 900;
+    }
+
+    .plan h2 {
+        font-size: xx-large;
+    }
+
+    .cont-popular span {
+        padding-top: 4px;
+    }
+
+    .plan a {
+        font-size: larger;
+    }
+
+    #preguntas {
+        padding: 120px 0 0 0;
+    }
 }
