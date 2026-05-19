@@ -10,7 +10,7 @@ $todas_las_citas = mostrarCitas();
 
 
 // 2. Configurar la paginación
-$registros_por_pagina = 10; // Mostrar 10 citas por página
+$registros_por_pagina = 9; // Mostrar 10 citas por página
 $total_registros = is_array($todas_las_citas) ? count($todas_las_citas) : 0;
 $total_paginas = ceil($total_registros / $registros_por_pagina);
 
