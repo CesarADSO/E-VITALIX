@@ -177,7 +177,7 @@ switch ($request) {
 
     // ADMIN INTERFACES
     case '/administrador/dashboard':
-        require BASE_PATH . '/app/views/dashboard/administrador/dashboard-administrador.php';
+        require BASE_PATH . '/app/controllers/adminConsultorioDashboardController.php';
         break;
 
     case '/admin/precios':
@@ -371,7 +371,7 @@ switch ($request) {
 
     // ESPECIALISTA INTERFACES
     case '/especialista/dashboard':
-        require BASE_PATH . '/app/views/dashboard/especialista/dashboard_especialista.php';
+        require BASE_PATH . '/app/controllers/especialistaDashboardController.php';
         break;
 
     case '/especialista/disponibilidad':
@@ -496,7 +496,7 @@ switch ($request) {
 
     // PACIENTE INTERFACES
     case '/paciente/dashboard':
-        require BASE_PATH . '/app/views/dashboard/paciente/dashboard_paciente.php';
+        require BASE_PATH . '/app/controllers/pacienteDashboardController.php';
         break;
 
     case '/paciente/completar-perfil':

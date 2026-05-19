@@ -27,7 +27,7 @@
 
                     datasets: [{
                         // datasets = datos que se van a mostrar (pueden ser varios)
-                        label: 'Nuevos',
+                        label: 'Nuevas sedes',
                         // Etiqueta para la leyenda
 
                         data: [45, 60, 75, 55, 40, 50, 65, 72, 60, 50, 45, 70],
@@ -42,7 +42,7 @@
                         barThickness: 20
                         // Grosor de las barras
                     }, {
-                        label: 'Recurrentes',
+                        label: 'Nuevos usuarios',
                         // Segunda serie de datos
 
                         data: [55, 65, 70, 60, 50, 58, 60, 75, 63, 48, 42, 72],
@@ -106,12 +106,12 @@
                 // Tipo gráfico: dona (anillo)
 
                 data: {
-                    labels: ['Exitosas', 'Canceladas'],
+                    labels: ['Sedes activas', 'Sedes inactivas'],
                     // Las dos categorías a mostrar
 
                     datasets: [{
                         data: [65, 35],
-                        // 65% Exitosas, 35% Canceladas
+                        // 65% Sedes activas, 35% Sedes inactivas
 
                         backgroundColor: ['#007bff', '#90CAF9'],
                         // Colores: azul fuerte y azul claro
