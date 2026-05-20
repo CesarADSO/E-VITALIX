@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="public/assets/auth/css/registrarse.css">
+    <link rel="icon" href="public/assets/auth/img/FAVICON.png">
     <style>
         /* Solo agrego esto para que el JS pueda ocultar/mostrar los pasos */
         .wizard-form-step {
