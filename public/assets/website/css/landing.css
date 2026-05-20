@@ -71,9 +71,10 @@ header nav {
     gap: 20px;
 }
 
-.cont-botones-inicio .boton1, .boton2 {
+.cont-botones-inicio .boton1,
+.boton2 {
     border-radius: 25px;
-    padding: 10px 20px; 
+    padding: 10px 20px;
 }
 
 .cont-botones-inicio .boton1 {
@@ -365,13 +366,15 @@ p {
 
 /* Efecto hover opcional para que se sienta interactivo */
 .boton-carrusel:hover {
-    background-color: #dbe4f4; 
+    background-color: #dbe4f4;
 }
 
 /* El estilo de la flecha */
 .boton-carrusel i {
-    font-size: 1.2rem; /* Tamaño de la flecha */
-    color: var(--gris-proyecto); /* El color oscuro/negro de la flecha en tu diseño */
+    font-size: 1.2rem;
+    /* Tamaño de la flecha */
+    color: var(--gris-proyecto);
+    /* El color oscuro/negro de la flecha en tu diseño */
     font-weight: bold;
 }
 
@@ -576,18 +579,52 @@ footer .fila-footer {
 /* ESTILOS SMARTPHONE */
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
+
+    .offcanvas {
+        background-color: var(--color-secundario);
+        width: 75% !important;
+    }
+
+    .offcanvas-body .cont-botones-inicio {
+        display: flex;
+        gap: 16px;
+    }
+
+    .offcanvas-body .boton1,
+    .offcanvas-body .boton2 {
+        text-align: center;
+    }
+
+
     #hero {
         padding: 30px;
         height: auto;
+    }
+
+    #hero .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #hero .fila-hero {
+        margin: 0;
     }
 
     .info-hero {
         font-size: 20px;
     }
 
+    .cont-foto {
+        width: 100%;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
     .imagen-inicio {
         width: 100%;
         height: auto;
+        border-radius: 16px 16px 0 0;
+        object-fit: cover;
     }
 
     .fila-botones-inicio {
@@ -597,10 +634,20 @@ footer .fila-footer {
 
     .cont-botones-hero .boton1 {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .cont-botones-hero .boton2 {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cont-botones-hero .circulo {
+        margin-left: auto;
     }
 
     #funcionalidades {
@@ -714,7 +761,100 @@ footer .fila-footer {
         height: 45px;
     }
 
+    /* ===== SECCIÓN CONVENCER ===== */
     #convencer {
-        padding: 0;
+        padding: 40px 24px;
+        min-height: auto;
+        background-position: center;
+    }
+
+    .cont-info .titulo-convencer {
+        font-size: 64px;
+        margin-bottom: 12px;
+    }
+
+    .cont-info h4 {
+        font-size: 14px;
+        margin-bottom: 32px;
+    }
+
+    .cont-descriptivo {
+        padding-top: 0;
+    }
+
+    .cont-descriptivo h3 {
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+
+    .cont-botones-2 {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .cont-botones-2 .boton1,
+    .cont-botones-2 .boton2 {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+        padding: 40px 24px;
+    }
+
+    footer .fila-footer {
+        margin-top: 48px;
+    }
+
+    .cont-logo-footer {
+        margin-bottom: 24px;
+    }
+
+    .cont-logo-footer p {
+        font-size: 14px;
+        margin-top: 12px;
+    }
+
+    .cont-info-footer {
+        margin-top: 0;
+    }
+
+    .cont-redes-sociales {
+        justify-content: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .cont-redes-sociales .redes {
+        font-size: 24px;
+    }
+
+    footer nav {
+        margin-bottom: 0;
+    }
+
+    footer .cont-nav .navbar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    footer .cont-nav .navbar-nav .nav-link {
+        font-size: 13px;
+        padding: 4px 0;
+    }
+
+    footer .cont-nav .item {
+        margin-right: 12px;
+    }
+
+    .cont-info-footer p {
+        text-align: left !important;
+        font-size: 13px;
     }
 }
