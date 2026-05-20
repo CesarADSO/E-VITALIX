@@ -24,12 +24,6 @@
     --texto-auxiliar: 14px;
 }
 
-html,
-body {
-    overflow-x: hidden;
-    width: 100%;
-}
-
 .btn-azul {
     border-radius: 25%;
     width: auto;
@@ -585,21 +579,6 @@ footer .fila-footer {
 /* ESTILOS SMARTPHONE */
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-
-    /* ===== FIX SCROLL HORIZONTAL ===== */
-    html,
-    body {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-        position: relative;
-    }
-
-    /* Fix del padding que Bootstrap inyecta al abrir el offcanvas */
-    body.offcanvas-backdrop,
-    body[style*="padding-right"] {
-        padding-right: 0 !important;
-    }
 
     .offcanvas {
         background-color: var(--color-secundario);

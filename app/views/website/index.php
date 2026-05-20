@@ -75,7 +75,7 @@ $plan = traerId();
                 </div>
 
                 <!-- Offcanvas solo para móvil -->
-                <div class="offcanvas offcanvas-end d-lg-none"
+                <div class="offcanvas offcanvas-start d-lg-none"
                     tabindex="-1"
                     id="menuMobile"
                     aria-labelledby="menuMobileLabel">
