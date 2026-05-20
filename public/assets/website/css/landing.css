@@ -24,6 +24,12 @@
     --texto-auxiliar: 14px;
 }
 
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 .btn-azul {
     border-radius: 25%;
     width: auto;
@@ -583,8 +589,10 @@ footer .fila-footer {
     /* ===== FIX SCROLL HORIZONTAL ===== */
     html,
     body {
-        overflow-x: hidden;
-        max-width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        position: relative;
     }
 
     /* Fix del padding que Bootstrap inyecta al abrir el offcanvas */
