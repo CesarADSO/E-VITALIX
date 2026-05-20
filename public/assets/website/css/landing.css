@@ -580,6 +580,10 @@ footer .fila-footer {
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
 
+    body {
+        overflow-x: hidden;
+    }
+
     .offcanvas {
         background-color: var(--color-secundario);
         width: 75% !important;
