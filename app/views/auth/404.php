@@ -17,7 +17,7 @@
     <div class="top-header" data-aos="fade-down" data-aos-duration="800">
         <div class="container">
             <div class="contact-info">
-                <div class="contact-item" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">
+                <div class="contact-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
                     <span class="contact-icon">📞</span>
                     <strong>EMERGENCIA</strong>
                     <span>+57 3214472736</span>
@@ -27,7 +27,7 @@
                     <strong>HORARIO DE ATENCIÓN</strong>
                     <span>08:00 - 20:00 Todos los días</span>
                 </div>
-                <div class="contact-item" data-aos="fade-left" data-aos-duration="600" data-aos-delay="400">
+                <div class="contact-item" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
                     <span class="contact-icon">📍</span>
                     <strong>UBICACIÓN</strong>
                     <span>SENA VILLETA</span>
@@ -71,10 +71,10 @@
                 </ul>
 
                 <div class="nav-buttons">
-                    <a href="login"  class="btn-entrar" data-aos="fade-left" data-aos-duration="600" data-aos-delay="800">
+                    <a href="login"  class="btn-entrar" data-aos="fade-up" data-aos-duration="600" data-aos-delay="800">
                         Entrar
                     </a>
-                    <a href="registro"  class="btn-registrarse" data-aos="fade-left" data-aos-duration="600" data-aos-delay="900">
+                    <a href="registro"  class="btn-registrarse" data-aos="fade-up" data-aos-duration="600" data-aos-delay="900">
                         Registrarse
                     </a>
                 </div>
