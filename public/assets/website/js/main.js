@@ -19,21 +19,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-/* ===== FIX OFFCANVAS — elimina el padding-right que Bootstrap inyecta ===== */
-const menuMobile = document.getElementById('menuMobile');
-
-if (menuMobile) {
-    menuMobile.addEventListener('show.bs.offcanvas', () => {
-        document.body.style.paddingRight = '0px';
-        document.body.style.overflow = 'hidden';
-    });
-
-    menuMobile.addEventListener('hidden.bs.offcanvas', () => {
-        document.body.style.paddingRight = '';
-        document.body.style.overflow = '';
-    });
-}
-
 /* ===== CONTADOR ANIMADO — el 100% en #convencer ===== */
 // Selecciona el elemento HTML que contiene el porcentaje (ej: <h2 class="titulo-convencer">0%</h2>)
 const contadorEl = document.querySelector('.titulo-convencer');
