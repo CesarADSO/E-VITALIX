@@ -485,98 +485,39 @@ $plan = traerId();
     <footer>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-
-                <!-- Botón hamburguesa apuntando al offcanvas -->
-                <button class="navbar-toggler d-lg-none" type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#menuMobile"
-                    aria-controls="menuMobile"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <!-- Menú desktop (se oculta en móvil) -->
-                <div class="collapse navbar-collapse cont-nav d-none d-lg-flex" id="navbarNav">
+                <div class="collapse navbar-collapse cont-nav" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item item">
-                            <a class="nav-link active text-white enlace" href="#">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Inicio
-                            </a>
+                            <a class="nav-link active text-white enlace" aria-current="page" href="#"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Inicio</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#funcionalidades">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Funcionalidades
-                            </a>
+                            <a class="nav-link text-white enlace" href="#funcionalidades"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Funcionalidades</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#beneficios">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Beneficios
-                            </a>
+                            <a class="nav-link text-white enlace" href="#beneficios"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Beneficios</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#precios">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Planes
-                            </a>
+                            <a class="nav-link text-white enlace" href="#precios"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Planes</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#preguntas">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Preguntas
-                            </a>
+                            <a class="nav-link text-white enlace" href="#preguntas"><img
+                                    src="public/assets/website/img/puntito blanco del nav.svg"
+                                    alt="Punto blanco">Preguntas</a>
                         </li>
                     </ul>
                 </div>
-
-                <!-- Offcanvas solo para móvil -->
-                <div class="offcanvas offcanvas-end d-lg-none"
-                    tabindex="-1"
-                    id="menuMobile"
-                    aria-labelledby="menuMobileLabel">
-
-                    <div class="offcanvas-header">
-                        <img src="public/assets/website/img/LOGO NEGATIVO 1.svg" alt="Logo evitalix" height="30">
-                        <button type="button"
-                            class="btn-close btn-close-white"
-                            data-bs-dismiss="offcanvas"
-                            aria-label="Cerrar">
-                        </button>
-                    </div>
-
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav mb-4">
-                            <li class="nav-item item">
-                                <a class="nav-link text-white enlace" href="#" data-bs-dismiss="offcanvas">
-                                    <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Inicio
-                                </a>
-                            </li>
-                            <li class="nav-item item">
-                                <a class="nav-link text-white enlace" href="#funcionalidades" data-bs-dismiss="offcanvas">
-                                    <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Funcionalidades
-                                </a>
-                            </li>
-                            <li class="nav-item item">
-                                <a class="nav-link text-white enlace" href="#beneficios" data-bs-dismiss="offcanvas">
-                                    <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Beneficios
-                                </a>
-                            </li>
-                            <li class="nav-item item">
-                                <a class="nav-link text-white enlace" href="#precios" data-bs-dismiss="offcanvas">
-                                    <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Planes
-                                </a>
-                            </li>
-                            <li class="nav-item item">
-                                <a class="nav-link text-white enlace" href="#preguntas" data-bs-dismiss="offcanvas">
-                                    <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Preguntas
-                                </a>
-                            </li>
-                        </ul>
-
-                        <div class="cont-botones-inicio flex-column">
-                            <a href="login" class="btn btn-primary boton1 w-100">Iniciar sesión</a>
-                            <a href="registro" class="btn btn-outline-primary boton boton2 w-100">Soy paciente</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </nav>
         <div class="container">
