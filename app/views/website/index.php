@@ -130,7 +130,7 @@ $plan = traerId();
         <div id="hero">
             <div class="container-fluid pe-0">
                 <div class="row fila-hero">
-                    <div class="col-md-6 cont-info" data-aos="fade-right" data-aos-duration="900">
+                    <div class="col-md-6 cont-info" data-aos="fade-up" data-aos-duration="900">
                         <h3 class="subtitulo-pequeño text-white"><img src="public/assets/website/img/estetoscopio.svg"
                                 alt="">Plataforma de gestión médica
                             integral</h3>
@@ -148,7 +148,7 @@ $plan = traerId();
                                         class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
                         </div>
                     </div>
-                    <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
+                    <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
                         <img class="imagen-inicio" src="public/assets/website/img/dashboard hero prueba.svg" alt="Dashboard">
                     </div>
 
@@ -267,8 +267,8 @@ $plan = traerId();
                         <div class="col-md-8">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <h3 class="text-white titulo-carrusel" data-aos="fade-right">Cero papel máxima eficiencia</h3>
-                                    <p class="text-white parrafo-carrusel" data-aos="fade-right" data-aos-delay="150">Transforma montañas de carpetas en un archivo
+                                    <h3 class="text-white titulo-carrusel" data-aos="fade-up">Cero papel máxima eficiencia</h3>
+                                    <p class="text-white parrafo-carrusel" data-aos="fade-up" data-aos-delay="150">Transforma montañas de carpetas en un archivo
                                         digital organizado. Encuentra la
                                         historia
                                         clínica de cualquier paciente en segundos, sin ocupar espacio físico en tu
@@ -460,11 +460,11 @@ $plan = traerId();
         <section id="convencer">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 cont-info" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="col-md-6 cont-info" data-aos="fade-up" data-aos-duration="1000">
                         <h2 class="titulo-convencer text-white">100%</h2>
                         <h4 class="text-white">De tu consultorio gestionado de forma digital y segura en la nube.</h4>
                     </div>
-                    <div class="col-md-6 cont-descriptivo" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="col-md-6 cont-descriptivo" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <h3 class="text-white">E-VITALIX transformó el caos de las agendas y el papeleo en un flujo de
                             trabajo organizado.
                             Dejamos de perder tiempo buscando historias clínicas y empezamos a enfocarnos en lo que
