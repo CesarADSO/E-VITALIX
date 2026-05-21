@@ -49,7 +49,7 @@ $citas = is_array($todas_las_citas) ? array_slice($todas_las_citas, $indice_inic
                         <div class="col-12 text-center py-5">
                             <i class="bi bi-calendar-x display-1 text-muted"></i>
                             <p class="mt-3">Aún no tienes citas agendadas.</p>
-                            <a href="<?= BASE_URL ?>/paciente/agendarCita" class="btn btn-primary">Agendar mi primera cita</a>
+                            <a href="<?= BASE_URL ?>/paciente/modulo-citas" class="btn btn-primary">Agendar mi primera cita</a>
                         </div>
                     <?php else: ?>
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

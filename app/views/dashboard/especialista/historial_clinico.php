@@ -57,10 +57,6 @@ include_once __DIR__ . '/../../../views/layouts/header_especialista.php';
                                                     <i class="bi bi-card-text text-primary"></i>
                                                     <strong><?= $paciente['tipo_documento'] ?>:</strong> <?= $paciente['numero_documento'] ?>
                                                 </p>
-                                                <p class="patient-info mb-1">
-                                                    <i class="bi bi-calendar text-primary"></i>
-                                                    <strong>Edad:</strong> <?= $paciente['edad'] ?> años
-                                                </p>
                                             </div>
 
                                             <div class="col-md-6 d-inline-block text-start">

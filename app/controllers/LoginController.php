@@ -83,11 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     switch ($resultado['id_rol']) {
         case 1:
-            if ($resultado['perfil_completo'] === 0) {
-                $redirecUrl = '/E-VITALIX/paciente/completar-perfil';
-            } else {
-                $redirecUrl = '/E-VITALIX/paciente/dashboard';
-            }
+            $redirecUrl = '/E-VITALIX/paciente/dashboard';
             $mensaje = 'Bienvenido Paciente';
             break;
 
@@ -95,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($plan_id)) {
                 // Si el plan_id existe, significa que el usuario viene del proceso de compra de un plan, por lo tanto, debemos crear una "nota" en la sesión para que el Dashboard sepa que debe mostrar la alerta de "Plan pendiente de contratación"
                 $_SESSION['suscripcion_deseada'] = $plan_id;
-            
+
 
                 // Redireccionamos al dashboard del administrador con el id del listo para pagar
                 $redirecUrl = BASE_URL . '/admin/confirmar-compra?id_plan=' . $_SESSION['suscripcion_deseada'];

@@ -26,7 +26,7 @@ $plan = traerId();
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="<?= BASE_URL ?>//">
+                <a class="navbar-brand" href="<?= BASE_URL ?>/">
                     <img src="public/assets/website/img/LOGO NEGATIVO 1.svg" alt="Logo de evitalix">
                 </a>
 
@@ -470,7 +470,7 @@ $plan = traerId();
                             Dejamos de perder tiempo buscando historias clínicas y empezamos a enfocarnos en lo que
                             importa: los pacientes.</h3>
                         <div class="cont-botones-2">
-                            <a href="#" class="btn btn-primary boton1">Empieza gratis <span
+                            <a href="registroAdmin" class="btn btn-primary boton1">Empieza gratis <span
                                     class="rounded-circle d-inline-block align-middle circulo"><i
                                         class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
                             <a href="#precios" class="btn btn-outline-primary boton2">Ver planes <span

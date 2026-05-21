@@ -1,5 +1,13 @@
 <?php
 require_once BASE_PATH . '/app/controllers/historialesController.php';
+require_once BASE_PATH . '/app/helpers/alert_helper.php';
+
+$perfil_completo = $_SESSION['user']['perfil_completo'];
+
+if ($perfil_completo === 0) {
+    mostrarSweetAlert('warning', 'Perfil Incompleto', 'Por favor completa tu perfil para acceder a esta sección', BASE_URL . '/paciente/completar-perfil');
+    exit();
+}
 
 $id_paciente = $_SESSION['user']['id_paciente'];
 
@@ -56,10 +64,6 @@ include_once __DIR__ . '/../../../views/layouts/header_paciente.php';
                                                 <p class="patient-info mb-1">
                                                     <i class="bi bi-card-text text-primary"></i>
                                                     <strong><?= $paciente['tipo_documento'] ?>:</strong> <?= $paciente['numero_documento'] ?>
-                                                </p>
-                                                <p class="patient-info mb-1">
-                                                    <i class="bi bi-calendar text-primary"></i>
-                                                    <strong>Edad:</strong> <?= $paciente['edad'] ?> años
                                                 </p>
                                             </div>
 
@@ -383,7 +387,7 @@ include_once __DIR__ . '/../../../views/layouts/header_paciente.php';
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
 

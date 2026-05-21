@@ -2,7 +2,15 @@
 require_once BASE_PATH . '/app/helpers/session_paciente.php';
 require_once BASE_PATH . '/app/controllers/especialidadController.php';
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
+require_once BASE_PATH . '/app/helpers/alert_helper.php';
 
+$perfil_completo = $_SESSION['user']['perfil_completo'];
+
+
+if ($perfil_completo === 0) {
+    mostrarSweetAlert('warning', 'Perfil Incompleto', 'Por favor completa tu perfil para acceder a esta sección', BASE_URL . '/paciente/completar-perfil');
+    exit();
+}
 
 
 $especialidades = listarParaLosPacientes();

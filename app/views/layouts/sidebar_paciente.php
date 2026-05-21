@@ -9,6 +9,8 @@ $id = $_SESSION['user']['id'];
 // EN LA VARIABLE ID_PACIENTE GUARDAMOS EL ID_PACIENTE DEL USUARIO QUE SE CREA AL INICIAR LA SESIÓN, ESTE ID LO NECESITAMOS PARA MOSTRAR EL HISTORIAL CLÍNICO DEL PACIENTE
 $id_paciente = $_SESSION['user']['id_paciente'];
 
+$perfil_completo = $_SESSION['user']['perfil_completo'];
+
 // EN LA VARIABLE PERFIL LLAMAMOS LA FUNCIÓN DEL CONTROLADOR mostrarPerfilAdmin(id)
 $perfil = mostrarPerfilPaciente($id);
 
@@ -60,6 +62,12 @@ $perfil = mostrarPerfilPaciente($id);
                 <i class="bi bi-grid-fill"></i>
                 <span>Dashboard</span>
             </a>
+            <?php if ($perfil_completo === 0): ?>
+                <a class="nav-item" href="<?= BASE_URL ?>/paciente/completar-perfil">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Completar perfil</span>
+                </a>
+            <?php endif; ?>
             <a class="nav-item" href="<?= BASE_URL ?>/paciente/modulo-citas">
                 <i class="fa-solid fa-book-medical"></i>
                 <span>Agendar cita</span>

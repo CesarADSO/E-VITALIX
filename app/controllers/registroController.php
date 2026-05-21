@@ -55,7 +55,7 @@ function registrarPaciente()
 
     $resultado = $objRegistro->registrar($data);
 
-    if ($resultado) {
+    if ($resultado === true) {
         mostrarSweetAlert('success', 'Registro Exitoso', '¡Te has registrado correctamente! Ahora puedes iniciar sesión.', '/E-VITALIX/login');
     } else {
         mostrarSweetAlert('error', 'Error en el Registro', 'Hubo un problema al registrar tus datos. Por favor, intenta nuevamente.');
@@ -71,7 +71,6 @@ function completarPerfilPaciente($id_paciente)
     $direccion = $_POST['direccion'] ?? '';
     $eps = $_POST['eps'] ?? '';
     $rh = $_POST['rh'] ?? '';
-    $historial_medico = $_POST['historial_medico'] ?? '';
     $nombre_contacto = $_POST['nombre_contacto'] ?? '';
     $telefono_contacto = $_POST['telefono_contacto'] ?? '';
     $direccion_contacto = $_POST['direccion_contacto'] ?? '';
@@ -94,7 +93,6 @@ function completarPerfilPaciente($id_paciente)
         'direccion' => $direccion,
         'eps' => $eps,
         'rh' => $rh,
-        'historial_medico' => $historial_medico,
         'nombre_contacto' => $nombre_contacto,
         'telefono_contacto' => $telefono_contacto,
         'direccion_contacto' => $direccion_contacto
