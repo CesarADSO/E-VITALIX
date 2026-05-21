@@ -189,13 +189,6 @@ document.addEventListener('DOMContentLoaded', function () {
             rhSelect.options[rhSelect.selectedIndex].text || 'No seleccionado';
         // Muestra el tipo de sangre seleccionado
 
-        const historial = document.getElementById('historial_medico').value;
-        // Obtén el texto del historial médico
-
-        document.getElementById('resumen-historial').textContent =
-            historial || 'No ingresado';
-        // Muestra el historial en el resumen
-
         // ===== CONTACTO DE EMERGENCIA =====
         document.getElementById('resumen-nombre-contacto').textContent =
             document.getElementById('nombre_contacto').value || 'No ingresado';

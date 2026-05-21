@@ -64,11 +64,6 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     value="<?= $paciente['apellidos'] ?>" disabled>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="edad" class="form-label">Edad</label>
-                                <input type="number" class="form-control" id="edad" name="edad"
-                                    value="<?= $paciente['edad'] ?>" disabled>
-                            </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="tipo_documento" class="form-label">Tipo de documento</label>

@@ -17,7 +17,7 @@ class Servicio
             $registrar = "INSERT INTO servicios (
                     nombre,
                     descripcion,
-                    id_especialista,
+                    id_especialidad,
                     id_consultorio,
                     duracion_minutos,
                     precio,
@@ -27,7 +27,7 @@ class Servicio
                 ) VALUES (
                     :nombre,
                     :descripcion,
-                    :id_especialista,
+                    :id_especialidad,
                     :id_consultorio,
                     :duracion_minutos,
                     :precio,
@@ -40,7 +40,7 @@ class Servicio
 
             $resultado->bindParam(':nombre', $data['nombre']);
             $resultado->bindParam(':descripcion', $data['descripcion']);
-            $resultado->bindParam(':id_especialista', $data['id_especialista']);
+            $resultado->bindParam(':id_especialidad', $data['id_especialidad']);
             $resultado->bindParam(':id_consultorio', $data['id_consultorio']);
             $resultado->bindParam(':duracion_minutos', $data['duracion_minutos']);
             $resultado->bindParam(':precio', $data['precio']);
