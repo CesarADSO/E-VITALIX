@@ -175,8 +175,8 @@ date_default_timezone_set('America/Bogota');
                 <td><?= $paciente['tipo_documento'] ?>: <?= $paciente['numero_documento'] ?></td>
             </tr>
             <tr>
-                <th>Edad</th>
-                <td><?= $paciente['edad'] ?> años</td>
+                <th>Ciudad</th>
+                <td><?= $paciente['ciudad'] ?></td>
                 <th>Tipo de Sangre</th>
                 <td><?= $paciente['rh'] ?></td>
             </tr>

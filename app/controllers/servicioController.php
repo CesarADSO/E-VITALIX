@@ -48,13 +48,13 @@ function registrarServicio()
     $nombre = $_POST['nombre'] ?? '';
     $descripcion = $_POST['descripcion'] ?? '';
     $codigoServicio = $_POST['codigo_servicio'] ?? '';
-    $idEspecialista = $_POST['id_especialista'] ?? '';
     $duracion = $_POST['duracion_minutos'] ?? '';
     $precio = $_POST['precio'] ?? '';
     $idMetodoPago = $_POST['id_metodo_pago'] ?? '';
+    $idEspecialidad = $_POST['id_especialidad'] ?? '';
 
     // VALIDAMOS CAMPOS OBLIGATORIOS
-    if (empty($nombre) || empty($idEspecialista) || empty($duracion) || empty($idMetodoPago)) {
+    if (empty($nombre) || empty($duracion) || empty($idMetodoPago) || empty($idEspecialidad)) {
         mostrarSweetAlert('error', 'Campos obligatorios', 'Por favor completa los campos requeridos');
         exit();
     }
@@ -81,11 +81,11 @@ function registrarServicio()
         'nombre' => $nombre,
         'descripcion' => $descripcion,
         'codigo_servicio' => $codigoServicio,
-        'id_especialista' => $idEspecialista,
         'duracion_minutos' => $duracion,
         'precio' => $precio,
         'id_metodo_pago' => $idMetodoPago,
-        'id_consultorio' => $id_consultorio
+        'id_consultorio' => $id_consultorio,
+        'id_especialidad' => $idEspecialidad
     ];
 
     // LLAMAMOS AL MODELO

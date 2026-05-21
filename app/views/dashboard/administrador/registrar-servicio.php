@@ -1,9 +1,9 @@
 <?php
 require_once BASE_PATH . '/app/helpers/session_administrador.php';
-require_once BASE_PATH . '/app/controllers/especialistaController.php';
+require_once BASE_PATH . '/app/controllers/especialidadController.php';
 require_once BASE_PATH . '/app/controllers/metodoPagoController.php';
 
-$especialistas = mostrarEspecialistas();
+$especialidades = listarEspecialidades();
 
 $metodosPago = mostrarMetodosPago();
 ?>
@@ -96,17 +96,16 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             <!-- Paso 2: Configuración -->
                             <div class="wizard-step" id="step2">
                                 <div class="row">
-                                    <!-- Especialista -->
+
+                                    <!-- Especialidad -->
                                     <div class="col-md-6 mb-3">
-                                        <label for="id_especialista" class="form-label">Especialista</label>
-                                        <select class="form-select" id="id_especialista" name="id_especialista" required>
-                                            <option value="">Seleccionar especialista</option>
-                                            <?php if (!empty($especialistas)) : ?>
-                                                <?php foreach ($especialistas as $especialista) : ?>
-                                                    <option value="<?= $especialista['id'] ?>"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></option>
+                                        <label for="especialidad" class="form-label">Especialidad</label>
+                                        <select name="id_especialidad" id="id_especialidad" class="form-select">
+                                            <option value="">Seleccionar especialidad</option>
+                                            <?php if (!empty($especialidades)) : ?>
+                                                <?php foreach ($especialidades as $especialidad) : ?>
+                                                    <option value="<?= $especialidad['id'] ?>"><?= $especialidad['nombre'] ?></option>
                                                 <?php endforeach; ?>
-                                            <?php else : ?>
-                                                <option value="">No hay especialistas disponibles</option>
                                             <?php endif; ?>
                                         </select>
                                     </div>
@@ -161,7 +160,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <p><strong>Nombre:</strong> <span id="resumen-nombre"></span></p>
                                             <p><strong>Descripción:</strong> <span id="resumen-descripcion"></span></p>
                                             <p><strong>Código:</strong> <span id="resumen-codigo"></span></p>
-                                            <p><strong>Especialista:</strong> <span id="resumen-especialista"></span></p>
+                                            <p><strong>Especialidad:</strong> <span id="resumen-especialidad"></span></p>
                                             <p><strong>Duración:</strong> <span id="resumen-duracion"></span></p>
                                             <p><strong>Precio:</strong> <span id="resumen-precio"></span></p>
                                             <p><strong>Método Pago:</strong> <span id="resumen-metodo-pago"></span></p>
@@ -236,8 +235,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 document.getElementById('resumen-codigo').textContent = document.getElementById('codigo_servicio').value || 'No ingresado';
 
                                 // Configuración
-                                document.getElementById('resumen-especialista').textContent =
-                                    document.getElementById('id_especialista').options[document.getElementById('id_especialista').selectedIndex].text || 'No seleccionado';
+                                document.getElementById('resumen-especialidad').textContent = document.getElementById('id_especialidad').value || 'No seleccionada';
                                 // Duración (convertir time a minutos)
                                 const duracionTime = document.getElementById('duracion_minutos').value;
                                 let duracionTexto = 'No ingresado';

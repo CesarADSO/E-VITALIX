@@ -68,7 +68,7 @@
                             <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Número de documento:</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     class="campos-formulario"
                                     placeholder="xxxxxxxxxx"
                                     id="numeroDocumento"
@@ -90,7 +90,7 @@
                             <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Teléfono:</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     class="campos-formulario"
                                     placeholder="Ingresa tu número de teléfono..."
                                     id="telefono"
