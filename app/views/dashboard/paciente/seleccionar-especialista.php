@@ -1,14 +1,10 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_paciente.php';
 // require_once BASE_PATH . '/app/controllers/slotController.php';
-require_once BASE_PATH . '/app/controllers/servicioController.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
 $id_consultorio = $_GET['id_consultorio'];
 $id_especialidad = $_GET['id_especialidad'];
-$id_servicio = $_GET['id_servicio'];
-
-$servicio = consultarNombreServicio($id_servicio);
 
 $especialistas = listarEspecialistasPorEspecialidad($id_especialidad);
 
@@ -43,13 +39,6 @@ $especialistas = listarEspecialistasPorEspecialidad($id_especialidad);
                                 <i class="bi bi-calendar-check-fill"></i>
                                 Selecciona el especialista que quieras
                             </h1>
-
-                            <div class="servicio-info">
-                                <div class="servicio-label">Servicio Seleccionado</div>
-                                <h3 class="servicio-nombre text-white">
-                                    <?= $servicio['nombre'] ?>
-                                </h3>
-                            </div>
                         </div>
                     </div>
 
@@ -75,7 +64,7 @@ $especialistas = listarEspecialistasPorEspecialidad($id_especialidad);
 
                                         <div class="horario-card-footer">
 
-                                            <a href="<?= BASE_URL ?>/paciente/seleccionar-horario?id_especialista=<?= $especialista['id'] ?>&id_consultorio=<?= $id_consultorio ?>&id_servicio=<?= $id_servicio ?>" class="btn-seleccionar"><i class="bi bi-check-circle-fill"></i>Seleccionar este especialista</a>
+                                            <a href="<?= BASE_URL ?>/paciente/seleccionar-horario?id_especialista=<?= $especialista['id'] ?>&id_consultorio=<?= $id_consultorio ?>&id_especialidad=<?= $id_especialidad ?>" class="btn-seleccionar"><i class="bi bi-check-circle-fill"></i>Seleccionar este especialista</a>
                                         </div>
                                     </div>
                                 </div>

@@ -80,7 +80,7 @@ class PacienteDashboard
     // Función para obtener las últimas 5 citas del paciente
     public function obtenerUltimasCitas($id_paciente) {
         try {
-            $mostrar = "SELECT citas.id AS id_cita, agenda_slot.id_especialista AS id_especialista, agenda_slot.id_consultorio AS id_consultorio, citas.id_servicio AS id_servicio, especialidades.id AS id_especialidad, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, agenda_slot.fecha, agenda_slot.hora_inicio, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id WHERE citas.id_paciente = :id_paciente ORDER BY agenda_slot.fecha DESC, agenda_slot.hora_inicio DESC LIMIT 5";
+            $mostrar = "SELECT citas.id AS id_cita, agenda_slot.id_especialista AS id_especialista, agenda_slot.id_consultorio AS id_consultorio, especialidades.id AS id_especialidad, especialistas.nombres AS nombre_especialista, especialistas.apellidos AS apellido_especialista, agenda_slot.fecha, agenda_slot.hora_inicio, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id WHERE citas.id_paciente = :id_paciente ORDER BY agenda_slot.fecha DESC, agenda_slot.hora_inicio DESC LIMIT 5";
             $resultado = $this->conexion->prepare($mostrar);
             $resultado->bindParam(':id_paciente', $id_paciente);
             $resultado->execute();

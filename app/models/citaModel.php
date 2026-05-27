@@ -14,13 +14,13 @@ class Cita
     public function agendar($data)
     {
         try {
-            $agendar = "INSERT INTO citas(id_agenda_slot, id_paciente, id_servicio, estado_cita) VALUES (:id_agenda_slot, :id_paciente, :id_servicio, 'Pendiente')";
+            $agendar = "INSERT INTO citas(id_agenda_slot, id_especialidad, id_paciente, estado_cita) VALUES (:id_agenda_slot,    :id_especialidad, :id_paciente, 'Pendiente')";
 
             $resultado = $this->conexion->prepare($agendar);
 
             $resultado->bindParam(':id_agenda_slot', $data['id_slot']);
             $resultado->bindParam(':id_paciente', $data['id_paciente']);
-            $resultado->bindParam(':id_servicio', $data['id_servicio']);
+            $resultado->bindParam(':id_especialidad', $data['id_especialidad']);
 
             $resultado->execute();
 
@@ -530,7 +530,7 @@ class Cita
                         <div class="info-row-icon">🏥</div>
                         <div class="info-row-content">
                             <div class="info-row-label">Tipo de Consulta</div>
-                            <div class="info-row-value">' . htmlspecialchars($data['id_servicio']) . '</div>
+                            <div class="info-row-value">' . htmlspecialchars($data['id_especialidad']) . '</div>
                         </div>
                     </div>
 
@@ -592,18 +592,14 @@ class Cita
                     e.nombres AS especialista_nombre,
                     es.nombre AS especialidad_nombre,
                     e.apellidos AS especialista_apellido,
-                    s.id AS id_servicio,
-                    s.nombre AS servicio_nombre,
                     co.id AS id_consultorio,
                     co.nombre AS nombre_consultorio,
                     co.ciudad, 
-                    co.direccion,
-                    s.precio AS servicio_precio
+                    co.direccion
                 FROM citas c
                 INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
                 INNER JOIN especialistas e ON a.id_especialista = e.id INNER JOIN especialidades es ON e.id_especialidad = es.id
                 INNER JOIN consultorios co ON e.id_consultorio = co.id 
-                INNER JOIN servicios s ON c.id_servicio = s.id
                 WHERE c.id_paciente = :id_paciente
                 ORDER BY a.fecha DESC, a.hora_inicio DESC";
 
@@ -625,7 +621,7 @@ class Cita
     {
         try {
 
-            $listar = "SELECT citas.id AS id_cita, agenda_slot.id AS id_horario, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, consultorios.ciudad, consultorios.direccion, servicios.id AS id_servicio, servicios.nombre AS nombre_servicio, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN servicios ON citas.id_servicio = servicios.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE citas.id = :id_cita";
+            $listar = "SELECT citas.id AS id_cita, agenda_slot.id AS id_horario, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, consultorios.ciudad, consultorios.direccion, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE citas.id = :id_cita";
 
             $resultado = $this->conexion->prepare($listar);
 
@@ -743,14 +739,6 @@ class Cita
             $resultado5->execute();
 
             $emailEspecialistaAnterior = $resultado5->fetchColumn();
-
-            // OBTENEMOS EL NOMBRE DEL SERVICIO DE LA CITA PARA INSERTARLO EN EL SEGUNDO EMAIL
-            $obtenerNombreServicio = "SELECT servicios.nombre FROM citas INNER JOIN servicios ON citas.id_servicio = servicios.id WHERE citas.id = :id_cita";
-            $resultado6 = $this->conexion->prepare($obtenerNombreServicio);
-            $resultado6->bindParam(':id_cita', $data['id_cita']);
-            $resultado6->execute();
-
-            $nombreServicio = $resultado6->fetchColumn();
 
 
             // ESTÁ LINEA LO QUE HACE ES DECIRLE A PHP QUE SI TODO SALIÓ BIEN GUARDE LOS DATOS PERMANENTEMENTE
@@ -1770,14 +1758,6 @@ class Cita
                         </div>
                     </div>
 
-                    <div class="info-row">
-                        <div class="info-row-icon">🏥</div>
-                        <div class="info-row-content">
-                            <div class="info-row-label">Tipo de Consulta</div>
-                            <div class="info-row-value">' . htmlspecialchars($nombreServicio) . '</div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div class="divider"></div>
@@ -1821,7 +1801,7 @@ class Cita
             if ($this->conexion->inTransaction()) {
                 $this->conexion->rollBack();
             }
-            error_log("Error en Cita::agendar->" . $e->getMessage());
+            error_log("Error en Cita::reagendar->" . $e->getMessage());
             return false;
         }
     }
@@ -1876,7 +1856,7 @@ class Cita
             $data['documentoPaciente'] = $datosPaciente['documento'] . ': ' . $datosPaciente['numero_documento'];
 
             // AHORA OBTENEMOS LOS DATOS DE LA CITA CANCELADA
-            $obtenerDatosCita = "SELECT a.fecha, a.hora_inicio, a.hora_fin, s.nombre FROM citas c INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id INNER JOIN servicios s ON c.id_servicio = s.id WHERE c.id = :id_cita";
+            $obtenerDatosCita = "SELECT a.fecha, a.hora_inicio, a.hora_fin, es.nombre AS especialidad FROM citas c INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id INNER JOIN especialidades es ON c.id_especialidad = es.id WHERE c.id = :id_cita";
 
             $resultado4 = $this->conexion->prepare($obtenerDatosCita);
             $resultado4->bindParam(':id_cita', $id_cita);
@@ -1887,7 +1867,7 @@ class Cita
             // INSERTAMOS LO QUE VIENE EN LA VARIABLE $datosCita en la variable $data
             $data['fechaCita'] = $datosCita['fecha'];
             $data['horaCita'] = $datosCita['hora_inicio'] . ' - ' . $datosCita['hora_fin'];
-            $data['tipoConsulta'] = $datosCita['nombre'];
+            $data['tipoConsulta'] = $datosCita['especialidad'];
 
             // OBTENER EL EMAIL DEL ESPECIALISTA QUE ESTÁ LIGADO A LA CITA QUE SE CANCELÓ
             $obtenerEmailEspecialista = "SELECT u.email FROM citas c INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id INNER JOIN especialistas e ON a.id_especialista = e.id INNER JOIN usuarios u ON e.id_usuario = u.id WHERE c.id = :id_cita";

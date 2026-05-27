@@ -205,39 +205,14 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                             </div>
                                         </div>
 
-                                        <!-- Servicios -->
-                                        <div class="consultorio-seccion">
-                                            <h6 class="consultorio-seccion-titulo">
-                                                <i class="bi bi-list-check"></i>
-                                                Servicios Disponibles
-                                            </h6>
-                                            <ul class="servicios-lista">
-                                                <?php
-                                                if (!empty($consultorio['servicios_agrupados'])):
-                                                    // 1. Separamos cada bloque de servicio por el pipe |
-                                                    $servicios = explode('|', $consultorio['servicios_agrupados']);
-                                                    foreach ($servicios as $item): 
-                                                    // 2. Separamos el ID del Nombre por los dos puntos :
-                                                    list($id_serv, $nombre_serv, $precio_serv) = explode(':', $item);
-                                                ?>
-                                                    <li class="servicio-item">
-                                                            <i class="bi bi-check-circle-fill servicio-icon"></i>
-                                                            <span class="servicio-texto"><!-- trim() elimina espacios en blanco al inicio y final -->
-                                                                <?= trim($nombre_serv) ?> -
-                                                            </span>
-                                                            <span class="servicio-texto">Precio: $<?= trim($precio_serv) ?></span>
 
-                                                        <a href="<?= BASE_URL ?>/paciente/seleccionar-especialista?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>&id_servicio=<?= $id_serv ?>"
-                                                            class="btn btn-sm btn-outline-primary py-0" style="font-size: 0.8rem;">
-                                                            Agendar
-                                                        </a>
-
-                                                    </li>
-                                                <?php endforeach; ?>
-                                                <?php else:?>
-                                                    <p>No hay servicios disponibles de esta especialidad</p>
-                                                <?php endif; ?>
-                                            </ul>
+                                        <!-- Footer con botón -->
+                                        <div class="consultorio-card-footer-tipo-a">
+                                            <a href="<?= BASE_URL ?>/paciente/seleccionar-especialista?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>"
+                                                class="btn btn-ver-detalles">
+                                                <i class="bi bi-building-check"></i>
+                                                Seleccionar este consultorio
+                                            </a>
                                         </div>
 
                                     </div>

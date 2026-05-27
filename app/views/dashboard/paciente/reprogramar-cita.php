@@ -5,7 +5,6 @@ require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
 $id_consultorio = $_GET['id_consultorio'];
 $id_especialidad = $_GET['id_especialidad'];
-$id_servicio = $_GET['id_servicio'];
 $id_cita = $_GET['id_cita'];
 $id_especialista = $_GET['id_especialista'];
 
@@ -93,7 +92,6 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_especialista);
                                                 <input type="hidden" name="accion" value="reagendar">
                                                 <input type="hidden" name="id_slot" value="<?= $espacioDeAgendamiento['id_slot'] ?>">
                                                 <input type="hidden" name="id_cita" value="<?= $id_cita ?>">
-                                                <input type="hidden" name="id_servicio" value="<?= $id_servicio ?>">
                                                 <button type="submit" class="btn-seleccionar">
                                                     <i class="bi bi-check-circle-fill"></i>
                                                     Seleccionar este Turno

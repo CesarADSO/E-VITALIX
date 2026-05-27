@@ -112,19 +112,14 @@ class Consultorio
         consultorio_especialidad.id_especialidad,
         /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
         /* SEPARATOR define cómo separaremos los nombres para luego usarlos en PHP */
-        GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades,
+        GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades
         /* TRUCO PARA EL PROYECTO: Agrupamos ID y Nombre del servicio juntos */
         /* Usamos un formato como 'ID:Nombre' para separarlos luego en PHP */
-        GROUP_CONCAT(DISTINCT CONCAT(servicios.id, ':', servicios.nombre, ':', servicios.precio) SEPARATOR '|') AS servicios_agrupados
     FROM consultorios
     INNER JOIN consultorio_especialidad 
         ON consultorio_especialidad.id_consultorio = consultorios.id
     INNER JOIN especialidades 
         ON especialidades.id = consultorio_especialidad.id_especialidad
-    LEFT JOIN servicios 
-        ON servicios.id_consultorio = consultorios.id
-        AND servicios.id_especialidad = :id_especialidad -- <--- ESTA ES LA LÍNEA CLAVE PARA QUE NO ME TRAIGA LOS SERVICIOS DE OTRA ESPECIALIDAD
-        AND servicios.estado_servicio = 'ACTIVO' -- <--- NUEVA LÍNEA CLAVE PARA QUE SOLO SE PUEDAN AGENDAR SERVICIOS ACTIVOS
     WHERE consultorios.id IN (
         /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
         /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
@@ -164,7 +159,8 @@ class Consultorio
         }
     }
 
-    public function traerEspecialidadesConsultorios($id) {
+    public function traerEspecialidadesConsultorios($id)
+    {
         try {
             $consultar = "SELECT especialidades.id, especialidades.nombre AS nombre_especialidad FROM especialidades INNER JOIN consultorio_especialidad ON especialidades.id = consultorio_especialidad.id_especialidad INNER JOIN consultorios ON consultorio_especialidad.id_consultorio = consultorios.id WHERE consultorios.id = :id_consultorio";
 
@@ -265,7 +261,6 @@ class Consultorio
                 // Retornamos true
                 return true;
             }
-            
         } catch (PDOException $e) {
             error_log("Error en Consultorio::verificarVigenciaPlan->" . $e->getMessage());
             return false;
