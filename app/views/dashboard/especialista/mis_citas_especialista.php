@@ -78,7 +78,7 @@ $estadisticas = $data['estadisticas'];
                                             <th>Nombres y apellidos</th>
                                             <th>Fecha</th>
                                             <th>Hora Inicio</th>
-                                            <th>Servicio</th>
+                                            <th>Especialidad</th>
                                             <th>Estado</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
@@ -105,7 +105,7 @@ $estadisticas = $data['estadisticas'];
                                                     <i class="bi bi-clock me-1"></i>
                                                     <?= date('h:i A', strtotime($cita['hora_inicio'])) ?>
                                                 </td>
-                                                <td><?= htmlspecialchars($cita['servicio_nombre'] ?? 'Sin servicio') ?></td>
+                                                <td><?= htmlspecialchars($cita['especialidad'] ?? 'Sin especialidad') ?></td>
                                                 <td>
                                                     <?php if ($cita['estado_cita'] === 'CONFIRMADA'): ?>
                                                         <span class="status-badge status status-aceptada">
@@ -137,7 +137,7 @@ $estadisticas = $data['estadisticas'];
                                                                 title="Cancelar cita">
                                                                 <i class="bi bi-x-circle"></i></a>
                                                         <?php elseif ($cita['estado_cita'] === 'CONFIRMADA'): ?>
-                                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?>&id_servicio=<?= $cita['id_servicio'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
+                                                            <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?> class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
                                                         <?php else: ?>
                                                             <span class="text-muted small">Sin acciones disponibles</span>
                                                         <?php endif; ?>

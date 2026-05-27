@@ -24,7 +24,6 @@ class CitasModel
                 SELECT 
                     p.id AS id_paciente,
                     c.id AS id_cita,
-                    c.id_servicio,
                     a.fecha,
                     a.hora_inicio,
                     a.hora_fin,
@@ -33,16 +32,11 @@ class CitasModel
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
                     p.telefono AS telefono_paciente,
                     u.email AS email_paciente,
-                    
-                    s.nombre AS servicio_nombre,
-                    s.duracion_minutos AS servicio_duracion,
-                    
-                    s.precio AS servicio_precio
+                    es.nombre AS especialidad
                 FROM citas c
                 INNER JOIN pacientes p ON c.id_paciente = p.id
                 INNER JOIN usuarios u ON p.id_usuario = u.id
-                
-                INNER JOIN servicios s ON c.id_servicio = s.id
+                INNER JOIN especialidades es ON c.id_especialidad = es.id
                 INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
                 WHERE a.id_especialista = :id_especialista
                 
