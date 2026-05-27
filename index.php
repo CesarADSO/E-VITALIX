@@ -220,6 +220,7 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/asistenteController.php';
         break;
 
+
     case '/admin/especialidades';
         require BASE_PATH . '/app/views/dashboard/administrador/especialidades.php';
         break;
