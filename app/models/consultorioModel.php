@@ -49,7 +49,7 @@ class Consultorio
             $id_admin = $this->conexion->lastInsertId();
 
             // HACEMOS EL INSERT EN CONSULTORIOS
-            $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :horario_atencion, 'Activo')";
+            $insertar = "INSERT INTO consultorios(nombre, direccion, id_ciudad, foto, telefono, correo_contacto, horario_atencion, estado) VALUES(:nombre, :direccion, :ciudad, :foto, :telefono, :correo_contacto, :horario_atencion, 'Activo')";
 
 
 
@@ -87,7 +87,7 @@ class Consultorio
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT consultorios.*, administradores.nombres, administradores.apellidos FROM consultorios LEFT JOIN administradores ON consultorios.id = administradores.id_consultorio ORDER BY consultorios.nombre ASC";
+            $consultar = "SELECT consultorios.*, administradores.nombres, administradores.apellidos, ciudades.nombre AS ciudad FROM consultorios LEFT JOIN administradores ON consultorios.id = administradores.id_consultorio LEFT JOIN ciudades ON consultorios.id_ciudad = ciudades.id ORDER BY consultorios.nombre ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);
@@ -144,7 +144,7 @@ class Consultorio
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT consultorios.*, planes_suscripcion.limite_citas_mensuales FROM consultorios LEFT JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id  WHERE consultorios.id = :id LIMIT 1";
+            $consulta = "SELECT consultorios.*, ciudades.nombre AS ciudad, planes_suscripcion.limite_citas_mensuales FROM consultorios LEFT JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id LEFT JOIN ciudades ON consultorios.id_ciudad = ciudades.id WHERE consultorios.id = :id LIMIT 1";
 
             $resultado = $this->conexion->prepare($consulta);
 
@@ -179,7 +179,7 @@ class Consultorio
     public function actualizar($data)
     {
         try {
-            $actualizar = "UPDATE consultorios SET nombre = :nombre, direccion = :direccion, ciudad = :ciudad, telefono = :telefono, correo_contacto = :correo_contacto, horario_atencion = :horario_atencion, estado = :estado WHERE id = :id";
+            $actualizar = "UPDATE consultorios SET nombre = :nombre, direccion = :direccion, id_ciudad = :ciudad, telefono = :telefono, correo_contacto = :correo_contacto, horario_atencion = :horario_atencion, estado = :estado WHERE id = :id";
 
             $resultado = $this->conexion->prepare($actualizar);
             $resultado->bindParam(':id', $data['id']);

@@ -1,5 +1,8 @@
 <?php
 require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
+require_once BASE_PATH . '/app/controllers/ciudadesController.php';
+
+$ciudades = listarCiudades();
 
 $datos = traertipoDocumento();
 ?>
@@ -80,7 +83,16 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad">
+                                        <select name="ciudad" class="form-select" id="">
+                                            <option value="">Seleccione una ciudad</option>
+                                            <?php if(!empty($ciudades)):?>
+                                                <?php foreach($ciudades as $ciudad):?>
+                                            <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                                            <?php endforeach;?>
+                                            <?php else:?>
+                                                <option value="">No hay ciudades registradas</option>
+                                            <?php endif;?>
+                                        </select>
                                     </div>
                                 </div>
 
