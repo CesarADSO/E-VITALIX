@@ -594,12 +594,13 @@ class Cita
                     e.apellidos AS especialista_apellido,
                     co.id AS id_consultorio,
                     co.nombre AS nombre_consultorio,
-                    co.ciudad, 
+                    ciu.nombre, 
                     co.direccion
                 FROM citas c
                 INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
                 INNER JOIN especialistas e ON a.id_especialista = e.id INNER JOIN especialidades es ON e.id_especialidad = es.id
                 INNER JOIN consultorios co ON e.id_consultorio = co.id 
+                INNER JOIN ciudades ciu ON co.id_ciudad = ciu.id
                 WHERE c.id_paciente = :id_paciente
                 ORDER BY a.fecha DESC, a.hora_inicio DESC";
 
@@ -621,7 +622,7 @@ class Cita
     {
         try {
 
-            $listar = "SELECT citas.id AS id_cita, agenda_slot.id AS id_horario, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, consultorios.ciudad, consultorios.direccion, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE citas.id = :id_cita";
+            $listar = "SELECT citas.id AS id_cita, agenda_slot.id AS id_horario, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, ciudades.nombre AS ciudad, consultorios.direccion, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id INNER JOIN ciudades ON consultorios.id_ciudad = ciudades.id WHERE citas.id = :id_cita";
 
             $resultado = $this->conexion->prepare($listar);
 

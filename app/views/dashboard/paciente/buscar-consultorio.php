@@ -2,6 +2,7 @@
 require_once BASE_PATH . '/app/helpers/session_paciente.php';
 require_once BASE_PATH . '/app/controllers/especialidadController.php';
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
+require_once BASE_PATH . '/app/controllers/ciudadesController.php';
 require_once BASE_PATH . '/app/helpers/alert_helper.php';
 
 $perfil_completo = $_SESSION['user']['perfil_completo'];
@@ -14,6 +15,8 @@ if ($perfil_completo === 0) {
 
 
 $especialidades = listarParaLosPacientes();
+
+$ciudades = listarCiudades();
 
 // ⚠️ Inicializamos el arreglo vacío.
 // La vista NO debe ejecutar lógica de consulta directamente.
@@ -101,10 +104,38 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                     <?php endif; ?>
 
                                                 </select>
-                                                <div class="form-text">
+                                                <!-- <div class="form-text">
                                                     <i class="bi bi-info-circle"></i>
                                                     Seleccione la especialidad médica que necesita
-                                                </div>
+                                                </div> -->
+                                            </div>
+
+                                            <!-- Select de Especialidad -->
+                                            <div class="col-md-9 mb-3 mb-md-0 mt-3">
+                                                <label for="especialidad" class="form-label">
+                                                    <i class="bi bi-stethoscope"></i>
+                                                    Ciudad <span class="required">*</span>
+                                                </label>
+                                                <select
+                                                    class="form-select select-especialidad"
+                                                    id="ciudad"
+                                                    name="id_ciudad">
+                                                    <option value="" selected disabled>Seleccione una ciudad...</option>
+                                                    <!-- Opciones que se cargarán desde la BD -->
+                                                    <?php if (!empty($ciudades)): ?>
+                                                        <?php foreach ($ciudades as $ciudad): ?>
+
+                                                            <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                                                        <?php endforeach; ?>
+                                                    <?php else: ?>
+                                                        <option value="" disabled>No hay ciudades disponibles</option>
+                                                    <?php endif; ?>
+
+                                                </select>
+                                                <!-- <div class="form-text">
+                                                    <i class="bi bi-info-circle"></i>
+                                                    Seleccione la especialidad médica que necesita
+                                                </div> -->
                                             </div>
 
                                             <!-- Botón Buscar -->
