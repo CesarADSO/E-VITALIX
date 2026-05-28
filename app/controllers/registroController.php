@@ -56,7 +56,7 @@ function registrarPaciente()
     $resultado = $objRegistro->registrar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro Exitoso', '¡Te has registrado correctamente! Ahora puedes iniciar sesión.', '/E-VITALIX/login');
+        mostrarSweetAlert('success', 'Registro Exitoso', '¡Te has registrado correctamente! Ahora puedes iniciar sesión.', BASE_URL . '/login');
     } else {
         mostrarSweetAlert('error', 'Error en el Registro', 'Hubo un problema al registrar tus datos. Por favor, intenta nuevamente.');
     }
@@ -101,7 +101,7 @@ function completarPerfilPaciente($id_paciente)
     $resultado = $objCompletar->completarPerfilPaciente($data);
 
     if ($resultado) {
-        mostrarSweetAlert('success', 'Perfil Completado', '¡Has completado tu perfil correctamente!', '/E-VITALIX/paciente/dashboard');
+        mostrarSweetAlert('success', 'Perfil Completado', '¡Has completado tu perfil correctamente!', BASE_URL . '/paciente/dashboard');
     } else {
         mostrarSweetAlert('error', 'Error al Completar Perfil', 'Hubo un problema al completar tu perfil. Por favor, intenta nuevamente.');
     }

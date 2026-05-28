@@ -27,7 +27,7 @@
             </div>
             <div class="modal-body">
                 <p><strong>Paciente:</strong> <span id="detPaciente"></span></p>
-                <p><strong>Servicio:</strong> <span id="detServicio"></span></p>
+                <p><strong>Especialidad:</strong> <span id="detEspecialidad"></span></p>
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
             eventClick: function(info) {
                 const data = info.event.extendedProps;
                 document.getElementById('detPaciente').innerText = data.paciente;
-                document.getElementById('detServicio').innerText = data.servicio;
+                document.getElementById('detEspecialidad').innerText = data.especialidad;
                 modalEl.show();
             },
 

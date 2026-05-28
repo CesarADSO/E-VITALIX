@@ -88,15 +88,10 @@ if (!$id) {
                 <span>Especialistas</span>
             </a>
 
-            <a class="nav-item" href="<?= BASE_URL ?>/admin/asistentes">
+            <!-- <a class="nav-item" href="<?= BASE_URL ?>/admin/asistentes">
                 <i class="bi bi-person-gear"></i>
                 <span>Asistentes</span>
-            </a>
-
-            <a class="nav-item" href="<?= BASE_URL ?>/admin/servicios">
-                <i class="fa-solid fa-stethoscope"></i>
-                <span>Servicios</span>
-            </a>
+            </a> -->
 
             <a class="nav-item" href="<?= BASE_URL ?>/admin/especialidades">
                 <i class="fa-solid fa-book-medical"></i>

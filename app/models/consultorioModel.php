@@ -49,7 +49,7 @@ class Consultorio
             $id_admin = $this->conexion->lastInsertId();
 
             // HACEMOS EL INSERT EN CONSULTORIOS
-            $insertar = "INSERT INTO consultorios(nombre, direccion, foto, ciudad, telefono, correo_contacto, horario_atencion, estado) VALUES(:nombre, :direccion, :foto, :ciudad, :telefono, :correo_contacto, :horario_atencion, 'Activo')";
+            $insertar = "INSERT INTO consultorios(nombre, direccion, id_ciudad, foto, telefono, correo_contacto, horario_atencion, estado) VALUES(:nombre, :direccion, :ciudad, :foto, :telefono, :correo_contacto, :horario_atencion, 'Activo')";
 
 
 
@@ -87,7 +87,7 @@ class Consultorio
     {
         try {
             // Variable que almacena la sentencia de sql a ejecutar
-            $consultar = "SELECT consultorios.*, administradores.nombres, administradores.apellidos FROM consultorios LEFT JOIN administradores ON consultorios.id = administradores.id_consultorio ORDER BY consultorios.nombre ASC";
+            $consultar = "SELECT consultorios.*, administradores.nombres, administradores.apellidos, ciudades.nombre AS ciudad FROM consultorios LEFT JOIN administradores ON consultorios.id = administradores.id_consultorio LEFT JOIN ciudades ON consultorios.id_ciudad = ciudades.id ORDER BY consultorios.nombre ASC";
             // Preparar lo necesario para ejecutar la función
 
             $resultado = $this->conexion->prepare($consultar);
@@ -101,7 +101,7 @@ class Consultorio
         }
     }
 
-    public function listarConsultoriosPorEspecialidad($id_especialidad)
+    public function listarConsultoriosPorEspecialidadYCiudad($id_especialidad, $id_ciudad)
     {
         try {
 
@@ -110,32 +110,30 @@ class Consultorio
             $consulta = "SELECT 
         consultorios.*, consultorios.id AS id_consultorio,
         consultorio_especialidad.id_especialidad,
+        ciudades.nombre AS ciudad,
         /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
         /* SEPARATOR define cómo separaremos los nombres para luego usarlos en PHP */
-        GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades,
+        GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades
         /* TRUCO PARA EL PROYECTO: Agrupamos ID y Nombre del servicio juntos */
         /* Usamos un formato como 'ID:Nombre' para separarlos luego en PHP */
-        GROUP_CONCAT(DISTINCT CONCAT(servicios.id, ':', servicios.nombre, ':', servicios.precio) SEPARATOR '|') AS servicios_agrupados
-    FROM consultorios
-    INNER JOIN consultorio_especialidad 
-        ON consultorio_especialidad.id_consultorio = consultorios.id
-    INNER JOIN especialidades 
-        ON especialidades.id = consultorio_especialidad.id_especialidad
-    LEFT JOIN servicios 
-        ON servicios.id_consultorio = consultorios.id
-        AND servicios.id_especialidad = :id_especialidad -- <--- ESTA ES LA LÍNEA CLAVE PARA QUE NO ME TRAIGA LOS SERVICIOS DE OTRA ESPECIALIDAD
-        AND servicios.estado_servicio = 'ACTIVO' -- <--- NUEVA LÍNEA CLAVE PARA QUE SOLO SE PUEDAN AGENDAR SERVICIOS ACTIVOS
-    WHERE consultorios.id IN (
-        /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
-        /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
-        SELECT id_consultorio FROM consultorio_especialidad WHERE id_especialidad = :id_especialidad
-    )
-    /* LA CLAVE: Colapsa todos los resultados en una sola fila por cada ID de consultorio */
-    /* El GROUP_CONCAT ahora captura TODAS las especialidades del consultorio */
-    GROUP BY consultorios.id";
+                FROM consultorios
+             INNER JOIN consultorio_especialidad 
+            ON consultorio_especialidad.id_consultorio = consultorios.id
+                INNER JOIN ciudades ON consultorios.id_ciudad = ciudades.id
+                INNER JOIN especialidades 
+             ON especialidades.id = consultorio_especialidad.id_especialidad
+            WHERE consultorios.id IN (
+            /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
+            /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
+            SELECT id_consultorio FROM consultorio_especialidad WHERE id_especialidad = :id_especialidad AND id_ciudad = :id_ciudad
+        )
+                /* LA CLAVE: Colapsa todos los resultados en una sola fila por cada ID de consultorio */
+            /* El GROUP_CONCAT ahora captura TODAS las especialidades del consultorio */
+            GROUP BY consultorios.id";
 
             $resultado = $this->conexion->prepare($consulta);
             $resultado->bindParam(':id_especialidad', $id_especialidad);
+            $resultado->bindParam(':id_ciudad', $id_ciudad);
             $resultado->execute();
 
             return $resultado->fetchAll();
@@ -149,7 +147,7 @@ class Consultorio
     {
         try {
             // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $consulta = "SELECT consultorios.*, planes_suscripcion.limite_citas_mensuales FROM consultorios LEFT JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id  WHERE consultorios.id = :id LIMIT 1";
+            $consulta = "SELECT consultorios.*, ciudades.nombre AS ciudad, planes_suscripcion.limite_citas_mensuales FROM consultorios LEFT JOIN planes_suscripcion ON consultorios.id_plan = planes_suscripcion.id LEFT JOIN ciudades ON consultorios.id_ciudad = ciudades.id WHERE consultorios.id = :id LIMIT 1";
 
             $resultado = $this->conexion->prepare($consulta);
 
@@ -164,7 +162,8 @@ class Consultorio
         }
     }
 
-    public function traerEspecialidadesConsultorios($id) {
+    public function traerEspecialidadesConsultorios($id)
+    {
         try {
             $consultar = "SELECT especialidades.id, especialidades.nombre AS nombre_especialidad FROM especialidades INNER JOIN consultorio_especialidad ON especialidades.id = consultorio_especialidad.id_especialidad INNER JOIN consultorios ON consultorio_especialidad.id_consultorio = consultorios.id WHERE consultorios.id = :id_consultorio";
 
@@ -183,7 +182,7 @@ class Consultorio
     public function actualizar($data)
     {
         try {
-            $actualizar = "UPDATE consultorios SET nombre = :nombre, direccion = :direccion, ciudad = :ciudad, telefono = :telefono, correo_contacto = :correo_contacto, horario_atencion = :horario_atencion, estado = :estado WHERE id = :id";
+            $actualizar = "UPDATE consultorios SET nombre = :nombre, direccion = :direccion, id_ciudad = :ciudad, telefono = :telefono, correo_contacto = :correo_contacto, horario_atencion = :horario_atencion, estado = :estado WHERE id = :id";
 
             $resultado = $this->conexion->prepare($actualizar);
             $resultado->bindParam(':id', $data['id']);
@@ -265,7 +264,6 @@ class Consultorio
                 // Retornamos true
                 return true;
             }
-            
         } catch (PDOException $e) {
             error_log("Error en Consultorio::verificarVigenciaPlan->" . $e->getMessage());
             return false;

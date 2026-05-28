@@ -40,51 +40,62 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                         <!-- <a href="<?= BASE_URL ?>/especialista/registrar-disponibilidad" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a> -->
                     </div>
 
-                    <!-- Horarios Table -->
-                    <div class="bg-white rounded shadow-sm p-4 cont-tabla-consultorios">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Disponibilidad</th>
-                                    <th>
-                                        Especialista
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th>Consultorio</th>
-                                    <th>Fecha</th>
-                                    <th>Hora inicio</th>
-                                    <th>Hora fin</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($slots)): ?>
-                                    <?php foreach ($slots as $slot): ?>
+                    <!-- Slots Table -->
+                    <div class="card shadow-sm d-none d-lg-block">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                Lista de slots disponibles
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td><?= $slot['id_disponibilidad'] ?></td>
-                                            <td><?= $slot['nombres'] ?> <?= $slot['apellidos'] ?></td>
-                                            <td><?= $slot['nombre_consultorio'] ?></td>
-                                            <td><?= $slot['fecha'] ?></td>
-                                            <td><?= $slot['hora_inicio'] ?></td>
-                                            <td><?= $slot['hora_fin'] ?></td>
-                                            <td>
-                                                
-                                                <?php if($slot['estado_slot'] === 'Disponible') :?>
-                                                <a style="text-decoration: none;" class="badge bg-success" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
-                                                <?php elseif ($slot['estado_slot'] === 'Reservado'):?>
-                                                    <a style="text-decoration: none;" class="badge bg-secondary" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
-                                                <?php else:?>
-                                                    <a style="text-decoration: none;" class="badge bg-danger" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
-                                                <?php endif;?>
-                                            </td>
+                                            <th>Disponibilidad</th>
+                                            <th>
+                                                Especialista
+                                                <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                            </th>
+                                            <th>Consultorio</th>
+                                            <th>Fecha</th>
+                                            <th>Hora inicio</th>
+                                            <th>Hora fin</th>
+                                            <th>Estado</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <td>No hay slots registrados</td>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($slots)): ?>
+                                            <?php foreach ($slots as $slot): ?>
+                                                <tr>
+                                                    <td><?= $slot['id_disponibilidad'] ?></td>
+                                                    <td><?= $slot['nombres'] ?> <?= $slot['apellidos'] ?></td>
+                                                    <td><?= $slot['nombre_consultorio'] ?></td>
+                                                    <td><?= $slot['fecha'] ?></td>
+                                                    <td><?= $slot['hora_inicio'] ?></td>
+                                                    <td><?= $slot['hora_fin'] ?></td>
+                                                    <td>
+                                                        <?php if($slot['estado_slot'] === 'Disponible') :?>
+                                                        <span class="badge bg-success"><?= $slot['estado_slot'] ?></span>
+                                                        <?php elseif ($slot['estado_slot'] === 'Reservado'):?>
+                                                            <span class="badge bg-secondary"><?= $slot['estado_slot'] ?></span>
+                                                        <?php else:?>
+                                                            <span class="badge bg-danger"><?= $slot['estado_slot'] ?></span>
+                                                        <?php endif;?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td>No hay slots registrados</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

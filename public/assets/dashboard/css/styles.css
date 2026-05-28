@@ -2152,6 +2152,7 @@
         overflow: hidden;
         transition: all 0.4s ease;
         border: 2px solid transparent;
+        margin-bottom: 20px;
     }
 
     .consultorio-card-tipo-a:hover {
