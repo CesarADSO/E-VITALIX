@@ -76,51 +76,61 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     </div>
 
                     <!-- Consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4 d-none d-lg-block">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
+                    <div class="card shadow-sm d-none d-lg-block">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-hospital me-2"></i>
+                                Lista de consultorios
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
 
-                                <thead>
-                                    <tr>
-                                        <th>Foto</th>
-                                        <th>
-                                            Nombre
-                                            <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                        </th>
-                                        <th>Dirección</th>
-                                        <th>Teléfono</th>
-                                        <th>
-                                            Ciudad
-                                            <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                        </th>
-                                        <th>Estado</th>
-                                        <th style="width: 80px;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($consultorios)) :  ?>
-                                        <?php foreach ($consultorios as $consultorio) : ?>
+                                        <thead>
                                             <tr>
-                                                <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
-                                                <td><?= $consultorio['nombre'] ?></td>
-                                                <td><?= $consultorio['direccion'] ?></td>
-                                                <td><?= $consultorio['telefono'] ?></td>
-                                                <td><?= $consultorio['ciudad'] ?></td>
-                                                <td><?= $consultorio['estado'] ?></td>
-                                                <td>
-                                                    <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                    <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-success btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <!-- <a href="<?= BASE_URL ?>/superadmin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a> -->
-                                                </td>
+                                                <th>Foto</th>
+                                                <th>
+                                                    Nombre
+                                                    <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                                </th>
+                                                <th>Dirección</th>
+                                                <th>Teléfono</th>
+                                                <th>
+                                                    Ciudad
+                                                    <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                                </th>
+                                                <th>Estado</th>
+                                                <th style="width: 80px;">Acciones</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td>No hay consultorios registrados!</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($consultorios)) :  ?>
+                                                <?php foreach ($consultorios as $consultorio) : ?>
+                                                    <tr>
+                                                        <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
+                                                        <td><?= $consultorio['nombre'] ?></td>
+                                                        <td><?= $consultorio['direccion'] ?></td>
+                                                        <td><?= $consultorio['telefono'] ?></td>
+                                                        <td><?= $consultorio['ciudad'] ?></td>
+                                                        <td><?= $consultorio['estado'] ?></td>
+                                                        <td>
+                                                            <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-info btn-sm" title="Consultar consultorio"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                            <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-success btn-sm" title="Editar consultorio"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                            <!-- <a href="<?= BASE_URL ?>/superadmin/eliminar-consultorio?accion=eliminar&id=<?= $consultorio['id'] ?>"><i class="fa-solid fa-trash-can"></i></a> -->
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td>No hay consultorios registrados!</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
