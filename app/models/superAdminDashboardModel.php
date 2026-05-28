@@ -73,7 +73,7 @@ class SuperAdminDashboard
     // 5. Mostrar los últimos 5 consultorios registrados
     public function mostrarUltimosConsultorios() {
         try {
-            $mostrar = "SELECT c.nombre, c.ciudad, c.estado, a.nombres, a.apellidos FROM administradores a LEFT JOIN consultorios c ON a.id_consultorio = c.id ORDER BY c.id DESC LIMIT 5";
+            $mostrar = "SELECT c.nombre, c.estado, a.nombres, a.apellidos, ciu.nombre AS ciudad FROM administradores a LEFT JOIN consultorios c ON a.id_consultorio = c.id INNER JOIN ciudades ciu ON c.id_ciudad = ciu.id ORDER BY c.id DESC LIMIT 5";
 
             $resultado = $this->conexion->prepare($mostrar);
             $resultado->execute();

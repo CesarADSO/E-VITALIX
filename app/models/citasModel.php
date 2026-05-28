@@ -24,7 +24,6 @@ class CitasModel
                 SELECT 
                     p.id AS id_paciente,
                     c.id AS id_cita,
-                    c.id_servicio,
                     a.fecha,
                     a.hora_inicio,
                     a.hora_fin,
@@ -33,16 +32,11 @@ class CitasModel
                     CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente,
                     p.telefono AS telefono_paciente,
                     u.email AS email_paciente,
-                    
-                    s.nombre AS servicio_nombre,
-                    s.duracion_minutos AS servicio_duracion,
-                    
-                    s.precio AS servicio_precio
+                    es.nombre AS especialidad
                 FROM citas c
                 INNER JOIN pacientes p ON c.id_paciente = p.id
                 INNER JOIN usuarios u ON p.id_usuario = u.id
-                
-                INNER JOIN servicios s ON c.id_servicio = s.id
+                INNER JOIN especialidades es ON c.id_especialidad = es.id
                 INNER JOIN agenda_slot a ON c.id_agenda_slot = a.id
                 WHERE a.id_especialista = :id_especialista
                 
@@ -229,7 +223,7 @@ class CitasModel
 
             // IMPORTANTE FALTA ENVIO DE CORREO ELECTRÓNICO AL PACIENTE INFORMANDO QUE SE ACEPTO LA CITA
             // OBTENEMOS LOS DATOS QUE NECESITAMOS PARA ENVIAR EL CORREO
-            $obtenerDatos = "SELECT especialistas.nombres, especialistas.apellidos, especialidades.nombre AS nombre_especialidad, consultorios.nombre AS nombre_consultorio, consultorios.ciudad, consultorios.direccion, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, servicios.nombre AS nombre_servicio, usuarios.email FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN servicios ON citas.id_servicio = servicios.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id INNER JOIN pacientes ON citas.id_paciente = pacientes.id INNER JOIN usuarios ON pacientes.id_usuario = usuarios.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE citas.id = :id_cita";
+            $obtenerDatos = "SELECT especialistas.nombres, especialistas.apellidos, especialidades.nombre AS nombre_especialidad, consultorios.nombre AS nombre_consultorio, consultorios.ciudad, consultorios.direccion, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, usuarios.email FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id INNER JOIN pacientes ON citas.id_paciente = pacientes.id INNER JOIN usuarios ON pacientes.id_usuario = usuarios.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id WHERE citas.id = :id_cita";
 
             $resultado2 = $this->conexion->prepare($obtenerDatos);
             $resultado2->bindParam(':id_cita', $id);
@@ -249,7 +243,7 @@ class CitasModel
             // DATOS CITA
             $data['fechaCita'] = $datos['fecha'];
             $data['horaCita'] = $datos['hora_inicio'] . ' - ' . $datos['hora_fin'];
-            $data['tipoConsulta'] = $datos['nombre_servicio'];
+            $data['tipoConsulta'] = $datos['nombre_especialidad'];
 
             // EMAIL DEL PACIENTE
             $emailPaciente = $datos['email'];
@@ -873,7 +867,7 @@ class CitasModel
 
             // IMPORTANTE FALTA ENVÍO DE CORREO ELECTRONICO AL PACIENTE INFORMANDO QUE SE DECLINO LA CITA
             // OBTENEMOS LOS DATOS QUE NECESITAMOS PARA ENVIAR EL CORREO
-            $obtenerDatos = "SELECT especialistas.nombres, especialistas.apellidos, especialidades.nombre AS nombre_especialidad, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, servicios.nombre AS nombre_servicio, usuarios.email FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN servicios ON citas.id_servicio = servicios.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id INNER JOIN pacientes ON citas.id_paciente = pacientes.id INNER JOIN usuarios ON pacientes.id_usuario = usuarios.id WHERE citas.id = :id_cita";
+            $obtenerDatos = "SELECT especialistas.nombres, especialistas.apellidos, especialidades.nombre AS nombre_especialidad, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, usuarios.email FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN especialidades ON especialistas.id_especialidad = especialidades.id INNER JOIN pacientes ON citas.id_paciente = pacientes.id INNER JOIN usuarios ON pacientes.id_usuario = usuarios.id WHERE citas.id = :id_cita";
 
             $resultado2 = $this->conexion->prepare($obtenerDatos);
             $resultado2->bindParam(':id_cita', $id);
@@ -889,7 +883,7 @@ class CitasModel
             // DATOS CITA
             $data['fechaCita'] = $datos['fecha'];
             $data['horaCita'] = $datos['hora_inicio'] . ' - ' . $datos['hora_fin'];
-            $data['tipoConsulta'] = $datos['nombre_servicio'];
+            $data['tipoConsulta'] = $datos['nombre_especialidad'];
 
             // EMAIL DEL PACIENTE
             $emailPaciente = $datos['email'];

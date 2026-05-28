@@ -18,11 +18,11 @@ class CalendarioModel
             $consulta = "SELECT s.id, s.fecha, s.hora_inicio, s.hora_fin, s.estado_slot, 
                         c.id AS cita_id, c.estado_cita, 
                         CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente, 
-                        srv.nombre AS servicio_nombre 
+                        es.nombre AS especialidad
                 FROM agenda_slot s 
                 LEFT JOIN citas c ON s.id = c.id_agenda_slot 
                 LEFT JOIN pacientes p ON p.id = c.id_paciente 
-                LEFT JOIN servicios srv ON c.id_servicio = srv.id 
+                LEFT JOIN especialidades es ON c.id_especialidad = es.id 
                 WHERE s.id_especialista = :id_especialista 
                 AND s.fecha BETWEEN :fecha_inicio AND :fecha_fin AND (
                         s.fecha > CURDATE() 
@@ -76,7 +76,7 @@ class CalendarioModel
                     'extendedProps' => [
                         'tipo' => $row['cita_id'] ? 'cita' : 'slot',
                         'paciente' => $row['nombre_paciente'] ?? 'N/A',
-                        'servicio' => $row['servicio_nombre'] ?? 'N/A',
+                        'especialidad' => $row['especialidad'] ?? 'N/A',
                         'estado' => $row['estado_cita'] ?? $row['estado_slot']
                     ]
                 ];

@@ -90,7 +90,7 @@ function agendarCita()
 {
     
     $id_slot = $_POST['id_slot'] ?? '';
-    $id_servicio = $_POST['id_servicio'] ?? '';
+    $id_especialidad = $_POST['id_especialidad'] ?? '';
     //1. ATRAPAMOS EL ID DEL CONSULTORIO
     $id_consultorio = $_POST['id_consultorio'] ?? '';
 
@@ -103,7 +103,7 @@ function agendarCita()
     $id_paciente = $_SESSION['user']['id_paciente'] ?? null;
 
     // VALIDAMOS LOS DATOS OBLIGATORIOS
-    if (empty($id_slot) || empty($id_servicio) || empty($id_paciente)) {
+    if (empty($id_slot) || empty($id_especialidad) || empty($id_paciente)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -138,7 +138,7 @@ function agendarCita()
     // EN EL ARREGLO DATA INSERTAMOS LOS DATOS QUE VAMOS A LLEVAR AL MÉTODO DEL MODELO
     $data = [
         'id_slot' => $id_slot,
-        'id_servicio' => $id_servicio,
+        'id_especialidad' => $id_especialidad,
         'id_paciente' => $id_paciente
     ];
 
@@ -148,8 +148,6 @@ function agendarCita()
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/lista-de-citas');
-    } else {
-        mostrarSweetAlert('error', 'No se pudo registrar la cita', 'Intente nuevamente');
     }
 }
 

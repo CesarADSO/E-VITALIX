@@ -32,7 +32,6 @@ function registrarConsultaMedica()
     // GUARDAMOS EN VARIABLES LOS DATOS QUE SE VAN A ENVIAR A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $id_cita = $_POST['id_cita'] ?? '';
     $id_paciente = $_POST['id_paciente'] ?? '';
-    $id_servicio = $_POST['id_servicio'] ?? '';
     $motivo_consulta = $_POST['motivo_consulta'] ?? '';
     $sintomas = $_POST['sintomas'] ?? '';
     $diagnostico = $_POST['diagnostico'] ?? '';
@@ -72,7 +71,6 @@ function registrarConsultaMedica()
     $data = [
         'id_cita' => $id_cita,
         'id_paciente' => $id_paciente,
-        'id_servicio'=> $id_servicio,
         'id_especialista' => $id_especialista,
         'motivo_consulta' => $motivo_consulta,
         'sintomas' => $sintomas,

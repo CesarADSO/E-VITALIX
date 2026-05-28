@@ -16,6 +16,7 @@ require_once BASE_PATH . '/app/helpers/session_especialista.php';
     <!-- FullCalendar CSS -->
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css' rel='stylesheet' />
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/css/styles.css">
+    <link rel="icon" href="<?= BASE_URL ?>/public/assets/dashboard/img/FAVICON.png">
 </head>
 <style>
     /* Personalización de colores para E-VITALIX */

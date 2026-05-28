@@ -110,7 +110,7 @@ require_once BASE_PATH . '/app/controllers/pacienteController.php';
                                 <div class="badge bg-<?= $colorEstado ?>"><?= $cita['estado_cita'] ?></div>
                                 <div>
                                     <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                                <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success" title="Reprogramar cita médica">
+                                                <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success" title="Reprogramar cita médica">
                                                     <i class="fa-solid fa-pen-to-square text-white"></i>
                                                 </a>
                                                 <a href="<?= BASE_URL ?>/paciente/cancelar-cita?id_cita=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger " title="Cancelar cita médica">

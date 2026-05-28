@@ -70,47 +70,57 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     </div>
 
-                    <!-- Consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4 d-none d-lg-block">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
+                    <!-- Usuarios Table -->
+                    <div class="card shadow-sm d-none d-lg-block">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-people me-2"></i>
+                                Lista de usuarios
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
 
-                                <thead>
-                                    <tr>
-
-
-                                        <th>
-                                            Correo
-                                            <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                        </th>
-                                        <th>rol</th>
-
-                                        <th>Estado</th>
-                                        <th style="width: 80px;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($usuarios)) :  ?>
-                                        <?php foreach ($usuarios as $usuario) : ?>
+                                        <thead>
                                             <tr>
 
 
-                                                <td><?= $usuario['email'] ?></td>
-                                                <td><?= $usuario['rol'] ?></td>
-                                                <td><?= $usuario['estado'] ?></td>
-                                                <td>
-                                                    <a href="<?= BASE_URL ?>/superadmin/actualizar-usuario?id=<?= $usuario['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <!-- <a href="<?= BASE_URL ?>/superadmin/eliminar-usuario?accion=eliminar&id=<?= $usuario['id'] ?>"><i class="fa-solid fa-trash-can"></i></a> -->
-                                                </td>
+                                                <th>
+                                                    Correo
+                                                    <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                                </th>
+                                                <th>Rol</th>
+
+                                                <th>Estado</th>
+                                                <th style="width: 80px;">Acciones</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td>No hay usuarios registrados!</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($usuarios)) :  ?>
+                                                <?php foreach ($usuarios as $usuario) : ?>
+                                                    <tr>
+
+
+                                                        <td><?= $usuario['email'] ?></td>
+                                                        <td><?= $usuario['rol'] ?></td>
+                                                        <td><?= $usuario['estado'] ?></td>
+                                                        <td>
+                                                            <a href="<?= BASE_URL ?>/superadmin/actualizar-usuario?id=<?= $usuario['id'] ?>" class="btn btn-sm btn-info" title="Editar usuario"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                            <!-- <a href="<?= BASE_URL ?>/superadmin/eliminar-usuario?accion=eliminar&id=<?= $usuario['id'] ?>"><i class="fa-solid fa-trash-can"></i></a> -->
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td>No hay usuarios registrados!</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

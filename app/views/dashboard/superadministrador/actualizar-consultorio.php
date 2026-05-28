@@ -2,6 +2,7 @@
 require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 // ENLAZAMOS LA DEPENDENCIA, EN ESTE CASO EL CONTROLADOR QUE TIENE LA FUNCIÓN DE CONSULTAR CONSULTORIOS
 require_once BASE_PATH . '/app/controllers/consultorioController.php';
+require_once BASE_PATH . '/app/controllers/ciudadesController.php';
 
 // ASIGNAMOS EL VALOR ID DEL REGISTRO SEGÚN LA TABLA
 $id = $_GET['id'];
@@ -18,6 +19,8 @@ $horario = json_decode($consultorio['horario_atencion'], true);
 
 // Si existen días en el JSON los guardamos, si no creamos un array vacío
 $diasSeleccionados = isset($horario['dias']) ? $horario['dias'] : [];
+
+$ciudades = listarCiudades();
 
 ?>
 
@@ -88,7 +91,16 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad" value="<?= $consultorio['ciudad'] ?>">
+                                        <select name="ciudad" class="form-select" id="">
+                                            <option value="<?= $consultorio['id_ciudad'] ?>"><?= $consultorio['ciudad'] ?></option>
+                                            <?php if(!empty($ciudades)): ?>
+                                                <?php foreach($ciudades as $ciudad):?>
+                                                    <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                                                <?php endforeach;?>
+                                                <?php else:?>
+                                                    <option value="">No hay ciudades registradas</option>
+                                                <?php endif;?>
+                                        </select>
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="telefono" class="form-label">Teléfono</label>

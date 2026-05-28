@@ -1,12 +1,10 @@
 <?php
 include_once __DIR__ . '/../../layouts/header_paciente.php';
 require_once BASE_PATH . '/app/controllers/slotController.php';
-require_once BASE_PATH . '/app/controllers/servicioController.php';
 require_once BASE_PATH . '/app/controllers/especialistaController.php';
 
 $id_consultorio = $_GET['id_consultorio'];
-// $id_especialidad = $_GET['id_especialidad'];
-$id_servicio = $_GET['id_servicio'];
+$id_especialidad = $_GET['id_especialidad'];
 
 $id_especialista = $_GET['id_especialista'] ?? null;
 
@@ -97,8 +95,8 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_especialista);
                                             <form action="<?= BASE_URL ?>/paciente/confirmar-cita" method="POST">
                                                 <input type="hidden" name="accion" value="agendar">
                                                 <input type="hidden" name="id_slot" value="<?= $espacioDeAgendamiento['id_slot'] ?>">
+                                                <input type="hidden" name="id_especialidad" value="<?= $id_especialidad ?>">
                                                 <input type="hidden" name="id_consultorio" value="<?= $id_consultorio ?>">
-                                                <input type="hidden" name="id_servicio" value="<?= $id_servicio ?>">
                                                 <button type="submit" class="btn-seleccionar">
                                                     <i class="bi bi-check-circle-fill"></i>
                                                     Seleccionar este Turno
