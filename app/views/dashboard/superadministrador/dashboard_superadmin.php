@@ -9,6 +9,7 @@ require_once BASE_PATH . '/app/helpers/session_superadmin.php';
 include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
 ?>
+
 <body>
     <div class="container-fluid">
         <div class="row">
@@ -26,9 +27,9 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <!-- Top Bar -->
                     <!-- AQUI VA EL INCLUDE DEL TOP BAR -->
 
-                <?php
-                include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
-                ?>
+                    <?php
+                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
+                    ?>
 
 
                     <!-- Stats Cards -->
@@ -80,7 +81,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <!-- Bottom Section -->
                     <div class="bottom-section">
                         <!-- Specialists Table -->
-                        <div class="specialists-card">
+                        <div class="specialists-card d-none d-lg-block">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h3 class="section-title mb-0">últimos 5 consultorios</h3>
                             </div>
@@ -90,23 +91,54 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                 <div>Administrador</div>
                                 <div>Estado</div>
                             </div>
-                            <?php if(!empty($ultimosConsultorios)):?>
-                            <?php foreach ($ultimosConsultorios as $consultorio): ?>
-                            <div class="specialist-row">
-                                <div class="specialist-info">
-                                    <div class="specialist-name"><?= $consultorio['nombre'] ?></div>
-                                </div>
-                                <div><?= $consultorio['ciudad'] ?></div>
-                                <div><?= $consultorio['nombres'] ?> <?= $consultorio['apellidos'] ?></div>
-                                <div>
-                                    <span class="status-badge status-espera"><?= $consultorio['estado'] ?></span>
-                                </div>
-                            </div>
-                            <?php endforeach; ?>
+                            <?php if (!empty($ultimosConsultorios)): ?>
+                                <?php foreach ($ultimosConsultorios as $consultorio): ?>
+                                    <div class="specialist-row">
+                                        <div class="specialist-info">
+                                            <div class="specialist-name"><?= $consultorio['nombre'] ?></div>
+                                        </div>
+                                        <div><?= $consultorio['ciudad'] ?></div>
+                                        <div><?= $consultorio['nombres'] ?> <?= $consultorio['apellidos'] ?></div>
+                                        <div>
+                                            <span class="status-badge status-espera"><?= $consultorio['estado'] ?></span>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
                             <?php else: ?>
                                 <div class="text-center py-4">No hay consultorios registrados.</div>
                             <?php endif; ?>
-                         </div>
+                        </div>
+
+                        <!-- VISTA MOVIL -->
+                    <div class="row d-lg-none mt-3">
+                        <?php if (!empty($ultimosConsultorios)): ?>
+                            <?php foreach ($ultimosConsultorios as $consultorio): ?>
+                                <div class="col-md-12 mt-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <h5 class="card-title"><?= $consultorio['nombre'] ?></h5>
+                                                <?php if ($consultorio['estado'] === 'Activo'): ?>
+                                                    <span class="status-badge bg-success text-white"><?= $consultorio['estado'] ?></span>
+                                                <?php else: ?>
+                                                    <span class="status-badge bg-danger text-white"><?= $consultorio['estado'] ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="mb-3">
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Ciudad: <?= $consultorio['ciudad'] ?></h6>
+                                            </div>
+                                            <div class="cont-botones d-flex justify-content-end gap-2">
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-success btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/consultar-consultorio?id=<?= $consultorio['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-magnifying-glass"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="col-12 text-center py-4">No hay consultorios registrados.</div>
+                        <?php endif; ?>
+                    </div>
 
                         <!-- Appointments Chart -->
                         <div class="appointments-card">
@@ -132,19 +164,19 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     </div>
                 </div>
 
-                
-                
-                
+
+
+
                 <!-- End Consultorios Section -->
 
-                
+
                 <!-- End Profesionales Section -->
 
             </div>
         </div>
     </div>
-<!-- AQUI VA EL FOOTER INCLUDE -->
+    <!-- AQUI VA EL FOOTER INCLUDE -->
 
-<?php
-include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
-?>
+    <?php
+    include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
+    ?>
