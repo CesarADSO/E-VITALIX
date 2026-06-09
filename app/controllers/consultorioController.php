@@ -13,7 +13,7 @@ switch ($method) {
 
         if ($accion === 'buscarPorEspecialidad') {
 
-            $consultorios = consultarConsultoriosPorEspecialidad();
+            $consultorios = consultarConsultoriosPorEspecialidadYCiudad();
 
             require_once __DIR__ . '/../views/dashboard/paciente/buscar-consultorio.php';
             exit();
@@ -260,16 +260,17 @@ function traerEspecialidadesPorConsultorio($id)
     return $consultorio;
 }
 
-function consultarConsultoriosPorEspecialidad()
+function consultarConsultoriosPorEspecialidadYCiudad()
 {
     // echo 'llegue aqui a la funcion';
     // exit();
 
     $id_especialidad = $_POST['id_especialidad'] ?? null;
+    $id_ciudad = $_POST['id_ciudad'] ?? null;
 
     $objConsultorio = new Consultorio();
 
-    $resultado = $objConsultorio->listarConsultoriosPorEspecialidad($id_especialidad);
+    $resultado = $objConsultorio->listarConsultoriosPorEspecialidadYCiudad($id_especialidad, $id_ciudad);
 
     return $resultado;
 }

@@ -8,6 +8,9 @@ require_once BASE_PATH . '/app/controllers/citaController.php';
 // 1. Traer todos las citas de la base de datos
 $todas_las_citas = mostrarCitas();
 
+// var_dump($todas_las_citas);
+// die();
+
 
 // 2. Configurar la paginación
 $registros_por_pagina = 9; // Mostrar 10 citas por página
@@ -72,12 +75,12 @@ $citas = is_array($todas_las_citas) ? array_slice($todas_las_citas, $indice_inic
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title fw-bold">Dr. <?= $cita['especialista_nombre'] . ' ' . $cita['especialista_apellido'] ?></h5>
-                                            <p class="card-text text-primary mb-1"><i class="bi bi-stethoscope"></i> <?= $cita['servicio_nombre'] ?></p>
+                                            <p class="card-text"><?= $cita['especialidad_nombre'] ?></p>
                                             <p class="card-text"><i class="bi bi-clock"></i> <?= date('h:i A', strtotime($cita['hora_inicio'])) ?></p>
                                         </div>
                                         <div class="card-footer d-flex justify-content-between bg-transparent border-0 pb-3">
                                             <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
-                                                <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success mx-2" title="Reprogramar cita médica">
+                                                <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success mx-2" title="Reprogramar cita médica">
                                                     <i class="fa-solid fa-pen-to-square text-white"></i>
                                                 </a>
                                                 <a href="<?= BASE_URL ?>/paciente/cancelar-cita?id_cita=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger mx-2" title="Cancelar cita médica">

@@ -72,51 +72,61 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <!-- <a href="<?= BASE_URL ?>/superadmin/registrar-administrador" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a> -->
                     </div>
 
-                    <!-- Consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4 d-none d-lg-block">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Foto</th>
-                                        <th>
-                                            Nombres y apellidos
-                                        </th>
-                                        <th>
-                                            Consultorio
-                                        </th>
-                                        <th>Teléfono</th>
-                                        <th>Tipo de documento</th>
-                                        <th>Número de documento</th>
-                                        <th>Estado</th>
-                                        <th style="width: 80px;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($administradores)) : ?>
-                                        <?php foreach ($administradores as $administrador) : ?>
+                    <!-- Administradores Table -->
+                    <div class="card shadow-sm d-none d-lg-block">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-person-gear me-2"></i>
+                                Lista de administradores de consultorios
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
-                                                <td><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></td>
-                                                <td><?= $administrador['nombre_consultorio'] ?></td>
-                                                <td><?= $administrador['telefono'] ?></td>
-                                                <td><?= $administrador['tipo_documento'] ?></td>
-                                                <td><?= $administrador['numero_documento'] ?></td>
-                                                <td><?= $administrador['estado'] ?></td>
-                                                <td>
-                                                    <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                                    <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <a href="<?= BASE_URL ?>/superadmin/eliminar-administrador?id=<?= $administrador['id'] ?>&accion=eliminar&id_usuario=<?= $administrador['id_usuario'] ?>"><i class="fa-solid fa-trash-can"></i></a>
-                                                </td>
+                                                <th>Foto</th>
+                                                <th>
+                                                    Nombres y apellidos
+                                                </th>
+                                                <th>
+                                                    Consultorio
+                                                </th>
+                                                <th>Teléfono</th>
+                                                <th>Tipo de documento</th>
+                                                <th>Número de documento</th>
+                                                <th>Estado</th>
+                                                <th style="width: 80px;">Acciones</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <td>
-                                            no hay administradores de consultorio registrados
-                                        </td>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($administradores)) : ?>
+                                                <?php foreach ($administradores as $administrador) : ?>
+                                                    <tr>
+                                                        <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
+                                                        <td><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></td>
+                                                        <td><?= $administrador['nombre_consultorio'] ?></td>
+                                                        <td><?= $administrador['telefono'] ?></td>
+                                                        <td><?= $administrador['tipo_documento'] ?></td>
+                                                        <td><?= $administrador['numero_documento'] ?></td>
+                                                        <td><?= $administrador['estado'] ?></td>
+                                                        <td>
+                                                            <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
+                                                            <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-sm btn-info" title="Editar administrador"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                            <a href="<?= BASE_URL ?>/superadmin/eliminar-administrador?id=<?= $administrador['id'] ?>&accion=eliminar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-sm btn-danger" title="Eliminar administrador"><i class="fa-solid fa-trash-can"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td>No hay administradores de consultorio registrados</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

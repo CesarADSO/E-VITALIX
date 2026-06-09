@@ -110,6 +110,14 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                         <div>
                                             <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
                                                 <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_servicio=<?= $cita['id_servicio'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success" title="Reprogramar cita médica">
+                            <div class="specialist-row">
+                                    <div class="specialist-name"><?= $cita['nombre_especialista'] ?> <?= $cita['apellido_especialista'] ?></div>
+                                <div><?= $cita['fecha'] ?></div>
+                                <div><?= date('h:i A', strtotime($cita['hora_inicio'])) ?></div>
+                                <div class="badge bg-<?= $colorEstado ?>"><?= $cita['estado_cita'] ?></div>
+                                <div>
+                                    <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                <a href="<?= BASE_URL ?>/paciente/reprogramar-cita?id_cita=<?= $cita['id_cita'] ?>&id_consultorio=<?= $cita['id_consultorio'] ?>&id_especialidad=<?= $cita['id_especialidad'] ?>&id_especialista=<?= $cita['id_especialista'] ?>" class="btn btn-sm btn-success" title="Reprogramar cita médica">
                                                     <i class="fa-solid fa-pen-to-square text-white"></i>
                                                 </a>
                                                 <a href="<?= BASE_URL ?>/paciente/cancelar-cita?id_cita=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger " title="Cancelar cita médica">

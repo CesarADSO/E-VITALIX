@@ -44,51 +44,61 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <!-- <a href="<?= BASE_URL ?>/superadmin/registrar-consultorio" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-plus-lg"></i> AÑADIR</a> -->
                     </div>
 
-                    <!-- Consultorios Table -->
-                    <div class="bg-white rounded shadow-sm p-4">
-                        <!-- <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=asignaciones" target="_blank">generar reporte pdf</a> -->
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
+                    <!-- Asignación de Consultorios Table -->
+                    <div class="card shadow-sm">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-link me-2"></i>
+                                Asignación de consultorios a administradores
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <!-- <a class="btn btn-primary boton-reporte" href="<?= BASE_URL ?>/superadmin/generar-reporte?tipo=asignaciones" target="_blank">generar reporte pdf</a> -->
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
 
-                            <thead>
-                                <tr>
-                                    <th>Foto</th>
-                                    <th>
-                                        Administrador
-                                    </th>
-                                    <th>Consultorio</th>
-                                    <th style="width: 80px;">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($datos)) :  ?>
-                                    <?php foreach ($datos as $administrador) : ?>
+                                    <thead>
                                         <tr>
-                                            <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
-                                            <td><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></td>
-                                            <td>
-                                                <?php
-                                                    if (empty($administrador['id_consultorio']) || $administrador['id_consultorio'] === 0) {
-                                                        echo '<span>Sin consultorio asignado</span>';
-                                                    }
-                                                    else {
-                                                        echo $administrador['nombre_consultorio'];
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <a href="<?= BASE_URL ?>/superadmin/asignar-consultorio?id=<?= $administrador['id'] ?>"><i class="fa-solid fa-plus"></i></a>
-                                                <a href="<?= BASE_URL ?>/superadmin/desasignar-consultorio?accion=desasignar&id=<?= $administrador['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
-                                            </td>
+                                            <th>Foto</th>
+                                            <th>
+                                                Administrador
+                                            </th>
+                                            <th>Consultorio</th>
+                                            <th style="width: 80px;">Acciones</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td>No hay administradores registrados</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($datos)) :  ?>
+                                            <?php foreach ($datos as $administrador) : ?>
+                                                <tr>
+                                                    <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
+                                                    <td><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></td>
+                                                    <td>
+                                                        <?php
+                                                            if (empty($administrador['id_consultorio']) || $administrador['id_consultorio'] === 0) {
+                                                                echo '<span>Sin consultorio asignado</span>';
+                                                            }
+                                                            else {
+                                                                echo $administrador['nombre_consultorio'];
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?= BASE_URL ?>/superadmin/asignar-consultorio?id=<?= $administrador['id'] ?>" class="btn btn-sm btn-success" title="Asignar consultorio"><i class="fa-solid fa-plus"></i></a>
+                                                        <a href="<?= BASE_URL ?>/superadmin/desasignar-consultorio?accion=desasignar&id=<?= $administrador['id'] ?>" class="btn btn-sm btn-danger" title="Desasignar consultorio"><i class="fa-solid fa-trash-can"></i></a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td>No hay administradores registrados</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

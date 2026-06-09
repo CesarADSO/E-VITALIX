@@ -76,28 +76,36 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     </div>
 
                     <!-- Especialistas Table -->
-                    <div class="bg-white rounded shadow-sm p-4 d-none d-lg-block">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Foto</th>
-                                        <th>
-                                            Nombres y apellidos
-                                            <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                        </th>
-                                        <th>Telefono</th>
-                                        <th>Especialidad</th>
-                                        <th>Estado</th>
-                                        <th style="width: 80px;">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($especialistas)) : ?>
-                                        <?php foreach ($especialistas as $especialista): ?>
+                    <div class="card shadow-sm d-none d-lg-block">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-person-badge me-2"></i>
+                                Lista de especialistas
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    <div class="user-avatar">
+                                                <th>Foto</th>
+                                                <th>
+                                                    Nombres y apellidos
+                                                    <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                                </th>
+                                                <th>Telefono</th>
+                                                <th>Especialidad</th>
+                                                <th>Estado</th>
+                                                <th style="width: 80px;">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($especialistas)) : ?>
+                                                <?php foreach ($especialistas as $especialista): ?>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="user-avatar">
                                                         <img class="especialistaImg" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $especialista['foto'] ?>" alt="<?= $especialista['nombres'] ?>">
                                                     </div>
                                                 </td>
@@ -118,8 +126,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </table>
                         </div>
                     </div>
-
-                    <!-- VISTA MOVIL -->
+                    </div>
+                    </div>
                     <div class="row d-lg-none mt-3">
                         <?php if (!empty($especialistas)): ?>
                             <?php foreach ($especialistas as $especialista): ?>
