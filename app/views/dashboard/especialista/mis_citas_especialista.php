@@ -28,7 +28,7 @@ $estadisticas = $data['estadisticas'];
                 <!-- Título de la sección -->
                 <div class="mb-4">
                     <h3 class="fw-bold">Mis Citas</h3>
-                    <p class="text-muted">Gestiona las citas que los pacientes han agendado contigo</p>
+                    <p class="text-muted d-none d-md-block">Gestiona las citas que los pacientes han agendado contigo</p>
                 </div>
 
                 <!-- Estadísticas de Citas -->
@@ -56,7 +56,7 @@ $estadisticas = $data['estadisticas'];
                 </div>
 
                 <!-- Tabla de Citas -->
-                <div class="card shadow-sm">
+                <div class="card shadow-sm d-none d-lg-block">
                     <div class="card-header card-header-primary">
                         <h5 class="mb-0 text-white">
                             <i class="bi bi-calendar-check me-2"></i>
@@ -158,11 +158,73 @@ $estadisticas = $data['estadisticas'];
                         <?php endif; ?>
                     </div>
                 </div>
+
+
+                <!-- VISTA MOVIL -->
+                <div class="row d-lg-none mt-3">
+                    <?php if (!empty($citas)): ?>
+                        <?php foreach ($citas as $cita): ?>
+                            <div class="col-md-12 mt-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title text-truncate"><?= $cita['nombre_paciente'] ?></h5>
+                                            <?php if ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                <span class="status-badge status status-aceptada">
+                                                    <?= $cita['estado_cita'] ?>
+                                                </span>
+                                            <?php elseif ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                <span class="status-badge status status-pendiente">
+                                                    <?= $cita['estado_cita'] ?>
+                                                </span>
+                                            <?php elseif ($cita['estado_cita'] === 'COMPLETADA'): ?>
+                                                <span class="status-badge status status-completada">
+                                                    <?= $cita['estado_cita'] ?>
+                                                </span>
+                                            <?php else: ?>
+                                                <span class="status-badge status status-cancelada">
+                                                    <?= $cita['estado_cita'] ?>
+                                                </span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="mb-3">
+                                            <h6 class="card-subtitle mb-2 text-body-secondary">Fecha: <?= $cita['fecha'] ?></h6>
+                                            <h6 class="card-subtitle mb-2 text-body-secondary">Hora: <?= date('h:i A', strtotime($cita['hora_inicio'])) ?></h6>
+                                            <h6 class="card-subtitle mb-2 text-body-secondary">Servicio: <?= $cita['servicio_nombre'] ?></h6>
+                                        </div>
+                                        <div class="cont-botones d-flex justify-content-end gap-2">
+                                            <?php if ($cita['estado_cita'] === 'PENDIENTE'): ?>
+                                                <a href="<?= BASE_URL ?>/especialista/aceptar-cita?id=<?= $cita['id_cita'] ?>&accion=aceptar" class="btn btn-sm btn-success btn-aceptar"
+                                                    data-cita-id="<?= $cita['id_cita'] ?>"
+                                                    title="Aceptar cita">
+                                                    <i class="bi bi-check-circle"></i></a>
+                                                <a href="<?= BASE_URL ?>/especialista/cancelar-cita?id=<?= $cita['id_cita'] ?>&accion=cancelar" class="btn btn-sm btn-danger btn-cancelar"
+                                                    data-cita-id="<?= $cita['id_cita'] ?>"
+                                                    title="Cancelar cita">
+                                                    <i class="bi bi-x-circle"></i></a>
+                                            <?php elseif ($cita['estado_cita'] === 'CONFIRMADA'): ?>
+                                                <a href="<?= BASE_URL ?>/especialista/iniciar-consulta?id_cita=<?= $cita['id_cita'] ?>&id_paciente=<?= $cita['id_paciente'] ?>&id_servicio=<?= $cita['id_servicio'] ?>" class="btn btn-sm btn-info" title="Iniciar consulta"><i class="fa-solid fa-book" style="color: #fff;"></i></a>
+                                            <?php else: ?>
+                                                <span class="text-muted small">Sin acciones disponibles</span>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No hay especialistas registrados.</p>
+
+                    <?php endif; ?>
+                </div>
+
+
+
             </div>
         </div>
     </div>
 
-    <!-- Modal de Confirmación -->
+    <!-- Modal de Confirmación
     <div class="modal fade" id="modalConfirmacion" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -179,9 +241,9 @@ $estadisticas = $data['estadisticas'];
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- Modal de Detalle de Cita -->
+    <!-- Modal de Detalle de Cita
     <div class="modal fade" id="modalDetalle" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -201,7 +263,7 @@ $estadisticas = $data['estadisticas'];
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <!-- AQUI VA EL FOOTER INCLUDE -->

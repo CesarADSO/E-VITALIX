@@ -37,6 +37,11 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                 include_once __DIR__ . '/../../layouts/topbar_especialista.php';
                 ?>
 
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                        <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
+                        <a href="<?= BASE_URL ?>/especialista/pacientes-atendidos" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                    </div>
+
                 <!-- Formulario de Registro de Administrador de Consultorio -->
                 <div class="bg-white rounded shadow-sm p-4">
                     <h4 class="mb-4">Consultar paciente</h4>
@@ -59,11 +64,6 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     value="<?= $paciente['apellidos'] ?>" disabled>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label for="edad" class="form-label">Edad</label>
-                                <input type="number" class="form-control" id="edad" name="edad"
-                                    value="<?= $paciente['edad'] ?>" disabled>
-                            </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="tipo_documento" class="form-label">Tipo de documento</label>

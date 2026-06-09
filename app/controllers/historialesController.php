@@ -7,7 +7,11 @@ switch ($method) {
     case 'GET':
         if (isset($_GET['id_paciente'])) {
             consultarHistorialClinicoPaciente($_GET['id_paciente']);
-        } else {
+        }
+        elseif (isset($_GET['id_consulta'])) {
+            consultarConsultaMedica($_GET['id_consulta']);
+        }
+        else {
             mostrarPacientesConConsulta();
         }
         break;
@@ -50,4 +54,14 @@ function consultarHistorialClinicoPaciente($id_paciente)
         'paciente'   => $objHistorial->consultarInfoPaciente($id_paciente),
         'historial'  => $objHistorial->consultarHistorialClinicoPaciente($id_paciente)
     ];
+}
+
+function consultarConsultaMedica($id_consulta) {
+    // INSTANCIAMOS EL MODELO
+    $objHistorial = new Historiales();
+
+    // ACCEDEMOS AL MÉTODO DE LA CLASE HISTORIALES
+    $resultado = $objHistorial->consultarConsultaMedica($id_consulta);
+
+    return $resultado;
 }

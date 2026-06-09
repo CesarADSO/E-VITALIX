@@ -1,5 +1,6 @@
 <?php
 $hoy = date("Y");
+date_default_timezone_set('America/Bogota');
 ?>
 
 <!DOCTYPE html>
@@ -142,7 +143,7 @@ $hoy = date("Y");
                         </td>
                         <td><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></td>
                         <td><?= $especialista['telefono'] ?></td>
-                        <td><?= $especialista['especialidad'] ?></td>
+                        <td><?= $especialista['nombre_especialidad'] ?></td>
                         <td><?= $especialista['estado'] ?></td>
                     </tr>
                 <?php endforeach; ?>

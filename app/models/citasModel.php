@@ -174,7 +174,8 @@ class CitasModel
      */
     public function contarCitasPorEstado($id_especialista)
     {
-        $consulta = "
+        try {
+            $consulta = "
         SELECT 
             estado_cita,
             COUNT(*) AS total
@@ -185,22 +186,34 @@ class CitasModel
         GROUP BY estado_cita
     ";
 
-        $stmt = $this->conexion->prepare($consulta);
-        $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
-        $stmt->execute();
+            $stmt = $this->conexion->prepare($consulta);
+            $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
+            $stmt->execute();
 
-        $conteo = [
-            'Pendiente' => 0,
-            'Aceptada' => 0,
-            'Cancelada' => 0,
-            'Rechazada' => 0
-        ];
+            $conteo = [
+                'PENDIENTE' => 0,
+                'CONFIRMADA' => 0,
+                'CANCELADA' => 0,
+                'RECHAZADA' => 0
+            ];
 
-        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $conteo[$fila['estado_cita']] = (int)$fila['total'];
+            while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $conteo[$fila['estado_cita']] = (int)$fila['total'];
+            }
+
+            return $conteo;
+        } catch (\Throwable $e) {
+            // SI HAY UN ERROR EN SQL, LO ATRAPAMOS AQUÍ Y EVITAMOS EL ERROR 500
+            error_log("Error fatal en contarCitasPorEstado: " . $e->getMessage());
+
+            // Devolvemos el arreglo en ceros para que la vista no se rompa
+            return [
+                'PENDIENTE' => 0,
+                'CONFIRMADA' => 0,
+                'CANCELADA' => 0,
+                'RECHAZADA' => 0
+            ];
         }
-
-        return $conteo;
     }
 
     public function aceptarCita($id)
@@ -816,8 +829,8 @@ class CitasModel
 </body>
 </html>';
 
-        // ENVIAR CORREO
-        $mail->send();
+            // ENVIAR CORREO
+            $mail->send();
 
 
 
@@ -834,10 +847,29 @@ class CitasModel
             // INICIAMOS UNA TRANSACCIÓN
             $this->conexion->beginTransaction();
 
+            $obtenerIdSlot = "SELECT id_agenda_slot FROM citas WHERE id = :id_cita";
+
+            $resultado = $this->conexion->prepare($obtenerIdSlot);
+            $resultado->bindParam(':id_cita', $id);
+            $resultado->execute();
+
+            // fetchColumn devuelve SOLO el valor del id del slot anterior
+            $id_agenda_slot = $resultado->fetchColumn();
+
+            if ($id_agenda_slot === false) {
+                return false;
+            }
+
             $cancelarCita = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita";
             $resultado = $this->conexion->prepare($cancelarCita);
             $resultado->bindParam(':id_cita', $id);
             $resultado->execute();
+
+            $cambiarEstadoSlot = "UPDATE agenda_slot SET estado_slot = 'Bloqueado' WHERE id = :id_agenda_slot";
+
+            $resultado2 = $this->conexion->prepare($cambiarEstadoSlot);
+            $resultado2->bindParam(':id_agenda_slot', $id_agenda_slot);
+            $resultado2->execute();
 
             // IMPORTANTE FALTA ENVÍO DE CORREO ELECTRONICO AL PACIENTE INFORMANDO QUE SE DECLINO LA CITA
             // OBTENEMOS LOS DATOS QUE NECESITAMOS PARA ENVIAR EL CORREO

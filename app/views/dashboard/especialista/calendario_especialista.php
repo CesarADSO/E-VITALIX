@@ -28,12 +28,6 @@
             <div class="modal-body">
                 <p><strong>Paciente:</strong> <span id="detPaciente"></span></p>
                 <p><strong>Servicio:</strong> <span id="detServicio"></span></p>
-                <p><strong>Motivo:</strong> <span id="detMotivo"></span></p>
-                <div id="areaAcciones" class="d-none mt-3">
-                    <hr>
-                    <button class="btn btn-success w-100 mb-2" id="btnAceptarCita">Aceptar Cita</button>
-                    <button class="btn btn-danger w-100" id="btnRechazarCita">Rechazar Cita</button>
-                </div>
             </div>
         </div>
     </div>
@@ -46,47 +40,51 @@
         const calendarEl = document.getElementById('calendar');
         const modalEl = new bootstrap.Modal(document.getElementById('modalEvento'));
 
+        // 1. Medir la pantalla: Si es menor a 768px (tamaño tablet/móvil de Bootstrap), es verdadero.
+        const esMovil = window.innerWidth < 768;
+
+
         const calendar = new FullCalendar.Calendar(calendarEl, {
             ...window.fullCalendarConfig,
+
+            // 2. Vistas dinámicas según el dispositivo
+            initialView: esMovil ? 'listWeek' : 'dayGridMonth',
+
+            // 3. Barra de herramientas dinámica (menos botones en móvil para evitar que se apeñuzque)
+            headerToolbar: esMovil ? {
+                left: 'prev,next',
+                center: 'title',
+                right: ''
+            } : {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+
             events: '<?= BASE_URL ?>/especialista/calendario-api?action=obtener_eventos_especialista',
 
             eventClick: function(info) {
                 const data = info.event.extendedProps;
                 document.getElementById('detPaciente').innerText = data.paciente;
                 document.getElementById('detServicio').innerText = data.servicio;
-                document.getElementById('detMotivo').innerText = data.motivo || 'N/A';
-
-                const areaAcciones = document.getElementById('areaAcciones');
-                if (data.tipo === 'cita' && data.estado === 'Pendiente') {
-                    areaAcciones.classList.remove('d-none');
-                    document.getElementById('btnAceptarCita').onclick = () => procesarCita(info.event.id, 'aceptar');
-                    document.getElementById('btnRechazarCita').onclick = () => procesarCita(info.event.id, 'cancelar');
-                } else {
-                    areaAcciones.classList.add('d-none');
-                }
                 modalEl.show();
+            },
+
+            // 4. Magia extra: Detectar si el especialista voltea el celular o encoge la ventana en PC
+            windowResize: function(arg) {
+                const pantallaChica = window.innerWidth < 768;
+
+                // Si la pantalla se hace pequeña y no estamos en lista, fuerza el cambio a lista
+                if (pantallaChica && arg.view.type !== 'listWeek') {
+                    calendar.changeView('listWeek');
+                }
+                // Si la pantalla se hace grande y estamos en lista, vuelve a la cuadrícula normal del mes
+                else if (!pantallaChica && arg.view.type === 'listWeek') {
+                    calendar.changeView('dayGridMonth');
+                }
             }
         });
 
         calendar.render();
-
-        function procesarCita(id, accion) {
-            Swal.fire({
-                title: '¿Confirmar acción?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Sí, proceder'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Llamada a tu controlador existente MisCitasController
-                    $.get(`<?= BASE_URL ?>/especialista/mis-citas?accion=${accion}&id=${id}`, function(res) {
-                        // Dado que tu controlador actual usa SweetAlert y redirige, 
-                        // lo ideal sería que devolviera JSON, pero para no romper tu lógica:
-                        modalEl.hide();
-                        calendar.refetchEvents();
-                    });
-                }
-            });
-        }
     });
 </script>

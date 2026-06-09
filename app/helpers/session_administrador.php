@@ -1,5 +1,5 @@
 <?php
-session_start();
+@session_start();
 // Validamos si hay una sesión activa
 if (!isset($_SESSION['user'])) {
     header('Location: /E-VITALIX/login');

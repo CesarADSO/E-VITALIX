@@ -33,7 +33,7 @@ class Registro
             $id_usuario = $this->conexion->lastInsertId();
 
             // HACEMOS EL INSERT EN LA TABLA PACIENTES
-            $registrarPaciente = "INSERT INTO pacientes(id_usuario, nombres, apellidos, id_tipo_documento, numero_documento, fecha_nacimiento, genero, telefono, ciudad, direccion, foto, eps, rh, historial_medico, nombre_contacto_emergencia, telefono_contacto_emergencia, direccion_contacto_emergencia, id_aseguradora) VALUES (:id_usuario, :nombres, :apellidos, :id_tipo_documento, :numero_documento, NULL, NULL, :telefono, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+            $registrarPaciente = "INSERT INTO pacientes(id_usuario, nombres, apellidos, id_tipo_documento, numero_documento, fecha_nacimiento, genero, telefono, ciudad, direccion, foto, eps, rh, nombre_contacto_emergencia, telefono_contacto_emergencia, direccion_contacto_emergencia, perfil_completo) VALUES (:id_usuario, :nombres, :apellidos, :id_tipo_documento, :numero_documento, NULL, NULL, :telefono, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0)";
 
             $resultadoPaciente = $this->conexion->prepare($registrarPaciente);
             $resultadoPaciente->bindParam(':id_usuario', $id_usuario);
@@ -50,7 +50,7 @@ class Registro
 
 
         } catch (PDOException $e) {
-            error_log("Error en Registro::registrar->" . $e->getMessage());
+           error_log("Error en Registro::registrar->" . $e->getMessage());
             return false;
         }
     }
@@ -59,7 +59,7 @@ class Registro
         // CREAMOS EL TRY CATCH PARA MANEJAR ERRORES
         try {
             // EN UNA VARIABLE GUARDAMOS LA SENTENCIA SQL QUE VAMOS A EJECUTAR
-            $completarPerfil = "UPDATE pacientes SET fecha_nacimiento = :fecha_nacimiento, genero = :genero, ciudad = :ciudad, direccion = :direccion, eps = :eps, rh = :rh, historial_medico = :historial_medico, nombre_contacto_emergencia = :nombre_contacto, telefono_contacto_emergencia = :telefono_contacto, direccion_contacto_emergencia = :direccion_contacto, perfil_completo = 1 WHERE id = :id_paciente";
+            $completarPerfil = "UPDATE pacientes SET fecha_nacimiento = :fecha_nacimiento, genero = :genero, ciudad = :ciudad, direccion = :direccion, eps = :eps, rh = :rh, nombre_contacto_emergencia = :nombre_contacto, telefono_contacto_emergencia = :telefono_contacto, direccion_contacto_emergencia = :direccion_contacto, perfil_completo = 1 WHERE id = :id_paciente";
 
             $resultado = $this->conexion->prepare($completarPerfil);
             $resultado->bindParam(':fecha_nacimiento', $data['fecha_nacimiento']);
@@ -68,7 +68,6 @@ class Registro
             $resultado->bindParam(':direccion', $data['direccion']);
             $resultado->bindParam(':eps', $data['eps']);
             $resultado->bindParam(':rh', $data['rh']);
-            $resultado->bindParam(':historial_medico', $data['historial_medico']);
             $resultado->bindParam(':nombre_contacto', $data['nombre_contacto']);
             $resultado->bindParam(':telefono_contacto', $data['telefono_contacto']);
             $resultado->bindParam(':direccion_contacto', $data['direccion_contacto']);

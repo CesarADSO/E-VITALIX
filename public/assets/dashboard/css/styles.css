@@ -353,6 +353,7 @@
         font-size: 13px;
         color: var(--gris-proyecto);
         font-weight: 600;
+        gap: 20px;
     }
 
     .specialist-row {
@@ -361,6 +362,7 @@
         padding: 15px 0;
         align-items: center;
         border-bottom: 1px solid #f1f1f1;
+        gap: 20px;
     }
 
     .specialist-info {
@@ -636,6 +638,9 @@
         color: var(--blanco-color);
     }
 
+    .btn-volver-disponibilidad {
+        margin-right: 20px;
+    }
 
     .check-especialidad .mi-label {
         color: var(--color-primario);
@@ -1704,12 +1709,12 @@
     }
 
     ::-webkit-scrollbar-thumb {
-        background: var(--color-primario);
+        background: #f1f1f1;
         border-radius: 5px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: var(--color-secundario);
+        background: #969696;
     }
 
     .lupa {
@@ -3909,47 +3914,61 @@
 
     /* ================================================== */
 
-/* ESTILOS RESPONSIVE SMARTPHONE */
-@media screen and (min-width: 320px) and (max-width: 767px) { 
-    .chart-header 
-    {
-        display: inline-block;
+    /* ESTILOS RESPONSIVE SMARTPHONE */
+    @media screen and (min-width: 320px) and (max-width: 767px) {
+        .chart-header {
+            display: inline-block;
+        }
+
+        .main-content h3 {
+            text-align: center;
+        }
+
+        .logo {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mb-4 {
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .consultorio-logo {
+            display: none;
+        }
+
+        .text-end {
+            display: flex;
+
+        }
+
+        .badge-estado {
+            top: 143px;
+        }
+
+        .gap-3 {
+            margin-bottom: 20px;
+        }
+
+        .mb-2 {
+            font-weight: 700;
+        }
+
+        .cont-estado-plan {
+            justify-content: center;
+        }
+
+        .subscription-widget .chart-title {
+            margin-bottom: 20px;
+        }
+
     }
 
-    .main-content h3 {
-        text-align: center;
+    .specialist-avatar .imagen-especialista {
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        object-fit: cover;
     }
-
-    .logo {
-        align-items: center;
-        justify-content: center;
-    }
-
-    .mb-4 {
-        text-align: center;
-        font-weight: 800;
-    }
-
-    .consultorio-logo {
-        display: none;
-    }
-
-    .text-end {
-        display: flex;
-        
-    }
-
-    .badge-estado {
-        top: 143px;
-    }
-
-    .gap-3 {
-        margin-bottom: 20px;
-    }
-
-    .mb-2 {
-        font-weight: 700;
-    }
-
-    
-}

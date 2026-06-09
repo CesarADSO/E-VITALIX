@@ -5,7 +5,34 @@ require_once BASE_PATH . '/app/controllers/consultorioController.php';
 
 // LLAMAMOS LA FUNCIÓN ESPECÍFICA QUE EXISTE EN DICHO CONTROLADOR
 
-$datos = mostrarConsultorios();
+
+
+// Lógica para paginación segura
+
+// 1. Traer todos los consultorios de la base de datos
+$todos_los_consultorios = mostrarConsultorios();
+
+
+// 2. Configurar la paginación
+$registros_por_pagina = 10; // Mostrar 10 consultorios por página
+$total_registros = is_array($todos_los_consultorios) ? count($todos_los_consultorios) : 0;
+$total_paginas = ceil($total_registros / $registros_por_pagina);
+
+// 3. Capturar en que página estamos
+$pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+// 4. Validar que la pagina actual sea un número válido y esté dentro del rango permitido
+if ($pagina_actual < 1) {
+    $pagina_actual = 1;
+}
+
+if ($pagina_actual > $total_paginas && $total_paginas > 0) {
+    $pagina_actual = $total_paginas;
+}
+
+// 5. Calcular el índice de inicio para la consulta SQL
+$indice_inicio = ($pagina_actual - 1) * $registros_por_pagina;
+$consultorios = is_array($todos_los_consultorios) ? array_slice($todos_los_consultorios, $indice_inicio, $registros_por_pagina) : [];
 ?>
 
 
@@ -38,7 +65,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <div>
                             <button class="btn btn-link text-primary p-0"
                                 style="text-decoration: none; font-size: 14px;">
-                                ← Todos (<?= count($datos) ?>)
+                                ← Todos (<?= count($consultorios) ?>)
                             </button>
                         </div>
                         <div class="d-grid gap-2 d-lg-flex justify-content-lg-end align-items-lg-center">
@@ -71,8 +98,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($datos)) :  ?>
-                                        <?php foreach ($datos as $consultorio) : ?>
+                                    <?php if (!empty($consultorios)) :  ?>
+                                        <?php foreach ($consultorios as $consultorio) : ?>
                                             <tr>
                                                 <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
                                                 <td><?= $consultorio['nombre'] ?></td>
@@ -99,8 +126,8 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                     <!-- VISTA MOVIL -->
                     <div class="row d-lg-none mt-3">
-                        <?php if (!empty($datos)): ?>
-                            <?php foreach ($datos as $consultorio): ?>
+                        <?php if (!empty($consultorios)): ?>
+                            <?php foreach ($consultorios as $consultorio): ?>
                                 <div class="col-md-12 mt-4">
                                     <div class="card">
                                         <div class="card-body">
@@ -125,6 +152,59 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+
+                            <?php if (isset($total_paginas) && $total_paginas > 1) : ?>
+                                <div class="col-12 mt-4 mb-5">
+                                    <nav aria-label="Navegación de horarios móvil">
+                                        <ul class="pagination pagination-sm justify-content-center">
+
+                                            <!-- Si la página actual es menor o igual a 1 entonces ponemos la clase disabled para evitar que se pueda ir a una página "0" que no existe y al botón anterior cogemos la página actual y le restamos 1 para volver una página atrás -->
+                                            <li class="page-item <?= ($pagina_actual <= 1) ? 'disabled' : '' ?>">
+                                                <a class="page-link" href="?pagina=<?= $pagina_actual - 1 ?>">
+                                                    <i class="bi bi-chevron-left"></i>
+                                                </a>
+                                            </li>
+
+                                            <!-- Si la página actual es igual a 1 entonces ponemos la clase active que pinta el botón de azulito y a ese botón le ponemos el número 1 -->
+
+                                            <li class="page-item <?= ($pagina_actual == 1) ? 'active' : '' ?>">
+                                                <a class="page-link" href="?pagina=1">1</a>
+                                            </li>
+                                            <!-- Si la página actual es mayor a 3 entonces mostramos un botón con puntos suspensivos pero con la clase disabled eso quiere decir que se muestran de a 3 botones disponibles para presionar -->
+                                            <?php if ($pagina_actual > 3): ?>
+                                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                                            <?php endif; ?>
+
+                                            <!-- Aquí hacemos el bucle para que los botones de paginación se muestren según el número de página que sean necesarias para mostrar todos los registros -->
+                                            <?php for ($i = max(2, $pagina_actual - 1); $i <= min($total_paginas - 1, $pagina_actual + 1); $i++) : ?>
+                                                <li class="page-item <?= ($pagina_actual == $i) ? 'active' : '' ?>">
+                                                    <a class="page-link" href="?pagina=<?= $i ?>"><?= $i ?></a>
+                                                </li>
+                                            <?php endfor; ?>
+
+                                            <!-- Si la página actual es menor que el total de páginas menos 2 entonces mostramos un botón con puntos suspensivos pero con la clase disabled -->
+                                            <?php if ($pagina_actual < $total_paginas - 2): ?>
+                                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                                            <?php endif; ?>
+
+                                            <!-- Si la página actual es igual al total de páginas entonces ponemos la clase active que pinta el botón de azulito -->
+                                            <li class="page-item <?= ($pagina_actual == $total_paginas) ? 'active' : '' ?>">
+                                                <a class="page-link" href="?pagina=<?= $total_paginas ?>"><?= $total_paginas ?></a>
+                                            </li>
+
+
+                                            <!-- Si la página actual es mayor o igual al total de páginas entonces desabilitamos la flecha derecha para evitar que siga avanzando a una página que no existe -->
+                                            <li class="page-item <?= ($pagina_actual >= $total_paginas) ? 'disabled' : '' ?>">
+                                                <a class="page-link" href="?pagina=<?= $pagina_actual + 1 ?>">
+                                                    <i class="bi bi-chevron-right"></i>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                            <?php endif; ?>
                         <?php else: ?>
                             <p>No hay consultorios registrados.</p>
 
