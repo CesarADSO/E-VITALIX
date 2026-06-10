@@ -315,12 +315,11 @@ switch ($request) {
         // Si el id viene desde el login lo guardamos en la variable id_plan
         if (isset($_SESSION['suscripcion_deseada']) && !empty($_SESSION['suscripcion_deseada'])) {
             $id_plan = $_SESSION['suscripcion_deseada'];
-        } 
-        // Si viene desde url lo guardamos en la variable id_plan
-        elseif (isset($_GET['id_plan']) && !empty($_GET['id_plan'])){
-            $id_plan = $_GET['id_plan'];
         }
-        else {
+        // Si viene desde url lo guardamos en la variable id_plan
+        elseif (isset($_GET['id_plan']) && !empty($_GET['id_plan'])) {
+            $id_plan = $_GET['id_plan'];
+        } else {
             // Si no se encuentra un ID del plan, redirigimos al administrador al dashboard para evitar que compre un plan que no existe o que no seleccionó
             header('Location:' . BASE_URL . '/administrador/dashboard');
             exit();
@@ -497,7 +496,7 @@ switch ($request) {
     case '/paciente/lista-de-citas':
         require BASE_PATH . '/app/views/dashboard/paciente/lista-de-citas.php';
         break;
-        
+
     case '/paciente/guardar-cita':
         require BASE_PATH . '/app/controllers/citaController.php';
         break;
@@ -541,19 +540,19 @@ switch ($request) {
         require BASE_PATH . '/app/views/dashboard/superadministrador/especialidades.php';
         break;
 
-    case '/superadmin/guardar-especialidad';
+    case '/superadmin/guardar-especialidad':
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
 
-    case '/superadmin/cambiar-estado-especialidad';
+    case '/superadmin/cambiar-estado-especialidad':
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
 
-    case '/superadmin/editar-especialidad';
+    case '/superadmin/editar-especialidad':
         require BASE_PATH . '/app/views/dashboard/superadministrador/editar-especialidad.php';
         break;
 
-    case '/superadmin/guardar-cambios-especialidad';
+    case '/superadmin/guardar-cambios-especialidad':
         require BASE_PATH . '/app/controllers/especialidadController.php';
         break;
 
@@ -643,10 +642,6 @@ switch ($request) {
 
     case '/asistente/mis-tickets':
         require BASE_PATH . '/app/views/dashboard/asistente/mis-tickets.php';
-        break;
-
-    case '/asistente/crear-ticket':
-        require BASE_PATH . '/app/views/dashboard/asistente/crear-ticket.php';
         break;
 
     case '/asistente/guardar-ticket':
