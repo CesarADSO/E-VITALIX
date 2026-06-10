@@ -10,21 +10,18 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'POST':
+        $accion = $_POST['accion'] ?? '';
         if (isset($_SESSION['user']['id_paciente'])) {
             completarPerfilPaciente($_SESSION['user']['id_paciente']);
-        } else {
+        }
+
+        if ($accion === 'registrarPaciente') {
             registrarPaciente();
         }
         break;
-
-
-
     default:
-
         break;
 }
-
-
 function registrarPaciente()
 {
     // CAPTURAMOS LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
@@ -58,14 +55,15 @@ function registrarPaciente()
 
     $resultado = $objRegistro->registrar($data);
 
-    if ($resultado) {
-        mostrarSweetAlert('success', 'Registro Exitoso', '¡Te has registrado correctamente! Ahora puedes iniciar sesión.', '/E-VITALIX/login');
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Registro Exitoso', '¡Te has registrado correctamente! Ahora puedes iniciar sesión.', BASE_URL . '/login');
     } else {
         mostrarSweetAlert('error', 'Error en el Registro', 'Hubo un problema al registrar tus datos. Por favor, intenta nuevamente.');
     }
 }
 
-function completarPerfilPaciente($id_paciente) {
+function completarPerfilPaciente($id_paciente)
+{
     // CAPTURAMOS LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
     $fecha_nacimiento = $_POST['fecha_nacimiento'] ?? '';
     $genero = $_POST['genero'] ?? '';
@@ -73,11 +71,9 @@ function completarPerfilPaciente($id_paciente) {
     $direccion = $_POST['direccion'] ?? '';
     $eps = $_POST['eps'] ?? '';
     $rh = $_POST['rh'] ?? '';
-    $historial_medico = $_POST['historial_medico'] ?? '';
     $nombre_contacto = $_POST['nombre_contacto'] ?? '';
     $telefono_contacto = $_POST['telefono_contacto'] ?? '';
     $direccion_contacto = $_POST['direccion_contacto'] ?? '';
-
 
     // VALIDAMOS LOS CAMPOS OBLIGATORIOS
     if (empty($fecha_nacimiento) || empty($genero) || empty($ciudad) || empty($direccion) || empty($eps) || empty($rh) || empty($nombre_contacto) || empty($telefono_contacto) || empty($direccion_contacto)) {
@@ -97,7 +93,6 @@ function completarPerfilPaciente($id_paciente) {
         'direccion' => $direccion,
         'eps' => $eps,
         'rh' => $rh,
-        'historial_medico' => $historial_medico,
         'nombre_contacto' => $nombre_contacto,
         'telefono_contacto' => $telefono_contacto,
         'direccion_contacto' => $direccion_contacto
@@ -106,7 +101,7 @@ function completarPerfilPaciente($id_paciente) {
     $resultado = $objCompletar->completarPerfilPaciente($data);
 
     if ($resultado) {
-        mostrarSweetAlert('success', 'Perfil Completado', '¡Has completado tu perfil correctamente!', '/E-VITALIX/paciente/dashboard');
+        mostrarSweetAlert('success', 'Perfil Completado', '¡Has completado tu perfil correctamente!', BASE_URL . '/paciente/dashboard');
     } else {
         mostrarSweetAlert('error', 'Error al Completar Perfil', 'Hubo un problema al completar tu perfil. Por favor, intenta nuevamente.');
     }

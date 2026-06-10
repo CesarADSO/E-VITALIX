@@ -14,16 +14,20 @@ class CalendarioModel
     public function obtenerEventosEspecialista($id_especialista, $fecha_inicio, $fecha_fin)
     {
         try {
+
             $consulta = "SELECT s.id, s.fecha, s.hora_inicio, s.hora_fin, s.estado_slot, 
-                            c.id AS cita_id, c.estado_cita, c.motivo_consulta, 
-                            CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente, 
-                            srv.nombre AS servicio_nombre 
-                    FROM agenda_slot s 
-                    LEFT JOIN citas c ON s.id = c.id_agenda_slot 
-                    LEFT JOIN pacientes p ON p.id = c.id_paciente 
-                    LEFT JOIN servicios srv ON c.id_servicio = srv.id 
-                    WHERE s.id_especialista = :id_especialista 
-                    AND (s.fecha > CURDATE() OR (s.fecha = CURDATE() AND s.hora_inicio > CURTIME() ))";
+                        c.id AS cita_id, c.estado_cita, 
+                        CONCAT(p.nombres, ' ', p.apellidos) AS nombre_paciente, 
+                        es.nombre AS especialidad
+                FROM agenda_slot s 
+                LEFT JOIN citas c ON s.id = c.id_agenda_slot 
+                LEFT JOIN pacientes p ON p.id = c.id_paciente 
+                LEFT JOIN especialidades es ON c.id_especialidad = es.id 
+                WHERE s.id_especialista = :id_especialista 
+                AND s.fecha BETWEEN :fecha_inicio AND :fecha_fin AND (
+                        s.fecha > CURDATE() 
+                        OR (s.fecha = CURDATE() AND s.hora_inicio >= CURTIME())
+                    )";
 
             $stmt = $this->conexion->prepare($consulta);
             $stmt->bindParam(':id_especialista', $id_especialista, PDO::PARAM_INT);
@@ -33,25 +37,32 @@ class CalendarioModel
 
             $eventos = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $clase = 'fc-event-disponible';
-                $titulo = 'Disponible';
+                $clase = '';
+                $titulo = '';
 
-                if ($row['estado_slot'] === 'Bloqueado') {
-                    $clase = 'fc-event-bloqueado';
-                    $titulo = 'Bloqueado';
-                } elseif ($row['cita_id']) {
+                if ($row['cita_id'] == null) {
+                    // Es un espacio disponible
+                    $clase = 'fc-event-disponible';
+                    $titulo = 'Disponible';
+                } else {
+                    // Es una cita - Ajustado a los valores ENUM de tu SQL (MAYÚSCULAS)
                     switch ($row['estado_cita']) {
-                        case 'Pendiente':
+                        case 'PENDIENTE':
                             $clase = 'fc-event-pendiente';
                             $titulo = 'Pendiente: ' . $row['nombre_paciente'];
                             break;
-                        case 'Aceptada':
+                        case 'CONFIRMADA':
+                        case 'ACEPTADA': // Por si acaso usas ambos
                             $clase = 'fc-event-aceptada';
                             $titulo = 'Cita: ' . $row['nombre_paciente'];
                             break;
-                        case 'Cancelada':
+                        case 'CANCELADA':
                             $clase = 'fc-event-cancelada';
                             $titulo = 'Cancelada';
+                            break;
+                        default:
+                            $clase = 'fc-event-bloqueado';
+                            $titulo = 'Ocupado';
                             break;
                     }
                 }
@@ -65,8 +76,7 @@ class CalendarioModel
                     'extendedProps' => [
                         'tipo' => $row['cita_id'] ? 'cita' : 'slot',
                         'paciente' => $row['nombre_paciente'] ?? 'N/A',
-                        'servicio' => $row['servicio_nombre'] ?? 'N/A',
-                        'motivo' => $row['motivo_consulta'] ?? '',
+                        'especialidad' => $row['especialidad'] ?? 'N/A',
                         'estado' => $row['estado_cita'] ?? $row['estado_slot']
                     ]
                 ];

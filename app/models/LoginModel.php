@@ -93,6 +93,10 @@ class Login
                 }
             }
 
+            if (isset($perfil['perfil_completo'])) {
+                $perfil_completo = $perfil['perfil_completo'];
+            }
+
             // 3. Retornar todos los datos que necesitas
             return [
                 'id_usuario' => $user['id'],

@@ -15,5 +15,5 @@ require_once BASE_PATH . '/app/helpers/session_administrador.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css" />
     <link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/dashboard/css/styles.css">
-    
+    <link rel="icon" href="<?= BASE_URL ?>/public/assets/dashboard/img/FAVICON.png">
 </head>

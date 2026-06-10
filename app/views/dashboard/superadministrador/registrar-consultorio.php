@@ -1,5 +1,8 @@
 <?php
 require_once BASE_PATH . '/app/controllers/tipoDocumentoController.php';
+require_once BASE_PATH . '/app/controllers/ciudadesController.php';
+
+$ciudades = listarCiudades();
 
 $datos = traertipoDocumento();
 ?>
@@ -24,16 +27,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                 <div id="consultoriosSection">
                     <!-- Top Bar -->
                     <?php
-                    include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
+                    // include_once __DIR__ . '/../../layouts/topbar_superadministrador.php';
                     ?>
 
                     <!-- Consultorios Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
-                            </button>
+                            <a href="<?= BASE_URL ?>/superadmin/consultorios" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a> 
                         </div>
                         <a href="<?= BASE_URL ?>/superadmin/consultorios" class="btn btn-primary btn-sm" style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
@@ -83,7 +83,16 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="ciudad" class="form-label">Ciudad</label>
-                                        <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingresa la ciudad">
+                                        <select name="ciudad" class="form-select" id="">
+                                            <option value="">Seleccione una ciudad</option>
+                                            <?php if(!empty($ciudades)):?>
+                                                <?php foreach($ciudades as $ciudad):?>
+                                            <option value="<?= $ciudad['id'] ?>"><?= $ciudad['nombre'] ?></option>
+                                            <?php endforeach;?>
+                                            <?php else:?>
+                                                <option value="">No hay ciudades registradas</option>
+                                            <?php endif;?>
+                                        </select>
                                     </div>
                                 </div>
 

@@ -2,6 +2,10 @@
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
 header("Expires: 0");
+
+if (isset($_GET['plan'])) {
+    $plan_id = $_GET['plan'] ?? null;
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,7 @@ header("Expires: 0");
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="public/assets/auth/css/inicionSesion.css">
+    <link rel="icon" href="public/assets/auth/img/FAVICON.png">
 </head>
 
 <body>
@@ -30,7 +35,7 @@ header("Expires: 0");
                 <div class="logo-container">
                     <!-- Aquí va tu logo - Reemplaza el src con la ruta de tu imagen -->
                     <div class="logo">
-                        <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo"
+                        <a href="<?= BASE_URL ?>/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix Logo"
                                 class="img-fluid" style="max-width: 100%;"></a>
                         <!-- Mientras tanto, placeholder: -->
                         <!-- <div class="logo-placeholder">E-VITALIX</div> -->
@@ -42,6 +47,10 @@ header("Expires: 0");
                 <p class="login-pharagraf">Ingrese sus
                     credenciales para Iniciar sesión</p>
                 <form id="loginForm" action="iniciar-sesion" method="POST">
+                    <?php if(!empty($plan_id)):?>
+                        <input type="hidden" name="plan_pendiente" value="<?= $plan_id ?>">
+                    <?php endif;?>
+
                     <div>
                         <input type="email" name="email" class="campos-formulario" placeholder="Email" id="email" required>
                     </div>

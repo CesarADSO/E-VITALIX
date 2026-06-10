@@ -42,62 +42,70 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                     </div>
 
                     <!-- Pacientes Table -->
-                    <div class="bg-white rounded shadow-sm p-4">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle table-pacientes table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Foto</th>
-                                    <th>
-                                        Nombres y Apellidos
-                                        <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
-                                    </th>
-                                    <th>Documento</th>
-                                    <th>Teléfono</th>
-                                    <th>Email</th>
-                                    <th>EPS</th>
-                                    <th>RH</th>
-                                    <th>Estado</th>
-                                    <th style="width: 80px;">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (!empty($datos)) :  ?>
-                                    <?php foreach ($datos as $paciente) : ?>
+                    <div class="card shadow-sm d-none d-lg-block">
+                        <div class="card-header card-header-primary">
+                            <h5 class="mb-0 text-white">
+                                <i class="bi bi-people me-2"></i>
+                                Lista de pacientes
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="bg-white rounded shadow-sm p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle table-pacientes table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <img class="imgconsultorio"
-                                                    src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>"
-                                                    alt="<?= $paciente['nombres'] ?>"
-                                                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-                                            </td>
-                                            <td><?= $paciente['nombres'] . ' ' . $paciente['apellidos'] ?></td>
-                                            <td>
-                                                <span style="font-size: 12px; color: var(--gris-proyecto);">
-                                                    <?= $paciente['tipo_documento'] ?>
-                                                </span><br>
-                                                <?= $paciente['numero_documento'] ?>
-                                            </td>
-                                            <td><?= $paciente['telefono'] ?></td>
-                                            <td><?= $paciente['email'] ?></td>
-                                            <td><?= $paciente['eps'] ?? 'N/A' ?></td>
-                                            <td>
-                                                <span class="badge" style="background-color: #dc3545; color: white;">
-                                                    <?= $paciente['rh'] ?? 'N/A' ?>
-                                                </span>
-                                            </td>
-                                            <td>
-                                                <?php if ($paciente['estado'] == 'Activo') : ?>
-                                                    <span class="badge bg-success">Activo</span>
-                                                <?php else : ?>
-                                                    <span class="badge bg-secondary">Inactivo</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <a href="<?= BASE_URL ?>/admin/consultar-paciente"><i class="fa-solid fa-magnifying-glass"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/actualizar-paciente?id=<?= $paciente['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/admin/eliminar-paciente?accion=eliminar&id=<?= $paciente['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
-                                            </td>
+                                            <th>Foto</th>
+                                            <th>
+                                                Nombres y Apellidos
+                                                <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
+                                            </th>
+                                            <th>Documento</th>
+                                            <th>Teléfono</th>
+                                            <th>Email</th>
+                                            <th>EPS</th>
+                                            <th>RH</th>
+                                            <th>Estado</th>
+                                            <th style="width: 80px;">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($datos)) :  ?>
+                                            <?php foreach ($datos as $paciente) : ?>
+                                                <tr>
+                                                    <td>
+                                                        <img class="imgconsultorio"
+                                                            src="<?= BASE_URL ?>/public/uploads/pacientes/<?= $paciente['foto'] ?>"
+                                                            alt="<?= $paciente['nombres'] ?>"
+                                                            style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                                    </td>
+                                                    <td><?= $paciente['nombres'] . ' ' . $paciente['apellidos'] ?></td>
+                                                    <td>
+                                                        <span style="font-size: 12px; color: var(--gris-proyecto);">
+                                                            <?= $paciente['tipo_documento'] ?>
+                                                        </span><br>
+                                                        <?= $paciente['numero_documento'] ?>
+                                                    </td>
+                                                    <td><?= $paciente['telefono'] ?></td>
+                                                    <td><?= $paciente['email'] ?></td>
+                                                    <td><?= $paciente['eps'] ?? 'N/A' ?></td>
+                                                    <td>
+                                                        <span class="badge" style="background-color: #dc3545; color: white;">
+                                                            <?= $paciente['rh'] ?? 'N/A' ?>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <?php if ($paciente['estado'] == 'Activo') : ?>
+                                                            <span class="badge bg-success">Activo</span>
+                                                        <?php else : ?>
+                                                            <span class="badge bg-secondary">Inactivo</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?= BASE_URL ?>/admin/consultar-paciente" class="btn btn-sm btn-info" title="Consultar paciente"><i class="fa-solid fa-magnifying-glass lupa"></i></a>
+                                                        <a href="<?= BASE_URL ?>/admin/actualizar-paciente?id=<?= $paciente['id'] ?>" class="btn btn-sm btn-success" title="Editar paciente"><i class="fa-solid fa-pen-to-square editar"></i></a>
+                                                        <a href="<?= BASE_URL ?>/admin/eliminar-paciente?accion=eliminar&id=<?= $paciente['id'] ?>" class="btn btn-sm btn-danger" title="Eliminar paciente"><i class="fa-solid fa-trash-can"></i></a>
+                                                    </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
@@ -111,6 +119,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                             </tbody>
                         </table>
                         </div>
+                    </div>
+                    </div>
                     </div>
 
                 </div>

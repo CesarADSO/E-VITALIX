@@ -12,16 +12,17 @@
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="public/assets/auth/css/registrarse.css">
+    <link rel="icon" href="public/assets/auth/img/FAVICON.png">
 </head>
 
 <body>
     <div class="registro-container">
         <div class="registro-content">
-            <div class="row">
+            <div class="row fila-general">
                 <div class="form-section col-md-6">
                     <div class="logo-header">
                         <!-- Reemplaza con tu logo -->
-                        <a href="/E-VITALIX/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix" class="logo-registro"></a>
+                        <a href="<?= BASE_URL ?>/"><img src="public/assets/auth/img/image-removebg-preview 1.png" alt="E-Vitalix" class="logo-registro"></a>
                     </div>
 
                     <p class="subtitle-registro">
@@ -30,8 +31,9 @@
 
 
                     <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data">
-                        <div class="form-row-custom">
-                            <div class="form-group-custom">
+                        <input type="hidden" name="accion" value="registrarPaciente">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <label class="form-label-custom">Nombres:</label>
                                 <input
                                     type="text"
@@ -42,7 +44,7 @@
                                     required>
                             </div>
 
-                            <div class="form-group-custom">
+                            <div class="col-md-6">
                                 <label class="form-label-custom">Apellidos:</label>
                                 <input
                                     type="text"
@@ -53,14 +55,7 @@
                                     required>
                             </div>
 
-
-
-
-                        </div>
-
-                        <div class="form-row-custom">
-
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Tipo de documento:</label>
                                 <select name="tipo_documento" class="campos-formulario" id="tipoDocumento" required>
                                     <option value="">Selecciona tu tipo de documento</option>
@@ -70,10 +65,10 @@
                                 </select>
                             </div>
 
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Número de documento:</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     class="campos-formulario"
                                     placeholder="xxxxxxxxxx"
                                     id="numeroDocumento"
@@ -81,14 +76,7 @@
                                     required>
                             </div>
 
-
-
-
-                        </div>
-
-                        <div class="form-row-custom">
-
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Email:</label>
                                 <input
                                     type="email"
@@ -99,19 +87,21 @@
                                     required>
                             </div>
 
-                            <div class="form-group-custom">
+                            <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Teléfono:</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     class="campos-formulario"
                                     placeholder="Ingresa tu número de teléfono..."
                                     id="telefono"
                                     name="telefono"
                                     required>
                             </div>
-                        </div>
 
-                        <button type="submit" class="btn-azul">Registrarse</button>
+                        </div>
+     
+
+                        <button type="submit" class="btn-azul btn-registrarse-paciente">Registrarse</button>
 
                     </form>
 

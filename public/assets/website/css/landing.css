@@ -1,0 +1,860 @@
+/* CONFIGURACIÓN BÁSICA DE UN ARCHIVO CSS */
+
+/* 1. TIPOGRAFÍAS */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+/* 2. ICONOS */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
+
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #0c498a;
+    --blanco-color: #ffffff;
+    --gris-proyecto: #1c1c1c;
+    --tercer-azul: #1a73d3;
+    --titulo-principal: 48px;
+    --subtitulo-seccion: 32px;
+    --titulo-bloque: 24px;
+    --subtitulo-menor: 18px;
+    --parrafos: 16px;
+    --texto-auxiliar: 14px;
+}
+
+.btn-azul {
+    border-radius: 25%;
+    width: auto;
+    background-color: var(--color-primario);
+    height: auto;
+    padding: 10px;
+}
+
+.btn-rojo {
+    border-radius: 25%;
+    width: auto;
+    background-color: red;
+    height: auto;
+    padding: 10px;
+}
+
+.campos-formulario {
+    border-radius: 17%;
+    background: #BFD2F8;
+}
+
+header {
+    width: 100%;
+    position: relative;
+}
+
+header nav {
+    background: var(--color-secundario) !important;
+}
+
+.cont-nav {
+    flex-grow: 0;
+}
+
+.item {
+    margin-right: 20px;
+}
+
+.item .enlace img {
+    margin-right: 10px;
+}
+
+.cont-botones-inicio {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones-inicio .boton1,
+.boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones-inicio .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-inicio .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
+.cont-botones {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones .boton1,
+.boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
+.cont-botones-hero {
+    display: flex;
+    gap: 20px;
+}
+
+.cont-botones-hero .boton1,
+.boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones-hero .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-hero .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
+#hero {
+    width: 100%;
+    background: var(--color-secundario);
+    height: 90vh;
+    padding: 90px 0px 90px 90px;
+    overflow: hidden;
+}
+
+.cont-info .subtitulo-pequeño {
+    color: var(--blanco-color);
+    font-size: var(--texto-auxiliar);
+}
+
+.cont-info .subtitulo-pequeño img {
+    margin-right: 10px;
+}
+
+.subtitulo-pequeño {
+    margin-bottom: 24px;
+}
+
+.titulo-principal {
+    margin-bottom: 24px;
+}
+
+.info-hero {
+    font-size: 24px;
+    margin-bottom: 48px;
+}
+
+.boton1 .circulo {
+    width: 35px;
+    height: 35px;
+    background-color: #BBCFFF;
+    margin-left: 10px;
+    position: relative;
+}
+
+.boton2 .circulo {
+    width: 35px;
+    height: 35px;
+    background-color: #BBCFFF;
+    margin-left: 10px;
+    position: relative;
+}
+
+.circulo .flecha-derecha {
+    font-size: 16px;
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+}
+
+main {
+    background: #0c498a;
+    position: relative;
+    width: 100%;
+}
+
+#funcionalidades {
+    padding: 120px;
+}
+
+#funcionalidades .titulo-funcionalidades {
+    margin-bottom: 50px;
+    color: var(--blanco-color);
+}
+
+.cont-fun-1,
+.cont-fun-2,
+.cont-fun-3 {
+    border-radius: 40px;
+}
+
+.cont-fun-1 {
+    padding-right: 0;
+    height: 70vh;
+    margin-bottom: 16px;
+}
+
+.cont-info-1 {
+    margin-top: 130px;
+    padding-left: 40px;
+}
+
+.cont-info-1 h5 {
+    margin-bottom: 56px;
+    font-size: var(--parrafos);
+}
+
+.cont-info-1 h2 {
+    margin-bottom: 56px;
+}
+
+.cont-info-1 h5,
+h2,
+p {
+    color: var(--gris-proyecto);
+}
+
+.cont-foto-1 {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.cont-fun-2 {
+    padding: 30px;
+}
+
+.cont-info-2 {
+    padding-right: 200px;
+    margin-top: 56px;
+}
+
+.cont-info-2 h5,
+h2,
+p {
+    color: var(--gris-proyecto);
+}
+
+.cont-info-2 h5 {
+    margin-bottom: 40px;
+    font-size: var(--parrafos);
+}
+
+.cont-info-2 h2 {
+    margin-bottom: 40px;
+}
+
+.cont-fun-3 {
+    padding: 30px;
+}
+
+.cont-info-3 {
+    margin-top: 56px;
+}
+
+.cont-info-3 h5,
+h2,
+p {
+    color: var(--gris-proyecto);
+}
+
+.cont-info-3 h5 {
+    font-size: var(--parrafos);
+    margin-bottom: 40px;
+}
+
+.cont-info-3 h2 {
+    margin-bottom: 40px;
+}
+
+#beneficios {
+    padding: 120px;
+}
+
+.titulo-beneficios {
+    margin-bottom: 56px;
+}
+
+.fila-beneficios {
+    margin-bottom: 56px;
+}
+
+.fila-beneficios .cont-foto {
+    border-radius: 40px;
+}
+
+.cont-1,
+.cont-2,
+.cont-3 {
+    height: 400px;
+}
+
+.cont-1 img {
+    width: 100%;
+    border-radius: 40px;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cont-2 img {
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cont-3 img {
+    border-radius: 40px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.titulo-carrusel {
+    margin-bottom: 40px;
+}
+
+.parrafo-carrusel {
+    padding-right: 200px;
+}
+
+.cont-botones-carrusel {
+    display: flex;
+    justify-content: end;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.cont-botones-carrusel .boton-carrusel {
+    width: 55px;
+    /* Ajusta según el tamaño exacto de tu Figma */
+    height: 55px;
+    border-radius: 50%;
+    background-color: #eef3fc;
+    /* Tu color azul clarito de fondo */
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover opcional para que se sienta interactivo */
+.boton-carrusel:hover {
+    background-color: #dbe4f4;
+}
+
+/* El estilo de la flecha */
+.boton-carrusel i {
+    font-size: 1.2rem;
+    /* Tamaño de la flecha */
+    color: var(--gris-proyecto);
+    /* El color oscuro/negro de la flecha en tu diseño */
+    font-weight: bold;
+}
+
+#precios {
+    width: 100%;
+    position: relative;
+    padding: 120px;
+}
+
+#precios .titulo-precios {
+    margin-bottom: 40px;
+}
+
+.parrafo-planes {
+    margin-bottom: 40px;
+}
+
+.cont-plan .plan {
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.plan .cont-popular {
+    display: flex;
+    justify-content: space-between;
+}
+
+.plan h3 {
+    font-size: var(--titulo-bloque);
+    margin-bottom: 40px;
+    color: var(--gris-proyecto);
+}
+
+.plan h2 {
+    margin-bottom: 40px;
+}
+
+.plan .p-descriptivo-plan {
+    font-size: var(--texto-auxiliar);
+    margin-bottom: 40px;
+}
+
+.plan a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    border-radius: 20px;
+    background: var(--color-primario);
+    margin-bottom: 40px;
+}
+
+.plan .chulo {
+    color: var(--gris-proyecto);
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.cont-popular span {
+    display: inline-block;
+    /* Obligatorio para que respete el padding arriba/abajo */
+    padding: 8px 20px;
+    background: var(--color-primario);
+    height: 30px;
+    border-radius: 20px;
+    color: var(--blanco-color);
+}
+
+#preguntas {
+    width: 100%;
+    position: relative;
+    padding: 120px;
+}
+
+.titulo-preguntas {
+    margin-bottom: 56px;
+}
+
+.cont-pregunta {
+    margin-bottom: 20px;
+    border-radius: 32px;
+    padding: 30px;
+}
+
+.cabecera-acordion {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cabecera-acordion {
+    color: var(--gris-proyecto);
+}
+
+.boton-acordion {
+    border-radius: 50%;
+    background: var(--color-primario);
+    flex-shrink: 0;
+    /* Vital: Evita que el texto aplaste el botón en celulares */
+}
+
+/* Transición suave para la flecha */
+.icono-flecha {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* El truco de la rotación automática */
+/* Cuando Bootstrap detecta que el acordeón está abierto (aria-expanded="true"), rotamos la flecha */
+.boton-acordion[aria-expanded="true"] .icono-flecha {
+    transform: rotate(180deg);
+}
+
+.cuerpo-acordion {
+    padding: 0;
+    margin-top: 32px;
+}
+
+.cuerpo-acordion strong {
+    font-weight: 400;
+}
+
+.cabecera-acordion h3 {
+    font-weight: 300;
+}
+
+#convencer {
+    padding: 120px;
+    background-image: url('../img/imagen\ para\ sección\ convencer.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+}
+
+.cont-info .titulo-convencer {
+    font-size: 115px;
+    margin-bottom: 20px;
+}
+
+.cont-descriptivo {
+    padding-top: 230px;
+}
+
+.cont-descriptivo h3 {
+    margin-bottom: 60px;
+}
+
+.cont-botones-2 {
+    display: flex;
+    gap: 20px;
+    justify-content: end;
+}
+
+.cont-botones-2 .boton1,
+.boton2 {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.cont-botones-2 .boton1 {
+    background-color: var(--color-primario);
+    color: var(--blanco-color);
+    box-shadow: 0 3px 3px 0 #B9CEFF;
+}
+
+.cont-botones-2 .boton2 {
+    background: var(--gris-proyecto);
+    color: var(--blanco-color);
+    border: transparent;
+    box-shadow: 0 3px 3px 0 #5E8DFF;
+}
+
+footer {
+    padding: 90px;
+    background: var(--color-secundario);
+}
+
+footer .fila-footer {
+    margin-top: 199px;
+}
+
+.cont-info-footer {
+    margin-top: auto;
+}
+
+.cont-redes-sociales {
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+}
+
+.cont-redes-sociales .redes {
+    font-size: 30px;
+}
+
+.navbar-toggler {
+    background-color: #ffffff !important;
+}
+
+/* ESTILOS SMARTPHONE */
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+    .offcanvas {
+        background-color: var(--color-secundario);
+        width: 75% !important;
+    }
+
+    .offcanvas-body .cont-botones-inicio {
+        display: flex;
+        gap: 16px;
+    }
+
+    .offcanvas-body .boton1,
+    .offcanvas-body .boton2 {
+        text-align: center;
+    }
+
+
+    #hero {
+        padding: 30px;
+        height: auto;
+    }
+
+    #hero .container-fluid {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #hero .fila-hero {
+        margin: 0;
+    }
+
+    .info-hero {
+        font-size: 20px;
+    }
+
+    .cont-foto {
+        width: 100%;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
+    .imagen-inicio {
+        width: 100%;
+        height: auto;
+        border-radius: 16px 16px 0 0;
+        object-fit: cover;
+    }
+
+    .fila-botones-inicio {
+        margin-top: 40px;
+        gap: 20px;
+    }
+
+    .cont-botones-hero .boton1 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cont-botones-hero .boton2 {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cont-botones-hero .circulo {
+        margin-left: auto;
+    }
+
+    #funcionalidades {
+        padding: 120px 0 0 0;
+    }
+
+    .cont-info-1 {
+        margin-top: 59px;
+        padding-left: 29px;
+    }
+
+    .cont-foto-1 {
+        margin-top: 0;
+    }
+
+    .cont-foto-1 img {
+        width: 90%;
+    }
+
+    .cont-info-1 h5 {
+        margin-bottom: 20px;
+    }
+
+    .cont-info-1 h2 {
+        margin-bottom: 25px;
+    }
+
+    .cont-foto-2 img {
+        width: 100%;
+    }
+
+    .cont-info-2 {
+        padding-right: 0;
+    }
+
+    .cont-info-2 h2 {
+        margin-bottom: 25px;
+    }
+
+    .cont-info-2 h5 {
+        margin-bottom: 25px;
+    }
+
+    .cont-fun-2 {
+        margin-bottom: 16px;
+    }
+
+    .cont-foto-3 img {
+        width: 100%;
+    }
+
+    .cont-info-3 h5 {
+        margin-bottom: 25px;
+    }
+
+    .cont-info-3 h2 {
+        margin-bottom: 25px;
+    }
+
+    #beneficios {
+        padding: 120px 0 0 0;
+    }
+
+    .titulo-carrusel {
+        text-align: center;
+    }
+
+    .parrafo-carrusel {
+        text-align: center;
+        padding: 0;
+        margin-bottom: 40px;
+    }
+
+    .cont-botones-carrusel {
+        justify-content: center;
+    }
+
+    #precios {
+        padding: 120px 0 0 0;
+    }
+
+    .fila-planes {
+        gap: 20px;
+    }
+
+    .cont-plan .plan {
+        padding: 35px;
+    }
+
+    .plan h3 {
+        font-weight: 900;
+    }
+
+    .plan h2 {
+        font-size: xx-large;
+    }
+
+    .cont-popular span {
+        padding-top: 4px;
+    }
+
+    .plan a {
+        font-size: larger;
+    }
+
+    #preguntas {
+        padding: 120px 0 70px 0;
+    }
+
+    .boton-acordion {
+        height: 45px;
+    }
+
+    /* ===== SECCIÓN CONVENCER ===== */
+    #convencer {
+        padding: 40px 24px;
+        min-height: auto;
+        background-position: center;
+    }
+
+    .cont-info .titulo-convencer {
+        font-size: 64px;
+        margin-bottom: 12px;
+    }
+
+    .cont-info h4 {
+        font-size: 14px;
+        margin-bottom: 32px;
+    }
+
+    .cont-descriptivo {
+        padding-top: 0;
+    }
+
+    .cont-descriptivo h3 {
+        font-size: 16px;
+        margin-bottom: 32px;
+    }
+
+    .cont-botones-2 {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .cont-botones-2 .boton1,
+    .cont-botones-2 .boton2 {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+        padding: 40px 24px;
+    }
+
+    footer .fila-footer {
+        margin-top: 48px;
+    }
+
+    .cont-logo-footer {
+        margin-bottom: 24px;
+    }
+
+    .cont-logo-footer p {
+        font-size: 14px;
+        margin-top: 12px;
+    }
+
+    .cont-info-footer {
+        margin-top: 0;
+    }
+
+    .cont-redes-sociales {
+        justify-content: flex-start;
+        margin-bottom: 12px;
+    }
+
+    .cont-redes-sociales .redes {
+        font-size: 24px;
+    }
+
+    footer nav {
+        margin-bottom: 0;
+    }
+
+    footer .cont-nav .navbar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    footer .cont-nav .navbar-nav .nav-link {
+        font-size: 13px;
+        padding: 4px 0;
+    }
+
+    footer .cont-nav .item {
+        margin-right: 12px;
+    }
+
+    .cont-info-footer p {
+        text-align: left !important;
+        font-size: 13px;
+    }
+}

@@ -13,7 +13,7 @@ switch ($method) {
 
         if ($accion === 'buscarPorEspecialidad') {
 
-            $consultorios = consultarConsultoriosPorEspecialidad();
+            $consultorios = consultarConsultoriosPorEspecialidadYCiudad();
 
             require_once __DIR__ . '/../views/dashboard/paciente/buscar-consultorio.php';
             exit();
@@ -48,6 +48,7 @@ switch ($method) {
         if (isset($_GET['id'])) {
             // Esta función llena el formulario de editar con un solo consultorio
             listarConsultorio($_GET['id']);
+            traerEspecialidadesPorConsultorio($_GET['id']);
         } else {
             // Esta función llena toda la tabla de consultorios
             mostrarConsultorios();
@@ -88,7 +89,7 @@ function registrarConsultorio()
     $numero_documento_admin = $_POST['numero_documento_admin'] ?? '';
 
     // Validamos los campos que son obligatorios
-    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($email_admin) || empty($nombres_admin) || empty($apellidos_admin) || empty($telefono_admin) || empty($tipo_documento_admin) || empty($numero_documento_admin)) {
+    if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($email_admin) || empty($nombres_admin) || empty($apellidos_admin) || empty($telefono_admin) || empty($tipo_documento_admin) || empty($numero_documento_admin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
@@ -211,10 +212,18 @@ function registrarConsultorio()
     // Y esperamos una respuesta booleana del modelo
     $resultado = $ObjConsultorio->registrar($data);
 
+    // CAPTURAMOS LO QUE VIENE POR METHOD POST ORIGEN PARA SABER A DONDE REDIRIGIR
+    $origen = $_POST['origen'] ?? 'interno';
+
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio', '/E-VITALIX/superadmin/consultorios');
+        if ($origen === 'publico') {
+            mostrarSweetAlert('success', '¡Cuenta creada!', 'Tu cuenta ha sido creada correctamente. Ya puedes iniciar sesión.', '/E-VITALIX/login');
+        }
+        else {
+            mostrarSweetAlert('success', 'Registro de consultorio exitoso', 'Se ha creado un nuevo consultorio', '/E-VITALIX/superadmin/consultorios');
+        }
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el consultorio. Intenta nuevamente');
     }
@@ -242,16 +251,26 @@ function listarConsultorio($id)
     return $consultorio;
 }
 
-function consultarConsultoriosPorEspecialidad()
+function traerEspecialidadesPorConsultorio($id)
+{
+    $objConsultorio = new Consultorio();
+
+    $consultorio = $objConsultorio->traerEspecialidadesConsultorios($id);
+
+    return $consultorio;
+}
+
+function consultarConsultoriosPorEspecialidadYCiudad()
 {
     // echo 'llegue aqui a la funcion';
     // exit();
 
     $id_especialidad = $_POST['id_especialidad'] ?? null;
+    $id_ciudad = $_POST['id_ciudad'] ?? null;
 
     $objConsultorio = new Consultorio();
 
-    $resultado = $objConsultorio->listarConsultoriosPorEspecialidad($id_especialidad);
+    $resultado = $objConsultorio->listarConsultoriosPorEspecialidadYCiudad($id_especialidad, $id_ciudad);
 
     return $resultado;
 }

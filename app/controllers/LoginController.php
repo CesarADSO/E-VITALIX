@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Capturamos en variables los valores enviados a través de los name de los campos y method post del formulario
     $correo = $_POST['email'] ?? '';
     $clave = $_POST['clave'] ?? '';
+    $plan_id = $_POST['plan_pendiente'] ?? null; // Esta variable solo existirá si el usuario viene del proceso de compra de un plan, si no viene será null
 
 
     // Validamos que los campos/variables no estén vacias
@@ -47,23 +48,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'perfil_completo' => $resultado['perfil_completo'] ?? null
     ];
 
+    // ====================================================================
+    // 🛡️ INICIO DEL GUARDIÁN: VERIFICAR VIGENCIA DEL PLAN
+    // ====================================================================
+
+    // Obtenemos el ID del consultorio del arreglo session['user'] y le asignamos ese valor a una variable
+    $id_consultorio = $_SESSION['user']['id_consultorio'] ?? null;
+
+    // Si existe el Id del consultorio importamos el modelo de consultorios para acceder a la función verificarVigenciaPlan
+    if ($id_consultorio) {
+        // Importamos el modelo de los consultorios
+        require_once __DIR__ . '/../models/consultorioModel.php';
+        // Instanciamos la clase de ese modelo y accedemos al método verificarVigenciaPlan
+        $objConsultorio = new Consultorio();
+
+        // Accedemos al método de esa clase que necesitamos
+        $plan_vencido = $objConsultorio->verificarVigenciaPlan($id_consultorio);
+
+        // Ahora si la función devolvió true osea que si degradó el plan preparamos la respuesta
+        if ($plan_vencido) {
+            // Guardamos esta "bandera" en $_SESSION para que el dato sobreviva a la redirección y el Dashboard sepa que debe mostrar la alerta.
+            // USAMOS UN SOLO IGUAL (=) para asignar el valor
+            $_SESSION['alerta_vencimiento'] = true;
+        }
+    }
+
+    // ====================================================================
+    // 🔓 FIN DEL GUARDIÁN
+    // ====================================================================
+
     // Redirección según el rol
     $redirecUrl = '/E-VITALIX/login';
     $mensaje = 'Rol inexistente. Redirigiendo al inicio de sesión';
 
     switch ($resultado['id_rol']) {
         case 1:
-            if ($resultado['perfil_completo'] === 0) {
-                $redirecUrl = '/E-VITALIX/paciente/completar-perfil';
-            } else {
-                $redirecUrl = '/E-VITALIX/paciente/dashboard';
-            }
+            $redirecUrl = '/E-VITALIX/paciente/dashboard';
             $mensaje = 'Bienvenido Paciente';
             break;
 
         case 2:
-            $redirecUrl = '/E-VITALIX/administrador/dashboard';
-            $mensaje = 'Bienvenido Administrador';
+            if (!empty($plan_id)) {
+                // Si el plan_id existe, significa que el usuario viene del proceso de compra de un plan, por lo tanto, debemos crear una "nota" en la sesión para que el Dashboard sepa que debe mostrar la alerta de "Plan pendiente de contratación"
+                $_SESSION['suscripcion_deseada'] = $plan_id;
+
+
+                // Redireccionamos al dashboard del administrador con el id del listo para pagar
+                $redirecUrl = BASE_URL . '/admin/confirmar-compra?id_plan=' . $_SESSION['suscripcion_deseada'];
+                $mensaje = 'Bienvenido Administrador, estás a un paso de contratar tu plan';
+            } else {
+                $redirecUrl = '/E-VITALIX/administrador/dashboard';
+                $mensaje = 'Bienvenido Administrador';
+            }
             break;
 
         case 3:

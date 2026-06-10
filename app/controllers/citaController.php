@@ -3,6 +3,8 @@
 // EN ESTE CASO EL ALERT HELPER Y EL MODELO
 require_once __DIR__ . '/../helpers/alert_helper.php';
 require_once __DIR__ . '/../models/citaModel.php';
+// IMPORTAMOS EL MODELO DE LOS CONSULTORIOS PARA OBTENER LO DATOS DEL PLAN ACTUAL
+require_once __DIR__ . '/../models/consultorioModel.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -29,14 +31,20 @@ switch ($method) {
     case 'GET':
         $accion = $_GET['accion'] ?? '';
         if ($accion === 'cancelar') {
-            cancelarCita($_GET['id']);
+            cancelarCita($_GET['id_cita']);
         }
 
-        if (isset($_GET['id'])) {
-            listarCita($_GET['id']);
+        if (isset($_GET['id_cita'])) {
+            listarCita($_GET['id_cita']);
             break;
         }
         mostrarCitas();
+
+        if (isset($_GET['id_consultorio'])) {
+            contarCitasMensuales($_GET['id_consultorio']);
+        }
+        
+
         break;
 }
 
@@ -80,8 +88,11 @@ switch ($method) {
 
 function agendarCita()
 {
+    
     $id_slot = $_POST['id_slot'] ?? '';
-    $id_servicio = $_POST['id_servicio'] ?? '';
+    $id_especialidad = $_POST['id_especialidad'] ?? '';
+    //1. ATRAPAMOS EL ID DEL CONSULTORIO
+    $id_consultorio = $_POST['id_consultorio'] ?? '';
 
     // REANUDAMOS LA SESIÓN DE MANERA SEGURA
     if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -92,18 +103,42 @@ function agendarCita()
     $id_paciente = $_SESSION['user']['id_paciente'] ?? null;
 
     // VALIDAMOS LOS DATOS OBLIGATORIOS
-    if (empty($id_slot) || empty($id_servicio || empty($id_paciente))) {
+    if (empty($id_slot) || empty($id_especialidad) || empty($id_paciente)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
+    
+    // ====================================================================
+    // 🔒 INICIO DEL CANDADO: VALIDACIÓN DEL LÍMITE DE CITAS DEL PLAN
+    // ====================================================================
 
     // INSTANCIAMOS LA CLASE Cita
     $objCita = new Cita();
+    // INSTANCIAMOS LA CLASE Consultorio PARA OBTENER EL LIMITE DE CITAS MENSUALES DEL PLAN
+    $objConsultorio = new Consultorio();
+
+    // CONSULTAMOS EL LÍMITE DEL PLAN DEL CONSULTORIO
+    $datosConsultorio = $objConsultorio->listarConsultorioPorId($id_consultorio);
+    $limite_citas = $datosConsultorio['limite_citas_mensuales'];
+
+    // CONTAMOS CUANTAS CITAS VAN EN ESE MES
+    $conteo = $objCita->contarCitasMensuales($id_consultorio);
+    $total_citas_actuales = $conteo['total_citas'];
+
+    // VALIDAMOS SI YA SE ALCANZÓ EL LÍMITE
+    if ($total_citas_actuales >= $limite_citas) {
+        mostrarSweetAlert('error', 'Agenda no disponible', 'Lo sentimos, este consultorio ha alcanzado su límite de citas mensuales y no puede recibir más solicitudes','/E-VITALIX/paciente/modulo-citas');
+        exit(); // Evita que el código siga bajando
+    }
+
+    // ====================================================================
+    // 🔓 FIN DEL CANDADO
+    // ====================================================================
 
     // EN EL ARREGLO DATA INSERTAMOS LOS DATOS QUE VAMOS A LLEVAR AL MÉTODO DEL MODELO
     $data = [
         'id_slot' => $id_slot,
-        'id_servicio' => $id_servicio,
+        'id_especialidad' => $id_especialidad,
         'id_paciente' => $id_paciente
     ];
 
@@ -113,8 +148,6 @@ function agendarCita()
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/lista-de-citas');
-    } else {
-        mostrarSweetAlert('error', 'No se pudo registrar la cita', 'Intente nuevamente');
     }
 }
 
@@ -179,15 +212,28 @@ function reagendarCita()
     }
 }
 
-function cancelarCita($id)
-{
+function cancelarCita($id_cita)
+{   
     $ObjCita = new Cita();
 
-    $resultado = $ObjCita->cancelar($id);
+    $resultado = $ObjCita->cancelar($id_cita);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/ListaDeCitas');
+        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
     }
+}
+
+
+function contarCitasMensuales($id_consultorio) {
+    // INSTACIAMOS LA CLASE Cita para acceder al método de conteo
+    $objCita = new Cita();
+    
+    // LLAMAMOS AL MÉTODO DEL MODELO PARA CONTAR LAS CITAS MENSUALES Y PASAMOS EL ID DEL CONSULTORIO
+    $resultado = $objCita->contarCitasMensuales($id_consultorio);
+
+    // RETORNAMOS A LA VISTA
+    return $resultado;
+    
 }

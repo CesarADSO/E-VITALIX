@@ -86,7 +86,7 @@ function reporteEspecialistasPDF()
     $html = ob_get_clean();
 
     // Se genera el PDF a partir del HTML capturado
-    generarPDF($html, 'reporte_especialistas.pdf', false);
+    generarPDF($html, 'reporte_especialistas.pdf', true);
 }
 
 function reporteAsistentesPDF()
@@ -110,5 +110,5 @@ function reporteAsistentesPDF()
     $html = ob_get_clean();
 
     // Se genera el archivo PDF
-    generarPDF($html, 'reporte_asistentes.pdf', false);
+    generarPDF($html, 'reporte_asistentes.pdf', true);
 }

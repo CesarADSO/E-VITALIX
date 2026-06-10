@@ -4,6 +4,7 @@ require_once BASE_PATH . '/app/controllers/misCitasController.php';
 // OBTENEMOS LOS DATOS DE LA CITA Y EL PACIENTE
 $id_cita = $_GET['id_cita'] ?? '';
 $id_paciente = $_GET['id_paciente'] ?? '';
+$id_servicio = $_GET['id_servicio'] ?? '';
 
 $cita = obtenerIdCitaYPaciente($id_cita, $id_paciente);
 ?>
@@ -32,14 +33,8 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                     <!-- Horarios Header -->
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <!-- <div>
-                            <button class="btn btn-link text-primary p-0"
-                                style="text-decoration: none; font-size: 14px;">
-                                ← Todos (0)
-                            </button>
-                        </div> -->
-                        <a href="<?= BASE_URL ?>/especialista/mis-citas" class="btn btn-primary btn-sm"
-                            style="border-radius: 20px;"><i class="bi bi-arrow-left"></i> VOLVER</a>
+                        <a href="<?= BASE_URL ?>/especialista/mis-citas" class="btn btn-link text-primary p-0" style="text-decoration: none; font-size: 14px;">← Todos</a>
+                        <a href="<?= BASE_URL ?>/especialista/mis-citas" class="btn btn-primary btn-sm btn-añadir-volver"><i class="bi bi-arrow-left"></i> VOLVER</a>
                     </div>
 
                     <!-- Formulario de Registro de Consulta Médica -->
@@ -69,6 +64,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                             <!-- Motivo de la Consulta -->
                             <input type="hidden" name="id_cita" value="<?= $cita['id_cita'] ?>">
                             <input type="hidden" name="id_paciente" value="<?= $cita['id_paciente'] ?>">
+                            <input type="hidden" name="id_servicio" value="<?= $id_servicio ?>">
                             <div class="wizard-step active" id="step1">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
@@ -117,7 +113,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                     <button type="button" class="btn btn-primary next-step" data-next="2">Siguiente</button>
                                 </div>
 
-                                
+
                             </div>
 
                             <div class="wizard-step" id="step2">
@@ -181,6 +177,12 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                         <label for="duracion" class="form-label">Duración del tratamiento</label>
                                         <input type="text" class="form-control" name="duracion" placeholder="Ej: 7 días">
                                     </div>
+
+                                    <div class="mb-3 col-md-6">
+                                        <label for="medicamento" class="form-label">Orden médica <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="orden_medica" placeholder="Ingrese la orden médica">
+                                    </div>
+
                                 </div>
 
                                 <!-- Botones -->
@@ -190,8 +192,6 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                 </div>
 
                             </div>
-
-
                         </form>
                     </div>
                 </div>

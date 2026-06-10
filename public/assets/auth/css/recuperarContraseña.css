@@ -181,9 +181,6 @@ body {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 576px) {
-    .logo-container {
-        margin-bottom: -30px;
-    }
 
     .logo img {
         max-width: 160px;
