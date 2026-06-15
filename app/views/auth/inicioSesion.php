@@ -22,7 +22,7 @@ if (isset($_GET['plan'])) {
         rel="stylesheet">
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/auth/css/inicionSesion.css">
+    <link rel="stylesheet" href="public/assets/auth/css/inicioSesion.css">
     <link rel="icon" href="public/assets/auth/img/FAVICON.png">
 </head>
 
@@ -61,7 +61,7 @@ if (isset($_GET['plan'])) {
                             required
                             maxlength="255"
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
-                        <small class="form-text text-muted">Ingresa un email válido</small>
+                        <small class="form-text text-white">Ingresa un email válido</small>
                     </div>
 
                     <div class="mb-3">
@@ -74,7 +74,7 @@ if (isset($_GET['plan'])) {
                             required
                             minlength="8"
                             maxlength="100">
-                        <small class="form-text text-muted">Mínimo 8 caracteres</small>
+                        <small class="form-text text-white">Mínimo 8 caracteres</small>
                     </div>
 
                     <div class="form-options">

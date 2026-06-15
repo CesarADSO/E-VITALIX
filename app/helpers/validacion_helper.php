@@ -669,20 +669,6 @@ class Validaciones {
     }
 
     /**
-     * Validar género
-     */
-    public static function validarGenero($genero) {
-        $generos_validos = ['Masculino', 'Femenino', 'Otro'];
-        if (!in_array($genero, $generos_validos)) {
-            return [
-                'valido' => false,
-                'mensaje' => 'Género no válido'
-            ];
-        }
-        return ['valido' => true];
-    }
-
-    /**
      * Validar URL
      */
     public static function validarURL($url) {

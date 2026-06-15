@@ -132,13 +132,6 @@ function completarPerfilPaciente($id_paciente)
         exit();
     }
 
-    // Validar género
-    $validacion_genero = Validaciones::validarGenero($genero);
-    if (!$validacion_genero['valido']) {
-        mostrarSweetAlert('error', 'Error de validación', $validacion_genero['mensaje']);
-        exit();
-    }
-
     // Validar ciudad
     $validacion_ciudad = Validaciones::validarCiudad($ciudad);
     if (!$validacion_ciudad['valido']) {
