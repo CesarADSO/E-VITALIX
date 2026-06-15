@@ -81,4 +81,40 @@ class Registro
             return false;
         }
     }
+
+    /**
+     * Verificar si un email ya está registrado
+     */
+    public function emailExiste($email)
+    {
+        try {
+            $query = "SELECT id FROM usuarios WHERE email = :email LIMIT 1";
+            $resultado = $this->conexion->prepare($query);
+            $resultado->bindParam(':email', $email);
+            $resultado->execute();
+            
+            return $resultado->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error en Registro::emailExiste->" . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Verificar si un documento ya está registrado
+     */
+    public function documentoExiste($numero_documento)
+    {
+        try {
+            $query = "SELECT id FROM pacientes WHERE numero_documento = :numero_documento LIMIT 1";
+            $resultado = $this->conexion->prepare($query);
+            $resultado->bindParam(':numero_documento', $numero_documento);
+            $resultado->execute();
+            
+            return $resultado->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error en Registro::documentoExiste->" . $e->getMessage());
+            return false;
+        }
+    }
 }

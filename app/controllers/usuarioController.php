@@ -1,6 +1,7 @@
 <?php
 // Importamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/usuarioModel.php';
 
 // Capturamos en una variable el método o solicitud hecha al servidor
@@ -56,14 +57,44 @@ switch ($method) {
 function registrarSuperAdministrador()
 {
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
-    $email = $_POST['email'] ?? '';
-    $nombres = $_POST['nombres'] ?? '';
-    $apellidos = $_POST['apellidos'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
+    $email = Validaciones::sanitizarEmail($_POST['email'] ?? '');
+    $nombres = Validaciones::sanitizarString($_POST['nombres'] ?? '');
+    $apellidos = Validaciones::sanitizarString($_POST['apellidos'] ?? '');
+    $telefono = Validaciones::sanitizarString($_POST['telefono'] ?? '');
 
-    // Validamos los campos que son obligatorios
-    if (empty($email) || empty($nombres) || empty($apellidos) || empty($telefono)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    // VALIDACIONES INDIVIDUALES
+    // Validar email
+    $validacion_email = Validaciones::validarEmail($email);
+    if (!$validacion_email['valido']) {
+        mostrarSweetAlert('error', 'Error en email', $validacion_email['mensaje']);
+        exit();
+    }
+
+    // Validar nombres
+    $validacion_nombres = Validaciones::validarNombres($nombres);
+    if (!$validacion_nombres['valido']) {
+        mostrarSweetAlert('error', 'Error en nombres', $validacion_nombres['mensaje']);
+        exit();
+    }
+
+    // Validar apellidos
+    $validacion_apellidos = Validaciones::validarApellidos($apellidos);
+    if (!$validacion_apellidos['valido']) {
+        mostrarSweetAlert('error', 'Error en apellidos', $validacion_apellidos['mensaje']);
+        exit();
+    }
+
+    // Validar teléfono
+    $validacion_telefono = Validaciones::validarTelefono($telefono);
+    if (!$validacion_telefono['valido']) {
+        mostrarSweetAlert('error', 'Error en teléfono', $validacion_telefono['mensaje']);
+        exit();
+    }
+
+    // Verificar que el email no existe ya
+    $objUsuario = new Usuario();
+    if ($objUsuario->emailExiste($email)) {
+        mostrarSweetAlert('error', 'Email duplicado', 'Este email ya está registrado en el sistema');
         exit();
     }
 
@@ -71,26 +102,17 @@ function registrarSuperAdministrador()
     $ruta_foto = null;
 
     if (!empty($_FILES['foto']['name'])) {
+        // Validar el archivo de imagen
+        $validacion_imagen = Validaciones::validarImagenUpload($_FILES['foto'], 2);
+        if (!$validacion_imagen['valido']) {
+            mostrarSweetAlert('error', 'Error en imagen', $validacion_imagen['mensaje']);
+            exit();
+        }
 
         $file = $_FILES['foto'];
 
         // OBTENEMOS LA EXTENSIÓN DEL ARCHIVO
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        // DEFINIMOS LAS EXTENSIONES PERMITIDAS
-        $permitidas = ['png', 'jpg', 'jpeg'];
-
-        // VALIDAMOS QUE LA EXTENSIÓN DE LA IMAGEN CARGADA ESTÉ DENTRO DE LAS PERIMITIDAS
-        if (!in_array($ext, $permitidas)) {
-            mostrarSweetAlert('error', 'Extensión no permitida', 'Señor usuario cargue una extensión que sea permitida');
-            exit();
-        }
-
-        // VALIDAMOS EL TAMAÑO O PESO DE LA IMAGEN MAX 2MB
-        if ($file['size'] > 2 * 1024 * 1024) {
-            mostrarSweetAlert('error', 'Error al cargar la foto', 'Señor usuario el peso de la foto es superior a 2MB');
-            exit();
-        }
 
         // DEFINIMOS EL NOMBRE DEL ARCHIVO Y LE CONCATENAMOS LA EXTENSIÓN
         $ruta_foto = uniqid('superadministrador_') . '.' . $ext;
@@ -99,14 +121,15 @@ function registrarSuperAdministrador()
         $destino = BASE_PATH . "/public/uploads/usuarios/" . $ruta_foto;
 
         // MOVEMOS EL ARCHIVO AL DESTINO
-        move_uploaded_file($file['tmp_name'], $destino);
+        if (!move_uploaded_file($file['tmp_name'], $destino)) {
+            mostrarSweetAlert('error', 'Error al cargar', 'No se pudo cargar la imagen. Intenta nuevamente');
+            exit();
+        }
     } else {
         $ruta_foto = 'default-superadministrador.jpg';
     }
 
-
     // POO - INSTANTIAMOS LA CLASE DEL MODELO USUARIO PARA ACCEDER AL MÉTODO REGISTRAR
-    $objUsuario = new Usuario();
     $data = [
         'email' => $email,
         'nombres' => $nombres,
@@ -150,32 +173,56 @@ function listarUsuario($id)
 function actualizarUsuario()
 {
     // CAPTURAMOS EN VARIABLES LOS VALORES ENVIADOS A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
-    $id = $_POST['id'] ?? '';
-    $email = $_POST['correo'] ?? '';
+    $id = Validaciones::sanitizarNumero($_POST['id'] ?? '');
+    $email = Validaciones::sanitizarEmail($_POST['correo'] ?? '');
     $contrasena = $_POST['contrasena'] ?? '';
     $estado = $_POST['estado'] ?? '';
 
-    // Validamos los campos que son obligatorios
-    if (empty($email) || empty($estado)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    // Validar ID
+    $validacion_id = Validaciones::validarNumero($id, 1);
+    if (!$validacion_id['valido']) {
+        mostrarSweetAlert('error', 'Error de validación', 'ID de usuario inválido');
         exit();
     }
 
+    // Validar email
+    $validacion_email = Validaciones::validarEmail($email);
+    if (!$validacion_email['valido']) {
+        mostrarSweetAlert('error', 'Error en email', $validacion_email['mensaje']);
+        exit();
+    }
+
+    // Validar estado
+    $estados_validos = ['Activo', 'Inactivo', 'Suspendido'];
+    if (!in_array($estado, $estados_validos)) {
+        mostrarSweetAlert('error', 'Error de validación', 'Estado de usuario inválido');
+        exit();
+    }
+
+    // Validar contraseña si se proporcionó
+    if (!empty($contrasena)) {
+        $validacion_contrasena = Validaciones::validarContrasenasimple($contrasena);
+        if (!$validacion_contrasena['valido']) {
+            mostrarSweetAlert('error', 'Error en contraseña', $validacion_contrasena['mensaje']);
+            exit();
+        }
+        // Encriptar la contraseña
+        $contrasena = password_hash($contrasena, PASSWORD_DEFAULT);
+    }
+
     $ObjUsuario = new Usuario();
+    
     $data = [
         'id' => $id,
         'email' => $email,
         'contrasena' => $contrasena,
         'estado' => $estado
-
-        // 'id_admin' => $id_admin
     ];
-    // Enviamos la data al método "actualizar()" de la clase instanciada anteriormente "Consultorio()"
-    // Y esperamos una respuesta booleana del modelo
+    
+    // Enviamos la data al método "actualizar()" de la clase instanciada anteriormente "Usuario()"
     $resultado = $ObjUsuario->actualizar($data);
 
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
-    // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Modificación exitosa', 'Se ha actualizado el Usuario', '/E-VITALIX/superadmin/usuarios');
     } else {
