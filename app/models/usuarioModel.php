@@ -123,4 +123,29 @@ class Usuario
             return false;
         }
     }
+
+    /**
+     * Verificar si un email ya está registrado
+     */
+    public function emailExiste($email, $excluir_id = null)
+    {
+        try {
+            if ($excluir_id) {
+                $query = "SELECT id FROM usuarios WHERE email = :email AND id != :id LIMIT 1";
+                $resultado = $this->conexion->prepare($query);
+                $resultado->bindParam(':email', $email);
+                $resultado->bindParam(':id', $excluir_id);
+            } else {
+                $query = "SELECT id FROM usuarios WHERE email = :email LIMIT 1";
+                $resultado = $this->conexion->prepare($query);
+                $resultado->bindParam(':email', $email);
+            }
+            $resultado->execute();
+            
+            return $resultado->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Error en Usuario::emailExiste->" . $e->getMessage());
+            return false;
+        }
+    }
 }

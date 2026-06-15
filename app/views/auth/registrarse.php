@@ -30,7 +30,7 @@
                     </p>
 
 
-                    <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data">
+                    <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data" novalidate>
                         <input type="hidden" name="accion" value="registrarPaciente">
                         <div class="row">
                             <div class="col-md-6">
@@ -41,7 +41,11 @@
                                     placeholder="Ingresa tu nombre..."
                                     id="nombre"
                                     name="nombres"
-                                    required>
+                                    required
+                                    minlength="2"
+                                    maxlength="100"
+                                    pattern="[a-záéíóúñ\s\-'áéíóúÁÉÍÓÚÑ]+"
+                                    title="Solo se permiten letras">
                             </div>
 
                             <div class="col-md-6">
@@ -52,7 +56,11 @@
                                     placeholder="Ingresa tu apellido..."
                                     id="apellidos"
                                     name="apellidos"
-                                    required>
+                                    required
+                                    minlength="2"
+                                    maxlength="100"
+                                    pattern="[a-záéíóúñ\s\-'áéíóúÁÉÍÓÚÑ]+"
+                                    title="Solo se permiten letras">
                             </div>
 
                             <div class="col-md-6 cont-input">
@@ -68,12 +76,17 @@
                             <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Número de documento:</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     class="campos-formulario"
                                     placeholder="xxxxxxxxxx"
                                     id="numeroDocumento"
                                     name="numero_documento"
-                                    required>
+                                    required
+                                    minlength="5"
+                                    maxlength="10"
+                                    pattern="[0-9]+"
+                                    inputmode="numeric"
+                                    title="Solo números">
                             </div>
 
                             <div class="col-md-6 cont-input">
@@ -84,18 +97,24 @@
                                     placeholder="tucorreo@gmail.com"
                                     id="email"
                                     name="email"
-                                    required>
+                                    required
+                                    maxlength="255">
                             </div>
 
                             <div class="col-md-6 cont-input">
                                 <label class="form-label-custom">Teléfono:</label>
                                 <input
-                                    type="number"
+                                    type="tel"
                                     class="campos-formulario"
                                     placeholder="Ingresa tu número de teléfono..."
                                     id="telefono"
                                     name="telefono"
-                                    required>
+                                    required
+                                    minlength="7"
+                                    maxlength="15"
+                                    pattern="[0-9\s\-\+]+"
+                                    inputmode="tel"
+                                    title="Ingresa un teléfono válido">
                             </div>
 
                         </div>
@@ -123,6 +142,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation Library -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="public/assets/js/validaciones.js"></script>
+    <script>
+        // Configurar validaciones para el formulario de registro
+        configurarValidacionesFormulario('registroForm', {
+            'nombre': {
+                tipo: 'nombres',
+                opciones: {}
+            },
+            'apellidos': {
+                tipo: 'nombres',
+                opciones: {}
+            },
+            'tipoDocumento': {
+                tipo: 'select',
+                opciones: { nombre: 'tipo de documento' }
+            },
+            'numeroDocumento': {
+                tipo: 'documento',
+                opciones: {}
+            },
+            'email': {
+                tipo: 'email',
+                opciones: {}
+            },
+            'telefono': {
+                tipo: 'telefono',
+                opciones: {}
+            }
+        });
+    </script>
     <script src="public/assets/auth/js/registrarse.js"></script>
 </body>
 

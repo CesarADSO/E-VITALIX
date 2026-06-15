@@ -1,6 +1,7 @@
 <?php
 // Importamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/LoginModel.php';
 
 // $clave = '123';
@@ -10,15 +11,34 @@ require_once __DIR__ . '/../models/LoginModel.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Capturamos en variables los valores enviados a través de los name de los campos y method post del formulario
-    $correo = $_POST['email'] ?? '';
+    $correo = Validaciones::sanitizarEmail($_POST['email'] ?? '');
     $clave = $_POST['clave'] ?? '';
     $plan_id = $_POST['plan_pendiente'] ?? null; // Esta variable solo existirá si el usuario viene del proceso de compra de un plan, si no viene será null
 
+    // Validaciones básicas
+    $validacion = Validaciones::validarCamposObligatorios(['email' => $correo, 'clave' => $clave], ['email', 'clave']);
+    
+    if (!$validacion['valido']) {
+        mostrarSweetAlert('error', 'Campos vacíos', $validacion['mensaje']);
+        exit();
+    }
 
-    // Validamos que los campos/variables no estén vacias
+    // Validar formato de email
+    $validacion_email = Validaciones::validarEmail($correo);
+    if (!$validacion_email['valido']) {
+        mostrarSweetAlert('error', 'Email inválido', $validacion_email['mensaje']);
+        exit();
+    }
 
-    if (empty($correo) || empty($clave)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar');
+    // Validar que la contraseña no esté vacía
+    if (strlen($clave) < 1) {
+        mostrarSweetAlert('error', 'Error de validación', 'La contraseña es requerida');
+        exit();
+    }
+
+    // Validar que la contraseña no sea demasiado corta para procesarla
+    if (strlen($clave) > 100) {
+        mostrarSweetAlert('error', 'Error de validación', 'La contraseña es demasiado larga');
         exit();
     }
 

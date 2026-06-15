@@ -4,6 +4,7 @@ session_start();
 
 // Importamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/registroModel.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -22,26 +23,74 @@ switch ($method) {
     default:
         break;
 }
+
 function registrarPaciente()
 {
     // CAPTURAMOS LOS DATOS QUE VIENEN A TRAVÉS DEL METHOD POST Y LOS NAME DE LOS CAMPOS
-    $nombres = $_POST['nombres'] ?? '';
-    $apellidos = $_POST['apellidos'] ?? '';
+    $nombres = Validaciones::sanitizarString($_POST['nombres'] ?? '');
+    $apellidos = Validaciones::sanitizarString($_POST['apellidos'] ?? '');
     $tipo_documento = $_POST['tipo_documento'] ?? '';
-    $numero_documento = $_POST['numero_documento'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
+    $numero_documento = Validaciones::sanitizarNumero($_POST['numero_documento'] ?? '');
+    $email = Validaciones::sanitizarEmail($_POST['email'] ?? '');
+    $telefono = Validaciones::sanitizarString($_POST['telefono'] ?? '');
 
-
-    // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($nombres) || empty($apellidos) || empty($tipo_documento) || empty($numero_documento) || empty($email) || empty($telefono)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    // VALIDACIONES INDIVIDUALES
+    // Validar nombres
+    $validacion_nombres = Validaciones::validarNombres($nombres);
+    if (!$validacion_nombres['valido']) {
+        mostrarSweetAlert('error', 'Error en nombres', $validacion_nombres['mensaje']);
         exit();
     }
 
+    // Validar apellidos
+    $validacion_apellidos = Validaciones::validarApellidos($apellidos);
+    if (!$validacion_apellidos['valido']) {
+        mostrarSweetAlert('error', 'Error en apellidos', $validacion_apellidos['mensaje']);
+        exit();
+    }
+
+    // Validar tipo de documento
+    $validacion_tipo_doc = Validaciones::validarSelect($tipo_documento, 'tipo de documento');
+    if (!$validacion_tipo_doc['valido']) {
+        mostrarSweetAlert('error', 'Error de validación', $validacion_tipo_doc['mensaje']);
+        exit();
+    }
+
+    // Validar número de documento
+    $validacion_num_doc = Validaciones::validarDocumento($numero_documento, $tipo_documento);
+    if (!$validacion_num_doc['valido']) {
+        mostrarSweetAlert('error', 'Error en documento', $validacion_num_doc['mensaje']);
+        exit();
+    }
+
+    // Validar email
+    $validacion_email = Validaciones::validarEmail($email);
+    if (!$validacion_email['valido']) {
+        mostrarSweetAlert('error', 'Error en email', $validacion_email['mensaje']);
+        exit();
+    }
+
+    // Validar teléfono
+    $validacion_telefono = Validaciones::validarTelefono($telefono);
+    if (!$validacion_telefono['valido']) {
+        mostrarSweetAlert('error', 'Error en teléfono', $validacion_telefono['mensaje']);
+        exit();
+    }
 
     // INSTANCIAMOS LA CLASE DEL MODELO
     $objRegistro = new Registro();
+
+    // Verificar que el email no existe ya en la base de datos
+    if ($objRegistro->emailExiste($email)) {
+        mostrarSweetAlert('error', 'Email duplicado', 'Este email ya está registrado en el sistema');
+        exit();
+    }
+
+    // Verificar que el documento no existe ya en la base de datos
+    if ($objRegistro->documentoExiste($numero_documento)) {
+        mostrarSweetAlert('error', 'Documento duplicado', 'Este documento ya está registrado en el sistema');
+        exit();
+    }
 
     // CREAMOS UNA VARIABLE LLAMADA DATA PARA ALMACENAR LOS DATOS PARA LUEGO PASARSELOS AL MODELO
     $data = [
@@ -68,16 +117,67 @@ function completarPerfilPaciente($id_paciente)
     $fecha_nacimiento = $_POST['fecha_nacimiento'] ?? '';
     $genero = $_POST['genero'] ?? '';
     $ciudad = $_POST['ciudad'] ?? '';
-    $direccion = $_POST['direccion'] ?? '';
+    $direccion = Validaciones::sanitizarString($_POST['direccion'] ?? '');
     $eps = $_POST['eps'] ?? '';
     $rh = $_POST['rh'] ?? '';
-    $nombre_contacto = $_POST['nombre_contacto'] ?? '';
-    $telefono_contacto = $_POST['telefono_contacto'] ?? '';
-    $direccion_contacto = $_POST['direccion_contacto'] ?? '';
+    $nombre_contacto = Validaciones::sanitizarString($_POST['nombre_contacto'] ?? '');
+    $telefono_contacto = Validaciones::sanitizarString($_POST['telefono_contacto'] ?? '');
+    $direccion_contacto = Validaciones::sanitizarString($_POST['direccion_contacto'] ?? '');
 
-    // VALIDAMOS LOS CAMPOS OBLIGATORIOS
-    if (empty($fecha_nacimiento) || empty($genero) || empty($ciudad) || empty($direccion) || empty($eps) || empty($rh) || empty($nombre_contacto) || empty($telefono_contacto) || empty($direccion_contacto)) {
-        mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+    // VALIDACIONES INDIVIDUALES
+    // Validar fecha de nacimiento
+    $validacion_fecha = Validaciones::validarFechaNacimiento($fecha_nacimiento);
+    if (!$validacion_fecha['valido']) {
+        mostrarSweetAlert('error', 'Error en fecha', $validacion_fecha['mensaje']);
+        exit();
+    }
+
+    // Validar ciudad
+    $validacion_ciudad = Validaciones::validarCiudad($ciudad);
+    if (!$validacion_ciudad['valido']) {
+        mostrarSweetAlert('error', 'Error en ciudad', $validacion_ciudad['mensaje']);
+        exit();
+    }
+
+    // Validar dirección
+    $validacion_direccion = Validaciones::validarDireccion($direccion);
+    if (!$validacion_direccion['valido']) {
+        mostrarSweetAlert('error', 'Error en dirección', $validacion_direccion['mensaje']);
+        exit();
+    }
+
+    // Validar EPS
+    $validacion_eps = Validaciones::validarEPS($eps);
+    if (!$validacion_eps['valido']) {
+        mostrarSweetAlert('error', 'Error de validación', $validacion_eps['mensaje']);
+        exit();
+    }
+
+    // Validar RH
+    $validacion_rh = Validaciones::validarRH($rh);
+    if (!$validacion_rh['valido']) {
+        mostrarSweetAlert('error', 'Error en RH', $validacion_rh['mensaje']);
+        exit();
+    }
+
+    // Validar nombre contacto
+    $validacion_nombre_contacto = Validaciones::validarNombres($nombre_contacto);
+    if (!$validacion_nombre_contacto['valido']) {
+        mostrarSweetAlert('error', 'Error en contacto de emergencia', $validacion_nombre_contacto['mensaje']);
+        exit();
+    }
+
+    // Validar teléfono contacto
+    $validacion_tel_contacto = Validaciones::validarTelefono($telefono_contacto);
+    if (!$validacion_tel_contacto['valido']) {
+        mostrarSweetAlert('error', 'Error en teléfono de contacto', $validacion_tel_contacto['mensaje']);
+        exit();
+    }
+
+    // Validar dirección contacto
+    $validacion_dir_contacto = Validaciones::validarDireccion($direccion_contacto);
+    if (!$validacion_dir_contacto['valido']) {
+        mostrarSweetAlert('error', 'Error en dirección de contacto', $validacion_dir_contacto['mensaje']);
         exit();
     }
 
