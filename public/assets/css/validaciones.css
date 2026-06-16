@@ -1,0 +1,243 @@
+/**
+ * ESTILOS PARA VALIDACIONES
+ * Estilos para mostrar errores y estados válidos en formularios
+ */
+
+/* Estilos para campos inválidos */
+.is-invalid {
+    border-color: #dc3545 !important;
+    padding-right: calc(1.5em + 0.75rem);
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.is-invalid:focus {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Estilos para campos válidos */
+.is-valid {
+    border-color: #198754 !important;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.is-valid:focus {
+    border-color: #198754 !important;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* Mensaje de error */
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+    margin-left: 0;
+}
+
+.is-invalid ~ .invalid-feedback,
+.invalid-feedback.d-block {
+    display: block !important;
+}
+
+/* Mensaje de éxito */
+.valid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #198754;
+}
+
+.is-valid ~ .valid-feedback {
+    display: block;
+}
+
+/* Estilos para inputs */
+input.is-invalid,
+textarea.is-invalid,
+select.is-invalid {
+    border-color: #dc3545 !important;
+    background-color: #fff5f5;
+}
+
+input.is-valid,
+textarea.is-valid,
+select.is-valid {
+    border-color: #198754 !important;
+    background-color: #f1f9f6;
+}
+
+/* Indicador de fortaleza de contraseña */
+.password-strength-indicator {
+    margin-top: 0.5rem;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #000;
+}
+
+.badge.bg-info {
+    background-color: #0dcaf0 !important;
+}
+
+.badge.bg-success {
+    background-color: #198754 !important;
+}
+
+/* Ayuda de formulario */
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Grupos de formulario con validación */
+.form-group.has-error input,
+.form-group.has-error textarea,
+.form-group.has-error select {
+    border-color: #dc3545;
+}
+
+.form-group.has-success input,
+.form-group.has-success textarea,
+.form-group.has-success select {
+    border-color: #198754;
+}
+
+/* Etiquetas con validación */
+label.required::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Animación para entrada de error */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.is-invalid {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Estilos adicionales para mayor claridad */
+.campos-formulario.is-invalid {
+    background-color: #fff5f5;
+    border: 2px solid #dc3545;
+}
+
+.campos-formulario.is-valid {
+    background-color: #f1f9f6;
+    border: 2px solid #198754;
+}
+
+/* Tooltip para validación */
+.tooltip-validation {
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+    border-left: 3px solid #0dcaf0;
+    margin-top: 0.5rem;
+    padding-left: 0.75rem;
+}
+
+/* Estilos para mensaje de error flotante */
+.floating-error {
+    position: absolute;
+    background-color: #dc3545;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    z-index: 1000;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+/* Verificación de carga (spinner) */
+.validation-loading {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #0dcaf0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 0.5rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilos para confirmación de campo */
+.field-success-checkmark {
+    color: #198754;
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+/* Estilos para advertencia */
+.field-warning {
+    color: #ffc107;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Estilos responsive para pequeñas pantallas */
+@media (max-width: 576px) {
+    .invalid-feedback,
+    .valid-feedback,
+    .form-text {
+        font-size: 0.8rem;
+    }
+
+    .campos-formulario.is-invalid,
+    .campos-formulario.is-valid {
+        font-size: 0.9rem;
+    }
+}
+
+/* Efecto de focus mejorado */
+.campos-formulario:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(13, 202, 240, 0.25);
+}
+
+.campos-formulario.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+.campos-formulario.is-valid:focus {
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.25);
+}
