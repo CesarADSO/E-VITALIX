@@ -44,27 +44,27 @@ $plan = traerId();
                     <ul class="navbar-nav">
                         <li class="nav-item item">
                             <a class="nav-link active text-white enlace" href="#">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Inicio
+                                Inicio
                             </a>
                         </li>
                         <li class="nav-item item">
                             <a class="nav-link text-white enlace" href="#funcionalidades">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Funcionalidades
+                                Funcionalidades
                             </a>
                         </li>
                         <li class="nav-item item">
                             <a class="nav-link text-white enlace" href="#beneficios">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Beneficios
+                                Beneficios
                             </a>
                         </li>
                         <li class="nav-item item">
                             <a class="nav-link text-white enlace" href="#precios">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Planes
+                                Planes
                             </a>
                         </li>
                         <li class="nav-item item">
                             <a class="nav-link text-white enlace" href="#preguntas">
-                                <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Preguntas
+                                Preguntas
                             </a>
                         </li>
                     </ul>
@@ -149,7 +149,7 @@ $plan = traerId();
                         </div>
                     </div>
                     <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
-                        <img class="imagen-inicio" src="public/assets/website/img/dashboard hero prueba.svg" alt="Dashboard">
+                        <img class="imagen-inicio" src="public/assets/website/img/dasbo.png" alt="Dashboard">
                     </div>
 
                     <!-- BOTONES MOVIL -->
@@ -186,7 +186,7 @@ $plan = traerId();
                                         PDF al instante y mantén la información siempre disponible.</p>
                                 </div>
                                 <div class="col-md-8 cont-foto-1">
-                                    <img src="public/assets/website/img/imagen de prueba 1.svg" alt="Imagen de prueba">
+                                    <img src="public/assets/website/img/historial.png" alt="Imagen de prueba">
                                 </div>
                             </div>
                         </div>
@@ -195,7 +195,7 @@ $plan = traerId();
                         <div class="bg-white cont-fun-2" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                             <div class="row">
                                 <div class="col-md-12 cont-foto-2">
-                                    <img src="public/assets/website/img/imagen de prueba 2.svg"
+                                    <img src="public/assets/website/img/calendario.png"
                                         alt="Imagen de prueba 2">
                                 </div>
                                 <div class="col-md-12 cont-info-2">
@@ -212,14 +212,14 @@ $plan = traerId();
                         <div class="bg-white cont-fun-3" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                             <div class="row">
                                 <div class="col-md-12 cont-foto-3">
-                                    <img src="public/assets/website/img/imagen de prueba 3.svg"
+                                    <img src="public/assets/website/img/agendar.png"
                                         alt="Imagen de prueba 3">
                                 </div>
                                 <div class="col-md-12 cont-info-3">
                                     <h5>Funcionalidad 03</h5>
                                     <h2>Portal de Agendamiento Directo</h2>
                                     <p>Facilita la vida de tu recepción y de tus pacientes. E-VITALIX incluye un módulo
-                                        donde el paciente puede buscar por especialidad y elegir tu consultorio
+                                        donde el paciente puede buscar por especialidad y ciudad para elegir tu consultorio
                                         directamente, automatizando el ingreso de nuevas citas a tu sistema.</p>
                                 </div>
                             </div>
@@ -230,11 +230,11 @@ $plan = traerId();
         </section>
         <section id="beneficios">
             <div class="container">
-                <h2 class="text-center text-white titulo-beneficios" data-aos="fade-up">Beneficios para el consultorio</h2>
+                <h2 class="text-center text-white titulo-beneficios" data-aos="fade-up">Beneficios para la clínica</h2>
                 <div class="row fila-beneficios gx-3">
                     <div class="col-md-6 d-none d-lg-block">
                         <div class="cont-foto cont-1" data-aos="zoom-in" data-aos-duration="700">
-                            <img src="public/assets/website/img/beneficios 1.svg" alt="beneficios 1">
+                            <img src="public/assets/website/img/doctoresLogo.png" alt="beneficios 1">
                         </div>
                     </div>
                     <div class="col-md-3 d-none d-lg-block">
@@ -244,7 +244,7 @@ $plan = traerId();
                     </div>
                     <div class="col-md-3 d-none d-lg-block">
                         <div class="cont-foto cont-3" data-aos="zoom-in" data-aos-duration="700" data-aos-delay="300">
-                            <img src="public/assets/website/img/beneficios 3.svg" alt="beneficios 3">
+                            <img src="public/assets/website/img/db.png" alt="beneficios 3">
                         </div>
                     </div>
 
@@ -276,21 +276,13 @@ $plan = traerId();
                                     </p>
                                 </div>
                                 <div class="carousel-item">
-                                    <h3 class="text-white titulo-carrusel">Cero papel máxima eficiencia</h3>
-                                    <p class="text-white parrafo-carrusel">Transforma montañas de carpetas en un archivo
-                                        digital organizado. Encuentra la
-                                        historia
-                                        clínica de cualquier paciente en segundos, sin ocupar espacio físico en tu
-                                        clínica.
+                                    <h3 class="text-white titulo-carrusel">Atención rápida y sin filas</h3>
+                                    <p class="text-white parrafo-carrusel">Agenda citas y accede a servicios de salud desde cualquier lugar, evitando largas esperas, desplazamientos innecesarios y trámites presenciales.
                                     </p>
                                 </div>
                                 <div class="carousel-item">
-                                    <h3 class="text-white titulo-carrusel">Cero papel máxima eficiencia</h3>
-                                    <p class="text-white parrafo-carrusel">Transforma montañas de carpetas en un archivo
-                                        digital organizado. Encuentra la
-                                        historia
-                                        clínica de cualquier paciente en segundos, sin ocupar espacio físico en tu
-                                        clínica.
+                                    <h3 class="text-white titulo-carrusel">Acceso inmediato a la atención médica</h3>
+                                    <p class="text-white parrafo-carrusel">Gestiona citas y consultas en línea de forma rápida y sencilla, ahorrando tiempo y eliminando procesos presenciales innecesarios.
                                     </p>
                                 </div>
                             </div>
@@ -492,29 +484,19 @@ $plan = traerId();
                 <div class="collapse navbar-collapse cont-nav" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item item">
-                            <a class="nav-link active text-white enlace" aria-current="page" href="#"><img
-                                    src="public/assets/website/img/puntito blanco del nav.svg"
-                                    alt="Punto blanco">Inicio</a>
+                            <a class="nav-link active text-white enlace" aria-current="page" href="#">Inicio</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#funcionalidades"><img
-                                    src="public/assets/website/img/puntito blanco del nav.svg"
-                                    alt="Punto blanco">Funcionalidades</a>
+                            <a class="nav-link text-white enlace" href="#funcionalidades">Funcionalidades</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#beneficios"><img
-                                    src="public/assets/website/img/puntito blanco del nav.svg"
-                                    alt="Punto blanco">Beneficios</a>
+                            <a class="nav-link text-white enlace" href="#beneficios">Beneficios</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#precios"><img
-                                    src="public/assets/website/img/puntito blanco del nav.svg"
-                                    alt="Punto blanco">Planes</a>
+                            <a class="nav-link text-white enlace" href="#precios">Planes</a>
                         </li>
                         <li class="nav-item item">
-                            <a class="nav-link text-white enlace" href="#preguntas"><img
-                                    src="public/assets/website/img/puntito blanco del nav.svg"
-                                    alt="Punto blanco">Preguntas</a>
+                            <a class="nav-link text-white enlace" href="#preguntas">Preguntas</a>
                         </li>
                     </ul>
                 </div>
