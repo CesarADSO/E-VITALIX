@@ -19,7 +19,7 @@ $resultado = $objModelo->recuperarClave($email);
 // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
 // Si es falsa notificamos y redirecciomamos
 if ($resultado === true) {
-    mostrarSweetAlert('success', 'Nueva clave generada', 'Se ha enviado una nueva contraseña a tu correo electrónico', '/E-VITALIX/login');
+    mostrarSweetAlert('success', 'Nueva clave generada', 'Se ha enviado una nueva contraseña a tu correo electrónico', BASE_URL . '/login');
 } else {
     mostrarSweetAlert('error', 'Usuario no encontrado', 'Verifique su correo electrónico e intente nuevamente');
 }
