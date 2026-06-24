@@ -17,9 +17,9 @@ $plan = traerId();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="public/assets/website/css/landing.css">
     <link rel="icon" href="public/assets/website/img/FAVICON.png">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="public/assets/website/css/landing.css">
 </head>
 
 <body>
@@ -130,7 +130,7 @@ $plan = traerId();
         <div id="hero">
             <div class="container-fluid pe-0">
                 <div class="row fila-hero">
-                    <div class="col-md-6 cont-info" data-aos="fade-up" data-aos-duration="900">
+                    <div class="col-md-6 cont-info">
                         <h3 class="subtitulo-pequeño text-white"><img src="public/assets/website/img/estetoscopio.svg"
                                 alt="">Plataforma de gestión médica
                             integral</h3>
@@ -148,7 +148,7 @@ $plan = traerId();
                                         class="bi bi-chevron-right text-white flecha-derecha"></i></span></a>
                         </div>
                     </div>
-                    <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end" data-aos="fade-up" data-aos-duration="900" data-aos-delay="200">
+                    <div class="col-md-6 cont-foto pe-0 d-flex justify-content-end">
                         <img class="imagen-inicio" src="public/assets/website/img/dasbo.png" alt="Dashboard">
                     </div>
 
