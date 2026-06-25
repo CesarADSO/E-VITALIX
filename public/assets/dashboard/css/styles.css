@@ -3992,6 +3992,10 @@
         padding-left: 30px;     /* evita que el contenido quede pegado al borde izquierdo */
         padding-right: 30px;    /* evita que el contenido quede pegado al borde derecho */
     }
+
+    .timeline::before {
+        content: none;
+    }
 }
 
 
@@ -4379,5 +4383,60 @@
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+    }
+}
+
+
+/* ==============================================================
+   IPAD PRO — TODAS LAS TABLAS → CARDS (992px – 1194px)
+
+   Por qué este rango:
+   - 992px: iPad Pro portrait (1024px DevTools) arranca aquí — sidebar
+     fijo 220px → main-content = 804px. Con 6-7 columnas queda apretado.
+   - 1194px: iPad Pro 11" landscape (1194px DevTools) — sidebar 240px →
+     main-content = 954px. Aún cómodo con cards.
+   - 1195px+: iPad Pro 12.9" landscape (1366px) → layout desktop completo,
+     tablas se ven bien con ~1166px disponibles.
+
+   Cómo funciona:
+   Todas las tablas del proyecto usan el patrón:
+     <div class="card shadow-sm d-none d-lg-block">  ← muestra tabla a 992px+
+       <table class="... table-pacientes ...">
+     </div>
+     <div class="row d-lg-none mt-3">               ← oculta cards a 992px+
+       ...tarjetas...
+     </div>
+
+   Con :has(.table-pacientes) ocultamos el wrapper de tabla y mostramos
+   el sibling de tarjetas, sin tocar el HTML de las vistas PHP.
+   ============================================================== */
+
+@media screen and (min-width: 992px) and (max-width: 1194px) {
+
+    /* Oculta el wrapper que contiene la tabla */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) {
+        display: none !important;
+    }
+
+    /* Muestra el panel de tarjetas sibling (Bootstrap lo oculta con d-lg-none) */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) ~ .row.d-lg-none {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 0 !important;
+    }
+
+    /* 2 tarjetas por fila: aprovecha el ancho disponible del main-content
+       (804px–954px) y evita tarjetas demasiado anchas o estrecha */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) ~ .row.d-lg-none > [class*="col-"] {
+        flex: 0 0 calc(50% - 8px);
+        max-width: calc(50% - 8px);
+        margin-top: 0 !important;
+    }
+
+    /* Las tarjetas individuales: sombra y esquinas redondeadas homogéneas */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) ~ .row.d-lg-none .card {
+        height: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
     }
 }
