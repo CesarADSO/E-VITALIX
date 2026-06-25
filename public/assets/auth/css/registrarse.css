@@ -289,7 +289,7 @@
  }
 
 
-/* =========================================================
+ /* =========================================================
    FIX RESPONSIVE — REGISTRO EN TABLETS (768px - 1112px)
    Cubre iPad Mini, iPad Air e iPad Pro vertical.
    En estos anchos, la imagen del doctor (object-fit:cover)
@@ -297,25 +297,25 @@
    contenedor. Mejor ocultarla y que el formulario ocupe el
    100% de la tarjeta, centrado con un ancho máximo cómodo.
    ========================================================= */
- 
-@media screen and (min-width: 768px) and (max-width: 1112px) {
- 
-    .registro-container {
-        align-items: center;
-        padding: 60px 20px;
-    }
- 
-    .image-section.col-md-6 {
-        display: none;
-    }
- 
-    .form-section.col-md-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-        padding: 45px 50px;
-    }
- 
-    .registro-content {
-        max-width: 700px;
-    }
-}
+
+ @media screen and (min-width: 768px) and (max-width: 1112px) {
+
+     .registro-container {
+         align-items: center;
+         padding: 60px 20px;
+     }
+
+     .image-section.col-md-6 {
+         display: none;
+     }
+
+     .form-section.col-md-6 {
+         flex: 0 0 100%;
+         max-width: 100%;
+         padding: 45px 50px;
+     }
+
+     .registro-content {
+         max-width: 700px;
+     }
+ }

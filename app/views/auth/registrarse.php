@@ -118,7 +118,7 @@
                             </div>
 
                         </div>
-     
+
 
                         <button type="submit" class="btn-azul btn-registrarse-paciente">Registrarse</button>
 
@@ -156,7 +156,9 @@
             },
             'tipoDocumento': {
                 tipo: 'select',
-                opciones: { nombre: 'tipo de documento' }
+                opciones: {
+                    nombre: 'tipo de documento'
+                }
             },
             'numeroDocumento': {
                 tipo: 'documento',
