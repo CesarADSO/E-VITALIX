@@ -27,29 +27,29 @@ window.addEventListener('load', () => {
     setTimeout(() => AOS.refresh(), 200);
 });
 
-// /* ===== NAVBAR — cambia de fondo al hacer scroll =====
-//    CAMBIO: usamos requestAnimationFrame para no recalcular
-//    estilos en cada pixel de scroll (esto causaba jank/tirones
-//    que se sentían como interferencia con las animaciones). */
-// const navbar = document.querySelector('header nav');
-// let navbarTicking = false;
+/* ===== NAVBAR — cambia de fondo al hacer scroll =====
+   CAMBIO: usamos requestAnimationFrame para no recalcular
+   estilos en cada pixel de scroll (esto causaba jank/tirones
+   que se sentían como interferencia con las animaciones). */
+const navbar = document.querySelector('header nav');
+let navbarTicking = false;
 
-// window.addEventListener('scroll', () => {
-//     if (!navbarTicking) {
-//         requestAnimationFrame(() => {
-//             if (window.scrollY > 50) {
-//                 navbar.style.backdropFilter = 'blur(10px)';
-//                 navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
-//                 navbar.style.transition = 'all 0.3s ease';
-//             } else {
-//                 navbar.style.backdropFilter = 'none';
-//                 navbar.style.boxShadow = 'none';
-//             }
-//             navbarTicking = false;
-//         });
-//         navbarTicking = true;
-//     }
-// });
+window.addEventListener('scroll', () => {
+    if (!navbarTicking) {
+        requestAnimationFrame(() => {
+            if (window.scrollY > 50) {
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                navbar.style.transition = 'all 0.3s ease';
+            } else {
+                navbar.style.backdropFilter = 'none';
+                navbar.style.boxShadow = 'none';
+            }
+            navbarTicking = false;
+        });
+        navbarTicking = true;
+    }
+});
 
 /* ===== CONTADOR ANIMADO — el 100% en #convencer ===== */
 const contadorEl = document.querySelector('.titulo-convencer');
@@ -150,21 +150,21 @@ if (tieneMouse) {
 /* ===== PARALLAX SUAVE EN EL HERO =====
    CAMBIO: requestAnimationFrame en vez de ejecutar en cada
    evento de scroll. Mismo efecto visual, sin el jank. */
-// const heroInfo = document.querySelector('#hero .cont-info');
-// const heroFoto = document.querySelector('#hero .cont-foto');
-// let parallaxTicking = false;
+const heroInfo = document.querySelector('#hero .cont-info');
+const heroFoto = document.querySelector('#hero .cont-foto');
+let parallaxTicking = false;
 
-// window.addEventListener('scroll', () => {
-//     if (!parallaxTicking) {
-//         requestAnimationFrame(() => {
-//             const scrollY = window.scrollY;
-//             if (heroInfo) heroInfo.style.transform = `translateY(${scrollY * 0.08}px)`;
-//             if (heroFoto) heroFoto.style.transform = `translateY(${scrollY * 0.12}px)`;
-//             parallaxTicking = false;
-//         });
-//         parallaxTicking = true;
-//     }
-// });
+window.addEventListener('scroll', () => {
+    if (!parallaxTicking) {
+        requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            if (heroInfo) heroInfo.style.transform = `translateY(${scrollY * 0.08}px)`;
+            if (heroFoto) heroFoto.style.transform = `translateY(${scrollY * 0.12}px)`;
+            parallaxTicking = false;
+        });
+        parallaxTicking = true;
+    }
+});
 
 /* ===== HOVER 3D EN TARJETAS DE PRECIOS ===== */
 document.querySelectorAll('.cont-plan .plan').forEach(plan => {
