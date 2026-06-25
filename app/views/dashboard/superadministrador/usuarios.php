@@ -128,7 +128,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <div class="row d-lg-none mt-3">
                         <?php if (!empty($usuarios)): ?>
                             <?php foreach ($usuarios as $usuario): ?>
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-6 mt-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-3">

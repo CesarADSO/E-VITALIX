@@ -1,8 +1,14 @@
-<?php 
-    // Validamos si hay un plan seleccionado en la URL, y lo guardamos en la sesión
-    if (isset($_GET['plan'])) {
-        $_SESSION['suscripcion_deseada'] = $_GET['plan'];
-    }
+<?php
+require_once BASE_PATH . '/app/controllers/ciudadesController.php';
+$ciudades = listarCiudades();
+
+?>
+
+<?php
+// Validamos si hay un plan seleccionado en la URL, y lo guardamos en la sesión
+if (isset($_GET['plan'])) {
+    $_SESSION['suscripcion_deseada'] = $_GET['plan'];
+}
 ?>
 
 
@@ -54,6 +60,10 @@
                             </div>
                             <div class="step" data-step="2">
                                 <span class="step-number">2</span>
+                                <span class="step-label">Selección de horario</span>
+                            </div>
+                            <div class="step" data-step="3">
+                                <span class="step-number">3</span>
                                 <span class="step-label">Crea tu cuenta</span>
                             </div>
                         </div>
@@ -72,7 +82,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label-custom">Ciudad:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa la ciudad" id="ciudad_consultorio" name="ciudad" required>
+                                    <select class="campos-formulario" name="ciudad" required>
+                                        <option value="">Selecciona una ciudad</option>
+                                        <?php foreach ($ciudades as $ciudad): ?>
+                                            <option value="<?= $ciudad['id'] ?>"><?= htmlspecialchars($ciudad['nombre']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Dirección:</label>
@@ -94,6 +109,56 @@
                         </div>
 
                         <div class="wizard-form-step" data-step="2" id="step2">
+                            <div class="mb-3">
+                                <label for="horario_atencion" class="form-label">Días de Atención</label>
+                                <div class="row">
+                                    <div class="form-check check-dia col-md-6">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Lunes">
+                                        <label class="form-check-label mi-label">Lunes</label>
+                                    </div>
+                                    <div class="form-check check-dia">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Martes">
+                                        <label class="form-check-label mi-label">Martes</label>
+                                    </div>
+                                    <div class="form-check check-dia">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Miercoles">
+                                        <label class="form-check-label mi-label">Miercoles</label>
+                                    </div>
+                                    <div class="form-check check-dia">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Jueves">
+                                        <label class="form-check-label mi-label">Jueves</label>
+                                    </div>
+                                    <div class="form-check check-dia">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Viernes">
+                                        <label class="form-check-label mi-label">Viernes</label>
+                                    </div>
+                                    <div class="form-check check-dia">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Sabado">
+                                        <label class="form-check-label mi-label">Sabado</label>
+                                    </div>
+                                    <div class="form-check check-dia">
+                                        <input class="form-check-input" type="checkbox" name="dias[]" value="Domingo">
+                                        <label class="form-check-label mi-label">Domingo</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Horario de atención</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="hora_apertura" class="form-label">Hora apertura</label>
+                                        <input type="time" id="hora_apertura" name="hora_apertura" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="hora_cierre" class="form-label">Hora cierre</label>
+                                        <input type="time" id="hora_cierre" name="hora_cierre" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wizard-form-step" data-step="3" id="step3">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="form-label-custom">Nombres:</label>
@@ -143,18 +208,18 @@
 
                     <div class="login-link-container">
                         <!-- Este condicional es para validar si el usuario trae un id del plan deseado -->
-                        <?php 
-                            if(isset($_SESSION['suscripcion_deseada'])): 
+                        <?php
+                        if (isset($_SESSION['suscripcion_deseada'])):
                         ?>
-                        <a href="login?plan=<?= $_SESSION['suscripcion_deseada'] ?>" class="btn-login-link">
-                            ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
-                        </a>
+                            <a href="login?plan=<?= $_SESSION['suscripcion_deseada'] ?>" class="btn-login-link">
+                                ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
+                            </a>
 
-                        <?php else:?>
-                        <a href="login" class="btn-login-link">
-                            ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
-                        </a>
-                        <?php endif;?>
+                        <?php else: ?>
+                            <a href="login" class="btn-login-link">
+                                ¿Ya tienes cuenta? <strong>Inicia sesión</strong>
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
 
