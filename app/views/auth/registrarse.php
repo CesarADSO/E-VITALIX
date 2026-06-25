@@ -110,11 +110,11 @@
                                     id="telefono"
                                     name="telefono"
                                     required
-                                    minlength="7"
-                                    maxlength="15"
-                                    pattern="[0-9\s\-\+]+"
-                                    inputmode="tel"
-                                    title="Ingresa un teléfono válido">
+                                    minlength="10"
+                                    maxlength="10"
+                                    pattern="[0-9]{10}"
+                                    inputmode="numeric"
+                                    title="El teléfono debe tener exactamente 10 dígitos">
                             </div>
 
                         </div>

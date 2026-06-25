@@ -1,6 +1,7 @@
 <?php
 // Importamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/consultorioModel.php';
 
 // Capturamos en una variable el método o solicitud hecha al servidor
@@ -91,6 +92,18 @@ function registrarConsultorio()
     // Validamos los campos que son obligatorios
     if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($email_admin) || empty($nombres_admin) || empty($apellidos_admin) || empty($telefono_admin) || empty($tipo_documento_admin) || empty($numero_documento_admin)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono del consultorio inválido', $validacionTelefono['mensaje']);
+        exit();
+    }
+
+    $validacionTelefonoAdmin = Validaciones::validarTelefono($telefono_admin);
+    if (!$validacionTelefonoAdmin['valido']) {
+        mostrarSweetAlert('error', 'Teléfono del administrador inválido', $validacionTelefonoAdmin['mensaje']);
         exit();
     }
 
@@ -292,6 +305,12 @@ function actualizarConsultorio()
     // Validamos los campos que son obligatorios
     if (empty($nombre) || empty($direccion) || empty($ciudad) || empty($telefono) || empty($correo_contacto) || empty($dias) || empty($hora_apertura) || empty($hora_cierre) || empty($estado)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 

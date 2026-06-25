@@ -95,7 +95,7 @@ if (isset($_GET['plan'])) {
                                 </div>
                                 <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Teléfono:</label>
-                                    <input type="number" class="campos-formulario" id="telefono_consultorio" placeholder="ingresa el teléfono" name="telefono">
+                                    <input type="tel" class="campos-formulario" id="telefono_consultorio" placeholder="ingresa el teléfono" name="telefono" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                 </div>
                                 <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Foto:</label>
@@ -192,7 +192,7 @@ if (isset($_GET['plan'])) {
 
                                 <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Teléfono:</label>
-                                    <input type="text" class="campos-formulario" placeholder="Ingresa tu número de teléfono..." id="telefono" name="telefono_admin" required>
+                                    <input type="tel" class="campos-formulario" placeholder="Ingresa tu número de teléfono..." id="telefono" name="telefono_admin" required minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                 </div>
 
                             </div>

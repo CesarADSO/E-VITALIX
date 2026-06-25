@@ -199,11 +199,11 @@ class Validaciones {
             ];
         }
 
-        // Validar longitud (números de Colombia)
-        if (strlen($telefono_limpio) < 7 || strlen($telefono_limpio) > 15) {
+        // Validar longitud exacta de 10 dígitos
+        if (strlen($telefono_limpio) !== 10) {
             return [
                 'valido' => false,
-                'mensaje' => 'El teléfono debe tener entre 7 y 15 dígitos'
+                'mensaje' => 'El teléfono debe tener exactamente 10 dígitos'
             ];
         }
 

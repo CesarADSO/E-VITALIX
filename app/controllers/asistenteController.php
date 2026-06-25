@@ -1,6 +1,7 @@
 <?php
-// IMPORTAMOS LAS DEPENDENCIAS NECESARIAS   
+// IMPORTAMOS LAS DEPENDENCIAS NECESARIAS
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/asistenteModel.php';
 
 // Capturamos en una variable el método o solicitud hecha al servidor
@@ -43,6 +44,12 @@ function registrarAsistente()
     // Validamos los campos que son obligatorios
     if (empty($nombres) || empty($apellidos) || empty($email) || empty($telefono) || empty($tipoDocumento) || empty($numeroDocumento)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 
@@ -187,6 +194,12 @@ function actualizarAsistente()
             'Campos incompletos',
             'Por favor completa todos los campos obligatorios'
         );
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 

@@ -106,7 +106,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>">
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                 </div>
 

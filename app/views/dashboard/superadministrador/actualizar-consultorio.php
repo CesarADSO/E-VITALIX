@@ -104,7 +104,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa tu número telefónico" value="<?= $consultorio['telefono'] ?>">
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa tu número telefónico" value="<?= $consultorio['telefono'] ?>" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                     <div class="mb-3">
                                         <label for="correo_contacto" class="form-label">Correo de Contacto</label>
