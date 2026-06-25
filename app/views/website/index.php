@@ -19,7 +19,7 @@ $plan = traerId();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" href="public/assets/website/img/FAVICON.png">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/website/css/landing.css">
+    <link rel="stylesheet" href="public/assets/website/css/landing.css?v=1.1">
 </head>
 
 <body>
@@ -526,7 +526,7 @@ $plan = traerId();
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script src="public/assets/website/js/main.js"></script>
+    <script src="public/assets/website/js/main.js?v=1.1"></script>
 </body>
 
 </html>
