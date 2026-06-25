@@ -99,7 +99,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento" class="form-label">Número de Documento <span class="text-danger">*</span></label>
-                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" required>
+                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" required pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                     </div>
                                 </div>
                                 <div class="row">

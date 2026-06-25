@@ -96,6 +96,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <option value="">Seleccionar tipo</option>
                                             <?php if (!empty($datos)) : ?>
                                                 <?php foreach ($datos as $tipoDocumento) : ?>
+                                                    <?php if (stripos($tipoDocumento['nombre'], 'tarjeta') !== false) continue; ?>
                                                     <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
@@ -105,7 +106,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento" class="form-label">Número de Documento</label>
-                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento">
+                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                     </div>
 
                                 </div>

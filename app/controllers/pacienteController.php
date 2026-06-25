@@ -63,6 +63,12 @@ function registrarPaciente()
         exit();
     }
 
+    $validacionDocumento = Validaciones::validarDocumento($numero_documento, $id_tipo_documento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
+        exit();
+    }
+
     $validacionTelefono = Validaciones::validarTelefono($telefono);
     if (!$validacionTelefono['valido']) {
         mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
@@ -173,6 +179,12 @@ function actualizarPaciente()
         empty($telefono) || empty($direccion) || empty($email)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionDocumento = Validaciones::validarDocumento($numero_documento, $id_tipo_documento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
         exit();
     }
 

@@ -47,6 +47,12 @@ function registrarAsistente()
         exit();
     }
 
+    $validacionDocumento = Validaciones::validarDocumento($numeroDocumento, $tipoDocumento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
+        exit();
+    }
+
     $validacionTelefono = Validaciones::validarTelefono($telefono);
     if (!$validacionTelefono['valido']) {
         mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);

@@ -187,7 +187,7 @@ if (isset($_GET['plan'])) {
 
                                 <div class="col-md-6 cont-input">
                                     <label class="form-label-custom">Número de documento:</label>
-                                    <input type="text" class="campos-formulario" placeholder="xxxxxxxxxx" id="numeroDocumento" name="numero_documento_admin" required>
+                                    <input type="text" class="campos-formulario" placeholder="xxxxxxxxxx" id="numeroDocumento" name="numero_documento_admin" required pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                 </div>
 
                                 <div class="col-md-6 cont-input">
