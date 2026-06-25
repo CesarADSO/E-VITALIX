@@ -95,7 +95,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                     Nombre
                                                     <i class="bi bi-chevron-down" style="font-size: 12px;"></i>
                                                 </th>
-                                                <th>Dirección</th>
                                                 <th>Teléfono</th>
                                                 <th>
                                                     Ciudad
@@ -111,7 +110,6 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                     <tr>
                                                         <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/consultorios/<?= $consultorio['foto'] ?>" alt="<?= $consultorio['nombre'] ?>"></td>
                                                         <td><?= $consultorio['nombre'] ?></td>
-                                                        <td><?= $consultorio['direccion'] ?></td>
                                                         <td><?= $consultorio['telefono'] ?></td>
                                                         <td><?= $consultorio['ciudad'] ?></td>
                                                         <td><?= $consultorio['estado'] ?></td>
@@ -138,7 +136,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <div class="row d-lg-none mt-3">
                         <?php if (!empty($consultorios)): ?>
                             <?php foreach ($consultorios as $consultorio): ?>
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-6 mt-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-3">

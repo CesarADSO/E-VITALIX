@@ -73,7 +73,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     </div>
 
                     <!-- Administradores Table -->
-                    <div class="card shadow-sm d-none d-lg-block">
+                    <div class="card shadow-sm d-none d-lg-block" id="tablaAdministradores">
                         <div class="card-header card-header-primary">
                             <h5 class="mb-0 text-white">
                                 <i class="bi bi-person-gear me-2"></i>
@@ -131,10 +131,10 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     </div>
 
                     <!-- VISTA MOVIL -->
-                    <div class="row d-lg-none mt-3">
+                    <div class="row d-lg-none mt-3" id="tarjetasAdministradores">
                         <?php if (!empty($administradores)): ?>
                             <?php foreach ($administradores as $administrador): ?>
-                                <div class="col-md-12 mt-4">
+                                <div class="col-md-6 mt-4">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
