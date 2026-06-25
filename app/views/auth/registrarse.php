@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="public/assets/auth/css/registrarse.css">
     <link rel="icon" href="public/assets/auth/img/FAVICON.png">
 </head>
@@ -29,6 +30,9 @@
                         Regístrate para poder crear tu cuenta de paciente.
                     </p>
 
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle"></i> La contraseña es tu número de documento.
+                    </div>
 
                     <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data" novalidate>
                         <input type="hidden" name="accion" value="registrarPaciente">

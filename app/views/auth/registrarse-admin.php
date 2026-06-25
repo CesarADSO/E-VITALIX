@@ -25,6 +25,7 @@ if (isset($_GET['plan'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="public/assets/auth/css/registrarse.css">
     <link rel="icon" href="public/assets/auth/img/FAVICON.png">
     <style>
@@ -51,6 +52,10 @@ if (isset($_GET['plan'])) {
                     <p class="subtitle-registro">
                         Regístrate para poder crear tu cuenta de administrador de consultorio.
                     </p>
+
+                    <div class="alert alert-info" role="alert">
+                        <i class="bi bi-info-circle"></i> La contraseña es tu número de documento.
+                    </div>
 
                     <div class="wizard-progress mb-4">
                         <div class="steps">
