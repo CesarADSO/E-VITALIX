@@ -578,6 +578,19 @@ footer .fila-footer {
 
 /* ESTILOS SMARTPHONE */
 
+/* El offcanvas usa d-lg-none → visible en 320–991px (hamburguesa activa).
+   El fondo oscuro debe cubrir todo ese rango, no solo hasta 767px. */
+.offcanvas#menuMobile {
+    background-color: var(--color-secundario);
+}
+
+/* Tablet (768–991px): ancho proporcional para iPad Mini y Air */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .offcanvas#menuMobile {
+        width: 65% !important;
+    }
+}
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
 
     .offcanvas {
