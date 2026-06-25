@@ -49,7 +49,7 @@ class Consultorio
             $id_admin = $this->conexion->lastInsertId();
 
             // HACEMOS EL INSERT EN CONSULTORIOS
-            $insertar = "INSERT INTO consultorios(nombre, direccion, id_ciudad, foto, telefono, correo_contacto, horario_atencion, estado) VALUES(:nombre, :direccion, :ciudad, :foto, :telefono, :correo_contacto, :horario_atencion, 'Activo')";
+            $insertar = "INSERT INTO consultorios(nombre, direccion, id_ciudad, foto, telefono, correo_contacto, horario_atencion, estado, id_plan) VALUES(:nombre, :direccion, :ciudad, :foto, :telefono, :correo_contacto, :horario_atencion, 'Activo', 1)";
 
 
 

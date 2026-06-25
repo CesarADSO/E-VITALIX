@@ -1,60 +1,79 @@
-AOS.init({
-    once: true, // La animación ocurre solo la primera vez
-    duration: 750, // Duración por defecto
-    easing: 'ease-out-cubic',
-    offset: 80 // Cuántos px antes del elemento empieza
+/* =========================================================
+   AOS — inicialización
+   CAMBIO CLAVE: esperamos a que TODO cargue (window.load),
+   no solo el HTML (DOMContentLoaded). AOS calcula la posición
+   de cada elemento en el momento del init; si las imágenes
+   aún no cargaron, el documento no tiene su altura final y
+   los triggers de scroll quedan desincronizados. Por eso el
+   contenido "aparecía tarde" o se sentía vacío un instante.
+   ========================================================= */
+
+window.addEventListener('load', () => {
+    AOS.init({
+        once: true,
+        duration: 600,        // antes 750 — animación más corta, menos sensación de "vacío"
+        easing: 'ease-out-cubic',
+        offset: 60,            // antes 80 — dispara un poco antes, da más margen
+        disable: function () {
+            // Desactiva AOS en pantallas pequeñas si prefieres rendimiento sobre efecto.
+            // Déjalo en "false" para mantenerlo activo en móvil; cámbialo a una condición
+            // como window.innerWidth < 768 si quieres quitarlo del todo en celular.
+            return false;
+        }
+    });
+
+    // Recalcula posiciones una vez que todas las imágenes y fuentes ya están listas.
+    // Esto corrige cualquier desfase que haya quedado del cálculo inicial.
+    setTimeout(() => AOS.refresh(), 200);
 });
 
-/* ===== NAVBAR — cambia de fondo al hacer scroll ===== */
+/* ===== NAVBAR — cambia de fondo al hacer scroll =====
+   CAMBIO: usamos requestAnimationFrame para no recalcular
+   estilos en cada pixel de scroll (esto causaba jank/tirones
+   que se sentían como interferencia con las animaciones). */
 const navbar = document.querySelector('header nav');
+let navbarTicking = false;
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.style.backdropFilter = 'blur(10px)';
-        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
-        navbar.style.transition = 'all 0.3s ease';
-    } else {
-        navbar.style.backdropFilter = 'none';
-        navbar.style.boxShadow = 'none';
+    if (!navbarTicking) {
+        requestAnimationFrame(() => {
+            if (window.scrollY > 50) {
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+                navbar.style.transition = 'all 0.3s ease';
+            } else {
+                navbar.style.backdropFilter = 'none';
+                navbar.style.boxShadow = 'none';
+            }
+            navbarTicking = false;
+        });
+        navbarTicking = true;
     }
 });
 
 /* ===== CONTADOR ANIMADO — el 100% en #convencer ===== */
-// Selecciona el elemento HTML que contiene el porcentaje (ej: <h2 class="titulo-convencer">0%</h2>)
 const contadorEl = document.querySelector('.titulo-convencer');
 
-// Verificamos que el elemento exista en la página
 if (contadorEl) {
-    // Crea un Intersection Observer: API que detecta cuando un elemento entra en el viewport (pantalla visible)
     const contadorObserver = new IntersectionObserver((entries) => {
-        // entries es un array con los elementos observados que cambian de visibilidad
         entries.forEach(entry => {
-            // isIntersecting = true significa que el usuario scrolleó hasta ver el elemento
             if (entry.isIntersecting) {
-                // ===== CONFIGURACIÓN DEL CONTADOR =====
-                let inicio = 0;           // Valor inicial del contador (comienza en 0)
-                const fin = 100;          // Valor final (hasta 100%)
-                const duracion = 1800;    // Duración total en milisegundos (1.8 segundos)
-                const paso = Math.ceil(duracion / fin);  // Calcula el intervalo entre cada incremento
-                // Ej: 1800ms ÷ 100 = 18ms entre cada número
+                let inicio = 0;
+                const fin = 100;
+                const duracion = 1800;
+                const paso = Math.ceil(duracion / fin);
 
-                // Ejecuta una función repetidamente cada 'paso' milisegundos
                 const intervalo = setInterval(() => {
-                    inicio++;  // Incrementa el contador en 1
-                    contadorEl.textContent = inicio + '%';  // Actualiza el texto del elemento a mostrar "1%", "2%", etc.
-
-                    // Cuando llega a 100, detiene el intervalo
+                    inicio++;
+                    contadorEl.textContent = inicio + '%';
                     if (inicio >= fin) clearInterval(intervalo);
                 }, paso);
 
-                // Detiene la observación del elemento después de que se ejecute la animación
-                // Esto evita que la animación se repita si el usuario vuelve a scrollear
                 contadorObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });  // threshold: 0.5 = se activa cuando el 50% del elemento es visible
+    }, { threshold: 0.5 });
 
-    // Comienza a observar el elemento (lo vigila para detectar cuando entra en pantalla)
     contadorObserver.observe(contadorEl);
 }
 
@@ -72,64 +91,79 @@ document.querySelectorAll('a[href^="#"]').forEach(enlace => {
     });
 });
 
-/* ===== CURSOR PERSONALIZADO ===== */
-const cursor = document.createElement('div');
-const cursorPunto = document.createElement('div');
+/* ===== CURSOR PERSONALIZADO =====
+   CAMBIO: solo se activa en dispositivos con mouse real
+   (pointer: fine). En táctil no tiene sentido y solo consume
+   recursos / puede interferir con el scroll en móvil. */
+const tieneMouse = window.matchMedia('(pointer: fine)').matches;
 
-cursor.style.cssText = `
-    width: 36px;
-    height: 36px;
-    border: 2px solid #007bff;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s ease, opacity 0.3s ease;
-    transform: translate(-50%, -50%);
-`;
+if (tieneMouse) {
+    const cursor = document.createElement('div');
+    const cursorPunto = document.createElement('div');
 
-cursorPunto.style.cssText = `
-    width: 6px;
-    height: 6px;
-    background: #007bff;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.05s ease;
-`;
+    cursor.style.cssText = `
+        width: 36px;
+        height: 36px;
+        border: 2px solid #007bff;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.15s ease, opacity 0.3s ease;
+        transform: translate(-50%, -50%);
+    `;
 
-document.body.appendChild(cursor);
-document.body.appendChild(cursorPunto);
+    cursorPunto.style.cssText = `
+        width: 6px;
+        height: 6px;
+        background: #007bff;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.05s ease;
+    `;
 
-window.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    cursorPunto.style.left = e.clientX + 'px';
-    cursorPunto.style.top = e.clientY + 'px';
-});
+    document.body.appendChild(cursor);
+    document.body.appendChild(cursorPunto);
 
-/* Se agranda al pasar sobre elementos clicables */
-document.querySelectorAll('a, button, .plan, .cont-fun-1, .cont-fun-2, .cont-fun-3').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1.6)';
-        cursor.style.background = 'rgba(0, 123, 255, 0.1)';
+    window.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        cursorPunto.style.left = e.clientX + 'px';
+        cursorPunto.style.top = e.clientY + 'px';
     });
-    el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursor.style.background = 'transparent';
-    });
-});
 
-/* ===== PARALLAX SUAVE EN EL HERO ===== */
+    document.querySelectorAll('a, button, .plan, .cont-fun-1, .cont-fun-2, .cont-fun-3').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1.6)';
+            cursor.style.background = 'rgba(0, 123, 255, 0.1)';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursor.style.background = 'transparent';
+        });
+    });
+}
+
+/* ===== PARALLAX SUAVE EN EL HERO =====
+   CAMBIO: requestAnimationFrame en vez de ejecutar en cada
+   evento de scroll. Mismo efecto visual, sin el jank. */
 const heroInfo = document.querySelector('#hero .cont-info');
 const heroFoto = document.querySelector('#hero .cont-foto');
+let parallaxTicking = false;
 
 window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    if (heroInfo) heroInfo.style.transform = `translateY(${scrollY * 0.08}px)`;
-    if (heroFoto) heroFoto.style.transform = `translateY(${scrollY * 0.12}px)`;
+    if (!parallaxTicking) {
+        requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            if (heroInfo) heroInfo.style.transform = `translateY(${scrollY * 0.08}px)`;
+            if (heroFoto) heroFoto.style.transform = `translateY(${scrollY * 0.12}px)`;
+            parallaxTicking = false;
+        });
+        parallaxTicking = true;
+    }
 });
 
 /* ===== HOVER 3D EN TARJETAS DE PRECIOS ===== */

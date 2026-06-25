@@ -102,10 +102,6 @@ if (!$id) {
                 <i class="bi bi-ticket-detailed"></i>
                 <span>Soporte técnico</span>
             </a>
-
-        </nav>
-
-        <div class="w-100" style="margin-top: auto; padding: 20px;">
             <a class="nav-item" href="<?= BASE_URL ?>/admin/perfil">
                 <i class="bi bi-person-circle"></i>
                 <span>Perfil</span>
@@ -114,6 +110,6 @@ if (!$id) {
                 <i class="bi-box-arrow-right"></i>
                 <span>Cerrar Sesión</span>
             </a>
-        </div>
+        </nav>
     </div>
 </div>

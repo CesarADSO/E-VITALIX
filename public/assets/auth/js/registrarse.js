@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let currentStep = 1;
-    const totalSteps = 2; // Arreglado a 2 pasos
+    const totalSteps = 3; // Arreglado a 2 pasos
 
     // Elementos del DOM
     const btnSiguiente = document.getElementById('btnSiguiente');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.step').forEach(step => {
             const stepNum = parseInt(step.dataset.step);
             step.classList.remove('active', 'completed');
-            
+
             if (stepNum === currentStep) {
                 step.classList.add('active');
             } else if (stepNum < currentStep) {
@@ -31,20 +31,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Actualizar línea de progreso
         const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
-        if(progressLine) {
+        if (progressLine) {
             progressLine.style.width = `${progressPercent}%`;
         }
 
         // Mostrar/ocultar botones dependiendo de dónde estés
         if (currentStep === 1) {
+            // Primer paso: solo "Siguiente", ocupando todo el ancho
             btnAnterior.style.display = 'none';
             btnSiguiente.style.display = 'block';
-            btnSiguiente.style.width = '100%'; // Ocupa todo el ancho en el paso 1
+            btnSiguiente.style.width = '100%';
             btnRegistrar.style.display = 'none';
-        } else {
+        } else if (currentStep === totalSteps) {
+            // Último paso: "Anterior" + "Registrar"
             btnAnterior.style.display = 'block';
             btnSiguiente.style.display = 'none';
             btnRegistrar.style.display = 'block';
+        } else {
+            // Pasos intermedios: "Anterior" + "Siguiente"
+            btnAnterior.style.display = 'block';
+            btnSiguiente.style.display = 'block';
+            btnSiguiente.style.width = '48%';
+            btnRegistrar.style.display = 'none';
         }
     }
 
@@ -60,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        if(!isValid) {
+        if (!isValid) {
             alert('Por favor, llena todos los campos obligatorios.');
         }
 
@@ -68,8 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Botón Siguiente
-    if(btnSiguiente) {
-        btnSiguiente.addEventListener('click', function() {
+    if (btnSiguiente) {
+        btnSiguiente.addEventListener('click', function () {
             if (validateCurrentStep() && currentStep < totalSteps) {
                 currentStep++;
                 updateWizard();
@@ -78,8 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Botón Anterior
-    if(btnAnterior) {
-        btnAnterior.addEventListener('click', function() {
+    if (btnAnterior) {
+        btnAnterior.addEventListener('click', function () {
             if (currentStep > 1) {
                 currentStep--;
                 updateWizard();

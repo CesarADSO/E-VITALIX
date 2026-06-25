@@ -3973,3 +3973,470 @@
         border-radius: 50%;
         object-fit: cover;
     }
+
+/* =========================================================
+   FIX: MAIN-CONTENT DESCENTRADO EN IPAD AIR / MINI (768px - 991px)
+   .main-content tiene "col-md-9" fijo (75% de ancho), pensado
+   para cuando el sidebar ocupa col-lg-2 a su lado. Pero en este
+   rango el sidebar es un offcanvas oculto (no ocupa espacio real
+   en el flujo) — así que ese 75% deja un 25% de hueco vacío a la
+   derecha, empujando todo el contenido hacia la izquierda en vez
+   de centrarlo.
+   ========================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+    .main-content.col-md-9 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left: 30px;     /* evita que el contenido quede pegado al borde izquierdo */
+        padding-right: 30px;    /* evita que el contenido quede pegado al borde derecho */
+    }
+
+    .timeline::before {
+        content: none;
+    }
+}
+
+
+/* =========================================================
+   FIX RESPONSIVE — SIDEBAR EN IPAD PRO (992px - 1112px)
+   El sidebar usa col-lg-2 (≈16.6% de ancho) fijo desde 992px,
+   pensado para monitores de 1280px+. En 1024px eso son apenas
+   ~170px, insuficiente para textos largos como "Administradores
+   - Consultorios" o "Tickets de soporte", que se ven partidos
+   y apretados. Tampoco hay ningún ajuste de fuente/padding en
+   este rango específico.
+   ========================================================= */
+
+@media screen and (min-width: 992px) and (max-width: 1112px) {
+
+    /* Ensanchamos el sidebar — de 16.6% (col-lg-2) a un ancho fijo más cómodo.
+       IMPORTANTE: el HTML tiene col-lg-10 fijo en .main-content, que asume
+       que el sidebar sigue midiendo col-lg-2. Si solo cambiamos el sidebar,
+       el grid de Bootstrap no se "entera" y .main-content sigue ocupando
+       83.3% como si nada — dejando al sidebar flotando con un ancho que ya
+       no concuerda con el espacio real disponible. Por eso ajustamos LOS DOS
+       juntos, en el mismo breakpoint. */
+
+    /* FIX: sidebar fijo en pantalla + scroll independiente en main-content.
+       "sticky-lg-top" del HTML casi lo logra, pero sticky puede despegarse
+       si el .row padre crece más que el sidebar. position:fixed es 100%
+       confiable: el sidebar queda anclado al viewport sin importar cuánto
+       crezca el contenido, y el main-content se desplaza solo. */
+    .sidebar.col-lg-2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 220px;
+        overflow-y: auto;   /* si el propio menú del sidebar fuera más alto que la pantalla, scrollea solo internamente */
+    }
+
+    .main-content.col-lg-10 {
+        margin-left: 220px;     /* compensa el espacio que el sidebar ya no ocupa en el flujo normal (position:fixed lo saca del flujo) */
+        flex: 0 0 calc(100% - 220px);
+        max-width: calc(100% - 220px);
+        height: 100vh;
+        overflow-y: auto;       /* scroll propio del contenido principal */
+    }
+
+    /* Texto de los nav-items: reducimos un poco para que respiren mejor en el ancho nuevo */
+    .nav-item {
+        padding: 10px 16px;
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    .nav-item i {
+        font-size: 16px;
+        min-width: 16px;
+    }
+
+    /* Perfil de usuario: evita que "superadministrador" se vea apretado */
+    .user-role {
+        font-size: 11px;
+        padding: 0 8px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Botones de Perfil / Cerrar sesión al final, mismo ajuste que el resto del menú */
+    .sidebar .nav-item span {
+        font-size: 14px;
+    }
+
+    /* FIX: tabla "últimos 5 consultorios" se ve rota — comparte la
+       mitad del ancho con el donut chart (.bottom-section es grid
+       de 2 columnas), y sus 5 columnas (grid-template-columns:
+       2fr 1.5fr 0.8fr 1fr 1fr) no tienen espacio suficiente. El
+       texto se envuelve en varias líneas con alturas distintas por
+       fila, rompiendo la alineación horizontal de la tabla.
+       Pasamos a 1 sola columna: tabla a ancho completo arriba,
+       donut chart en su propia fila completa abajo. */
+    .bottom-section {
+        grid-template-columns: 1fr;
+    }
+
+    /* FIX: con la tabla a ancho completo, las columnas con "1fr"
+       reparten el espacio sobrante de forma proporcional, no según
+       lo que su contenido realmente necesita — "Estado" (un badge
+       corto) queda separado del resto con un hueco vacío a la
+       derecha. Además, el CSS original define 5 valores
+       (2fr 1.5fr 0.8fr 1fr 1fr) para solo 4 columnas reales en el
+       HTML (Consultorio, Ciudad, Administrador, Estado) — un
+       desajuste que ya existía. Corregimos a 4 valores ajustados
+       al contenido real, dejando "Estado" pegado al final. */
+    .table-header,
+    .specialist-row {
+        grid-template-columns: 2fr 1fr 1.5fr 0.7fr;
+    }
+
+    /* FIX: tabla de "administradores de consultorios" tiene 8 columnas
+       (Foto, Nombres y apellidos, Consultorio, Teléfono, Tipo de
+       documento, Número de documento, Estado, Acciones) y no existe
+       vista de detalle aparte — no se puede ocultar ninguna columna
+       sin perder información. En vez de comprimir una tabla con
+       tantos campos, mostramos el mismo formato de tarjetas que ya
+       existe para móvil (d-lg-none), también en iPad Pro. */
+    #tablaAdministradores {
+        display: none !important;   /* oculta la tabla, que normalmente se muestra desde 992px con d-none d-lg-block */
+    }
+
+    #tarjetasAdministradores {
+        display: flex !important;   /* muestra las tarjetas, que normalmente se ocultan desde 992px con d-lg-none */
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* Las tarjetas usan col-md-12 (100% de ancho), pensado para
+       cuando se apilan en celular. En 1024px eso se vería demasiado
+       ancho con poco contenido — pasamos a 2 tarjetas por fila. */
+    #tarjetasAdministradores > [class*="col-"] {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-top: 0 !important;
+    }
+}
+
+
+/* =========================================================
+   FIX: TABLA DE TICKETS — TARJETAS EN VEZ DE TABLA (768px - 1112px)
+   Esta tabla usa "d-none d-md-block" (se muestra desde 768px,
+   no 992px como las demás), así que el problema afecta tanto a
+   iPad Air/Mini como a iPad Pro. Tiene 6 columnas con contenido
+   variable en longitud (Email, Título) — en este rango se generaba
+   scroll horizontal y la columna "Acciones" quedaba fuera de vista,
+   sin acceso a los botones de consultar/responder. Mostramos el
+   mismo formato de tarjetas que ya existe para celular.
+   ========================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 1112px) {
+
+    #tablaTickets {
+        display: none !important;   /* oculta la tabla, que normalmente se muestra desde 768px con d-none d-md-block */
+    }
+
+    #tarjetasTickets {
+        display: flex !important;   /* muestra las tarjetas, que normalmente se ocultan desde 992px con d-lg-none */
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #tarjetasTickets > [class*="col-"] {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-top: 0 !important;
+    }
+}
+
+
+/* ==============================================================
+   TABLETS — IPAD AIR LANDSCAPE + IPAD PRO 11" LANDSCAPE
+   Rango: 1113px – 1194px
+   DevTools: iPad Air landscape (1180px), iPad Pro 11" landscape (1194px)
+   Espeja el bloque 992–1112px con sidebar ligeramente más ancho.
+   ============================================================== */
+
+@media screen and (min-width: 1113px) and (max-width: 1194px) {
+
+    /* Sidebar fijo en pantalla + scroll interno independiente */
+    .sidebar.col-lg-2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 240px;
+        overflow-y: auto;
+    }
+
+    .main-content.col-lg-10 {
+        margin-left: 240px;
+        flex: 0 0 calc(100% - 240px);
+        max-width: calc(100% - 240px);
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    /* Nav-items: reducción leve para que el texto respire en 240px */
+    .nav-item {
+        padding: 10px 18px;
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    .nav-item i {
+        font-size: 16px;
+        min-width: 16px;
+    }
+
+    .user-role {
+        font-size: 11px;
+        padding: 0 8px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .sidebar .nav-item span {
+        font-size: 14px;
+    }
+
+    /* Bottom-section: 1 sola columna (tabla + donut no compiten por ancho) */
+    .bottom-section {
+        grid-template-columns: 1fr;
+    }
+
+    /* Tabla custom del dashboard — corrige desajuste de 5 fr a 4 cols reales */
+    .table-header,
+    .specialist-row {
+        grid-template-columns: 2fr 1fr 1.5fr 0.7fr;
+    }
+
+    /* Administradores: cards en vez de tabla (mismo criterio que 992-1112px) */
+    #tablaAdministradores {
+        display: none !important;
+    }
+
+    #tarjetasAdministradores {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #tarjetasAdministradores > [class*="col-"] {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-top: 0 !important;
+    }
+
+    /* Tickets: rango 768-1112px ya cubre esto, pero lo extendemos explícitamente */
+    #tablaTickets {
+        display: none !important;
+    }
+
+    #tarjetasTickets {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #tarjetasTickets > [class*="col-"] {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-top: 0 !important;
+    }
+}
+
+
+/* ==============================================================
+   IPAD PRO 12.9" LANDSCAPE (1195px – 1366px)
+   Layout de escritorio completo; ajustes táctiles y tipográficos.
+   ============================================================== */
+
+@media screen and (min-width: 1195px) and (max-width: 1366px) {
+
+    /* Garantizamos que el sidebar no quede aplastado en ancho */
+    .sidebar {
+        min-width: 200px;
+    }
+
+    /* Reducción sutil de padding de nav-items para dar aire al contenido */
+    .nav-item {
+        padding: 11px 20px;
+        font-size: 14px;
+    }
+
+    /* Títulos de sección: levemente más compactos */
+    .page-title {
+        font-size: 24px;
+    }
+
+    .header-title {
+        font-size: 24px;
+    }
+}
+
+
+/* ==============================================================
+   TOUCH TARGETS — mínimo 44 × 44 px en dispositivos táctiles
+   Aplica a iPad Mini, Air y Pro (pointer: coarse = pantalla táctil).
+   ============================================================== */
+
+@media (pointer: coarse) {
+
+    /* Botones de acción principales */
+    .btn {
+        min-height: 44px;
+    }
+
+    /* Ítems del sidebar */
+    .nav-item {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Botón hamburguesa del navbar móvil */
+    .navbar-toggler {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 10px;
+    }
+
+    /* Pestañas de navegación dentro de las vistas */
+    .nav-tabs .nav-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Inputs y selects: área de toque cómoda */
+    .form-control,
+    .form-select {
+        min-height: 44px;
+    }
+
+    /* Botones pequeños dentro de tablas */
+    .table .btn-sm {
+        min-height: 44px;
+        padding: 8px 12px;
+    }
+
+    /* Ítems de la lista de opciones de periodo */
+    .label-periodo {
+        padding: 22px 20px;
+    }
+}
+
+
+/* ==============================================================
+   AJUSTES GENERALES PARA TODOS LOS iPADS (768px – 1194px)
+   Padding, tipografía y grillas comunes a portrait y landscape.
+   ============================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1194px) {
+
+    /* Padding uniforme del área de contenido principal */
+    .main-content {
+        padding: 20px;
+    }
+
+    /* Stats cards: al menos 2 columnas en tablet, máximo 4 */
+    .stats-cards {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    /* Encabezados de sección: tamaño legible sin dominar la pantalla */
+    .page-title {
+        font-size: 22px;
+    }
+
+    .header-title {
+        font-size: 22px;
+    }
+
+    .titulo-principal-planes {
+        font-size: 36px;
+    }
+
+    /* Wizard de agendamiento: steps en 2 filas si no caben en 1 */
+    .wizard > .steps ul {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .wizard > .steps li a {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    /* Evita desbordamiento horizontal en cualquier tabla Bootstrap
+       que no tenga wrapper .table-responsive propio */
+    .card-body .table:not(.table-responsive > .table) {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+
+/* ==============================================================
+   IPAD PRO — TODAS LAS TABLAS → CARDS (992px – 1194px)
+
+   Por qué este rango:
+   - 992px: iPad Pro portrait (1024px DevTools) arranca aquí — sidebar
+     fijo 220px → main-content = 804px. Con 6-7 columnas queda apretado.
+   - 1194px: iPad Pro 11" landscape (1194px DevTools) — sidebar 240px →
+     main-content = 954px. Aún cómodo con cards.
+   - 1195px+: iPad Pro 12.9" landscape (1366px) → layout desktop completo,
+     tablas se ven bien con ~1166px disponibles.
+
+   Cómo funciona:
+   Todas las tablas del proyecto usan el patrón:
+     <div class="card shadow-sm d-none d-lg-block">  ← muestra tabla a 992px+
+       <table class="... table-pacientes ...">
+     </div>
+     <div class="row d-lg-none mt-3">               ← oculta cards a 992px+
+       ...tarjetas...
+     </div>
+
+   Con :has(.table-pacientes) ocultamos el wrapper de tabla y mostramos
+   el sibling de tarjetas, sin tocar el HTML de las vistas PHP.
+   ============================================================== */
+
+@media screen and (min-width: 992px) and (max-width: 1194px) {
+
+    /* Oculta el wrapper que contiene la tabla */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) {
+        display: none !important;
+    }
+
+    /* Muestra el panel de tarjetas sibling (Bootstrap lo oculta con d-lg-none) */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) ~ .row.d-lg-none {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 0 !important;
+    }
+
+    /* 2 tarjetas por fila: aprovecha el ancho disponible del main-content
+       (804px–954px) y evita tarjetas demasiado anchas o estrecha */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) ~ .row.d-lg-none > [class*="col-"] {
+        flex: 0 0 calc(50% - 8px);
+        max-width: calc(50% - 8px);
+        margin-top: 0 !important;
+    }
+
+    /* Las tarjetas individuales: sombra y esquinas redondeadas homogéneas */
+    .card.shadow-sm.d-none.d-lg-block:has(.table-pacientes) ~ .row.d-lg-none .card {
+        height: 100%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    }
+}

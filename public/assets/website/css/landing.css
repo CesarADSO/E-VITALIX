@@ -621,6 +621,19 @@ footer .fila-footer {
 
 /* ESTILOS SMARTPHONE */
 
+/* El offcanvas usa d-lg-none → visible en 320–991px (hamburguesa activa).
+   El fondo oscuro debe cubrir todo ese rango, no solo hasta 767px. */
+.offcanvas#menuMobile {
+    background-color: var(--color-secundario);
+}
+
+/* Tablet (768–991px): ancho proporcional para iPad Mini y Air */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .offcanvas#menuMobile {
+        width: 65% !important;
+    }
+}
+
 @media screen and (min-width: 320px) and (max-width: 767px) {
 
     .offcanvas {
@@ -900,29 +913,622 @@ footer .fila-footer {
         text-align: left !important;
         font-size: 13px;
     }
+}
 
-    @media screen and (max-width: 767px) {
+/* =========================================================
+   RESGUARDO GLOBAL — evita scroll horizontal por cualquier
+   desborde futuro (no sustituye arreglar la causa, pero
+   protege mientras se revisa cada caso puntual).
+   ========================================================= */
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
 
-        .cont-fun-1 {
-            min-height: auto;
-            margin-bottom: 20px;
-        }
-    
-        .cont-info-1 {
-            margin-top: 50px;
-            padding-left: 30px;
-            padding-right: 30px;
-        }
-    
-        .cont-foto-1 {
-            margin-top: -30px;
-            justify-content: center;
-            padding-right: 0;
-        }
-    
-        .cont-foto-1 img {
-            width: 90%;
-            max-width: 100%;
-        }
+/* =========================================================
+   FIX: IMÁGENES DESBORDANDO LOS CONTENEDORES BLANCOS
+   (sección Funcionalidades — afecta a todos los tamaños,
+   no solo tablet). Las imágenes no tenían object-fit ni
+   límite de tamaño, y los contenedores no recortaban el
+   contenido a su border-radius.
+   ========================================================= */
+
+.cont-fun-1,
+.cont-fun-2,
+.cont-fun-3 {
+    overflow: hidden;
+    /* recorta cualquier hijo a las esquinas redondeadas del contenedor */
+}
+
+.cont-foto-1 img,
+.cont-foto-2 img,
+.cont-foto-3 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cont-foto-2 img,
+.cont-foto-3 img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* =========================================================
+   FIX: BOTONES DEL ACORDEÓN SE VEN OVALADOS, NO CIRCULARES
+   border-radius:50% solo forma un círculo si width = height.
+   Sin un width explícito, el botón tomaba un ancho distinto
+   al alto según su padding/contenido interno.
+   ========================================================= */
+.boton-acordion {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   FIX RESPONSIVE — TABLET (768px - 991px)
+   Bootstrap activa el layout desktop (col-md-*) en 768px,
+   pero tu CSS solo tenía estilos hasta 767px (celular).
+   Este bloque cubre ese rango que estaba vacío.
+   ========================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+    /* ---------- HERO ---------- */
+    #hero {
+        height: auto;
+        /* el 90vh fijo + overflow:hidden cortaba el contenido */
+        padding: 50px 40px;
+        overflow: visible;
+    }
+
+    /* FIX: línea fija visible al final del hero.
+       Bootstrap pone margin negativo (-12px) por defecto en .row
+       para compensar el padding de las columnas. Tu CSS solo
+       resetea esto en el media query de celular (.fila-hero {margin:0}),
+       nunca en tablet — así el .row se extendía más allá del padding
+       del #hero y generaba ese corte visible en el borde. */
+    #hero .fila-hero {
+        margin: 0;
+    }
+
+    #hero .container-fluid {
+        padding: 0;
+    }
+
+    .titulo-principal {
+        font-size: 36px;
+    }
+
+    .info-hero {
+        font-size: 18px;
+        margin-bottom: 32px;
+    }
+
+    .cont-foto img.imagen-inicio {
+        width: 100%;
+        height: auto;
+    }
+
+    /* FIX: botones "Empieza gratis" / "Ver planes" se ven pegados
+       verticalmente. La clase de Bootstrap "d-md-block" fuerza
+       display:block !important desde 768px, anulando el
+       display:flex de .cont-botones — y como gap solo funciona
+       en flex/grid, queda sin efecto. Forzamos flex de vuelta. */
+    .cont-botones {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    /* ---------- FUNCIONALIDADES ---------- */
+    #funcionalidades {
+        padding: 70px 40px;
+    }
+
+    .cont-fun-1 {
+        height: auto;
+        padding: 20px;
+    }
+
+    .cont-info-1 {
+        margin-top: 30px;
+        padding-left: 0;
+    }
+
+    .cont-info-1 h5,
+    .cont-info-1 h2 {
+        margin-bottom: 24px;
+    }
+
+    .cont-foto-1 img {
+        width: 100%;
+    }
+
+    .cont-foto-2 img,
+    .cont-foto-3 img {
+        height: 220px;
+        /* necesario para que object-fit:cover recorte bien la imagen */
+    }
+
+    .cont-info-2 {
+        padding-right: 0;
+        /* eliminamos el padding-right:200px que rompía la columna */
+        margin-top: 24px;
+    }
+
+    .cont-info-3 {
+        margin-top: 24px;
+    }
+
+    /* ---------- BENEFICIOS ---------- */
+    #beneficios {
+        padding: 70px 40px;
+    }
+
+    .parrafo-carrusel {
+        padding-right: 0;
+        /* eliminamos el padding-right:200px */
+    }
+
+    .cont-botones-carrusel {
+        margin-top: 16px;
+    }
+
+    /* ---------- PRECIOS ---------- */
+    #precios {
+        padding: 70px 40px;
+    }
+
+    /* FIX: 3 columnas (col-md-4) se ven forzadas/apretadas en tablet.
+       Pasamos a 2 por fila — la tercera tarjeta baja a su propia fila. */
+    .fila-planes {
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .cont-plan {
+        flex: 0 0 48%;
+        max-width: 48%;
+        margin-bottom: 24px;
+    }
+
+    .cont-plan .plan {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* las 3 tarjetas igualan su alto dentro de la fila */
+    }
+
+    .plan h3 {
+        margin-bottom: 16px;
+        /* antes 40px — exceso de espacio vertical */
+        font-size: 20px;
+    }
+
+    .plan h2 {
+        margin-bottom: 16px;
+    }
+
+    .plan .p-descriptivo-plan {
+        margin-bottom: 24px;
+        /* antes 40px */
+        min-height: 40px;
+        /* evita que párrafos de distinto largo descuadren el botón */
+    }
+
+    .plan a {
+        margin-top: auto;
+        /* empuja el botón al fondo, alineándolo entre tarjetas */
+        margin-bottom: 20px;
+        /* antes 40px */
+        font-size: 14px;
+        padding: 12px 10px;
+    }
+
+    /* FIX: badge "El más popular" se cortaba a "El más" por falta de ancho */
+    .plan .cont-popular {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .plan .cont-popular h3 {
+        margin-bottom: 0;
+    }
+
+    .cont-popular span {
+        white-space: nowrap;
+        /* el badge nunca corta su propio texto */
+        font-size: 12px;
+        padding: 6px 14px;
+        height: auto;
+    }
+
+    /* ---------- PREGUNTAS ---------- */
+    #preguntas {
+        padding: 70px 40px;
+    }
+
+    /* ---------- CONVENCER ---------- */
+    #convencer {
+        padding: 60px 40px;
+        min-height: auto;
+    }
+
+    .cont-info .titulo-convencer {
+        font-size: 72px;
+    }
+
+    .cont-descriptivo {
+        padding-top: 40px;
+        /* el padding-top:230px original descolocaba todo en tablet */
+    }
+
+    .cont-botones-2 {
+        justify-content: flex-start;
+        margin-top: 24px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+        padding: 50px 40px;
+    }
+
+    footer .fila-footer {
+        margin-top: 60px;
+    }
+
+    /* FIX: scroll horizontal causado por col-md-2 (≈16% de ancho)
+       siendo muy angosta para "evitalix558@gmail.com" + los iconos
+       de redes, alineados a la derecha sin poder romper línea. */
+    .cont-logo-footer {
+        flex: 0 0 60%;
+        max-width: 60%;
+    }
+
+    .cont-info-footer {
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+
+    .cont-info-footer p {
+        word-break: break-all;
+        /* permite cortar el correo si no entra en una línea */
+        font-size: 13px;
+        text-align: right;
+    }
+
+    .cont-redes-sociales {
+        margin-bottom: 8px;
+    }
+}
+
+
+/* =========================================================
+   AJUSTE EXTRA PARA CELULAR
+   El hero usa overflow:hidden a nivel global (línea ~140
+   del CSS original). Si el contenido alguna vez excede el
+   alto disponible en pantallas muy pequeñas, mejor permitir
+   que crezca en vez de cortar contenido.
+   ========================================================= */
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    #hero {
+        overflow: visible;
+    }
+}
+
+/* =========================================================
+   FIX RESPONSIVE — IPAD PRO / TABLETS GRANDES (992px - 1112px)
+   Bootstrap activa col-lg-* en 992px, lo que saca a estos
+   anchos del rango "tablet" anterior (768-991px) y los manda
+   directo al layout de desktop — pensado para 1200px+.
+   A 1024px de ancho real, el 50/50 de columnas no alcanza
+   para el texto del hero sin chocar con la imagen, y la
+   altura fija de 90vh deja un espacio vacío enorme abajo.
+   ========================================================= */
+
+@media screen and (min-width: 992px) and (max-width: 1112px) {
+
+    #hero {
+        height: auto;
+        padding: 60px 50px;
+    }
+
+    /* Texto un poco más ancho que la imagen, para que no choquen */
+    #hero .cont-info {
+        flex: 0 0 55%;
+        max-width: 55%;
+    }
+
+    #hero .cont-foto {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+
+    .titulo-principal {
+        font-size: 34px;
+    }
+
+    .info-hero {
+        font-size: 17px;
+        margin-bottom: 32px;
+    }
+
+    .imagen-inicio {
+        width: 100%;
+        height: auto;
+    }
+
+    /* FIX: navbar apretado — links + botones "Iniciar sesión" /
+       "Soy paciente" compiten por espacio en 1024px, un ancho
+       menor al que el CSS original (pensado para 1200px+) anticipaba. */
+    .item {
+        margin-right: 14px;
+    }
+
+    .item .enlace {
+        font-size: 15px;
+    }
+
+    .cont-botones-inicio {
+        gap: 12px;
+    }
+
+    .cont-botones-inicio .boton1,
+    .cont-botones-inicio .boton2 {
+        padding: 9px 16px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    /* FIX: Funcionalidad 01 — hueco vacío enorme debajo del texto.
+       height:70vh + margin-top:130px están pensados para pantallas
+       grandes; en 1024px la imagen manda el alto de la tarjeta y
+       deja el texto "flotando" arriba con espacio vacío abajo. */
+    #funcionalidades {
+        padding: 80px 40px;
+    }
+
+    .cont-fun-1 {
+        height: auto;
+    }
+
+    .cont-fun-1 .row {
+        align-items: center;
+        /* centra el texto verticalmente respecto a la imagen */
+    }
+
+    .cont-info-1 {
+        margin-top: 0;
+        padding: 40px;
+    }
+
+    .cont-foto-1 {
+        margin-top: 0;
+    }
+
+    .cont-foto-1 img {
+        width: 100%;
+    }
+
+    /* FIX: Funcionalidad 02/03 — párrafo se ve angosto y alargado.
+       Limitamos el ancho de línea ideal y damos algo más de aire
+       interno sin depender de paddings pensados para desktop grande. */
+    .cont-fun-2,
+    .cont-fun-3 {
+        padding: 24px;
+    }
+
+    .cont-info-2,
+    .cont-info-3 {
+        margin-top: 28px;
+        padding-right: 0;
+    }
+
+    .cont-info-2 p,
+    .cont-info-3 p {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    /* FIX: Planes — 3 columnas (preferencia del cliente), pero
+       parejas entre sí: misma altura, badge sin descuadrar el
+       título, botones alineados al mismo nivel en las 3 tarjetas. */
+    .fila-planes {
+        align-items: stretch;
+    }
+
+    .cont-plan .plan {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 32px;
+    }
+
+    .plan h3 {
+        margin-bottom: 16px;
+        font-size: 20px;
+        min-height: 50px;
+        /* iguala el alto del título entre "Plan pro" (con badge) y los demás */
+        display: flex;
+        align-items: center;
+    }
+
+    .plan .cont-popular {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        min-height: 50px;
+    }
+
+    .plan .cont-popular h3 {
+        margin-bottom: 0;
+        min-height: auto;
+    }
+
+    .plan h2 {
+        margin-bottom: 16px;
+        min-height: 60px;
+        /* iguala "Gratis" (1 línea) con "$50,000/ mensual" (2 líneas) */
+        display: flex;
+        align-items: center;
+    }
+
+    .plan .p-descriptivo-plan {
+        margin-bottom: 24px;
+        min-height: 44px;
+        /* iguala párrafos de distinto largo entre las 3 tarjetas */
+    }
+
+    .plan a {
+        margin-top: auto;
+        /* todos los botones quedan a la misma altura, sin importar el texto arriba */
+        margin-bottom: 20px;
+        white-space: nowrap;
+        font-size: 14px;
+        padding: 12px 10px;
+    }
+
+    .cont-popular span {
+        display: none;
+    }
+
+    .parrafo-carrusel {
+        padding-right: 0;
+    }
+}
+
+
+
+/* ==============================================================
+   LANDING — IPAD AIR LANDSCAPE + IPAD PRO 11" LANDSCAPE
+   Rango: 1113px – 1194px
+   El layout de escritorio cabe en este ancho; sólo refinamos
+   el hero, la navbar y las tarjetas de planes para que respiren.
+   ============================================================== */
+
+@media screen and (min-width: 1113px) and (max-width: 1194px) {
+
+    /* Hero: altura automática para evitar corte de imagen */
+    #hero {
+        height: auto;
+        padding: 60px 50px;
+    }
+
+    #hero .cont-info {
+        flex: 0 0 52%;
+        max-width: 52%;
+    }
+
+    #hero .cont-foto {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+
+    .titulo-principal {
+        font-size: 38px;
+    }
+
+    .info-hero {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .imagen-inicio {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Navbar: links y botones con espacio adecuado */
+    .item {
+        margin-right: 16px;
+    }
+
+    .item .enlace {
+        font-size: 15px;
+    }
+
+    .cont-botones-inicio {
+        gap: 12px;
+    }
+
+    .cont-botones-inicio .boton1,
+    .cont-botones-inicio .boton2 {
+        padding: 9px 18px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    /* Funcionalidades: padding generoso para que no se apriete */
+    #funcionalidades {
+        padding: 80px 50px;
+    }
+
+    .cont-fun-1 {
+        height: auto;
+    }
+
+    .cont-fun-1 .row {
+        align-items: center;
+    }
+
+    .cont-info-1 {
+        margin-top: 0;
+        padding: 40px;
+    }
+
+    .cont-foto-1 img {
+        width: 100%;
+    }
+
+    .cont-fun-2,
+    .cont-fun-3 {
+        padding: 28px;
+    }
+
+    .cont-info-2,
+    .cont-info-3 {
+        padding-right: 0;
+    }
+
+    /* Planes: 3 columnas con misma altura (igual que 992-1112px) */
+    .fila-planes {
+        align-items: stretch;
+    }
+
+    .cont-plan .plan {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 32px;
+    }
+
+    .plan h3 {
+        font-size: 20px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .plan h2 {
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .plan a {
+        margin-top: auto;
+        margin-bottom: 20px;
+        font-size: 14px;
+        padding: 12px 14px;
     }
 }
