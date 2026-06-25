@@ -62,7 +62,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         </div>
                     </div>
 
-                    <div class="card shadow-sm d-none d-md-block">
+                    <div class="card shadow-sm d-none d-md-block" id="tablaTickets">
                         <div class="card-header card-header-primary">
                             <h5 class="mb-0 text-white"><i class="bi bi-calendar-check me-2"></i>Lista de tickets</h5>
                         </div>
@@ -122,7 +122,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     </div>
 
                     <!-- VISTA MOVIL -->
-                    <div class="row d-lg-none mt-3">
+                    <div class="row d-lg-none mt-3" id="tarjetasTickets">
                         <?php if (!empty($tickets)): ?>
                             <?php foreach ($tickets as $ticket): ?>
                                 <div class="col-md-12 mt-4">

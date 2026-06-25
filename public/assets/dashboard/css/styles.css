@@ -3974,7 +3974,28 @@
         object-fit: cover;
     }
 
-    /* =========================================================
+/* =========================================================
+   FIX: MAIN-CONTENT DESCENTRADO EN IPAD AIR / MINI (768px - 991px)
+   .main-content tiene "col-md-9" fijo (75% de ancho), pensado
+   para cuando el sidebar ocupa col-lg-2 a su lado. Pero en este
+   rango el sidebar es un offcanvas oculto (no ocupa espacio real
+   en el flujo) — así que ese 75% deja un 25% de hueco vacío a la
+   derecha, empujando todo el contenido hacia la izquierda en vez
+   de centrarlo.
+   ========================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+    .main-content.col-md-9 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left: 30px;     /* evita que el contenido quede pegado al borde izquierdo */
+        padding-right: 30px;    /* evita que el contenido quede pegado al borde derecho */
+    }
+}
+
+
+/* =========================================================
    FIX RESPONSIVE — SIDEBAR EN IPAD PRO (992px - 1112px)
    El sidebar usa col-lg-2 (≈16.6% de ancho) fijo desde 992px,
    pensado para monitores de 1280px+. En 1024px eso son apenas
@@ -4042,5 +4063,88 @@
     /* Botones de Perfil / Cerrar sesión al final, mismo ajuste que el resto del menú */
     .sidebar .nav-item span {
         font-size: 14px;
+    }
+
+    /* FIX: tabla "últimos 5 consultorios" se ve rota — comparte la
+       mitad del ancho con el donut chart (.bottom-section es grid
+       de 2 columnas), y sus 5 columnas (grid-template-columns:
+       2fr 1.5fr 0.8fr 1fr 1fr) no tienen espacio suficiente. El
+       texto se envuelve en varias líneas con alturas distintas por
+       fila, rompiendo la alineación horizontal de la tabla.
+       Pasamos a 1 sola columna: tabla a ancho completo arriba,
+       donut chart en su propia fila completa abajo. */
+    .bottom-section {
+        grid-template-columns: 1fr;
+    }
+
+    /* FIX: con la tabla a ancho completo, las columnas con "1fr"
+       reparten el espacio sobrante de forma proporcional, no según
+       lo que su contenido realmente necesita — "Estado" (un badge
+       corto) queda separado del resto con un hueco vacío a la
+       derecha. Además, el CSS original define 5 valores
+       (2fr 1.5fr 0.8fr 1fr 1fr) para solo 4 columnas reales en el
+       HTML (Consultorio, Ciudad, Administrador, Estado) — un
+       desajuste que ya existía. Corregimos a 4 valores ajustados
+       al contenido real, dejando "Estado" pegado al final. */
+    .table-header,
+    .specialist-row {
+        grid-template-columns: 2fr 1fr 1.5fr 0.7fr;
+    }
+
+    /* FIX: tabla de "administradores de consultorios" tiene 8 columnas
+       (Foto, Nombres y apellidos, Consultorio, Teléfono, Tipo de
+       documento, Número de documento, Estado, Acciones) y no existe
+       vista de detalle aparte — no se puede ocultar ninguna columna
+       sin perder información. En vez de comprimir una tabla con
+       tantos campos, mostramos el mismo formato de tarjetas que ya
+       existe para móvil (d-lg-none), también en iPad Pro. */
+    #tablaAdministradores {
+        display: none !important;   /* oculta la tabla, que normalmente se muestra desde 992px con d-none d-lg-block */
+    }
+
+    #tarjetasAdministradores {
+        display: flex !important;   /* muestra las tarjetas, que normalmente se ocultan desde 992px con d-lg-none */
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    /* Las tarjetas usan col-md-12 (100% de ancho), pensado para
+       cuando se apilan en celular. En 1024px eso se vería demasiado
+       ancho con poco contenido — pasamos a 2 tarjetas por fila. */
+    #tarjetasAdministradores > [class*="col-"] {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-top: 0 !important;
+    }
+}
+
+
+/* =========================================================
+   FIX: TABLA DE TICKETS — TARJETAS EN VEZ DE TABLA (768px - 1112px)
+   Esta tabla usa "d-none d-md-block" (se muestra desde 768px,
+   no 992px como las demás), así que el problema afecta tanto a
+   iPad Air/Mini como a iPad Pro. Tiene 6 columnas con contenido
+   variable en longitud (Email, Título) — en este rango se generaba
+   scroll horizontal y la columna "Acciones" quedaba fuera de vista,
+   sin acceso a los botones de consultar/responder. Mostramos el
+   mismo formato de tarjetas que ya existe para celular.
+   ========================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 1112px) {
+
+    #tablaTickets {
+        display: none !important;   /* oculta la tabla, que normalmente se muestra desde 768px con d-none d-md-block */
+    }
+
+    #tarjetasTickets {
+        display: flex !important;   /* muestra las tarjetas, que normalmente se ocultan desde 992px con d-lg-none */
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #tarjetasTickets > [class*="col-"] {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+        margin-top: 0 !important;
     }
 }
