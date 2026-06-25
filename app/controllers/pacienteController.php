@@ -1,7 +1,7 @@
 <?php
-// Importamos las dependencias 
+// Importamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
-
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/pacienteModel.php';
 
 // Capturamos en una variable el metodo o solicitud hecha al servidor 
@@ -60,6 +60,18 @@ function registrarPaciente()
         empty($numero_documento) || empty($fecha_nacimiento) || empty($genero) || empty($telefono) || empty($ciudad) || empty($direccion) || empty($email)
     ) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionDocumento = Validaciones::validarDocumento($numero_documento, $id_tipo_documento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 
@@ -169,6 +181,19 @@ function actualizarPaciente()
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
         exit();
     }
+
+    $validacionDocumento = Validaciones::validarDocumento($numero_documento, $id_tipo_documento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
+        exit();
+    }
+
     // Instanciamos la clase Paciente
     $objPaciente = new Paciente();
     $data = [

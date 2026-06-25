@@ -124,7 +124,8 @@ $perfil = mostrarPerfilPaciente($id);
                                                                              <label style="font-size:13px;color:var(--gris-proyecto);">Teléfono</label>
                                                                              <input type="tel" name="telefono"
                                                                                     class="form-control campos-formulario"
-                                                                                    value="<?= $perfil['telefono'] ?>">
+                                                                                    value="<?= $perfil['telefono'] ?>"
+                                                                                    minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                                                       </div>
                                                                </div>
 

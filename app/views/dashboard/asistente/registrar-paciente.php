@@ -99,7 +99,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento" class="form-label">Número de Documento <span class="text-danger">*</span></label>
-                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" required>
+                                        <input type="text" name="numeroDocumento" class="form-control" id="numero_documento" placeholder="Ingresa el número de documento" required pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -137,7 +137,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" required>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" required minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="ciudad" class="form-label">Ciudad <span class="text-danger">*</span></label>
@@ -219,7 +219,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
-                                        <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" placeholder="Teléfono de emergencia">
+                                        <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" placeholder="Teléfono de emergencia" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                 </div>
                                 <div class="mb-3">

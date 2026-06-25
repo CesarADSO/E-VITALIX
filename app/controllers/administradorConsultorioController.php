@@ -1,6 +1,7 @@
 <?php
 // IMPORTAMOS LAS DEPENDENCIAS NECESARIAS
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/administradorConsultorioModel.php';
 
 // Capturamos en una variable el método o solicitud hecha al servidor
@@ -51,6 +52,12 @@ function registrarAdministradorConsultorio()
     // Validamos los campos que son obligatorios
     if (empty($nombres) || empty($apellidos) || empty($email) || empty($telefono) || empty($tipoDocumento) || empty($numeroDocumento)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionDocumento = Validaciones::validarDocumento($numeroDocumento, $tipoDocumento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
         exit();
     }
 

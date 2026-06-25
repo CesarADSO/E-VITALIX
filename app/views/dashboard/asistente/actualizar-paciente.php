@@ -130,7 +130,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $paciente['telefono'] ?>" required>
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" value="<?= $paciente['telefono'] ?>" required minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="ciudad" class="form-label">Ciudad <span class="text-danger">*</span></label>
@@ -208,7 +208,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
-                                        <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" value="<?= $paciente['telefono_contacto_emergencia'] ?>">
+                                        <input type="tel" name="telefonoContacto" class="form-control" id="telefono_contacto" value="<?= $paciente['telefono_contacto_emergencia'] ?>" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                 </div>
                                 <div class="mb-3">

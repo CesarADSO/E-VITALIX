@@ -133,7 +133,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono_contacto" class="form-label">Teléfono del Contacto</label>
                                         <input type="tel" class="form-control" id="telefono_contacto" name="telefono_contacto"
-                                            placeholder="Número telefónico" required>
+                                            placeholder="Número telefónico" required minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
 
                                     <div class="mb-3 col-md-6">

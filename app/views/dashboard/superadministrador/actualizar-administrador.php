@@ -89,7 +89,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             <div class="col-md-6 mb-3">
                                 <label for="telefono" class="form-label">Teléfono</label>
                                 <input type="tel" class="form-control" id="telefono" name="telefono"
-                                    value="<?= $administrador['telefono'] ?>" required>
+                                    value="<?= $administrador['telefono'] ?>" required minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                             </div>
                         </div>
 

@@ -49,8 +49,8 @@ class ValidadorFormulario {
         if (!/^[0-9]+$/.test(telefono_limpio)) {
             return 'El teléfono debe contener solo números';
         }
-        if (telefono_limpio.length < 7 || telefono_limpio.length > 15) {
-            return 'El teléfono debe tener entre 7 y 15 dígitos';
+        if (telefono_limpio.length !== 10) {
+            return 'El teléfono debe tener exactamente 10 dígitos';
         }
         return null;
     }

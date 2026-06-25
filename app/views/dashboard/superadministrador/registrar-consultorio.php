@@ -104,7 +104,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico del consultorio">
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico del consultorio" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -171,7 +171,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento_admin" class="form-label">Número de documento</label>
-                                        <input type="text" name="numero_documento_admin" class="form-control" id="numero_documento_admin" placeholder="Ingresa el número de documento">
+                                        <input type="text" name="numero_documento_admin" class="form-control" id="numero_documento_admin" placeholder="Ingresa el número de documento" pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                     </div>
                                 </div>
 
@@ -183,7 +183,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono_admin" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono_admin" class="form-control" id="telefono_admin" placeholder="Ingresa el número telefónico">
+                                        <input type="tel" name="telefono_admin" class="form-control" id="telefono_admin" placeholder="Ingresa el número telefónico" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                 </div>
 

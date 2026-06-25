@@ -75,7 +75,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="col-md-6">
                                     <label for="numero_documento" class="form-label">Número de Documento</label>
                                     <input type="text" class="form-control" id="numero_documento" name="numero_documento"
-                                        placeholder="Ingresa el número de documento" required>
+                                        placeholder="Ingresa el número de documento" required pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                 </div>
                             </div>
 
@@ -93,7 +93,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                 <div class="col-md-6">
                                     <label for="telefono" class="form-label">Teléfono</label>
                                     <input type="tel" class="form-control" id="telefono" name="telefono"
-                                        placeholder="Ingresa el número telefónico" required>
+                                        placeholder="Ingresa el número telefónico" required minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     <div class="form-text">Para contacto directo</div>
                                 </div>
                             </div>

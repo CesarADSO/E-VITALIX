@@ -2,6 +2,7 @@
 // IMPORTAMOS LA DEPENDENCIAS NECESARIAS
 // EN ESTE CASO EL ALERT HELPER Y EL MODELO
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/especialistaModel.php';
 
 // DECLARAMOS LA VARIBALE METHOD CON EL REQUEST METHOD PARA PODER VALIDAR QUE FUNCIÓN SE VA A EJECUTAR SEGÚN LA PETICIÓN HTTP
@@ -82,6 +83,18 @@ function registrarEspecialista()
     // VALIDAMOS LOS DATOS QUE SON OBLIGATORIOS
     if (empty($tipoDocumento) || empty($numeroDocumento) || empty($nombres) || empty($apellidos) || empty($fechaNacimiento) || empty($genero) || empty($telefono) || empty($direccion) || empty($email) || empty($especialidad) || empty($registroProfesional)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionDocumento = Validaciones::validarDocumento($numeroDocumento, $tipoDocumento);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento inválido', $validacionDocumento['mensaje']);
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 
@@ -220,6 +233,12 @@ function actualizarEspecialista()
     // VALIDAMOS LOS CAMPOS QUE SON OBLIGATORIOS
     if (empty($tipoDocumento) || empty($nombres) || empty($apellidos) || empty($telefono) || empty($direccion) ||  empty($especialidad) || empty($registroProfesional)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Por favor completar los campos obligatorios');
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 

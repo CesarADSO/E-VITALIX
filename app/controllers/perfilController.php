@@ -1,6 +1,7 @@
 <?php
 // Importamos las dependencias
 require_once __DIR__ . '/../helpers/alert_helper.php';
+require_once __DIR__ . '/../helpers/validacion_helper.php';
 require_once __DIR__ . '/../models/perfilModel.php';
 
 function mostrarPerfilSuperAdmin($id)
@@ -106,6 +107,12 @@ function actInfoPersonalSuperAdmin()
         exit();
     }
 
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
+        exit();
+    }
+
     // POO - INSTANCIAMOS LA CLASE
     $objPerfil = new Perfil();
 
@@ -143,6 +150,12 @@ function actInfoPersonalAdmin()
     // VALIDAMOS LOS DATOS OBLIGATORIOS
     if (empty($nombres) || empty($apellidos) || empty($email) || empty($telefono)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Todos los campos son obligatorios');
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 
@@ -188,6 +201,12 @@ function actInfoPersonalEspecialista()
         exit();
     }
 
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
+        exit();
+    }
+
     // POO - INSTANCIAMOS LA CLASE
     $objPerfil = new Perfil();
 
@@ -230,6 +249,12 @@ function actInfoPersonalAsistente()
         exit();
     }
 
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
+        exit();
+    }
+
     // POO - INSTANCIAMOS LA CLASE
     $objPerfil = new Perfil();
 
@@ -269,6 +294,12 @@ function actInfoPersonalPaciente()
     // VALIDAMOS LOS DATOS OBLIGATORIOS
     if (empty($nombres) || empty($apellidos) || empty($email) || empty($telefono)) {
         mostrarSweetAlert('error', 'Campos vacíos', 'Todos los campos son obligatorios');
+        exit();
+    }
+
+    $validacionTelefono = Validaciones::validarTelefono($telefono);
+    if (!$validacionTelefono['valido']) {
+        mostrarSweetAlert('error', 'Teléfono inválido', $validacionTelefono['mensaje']);
         exit();
     }
 

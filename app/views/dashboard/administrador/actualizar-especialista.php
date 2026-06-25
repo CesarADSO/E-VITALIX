@@ -93,9 +93,14 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                         <label for="tipo_documento" class="form-label">Tipo de Documento</label>
                                         <select name="tipoDocumento" class="form-select" id="tipo_documento">
                                             <!-- Los tipos de documento se cargarán desde la base de datos -->
-                                            <option value="<?= $especialista['id_tipo_documento'] ?>"><?= $especialista['documento'] ?></option>
+                                            <?php if (stripos($especialista['documento'], 'tarjeta') !== false) : ?>
+                                                <option value="" selected disabled>Selecciona un tipo de documento válido</option>
+                                            <?php else : ?>
+                                                <option value="<?= $especialista['id_tipo_documento'] ?>"><?= $especialista['documento'] ?></option>
+                                            <?php endif; ?>
                                             <?php if (!empty($datos)) : ?>
                                                 <?php foreach ($datos as $tipoDocumento) : ?>
+                                                    <?php if (stripos($tipoDocumento['nombre'], 'tarjeta') !== false) continue; ?>
                                                     <option value="<?= $tipoDocumento['id'] ?>"><?= $tipoDocumento['nombre'] ?></option>
                                                 <?php endforeach; ?>
                                             <?php else : ?>
@@ -106,7 +111,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
 
                                     <div class="col-md-6 mb-3">
                                         <label for="telefono" class="form-label">Teléfono</label>
-                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>">
+                                        <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Ingresa el número telefónico" value="<?= $especialista['telefono'] ?>" minlength="10" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" title="El teléfono debe tener exactamente 10 dígitos">
                                     </div>
                                 </div>
 
