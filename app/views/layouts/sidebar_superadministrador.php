@@ -96,10 +96,7 @@ $perfil = mostrarPerfilSuperAdmin($id);
                 <i class="bi bi-ticket-detailed"></i>
                 <span>Tickets de soporte</span>
             </a>
-        </nav>
 
-        <!-- BOTONES DEL PERFIL Y CERRAR SESIÓN -->
-        <div class="w-100" style="margin-top: auto; padding: 20px;">
             <a class="nav-item" href="<?= BASE_URL ?>/superadmin/perfil">
                 <i class="bi bi-person-circle"></i>
                 <span>Perfil</span>
@@ -108,7 +105,7 @@ $perfil = mostrarPerfilSuperAdmin($id);
                 <i class="bi-box-arrow-right"></i>
                 <span>Cerrar Sesión</span>
             </a>
-        </div>
+        </nav>
     </div>
 </div>
 
