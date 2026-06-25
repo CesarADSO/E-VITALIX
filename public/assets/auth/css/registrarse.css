@@ -266,24 +266,56 @@
  }
 
  .step.active .step-number {
-        background-color: var(--color-primario);
+     background-color: var(--color-primario);
+ }
+
+ .step-label {
+     font-size: var(--texto-auxiliar);
+     color: var(--gris-proyecto);
+     text-align: center;
+ }
+
+ .step.active .step-label {
+     color: var(--color-primario);
+     font-weight: bold;
+ }
+
+ .btn-registrarse-paciente {
+     margin-top: 40px;
+ }
+
+ .cont-input {
+     margin-top: 15px;
+ }
+
+
+/* =========================================================
+   FIX RESPONSIVE — REGISTRO EN TABLETS (768px - 1112px)
+   Cubre iPad Mini, iPad Air e iPad Pro vertical.
+   En estos anchos, la imagen del doctor (object-fit:cover)
+   se recorta perdiendo parte de la foto al angostarse el
+   contenedor. Mejor ocultarla y que el formulario ocupe el
+   100% de la tarjeta, centrado con un ancho máximo cómodo.
+   ========================================================= */
+ 
+@media screen and (min-width: 768px) and (max-width: 1112px) {
+ 
+    .registro-container {
+        align-items: center;
+        padding: 60px 20px;
     }
-
-    .step-label {
-        font-size: var(--texto-auxiliar);
-        color: var(--gris-proyecto);
-        text-align: center;
+ 
+    .image-section.col-md-6 {
+        display: none;
     }
-
-    .step.active .step-label {
-        color: var(--color-primario);
-        font-weight: bold;
+ 
+    .form-section.col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 45px 50px;
     }
-
-.btn-registrarse-paciente {
-    margin-top: 40px;
-}
-
-.cont-input {
-    margin-top: 15px;
+ 
+    .registro-content {
+        max-width: 700px;
+    }
 }
