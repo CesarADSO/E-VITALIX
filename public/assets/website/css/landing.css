@@ -1353,4 +1353,126 @@ body {
 
 
 
-/* dasdsad */
+/* ==============================================================
+   LANDING — IPAD AIR LANDSCAPE + IPAD PRO 11" LANDSCAPE
+   Rango: 1113px – 1194px
+   El layout de escritorio cabe en este ancho; sólo refinamos
+   el hero, la navbar y las tarjetas de planes para que respiren.
+   ============================================================== */
+
+@media screen and (min-width: 1113px) and (max-width: 1194px) {
+
+    /* Hero: altura automática para evitar corte de imagen */
+    #hero {
+        height: auto;
+        padding: 60px 50px;
+    }
+
+    #hero .cont-info {
+        flex: 0 0 52%;
+        max-width: 52%;
+    }
+
+    #hero .cont-foto {
+        flex: 0 0 48%;
+        max-width: 48%;
+    }
+
+    .titulo-principal {
+        font-size: 38px;
+    }
+
+    .info-hero {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .imagen-inicio {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Navbar: links y botones con espacio adecuado */
+    .item {
+        margin-right: 16px;
+    }
+
+    .item .enlace {
+        font-size: 15px;
+    }
+
+    .cont-botones-inicio {
+        gap: 12px;
+    }
+
+    .cont-botones-inicio .boton1,
+    .cont-botones-inicio .boton2 {
+        padding: 9px 18px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    /* Funcionalidades: padding generoso para que no se apriete */
+    #funcionalidades {
+        padding: 80px 50px;
+    }
+
+    .cont-fun-1 {
+        height: auto;
+    }
+
+    .cont-fun-1 .row {
+        align-items: center;
+    }
+
+    .cont-info-1 {
+        margin-top: 0;
+        padding: 40px;
+    }
+
+    .cont-foto-1 img {
+        width: 100%;
+    }
+
+    .cont-fun-2,
+    .cont-fun-3 {
+        padding: 28px;
+    }
+
+    .cont-info-2,
+    .cont-info-3 {
+        padding-right: 0;
+    }
+
+    /* Planes: 3 columnas con misma altura (igual que 992-1112px) */
+    .fila-planes {
+        align-items: stretch;
+    }
+
+    .cont-plan .plan {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: 32px;
+    }
+
+    .plan h3 {
+        font-size: 20px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .plan h2 {
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    .plan a {
+        margin-top: auto;
+        margin-bottom: 20px;
+        font-size: 14px;
+        padding: 12px 14px;
+    }
+}
