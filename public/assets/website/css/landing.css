@@ -214,13 +214,16 @@ main {
 
 .cont-fun-1 {
     padding-right: 0;
-    height: 70vh;
-    margin-bottom: 16px;
+    min-height: 650px;
+    margin-bottom: 60px;
+    overflow: hidden;
+    border-radius: 40px;
 }
 
 .cont-info-1 {
-    margin-top: 130px;
+    margin-top: 90px;
     padding-left: 40px;
+    padding-right: 20px;
 }
 
 .cont-info-1 h5 {
@@ -233,24 +236,39 @@ main {
 }
 
 .cont-info-1 h5,
-h2,
-p {
+.cont-info-1 h2,
+.cont-info-1 p {
     color: var(--gris-proyecto);
 }
 
 .cont-foto-1 {
-    margin-top: 40px;
+    margin-top: 70px;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+}
+
+.cont-foto-1 img {
+    width: 100%;
+    max-width: 720px;
+    height: auto;
+    display: block;
 }
 
 .cont-fun-2 {
     padding: 30px;
+    height: 100%;
+}
+
+.cont-fun-2 .row,
+.cont-fun-3 .row {
+    height: 100%;
 }
 
 .cont-info-2 {
-    padding-right: 200px;
-    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .cont-info-2 h5,
@@ -270,10 +288,13 @@ p {
 
 .cont-fun-3 {
     padding: 30px;
+    height: 100%;
 }
 
 .cont-info-3 {
-    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .cont-info-3 h5,
@@ -292,7 +313,10 @@ p {
 }
 
 #beneficios {
-    padding: 120px;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    padding-left: 120px;
+    padding-right: 120px;
 }
 
 .titulo-beneficios {
@@ -300,7 +324,7 @@ p {
 }
 
 .fila-beneficios {
-    margin-bottom: 56px;
+    margin-bottom: 30px;
 }
 
 .fila-beneficios .cont-foto {
@@ -310,7 +334,7 @@ p {
 .cont-1,
 .cont-2,
 .cont-3 {
-    height: 400px;
+    height: 320px;
 }
 
 .cont-1 img {
@@ -344,9 +368,11 @@ p {
 
 .cont-botones-carrusel {
     display: flex;
-    justify-content: end;
-    align-items: baseline;
+    justify-content: center;
+    align-items: center;
     gap: 16px;
+    height: 100%;
+    margin-top: 60px;
 }
 
 .cont-botones-carrusel .boton-carrusel {
@@ -395,6 +421,22 @@ p {
 .cont-plan .plan {
     border-radius: 20px;
     padding: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fila-planes .cont-plan {
+    display: flex;
+}
+
+.plan a {
+    margin-top: auto;
+}
+
+.plan ul,
+.plan .lista-beneficios {
+    margin-top: 30px;
 }
 
 .plan .cont-popular {
@@ -550,16 +592,17 @@ p {
 }
 
 footer {
-    padding: 90px;
+    padding: 50px 90px;
     background: var(--color-secundario);
 }
 
 footer .fila-footer {
-    margin-top: 199px;
+    margin-top: 10px;
 }
 
+
 .cont-info-footer {
-    margin-top: auto;
+    margin-top: 30px;
 }
 
 .cont-redes-sociales {
@@ -856,5 +899,30 @@ footer .fila-footer {
     .cont-info-footer p {
         text-align: left !important;
         font-size: 13px;
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .cont-fun-1 {
+            min-height: auto;
+            margin-bottom: 20px;
+        }
+    
+        .cont-info-1 {
+            margin-top: 50px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    
+        .cont-foto-1 {
+            margin-top: -30px;
+            justify-content: center;
+            padding-right: 0;
+        }
+    
+        .cont-foto-1 img {
+            width: 90%;
+            max-width: 100%;
+        }
     }
 }

@@ -303,43 +303,104 @@ $plan = traerId();
         </section>
         <section id="precios">
             <div class="container">
-                <h2 class="text-white text-center titulo-precios" data-aos="fade-up">Planes y precios</h2>
-                <p class="text-white text-center parrafo-planes" data-aos="fade-up" data-aos-delay="100">Planes simples y transparentes diseñados para el
-                    crecimiento de tu consultorio.</p>
-                <div class="row fila-planes">
-                    <div class="col-md-4 cont-plan  data-aos=" fade-up" data-aos-delay="100"">
-                        <div class=" bg-white plan">
+                <h2 class="text-white text-center titulo-precios" data-aos="fade-up">
+                    Planes y precios
+                </h2>
+
+        ```
+            <p class="text-white text-center parrafo-planes" data-aos="fade-up" data-aos-delay="100">
+                Planes simples y transparentes diseñados para el crecimiento de tu consultorio.
+            </p>
+
+            <div class="row fila-planes">
+
+                <!-- PLAN SEMILLA -->
+                <div class="col-md-4 cont-plan d-flex" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white plan w-100">
                         <h3>Plan semilla</h3>
+
                         <h2>Gratis</h2>
-                        <p class="p-descriptivo-plan">Perfecto para comenzar y probar la plataforma</p>
-                        <a href="registroAdmin" class="btn btn-primary boton-plan">Crear cuenta gratis</a>
-                        <p><i class="bi bi-check2 chulo"></i>Hasta 30 citas mensuales</p>
+
+                        <p class="p-descriptivo-plan">
+                            Perfecto para comenzar y probar la plataforma
+                        </p>
+
+                        <a href="registroAdmin" class="btn btn-primary boton-plan">
+                            Crear cuenta gratis
+                        </a>
+
+                        <div class="mt-auto">
+                            <p>
+                                <i class="bi bi-check2 chulo"></i>
+                                Hasta 30 citas mensuales
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 cont-plan  data-aos=" fade-up" data-aos-delay="200"">
-                        <div class=" bg-white plan">
-                    <div class="cont-popular">
-                        <h3>Plan pro</h3>
-                        <span>El más popular</span>
+
+                <!-- PLAN PRO -->
+                <div class="col-md-4 cont-plan d-flex" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white plan w-100">
+
+                        <div class="cont-popular">
+                            <h3>Plan pro</h3>
+                            <span>El más popular</span>
+                        </div>
+
+                        <h2>$50,000/ mensual</h2>
+
+                        <p class="p-descriptivo-plan">
+                            Ideal para consultorios en crecimiento
+                        </p>
+
+                        <a href="registroAdmin?plan=<?= $plan[1]['id'] ?>"
+                            class="btn btn-primary boton-plan">
+                            Comprar plan pro
+                        </a>
+
+                        <div class="mt-auto">
+                            <p>
+                                <i class="bi bi-check2 chulo"></i>
+                                Hasta 300 citas mensuales
+                            </p>
+                        </div>
+
                     </div>
-                    <h2>$50,000/ mensual</h2>
-                    <p class="p-descriptivo-plan">Ideal para consultorios en crecimiento</p>
-                    <a href="registroAdmin?plan=<?= $plan[1]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan pro</a>
-                    <p><i class="bi bi-check2 chulo"></i>Hasta 300 citas mensuales</p>
                 </div>
-            </div>
-            <div class="col-md-4 cont-plan" data-aos="fade-up" data-aos-delay="300">
-                <div class="bg-white plan">
-                    <h3>Plan premium</h3>
-                    <h2>$150,000/ mensual</h2>
-                    <p class="p-descriptivo-plan">Para grandes redes de consultorios médicos</p>
-                    <a href="registroAdmin?plan=<?= $plan[2]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan premium</a>
-                    <p><i class="bi bi-check2 chulo"></i>Hasta 3,000 citas mensuales</p>
+
+                <!-- PLAN PREMIUM -->
+                <div class="col-md-4 cont-plan d-flex" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white plan w-100">
+
+                        <h3>Plan premium</h3>
+
+                        <h2>$150,000/ mensual</h2>
+
+                        <p class="p-descriptivo-plan">
+                            Para grandes redes de consultorios médicos
+                        </p>
+
+                        <a href="registroAdmin?plan=<?= $plan[2]['id'] ?>"
+                            class="btn btn-primary boton-plan">
+                            Comprar plan premium
+                        </a>
+
+                        <div class="mt-auto">
+                            <p>
+                                <i class="bi bi-check2 chulo"></i>
+                                Hasta 3,000 citas mensuales
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
-            </div>
-            </div>
+        </div>
+        ```
+
         </section>
+
         <section id="preguntas">
             <div class="container">
                 <h2 class="text-white text-center titulo-preguntas" data-aos="fade-up">Preguntas frecuentes</h2>
