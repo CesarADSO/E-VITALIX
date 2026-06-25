@@ -3973,3 +3973,74 @@
         border-radius: 50%;
         object-fit: cover;
     }
+
+    /* =========================================================
+   FIX RESPONSIVE — SIDEBAR EN IPAD PRO (992px - 1112px)
+   El sidebar usa col-lg-2 (≈16.6% de ancho) fijo desde 992px,
+   pensado para monitores de 1280px+. En 1024px eso son apenas
+   ~170px, insuficiente para textos largos como "Administradores
+   - Consultorios" o "Tickets de soporte", que se ven partidos
+   y apretados. Tampoco hay ningún ajuste de fuente/padding en
+   este rango específico.
+   ========================================================= */
+
+@media screen and (min-width: 992px) and (max-width: 1112px) {
+
+    /* Ensanchamos el sidebar — de 16.6% (col-lg-2) a un ancho fijo más cómodo.
+       IMPORTANTE: el HTML tiene col-lg-10 fijo en .main-content, que asume
+       que el sidebar sigue midiendo col-lg-2. Si solo cambiamos el sidebar,
+       el grid de Bootstrap no se "entera" y .main-content sigue ocupando
+       83.3% como si nada — dejando al sidebar flotando con un ancho que ya
+       no concuerda con el espacio real disponible. Por eso ajustamos LOS DOS
+       juntos, en el mismo breakpoint. */
+
+    /* FIX: sidebar fijo en pantalla + scroll independiente en main-content.
+       "sticky-lg-top" del HTML casi lo logra, pero sticky puede despegarse
+       si el .row padre crece más que el sidebar. position:fixed es 100%
+       confiable: el sidebar queda anclado al viewport sin importar cuánto
+       crezca el contenido, y el main-content se desplaza solo. */
+    .sidebar.col-lg-2 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 220px;
+        overflow-y: auto;   /* si el propio menú del sidebar fuera más alto que la pantalla, scrollea solo internamente */
+    }
+
+    .main-content.col-lg-10 {
+        margin-left: 220px;     /* compensa el espacio que el sidebar ya no ocupa en el flujo normal (position:fixed lo saca del flujo) */
+        flex: 0 0 calc(100% - 220px);
+        max-width: calc(100% - 220px);
+        height: 100vh;
+        overflow-y: auto;       /* scroll propio del contenido principal */
+    }
+
+    /* Texto de los nav-items: reducimos un poco para que respiren mejor en el ancho nuevo */
+    .nav-item {
+        padding: 10px 16px;
+        font-size: 14px;
+        line-height: 1.3;
+    }
+
+    .nav-item i {
+        font-size: 16px;
+        min-width: 16px;
+    }
+
+    /* Perfil de usuario: evita que "superadministrador" se vea apretado */
+    .user-role {
+        font-size: 11px;
+        padding: 0 8px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Botones de Perfil / Cerrar sesión al final, mismo ajuste que el resto del menú */
+    .sidebar .nav-item span {
+        font-size: 14px;
+    }
+}
