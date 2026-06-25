@@ -95,6 +95,12 @@ function registrarConsultorio()
         exit();
     }
 
+    $validacionDocumento = Validaciones::validarDocumento($numero_documento_admin, $tipo_documento_admin);
+    if (!$validacionDocumento['valido']) {
+        mostrarSweetAlert('error', 'Documento del administrador inválido', $validacionDocumento['mensaje']);
+        exit();
+    }
+
     $validacionTelefono = Validaciones::validarTelefono($telefono);
     if (!$validacionTelefono['valido']) {
         mostrarSweetAlert('error', 'Teléfono del consultorio inválido', $validacionTelefono['mensaje']);

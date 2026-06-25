@@ -171,7 +171,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="numero_documento_admin" class="form-label">Número de documento</label>
-                                        <input type="text" name="numero_documento_admin" class="form-control" id="numero_documento_admin" placeholder="Ingresa el número de documento">
+                                        <input type="text" name="numero_documento_admin" class="form-control" id="numero_documento_admin" placeholder="Ingresa el número de documento" pattern="[0-9]+" inputmode="numeric" minlength="5" maxlength="10" title="Solo números, entre 5 y 10 dígitos">
                                     </div>
                                 </div>
 
