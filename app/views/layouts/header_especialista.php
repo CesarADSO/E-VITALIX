@@ -55,8 +55,8 @@ require_once BASE_PATH . '/app/helpers/session_especialista.php';
     }
 
     .fc-event-bloqueado {
-        background-color: #6c757d !important;
-        border-color: #6c757d !important;
+        background-color: #dc3545 !important;
+        border-color: #dc3545 !important;
         cursor: not-allowed;
     }
 
