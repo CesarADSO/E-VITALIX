@@ -41,6 +41,7 @@ class CalendarioModel
                 $titulo = '';
 
                 if ($row['cita_id'] == null) {
+                    // Esto lo hacemos para que al cambiar el estado del slot desde el panel del especialista, se refleje en el calendario correctamente
                     if ($row['estado_slot'] === 'Bloqueado') {
                         $clase = 'fc-event-bloqueado';
                         $titulo = 'Bloqueado';
