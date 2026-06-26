@@ -152,7 +152,11 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                             </div>
 
                             <!-- Paso 4: Confirmación -->
-                            <div class="wizard-step" id="step4">
+                            <!-- FALTABA: la clase "is-last" es la que le dice al wizard que este es el
+                                 último paso y que debe llamar a updateSummary() para pintar el resumen.
+                                 Sin ella, el bloque `if (nextStep.classList.contains('is-last'))` en
+                                 dashboards.js nunca se cumple y el resumen queda vacío. -->
+                            <div class="wizard-step is-last" id="step4">
                                 <div class="mb-3">
                                     <h5>Resumen de la Información</h5>
                                     <div class="card">
@@ -189,8 +193,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
             </div>
         </div>
     </div>
-
-
+    
     <?php
     include_once __DIR__ . '/../../layouts/footer_paciente.php';
     ?>
