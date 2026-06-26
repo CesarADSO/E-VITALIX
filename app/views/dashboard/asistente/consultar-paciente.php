@@ -45,14 +45,14 @@
                                             <i class="bi bi-calendar me-1"></i>
                                             <span id="paciente-edad">35 años</span>
                                         </span>
-                                        <span class="badge bg-success">
+                                        <span class="badge bg-primary">
                                             <i class="bi bi-shield-check me-1"></i>
                                             <span id="paciente-eps">Sura EPS</span>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="col-md-3 text-end">
-                                    <span class="badge bg-success p-3">
+                                    <span class="badge bg-primary p-3">
                                         <i class="bi bi-eye me-2"></i>Vista de Solo Lectura
                                     </span>
                                 </div>
@@ -105,7 +105,7 @@
 
                             <!-- Contact Information -->
                             <div class="card shadow-sm mb-4">
-                                <div class="card-header bg-success text-white">
+                                <div class="card-header bg-primary text-white">
                                     <h5 class="mb-0">
                                         <i class="bi bi-telephone me-2"></i>
                                         Información de Contacto

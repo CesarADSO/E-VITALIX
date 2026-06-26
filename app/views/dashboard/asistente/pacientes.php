@@ -96,7 +96,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                     </td>
                                                     <td>
                                                         <?php if ($paciente['estado'] == 'Activo') : ?>
-                                                            <span class="badge bg-success">Activo</span>
+                                                            <span class="badge bg-primary">Activo</span>
                                                         <?php else : ?>
                                                             <span class="badge bg-secondary">Inactivo</span>
                                                         <?php endif; ?>

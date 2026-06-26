@@ -103,8 +103,8 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                         <td><?= $especialidad['descripcion'] ?></td>
                                                         <td>
                                                             <?php if ($especialidad['estado'] === 'ACTIVA'): ?>
-                                                                <span class="badge bg-success status-bagde status text-white"><?= $especialidad['estado'] ?></span>
-                                                                <!-- <a class="badge bg-success status-badge status btn-estado" href="<?= BASE_URL ?>/admin/cambiar-estado-especialidad?id=<?= $especialidad['id'] ?>&accion=modificarEstado"><?= $especialidad['estado'] ?></a> -->
+                                                                <span class="badge bg-primary status-bagde status text-white"><?= $especialidad['estado'] ?></span>
+                                                                <!-- <a class="badge bg-primary status-badge status btn-estado" href="<?= BASE_URL ?>/admin/cambiar-estado-especialidad?id=<?= $especialidad['id'] ?>&accion=modificarEstado"><?= $especialidad['estado'] ?></a> -->
                                                             <?php else: ?>
                                                                 <span class="badge bg-danger status-bagde status text-white"><?= $especialidad['estado'] ?></span>
                                                                 <!-- <a class="badge bg-danger status-badge status btn-estado" href="<?= BASE_URL ?>/admin/cambiar-estado-especialidad?id=<?= $especialidad['id'] ?>&accion=modificarEstado"><?= $especialidad['estado'] ?></a> -->
@@ -135,7 +135,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h5 class="card-title text-truncate"><?= $especialidad['nombre'] ?></h5>
                                                 <?php if ($especialidad['estado'] === 'ACTIVA'): ?>
-                                                    <span class="status-badge bg-success text-white"><?= $especialidad['estado'] ?></span>
+                                                    <span class="status-badge bg-primary text-white"><?= $especialidad['estado'] ?></span>
                                                 <?php else: ?>
                                                     <span class="status-badge bg-danger text-white"><?= $servicio['estado'] ?></span>
                                                 <?php endif; ?>

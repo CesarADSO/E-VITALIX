@@ -140,7 +140,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h5 class="card-title"><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></h5>
                                                 <?php if ($administrador['estado'] === 'Activo'): ?>
-                                                    <span class="status-badge bg-success text-white"><?= $administrador['estado'] ?></span>
+                                                    <span class="status-badge bg-primary text-white"><?= $administrador['estado'] ?></span>
                                                 <?php else: ?>
                                                     <span class="status-badge bg-danger text-white"><?= $administrador['estado'] ?></span>
                                                 <?php endif; ?>

@@ -78,7 +78,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                     <td><?= $slot['hora_fin'] ?></td>
                                                     <td>
                                                         <?php if($slot['estado_slot'] === 'Disponible') :?>
-                                                        <span class="badge bg-success"><?= $slot['estado_slot'] ?></span>
+                                                        <span class="badge bg-primary"><?= $slot['estado_slot'] ?></span>
                                                         <?php elseif ($slot['estado_slot'] === 'Reservado'):?>
                                                             <span class="badge bg-secondary"><?= $slot['estado_slot'] ?></span>
                                                         <?php else:?>

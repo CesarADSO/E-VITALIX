@@ -63,7 +63,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                             <?php if ($ticket['estado'] === 'ABIERTO'): ?>
                                                                 <span class="badge bg-info status-badge status text-white"><?= $ticket['estado'] ?></span>
                                                             <?php elseif ($ticket['estado'] === 'RESPONDIDO'): ?>
-                                                                <span class="badge bg-success status-badge status text-white"><?= $ticket['estado'] ?></span>
+                                                                <span class="badge bg-primary status-badge status text-white"><?= $ticket['estado'] ?></span>
                                                             <?php else: ?>
                                                                 <span class="badge bg-danger status-badge status text-white"><?= $ticket['estado'] ?></span>
                                                             <?php endif; ?>
@@ -105,7 +105,7 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                                 <?php if ($ticket['estado'] === 'ABIERTO'): ?>
                                                     <span class="badge bg-info status-badge status text-white"><?= $ticket['estado'] ?></span>
                                                 <?php elseif ($ticket['estado'] === 'RESPONDIDO'): ?>
-                                                    <span class="badge bg-success status-badge status text-white"><?= $ticket['estado'] ?></span>
+                                                    <span class="badge bg-primary status-badge status text-white"><?= $ticket['estado'] ?></span>
                                                 <?php else: ?>
                                                     <span class="badge bg-danger status-badge status text-white"><?= $ticket['estado'] ?></span>
                                                 <?php endif; ?>
