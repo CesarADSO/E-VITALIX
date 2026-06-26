@@ -118,7 +118,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h5 class="card-title text-truncate">Disponibilidad médica</h5>
                                                 <?php if ($horario['estado_disponibilidad'] === 'Activo'): ?>
-                                                    <span class="status-badge bg-success text-white"><?= $horario['estado_disponibilidad'] ?></span>
+                                                    <span class="status-badge bg-primary text-white"><?= $horario['estado_disponibilidad'] ?></span>
                                                 <?php else: ?>
                                                     <span class="status-badge bg-danger text-white"><?= $horario['estado_disponibilidad'] ?></span>
                                                 <?php endif; ?>

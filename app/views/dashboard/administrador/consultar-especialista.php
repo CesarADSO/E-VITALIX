@@ -79,7 +79,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                                     <i class="fa-solid fa-user text-primary"></i>
                                                     <strong>Estado:</strong>
                                                     <?php if ($especialista['estado'] == 'Activo'): ?>
-                                                        <span class="badge bg-success status-badge status btn-estado text-white"><?= $especialista['estado'] ?></span>
+                                                        <span class="badge bg-primary status-badge status btn-estado text-white"><?= $especialista['estado'] ?></span>
                                                     <?php else: ?>
                                                         <span class="badge bg-danger status-badge status btn-estado text-white"><?= $especialista['estado'] ?></span>
                                                     <?php endif; ?>

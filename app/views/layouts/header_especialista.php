@@ -43,8 +43,8 @@ require_once BASE_PATH . '/app/helpers/session_especialista.php';
 
     /* Eventos según estado */
     .fc-event-disponible {
-        background-color: #28a745 !important;
-        border-color: #28a745 !important;
+        background-color: #007bff !important;
+        border-color: #007bff !important;
         cursor: pointer;
     }
 

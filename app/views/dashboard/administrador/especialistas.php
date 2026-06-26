@@ -137,7 +137,7 @@ include_once __DIR__ . '/../../layouts/header_administrador.php';
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h5 class="card-title text-truncate"><?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?></h5>
                                                 <?php if ($especialista['estado'] === 'Activo'): ?>
-                                                    <span class="status-badge bg-success text-white"><?= $especialista['estado'] ?></span>
+                                                    <span class="status-badge bg-primary text-white"><?= $especialista['estado'] ?></span>
                                                 <?php else: ?>
                                                     <span class="status-badge bg-danger text-white"><?= $especialista['estado'] ?></span>
                                                 <?php endif; ?>
