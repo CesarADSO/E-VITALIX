@@ -49,8 +49,8 @@ require_once BASE_PATH . '/app/helpers/session_especialista.php';
     }
 
     .fc-event-reservado {
-        background-color: #007bff !important;
-        border-color: #007bff !important;
+        background-color: rgba(var(--bs-info-rgb),var(--bs-bg-opacity)) !important;
+        border-color: rgba(var(--bs-info-rgb),var(--bs-bg-opacity)) !important;
         cursor: default;
     }
 
