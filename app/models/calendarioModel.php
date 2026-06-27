@@ -41,9 +41,14 @@ class CalendarioModel
                 $titulo = '';
 
                 if ($row['cita_id'] == null) {
-                    // Es un espacio disponible
-                    $clase = 'fc-event-disponible';
-                    $titulo = 'Disponible';
+                    // Esto lo hacemos para que al cambiar el estado del slot desde el panel del especialista, se refleje en el calendario correctamente
+                    if ($row['estado_slot'] === 'Bloqueado') {
+                        $clase = 'fc-event-bloqueado';
+                        $titulo = 'Bloqueado';
+                    } else {
+                        $clase = 'fc-event-disponible';
+                        $titulo = 'Disponible';
+                    }
                 } else {
                     // Es una cita - Ajustado a los valores ENUM de tu SQL (MAYÚSCULAS)
                     switch ($row['estado_cita']) {

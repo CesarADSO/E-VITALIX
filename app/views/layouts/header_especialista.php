@@ -43,20 +43,20 @@ require_once BASE_PATH . '/app/helpers/session_especialista.php';
 
     /* Eventos según estado */
     .fc-event-disponible {
-        background-color: #28a745 !important;
-        border-color: #28a745 !important;
+        background-color: #007bff !important;
+        border-color: #007bff !important;
         cursor: pointer;
     }
 
     .fc-event-reservado {
-        background-color: #007bff !important;
-        border-color: #007bff !important;
+        background-color: rgba(var(--bs-info-rgb),var(--bs-bg-opacity)) !important;
+        border-color: rgba(var(--bs-info-rgb),var(--bs-bg-opacity)) !important;
         cursor: default;
     }
 
     .fc-event-bloqueado {
-        background-color: #6c757d !important;
-        border-color: #6c757d !important;
+        background-color: #dc3545 !important;
+        border-color: #dc3545 !important;
         cursor: not-allowed;
     }
 

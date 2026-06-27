@@ -95,8 +95,8 @@ select.is-valid {
     background-color: #0dcaf0 !important;
 }
 
-.badge.bg-success {
-    background-color: #198754 !important;
+.badge.bg-primary {
+    background-color: #007bff !important;
 }
 
 /* Ayuda de formulario */

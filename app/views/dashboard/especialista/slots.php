@@ -98,7 +98,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                                         <td>
 
                                                             <?php if ($slot['estado_slot'] === 'Disponible') : ?>
-                                                                <a style="text-decoration: none;" class="badge bg-success status-badge status" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
+                                                                <a style="text-decoration: none;" class="badge bg-primary status-badge status" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
                                                             <?php elseif ($slot['estado_slot'] === 'Reservado'): ?>
                                                                 <a style="text-decoration: none;" class="badge bg-secondary status-badge status" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
                                                             <?php else: ?>
@@ -128,7 +128,7 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h5 class="card-title text-truncate"><?= $slot['nombres'] ?> <?= $slot['apellidos'] ?></h5>
                                                 <?php if ($slot['estado_slot'] === 'Disponible') : ?>
-                                                    <a style="text-decoration: none;" class="badge bg-success status-badge status" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
+                                                    <a style="text-decoration: none;" class="badge bg-primary status-badge status" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
                                                 <?php elseif ($slot['estado_slot'] === 'Reservado'): ?>
                                                     <a style="text-decoration: none;" class="badge bg-secondary status-badge status" href="<?= BASE_URL ?>/especialista/actualizar-slot?id=<?= $slot['id'] ?>&accion=modificarEstado"><?= $slot['estado_slot'] ?></a>
                                                 <?php else: ?>

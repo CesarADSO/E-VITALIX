@@ -201,6 +201,7 @@ function completarPerfilPaciente($id_paciente)
     $resultado = $objCompletar->completarPerfilPaciente($data);
 
     if ($resultado) {
+        $_SESSION['user']['perfil_completo'] = 1;
         mostrarSweetAlert('success', 'Perfil Completado', '¡Has completado tu perfil correctamente!', BASE_URL . '/paciente/dashboard');
     } else {
         mostrarSweetAlert('error', 'Error al Completar Perfil', 'Hubo un problema al completar tu perfil. Por favor, intenta nuevamente.');

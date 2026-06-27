@@ -94,8 +94,21 @@ document.addEventListener('DOMContentLoaded', function () {
             // Muestra el siguiente paso agregando la clase "active"
 
             if (nextStep.classList.contains('is-last')) {
-                if (typeof updateSummary === "function") {
-                    updateSummary();
+                // Detecta cuál es el formulario activo buscando un elemento clave de cada resumen,
+                // y llama a la función correcta. Antes había una sola llamada a updateSummary(),
+                // pero como las tres funciones tenían el mismo nombre en el mismo scope, JavaScript
+                // solo guardaba la última (la del especialista) y sobreescribía las anteriores.
+                const tienePaciente = !!(document.getElementById('resumen-fecha-nacimiento') && document.getElementById('resumen-eps'));
+
+                if (tienePaciente) {
+                    // El resumen tiene campos del paciente → llamar a la función del paciente
+                    updateSummaryPaciente();
+                } else if (document.getElementById('resumen-nombre-administrador')) {
+                    // El resumen tiene campos del consultorio → llamar a la función del consultorio
+                    updateSummaryConsultorio();
+                } else if (document.getElementById('resumen-especialidad')) {
+                    // El resumen tiene campos del especialista → llamar a la función del especialista
+                    updateSummaryEspecialista();
                 }
             }
         });
@@ -150,7 +163,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ========== FUNCIÓN: LLENAR EL RESUMEN FINAL DEL PACIENTE ==========
-    function updateSummary() {
+    // FALTABA: esta función se llamaba "updateSummary", igual que las dos de abajo.
+    // En JavaScript, dentro del mismo scope, si declaras varias funciones con el mismo nombre
+    // solo sobrevive la ÚLTIMA. Por eso esta nunca se ejecutaba: la pisaban las otras dos.
+    // Solución: renombrarla a "updateSummaryPaciente" para que tenga identidad propia.
+    function updateSummaryPaciente() {
         // Esta función se ejecuta en el último paso para mostrar un resumen de todo lo llenado
 
         // ===== DATOS PERSONALES =====
@@ -175,12 +192,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Copia el valor de la dirección
 
         // ===== INFORMACIÓN MÉDICA =====
-        const epsSelect = document.getElementById('eps');
-        // Obtén el select de EPS (aseguradora médica)
-
+        // FALTABA: "eps" es un input tipo texto, no un <select>, por lo que usar
+        // .options[selectedIndex].text lanzaría un error. Se usa .value directamente.
         document.getElementById('resumen-eps').textContent =
-            epsSelect.options[epsSelect.selectedIndex].text || 'No seleccionado';
-        // Muestra el nombre de la EPS seleccionada
+            document.getElementById('eps').value || 'No ingresado';
 
         const rhSelect = document.getElementById('rh');
         // Obtén el select de tipo de sangre
@@ -205,7 +220,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // LLENAR EL RESUMEN FINAL DEL CONSULTORIO
-    function updateSummary() {
+    // Renombrada de "updateSummary" a "updateSummaryConsultorio" para evitar el conflicto de nombres.
+    function updateSummaryConsultorio() {
 
         // --- Campos normales tipo texto ---
         // Cada línea toma el valor del input y si está vacío muestra "No ingresado".
@@ -310,7 +326,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // FUNCION PARA ACTUALIZAR EL RESUMEN AL REGISTRAR UN ESPECIALISTA
-    function updateSummary() {
+    // Renombrada de "updateSummary" a "updateSummaryEspecialista" para evitar el conflicto de nombres.
+    function updateSummaryEspecialista() {
         // Información Personal
         document.getElementById('resumen-tipo-documento').textContent = document.getElementById('tipo_documento').options[document.getElementById('tipo_documento').selectedIndex].text || 'No seleccionado';
         document.getElementById('resumen-numero-documento').textContent = document.getElementById('numero_documento').value || 'No ingresado';
