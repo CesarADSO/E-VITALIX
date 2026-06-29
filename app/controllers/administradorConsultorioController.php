@@ -23,11 +23,14 @@ switch ($method) {
         break;
     case 'GET':
         $accion = $_GET['accion'] ?? '';
-        if ($accion === 'eliminar') {
-            eliminarAdministradorConsultorio($_GET['id'], $_GET['id_usuario']);
+        if ($accion === 'desactivar') {
+            desactivarAdministradorConsultorio($_GET['id_usuario']);
         }
         elseif ($accion === 'desasignar') {
             desasignarConsultorioAdministrador($_GET['id']);
+        }
+        elseif ($accion === 'activar') {
+            activarAdministradorConsultorio($_GET['id_usuario']);
         }
         if (isset($_GET['id'])) {
             listarAdministradorConsultorioId($_GET['id']);
@@ -180,17 +183,30 @@ function actualizarAdministradorConsultorio()
     exit();
 }
 
-function eliminarAdministradorConsultorio($id, $id_usuario) {
+function desactivarAdministradorConsultorio($id_usuario) {
     $objAdministrador = new Administrador();
 
-    $resultado = $objAdministrador->eliminar($id, $id_usuario);
+    $resultado = $objAdministrador->desactivar($id_usuario);
 
      // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Eliminación exitosa', 'Se ha eliminado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
+        mostrarSweetAlert('success', 'Desactivación exitosa', 'Se ha desactivado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
     } else {
-        mostrarSweetAlert('error', 'Error al eliminar', 'No se puedo eliminar el administrador de consultorio. Intenta nuevamente');
+        mostrarSweetAlert('error', 'Error al desactivar', 'No se pudo desactivar el administrador de consultorio. Intenta nuevamente');
+    }
+    exit();
+}
+
+function activarAdministradorConsultorio($id_usuario) {
+    $objAdministrador = new Administrador();
+
+    $resultado = $objAdministrador->activar($id_usuario);
+
+    if ($resultado === true) {
+        mostrarSweetAlert('success', 'Activación exitosa', 'Se ha activado el administrador de consultorio seleccionado', '/E-VITALIX/superadmin/administradores-consultorio');
+    } else {
+        mostrarSweetAlert('error', 'Error al activar', 'No se pudo activar el administrador de consultorio. Intenta nuevamente');
     }
     exit();
 }

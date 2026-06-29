@@ -133,7 +133,10 @@ include_once __DIR__ . '/../../layouts/header_especialista.php';
 
                                     <div class="mb-3 col-md-6">
                                         <label for="temperatura" class="form-label">Temperatura</label>
-                                        <input type="number" class="form-control" name="temperatura" placeholder="Ingrese la temperatura">
+                                        <!-- step="0.01" permite ingresar decimales (ej: 38.5), coincide con DECIMAL(4,2) en la BD -->
+                                          <!-- min/max evitan valores fuera de un rango razonable para temperatura corporal -->
+                                            <!-- id agregado para que el <label for="temperatura"> funcione correctamente -->
+                                        <input type="number" class="form-control" name="temperatura" step="0.01" min="30" max="45" placeholder="Ingrese la temperatura">
                                         <div class="form-text">Temperatura corporal en grados Celsius</div>
                                     </div>
 
