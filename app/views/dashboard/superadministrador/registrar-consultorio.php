@@ -69,6 +69,10 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                             </div>
                         </div>
 
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle"></i> Las fotos no deben superar el tamaño de 2MB.
+                        </div>
+
                         <!-- Formulario -->
                         <form id="consultorioForm" action="<?= BASE_URL ?>/superadmin/guardar-consultorio" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="accion" value="registrar">

@@ -113,8 +113,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                         <td><?= $administrador['estado'] ?></td>
                                                         <td>
                                                             <!-- <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> -->
-                                                            <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-sm btn-info" title="Editar administrador"><i class="fa-solid fa-pen-to-square editar"></i></a>
-                                                            <a href="<?= BASE_URL ?>/superadmin/eliminar-administrador?id=<?= $administrador['id'] ?>&accion=eliminar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-sm btn-danger" title="Eliminar administrador"><i class="fa-solid fa-trash-can"></i></a>
+                                                            <?php if($administrador['estado'] === 'Activo'):?>
+                                                            <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            <a href="<?= BASE_URL ?>/superadmin/desactivar-administrador?accion=desactivar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-danger btn-sm text-white"><i class="fa-solid fa-xmark"></i></a>
+                                                            <?php else:?>
+                                                            <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            <a href="<?= BASE_URL ?>/superadmin/activar-administrador?accion=activar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-success btn-sm text-white"><i class="fa-solid fa-check"></i></a>
+                                                            <?php endif;?>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -152,8 +157,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                 <h6 class="card-subtitle mb-2 text-body-secondary">Número de documento: <?= $administrador['numero_documento'] ?></h6>
                                             </div>
                                             <div class="cont-botones d-flex justify-content-end gap-2">
-                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-success btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= BASE_URL ?>/superadmin/eliminar-administrador?id=<?= $administrador['id'] ?>&accion=eliminar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-danger btn-sm text-white"><i class="fa-solid fa-trash-can"></i></a>
+                                                <?php if($administrador['estado'] === 'Activo'):?>
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/desactivar-administrador?accion=desactivar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-danger btn-sm text-white"><i class="fa-solid fa-xmark"></i></a>
+                                                <?php else:?>
+                                                <a href="<?= BASE_URL ?>/superadmin/actualizar-administrador?id=<?= $administrador['id'] ?>" class="btn btn-info btn-sm text-white"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= BASE_URL ?>/superadmin/activar-administrador?accion=activar&id_usuario=<?= $administrador['id_usuario'] ?>" class="btn btn-success btn-sm text-white"><i class="fa-solid fa-check"></i></a>
+                                                <?php endif;?>
                                             </div>
                                         </div>
                                     </div>
