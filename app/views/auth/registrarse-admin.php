@@ -54,7 +54,7 @@ if (isset($_GET['plan'])) {
                     </p>
 
                     <div class="alert alert-info" role="alert">
-                        <i class="bi bi-info-circle"></i> La contraseña es tu número de documento.
+                        <i class="bi bi-info-circle"></i> La contraseña es tu número de documento y se recomienda cambiarla en la sección perfil por razones de seguridad.
                     </div>
 
                     <div class="wizard-progress mb-4">

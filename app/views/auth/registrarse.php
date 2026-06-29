@@ -31,7 +31,7 @@
                     </p>
 
                     <div class="alert alert-info" role="alert">
-                        <i class="bi bi-info-circle"></i> La contraseña es tu número de documento.
+                        <i class="bi bi-info-circle"></i> La contraseña es tu número de documento y se recomienda cambiarla en la sección perfil por razones de seguridad.
                     </div>
 
                     <form id="registroForm" action="<?= BASE_URL ?>/registrarse" method="POST" enctype="multipart/form-data" novalidate>

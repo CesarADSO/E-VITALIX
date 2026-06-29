@@ -129,7 +129,11 @@ switch ($request) {
         require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
         break;
 
-    case '/superadmin/eliminar-administrador':
+    case '/superadmin/desactivar-administrador':
+        require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
+        break;
+
+    case '/superadmin/activar-administrador':
         require BASE_PATH . '/app/controllers/administradorConsultorioController.php';
         break;
 

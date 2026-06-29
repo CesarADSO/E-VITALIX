@@ -1,6 +1,94 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // ==================== CLASE ACTIVE EN SIDEBAR ====================
+    // Marca automáticamente el ítem del menú lateral que corresponde a la URL
+    // actual. Funciona en móvil, tablet y desktop porque todos usan el mismo
+    // bloque HTML del sidebar — Bootstrap Offcanvas solo cambia cómo se muestra,
+    // no duplica los elementos en el DOM.
+    //
+    // Flujo general:
+    //   1. Se lee la ruta actual del navegador (window.location.pathname).
+    //   2. Se recorren todos los ítems del menú (.nav-item dentro de .nav-menu).
+    //   3. Se compara la ruta de cada ítem con la ruta actual.
+    //   4. Si coinciden, se le agrega la clase "active"; al resto se les quita.
+    //
+    // Por qué basarse en la URL y no en el clic:
+    //   Esta es una aplicación PHP que recarga la página completa en cada navegación.
+    //   Detectar el clic no sirve porque el estado se pierde al recargar.
+    //   En cambio, leer la URL al cargar la página es persistente y siempre correcto.
+
+    function activarItemSidebar() {
+
+        // Lee solo el "path" de la URL actual, sin protocolo, dominio ni query string.
+        // Ejemplo: si el usuario está en "http://localhost/E-VITALIX/paciente/dashboard"
+        //          window.location.pathname devuelve "/E-VITALIX/paciente/dashboard"
+        const rutaActual = window.location.pathname;
+
+        // Selecciona todos los <a class="nav-item"> que estén dentro de un .nav-menu.
+        // Un solo selector cubre los sidebars de todos los roles (paciente, admin,
+        // especialista, superadmin, asistente) sin necesitar identificar el rol.
+        // querySelectorAll devuelve un NodeList que se puede recorrer con forEach.
+        const itemsNav = document.querySelectorAll('.nav-menu .nav-item');
+
+        // Recorre cada ítem del menú uno por uno.
+        // En cada vuelta "item" es el elemento <a> correspondiente a un enlace del menú.
+        itemsNav.forEach(function (item) {
+
+            // Quita la clase "active" de este ítem antes de comparar.
+            // Esto limpia cualquier estado previo, incluidas las clases hardcodeadas
+            // en el HTML, y garantiza que solo un ítem quede activo al final.
+            item.classList.remove('active');
+
+            // Obtiene únicamente la parte del "path" del href del enlace.
+            // "new URL(item.href)" construye un objeto URL a partir del atributo href,
+            // que el navegador ya resuelve como URL absoluta.
+            // ".pathname" extrae el path sin protocolo, dominio ni parámetros de consulta.
+            // Ejemplo: href="http://localhost/E-VITALIX/especialista/mis-citas"
+            //          → rutaItem = "/E-VITALIX/especialista/mis-citas"
+            const rutaItem = new URL(item.href).pathname;
+
+            // Excluye el ítem de "Cerrar Sesión" de la comparación.
+            // Al cerrar sesión se redirige inmediatamente, por lo que nunca debe
+            // quedar marcado como ítem activo.
+            if (rutaItem.includes('cerrarSesion')) {
+                return; // "return" dentro de forEach actúa como "continue": salta a la siguiente iteración
+            }
+
+            // Compara la ruta actual con la ruta del ítem usando dos condiciones:
+            //
+            //   Condición A — rutaActual === rutaItem
+            //     Coincidencia exacta. Cubre el caso más común: el usuario está
+            //     exactamente en la página del ítem.
+            //     Ejemplo: rutaActual="/E-VITALIX/paciente/dashboard"
+            //              rutaItem ="/E-VITALIX/paciente/dashboard" → ✓ activo
+            //
+            //   Condición B — rutaActual.startsWith(rutaItem + '/')
+            //     Coincidencia por prefijo con separador "/".
+            //     Cubre subrutas: si el módulo tiene páginas de detalle o parámetros
+            //     en la URL, el ítem del menú padre sigue resaltado.
+            //     Ejemplo: rutaActual="/E-VITALIX/paciente/historial-clinico/detalle/5"
+            //              rutaItem ="/E-VITALIX/paciente/historial-clinico" → ✓ activo
+            //     El "+ '/'" evita falsos positivos entre rutas con prefijo similar.
+            //     Ejemplo sin él: "/paciente/lista-de-citas" coincidiría con
+            //     "/paciente/lista-de-citas-pasadas" — con él, no coincide.
+            if (rutaActual === rutaItem || rutaActual.startsWith(rutaItem + '/')) {
+
+                // Si alguna de las dos condiciones se cumple, agrega la clase "active".
+                // El CSS del sidebar usa esta clase para cambiar el color de fondo,
+                // el color del texto y el ícono del ítem seleccionado.
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Ejecuta la función al cargar la página.
+    // Al estar dentro de DOMContentLoaded el DOM ya existe, así que la llamada
+    // directa es suficiente — no se necesita otro evento de espera.
+    activarItemSidebar();
+
+    
+
     // ==================== INICIALIZACIÓN DE GRÁFICOS ====================
     // Esta función crea dos gráficos usando la librería Chart.js
 

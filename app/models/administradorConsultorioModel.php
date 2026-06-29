@@ -710,29 +710,39 @@ class Administrador
         }
     }
 
-    public function eliminar($id, $id_usuario)
+    public function desactivar($id_usuario)
     {
         try {
-            // EN UNA VARIABLE GUARDAMOS LA CONSULTA SQL A EJECUTAR SEGÚN SEA EL CASO
-            $eliminar = "DELETE FROM administradores WHERE id = :id";
 
-            $resultado = $this->conexion->prepare($eliminar);
+            $desactivar = "UPDATE usuarios SET estado = 'Inactivo' WHERE id = :id_usuario";
 
-            $resultado->bindParam(':id', $id);
+            $resultado = $this->conexion->prepare($desactivar);
+
+            $resultado->bindParam(':id_usuario', $id_usuario);
 
             $resultado->execute();
 
-            $eliminar2 = "DELETE FROM usuarios WHERE id = :id_usuario";
+            return true;
+        } catch (PDOException $e) {
+            error_log("Error en Administrador::desactivar->" . $e->getMessage());
+            return false;
+        }
+    }
 
-            $resultado2 = $this->conexion->prepare($eliminar2);
+    public function activar($id_usuario)
+    {
+        try {
+            $activar = "UPDATE usuarios SET estado = 'Activo' WHERE id = :id_usuario";
 
-            $resultado2->bindParam(':id_usuario', $id_usuario);
+            $resultado = $this->conexion->prepare($activar);
 
-            $resultado2->execute();
+            $resultado->bindParam(':id_usuario', $id_usuario);
+
+            $resultado->execute();
 
             return true;
         } catch (PDOException $e) {
-            error_log("Error en Administrador::eliminar->" . $e->getMessage());
+            error_log("Error en Administrador::activar->" . $e->getMessage());
             return false;
         }
     }
