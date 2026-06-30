@@ -4,6 +4,7 @@
 
 <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
 <script src="<?= BASE_URL ?>/public/assets/dashboard/js/dashboards.js"></script>
+<script src="<?= BASE_URL ?>/public/assets/js/password-toggle.js"></script>
 
 <script>
     function initCharts() {
