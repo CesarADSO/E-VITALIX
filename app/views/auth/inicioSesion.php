@@ -22,6 +22,7 @@ if (isset($_GET['plan'])) {
         rel="stylesheet">
     <!-- AOS Animation Library -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="public/assets/auth/css/inicioSesion.css">
     <link rel="icon" href="public/assets/auth/img/FAVICON.png">
 </head>
@@ -99,6 +100,7 @@ if (isset($_GET['plan'])) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="public/assets/js/validaciones.js"></script>
+    <script src="public/assets/js/password-toggle.js"></script>
     <script>
         // Configurar validaciones para el formulario de login
         configurarValidacionesFormulario('loginForm', {

@@ -47,6 +47,7 @@
 
 
 <script src="<?= BASE_URL ?>/public/assets/dashboard/js/dashboards.js"></script>
+<script src="<?= BASE_URL ?>/public/assets/js/password-toggle.js"></script>
 
 <script>
     function initCharts() {
