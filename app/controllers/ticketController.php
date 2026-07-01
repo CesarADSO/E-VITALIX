@@ -122,7 +122,7 @@ function crear()
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Creación de ticket exitosa', 'Espera a que el super administrador devuelva una respuesta', '/E-VITALIX/admin/mis-tickets');
+        mostrarSweetAlert('success', 'Creación de ticket exitosa', 'Espera a que el super administrador devuelva una respuesta', BASE_URL . '/admin/mis-tickets');
     } else {
         mostrarSweetAlert('error', 'Error al crear el ticket', 'No se pudo crear el ticket. Intenta nuevamente');
     }
@@ -242,7 +242,7 @@ function actualizarTicket() {
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Actualización de ticket exitosa', 'El ticket se ha actualizado correctamente', '/E-VITALIX/admin/mis-tickets');
+        mostrarSweetAlert('success', 'Actualización de ticket exitosa', 'El ticket se ha actualizado correctamente', BASE_URL . '/admin/mis-tickets');
     } else {
         mostrarSweetAlert('error', 'Error al actualizar el ticket', 'No se pudo actualizar el ticket. Intenta nuevamente');
     }
@@ -275,7 +275,7 @@ function responderTicket() {
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO Y NOTIFICAMOS SI HAY ÉXITO O ERROR
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Respuesta enviada con éxito', 'El ticket se ha respondido correctamente', '/E-VITALIX/superadmin/tickets-usuarios');
+        mostrarSweetAlert('success', 'Respuesta enviada con éxito', 'El ticket se ha respondido correctamente', BASE_URL . '/superadmin/tickets-usuarios');
     } else {
         mostrarSweetAlert('error', 'Error al responder el ticket', 'No se pudo responder el ticket. Intenta nuevamente');
     }
@@ -291,7 +291,7 @@ function cerrarTicket($id) {
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Ticket cerrado correctamente', 'Redirigiendo a mis tickets');
+        mostrarSweetAlert('success', 'Ticket cerrado correctamente', 'Redirigiendo a mis tickets', BASE_URL . '/admin/mis-tickets');
     }
     else {
         mostrarSweetAlert('error', 'Error al cerrar el ticket', 'No se pudo cerrar el ticket. Intenta nuevamente');
