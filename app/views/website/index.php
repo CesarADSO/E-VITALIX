@@ -630,10 +630,10 @@ $plan = traerId();
                     <p class="text-white"> E-VITALIX — Plataforma integral de gestión médica y agendamiento.</p>
                 </div>
                 <div class="col-md-2 cont-info-footer">
-                    <div class="cont-redes-sociales">
+                    <!-- <div class="cont-redes-sociales">
                         <a href="#" class="text-white redes"><i class="bi bi-instagram"></i></a>
                         <a href="#" class="text-white redes"><i class="bi bi-twitter-x"></i></a>
-                    </div>
+                    </div> -->
                     <p class="text-white text-end">evitalix558@gmail.com</p>
                 </div>
             </div>
