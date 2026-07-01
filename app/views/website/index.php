@@ -19,7 +19,7 @@ $plan = traerId();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="icon" href="public/assets/website/img/FAVICON.png">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/website/css/landing.css?v=1.1">
+    <link rel="stylesheet" href="public/assets/website/css/landing.css">
 </head>
 
 <body>
@@ -65,6 +65,11 @@ $plan = traerId();
                         <li class="nav-item item">
                             <a class="nav-link text-white enlace" href="#preguntas">
                                 Preguntas
+                            </a>
+                        </li>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#equipo">
+                                Equipo
                             </a>
                         </li>
                     </ul>
@@ -114,6 +119,11 @@ $plan = traerId();
                             <li class="nav-item item">
                                 <a class="nav-link text-white enlace" href="#preguntas" data-bs-dismiss="offcanvas">
                                     <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Preguntas
+                                </a>
+                            </li>
+                            <li class="nav-item item">
+                                <a class="nav-link text-white enlace" href="#equipo" data-bs-dismiss="offcanvas">
+                                    <img src="public/assets/website/img/puntito blanco del nav.svg" alt="">Equipo
                                 </a>
                             </li>
                         </ul>
@@ -307,37 +317,37 @@ $plan = traerId();
                 <p class="text-white text-center parrafo-planes" data-aos="fade-up" data-aos-delay="100">Planes simples y transparentes diseñados para el
                     crecimiento de tu consultorio.</p>
                 <div class="row fila-planes">
-                    <div class="col-md-4 cont-plan  data-aos=" fade-up" data-aos-delay="100"">
-                        <div class=" bg-white plan">
-                        <h3>Plan semilla</h3>
-                        <h2>Gratis</h2>
-                        <p class="p-descriptivo-plan">Perfecto para comenzar y probar la plataforma</p>
-                        <a href="registroAdmin" class="btn btn-primary boton-plan">Crear cuenta gratis</a>
-                        <p><i class="bi bi-check2 chulo"></i>Hasta 30 citas mensuales</p>
+                    <div class="col-md-6 col-lg-4 cont-plan" data-aos="fade-up" data-aos-delay="100">
+                        <div class="bg-white plan">
+                            <h3>Plan semilla</h3>
+                            <h2>Gratis</h2>
+                            <p class="p-descriptivo-plan">Perfecto para comenzar y probar la plataforma</p>
+                            <a href="registroAdmin" class="btn btn-primary boton-plan">Crear cuenta gratis</a>
+                            <p><i class="bi bi-check2 chulo"></i>Hasta 30 citas mensuales</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 cont-plan" data-aos="fade-up" data-aos-delay="200">
+                        <div class="bg-white plan">
+                            <div class="cont-popular">
+                                <h3>Plan pro</h3>
+                                <span>El más popular</span>
+                            </div>
+                            <h2>$50,000/ mensual</h2>
+                            <p class="p-descriptivo-plan">Ideal para consultorios en crecimiento</p>
+                            <a href="registroAdmin?plan=<?= $plan[1]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan pro</a>
+                            <p><i class="bi bi-check2 chulo"></i>Hasta 300 citas mensuales</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 cont-plan" data-aos="fade-up" data-aos-delay="300">
+                        <div class="bg-white plan">
+                            <h3>Plan premium</h3>
+                            <h2>$150,000/ mensual</h2>
+                            <p class="p-descriptivo-plan">Para grandes redes de consultorios médicos</p>
+                            <a href="registroAdmin?plan=<?= $plan[2]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan premium</a>
+                            <p><i class="bi bi-check2 chulo"></i>Hasta 3,000 citas mensuales</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 cont-plan  data-aos=" fade-up" data-aos-delay="200"">
-                        <div class=" bg-white plan">
-                    <div class="cont-popular">
-                        <h3>Plan pro</h3>
-                        <span>El más popular</span>
-                    </div>
-                    <h2>$50,000/ mensual</h2>
-                    <p class="p-descriptivo-plan">Ideal para consultorios en crecimiento</p>
-                    <a href="registroAdmin?plan=<?= $plan[1]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan pro</a>
-                    <p><i class="bi bi-check2 chulo"></i>Hasta 300 citas mensuales</p>
-                </div>
-            </div>
-            <div class="col-md-4 cont-plan" data-aos="fade-up" data-aos-delay="300">
-                <div class="bg-white plan">
-                    <h3>Plan premium</h3>
-                    <h2>$150,000/ mensual</h2>
-                    <p class="p-descriptivo-plan">Para grandes redes de consultorios médicos</p>
-                    <a href="registroAdmin?plan=<?= $plan[2]['id'] ?>" class="btn btn-primary boton-plan">Comprar plan premium</a>
-                    <p><i class="bi bi-check2 chulo"></i>Hasta 3,000 citas mensuales</p>
-                </div>
-            </div>
-            </div>
             </div>
         </section>
         <section id="preguntas">
@@ -449,6 +459,114 @@ $plan = traerId();
                 </div>
             </div>
         </section>
+        <section id="equipo">
+            <div class="container">
+                <h2 class="text-white text-center titulo-equipo" data-aos="fade-up">Nuestro equipo</h2>
+                <p class="text-white text-center parrafo-equipo" data-aos="fade-up" data-aos-delay="100">Las personas
+                    detrás de E-VITALIX.</p>
+                <div class="row fila-equipo">
+                    <div class="col-md-6 col-lg-4 cont-equipo" data-aos="fade-up" data-aos-delay="100">
+                        <div class="tarjeta-equipo" tabindex="0" aria-label="Ver más sobre César Morales">
+                            <div class="tarjeta-equipo-inner">
+                                <div class="tarjeta-cara tarjeta-frente"
+                                    style="background-image: url('public/assets/website/img/cesar.svg')">
+                                    <div class="tarjeta-blur"></div>
+                                    <div class="tarjeta-info">
+                                        <h3>César Morales</h3>
+                                        <p class="text-white">Project Manager</p>
+                                    </div>
+                                    <span class="tarjeta-toque"><i class="bi bi-cursor-fill"></i> Selecciona para ver más</span>
+                                </div>
+                                <div class="tarjeta-cara tarjeta-detras">
+                                    <h3>César Morales</h3>
+                                    <p class="text-white">Project Manager</p>
+                                    <div class="tarjeta-skills">
+                                        <span>PHP</span>
+                                        <span>MySQL</span>
+                                        <span>Git</span>
+                                        <span>GitHub</span>
+                                    </div>
+                                    <div class="tarjeta-redes">
+                                        <a href="https://www.linkedin.com/in/cesarr-c-morales-gonz%C3%A1lez-1b182a352/" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="LinkedIn de César Morales"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://wa.link/v8dvzd" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="WhatsApp de César Morales"><i class="bi bi-whatsapp"></i></a>
+                                        <a href="https://cesaradso.github.io/Portafolio-web-personal/" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="Portafolio de César Morales"><i class="bi bi-globe2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="tarjeta-equipo" tabindex="0" aria-label="Ver más sobre Diego Riaño">
+                            <div class="tarjeta-equipo-inner">
+                                <div class="tarjeta-cara tarjeta-frente"
+                                    style="background-image: url('public/assets/website/img/diego.svg')">
+                                    <div class="tarjeta-blur"></div>
+                                    <div class="tarjeta-info">
+                                        <h3>Diego Riaño</h3>
+                                        <p class="text-white">Frontend Developer</p>
+                                    </div>
+                                    <span class="tarjeta-toque"><i class="bi bi-cursor-fill"></i> Selecciona para ver más</span>
+                                </div>
+                                <div class="tarjeta-cara tarjeta-detras">
+                                    <h3>Diego Riaño</h3>
+                                    <p class="text-white">Frontend Developer</p>
+                                    <div class="tarjeta-skills">
+                                        <span>HTML</span>
+                                        <span>CSS</span>
+                                        <span>JS</span>
+                                        <span>Scrum</span>
+                                    </div>
+                                    <div class="tarjeta-redes">
+                                        <a href="#" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="LinkedIn de Diego Riaño"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://wa.link/hy9ciy" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="WhatsApp de Diego Riaño"><i class="bi bi-whatsapp"></i></a>
+                                        <a href="https://github.com/alejoriano06" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="Portafolio de Diego Riaño"><i class="bi bi-globe2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="tarjeta-equipo" tabindex="0" aria-label="Ver más sobre Nicolás Pinzón">
+                            <div class="tarjeta-equipo-inner">
+                                <div class="tarjeta-cara tarjeta-frente"
+                                    style="background-image: url('public/assets/website/img/Nicolas.svg')">
+                                    <div class="tarjeta-blur"></div>
+                                    <div class="tarjeta-info">
+                                        <h3>Nicolás Pinzón</h3>
+                                        <p class="text-white">Backend Developer</p>
+                                    </div>
+                                    <span class="tarjeta-toque"><i class="bi bi-cursor-fill"></i> Selecciona para ver más</span>
+                                </div>
+                                <div class="tarjeta-cara tarjeta-detras">
+                                    <h3>Nicolás Pinzón</h3>
+                                    <p class="text-white">Backend Developer</p>
+                                    <div class="tarjeta-skills">
+                                        <span>PHP</span>
+                                        <span>Rest API</span>
+                                        <span>Laravel</span>
+                                        <span>JS</span>
+                                    </div>
+                                    <div class="tarjeta-redes">
+                                        <a href="#" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="LinkedIn de Nicolás Pinzón"><i class="bi bi-linkedin"></i></a>
+                                        <a href="https://wa.link/7lj0dw" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="WhatsApp de Nicolás Pinzón"><i class="bi bi-whatsapp"></i></a>
+                                        <a href="https://github.com/nicolas21012005" target="_blank" rel="noopener" class="red-social"
+                                            aria-label="Portafolio de Nicolás Pinzón"><i class="bi bi-globe2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="convencer">
             <div class="container">
                 <div class="row">
@@ -498,6 +616,9 @@ $plan = traerId();
                         <li class="nav-item item">
                             <a class="nav-link text-white enlace" href="#preguntas">Preguntas</a>
                         </li>
+                        <li class="nav-item item">
+                            <a class="nav-link text-white enlace" href="#equipo">Equipo</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -526,7 +647,7 @@ $plan = traerId();
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script src="public/assets/website/js/main.js?v=1.1"></script>
+    <script src="public/assets/website/js/main.js"></script>
 </body>
 
 </html>
