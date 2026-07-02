@@ -51,7 +51,9 @@ $espaciosDeAgendamiento = listarDisponibilidad($id_especialista);
                                     <?= $especialista['nombres'] ?> <?= $especialista['apellidos'] ?>
                                 </h3>
                             </div>
+                            
                         </div>
+                        <a href="<?= BASE_URL ?>/paciente/seleccionar-especialista?id_consultorio=<?= $id_consultorio ?>&id_especialidad=<?= $id_especialidad ?>" class="btn btn-outline-light btn-sm mt-3"><i class="bi bi-arrow-left"></i>Volver a la pestaña anterior</a>
                     </div>
 
                     <!-- Grid de horarios disponibles -->
