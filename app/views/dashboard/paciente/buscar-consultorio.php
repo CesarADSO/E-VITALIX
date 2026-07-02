@@ -23,6 +23,12 @@ $ciudades = listarCiudades();
 // El controlador debe enviar los datos cuando exista POST.
 $consultorios = $consultorios ?? [];
 
+// Especialidad realmente buscada por el paciente en el formulario.
+// No se debe usar $consultorio['id_especialidad'] porque, al venir de un
+// GROUP BY sobre todas las especialidades del consultorio, ese valor es
+// arbitrario y no corresponde necesariamente a la especialidad buscada.
+$id_especialidad_buscada = $_POST['id_especialidad'] ?? null;
+
 
 ?>
 
@@ -239,7 +245,8 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
 
                                         <!-- Footer con botón -->
                                         <div class="consultorio-card-footer-tipo-a">
-                                            <a href="<?= BASE_URL ?>/paciente/seleccionar-especialista?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $consultorio['id_especialidad'] ?>"
+                                            <!-- Acá se arma el link con la variable id_especialidad_buscada para asegurar que sea la especialidad seleccionada y así no aparezcan especialistas de otras especialidades -->
+                                            <a href="<?= BASE_URL ?>/paciente/seleccionar-especialista?id_consultorio=<?= $consultorio['id_consultorio'] ?>&id_especialidad=<?= $id_especialidad_buscada ?>"
                                                 class="btn btn-ver-detalles">
                                                 <i class="bi bi-building-check"></i>
                                                 Seleccionar este consultorio
