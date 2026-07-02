@@ -39,8 +39,8 @@ switch ($method) {
             mostrarEspecialistas();
         }
 
-        if (isset($_GET['id_especialidad'])) {
-            listarEspecialistasPorEspecialidad($_GET['id_especialidad']);
+        if (isset($_GET['id_especialidad']) && isset($_GET['id_consultorio'])) {
+            listarEspecialistasPorEspecialidad($_GET['id_especialidad'], $_GET['id_consultorio']);
         }
 
         break;
@@ -294,12 +294,12 @@ function eliminarEspecialista($idUsuario, $id)
 }
 
 
-function listarEspecialistasPorEspecialidad($id_especialidad) {
+function listarEspecialistasPorEspecialidad($id_especialidad, $id_consultorio) {
     // INSTANCIAMOS LA CLASE DEL MODELO
     $objEspecialista = new Especialista();
 
     // ACCEDEMOS AL MÉTODO QUE VAMOS A USAR
-    $resultado = $objEspecialista->listarEspecialistasPorEspecialidad($id_especialidad);
+    $resultado = $objEspecialista->listarEspecialistasPorEspecialidad($id_especialidad, $id_consultorio);
 
     return $resultado;
 }
