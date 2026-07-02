@@ -236,13 +236,15 @@ class Especialista
         }
     }
 
-    public function listarEspecialistasPorEspecialidad($id_especialidad)
+    // Además de filtrar por especialidad también se filtra por consultorio y estado activo del especialista ya que en cualquier consultorio que ofreciera la misma especialidad podia aparecer los especialistas de un consultorio en otro consultorio solo por filtrar por especialidad ahora al filtrar por consultorio y estado activo se evita que los especialistas de un consultorio aparezcan en otro consultorio y que los especialistas inactivos aparezcan en la lista de especialistas disponibles para el paciente.
+    public function listarEspecialistasPorEspecialidad($id_especialidad, $id_consultorio)
     {
         try {
-            $listar = "SELECT especialistas.id, especialistas.id_usuario, especialistas.nombres, especialistas.apellidos, especialistas.foto, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_especialidad = :id_especialidad AND usuarios.estado = 'Activo'";
+            $listar = "SELECT especialistas.id, especialistas.id_usuario, especialistas.nombres, especialistas.apellidos, especialistas.foto, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_especialidad = :id_especialidad AND especialistas.id_consultorio = :id_consultorio AND usuarios.estado = 'Activo'";
 
             $resultado = $this->conexion->prepare($listar);
             $resultado->bindParam(':id_especialidad', $id_especialidad);
+            $resultado->bindParam(':id_consultorio', $id_consultorio);
             $resultado->execute();
 
             return $resultado->fetchAll();

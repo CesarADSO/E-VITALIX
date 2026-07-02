@@ -6,7 +6,8 @@ require_once BASE_PATH . '/app/controllers/especialistaController.php';
 $id_consultorio = $_GET['id_consultorio'];
 $id_especialidad = $_GET['id_especialidad'];
 
-$especialistas = listarEspecialistasPorEspecialidad($id_especialidad);
+// Acá venía el id_consultorio por method get y pero no se colocaba como argumento de la variable $especialistas, y ahora al agregarlo si aparecen por consultorio y por especialidad y por estado activo
+$especialistas = listarEspecialistasPorEspecialidad($id_especialidad, $id_consultorio);
 
 // $espaciosDeAgendamiento = listarDisponibilidad($id_consultorio, $id_especialidad, $id_servicio);
 ?>
