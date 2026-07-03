@@ -105,8 +105,18 @@ document.addEventListener('DOMContentLoaded', function () {
             // Selecciona la tabla con clase "table-pacientes"
             // DataTable() = la convierte en una tabla interactiva
 
-            "pageLength": 10,
-            // Muestra 10 filas por página
+            "paging": false,
+            // La paginación real la hace el servidor en PHP (array_slice + ?pagina=N).
+            // Estas tablas solo reciben los 10 registros de la página actual, así que
+            // el paginador propio de DataTables no tenía más datos a los que "avanzar"
+            // y por eso se veía pero no hacía nada al hacer clic.
+
+            "info": false,
+            // El conteo "Mostrando X a Y de Z" también lo controla el bloque PHP de paginación.
+
+            "searching": false,
+            // La búsqueda de DataTables solo filtraría dentro de los 10 registros ya
+            // cargados, lo cual sería engañoso al no buscar en toda la base de datos.
 
             "language": {
                 // Configuración de textos en español
