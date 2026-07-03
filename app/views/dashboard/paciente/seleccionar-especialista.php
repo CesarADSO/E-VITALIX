@@ -40,6 +40,7 @@ $especialistas = listarEspecialistasPorEspecialidad($id_especialidad, $id_consul
                                 <i class="bi bi-calendar-check-fill"></i>
                                 Selecciona el especialista que quieras
                             </h1>
+                            <a href="<?= BASE_URL ?>/paciente/modulo-citas" class="btn btn-outline-light btn-sm mb-3"><i class="bi bi-arrow-left"></i>Volver a la pestaña anterior</a>
                         </div>
                     </div>
 
