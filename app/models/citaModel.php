@@ -14,7 +14,7 @@ class Cita
     public function agendar($data)
     {
         try {
-            $agendar = "INSERT INTO citas(id_agenda_slot, id_especialidad, id_paciente, estado_cita) VALUES (:id_agenda_slot,    :id_especialidad, :id_paciente, 'Pendiente')";
+            $agendar = "INSERT INTO citas(id_agenda_slot, id_especialidad, id_paciente, estado_cita) VALUES (:id_agenda_slot,    :id_especialidad, :id_paciente, 'PENDIENTE')";
 
             $resultado = $this->conexion->prepare($agendar);
 
@@ -1826,7 +1826,7 @@ class Cita
                 return false;
             }
 
-            $cancelar = "UPDATE citas SET estado_cita = 'Cancelada' WHERE id = :id_cita";
+            $cancelar = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita";
 
             $resultado = $this->conexion->prepare($cancelar);
 
