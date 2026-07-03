@@ -123,11 +123,12 @@ function agendarCita()
 
     // CONTAMOS CUANTAS CITAS VAN EN ESE MES
     $conteo = $objCita->contarCitasMensuales($id_consultorio);
-    $total_citas_actuales = $conteo['total_citas'];
+    // Como conteo trae un valor suelto y no un arreglo asociativo, lo traemos sin hacer $conteo['total_citas'] si lo traemos como arreglo asociativo no daría un error fatal
+    $total_citas_actuales = $conteo;
 
     // VALIDAMOS SI YA SE ALCANZÓ EL LÍMITE
     if ($total_citas_actuales >= $limite_citas) {
-        mostrarSweetAlert('error', 'Agenda no disponible', 'Lo sentimos, este consultorio ha alcanzado su límite de citas mensuales y no puede recibir más solicitudes','/E-VITALIX/paciente/modulo-citas');
+        mostrarSweetAlert('error', 'Agenda no disponible', 'Lo sentimos, este consultorio ha alcanzado su límite de citas mensuales y no puede recibir más solicitudes', BASE_URL . '/paciente/modulo-citas');
         exit(); // Evita que el código siga bajando
     }
 
@@ -147,7 +148,7 @@ function agendarCita()
 
     // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/lista-de-citas');
+        mostrarSweetAlert('success', 'Cita registrada correctamente', 'Por favor esperar a que el especialista la acepte', BASE_URL . '/paciente/lista-de-citas');
     }
 }
 
@@ -206,7 +207,7 @@ function reagendarCita()
     $resultado = $ObjCita->reagendar($data);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita reagendada correctamente', 'Por favor esperar a que el especialista la acepte', '/E-VITALIX/paciente/lista-de-citas');
+        mostrarSweetAlert('success', 'Cita reagendada correctamente', 'Por favor esperar a que el especialista la acepte', BASE_URL . '/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo reagendar la cita', 'Intente nuevamente');
     }
@@ -219,7 +220,7 @@ function cancelarCita($id_cita)
     $resultado = $ObjCita->cancelar($id_cita);
 
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', '/E-VITALIX/paciente/lista-de-citas');
+        mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', BASE_URL . '/paciente/lista-de-citas');
     } else {
         mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
     }
