@@ -67,10 +67,9 @@ include_once __DIR__ . '/../../layouts/header_paciente.php';
                                         <label for="genero" class="form-label">Género</label>
                                         <select class="form-select" id="genero" name="genero" required>
                                             <option value="">Seleccionar género</option>
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
-                                            <option value="O">Otro</option>
-                                            <option value="PN">Prefiero no decir</option>
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
+                                            <option value="Otro">Otro</option>
                                         </select>
                                     </div>
                                 </div>
