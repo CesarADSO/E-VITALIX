@@ -237,10 +237,12 @@ class Especialista
     }
 
     // Además de filtrar por especialidad también se filtra por consultorio y estado activo del especialista ya que en cualquier consultorio que ofreciera la misma especialidad podia aparecer los especialistas de un consultorio en otro consultorio solo por filtrar por especialidad ahora al filtrar por consultorio y estado activo se evita que los especialistas de un consultorio aparezcan en otro consultorio y que los especialistas inactivos aparezcan en la lista de especialistas disponibles para el paciente.
+
+    // Se agrega la condición de que si no tiene por lo menos un slot vigente o registrado no aparezca en la lista de especialistas disponibles para el paciente, ya que si no tiene slots no puede atender pacientes y por lo tanto no debería aparecer en la lista de especialistas disponibles para el paciente y además que si ya tiene todos los slots reservados tampoco debería aparecer.
     public function listarEspecialistasPorEspecialidad($id_especialidad, $id_consultorio)
     {
         try {
-            $listar = "SELECT especialistas.id, especialistas.id_usuario, especialistas.nombres, especialistas.apellidos, especialistas.foto, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id WHERE especialistas.id_especialidad = :id_especialidad AND especialistas.id_consultorio = :id_consultorio AND usuarios.estado = 'Activo'";
+            $listar = "SELECT DISTINCT especialistas.id, especialistas.id_usuario, especialistas.nombres, especialistas.apellidos, especialistas.foto, usuarios.estado FROM especialistas INNER JOIN usuarios ON especialistas.id_usuario = usuarios.id INNER JOIN agenda_slot ON especialistas.id = agenda_slot.id_especialista WHERE especialistas.id_especialidad = :id_especialidad AND especialistas.id_consultorio = :id_consultorio AND agenda_slot.estado_slot = 'Disponible' AND (agenda_slot.fecha > CURDATE() OR (agenda_slot.fecha = CURDATE() AND agenda_slot.hora_inicio > CURTIME())) AND usuarios.estado = 'Activo'";
 
             $resultado = $this->conexion->prepare($listar);
             $resultado->bindParam(':id_especialidad', $id_especialidad);
