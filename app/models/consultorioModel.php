@@ -107,29 +107,34 @@ class Consultorio
 
             // HACEMOS LA CONSULTA DE LOS CONSULTORIOS
 
-            $consulta = "SELECT 
-        consultorios.*, consultorios.id AS id_consultorio,
-        consultorio_especialidad.id_especialidad,
-        ciudades.nombre AS ciudad,
-        /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
-        /* SEPARATOR define cómo separaremos los nombres para luego usarlos en PHP */
-        GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades
-        /* TRUCO PARA EL PROYECTO: Agrupamos ID y Nombre del servicio juntos */
-        /* Usamos un formato como 'ID:Nombre' para separarlos luego en PHP */
+            $consulta = "
+                SELECT
+                    consultorios.*,
+                    consultorios.id AS id_consultorio,
+                    consultorio_especialidad.id_especialidad,
+                    ciudades.nombre AS ciudad,
+                    /* DISTINCT evita que se repitan nombres si hay cruces en los JOIN */
+                    /* SEPARATOR define cómo separaremos los nombres para luego usarlos en PHP */
+                    GROUP_CONCAT(DISTINCT especialidades.nombre SEPARATOR ', ') AS nombres_especialidades
                 FROM consultorios
-             INNER JOIN consultorio_especialidad 
-            ON consultorio_especialidad.id_consultorio = consultorios.id
-                INNER JOIN ciudades ON consultorios.id_ciudad = ciudades.id
-                INNER JOIN especialidades 
-             ON especialidades.id = consultorio_especialidad.id_especialidad
-            WHERE consultorios.id IN (
-            /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
-            /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
-            SELECT id_consultorio FROM consultorio_especialidad WHERE id_especialidad = :id_especialidad AND id_ciudad = :id_ciudad
-        )
+                INNER JOIN consultorio_especialidad
+                    ON consultorio_especialidad.id_consultorio = consultorios.id
+                INNER JOIN ciudades
+                    ON consultorios.id_ciudad = ciudades.id
+                INNER JOIN especialidades
+                    ON especialidades.id = consultorio_especialidad.id_especialidad
+                WHERE consultorios.estado = 'Activo'
+                    AND consultorios.id_ciudad = :id_ciudad
+                    AND consultorios.id IN (
+                        /* SUBQUERY: Primero encontramos TODOS los IDs de consultorios que tengan la especialidad buscada */
+                        /* Esto permite que el JOIN traiga TODAS las especialidades del consultorio, no solo la seleccionada */
+                        SELECT id_consultorio
+                        FROM consultorio_especialidad
+                        WHERE id_especialidad = :id_especialidad
+                    )
                 /* LA CLAVE: Colapsa todos los resultados en una sola fila por cada ID de consultorio */
-            /* El GROUP_CONCAT ahora captura TODAS las especialidades del consultorio */
-            GROUP BY consultorios.id";
+                /* El GROUP_CONCAT ahora captura TODAS las especialidades del consultorio */
+                GROUP BY consultorios.id";
 
             $resultado = $this->conexion->prepare($consulta);
             $resultado->bindParam(':id_especialidad', $id_especialidad);
