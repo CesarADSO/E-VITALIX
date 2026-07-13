@@ -141,9 +141,12 @@ function registrarSuperAdministrador()
     // ENVIAMOS LA DATA AL MÉTODO "registrar()" DE LA CLASE INSTANTIADA ANTERIORMENTE "Usuario()"
     $resultado = $objUsuario->registrarSuperAdministrador($data);
 
-    // ESPERAMOS UNA RESPUESTA BOOLEANA DEL MODELO
+    // ESPERAMOS UNA RESPUESTA DEL MODELO
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro exitoso', 'Se ha registrado el Superadministrador', '/E-VITALIX/superadmin/usuarios');
+        mostrarSweetAlert('success', 'Registro exitoso', 'Se ha registrado el Superadministrador. Las credenciales de acceso fueron enviadas a su correo electrónico', '/E-VITALIX/superadmin/usuarios');
+    } elseif ($resultado === 'correo_fallido') {
+        // LA CUENTA SE CREÓ PERO EL CORREO CON LAS CREDENCIALES NO SE PUDO ENVIAR
+        mostrarSweetAlert('warning', 'Registro exitoso, correo no enviado', 'La cuenta fue creada pero no se pudo enviar el correo con las credenciales. Asigne una contraseña desde la opción Editar del listado de usuarios', '/E-VITALIX/superadmin/usuarios');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar el Superadministrador. Intenta nuevamente');
     }
