@@ -11,6 +11,32 @@ class Especialidad
         $this->conexion = $db->getConexion();
     }
 
+    // VERIFICA SI YA EXISTE UNA ESPECIALIDAD CON EL MISMO NOMBRE (SIN DISTINGUIR MAYÚSCULAS NI ESPACIOS EXTRA)
+    // $idExcluir PERMITE OMITIR EL PROPIO REGISTRO CUANDO SE ESTÁ ACTUALIZANDO
+    public function existePorNombre($nombre, $idExcluir = null)
+    {
+        try {
+            $consulta = "SELECT COUNT(*) FROM especialidades WHERE LOWER(TRIM(nombre)) = LOWER(TRIM(:nombre))";
+            if ($idExcluir !== null) {
+                $consulta .= " AND id != :idExcluir";
+            }
+
+            $resultado = $this->conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            if ($idExcluir !== null) {
+                $resultado->bindParam(':idExcluir', $idExcluir);
+            }
+
+            $resultado->execute();
+
+            return $resultado->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error en Especialidad::existePorNombre->" . $e->getMessage());
+            // ANTE UN ERROR DE CONSULTA PREFERIMOS BLOQUEAR EL REGISTRO PARA NO PERMITIR DUPLICADOS
+            return true;
+        }
+    }
+
     public function registrar($data)
     {
         try {
