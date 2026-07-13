@@ -48,7 +48,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <h4 class="mb-4">Actualizar Administrador de Consultorio</h4>
                     <p class="text-muted mb-4 texto">En este formulario podrá modificar los datos del administrador de consultorio seleccionado</p>
 
-                    <form id="adminConsultorioForm" action="<?= BASE_URL ?>/superadmin/guardar-cambios-admin-consultorio" method="POST" enctype="multipart/form-data">
+                    <form id="adminConsultorioForm" action="<?= BASE_URL ?>/superadmin/guardar-cambios-admin-consultorio" method="POST" enctype="multipart/form-data" novalidate>
                         <input type="hidden" name="id" value="<?= $administrador['id'] ?>">
                         <input type="hidden" name="accion" value="actualizar">
                         <div class="row">
@@ -112,3 +112,23 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
     <?php
     include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>
+
+    <!-- VALIDACIONES EN ESPAÑOL (MISMO SISTEMA DEL LOGIN) -->
+    <script src="<?= BASE_URL ?>/public/assets/js/validaciones.js"></script>
+    <script>
+        // Configurar validaciones para el formulario de actualización de administrador de consultorio
+        configurarValidacionesFormulario('adminConsultorioForm', {
+            'nombres': {
+                tipo: 'nombres',
+                opciones: {}
+            },
+            'apellidos': {
+                tipo: 'nombres',
+                opciones: {}
+            },
+            'telefono': {
+                tipo: 'telefono',
+                opciones: {}
+            }
+        });
+    </script>

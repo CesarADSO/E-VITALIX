@@ -106,7 +106,13 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                     <tr>
                                                         <td><img class="imgconsultorio" src="<?= BASE_URL ?>/public/uploads/usuarios/<?= $administrador['foto'] ?>" alt="<?= $administrador['nombres'] ?>"></td>
                                                         <td><?= $administrador['nombres'] ?> <?= $administrador['apellidos'] ?></td>
-                                                        <td><?= $administrador['nombre_consultorio'] ?></td>
+                                                        <td>
+                                                            <?php if (!empty($administrador['nombre_consultorio'])): ?>
+                                                                <?= $administrador['nombre_consultorio'] ?>
+                                                            <?php else: ?>
+                                                                <span class="badge bg-secondary">Sin consultorio asignado</span>
+                                                            <?php endif; ?>
+                                                        </td>
                                                         <td><?= $administrador['telefono'] ?></td>
                                                         <td><?= $administrador['tipo_documento'] ?></td>
                                                         <td><?= $administrador['numero_documento'] ?></td>
@@ -151,7 +157,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                                                 <?php endif; ?>
                                             </div>
                                             <div class="mb-3">
-                                                <h6 class="card-subtitle mb-2 text-body-secondary">Consultorio: <?= $administrador['nombre_consultorio'] ?></h6>
+                                                <h6 class="card-subtitle mb-2 text-body-secondary">Consultorio: <?= !empty($administrador['nombre_consultorio']) ? $administrador['nombre_consultorio'] : 'Sin consultorio asignado' ?></h6>
                                                 <h6 class="card-subtitle mb-2 text-body-secondary">Teléfono: <?= $administrador['telefono'] ?></h6>
                                                 <h6 class="card-subtitle mb-2 text-body-secondary">Tipo de documento: <?= $administrador['tipo_documento'] ?></h6>
                                                 <h6 class="card-subtitle mb-2 text-body-secondary">Número de documento: <?= $administrador['numero_documento'] ?></h6>
