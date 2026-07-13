@@ -231,7 +231,7 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 
                             <!-- Body del Modal con Formulario -->
                             <div class="modal-body">
-                                <form id="miFormularioRegistrar" action="<?= BASE_URL ?>/superadmin/guardar-especialidad" method="POST">
+                                <form id="miFormularioRegistrar" action="<?= BASE_URL ?>/superadmin/guardar-especialidad" method="POST" novalidate>
                                     <input type="hidden" name="accion" value="registrarEspecialidad">
 
                                     <!-- Campo Nombre -->
@@ -289,3 +289,19 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
     <?php
     include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
     ?>
+
+    <!-- VALIDACIONES EN ESPAÑOL (MISMO SISTEMA DEL LOGIN) -->
+    <script src="<?= BASE_URL ?>/public/assets/js/validaciones.js"></script>
+    <script>
+        // Configurar validaciones para el formulario de registro de especialidad
+        configurarValidacionesFormulario('miFormularioRegistrar', {
+            'nombreRegistrar': {
+                tipo: 'nombres',
+                opciones: {}
+            },
+            'descripcion': {
+                tipo: 'textarea',
+                opciones: {}
+            }
+        });
+    </script>
