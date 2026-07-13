@@ -42,20 +42,20 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <p class="text-muted mb-4 texto">Actualiza la información de la especialidad seleccionada</p>
 
 
-                        <form id="especialidadForm" action="<?= BASE_URL ?>/superadmin/guardar-cambios-especialidad" method="POST">
+                        <form id="especialidadForm" action="<?= BASE_URL ?>/superadmin/guardar-cambios-especialidad" method="POST" novalidate>
                             <input type="hidden" name="id" value="<?= $especialidad['id'] ?>">
                             <input type="hidden" name="accion" value="actualizar">
 
                             <!-- Nombre y descripción -->
 
                             <div class="mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" value="<?= $especialidad['nombre'] ?>">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $especialidad['nombre'] ?>">
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Descripción</label>
-                                <textarea name="descripcion" class="form-control"><?= $especialidad['descripcion'] ?></textarea>
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea id="descripcion" name="descripcion" class="form-control"><?= $especialidad['descripcion'] ?></textarea>
                             </div>
 
 
@@ -73,3 +73,19 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
 <?php
     include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
 ?>
+
+<!-- VALIDACIONES EN ESPAÑOL (MISMO SISTEMA DEL LOGIN) -->
+<script src="<?= BASE_URL ?>/public/assets/js/validaciones.js"></script>
+<script>
+    // Configurar validaciones para el formulario de actualización de especialidad
+    configurarValidacionesFormulario('especialidadForm', {
+        'nombre': {
+            tipo: 'nombres',
+            opciones: {}
+        },
+        'descripcion': {
+            tipo: 'textarea',
+            opciones: {}
+        }
+    });
+</script>

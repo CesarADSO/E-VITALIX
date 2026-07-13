@@ -67,6 +67,12 @@ function registrarEspecialidad()
     // INSTANCIAMOS LA CLASE
     $objEspecialidad = new Especialidad();
 
+    // VALIDAMOS QUE NO EXISTA OTRA ESPECIALIDAD CON EL MISMO NOMBRE
+    if ($objEspecialidad->existePorNombre($nombre)) {
+        mostrarSweetAlert('error', 'Especialidad duplicada', 'Ya existe una especialidad con este nombre en el sistema');
+        exit();
+    }
+
     $data = [
         'nombre' => $nombre,
         'descripcion' => $descripcion
@@ -78,7 +84,7 @@ function registrarEspecialidad()
     // Si la respuesta del modelo es verdadera confirmamos el registro y redireccionamos
     // Si es falsa notificamos y redirecciomamos
     if ($resultado === true) {
-        mostrarSweetAlert('success', 'Registro de Especialidad exitoso', 'Se ha creado un nueva especialidad', '/E-VITALIX/superadmin/especialidades');
+        mostrarSweetAlert('success', 'Registro de Especialidad exitoso', 'Se ha creado una nueva especialidad', '/E-VITALIX/superadmin/especialidades');
     } else {
         mostrarSweetAlert('error', 'Error al registrar', 'No se puedo registrar la especialidad. Intenta nuevamente');
     }
@@ -162,6 +168,12 @@ function actualizarEspecialidad()
 
     // INSTANCIAMOS LA CLASE DEL MODELO especialidadModel.php
     $objEspecialidad = new Especialidad();
+
+    // VALIDAMOS QUE EL NUEVO NOMBRE NO PERTENEZCA A OTRA ESPECIALIDAD (EXCLUYENDO LA QUE SE ESTÁ EDITANDO)
+    if ($objEspecialidad->existePorNombre($nombre, $id)) {
+        mostrarSweetAlert('error', 'Especialidad duplicada', 'Ya existe otra especialidad con este nombre en el sistema');
+        exit();
+    }
 
     // EN LA VARIABLE DATA GUARDAMOS LOS DATOS EN UN TIPO ARREGLO CON CLAVE VALOR
     $data = [
