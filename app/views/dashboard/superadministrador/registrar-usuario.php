@@ -32,7 +32,11 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                         <h4 class="mb-4">Registrar Superadministrador</h4>
                         <p class="text-muted mb-4 texto">Crear cuenta con permisos de superadministrador</p>
 
-                        <form id="superadminForm" action="<?= BASE_URL ?>/superadmin/guardar-usuario" method="POST" enctype="multipart/form-data">
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle"></i> La contraseña será enviada al correo electrónico registrado.
+                        </div>
+
+                        <form id="superadminForm" action="<?= BASE_URL ?>/superadmin/guardar-usuario" method="POST" enctype="multipart/form-data" novalidate>
 
 
                             <div class="row">
@@ -84,3 +88,27 @@ include_once __DIR__ . '/../../layouts/header_superadministrador.php';
                     <?php
                     include_once __DIR__ . '/../../layouts/footer_superadministrador.php';
                     ?>
+
+                    <!-- VALIDACIONES EN ESPAÑOL (MISMO SISTEMA DEL LOGIN) -->
+                    <script src="<?= BASE_URL ?>/public/assets/js/validaciones.js"></script>
+                    <script>
+                        // Configurar validaciones para el formulario de registro de superadministrador
+                        configurarValidacionesFormulario('superadminForm', {
+                            'nombres': {
+                                tipo: 'nombres',
+                                opciones: {}
+                            },
+                            'apellidos': {
+                                tipo: 'nombres',
+                                opciones: {}
+                            },
+                            'email': {
+                                tipo: 'email',
+                                opciones: {}
+                            },
+                            'telefono': {
+                                tipo: 'telefono',
+                                opciones: {}
+                            }
+                        });
+                    </script>
