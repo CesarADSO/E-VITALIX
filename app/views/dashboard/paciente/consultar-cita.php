@@ -6,6 +6,13 @@ require_once BASE_PATH . '/app/controllers/citaController.php';
 $id_cita = $_GET['id_cita'] ?? null;
 
 $cita = listarCita($id_cita);
+
+// CANDADO DE SEGURIDAD: listarCita() solo devuelve la cita si pertenece al paciente logueado.
+// Si viene vacía (cita inexistente o de otro paciente), denegamos el acceso y volvemos al listado.
+if (empty($cita)) {
+    header('Location: ' . BASE_URL . '/paciente/lista-de-citas?error=acceso_denegado');
+    exit();
+}
 ?>
 
 
