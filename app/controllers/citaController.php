@@ -170,9 +170,18 @@ function mostrarCitas()
 
 function listarCita($id)
 {
+    // REANUDAMOS LA SESIÓN DE FORMA SEGURA PARA OBTENER EL PACIENTE LOGUEADO
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // OBTENEMOS EL ID DEL PACIENTE LOGUEADO
+    $id_paciente = $_SESSION['user']['id_paciente'] ?? null;
+
     $objCita = new Cita();
 
-    $resultado = $objCita->listarCita($id);
+    // PASAMOS EL id_paciente PARA QUE LA CONSULTA SOLO DEVUELVA CITAS PROPIAS
+    $resultado = $objCita->listarCita($id, $id_paciente);
 
     return $resultado;
 }
@@ -214,15 +223,30 @@ function reagendarCita()
 }
 
 function cancelarCita($id_cita)
-{   
+{
+    // REANUDAMOS LA SESIÓN DE FORMA SEGURA PARA OBTENER EL PACIENTE LOGUEADO
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+
+    // OBTENEMOS EL ID DEL PACIENTE LOGUEADO
+    $id_paciente = $_SESSION['user']['id_paciente'] ?? null;
+
+    if (empty($id_cita) || empty($id_paciente)) {
+        mostrarSweetAlert('error', 'Solicitud inválida', 'No se pudo procesar la cancelación', BASE_URL . '/paciente/lista-de-citas');
+        exit();
+    }
+
     $ObjCita = new Cita();
 
-    $resultado = $ObjCita->cancelar($id_cita);
+    // PASAMOS EL id_paciente PARA QUE SOLO SE CANCELEN CITAS PROPIAS Y EN ESTADO PENDIENTE
+    $resultado = $ObjCita->cancelar($id_cita, $id_paciente);
 
     if ($resultado === true) {
         mostrarSweetAlert('success', 'Cita cancelada correctamente', 'La cita fue cancelada exitosamente', BASE_URL . '/paciente/lista-de-citas');
     } else {
-        mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'Intente nuevamente');
+        // LA CITA NO EXISTE, NO ES DEL PACIENTE O YA NO ESTÁ PENDIENTE
+        mostrarSweetAlert('error', 'No se pudo cancelar la cita', 'La cita no está disponible para cancelación', BASE_URL . '/paciente/lista-de-citas');
     }
 }
 

@@ -618,15 +618,18 @@ class Cita
     }
 
 
-    public function listarCita($id)
+    public function listarCita($id, $id_paciente)
     {
         try {
 
-            $listar = "SELECT citas.id AS id_cita, agenda_slot.id AS id_horario, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, ciudades.nombre AS ciudad, consultorios.direccion, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id INNER JOIN ciudades ON consultorios.id_ciudad = ciudades.id WHERE citas.id = :id_cita";
+            // FILTRAMOS TAMBIÉN POR id_paciente PARA QUE UN PACIENTE SOLO PUEDA CONSULTAR SUS PROPIAS CITAS
+            // (EVITA QUE, ALTERANDO EL id_cita EN LA URL, SE VEAN CITAS DE OTROS PACIENTES)
+            $listar = "SELECT citas.id AS id_cita, agenda_slot.id AS id_horario, agenda_slot.fecha, agenda_slot.hora_inicio, agenda_slot.hora_fin, especialistas.nombres, especialistas.apellidos, consultorios.nombre AS nombre_consultorio, ciudades.nombre AS ciudad, consultorios.direccion, citas.estado_cita FROM citas INNER JOIN agenda_slot ON citas.id_agenda_slot = agenda_slot.id INNER JOIN especialistas ON agenda_slot.id_especialista = especialistas.id INNER JOIN consultorios ON agenda_slot.id_consultorio = consultorios.id INNER JOIN ciudades ON consultorios.id_ciudad = ciudades.id WHERE citas.id = :id_cita AND citas.id_paciente = :id_paciente";
 
             $resultado = $this->conexion->prepare($listar);
 
             $resultado->bindParam(':id_cita', $id);
+            $resultado->bindParam(':id_paciente', $id_paciente);
 
             $resultado->execute();
 
@@ -1807,30 +1810,38 @@ class Cita
         }
     }
 
-    public function cancelar($id_cita)
+    public function cancelar($id_cita, $id_paciente)
     {
         try {
 
             $this->conexion->beginTransaction();
 
-            $obtenerIdSlot = "SELECT id_agenda_slot FROM citas WHERE id = :id_cita";
+            // OBTENEMOS EL SLOT SOLO SI LA CITA PERTENECE AL PACIENTE Y AÚN ESTÁ PENDIENTE.
+            // ASÍ UN PACIENTE NO PUEDE CANCELAR CITAS DE OTROS PACIENTES (ALTERANDO EL id_cita EN LA URL)
+            // NI CANCELAR CITAS QUE YA NO ESTÁN EN ESTADO PENDIENTE.
+            $obtenerIdSlot = "SELECT id_agenda_slot FROM citas WHERE id = :id_cita AND id_paciente = :id_paciente AND estado_cita = 'PENDIENTE'";
 
             $resultado = $this->conexion->prepare($obtenerIdSlot);
             $resultado->bindParam(':id_cita', $id_cita);
+            $resultado->bindParam(':id_paciente', $id_paciente);
             $resultado->execute();
 
             // fetchColumn devuelve SOLO el valor del id del slot anterior
             $id_agenda_slot = $resultado->fetchColumn();
 
+            // SI NO HAY COINCIDENCIA (CITA INEXISTENTE, DE OTRO PACIENTE O NO PENDIENTE)
+            // REVERTIMOS LA TRANSACCIÓN Y ABORTAMOS
             if ($id_agenda_slot === false) {
+                $this->conexion->rollBack();
                 return false;
             }
 
-            $cancelar = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita";
+            $cancelar = "UPDATE citas SET estado_cita = 'CANCELADA' WHERE id = :id_cita AND id_paciente = :id_paciente";
 
             $resultado = $this->conexion->prepare($cancelar);
 
             $resultado->bindParam(':id_cita', $id_cita);
+            $resultado->bindParam(':id_paciente', $id_paciente);
 
             $resultado->execute();
 
